@@ -3,8 +3,7 @@ part of 'settings_popups.dart';
 Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
   var newLimit = limit;
 
-  final delayController =
-      TextEditingController()..text = (newLimit < 0 ? '' : newLimit).toString();
+  final delayController = TextEditingController()..text = (newLimit < 0 ? '' : newLimit).toString();
 
   final formKey = GlobalKey<FormState>();
 
@@ -13,9 +12,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
     builder:
         (context) => AlertDialog(
           scrollable: true,
-          title: Text(
-            Localization.current.I18nSettings_journalLinesNumberPopup,
-          ),
+          title: Text(Localization.current.I18nSettings_journalLinesNumberPopup),
           content: Form(
             key: formKey,
             child: Column(
@@ -24,9 +21,7 @@ Future<int?> setLogLimitPopup(BuildContext context, int limit) async {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: Localization.current.I18nSettings_numberOfLines,
-                  ),
+                  decoration: InputDecoration(labelText: Localization.current.I18nSettings_numberOfLines),
                   controller: delayController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {

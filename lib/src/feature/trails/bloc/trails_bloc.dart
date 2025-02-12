@@ -20,9 +20,7 @@ part 'trails_event.dart';
 part 'trails_state.dart';
 
 class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
-  TrailsBloc({required AppDatabase database})
-    : _db = database,
-      super(const TrailsState.initial()) {
+  TrailsBloc({required AppDatabase database}) : _db = database, super(const TrailsState.initial()) {
     _trailsSubscription = _db.getTrails().watch().listen((event) async {
       _trails = event;
       logger.t('TrailsBloc -> getTrails().watch()');

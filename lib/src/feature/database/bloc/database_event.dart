@@ -58,11 +58,7 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.deselectRace() = _DeselectRace;
 
-  const factory DatabaseEvent.addStage({
-    required String name,
-    required int raceId,
-    int? trailId,
-  }) = _AddStage;
+  const factory DatabaseEvent.addStage({required String name, required int raceId, int? trailId}) = _AddStage;
 
   const factory DatabaseEvent.upsertStage({
     int? id,
@@ -81,8 +77,7 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.selectStage(Stage stage) = _SelectStage;
 
-  const factory DatabaseEvent.getParticipantsAtStart(int stageId) =
-      _GetParticipantsAtStart;
+  const factory DatabaseEvent.getParticipantsAtStart(int stageId) = _GetParticipantsAtStart;
 
   const factory DatabaseEvent.addStartNumber({
     required Stage stage,
@@ -145,10 +140,8 @@ class DatabaseEvent with _$DatabaseEvent {
     required int deltaInSeconds,
   }) = _UpdateManualStartTime;
 
-  const factory DatabaseEvent.setStatusForStartId({
-    required int startId,
-    required ParticipantStatus status,
-  }) = _SetStatusForStartId;
+  const factory DatabaseEvent.setStatusForStartId({required int startId, required ParticipantStatus status}) =
+      _SetStatusForStartId;
 
   // const factory DatabaseEvent.getFinishesFromStage({
   //   required int stageId,
@@ -173,28 +166,17 @@ class DatabaseEvent with _$DatabaseEvent {
     int? number,
   }) = _AddFinishTimeManual;
 
-  const factory DatabaseEvent.clearStartResultsDebug(int stageId) =
-      _ClearStartResultsDebug;
+  const factory DatabaseEvent.clearStartResultsDebug(int stageId) = _ClearStartResultsDebug;
 
-  const factory DatabaseEvent.clearFinishResultsDebug(int stageId) =
-      _ClearFinishResultsDebug;
+  const factory DatabaseEvent.clearFinishResultsDebug(int stageId) = _ClearFinishResultsDebug;
 
   const factory DatabaseEvent.hideAllFinishes(int stageId) = _HideAllFinishes;
 
-  const factory DatabaseEvent.clearNumberAtFinish({
-    required Stage stage,
-    required int number,
-  }) = _ClearNumberAtFinish;
+  const factory DatabaseEvent.clearNumberAtFinish({required Stage stage, required int number}) = _ClearNumberAtFinish;
 
-  const factory DatabaseEvent.setDNSForStage({
-    required Stage stage,
-    required int number,
-  }) = _SetDNSForStage;
+  const factory DatabaseEvent.setDNSForStage({required Stage stage, required int number}) = _SetDNSForStage;
 
-  const factory DatabaseEvent.setDNFForStage({
-    required Stage stage,
-    required int number,
-  }) = _SetDNFForStage;
+  const factory DatabaseEvent.setDNFForStage({required Stage stage, required int number}) = _SetDNFForStage;
 
   const factory DatabaseEvent.hideFinish({required int id}) = _HideFinish;
 
@@ -205,27 +187,19 @@ class DatabaseEvent with _$DatabaseEvent {
     required String finishTime,
   }) = _AddNumberToFinish;
 
-  const factory DatabaseEvent.getNumbersOnTraceNow({
-    required int stageId,
-    required DateTime dateTimeNow,
-  }) = _GetNumbersOnTraceNow;
+  const factory DatabaseEvent.getNumbersOnTraceNow({required int stageId, required DateTime dateTimeNow}) =
+      _GetNumbersOnTraceNow;
 
-  const factory DatabaseEvent.shiftStartsTime({
-    required int stageId,
-    required int minutes,
-    String? fromTime,
-  }) = _ShiftStartsTime;
+  const factory DatabaseEvent.shiftStartsTime({required int stageId, required int minutes, String? fromTime}) =
+      _ShiftStartsTime;
 
-  const factory DatabaseEvent.selectAwaitingNumber({required int number}) =
-      _SelectAwaitingNumber;
+  const factory DatabaseEvent.selectAwaitingNumber({required int number}) = _SelectAwaitingNumber;
 
-  const factory DatabaseEvent.deselectAwaitingNumber() =
-      _DeselectAwaitingNumber;
+  const factory DatabaseEvent.deselectAwaitingNumber() = _DeselectAwaitingNumber;
 
   const factory DatabaseEvent.createRaceFromFile() = _CreateRaceFromFile;
 
-  const factory DatabaseEvent.createStagesFromFile({required int raceId}) =
-      _CreateStagesFromFile;
+  const factory DatabaseEvent.createStagesFromFile({required int raceId}) = _CreateStagesFromFile;
 
   const factory DatabaseEvent.shareStart() = _ShareStart;
 
@@ -233,6 +207,5 @@ class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.shareDatabase() = _ShareDatabase;
 
-  const factory DatabaseEvent.shareTrack({required TrailInfo trail}) =
-      _ShareTrack;
+  const factory DatabaseEvent.shareTrack({required TrailInfo trail}) = _ShareTrack;
 }

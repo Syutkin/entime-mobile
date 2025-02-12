@@ -23,21 +23,18 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     required AppDatabase database,
     required IAudioController audioController,
     required ISettingsProvider settingsProvider,
-  })  : _bluetoothProvider = bluetoothProvider,
-        _database = database,
-        _audioController = audioController,
-        _settingsProvider = settingsProvider,
-        super(const BluetoothBlocState.notInitialized()) {
+  }) : _bluetoothProvider = bluetoothProvider,
+       _database = database,
+       _audioController = audioController,
+       _settingsProvider = settingsProvider,
+       super(const BluetoothBlocState.notInitialized()) {
     _settingsSubscription = _settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
       _stageId = state.stageId;
     });
 
-    _btStateSubscription = bluetoothProvider.flutterBluetoothSerial
-        .onStateChanged()
-        .listen((btState) {
-      if (btState == BluetoothState.STATE_OFF ||
-          btState == BluetoothState.STATE_ON) {
+    _btStateSubscription = bluetoothProvider.flutterBluetoothSerial.onStateChanged().listen((btState) {
+      if (btState == BluetoothState.STATE_OFF || btState == BluetoothState.STATE_ON) {
         add(const BluetoothEvent.initialize());
       }
     });
@@ -45,19 +42,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         initialize: (event) async {
-          final isAvailable =
-              await bluetoothProvider.flutterBluetoothSerial.isAvailable ??
-                  false;
+          final isAvailable = await bluetoothProvider.flutterBluetoothSerial.isAvailable ?? false;
           if (isAvailable) {
-            final isEnabled =
-                await bluetoothProvider.flutterBluetoothSerial.isEnabled ??
-                    false;
+            final isEnabled = await bluetoothProvider.flutterBluetoothSerial.isEnabled ?? false;
             if (isEnabled) {
-              emit(
-                BluetoothBlocState.disconnected(
-                  bluetoothDevice: _bluetoothDevice,
-                ),
-              );
+              emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
             } else {
               emit(const BluetoothBlocState.notEnabled());
             }
@@ -80,14 +69,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               await bluetoothProvider.bluetoothBackgroundConnection.stop();
               // Если девайс выбран - обновляем
               _bluetoothDevice = device.device;
-              emit(
-                BluetoothBlocState.disconnected(
-                  bluetoothDevice: _bluetoothDevice,
-                ),
-              );
-              logger.i(
-                'Bluetooth -> Device selected ${_bluetoothDevice?.name}',
-              );
+              emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
+              logger.i('Bluetooth -> Device selected ${_bluetoothDevice?.name}');
               // Если девайс доступен - соединяемся
               if (device.availability == BluetoothDeviceAvailability.yes) {
                 add(BluetoothEvent.connect(selectedDevice: device.device));
@@ -118,9 +101,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           if (device != null) {
             // Состояние соединения
             emit(const BluetoothBlocState.connecting());
-            await bluetoothProvider.bluetoothBackgroundConnection.connect(
-              device,
-            );
+            await bluetoothProvider.bluetoothBackgroundConnection.connect(device);
             if (bluetoothProvider.bluetoothBackgroundConnection.isConnected) {
               // Запускаем событие 'соединён'
               add(const BluetoothEvent.connected());
@@ -128,32 +109,19 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               // Если соединение успешно, запускаем сборщик поступающих сообщений
               await bluetoothProvider.bluetoothBackgroundConnection.start();
               // и подписываемся на его события (поступающие сообщения)
-              _messageSubscription = bluetoothProvider
-                  .bluetoothBackgroundConnection.message
-                  .listen(
-                (message) => add(
-                  BluetoothEvent.messageReceived(
-                    message: message,
-                    stageId: _stageId,
-                  ),
-                ),
+              _messageSubscription = bluetoothProvider.bluetoothBackgroundConnection.message.listen(
+                (message) => add(BluetoothEvent.messageReceived(message: message, stageId: _stageId)),
               );
               bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
                 add(const BluetoothEvent.disconnected());
               });
             } else {
               logger.i("Bluetooth -> Can't connect");
-              emit(
-                BluetoothBlocState.disconnected(
-                  bluetoothDevice: event.selectedDevice,
-                ),
-              );
+              emit(BluetoothBlocState.disconnected(bluetoothDevice: event.selectedDevice));
               if (_reconnectActive) {
                 Timer(
                   Duration(seconds: _reconnectDelay),
-                  () => add(
-                    BluetoothEvent.connect(selectedDevice: _bluetoothDevice),
-                  ),
+                  () => add(BluetoothEvent.connect(selectedDevice: _bluetoothDevice)),
                 );
               }
             }
@@ -179,39 +147,25 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           state.maybeMap(
             disconnecting: (_) {
               logger.i('Bluetooth -> Disconnected locally');
-              emit(
-                BluetoothBlocState.disconnected(
-                  bluetoothDevice: _bluetoothDevice,
-                ),
-              );
+              emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
             },
             connected: (_) {
               logger.i('Bluetooth -> Disconnected remotely');
-              emit(
-                BluetoothBlocState.disconnected(
-                  bluetoothDevice: _bluetoothDevice,
-                ),
-              );
+              emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
               if (_reconnect) {
                 _reconnectActive = true;
                 add(BluetoothEvent.connect(selectedDevice: _bluetoothDevice));
               }
             },
             orElse: () {
-              emit(
-                BluetoothBlocState.disconnected(
-                  bluetoothDevice: _bluetoothDevice,
-                ),
-              );
+              emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
             },
           );
         },
         messageReceived: (event) {
           //Пришло сообщение из Bluetooth serial
           final now = DateTime.now();
-          logger.i(
-            'Bluetooth -> Received message: ${event.message}, time: $now',
-          );
+          logger.i('Bluetooth -> Received message: ${event.message}, time: $now');
           final message = _parseBT(event.message, now);
           message.when(
             automaticStart: (automaticStart) {
@@ -225,10 +179,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               // время из приложения
               if (!_settingsProvider.settings.beepFromApp) {
                 final stageId = event.stageId;
-                await _audioController.playCountdown(
-                  time: countdown,
-                  stageId: stageId,
-                );
+                await _audioController.playCountdown(time: countdown, stageId: stageId);
               }
             },
             voice: (time) async {
@@ -236,10 +187,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               // время из приложения
               if (!_settingsProvider.settings.voiceFromApp) {
                 final stageId = event.stageId;
-                await _audioController.callParticipant(
-                  time: time,
-                  stageId: stageId,
-                );
+                await _audioController.callParticipant(time: time, stageId: stageId);
               }
             },
             moduleSettings: (moduleSettings) {
@@ -251,9 +199,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         sendMessage: (event) async {
           //Отправлено соообщение в Bluetooth serial
           logger.i('Bluetooth -> Sent message: ${event.message}');
-          final isMessageSended = await bluetoothProvider
-              .bluetoothBackgroundConnection
-              .sendMessage(event.message);
+          final isMessageSended = await bluetoothProvider.bluetoothBackgroundConnection.sendMessage(event.message);
           if (isMessageSended) {
             await _database.addLog(
               level: LogLevel.information,
@@ -326,16 +272,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         );
         return BluetoothMessage.automaticStart(automaticStart: automaticStart);
       } on Exception catch (e) {
-        logger.e(
-          'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
-          error: e,
-        );
+        logger.e('Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage', error: e);
         return const BluetoothMessage.empty();
       } catch (e) {
-        logger.e(
-          'Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage',
-          error: e,
-        );
+        logger.e('Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage', error: e);
         return const BluetoothMessage.empty();
       }
     } else if (parsedMessage.startsWith('B') && parsedMessage.endsWith('#')) {

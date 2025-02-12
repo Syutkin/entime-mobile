@@ -10,11 +10,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
-    implements DatabaseBloc {}
+class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
-class MockSettingsCubit extends MockCubit<AppSettings>
-    implements SettingsCubit {}
+class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
 void main() {
   late DatabaseBloc databaseBloc;
@@ -30,35 +28,44 @@ void main() {
       home: Material(
         child: BlocProvider.value(
           value: databaseBloc,
-          child: BlocProvider.value(
-            value: settingsCubit,
-            child: const FinishPage(),
-          ),
+          child: BlocProvider.value(value: settingsCubit, child: const FinishPage()),
         ),
       ),
     );
   }
 
-  setUpAll(
-    () {
-      databaseBloc = MockDatabaseBloc();
-      settingsCubit = MockSettingsCubit();
-      settings = const AppSettings.defaults();
-    },
-  );
+  setUpAll(() {
+    databaseBloc = MockDatabaseBloc();
+    settingsCubit = MockSettingsCubit();
+    settings = const AppSettings.defaults();
+  });
 
-  setUp(
-    () {
-      race = const Race(id: 1, name: 'Race name', isDeleted: false);
-      stage = const Stage(
-        id: 1,
-        raceId: 1,
-        name: 'Stage name',
-        isActive: true,
-        isDeleted: false,
-      );
+  setUp(() {
+    race = const Race(id: 1, name: 'Race name', isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    when(() => databaseBloc.state).thenReturn(
+      const DatabaseState(
+        races: [],
+        stages: [],
+        categories: [],
+        riders: [],
+        participants: [],
+        finishes: [],
+        numbersOnTrace: [],
+      ),
+    );
+    when(() => settingsCubit.state).thenReturn(settings);
+  });
+
+  group('FinishPage tests', () {
+    patrolWidgetTest('Race and stage not selected', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(RaceTile), findsOneWidget);
+    });
+
+    patrolWidgetTest('Race selected and stage not selected', (PatrolTester $) async {
       when(() => databaseBloc.state).thenReturn(
-        const DatabaseState(
+        DatabaseState(
           races: [],
           stages: [],
           categories: [],
@@ -66,64 +73,31 @@ void main() {
           participants: [],
           finishes: [],
           numbersOnTrace: [],
+          race: race,
         ),
       );
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
-    },
-  );
 
-  group(
-    'FinishPage tests',
-    () {
-      patrolWidgetTest('Race and stage not selected', (
-        PatrolTester $,
-      ) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(RaceTile), findsOneWidget);
-      });
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(RaceTile), findsOneWidget);
+    });
 
-      patrolWidgetTest('Race selected and stage not selected', (
-        PatrolTester $,
-      ) async {
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-          ),
-        );
+    patrolWidgetTest('Race and stage selected', (PatrolTester $) async {
+      when(() => databaseBloc.state).thenReturn(
+        DatabaseState(
+          races: [],
+          stages: [],
+          categories: [],
+          riders: [],
+          participants: [],
+          finishes: [],
+          numbersOnTrace: [],
+          race: race,
+          stage: stage,
+        ),
+      );
 
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(RaceTile), findsOneWidget);
-      });
-
-      patrolWidgetTest('Race and stage selected', (
-        PatrolTester $,
-      ) async {
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-            stage: stage,
-          ),
-        );
-
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(FinishListPage), findsOneWidget);
-      });
-    },
-  );
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(FinishListPage), findsOneWidget);
+    });
+  });
 }

@@ -16,10 +16,7 @@ ThemeData appThemeData({
       brightness: brightness,
       contrastLevel: contrastLevel,
       dynamicSchemeVariant: dynamicSchemeVariant,
-      surface:
-          brightness == Brightness.dark && isOLEDBackground
-              ? Colors.black
-              : null,
+      surface: brightness == Brightness.dark && isOLEDBackground ? Colors.black : null,
     ),
     // For supporting predictive back
     pageTransitionsTheme: const PageTransitionsTheme(

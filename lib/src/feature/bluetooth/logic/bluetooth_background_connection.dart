@@ -71,9 +71,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   Future<void> connect(BluetoothDevice bluetoothDevice) async {
     try {
       await _connection?.close();
-      _connection = await BluetoothConnection.toAddress(
-        bluetoothDevice.address,
-      );
+      _connection = await BluetoothConnection.toAddress(bluetoothDevice.address);
       _connectionSubscription = _connection?.input?.listen(_onDataReceived);
       _connectionSubscription?.onDone(() async {
         // Сообщаем что соединение закрыто

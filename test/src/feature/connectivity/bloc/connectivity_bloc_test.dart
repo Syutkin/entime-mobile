@@ -12,37 +12,32 @@ void main() {
 
   setUp(() {
     connectivityProvider = MockConnectivityProvider();
-    when(() => connectivityProvider.onConnectivityChanged)
-        .thenAnswer((_) => Stream.fromIterable([false]));
+    when(() => connectivityProvider.onConnectivityChanged).thenAnswer((_) => Stream.fromIterable([false]));
     when(() => connectivityProvider.isConnected).thenReturn(false);
 
     bloc = ConnectivityBloc(connectivityProvider);
   });
 
-  group(
-    'ConnectivityBloc tests',
-    () {
-      test('Initial state is correct', () {
-        expect(bloc.state, const ConnectivityState.state(isConnected: false));
-      });
+  group('ConnectivityBloc tests', () {
+    test('Initial state is correct', () {
+      expect(bloc.state, const ConnectivityState.state(isConnected: false));
+    });
 
-      blocTest<ConnectivityBloc, ConnectivityState>(
-        'State changes when ConnectivityProvider emit new state',
-        setUp: () {
-          when(() => connectivityProvider.onConnectivityChanged).thenAnswer(
-            (_) => Stream.fromIterable(
-              [false, true, false, false, false, true, true, true],
-            ),
-          );
-        },
-        build: () => ConnectivityBloc(connectivityProvider),
-        expect: () => [
-          const ConnectivityState.state(isConnected: false),
-          const ConnectivityState.state(isConnected: true),
-          const ConnectivityState.state(isConnected: false),
-          const ConnectivityState.state(isConnected: true),
-        ],
-      );
-    },
-  );
+    blocTest<ConnectivityBloc, ConnectivityState>(
+      'State changes when ConnectivityProvider emit new state',
+      setUp: () {
+        when(
+          () => connectivityProvider.onConnectivityChanged,
+        ).thenAnswer((_) => Stream.fromIterable([false, true, false, false, false, true, true, true]));
+      },
+      build: () => ConnectivityBloc(connectivityProvider),
+      expect:
+          () => [
+            const ConnectivityState.state(isConnected: false),
+            const ConnectivityState.state(isConnected: true),
+            const ConnectivityState.state(isConnected: false),
+            const ConnectivityState.state(isConnected: true),
+          ],
+    );
+  });
 }

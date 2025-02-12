@@ -23,8 +23,7 @@ class BluetoothProvider implements IBluetoothProvider {
   FlutterBluetoothSerial get flutterBluetoothSerial => _flutterBluetoothSerial;
 
   @override
-  IBluetoothBackgroundConnection get bluetoothBackgroundConnection =>
-      _bluetoothBackgroundConnection;
+  IBluetoothBackgroundConnection get bluetoothBackgroundConnection => _bluetoothBackgroundConnection;
 
   @override
   Future<void> dispose() async {

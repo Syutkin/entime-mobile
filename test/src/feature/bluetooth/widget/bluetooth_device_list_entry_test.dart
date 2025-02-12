@@ -39,9 +39,7 @@ void main() {
   });
 
   group('BluetoothDeviceListEntry tests', () {
-    patrolWidgetTest('Bonded and connected device with name and rssi', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Bonded and connected device with name and rssi', (PatrolTester $) async {
       device = BluetoothDevice(
         address: address,
         name: name,
@@ -57,14 +55,8 @@ void main() {
       expect($(address), findsOneWidget);
       expect($(rssi.toString()), findsOneWidget);
       expect($(Localization.current.I18nBluetooth_dbm), findsOneWidget);
-      expect(
-        ($(Icon).at(0).evaluate().single.widget as Icon).icon,
-        Icons.devices,
-      );
-      expect(
-        ($(Icon).at(1).evaluate().single.widget as Icon).icon,
-        Icons.import_export,
-      );
+      expect(($(Icon).at(0).evaluate().single.widget as Icon).icon, Icons.devices);
+      expect(($(Icon).at(1).evaluate().single.widget as Icon).icon, Icons.import_export);
       expect(($(Icon).at(2).evaluate().single.widget as Icon).icon, Icons.link);
     });
 
@@ -74,10 +66,7 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget(device));
       expect($(Icon), findsOneWidget);
       expect($(name), findsNothing);
-      expect(
-        $(Localization.current.I18nBluetooth_unknownDevice),
-        findsOneWidget,
-      );
+      expect($(Localization.current.I18nBluetooth_unknownDevice), findsOneWidget);
       expect($(address), findsOneWidget);
       expect($(rssi.toString()), findsNothing);
       expect($(Localization.current.I18nBluetooth_dbm), findsNothing);

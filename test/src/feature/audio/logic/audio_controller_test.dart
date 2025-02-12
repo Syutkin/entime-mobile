@@ -27,9 +27,7 @@ void main() {
   late int stageId;
 
   setUp(() {
-    db = AppDatabase.customConnection(
-      DatabaseConnection(NativeDatabase.memory()),
-    );
+    db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory()));
 
     // populate DB
     for (final query in PopDB().queries) {
@@ -42,11 +40,7 @@ void main() {
     time = '09:59:45';
     stageId = 1;
 
-    ac = AudioController(
-      audioService: audioService,
-      database: db,
-      settingsProvider: settingsProvider,
-    );
+    ac = AudioController(audioService: audioService, database: db, settingsProvider: settingsProvider);
 
     when(() => appSettings.deltaInSeconds).thenReturn(10);
     when(() => settingsProvider.settings).thenReturn(appSettings);
@@ -103,20 +97,14 @@ void main() {
         time = '09:59:45';
 
         final result = await ac.callParticipant(time: time, stageId: stageId);
-        expect(
-          result,
-          'На старт приглашается номер 2, Алексахина Варвара. Следующий номер 7, Берестова Владислава.',
-        );
+        expect(result, 'На старт приглашается номер 2, Алексахина Варвара. Следующий номер 7, Берестова Владислава.');
       });
 
       test('Call second participant', () async {
         time = '10:00:45';
 
         final result = await ac.callParticipant(time: time, stageId: stageId);
-        expect(
-          result,
-          'На старт приглашается номер 7, Берестова Владислава. Следующий номер 14, Григолюк Изабелла.',
-        );
+        expect(result, 'На старт приглашается номер 7, Берестова Владислава. Следующий номер 14, Григолюк Изабелла.');
       });
 
       test('Last participant at category', () async {
@@ -146,8 +134,7 @@ void main() {
         expect(result2, 'Старты окончены, спасибо');
       });
 
-      test('Do not call participant by name if first character is num',
-          () async {
+      test('Do not call participant by name if first character is num', () async {
         // (1,"Алексахина Варвара","Zoenor",35,"ТимАк","Занаду"),
         await db.updateRider(id: 1, name: '092 Алексахина Варвара');
 
@@ -162,18 +149,12 @@ void main() {
         time = '11:17:45';
 
         result = await ac.callParticipant(time: time, stageId: stageId);
-        expect(
-          result,
-          'На старт приглашается номер 52, Смелоч Антон. Следующий номер 63.',
-        );
+        expect(result, 'На старт приглашается номер 52, Смелоч Антон. Следующий номер 63.');
 
         time = '11:18:45';
         result = await ac.callParticipant(time: time, stageId: stageId);
         result = await ac.callParticipant(time: time, stageId: stageId);
-        expect(
-          result,
-          'На старт приглашается номер 63. Следующий номер 74, Якушев Дементий.',
-        );
+        expect(result, 'На старт приглашается номер 63. Следующий номер 74, Якушев Дементий.');
       });
     });
 

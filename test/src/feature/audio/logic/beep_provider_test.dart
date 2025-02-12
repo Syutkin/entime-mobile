@@ -17,20 +17,13 @@ void main() {
       return Future.value();
     }
 
-    when(() => pool.start())
-        .thenAnswer((_) => Future.value(Future.value(mockStop)));
+    when(() => pool.start()).thenAnswer((_) => Future.value(Future.value(mockStop)));
   });
 
-  group(
-    'BeepProvider tests',
-    () {
-      test(
-        'BeepProvider beep',
-        () async {
-          await beepProvider.beep();
-          verify(() => pool.start()).called(1);
-        },
-      );
-    },
-  );
+  group('BeepProvider tests', () {
+    test('BeepProvider beep', () async {
+      await beepProvider.beep();
+      verify(() => pool.start()).called(1);
+    });
+  });
 }

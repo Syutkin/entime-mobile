@@ -1,13 +1,8 @@
 part of '../start_list_page.dart';
 
-Future<void> addRacerPopup({
-  required BuildContext context,
-  required Stage stage,
-}) async {
+Future<void> addRacerPopup({required BuildContext context, required Stage stage}) async {
   final now = DateTime.now();
-  final duration =
-      Duration(hours: now.hour, minutes: now.minute) +
-      const Duration(minutes: 1);
+  final duration = Duration(hours: now.hour, minutes: now.minute) + const Duration(minutes: 1);
   var time = duration < const Duration(days: 1) ? duration : Duration.zero;
   var number = 0;
   final formKey = GlobalKey<FormState>();
@@ -23,9 +18,7 @@ Future<void> addRacerPopup({
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: Localization.current.I18nProtocol_number,
-                  ),
+                  decoration: InputDecoration(labelText: Localization.current.I18nProtocol_number),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value == null) {
@@ -65,17 +58,9 @@ Future<void> addRacerPopup({
               if (formKey.currentState!.validate()) {
                 // Форматирование Duration отсюда:
                 // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
-                final startTime = time
-                    .toString()
-                    .split('.')
-                    .first
-                    .padLeft(8, '0');
+                final startTime = time.toString().split('.').first.padLeft(8, '0');
                 context.read<DatabaseBloc>().add(
-                  DatabaseEvent.addStartNumber(
-                    stage: stage,
-                    number: number,
-                    startTime: startTime,
-                  ),
+                  DatabaseEvent.addStartNumber(stage: stage, number: number, startTime: startTime),
                 );
                 Navigator.of(context).pop();
               }

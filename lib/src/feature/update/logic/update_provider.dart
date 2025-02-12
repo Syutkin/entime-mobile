@@ -36,11 +36,8 @@ abstract interface class IUpdateProvider {
 
 /// Тут. Всё. Очень. Плохо.
 class UpdateProvider implements IUpdateProvider {
-  UpdateProvider._(
-    http.Client client,
-    AppInfoProvider appInfo,
-    ISettingsProvider settingsProvider,
-  ) : _client = client,
+  UpdateProvider._(http.Client client, AppInfoProvider appInfo, ISettingsProvider settingsProvider)
+    : _client = client,
       _appInfo = appInfo,
       _settingsProvider = settingsProvider;
   final http.Client _client;
@@ -69,12 +66,10 @@ class UpdateProvider implements IUpdateProvider {
   }) async => UpdateProvider._(client, appInfoProvider, settingsProvider);
 
   @override
-  void onDownloading(DownloadingHandler callback) =>
-      _downloadingHandler = callback;
+  void onDownloading(DownloadingHandler callback) => _downloadingHandler = callback;
 
   @override
-  void onDownloadComplete(VoidCallback callback) =>
-      _onDownloadComplete = callback;
+  void onDownloadComplete(VoidCallback callback) => _onDownloadComplete = callback;
 
   @override
   void onError(ErrorHandler error) => _onError = error;
@@ -102,15 +97,11 @@ class UpdateProvider implements IUpdateProvider {
   }
 
   Future<Release?> _getLatestRelease() async {
-    final url = Uri.parse(
-      'https://api.github.com/repos/syutkin/entime-mobile/releases/latest',
-    );
+    final url = Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest');
     try {
       final response = await _client.get(url);
       if (response.statusCode == 200) {
-        final release = Release.fromJson(
-          jsonDecode(response.body) as Map<String, dynamic>,
-        );
+        final release = Release.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
         return release;
       } else {
         logger.d('Update_provider -> StatusCode: ${response.statusCode}');
@@ -132,8 +123,7 @@ class UpdateProvider implements IUpdateProvider {
       try {
         var dir = (await getDownloadsDirectory())?.path;
         dir ??= (await getApplicationDocumentsDirectory()).path;
-        final fileName =
-            '${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk';
+        final fileName = '${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk';
         final hashFileName = '$fileName.sha1';
 
         _isDownloadedFile = File('$dir/$fileName');
@@ -149,9 +139,7 @@ class UpdateProvider implements IUpdateProvider {
         }
 
         if (fileUrl == null) {
-          logger.w(
-            'Update_provider -> Can not find remote url for filename: $fileName',
-          );
+          logger.w('Update_provider -> Can not find remote url for filename: $fileName');
           _onError?.call("Can't get downloading link");
           return;
         }
@@ -178,13 +166,9 @@ class UpdateProvider implements IUpdateProvider {
 
               // Если файла хэша нет, то не проверяем
               if (referenceHash != null && referenceHash.isNotEmpty) {
-                final fileHash =
-                    (await sha1.bind(_isDownloadedFile!.openRead()).first)
-                        .toString();
+                final fileHash = (await sha1.bind(_isDownloadedFile!.openRead()).first).toString();
                 if (referenceHash != fileHash) {
-                  logger.e(
-                    'Update_provider -> Error: Hash mismatch. Got: $fileHash, expected: $referenceHash',
-                  );
+                  logger.e('Update_provider -> Error: Hash mismatch. Got: $fileHash, expected: $referenceHash');
                   _onError?.call('File Hash mismatch');
                   return;
                 }
@@ -217,19 +201,14 @@ class UpdateProvider implements IUpdateProvider {
     if (response.statusCode == 200) {
       return response.body;
     } else {
-      logger.d(
-        'Update_provider -> Can not get file hash: StatusCode: ${response.statusCode}',
-      );
+      logger.d('Update_provider -> Can not get file hash: StatusCode: ${response.statusCode}');
       return null;
     }
   }
 
   @override
   Future<void> installApk() async {
-    if (_canUpdate &&
-        _isDownloaded &&
-        _latestRelease != null &&
-        _isDownloadedFile != null) {
+    if (_canUpdate && _isDownloaded && _latestRelease != null && _isDownloadedFile != null) {
       if (await Permission.requestInstallPackages.request().isGranted) {
         final result = await OpenFile.open(_isDownloadedFile!.path);
         logger.d(result.message);
@@ -241,24 +220,16 @@ class UpdateProvider implements IUpdateProvider {
 
   @override
   Future<String?> showChangelog() async {
-    final previousVersion = Version.parse(
-      _settingsProvider.settings.previousVersion,
-    );
+    final previousVersion = Version.parse(_settingsProvider.settings.previousVersion);
 
     final currentVersion = Version.parse(_appInfo.version);
     // Не показывать ченджлог для не релизных версий и первого запуска
     // Не изменять значение последней запущенной версии для не релизных версий
     if (!currentVersion.isPreRelease) {
-      await _settingsProvider.update(
-        _settingsProvider.settings.copyWith(previousVersion: _appInfo.version),
-      );
+      await _settingsProvider.update(_settingsProvider.settings.copyWith(previousVersion: _appInfo.version));
       if (currentVersion > previousVersion &&
-          previousVersion !=
-              Version.parse(_settingsProvider.getDefaults().previousVersion)) {
-        return ChangelogProvider().changelog(
-          currentVersion.toString(),
-          previousVersion.toString(),
-        );
+          previousVersion != Version.parse(_settingsProvider.getDefaults().previousVersion)) {
+        return ChangelogProvider().changelog(currentVersion.toString(), previousVersion.toString());
       }
     }
     return null;

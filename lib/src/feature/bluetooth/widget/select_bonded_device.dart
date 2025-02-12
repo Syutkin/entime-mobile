@@ -12,11 +12,9 @@ import 'bluetooth_device_list_entry.dart';
 Future<void> selectBluetoothDevice(BuildContext context) async {
   BlocProvider.of<BluetoothBloc>(context).add(
     BluetoothEvent.selectDevice(
-      deviceWithAvailability: await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const SelectBondedDeviceScreen(),
-        ),
-      ),
+      deviceWithAvailability: await Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (context) => const SelectBondedDeviceScreen())),
     ),
   );
 }
@@ -33,8 +31,7 @@ class SelectBondedDeviceScreen extends StatefulWidget {
 }
 
 class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
-  List<BluetoothDeviceWithAvailability> devices =
-      <BluetoothDeviceWithAvailability>[];
+  List<BluetoothDeviceWithAvailability> devices = <BluetoothDeviceWithAvailability>[];
 
   // Availability
   StreamSubscription<BluetoothDiscoveryResult>? _discoveryStreamSubscription;
@@ -60,9 +57,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
                 .map(
                   (device) => BluetoothDeviceWithAvailability(
                     device,
-                    widget.checkAvailability
-                        ? BluetoothDeviceAvailability.maybe
-                        : BluetoothDeviceAvailability.yes,
+                    widget.checkAvailability ? BluetoothDeviceAvailability.maybe : BluetoothDeviceAvailability.yes,
                   ),
                 )
                 .toList();
@@ -78,21 +73,19 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   }
 
   void _startDiscovery() {
-    _discoveryStreamSubscription = FlutterBluetoothSerial.instance
-        .startDiscovery()
-        .listen((r) {
-          setState(() {
-            final i = devices.iterator;
-            while (i.moveNext()) {
-              final device = i.current;
-              if (device.device == r.device) {
-                device
-                  ..availability = BluetoothDeviceAvailability.yes
-                  ..rssi = r.rssi;
-              }
-            }
-          });
-        });
+    _discoveryStreamSubscription = FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
+      setState(() {
+        final i = devices.iterator;
+        while (i.moveNext()) {
+          final device = i.current;
+          if (device.device == r.device) {
+            device
+              ..availability = BluetoothDeviceAvailability.yes
+              ..rssi = r.rssi;
+          }
+        }
+      });
+    });
 
     _discoveryStreamSubscription?.onDone(() {
       setState(() {
@@ -131,16 +124,11 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
             FittedBox(
               child: Container(
                 margin: const EdgeInsets.all(16),
-                child: const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
+                child: const CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
               ),
             )
           else
-            IconButton(
-              icon: const Icon(Icons.replay),
-              onPressed: _restartDiscovery,
-            ),
+            IconButton(icon: const Icon(Icons.replay), onPressed: _restartDiscovery),
         ],
       ),
       body: ListView(children: list),

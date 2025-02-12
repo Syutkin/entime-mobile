@@ -8,9 +8,7 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 import '../settings.dart';
 
 class SharedPrefsSettingsProvider implements ISettingsProvider {
-  SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings)
-    : _prefs = prefs,
-      _settings = settings;
+  SharedPrefsSettingsProvider._(SharedPreferences prefs, AppSettings settings) : _prefs = prefs, _settings = settings;
   final SharedPreferences _prefs;
   AppSettings _settings;
 
@@ -47,9 +45,7 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
       countdownSize: prefs.getDouble('countdownSize') ?? defaults.countdownSize,
       countdownLeft: prefs.getDouble('countdownLeft') ?? defaults.countdownLeft,
       countdownTop: prefs.getDouble('countdownTop') ?? defaults.countdownTop,
-      countdownAtStartTime:
-          prefs.getBool('countdownAtStartTime') ??
-          defaults.countdownAtStartTime,
+      countdownAtStartTime: prefs.getBool('countdownAtStartTime') ?? defaults.countdownAtStartTime,
       checkUpdates: prefs.getBool('checkUpdates') ?? defaults.checkUpdates,
       showDNS: prefs.getBool('showDNS') ?? defaults.showDNS,
       showDNF: prefs.getBool('showDNF') ?? defaults.showDNF,
@@ -59,51 +55,26 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
       showManual: prefs.getBool('showManual') ?? defaults.showManual,
       reconnect: prefs.getBool('reconnect') ?? defaults.reconnect,
       finishDelay: prefs.getInt('finishDelay') ?? defaults.finishDelay,
-      substituteNumbers:
-          prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
-      substituteNumbersDelay:
-          prefs.getInt('substituteNumbersDelay') ??
-          defaults.substituteNumbersDelay,
-      showStartDifference:
-          prefs.getBool('showStartDifference') ?? defaults.showStartDifference,
-      showColorStartDifference:
-          prefs.getBool('showColorStartDifference') ??
-          defaults.showColorStartDifference,
-      startDifferenceThreshold:
-          prefs.getInt('startDifferenceThreshold') ??
-          defaults.startDifferenceThreshold,
-      showFinishDifference:
-          prefs.getBool('showFinishDifference') ??
-          defaults.showFinishDifference,
-      showColorFinishDifference:
-          prefs.getBool('showColorFinishDifference') ??
-          defaults.showColorFinishDifference,
-      finishDifferenceThreshold:
-          prefs.getInt('finishDifferenceThreshold') ??
-          defaults.finishDifferenceThreshold,
+      substituteNumbers: prefs.getBool('substituteNumbers') ?? defaults.substituteNumbers,
+      substituteNumbersDelay: prefs.getInt('substituteNumbersDelay') ?? defaults.substituteNumbersDelay,
+      showStartDifference: prefs.getBool('showStartDifference') ?? defaults.showStartDifference,
+      showColorStartDifference: prefs.getBool('showColorStartDifference') ?? defaults.showColorStartDifference,
+      startDifferenceThreshold: prefs.getInt('startDifferenceThreshold') ?? defaults.startDifferenceThreshold,
+      showFinishDifference: prefs.getBool('showFinishDifference') ?? defaults.showFinishDifference,
+      showColorFinishDifference: prefs.getBool('showColorFinishDifference') ?? defaults.showColorFinishDifference,
+      finishDifferenceThreshold: prefs.getInt('finishDifferenceThreshold') ?? defaults.finishDifferenceThreshold,
       deltaInSeconds: prefs.getInt('deltaInSeconds') ?? defaults.deltaInSeconds,
-      updateStartCorrectionDelay:
-          prefs.getInt('updateStartCorrectionDelay') ??
-          defaults.updateStartCorrectionDelay,
+      updateStartCorrectionDelay: prefs.getInt('updateStartCorrectionDelay') ?? defaults.updateStartCorrectionDelay,
       logLimit: prefs.getInt('logLimit') ?? defaults.logLimit,
-      seedColor: ColorSeed.values.byName(
-        prefs.getString('seedColor') ?? defaults.seedColor.name,
-      ),
-      brightness: Brightness.values.byName(
-        prefs.getString('brightness') ?? defaults.brightness.name,
-      ),
+      seedColor: ColorSeed.values.byName(prefs.getString('seedColor') ?? defaults.seedColor.name),
+      brightness: Brightness.values.byName(prefs.getString('brightness') ?? defaults.brightness.name),
       contrastLevel: prefs.getDouble('contrastLevel') ?? defaults.contrastLevel,
       dynamicSchemeVariant: DynamicSchemeVariant.values.byName(
-        prefs.getString('dynamicSchemeVariant') ??
-            defaults.dynamicSchemeVariant.name,
+        prefs.getString('dynamicSchemeVariant') ?? defaults.dynamicSchemeVariant.name,
       ),
-      isOLEDBackground:
-          prefs.getBool('isOLEDBackground') ?? defaults.isOLEDBackground,
-      previousVersion:
-          prefs.getString('previousVersion') ?? defaults.previousVersion,
-      updateNtpOffsetAtStartup:
-          prefs.getBool('updateNtpOffsetAtStartup') ??
-          defaults.updateNtpOffsetAtStartup,
+      isOLEDBackground: prefs.getBool('isOLEDBackground') ?? defaults.isOLEDBackground,
+      previousVersion: prefs.getString('previousVersion') ?? defaults.previousVersion,
+      updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ?? defaults.updateNtpOffsetAtStartup,
     );
 
     await WakelockPlus.toggle(enable: settings.wakelock);
@@ -167,47 +138,23 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     await _prefs.setBool('reconnect', settings.reconnect);
     await _prefs.setInt('finishDelay', settings.finishDelay);
     await _prefs.setBool('substituteNumbers', settings.substituteNumbers);
-    await _prefs.setInt(
-      'substituteNumbersDelay',
-      settings.substituteNumbersDelay,
-    );
+    await _prefs.setInt('substituteNumbersDelay', settings.substituteNumbersDelay);
     await _prefs.setBool('showStartDifference', settings.showStartDifference);
-    await _prefs.setBool(
-      'showColorStartDifference',
-      settings.showColorStartDifference,
-    );
-    await _prefs.setInt(
-      'startDifferenceThreshold',
-      settings.startDifferenceThreshold,
-    );
+    await _prefs.setBool('showColorStartDifference', settings.showColorStartDifference);
+    await _prefs.setInt('startDifferenceThreshold', settings.startDifferenceThreshold);
     await _prefs.setBool('showFinishDifference', settings.showFinishDifference);
-    await _prefs.setBool(
-      'showColorFinishDifference',
-      settings.showColorFinishDifference,
-    );
-    await _prefs.setInt(
-      'finishDifferenceThreshold',
-      settings.finishDifferenceThreshold,
-    );
+    await _prefs.setBool('showColorFinishDifference', settings.showColorFinishDifference);
+    await _prefs.setInt('finishDifferenceThreshold', settings.finishDifferenceThreshold);
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
-    await _prefs.setInt(
-      'updateStartCorrectionDelay',
-      settings.updateStartCorrectionDelay,
-    );
+    await _prefs.setInt('updateStartCorrectionDelay', settings.updateStartCorrectionDelay);
     await _prefs.setInt('log_limit', settings.logLimit);
     await _prefs.setString('seedColor', settings.seedColor.name);
     await _prefs.setString('brightness', settings.brightness.name);
     await _prefs.setDouble('contrastLevel', settings.contrastLevel);
-    await _prefs.setString(
-      'dynamicSchemeVariant',
-      settings.dynamicSchemeVariant.name,
-    );
+    await _prefs.setString('dynamicSchemeVariant', settings.dynamicSchemeVariant.name);
     await _prefs.setBool('isOLEDBackground', settings.isOLEDBackground);
     await _prefs.setString('previousVersion', settings.previousVersion);
-    await _prefs.setBool(
-      'updateNtpOffsetAtStartup',
-      settings.updateNtpOffsetAtStartup,
-    );
+    await _prefs.setBool('updateNtpOffsetAtStartup', settings.updateNtpOffsetAtStartup);
 
     _settings = settings;
     _appSettingsController.add(_settings);

@@ -7,11 +7,7 @@ class Note {
   String name;
 }
 
-Future<int?> buzzerFrequencyPopup({
-  required String text,
-  required BuildContext context,
-  required int frequency,
-}) async {
+Future<int?> buzzerFrequencyPopup({required String text, required BuildContext context, required int frequency}) async {
   final notes = <Note>[
     Note('B0', 31),
     Note('C1', 33),

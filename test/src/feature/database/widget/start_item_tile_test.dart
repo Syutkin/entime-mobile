@@ -15,8 +15,7 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockQueryRow extends Mock implements QueryRow {}
 
-class MockSettingsCubit extends MockCubit<AppSettings>
-    implements SettingsCubit {}
+class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
 void main() {
   late MockQueryRow row;
@@ -36,9 +35,7 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(value: settingsCubit, child: widget),
-      ),
+      home: Material(child: BlocProvider.value(value: settingsCubit, child: widget)),
     );
   }
 
@@ -58,9 +55,7 @@ void main() {
     });
 
     patrolWidgetTest('Show all basic info', (PatrolTester $) async {
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+      when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -86,12 +81,8 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('If countdown presents, show it instead of startTime', (
-      PatrolTester $,
-    ) async {
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+    patrolWidgetTest('If countdown presents, show it instead of startTime', (PatrolTester $) async {
+      when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -109,9 +100,7 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(StartItemTile(item: item, countdown: countdown)),
-      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item, countdown: countdown)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsNothing);
@@ -120,109 +109,92 @@ void main() {
       expect($(countdown), findsOneWidget);
     });
 
-    patrolWidgetTest(
-      'If participant is dns, show status name instead of manualCorrection',
-      (PatrolTester $) async {
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
-        final item = ParticipantAtStart(
-          row: row,
-          riderId: 1,
-          raceId: 1,
-          number: number,
-          participantStatusId: ParticipantStatus.active.index,
-          name: name,
-          startId: 1,
-          stageId: 1,
-          participantId: 1,
-          startTime: startTime,
-          automaticStartTime: automaticStartTime,
-          automaticCorrection: automaticCorrection,
-          manualStartTime: manualStartTime,
-          manualCorrection: manualCorrection,
-          statusId: ParticipantStatus.dns.index,
-        );
-        await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+    patrolWidgetTest('If participant is dns, show status name instead of manualCorrection', (PatrolTester $) async {
+      when(() => settingsCubit.state).thenReturn(settings);
+      final item = ParticipantAtStart(
+        row: row,
+        riderId: 1,
+        raceId: 1,
+        number: number,
+        participantStatusId: ParticipantStatus.active.index,
+        name: name,
+        startId: 1,
+        stageId: 1,
+        participantId: 1,
+        startTime: startTime,
+        automaticStartTime: automaticStartTime,
+        automaticCorrection: automaticCorrection,
+        manualStartTime: manualStartTime,
+        manualCorrection: manualCorrection,
+        statusId: ParticipantStatus.dns.index,
+      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
-        expect($(number.toString()), findsOneWidget);
-        expect($(startTime), findsOneWidget);
-        expect($(automaticCorrection.toString()), findsOneWidget);
-        expect($(manualCorrection.toString()), findsNothing);
-        expect($(Localization.current.I18nCore_dns), findsOneWidget);
-      },
-    );
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsNothing);
+      expect($(Localization.current.I18nCore_dns), findsOneWidget);
+    });
 
-    patrolWidgetTest(
-      'If participant is dnf, show status name instead of manualCorrection',
-      (PatrolTester $) async {
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
-        final item = ParticipantAtStart(
-          row: row,
-          riderId: 1,
-          raceId: 1,
-          number: number,
-          participantStatusId: ParticipantStatus.active.index,
-          name: name,
-          startId: 1,
-          stageId: 1,
-          participantId: 1,
-          startTime: startTime,
-          automaticStartTime: automaticStartTime,
-          automaticCorrection: automaticCorrection,
-          manualStartTime: manualStartTime,
-          manualCorrection: manualCorrection,
-          statusId: ParticipantStatus.dnf.index,
-        );
-        await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+    patrolWidgetTest('If participant is dnf, show status name instead of manualCorrection', (PatrolTester $) async {
+      when(() => settingsCubit.state).thenReturn(settings);
+      final item = ParticipantAtStart(
+        row: row,
+        riderId: 1,
+        raceId: 1,
+        number: number,
+        participantStatusId: ParticipantStatus.active.index,
+        name: name,
+        startId: 1,
+        stageId: 1,
+        participantId: 1,
+        startTime: startTime,
+        automaticStartTime: automaticStartTime,
+        automaticCorrection: automaticCorrection,
+        manualStartTime: manualStartTime,
+        manualCorrection: manualCorrection,
+        statusId: ParticipantStatus.dnf.index,
+      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
-        expect($(number.toString()), findsOneWidget);
-        expect($(startTime), findsOneWidget);
-        expect($(automaticCorrection.toString()), findsOneWidget);
-        expect($(manualCorrection.toString()), findsNothing);
-        expect($(Localization.current.I18nCore_dnf), findsOneWidget);
-      },
-    );
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsNothing);
+      expect($(Localization.current.I18nCore_dnf), findsOneWidget);
+    });
 
-    patrolWidgetTest(
-      'If participant is dsq, show status name instead of manualCorrection',
-      (PatrolTester $) async {
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
-        final item = ParticipantAtStart(
-          row: row,
-          riderId: 1,
-          raceId: 1,
-          number: number,
-          participantStatusId: ParticipantStatus.dsq.index,
-          name: name,
-          startId: 1,
-          stageId: 1,
-          participantId: 1,
-          startTime: startTime,
-          automaticStartTime: automaticStartTime,
-          automaticCorrection: automaticCorrection,
-          manualStartTime: manualStartTime,
-          manualCorrection: manualCorrection,
-          statusId: ParticipantStatus.dns.index,
-        );
-        await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+    patrolWidgetTest('If participant is dsq, show status name instead of manualCorrection', (PatrolTester $) async {
+      when(() => settingsCubit.state).thenReturn(settings);
+      final item = ParticipantAtStart(
+        row: row,
+        riderId: 1,
+        raceId: 1,
+        number: number,
+        participantStatusId: ParticipantStatus.dsq.index,
+        name: name,
+        startId: 1,
+        stageId: 1,
+        participantId: 1,
+        startTime: startTime,
+        automaticStartTime: automaticStartTime,
+        automaticCorrection: automaticCorrection,
+        manualStartTime: manualStartTime,
+        manualCorrection: manualCorrection,
+        statusId: ParticipantStatus.dns.index,
+      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
 
-        expect($(number.toString()), findsOneWidget);
-        expect($(startTime), findsOneWidget);
-        expect($(automaticCorrection.toString()), findsOneWidget);
-        expect($(manualCorrection.toString()), findsNothing);
-        expect($(Localization.current.I18nCore_dsq), findsOneWidget);
-      },
-    );
+      expect($(number.toString()), findsOneWidget);
+      expect($(startTime), findsOneWidget);
+      expect($(automaticCorrection.toString()), findsOneWidget);
+      expect($(manualCorrection.toString()), findsNothing);
+      expect($(Localization.current.I18nCore_dsq), findsOneWidget);
+    });
 
     patrolWidgetTest('Change color if highlighted', (PatrolTester $) async {
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+      when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
         riderId: 1,
@@ -240,9 +212,7 @@ void main() {
         manualCorrection: manualCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(
-        testWithLocale(StartItemTile(item: item, isHighlighted: true)),
-      );
+      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item, isHighlighted: true)));
 
       final context = $.tester.element(find.byType(StartItemTile));
       final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
@@ -253,18 +223,14 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Change color if difference more than threshold', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Change color if difference more than threshold', (PatrolTester $) async {
       settings = settings.copyWith(showColorStartDifference: true);
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+      when(() => settingsCubit.state).thenReturn(settings);
       final now = DateTime.now();
 
-      automaticStartTime = DateFormat(longTimeFormat).format(
-        now.add(Duration(milliseconds: settings.startDifferenceThreshold + 10)),
-      );
+      automaticStartTime = DateFormat(
+        longTimeFormat,
+      ).format(now.add(Duration(milliseconds: settings.startDifferenceThreshold + 10)));
 
       final item = ParticipantAtStart(
         row: row,
@@ -295,18 +261,14 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Take into account ntpOffset and do not change color', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Take into account ntpOffset and do not change color', (PatrolTester $) async {
       settings = settings.copyWith(showColorStartDifference: true);
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+      when(() => settingsCubit.state).thenReturn(settings);
       final now = DateTime.now();
 
-      automaticStartTime = DateFormat(longTimeFormat).format(
-        now.add(Duration(milliseconds: settings.startDifferenceThreshold + 10)),
-      );
+      automaticStartTime = DateFormat(
+        longTimeFormat,
+      ).format(now.add(Duration(milliseconds: settings.startDifferenceThreshold + 10)));
 
       final item = ParticipantAtStart(
         row: row,

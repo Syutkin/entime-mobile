@@ -12,9 +12,7 @@ part 'ntp_event.dart';
 part 'ntp_state.dart';
 
 class NtpBloc extends Bloc<NtpEvent, NtpState> {
-  NtpBloc(INtpProvider ntpProvider)
-    : _ntpProvider = ntpProvider,
-      super(const NtpState.initial(0)) {
+  NtpBloc(INtpProvider ntpProvider) : _ntpProvider = ntpProvider, super(const NtpState.initial(0)) {
     on<NtpEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         getNtpOffset: (event) async {

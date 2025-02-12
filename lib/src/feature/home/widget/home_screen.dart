@@ -27,7 +27,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TabCubit, AppTab>(
-        builder: (context, activeTab) => DefaultTabController(
+    builder:
+        (context, activeTab) => DefaultTabController(
           length: 3,
           child: Scaffold(
             key: const Key('HomeScaffold'),
@@ -37,10 +38,7 @@ class HomeScreen extends StatelessWidget {
               actions: <Widget>[
                 FilterButton(activeTab: activeTab),
                 const BluetoothButton(),
-                MenuButton(
-                  key: const Key('HomeAppBarMenuButton'),
-                  activeTab: activeTab,
-                ),
+                MenuButton(key: const Key('HomeAppBarMenuButton'), activeTab: activeTab),
               ],
               bottom: TabBar(
                 key: const Key('TabBar'),
@@ -56,18 +54,9 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
                 tabs: <Widget>[
-                  Tab(
-                    key: const Key('InitTab'),
-                    icon: Text(Localization.current.I18nHome_home),
-                  ),
-                  Tab(
-                    key: const Key('StartTab'),
-                    icon: Text(Localization.current.I18nHome_start),
-                  ),
-                  Tab(
-                    key: const Key('FinishTab'),
-                    icon: Text(Localization.current.I18nHome_finish),
-                  ),
+                  Tab(key: const Key('InitTab'), icon: Text(Localization.current.I18nHome_home)),
+                  Tab(key: const Key('StartTab'), icon: Text(Localization.current.I18nHome_start)),
+                  Tab(key: const Key('FinishTab'), icon: Text(Localization.current.I18nHome_finish)),
                 ],
               ),
             ),
@@ -89,167 +78,142 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-      );
+  );
 
-  SingleChildWidget _listenToBluetooth() =>
-      BlocListener<BluetoothBloc, BluetoothBlocState>(
-        listener: (context, state) {
-          state.whenOrNull(
-            connected: (message) {
-              message?.whenOrNull(
-                automaticStart: (automaticStart) {
-                  final databaseBloc = context.read<DatabaseBloc>();
-                  final offset = context.read<NtpBloc>().state.offset;
-                  final deltaInSeconds =
-                      context.read<SettingsCubit>().state.deltaInSeconds;
-                  final stageId = databaseBloc.state.stage?.id;
-                  if (stageId != null) {
-                    databaseBloc.add(
-                      DatabaseEvent.updateAutomaticCorrection(
-                        stageId: stageId,
-                        startTime: automaticStart.time,
-                        correction: automaticStart.correction,
-                        timestamp: automaticStart.timestamp,
-                        ntpOffset: offset,
-                        deltaInSeconds: deltaInSeconds,
-                        forceUpdate: automaticStart.updating,
-                      ),
-                    );
-                  }
-                },
-                finish: (time, timestamp) {
-                  final databaseBloc = context.read<DatabaseBloc>();
-                  final offset = context.read<NtpBloc>().state.offset;
-                  final stage = databaseBloc.state.stage;
-                  if (stage != null) {
-                    databaseBloc.add(
-                      DatabaseEvent.addFinishTime(
-                        stage: stage,
-                        finishTime: time,
-                        timestamp: timestamp,
-                        ntpOffset: offset,
-                      ),
-                    );
-                  }
-                },
-                moduleSettings: (moduleSettings) {
-                  context.read<ModuleSettingsBloc>().add(
-                        ModuleSettingsEvent.get(moduleSettings),
-                      );
-                },
-              );
+  SingleChildWidget _listenToBluetooth() => BlocListener<BluetoothBloc, BluetoothBlocState>(
+    listener: (context, state) {
+      state.whenOrNull(
+        connected: (message) {
+          message?.whenOrNull(
+            automaticStart: (automaticStart) {
+              final databaseBloc = context.read<DatabaseBloc>();
+              final offset = context.read<NtpBloc>().state.offset;
+              final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
+              final stageId = databaseBloc.state.stage?.id;
+              if (stageId != null) {
+                databaseBloc.add(
+                  DatabaseEvent.updateAutomaticCorrection(
+                    stageId: stageId,
+                    startTime: automaticStart.time,
+                    correction: automaticStart.correction,
+                    timestamp: automaticStart.timestamp,
+                    ntpOffset: offset,
+                    deltaInSeconds: deltaInSeconds,
+                    forceUpdate: automaticStart.updating,
+                  ),
+                );
+              }
+            },
+            finish: (time, timestamp) {
+              final databaseBloc = context.read<DatabaseBloc>();
+              final offset = context.read<NtpBloc>().state.offset;
+              final stage = databaseBloc.state.stage;
+              if (stage != null) {
+                databaseBloc.add(
+                  DatabaseEvent.addFinishTime(stage: stage, finishTime: time, timestamp: timestamp, ntpOffset: offset),
+                );
+              }
+            },
+            moduleSettings: (moduleSettings) {
+              context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(moduleSettings));
             },
           );
         },
       );
+    },
+  );
 
-  SingleChildWidget _listenToNewStartTime() =>
-      BlocListener<DatabaseBloc, DatabaseState>(
-        listener: (context, state) async {
-          // Обновление автоматического времени старта
-          final notification = state.notification;
-          if (notification != null) {
-            final databaseBloc = context.read<DatabaseBloc>();
-            final offset = context.read<NtpBloc>().state.offset;
-            await notification.mapOrNull(
-              updateAutomaticCorrection: (data) async {
-                final prevCorrection =
-                    data.previousStarts.first.automaticCorrection;
-                // Если новая поправка для номера отличается от предыдущей
-                // более чем на две секунды (updateStartCorrectionDelay в настройках),
-                // то уточняем, точно ли обновлять?
-                // Если разница настройки, то молча игнорируем отсечку
-                final updateStartCorrectionDelay = context
-                    .read<SettingsCubit>()
-                    .state
-                    .updateStartCorrectionDelay;
-                if (prevCorrection != null &&
-                    prevCorrection - data.correction >
-                        updateStartCorrectionDelay) {
-                  final text =
-                      Localization.current.I18nHome_updateAutomaticCorrection(
-                    data.number,
-                    data.previousStarts.first.automaticCorrection!,
-                    data.correction,
-                  );
-                  final deltaInSeconds =
-                      context.read<SettingsCubit>().state.deltaInSeconds;
-                  final update = await overwriteStartTimePopup(
-                    context: context,
-                    text: text,
-                  );
-                  if (update ?? false) {
-                    databaseBloc.add(
-                      DatabaseEvent.updateAutomaticCorrection(
-                        stageId: data.previousStarts.first.stageId,
-                        startTime: data.startTime,
-                        timestamp: data.timestamp,
-                        ntpOffset: offset,
-                        correction: data.correction,
-                        deltaInSeconds: deltaInSeconds,
-                        forceUpdate: true,
-                      ),
-                    );
-                  }
-                }
-              },
-            );
-          }
-        },
-      );
+  SingleChildWidget _listenToNewStartTime() => BlocListener<DatabaseBloc, DatabaseState>(
+    listener: (context, state) async {
+      // Обновление автоматического времени старта
+      final notification = state.notification;
+      if (notification != null) {
+        final databaseBloc = context.read<DatabaseBloc>();
+        final offset = context.read<NtpBloc>().state.offset;
+        await notification.mapOrNull(
+          updateAutomaticCorrection: (data) async {
+            final prevCorrection = data.previousStarts.first.automaticCorrection;
+            // Если новая поправка для номера отличается от предыдущей
+            // более чем на две секунды (updateStartCorrectionDelay в настройках),
+            // то уточняем, точно ли обновлять?
+            // Если разница настройки, то молча игнорируем отсечку
+            final updateStartCorrectionDelay = context.read<SettingsCubit>().state.updateStartCorrectionDelay;
+            if (prevCorrection != null && prevCorrection - data.correction > updateStartCorrectionDelay) {
+              final text = Localization.current.I18nHome_updateAutomaticCorrection(
+                data.number,
+                data.previousStarts.first.automaticCorrection!,
+                data.correction,
+              );
+              final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
+              final update = await overwriteStartTimePopup(context: context, text: text);
+              if (update ?? false) {
+                databaseBloc.add(
+                  DatabaseEvent.updateAutomaticCorrection(
+                    stageId: data.previousStarts.first.stageId,
+                    startTime: data.startTime,
+                    timestamp: data.timestamp,
+                    ntpOffset: offset,
+                    correction: data.correction,
+                    deltaInSeconds: deltaInSeconds,
+                    forceUpdate: true,
+                  ),
+                );
+              }
+            }
+          },
+        );
+      }
+    },
+  );
 
   SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
-        listenWhen: (previousState, state) {
-          return previousState.maybeMap(
-            initial: (initial) {
-              return state.maybeMap(
-                initial: (_) {
-                  return true;
-                },
-                updateAvailable: (_) {
-                  return true;
-                },
-                orElse: () {
-                  return false;
-                },
-              );
+    listenWhen: (previousState, state) {
+      return previousState.maybeMap(
+        initial: (initial) {
+          return state.maybeMap(
+            initial: (_) {
+              return true;
+            },
+            updateAvailable: (_) {
+              return true;
             },
             orElse: () {
               return false;
             },
           );
         },
-        listener: (context, state) async {
-          await state.whenOrNull(
-            updateAvailable: (version) {
-              if (!Scaffold.of(context).isDrawerOpen) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      Localization.current.I18nHome_updateAvailable(version),
-                    ),
-                    action: SnackBarAction(
-                      onPressed: () {
-                        BlocProvider.of<UpdateBloc>(
-                          context,
-                        ).add(const UpdateEvent.downloadUpdate());
-                        // ToDo: fix this for tests
-                        Scaffold.of(context).openDrawer();
-                      },
-                      label: Localization.current.I18nHome_update,
-                    ),
-                  ),
-                );
-              }
-            },
-            initial: (changelog) async {
-              if (changelog != null) {
-                await showChangelogAtStartup(context, changelog);
-              }
-            },
-          );
+        orElse: () {
+          return false;
         },
       );
+    },
+    listener: (context, state) async {
+      await state.whenOrNull(
+        updateAvailable: (version) {
+          if (!Scaffold.of(context).isDrawerOpen) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(Localization.current.I18nHome_updateAvailable(version)),
+                action: SnackBarAction(
+                  onPressed: () {
+                    BlocProvider.of<UpdateBloc>(context).add(const UpdateEvent.downloadUpdate());
+                    // ToDo: fix this for tests
+                    Scaffold.of(context).openDrawer();
+                  },
+                  label: Localization.current.I18nHome_update,
+                ),
+              ),
+            );
+          }
+        },
+        initial: (changelog) async {
+          if (changelog != null) {
+            await showChangelogAtStartup(context, changelog);
+          }
+        },
+      );
+    },
+  );
 
   SingleChildWidget _listenToCountdownEvents() {
     return BlocListener<CountdownBloc, CountdownState>(
@@ -272,9 +236,7 @@ class HomeScreen extends StatelessWidget {
               if (tick.callNextParticipant) {
                 final stageId = context.read<DatabaseBloc>().state.stage?.id;
                 if (stageId != null) {
-                  context.read<CountdownBloc>().add(
-                        CountdownEvent.callParticipant(stageId: stageId),
-                      );
+                  context.read<CountdownBloc>().add(CountdownEvent.callParticipant(stageId: stageId));
                 }
               }
             },
@@ -290,22 +252,21 @@ class TextTitle extends StatelessWidget {
   const TextTitle({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<DatabaseBloc, DatabaseState>(
-        builder: (context, state) {
-          final stage = state.stage;
-          if (stage != null) {
-            return Text(stage.name);
-          } else {
-            final race = state.race;
-            if (race != null) {
-              return Text(race.name);
-            } else {
-              return const Text(pubspec.name);
-            }
-          }
-        },
-      );
+  Widget build(BuildContext context) => BlocBuilder<DatabaseBloc, DatabaseState>(
+    builder: (context, state) {
+      final stage = state.stage;
+      if (stage != null) {
+        return Text(stage.name);
+      } else {
+        final race = state.race;
+        if (race != null) {
+          return Text(race.name);
+        } else {
+          return const Text(pubspec.name);
+        }
+      }
+    },
+  );
 }
 
 @visibleForTesting
@@ -344,10 +305,7 @@ class FilterButton extends StatelessWidget {
             PopupMenuItem(
               key: const Key('setStartDefaults'),
               value: FilterStart.setDefaults,
-              child: ListTile(
-                leading: const SizedBox.shrink(),
-                title: Text(Localization.current.I18nHome_setDefaults),
-              ),
+              child: ListTile(leading: const SizedBox.shrink(), title: Text(Localization.current.I18nHome_setDefaults)),
             ),
           ];
           return PopupMenuButton<FilterStart>(
@@ -356,25 +314,15 @@ class FilterButton extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterStart.showDNS:
-                  settingsCubit.update(
-                    settings.copyWith(showDNS: !settings.showDNS),
-                  );
+                  settingsCubit.update(settings.copyWith(showDNS: !settings.showDNS));
                 case FilterStart.showDNF:
-                  settingsCubit.update(
-                    settings.copyWith(showDNF: !settings.showDNF),
-                  );
+                  settingsCubit.update(settings.copyWith(showDNF: !settings.showDNF));
                 case FilterStart.showDSQ:
-                  settingsCubit.update(
-                    settings.copyWith(showDSQ: !settings.showDSQ),
-                  );
+                  settingsCubit.update(settings.copyWith(showDSQ: !settings.showDSQ));
                 case FilterStart.setDefaults:
                   const defaults = AppSettings.defaults();
                   settingsCubit.update(
-                    settings.copyWith(
-                      showDNS: defaults.showDNS,
-                      showDNF: defaults.showDNF,
-                      showDSQ: defaults.showDSQ,
-                    ),
+                    settings.copyWith(showDNS: defaults.showDNS, showDNF: defaults.showDNF, showDSQ: defaults.showDSQ),
                   );
               }
             },
@@ -403,10 +351,7 @@ class FilterButton extends StatelessWidget {
             PopupMenuItem(
               key: const Key('setFinishDefaults'),
               value: FilterFinish.setDefaults,
-              child: ListTile(
-                leading: const SizedBox.shrink(),
-                title: Text(Localization.current.I18nHome_setDefaults),
-              ),
+              child: ListTile(leading: const SizedBox.shrink(), title: Text(Localization.current.I18nHome_setDefaults)),
             ),
           ];
           return PopupMenuButton<FilterFinish>(
@@ -415,23 +360,11 @@ class FilterButton extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterFinish.showHidden:
-                  settingsCubit.update(
-                    settings.copyWith(
-                      showHidden: !settings.showHidden,
-                    ),
-                  );
+                  settingsCubit.update(settings.copyWith(showHidden: !settings.showHidden));
                 case FilterFinish.showNumbers:
-                  settingsCubit.update(
-                    settings.copyWith(
-                      showNumbers: !settings.showNumbers,
-                    ),
-                  );
+                  settingsCubit.update(settings.copyWith(showNumbers: !settings.showNumbers));
                 case FilterFinish.showManual:
-                  settingsCubit.update(
-                    settings.copyWith(
-                      showManual: !settings.showManual,
-                    ),
-                  );
+                  settingsCubit.update(settings.copyWith(showManual: !settings.showManual));
                 case FilterFinish.setDefaults:
                   const defaults = AppSettings.defaults();
                   settingsCubit.update(

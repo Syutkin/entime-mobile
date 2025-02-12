@@ -1,28 +1,21 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
-import 'generated/l10n.dart'
-    as generated
-    show AppLocalizationDelegate, GeneratedLocalization;
+import 'generated/l10n.dart' as generated show AppLocalizationDelegate, GeneratedLocalization;
 
 @sealed
 class Localization extends generated.GeneratedLocalization {
   Localization._();
-  static const LocalizationsDelegate<Localization> delegate = _LocalizationView(
-    generated.AppLocalizationDelegate(),
-  );
+  static const LocalizationsDelegate<Localization> delegate = _LocalizationView(generated.AppLocalizationDelegate());
   static late Localization current;
-  static List<Locale> get supportedLocales =>
-      const generated.AppLocalizationDelegate().supportedLocales;
+  static List<Locale> get supportedLocales => const generated.AppLocalizationDelegate().supportedLocales;
 }
 
 @sealed
 @immutable
 class _LocalizationView extends LocalizationsDelegate<Localization> {
   @literal
-  const _LocalizationView(
-    LocalizationsDelegate<generated.GeneratedLocalization> delegate,
-  ) : _delegate = delegate;
+  const _LocalizationView(LocalizationsDelegate<generated.GeneratedLocalization> delegate) : _delegate = delegate;
 
   final LocalizationsDelegate<generated.GeneratedLocalization> _delegate;
 
@@ -31,9 +24,7 @@ class _LocalizationView extends LocalizationsDelegate<Localization> {
 
   @override
   Future<Localization> load(Locale locale) =>
-      generated.GeneratedLocalization.load(
-        locale,
-      ).then<Localization>((_) => Localization.current = Localization._());
+      generated.GeneratedLocalization.load(locale).then<Localization>((_) => Localization.current = Localization._());
 
   @override
   bool shouldReload(covariant _LocalizationView old) => false;

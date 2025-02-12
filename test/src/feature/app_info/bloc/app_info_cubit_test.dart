@@ -21,27 +21,15 @@ void main() {
     when(() => appInfoProvider.version).thenReturn(version);
   });
 
-  group(
-    'AppInfoCubit tests',
-    () {
-      test(
-        'Get app name',
-        () {
-          expect(appInfoCubit.appName, appName);
-        },
-      );
-      test(
-        'Get build number',
-        () {
-          expect(appInfoCubit.buildNumber, buildNumber);
-        },
-      );
-      test(
-        'Get version',
-        () {
-          expect(appInfoCubit.version, version);
-        },
-      );
-    },
-  );
+  group('AppInfoCubit tests', () {
+    test('Get app name', () {
+      expect(appInfoCubit.appName, appName);
+    });
+    test('Get build number', () {
+      expect(appInfoCubit.buildNumber, buildNumber);
+    });
+    test('Get version', () {
+      expect(appInfoCubit.version, version);
+    });
+  });
 }

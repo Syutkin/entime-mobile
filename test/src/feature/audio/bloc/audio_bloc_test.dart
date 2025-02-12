@@ -15,25 +15,18 @@ void main() {
     ttsProvider = MockTtsProvider();
   });
 
-  group(
-    'AudioBloc test',
-    () {
-      blocTest<AudioBloc, AudioState>(
-        'FlutterBluetoothSerial: bluetooth not available',
-        setUp: () {
-          engine = 'TTS Engine';
-          voice = 'TTS Engine';
-          when(
-            () => ttsProvider.getDefaultEngine,
-          ).thenAnswer((_) => Future.value(engine));
-          when(
-            () => ttsProvider.getDefaultVoice,
-          ).thenAnswer((_) => Future.value({'name': voice}));
-        },
-        build: () => AudioBloc(ttsProvider: ttsProvider),
-        act: (bloc) => bloc.add(const AudioEvent.init()),
-        expect: () => [AudioState.initialized(engine: engine, voice: voice)],
-      );
-    },
-  );
+  group('AudioBloc test', () {
+    blocTest<AudioBloc, AudioState>(
+      'FlutterBluetoothSerial: bluetooth not available',
+      setUp: () {
+        engine = 'TTS Engine';
+        voice = 'TTS Engine';
+        when(() => ttsProvider.getDefaultEngine).thenAnswer((_) => Future.value(engine));
+        when(() => ttsProvider.getDefaultVoice).thenAnswer((_) => Future.value({'name': voice}));
+      },
+      build: () => AudioBloc(ttsProvider: ttsProvider),
+      act: (bloc) => bloc.add(const AudioEvent.init()),
+      expect: () => [AudioState.initialized(engine: engine, voice: voice)],
+    );
+  });
 }

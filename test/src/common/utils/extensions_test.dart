@@ -134,26 +134,17 @@ void main() {
       test('Correct time', () {
         const str = '10:10:02';
         final now = DateTime.now();
-        expect(
-          str.toDateTime(),
-          DateTime(now.year, now.month, now.day, 10, 10, 2),
-        );
+        expect(str.toDateTime(), DateTime(now.year, now.month, now.day, 10, 10, 2));
       });
       test('Time with milliseconds', () {
         const str = '10:10:02,123';
         final now = DateTime.now();
-        expect(
-          str.toDateTime(),
-          DateTime(now.year, now.month, now.day, 10, 10, 2, 123),
-        );
+        expect(str.toDateTime(), DateTime(now.year, now.month, now.day, 10, 10, 2, 123));
       });
       test('Short time', () {
         const str = '10:10';
         final now = DateTime.now();
-        expect(
-          str.toDateTime(),
-          DateTime(now.year, now.month, now.day, 10, 10),
-        );
+        expect(str.toDateTime(), DateTime(now.year, now.month, now.day, 10, 10));
       });
       test('Very short time', () {
         const str = '10';
@@ -200,8 +191,7 @@ void main() {
         duration = const Duration(hours: -100).format();
         expect(duration, '-100:00:00');
 
-        duration =
-            const Duration(hours: -2, minutes: -55, seconds: -34).format();
+        duration = const Duration(hours: -2, minutes: -55, seconds: -34).format();
         expect(duration, '-02:55:34');
 
         duration = const Duration(seconds: -1, milliseconds: -1).format();

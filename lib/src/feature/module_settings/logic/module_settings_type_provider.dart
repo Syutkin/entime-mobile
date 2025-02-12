@@ -13,9 +13,7 @@ class ModuleSettingsType extends ModuleSettingsProvider {
     logger.i('Updating modsettings from json');
 
     try {
-      _modSettingsModel = ModSettingsModelType.fromJson(
-        jsonDecode(jsonString) as Map<String, dynamic>,
-      );
+      _modSettingsModel = ModSettingsModelType.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
 
       // Module type
       type = _modSettingsModel.type;

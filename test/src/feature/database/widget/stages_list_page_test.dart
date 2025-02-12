@@ -9,11 +9,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
-    implements DatabaseBloc {}
+class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
-class MockTrailsBloc extends MockBloc<TrailsEvent, TrailsState>
-    implements TrailsBloc {}
+class MockTrailsBloc extends MockBloc<TrailsEvent, TrailsState> implements TrailsBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -30,10 +28,7 @@ void main() {
       home: Material(
         child: BlocProvider.value(
           value: databaseBloc,
-          child: BlocProvider.value(
-            value: trailsBloc,
-            child: StagesListPage(race: race),
-          ),
+          child: BlocProvider.value(value: trailsBloc, child: StagesListPage(race: race)),
         ),
       ),
     );
@@ -41,13 +36,7 @@ void main() {
 
   setUp(() async {
     race = const Race(id: 1, name: 'Race name', isDeleted: false);
-    stage = const Stage(
-      id: 1,
-      raceId: 1,
-      name: 'Stage name',
-      isActive: true,
-      isDeleted: false,
-    );
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
 
     databaseBloc = MockDatabaseBloc();
     trailsBloc = MockTrailsBloc();
@@ -67,41 +56,38 @@ void main() {
     );
   });
 
-  group(
-    'StagesListPage tests',
-    () {
-      patrolWidgetTest('Initial page, no stages', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(AppBar).$(race.name), findsOneWidget);
-        expect($(FloatingActionButton), findsOneWidget);
-        expect($(StageItemTile), findsNothing);
-      });
+  group('StagesListPage tests', () {
+    patrolWidgetTest('Initial page, no stages', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(AppBar).$(race.name), findsOneWidget);
+      expect($(FloatingActionButton), findsOneWidget);
+      expect($(StageItemTile), findsNothing);
+    });
 
-      // ToDo: I can't pass context with TrailsBloc
-      // patrolWidgetTest('Tap FAB, then add stage popup appears',
-      //     (PatrolTester $) async {
-      //   await $.pumpWidgetAndSettle(testWidget());
-      //   await $(FloatingActionButton).tap();
-      //   expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);
-      // });
+    // ToDo: I can't pass context with TrailsBloc
+    // patrolWidgetTest('Tap FAB, then add stage popup appears',
+    //     (PatrolTester $) async {
+    //   await $.pumpWidgetAndSettle(testWidget());
+    //   await $(FloatingActionButton).tap();
+    //   expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);
+    // });
 
-      patrolWidgetTest('Existing races list', (PatrolTester $) async {
-        const race = Race(id: 1, name: 'name', isDeleted: false);
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [race, race, race, race, race],
-            stages: [stage, stage, stage, stage],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-          ),
-        );
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(StageItemTile), findsNWidgets(4));
-      });
-    },
-  );
+    patrolWidgetTest('Existing races list', (PatrolTester $) async {
+      const race = Race(id: 1, name: 'name', isDeleted: false);
+      when(() => databaseBloc.state).thenReturn(
+        DatabaseState(
+          races: [race, race, race, race, race],
+          stages: [stage, stage, stage, stage],
+          categories: [],
+          riders: [],
+          participants: [],
+          finishes: [],
+          numbersOnTrace: [],
+          race: race,
+        ),
+      );
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(StageItemTile), findsNWidgets(4));
+    });
+  });
 }

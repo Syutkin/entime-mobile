@@ -13,20 +13,12 @@ class RiderItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subtitle = <String>[
-      if (rider.birthday != null) rider.birthday!,
-      if (rider.city != null) rider.city!,
-    ];
+    final subtitle = <String>[if (rider.birthday != null) rider.birthday!, if (rider.city != null) rider.city!];
     return ListTile(
       title: Text(rider.name),
       subtitle:
           subtitle.isNotEmpty
-              ? Text(
-                subtitle.join(', '),
-                style: DefaultTextStyle.of(
-                  context,
-                ).style.apply(fontSizeFactor: 0.75),
-              )
+              ? Text(subtitle.join(', '), style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75))
               : null,
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
@@ -36,10 +28,7 @@ class RiderItemTile extends StatelessWidget {
                 onTap: () async {
                   await editRacer(context);
                 },
-                child: ListTile(
-                  leading: const Icon(Icons.edit),
-                  title: Text(Localization.current.I18nCore_edit),
-                ),
+                child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
               ),
             ],
       ),
@@ -71,11 +60,6 @@ class RiderItemTile extends StatelessWidget {
             .toSet()
             .toList()
           ..remove(null);
-    await editRiderPopup(
-      context: context,
-      rider: rider,
-      cities: cities,
-      teams: teams,
-    );
+    await editRiderPopup(context: context, rider: rider, cities: cities, teams: teams);
   }
 }

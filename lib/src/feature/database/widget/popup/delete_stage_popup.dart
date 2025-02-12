@@ -1,9 +1,6 @@
 part of '../stages_list_page.dart';
 
-Future<bool?> deleteStagePopup({
-  required BuildContext context,
-  required String stageName,
-}) async => showDialog<bool>(
+Future<bool?> deleteStagePopup({required BuildContext context, required String stageName}) async => showDialog<bool>(
   context: context,
   builder:
       (context) => AlertDialog(

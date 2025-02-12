@@ -14,11 +14,8 @@ abstract interface class IConnectivityProvider {
 }
 
 class ConnectivityProvider implements IConnectivityProvider {
-  ConnectivityProvider._(Connectivity connectivity)
-    : _connectivity = connectivity {
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
-      _updateConnectionStatus,
-    );
+  ConnectivityProvider._(Connectivity connectivity) : _connectivity = connectivity {
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   factory ConnectivityProvider.init(Connectivity connectivity) {
@@ -31,8 +28,7 @@ class ConnectivityProvider implements IConnectivityProvider {
   // final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
   bool _currentConnection = false;
-  final StreamController<bool> _connectionController =
-      BehaviorSubject()..add(false);
+  final StreamController<bool> _connectionController = BehaviorSubject()..add(false);
 
   @override
   Stream<bool> get onConnectivityChanged => _connectionController.stream;

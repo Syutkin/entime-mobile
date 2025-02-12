@@ -25,8 +25,7 @@ class AudioProvider implements IAudioProvider {
   final IBeepProvider beepProvider;
 
   @override
-  Future<dynamic> setLanguage(String language) =>
-      ttsProvider.setLanguage(language);
+  Future<dynamic> setLanguage(String language) => ttsProvider.setLanguage(language);
 
   @override
   Future<dynamic> setVolume(double volume) => ttsProvider.setVolume(volume);

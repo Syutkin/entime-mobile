@@ -8,13 +8,10 @@ part 'start_number_and_times_csv.g.dart';
 
 @freezed
 class StartNumberAndTimesCsv with _$StartNumberAndTimesCsv {
-  const factory StartNumberAndTimesCsv({
-    required int number,
-    Map<String, String>? startTimes,
-  }) = _StartNumberAndTimesCsv;
+  const factory StartNumberAndTimesCsv({required int number, Map<String, String>? startTimes}) =
+      _StartNumberAndTimesCsv;
 
-  factory StartNumberAndTimesCsv.fromJson(Map<String, dynamic> cvs) =>
-      _$StartNumberAndTimesCsvFromJson(cvs);
+  factory StartNumberAndTimesCsv.fromJson(Map<String, dynamic> cvs) => _$StartNumberAndTimesCsvFromJson(cvs);
 
   factory StartNumberAndTimesCsv.fromMap(Map<String, dynamic> map) {
     late int number;

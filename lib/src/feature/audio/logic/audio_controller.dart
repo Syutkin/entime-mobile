@@ -20,9 +20,9 @@ class AudioController implements IAudioController {
     required IAudioService audioService,
     required AppDatabase database,
     required ISettingsProvider settingsProvider,
-  })  : _audioService = audioService,
-        _db = database,
-        _settingsProvider = settingsProvider;
+  }) : _audioService = audioService,
+       _db = database,
+       _settingsProvider = settingsProvider;
 
   final IAudioService _audioService;
   final ISettingsProvider _settingsProvider;
@@ -40,10 +40,7 @@ class AudioController implements IAudioController {
   }
 
   @override
-  Future<void> playCountdown({
-    required String time,
-    required int stageId,
-  }) async {
+  Future<void> playCountdown({required String time, required int stageId}) async {
     if (await _db.checkParticipantAroundStartTime(
           time: time,
           stageId: stageId,
@@ -53,17 +50,12 @@ class AudioController implements IAudioController {
       await _audioService.countdown();
       logger.i('AudioController -> Beep start $time');
     } else {
-      logger.i(
-        'AudioController -> Cannot find participant with start time around $time',
-      );
+      logger.i('AudioController -> Cannot find participant with start time around $time');
     }
   }
 
   @override
-  Future<String> callParticipant({
-    required String time,
-    required int stageId,
-  }) async {
+  Future<String> callParticipant({required String time, required int stageId}) async {
     logger.i('AudioController -> Voice time: $time');
     final start = <String>[];
     var newVoiceText = '';
@@ -75,54 +67,38 @@ class AudioController implements IAudioController {
       dateTime = dateTime.add(const Duration(minutes: 1));
       start.add(DateFormat(shortTimeFormat).format(dateTime));
     }
-    var participants = await _db.getStartingParticipants(
-      time: time,
-      stageId: stageId,
-    );
+    var participants = await _db.getStartingParticipants(time: time, stageId: stageId);
     if (participants.isNotEmpty) {
       _isStarted = true;
       _isBetweenCategory = false;
-      logger.d(
-        'First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
-      );
+      logger.d('First participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
       newVoiceText = 'На старт приглашается номер ${participants.first.number}';
       // Имена участников, которые были добавлены автоматически на старте,
       // начинаются с номера. Такие имена не произносим
-      _settingsProvider.settings.voiceName &&
-              !RegExp('^[0-9]').hasMatch(participants.first.name)
+      _settingsProvider.settings.voiceName && !RegExp('^[0-9]').hasMatch(participants.first.name)
           ? newVoiceText += ', ${participants.first.name}.'
           : newVoiceText += '.';
-      participants = await _db.getStartingParticipants(
-        time: start[1],
-        stageId: stageId,
-      );
+      participants = await _db.getStartingParticipants(time: start[1], stageId: stageId);
       if (participants.isNotEmpty) {
         newVoiceText += ' Следующий номер ${participants.first.number}';
         // Имена участников, которые были добавлены автоматически на старте,
         // начинаются с номера. Такие имена не произносим
-        if (_settingsProvider.settings.voiceName &&
-            !RegExp('^[0-9]').hasMatch(participants.first.name)) {
+        if (_settingsProvider.settings.voiceName && !RegExp('^[0-9]').hasMatch(participants.first.name)) {
           newVoiceText += ', ${participants.first.name}.';
         } else {
           newVoiceText += '.';
         }
       }
     } else {
-      participants = await _db.getStartingParticipants(
-        time: start[1],
-        stageId: stageId,
-      );
+      participants = await _db.getStartingParticipants(time: start[1], stageId: stageId);
       if (participants.isNotEmpty) {
         _isStarted = true;
         _isBetweenCategory = false;
-        logger.d(
-          'Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
-        );
+        logger.d('Second participant: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
         newVoiceText = 'Готовится номер ${participants.first.number}';
         // Имена участников, которые были добавлены автоматически на старте,
         // начинаются с номера. Такие имена не произносим
-        if (_settingsProvider.settings.voiceName &&
-            !RegExp('^[0-9]').hasMatch(participants.first.name)) {
+        if (_settingsProvider.settings.voiceName && !RegExp('^[0-9]').hasMatch(participants.first.name)) {
           newVoiceText += ', ${participants.first.name}.';
         } else {
           newVoiceText += '.';
@@ -131,15 +107,8 @@ class AudioController implements IAudioController {
         // если нет стартов в следующие две минуты,
         // сообщить сколько времени до старта след участника
         if (_isStarted && !_isBetweenCategory) {
-          logger.d(
-            'Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory',
-          );
-          final participants = await _db
-              .getNextStartingParticipants(
-                time: start.first,
-                stageId: stageId,
-              )
-              .get();
+          logger.d('Between category: isStarted: $_isStarted, isBetweenCategory: $_isBetweenCategory');
+          final participants = await _db.getNextStartingParticipants(time: start.first, stageId: stageId).get();
           if (participants.isNotEmpty) {
             _isBetweenCategory = true;
             final lastStart = start.first.toDateTime();
@@ -149,8 +118,7 @@ class AudioController implements IAudioController {
             // }
             if (lastStart != null && nextStart != null) {
               final delay = nextStart.difference(lastStart);
-              newVoiceText =
-                  'Старт следующего участника номер ${participants.first.number}, ';
+              newVoiceText = 'Старт следующего участника номер ${participants.first.number}, ';
               newVoiceText += 'через ${delay.inMinutes} мин 30 с';
             }
           } else {

@@ -17,22 +17,12 @@ Future<void> editRacerPopup({
 }) async {
   return showDialog<void>(
     context: context,
-    builder:
-        (BuildContext context) => EditRacerPopup(
-          item: participantAtStart,
-          riders: riders,
-          categories: categories,
-        ),
+    builder: (BuildContext context) => EditRacerPopup(item: participantAtStart, riders: riders, categories: categories),
   );
 }
 
 class EditRacerPopup extends StatefulWidget {
-  const EditRacerPopup({
-    required this.item,
-    required this.riders,
-    required this.categories,
-    super.key,
-  });
+  const EditRacerPopup({required this.item, required this.riders, required this.categories, super.key});
 
   final ParticipantAtStart item;
   final List<Rider> riders;
@@ -108,9 +98,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
               items: (f, cs) => categories,
               compareFn: (item1, item2) => item1 == item2,
               decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-                  labelText: Localization.current.I18nDatabase_category,
-                ),
+                decoration: InputDecoration(labelText: Localization.current.I18nDatabase_category),
               ),
               // ToDo: потом заменить на PopupProps.autocomplete
               // Но пока сыпет ошибку если жать бекспейс при пустом поле
@@ -124,9 +112,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
                     title: Text(Localization.current.I18nDatabase_newCategory),
                     trailing: TextButton(
                       onPressed: () {
-                        categoryDropdownKey.currentState!.changeSelectedItem(
-                          query,
-                        );
+                        categoryDropdownKey.currentState!.changeSelectedItem(query);
                         categoryDropdownKey.currentState!.closeDropDownSearch();
                         setState(() {
                           categories.insert(0, query);
@@ -140,9 +126,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
             ),
             DropdownSearch<Rider>(
               key: riderDropdownKey,
-              selectedItem: riders.firstWhere(
-                (rider) => rider.id == widget.item.riderId,
-              ),
+              selectedItem: riders.firstWhere((rider) => rider.id == widget.item.riderId),
               items: (f, cs) => riders,
               itemAsString: (value) => value.name,
               compareFn: (item1, item2) => item1.id == item2.id,
@@ -159,9 +143,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
               validator: validateRider,
               autoValidateMode: AutovalidateMode.always,
               decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-                  labelText: Localization.current.I18nDatabase_name,
-                ),
+                decoration: InputDecoration(labelText: Localization.current.I18nDatabase_name),
               ),
               popupProps: PopupProps.menu(
                 showSearchBox: true,
@@ -172,14 +154,8 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
                     title: Text(Localization.current.I18nDatabase_newRider),
                     trailing: TextButton(
                       onPressed: () {
-                        final rider = Rider(
-                          id: -1,
-                          name: query,
-                          isDeleted: false,
-                        );
-                        riderDropdownKey.currentState!.changeSelectedItem(
-                          rider,
-                        );
+                        final rider = Rider(id: -1, name: query, isDeleted: false);
+                        riderDropdownKey.currentState!.changeSelectedItem(rider);
                         riderDropdownKey.currentState!.closeDropDownSearch();
                         setState(() {
                           riders.insert(0, rider);
@@ -193,18 +169,14 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
             ),
             TextFormField(
               controller: nicknameController,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_nickname,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_nickname),
               validator: validateNickname,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
             TextFormField(
               controller: birthdayController,
               keyboardType: TextInputType.datetime,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_birthday,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_birthday),
               validator: validateBirthday,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
@@ -216,9 +188,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
               items: (f, cs) => teams,
               compareFn: (item1, item2) => item1 == item2,
               decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-                  labelText: Localization.current.I18nDatabase_team,
-                ),
+                decoration: InputDecoration(labelText: Localization.current.I18nDatabase_team),
               ),
               popupProps: PopupProps.menu(
                 showSearchBox: true,
@@ -248,9 +218,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
               items: (f, cs) => cities,
               compareFn: (item1, item2) => item1 == item2,
               decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-                  labelText: Localization.current.I18nDatabase_city,
-                ),
+                decoration: InputDecoration(labelText: Localization.current.I18nDatabase_city),
               ),
               validator: validateCity,
               autoValidateMode: AutovalidateMode.always,
@@ -276,9 +244,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
             TextFormField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_email,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_email),
               validator: validateEmail,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
@@ -286,9 +252,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
             TextFormField(
               controller: phoneController,
               keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_phone,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_phone),
               // validator: validatePhone,
               // autovalidateMode: AutovalidateMode.onUserInteraction,
               // inputFormatters: phoneFormatter,
@@ -296,9 +260,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
             TextFormField(
               controller: commentController,
               keyboardType: TextInputType.multiline,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_comment,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_comment),
               maxLines: null,
             ),
           ],

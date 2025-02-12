@@ -1,9 +1,6 @@
 part of '../trails_list_page.dart';
 
-Future<bool?> deleteTrailPopup({
-  required BuildContext context,
-  required String trailName,
-}) async => showDialog<bool>(
+Future<bool?> deleteTrailPopup({required BuildContext context, required String trailName}) async => showDialog<bool>(
   context: context,
   builder:
       (context) => AlertDialog(

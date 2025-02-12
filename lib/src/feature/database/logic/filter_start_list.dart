@@ -12,17 +12,13 @@ List<ParticipantAtStart> filterStartList(
   } else {
     return list.where((e) {
       final result =
-          (e.statusId == ParticipantStatus.active.index &&
-              e.participantStatusId == ParticipantStatus.active.index) ||
+          (e.statusId == ParticipantStatus.active.index && e.participantStatusId == ParticipantStatus.active.index) ||
           (showDNS &&
-              (e.participantStatusId == ParticipantStatus.dns.index ||
-                  e.statusId == ParticipantStatus.dns.index)) ||
+              (e.participantStatusId == ParticipantStatus.dns.index || e.statusId == ParticipantStatus.dns.index)) ||
           (showDNF &&
-              (e.participantStatusId == ParticipantStatus.dnf.index ||
-                  e.statusId == ParticipantStatus.dnf.index)) ||
+              (e.participantStatusId == ParticipantStatus.dnf.index || e.statusId == ParticipantStatus.dnf.index)) ||
           (showDSQ &&
-              (e.participantStatusId == ParticipantStatus.dsq.index ||
-                  e.statusId == ParticipantStatus.dsq.index));
+              (e.participantStatusId == ParticipantStatus.dsq.index || e.statusId == ParticipantStatus.dsq.index));
       return result;
     }).toList();
   }

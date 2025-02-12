@@ -14,8 +14,5 @@ Widget changelogMarkdown(String data) {
     }
   }
 
-  return Markdown(
-    data: data,
-    onTapLink: (text, href, title) => linkOnTapHandler(href),
-  );
+  return Markdown(data: data, onTapLink: (text, href, title) => linkOnTapHandler(href));
 }

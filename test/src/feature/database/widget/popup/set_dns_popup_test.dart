@@ -21,10 +21,7 @@ void main() {
               onPressed: () async {
                 result = await setDnsPopup(context: context, number: number);
               },
-              child: const Text(
-                'textButton',
-                key: Key('button'),
-              ),
+              child: const Text('textButton', key: Key('button')),
             );
           },
         ),
@@ -36,41 +33,26 @@ void main() {
     number = 10;
   });
 
-  group(
-    'setDnsPopup tests',
-    () {
-      patrolWidgetTest(
-        'Initial popup dialog',
-        (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          expect($(Localization.current.I18nCore_confirmation), findsOneWidget);
-          expect(
-            $(Localization.current.I18nStart_setDnsConfirmation(number)),
-            findsOneWidget,
-          );
-        },
-      );
+  group('setDnsPopup tests', () {
+    patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      expect($(Localization.current.I18nCore_confirmation), findsOneWidget);
+      expect($(Localization.current.I18nStart_setDnsConfirmation(number)), findsOneWidget);
+    });
 
-      patrolWidgetTest(
-        'Tap Ok button',
-        (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          await $(#okButton).tap();
-          expect(result, true);
-        },
-      );
+    patrolWidgetTest('Tap Ok button', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      await $(#okButton).tap();
+      expect(result, true);
+    });
 
-      patrolWidgetTest(
-        'Tap Cancel button',
-        (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          await $(#cancelButton).tap();
-          expect(result, false);
-        },
-      );
-    },
-  );
+    patrolWidgetTest('Tap Cancel button', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      await $(#cancelButton).tap();
+      expect(result, false);
+    });
+  });
 }

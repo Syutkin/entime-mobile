@@ -10,17 +10,12 @@ class RidersTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void routeToRidersListPage() {
-      Navigator.of(
-        context,
-      ).push(MaterialPageRoute<void>(builder: (context) => RidersListPage()));
+      Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => RidersListPage()));
     }
 
     return ListTile(
       onTap: routeToRidersListPage,
-      leading: IconButton(
-        icon: Icon(MdiIcons.faceMan),
-        onPressed: routeToRidersListPage,
-      ),
+      leading: IconButton(icon: Icon(MdiIcons.faceMan), onPressed: routeToRidersListPage),
       title: Text(Localization.current.I18nInit_riders),
     );
   }

@@ -31,19 +31,19 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     required AppDatabase database,
     required ISettingsProvider settingsProvider,
     this.fileProvider = const StartlistProvider(),
-  })  : _db = database,
-        _settingsProvider = settingsProvider,
-        super(
-          const DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-          ),
-        ) {
+  }) : _db = database,
+       _settingsProvider = settingsProvider,
+       super(
+         const DatabaseState(
+           races: [],
+           stages: [],
+           categories: [],
+           riders: [],
+           participants: [],
+           finishes: [],
+           numbersOnTrace: [],
+         ),
+       ) {
     on<DatabaseEvent>(transformer: sequential(), (event, emit) async {
       await event.map(
         initialize: (event) async {
@@ -64,8 +64,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           });
 
           await _stagesSubscription?.cancel();
-          _stagesSubscription =
-              _db.getStages(raceId: raceId).watch().listen((event) async {
+          _stagesSubscription = _db.getStages(raceId: raceId).watch().listen((event) async {
             _stages = event;
             logger.t('DatabaseBloc -> getStages(raceId: $raceId).watch()');
             await _emitState();
@@ -78,52 +77,31 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           });
 
           await _startsSubscription?.cancel();
-          _startsSubscription =
-              _db.getParticipantsAtStart(stageId: stageId).watch().listen(
-            (event) async {
-              _participants = event;
-              _categories = await _db.getCategories(raceId);
-              logger.t(
-                'DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()',
-              );
-              await _emitState();
-            },
-          );
+          _startsSubscription = _db.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
+            _participants = event;
+            _categories = await _db.getCategories(raceId);
+            logger.t('DatabaseBloc -> getParticipantsAtStart(stageId: $stageId).watch()');
+            await _emitState();
+          });
 
           await _finishesSubscription?.cancel();
-          _finishesSubscription =
-              _db.getFinishesFromStage(stageId: stageId).watch().listen((
-            event,
-          ) async {
+          _finishesSubscription = _db.getFinishesFromStage(stageId: stageId).watch().listen((event) async {
             _finishes = event;
-            logger.d(
-              'DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()',
-            );
+            logger.d('DatabaseBloc -> getFinishesFromStage(stageId: $stageId).watch()');
             await _emitState();
           });
 
           await _numbersOnTraceSubscription?.cancel();
           _numbersOnTraceSubscription = _db
-              .getNumbersOnTraceNow(
-                stageId: stageId,
-                dateTimeNow: DateTime(2020),
-              )
+              .getNumbersOnTraceNow(stageId: stageId, dateTimeNow: DateTime(2020))
               .watch()
               .listen((event) async {
-            _numbersOnTrace = await _db
-                .getNumbersOnTraceNow(
-                  stageId: stageId,
-                  dateTimeNow: DateTime.now(),
-                )
-                .get();
-            logger.t(
-              'DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()',
-            );
-            await _emitState();
-          });
+                _numbersOnTrace = await _db.getNumbersOnTraceNow(stageId: stageId, dateTimeNow: DateTime.now()).get();
+                logger.t('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
+                await _emitState();
+              });
 
-          _appSettingsSubscription ??=
-              _settingsProvider.state.listen((state) async {
+          _appSettingsSubscription ??= _settingsProvider.state.listen((state) async {
             _finishDelay = state.finishDelay;
             _substituteNumbers = state.substituteNumbers;
             _substituteNumbersDelay = state.substituteNumbersDelay;
@@ -195,19 +173,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         deselectRace: (event) async {
           _race = null;
           _stage = null;
-          final settings = _settingsProvider.settings.copyWith(
-            raceId: -1,
-            stageId: -1,
-          );
+          final settings = _settingsProvider.settings.copyWith(raceId: -1, stageId: -1);
           await _settingsProvider.update(settings);
           add(const DatabaseEvent.initialize());
         },
         addStage: (event) async {
-          await _db.addStage(
-            raceId: event.raceId,
-            name: event.name,
-            trailId: event.trailId,
-          );
+          await _db.addStage(raceId: event.raceId, name: event.name, trailId: event.trailId);
         },
         upsertStage: (event) async {
           await _db.upsertStage(
@@ -231,15 +202,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         selectStage: (event) async {
           _stage = event.stage;
           final stageId = event.stage.id;
-          final settings = _settingsProvider.settings.copyWith(
-            stageId: stageId,
-          );
+          final settings = _settingsProvider.settings.copyWith(stageId: stageId);
           await _settingsProvider.update(settings);
           add(const DatabaseEvent.initialize());
         },
         getParticipantsAtStart: (event) async {
-          _participants =
-              await _db.getParticipantsAtStart(stageId: event.stageId).get();
+          _participants = await _db.getParticipantsAtStart(stageId: event.stageId).get();
           await _emitState();
         },
         addStartNumber: (event) async {
@@ -285,11 +253,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               phone: event.phone,
               comment: event.comment,
             );
-            await _db.updateParticipant(
-              id: event.participantId,
-              riderId: event.riderId,
-              category: event.category,
-            );
+            await _db.updateParticipant(id: event.participantId, riderId: event.riderId, category: event.category);
           } else {
             final riderId = await _db.addRider(
               name: event.name,
@@ -301,11 +265,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               phone: event.phone,
               comment: event.comment,
             );
-            await _db.updateParticipant(
-              id: event.participantId,
-              riderId: riderId,
-              category: event.category,
-            );
+            await _db.updateParticipant(id: event.participantId, riderId: riderId, category: event.category);
           }
         },
         updateStartingInfo: (event) async {
@@ -328,10 +288,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           );
         },
         setStatusForStartId: (event) async {
-          await _db.setStatusForStartId(
-            startId: event.startId,
-            status: ParticipantStatus.dns,
-          );
+          await _db.setStatusForStartId(startId: event.startId, status: ParticipantStatus.dns);
         },
         updateAutomaticCorrection: (event) async {
           final previousStarts = await _db.updateAutomaticCorrection(
@@ -363,8 +320,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             ntpOffset: event.ntpOffset,
             finishDelay: event.finishDelay ?? _finishDelay,
             substituteNumbers: event.substituteNumbers ?? _substituteNumbers,
-            substituteNumbersDelay:
-                event.finishDelay ?? _substituteNumbersDelay,
+            substituteNumbersDelay: event.finishDelay ?? _substituteNumbersDelay,
             dateTimeNow: event.dateTimeNow,
             number: _awaitingNumber,
           );
@@ -396,10 +352,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         },
         clearNumberAtFinish: (event) async {
           // _autoFinishNumber = null;
-          await _db.clearNumberAtFinish(
-            stage: event.stage,
-            number: event.number,
-          );
+          await _db.clearNumberAtFinish(stage: event.stage, number: event.number);
         },
         setDNSForStage: (event) async {
           await _db.setDNSForStage(stage: event.stage, number: event.number);
@@ -428,20 +381,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           }
         },
         getNumbersOnTraceNow: (event) async {
-          _numbersOnTrace = await _db
-              .getNumbersOnTraceNow(
-                stageId: event.stageId,
-                dateTimeNow: event.dateTimeNow,
-              )
-              .get();
+          _numbersOnTrace =
+              await _db.getNumbersOnTraceNow(stageId: event.stageId, dateTimeNow: event.dateTimeNow).get();
           await _emitState();
         },
         shiftStartsTime: (event) async {
-          await _db.shiftStartsTime(
-            stageId: event.stageId,
-            minutes: event.minutes,
-            fromTime: event.fromTime,
-          );
+          await _db.shiftStartsTime(stageId: event.stageId, minutes: event.minutes, fromTime: event.fromTime);
         },
         selectAwaitingNumber: (event) {
           _awaitingNumber = event.number;
@@ -483,13 +428,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               final filename = '${race.name}-${stage.name}-start';
               final file = await saveToFile(csv, filename);
               if (file != null) {
-                await Share.shareXFiles(
-                  [XFile(file.path)],
-                  text: Localization.current.I18nProtocol_shareStartResults(
-                    race.name,
-                    stage.name,
-                  ),
-                );
+                await Share.shareXFiles([
+                  XFile(file.path),
+                ], text: Localization.current.I18nProtocol_shareStartResults(race.name, stage.name));
               }
             }
           }
@@ -509,13 +450,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               final filename = '${race.name}-${stage.name}-finish';
               final file = await saveToFile(csv, filename);
               if (file != null) {
-                await Share.shareXFiles(
-                  [XFile(file.path)],
-                  text: Localization.current.I18nProtocol_shareFinishResults(
-                    race.name,
-                    stage.name,
-                  ),
-                );
+                await Share.shareXFiles([
+                  XFile(file.path),
+                ], text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name));
               }
             }
           }
@@ -523,9 +460,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         shareDatabase: (event) async {
           final timeStamp = DateFormat(longDateFormat).format(DateTime.now());
           final dbDir = await getApplicationDocumentsDirectory();
-          final file = File(
-            path.join(dbDir.path, 'database_backup_$timeStamp.sqlite'),
-          );
+          final file = File(path.join(dbDir.path, 'database_backup_$timeStamp.sqlite'));
           await _db.exportInto(file);
           await Share.shareXFiles([XFile(file.path)]);
         },
@@ -584,11 +519,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   StartlistProvider fileProvider;
 
-  Future<void> _emitState({
-    Notification? notification,
-    int? autoFinishNumber,
-    bool? updateFinishNumber,
-  }) async {
+  Future<void> _emitState({Notification? notification, int? autoFinishNumber, bool? updateFinishNumber}) async {
     add(
       DatabaseEvent.emitState(
         race: _race,

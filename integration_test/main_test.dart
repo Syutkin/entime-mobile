@@ -44,28 +44,20 @@ void main() {
     );
 
     final flutterTts = FlutterTts();
-    final pool =
-        await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
+    final pool = await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
     final ttsProvider = TtsProvider(flutterTts);
     final beepProvider = AudioPoolProvider(pool);
 
-    final audioProvider =
-        AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
+    final audioProvider = AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
     final audioService = AudioService(settings: settings, audio: audioProvider);
-    final audioController = AudioController(
-      audioService: audioService,
-      database: database,
-      settingsProvider: settings,
-    );
+    final audioController = AudioController(audioService: audioService, database: database, settingsProvider: settings);
 
-    final countdown =
-        CountdownAtStart(database: database, settingsProvider: settings);
+    final countdown = CountdownAtStart(database: database, settingsProvider: settings);
 
     final ntpProvider = NtpProvider();
 
     final connectivity = Connectivity();
-    final IConnectivityProvider connectivityProvider =
-        ConnectivityProvider.init(connectivity);
+    final IConnectivityProvider connectivityProvider = ConnectivityProvider.init(connectivity);
 
     await $.pumpWidgetAndSettle(
       EntimeApp(

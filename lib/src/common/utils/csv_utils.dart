@@ -2,11 +2,7 @@ import 'package:csv/csv.dart';
 import 'package:csv/csv_settings_autodetection.dart';
 
 /// Convert a list of maps to csv
-String? mapListToCsv(
-  List<Map<String, dynamic>>? mapList, {
-  ListToCsvConverter? converter,
-  String? eol,
-}) {
+String? mapListToCsv(List<Map<String, dynamic>>? mapList, {ListToCsvConverter? converter, String? eol}) {
   if (mapList == null) {
     return null;
   }
@@ -73,8 +69,7 @@ class CsvToMapConverter {
 
   List<Map<String, dynamic>> convert(String csv) {
     final list = converter.convert<dynamic>(csv);
-    final List<dynamic> legend =
-        list.first.map((dynamic category) => category.toString()).toList();
+    final List<dynamic> legend = list.first.map((dynamic category) => category.toString()).toList();
     final maps = <Map<String, dynamic>>[];
     list.sublist(1).forEach((l) {
       final map = <String, dynamic>{};

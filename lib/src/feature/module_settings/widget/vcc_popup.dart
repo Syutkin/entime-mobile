@@ -1,10 +1,6 @@
 part of 'popups.dart';
 
-Future<int?> vccPopup({
-  required String text,
-  required String labelText,
-  required BuildContext context,
-}) async {
+Future<int?> vccPopup({required String text, required String labelText, required BuildContext context}) async {
   int? number;
   return showDialog<int>(
     context: context,

@@ -1,9 +1,6 @@
 part of '../races_list_page.dart';
 
-Future<bool?> deleteRacePopup({
-  required BuildContext context,
-  required String raceName,
-}) async => showDialog<bool>(
+Future<bool?> deleteRacePopup({required BuildContext context, required String raceName}) async => showDialog<bool>(
   context: context,
   builder:
       (context) => AlertDialog(

@@ -9,17 +9,10 @@ Future<void> updateTrailPopup(BuildContext context, TrailInfo trail) {
   // эмитим стейт с "dummy" треком
   if (trail.fileId != null) {
     context.read<TrailsBloc>().add(
-          TrailsEvent.emitTrack(
-            track: TrackFile(
-              id: -1,
-              name: '',
-              size: 0,
-              hashSha1: '',
-              data: Uint8List(0),
-              timestamp: DateTime.now(),
-            ),
-          ),
-        );
+      TrailsEvent.emitTrack(
+        track: TrackFile(id: -1, name: '', size: 0, hashSha1: '', data: Uint8List(0), timestamp: DateTime.now()),
+      ),
+    );
   }
   return _upsertTrailPopup(context, trail);
 }
@@ -36,19 +29,17 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
   final formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController()..text = name;
-  final filePickerController = TextEditingController()
-    ..text = (trail?.fileName ?? '') + (trail?.fileExtension ?? '');
+  final filePickerController = TextEditingController()..text = (trail?.fileName ?? '') + (trail?.fileExtension ?? '');
 
   IconButton addTrackIconButton(TrailsBloc bloc) {
     return IconButton(
       onPressed: () async {
-        file = (await FilePicker.platform.pickFiles(
-                // type: FileType.custom,
-                // allowedExtensions: ['csv'],
-                // withData: true,
-                ))
-            ?.files
-            .first;
+        file =
+            (await FilePicker.platform.pickFiles(
+              // type: FileType.custom,
+              // allowedExtensions: ['csv'],
+              // withData: true,
+            ))?.files.first;
         final path = file?.path;
         if (file != null && path != null) {
           bloc.add(TrailsEvent.loadTrack(filePath: path));
@@ -76,189 +67,168 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
 
   return showDialog<void>(
     context: context,
-    builder: (context) => ExpandedAlertDialog(
-      title: trail == null
-          ? Text(Localization.current.I18nDatabase_editRace)
-          : Text(name),
-      content: Form(
-        key: formKey,
-        child: ListView(
-          // shrinkWrap: true,
-          children: <Widget>[
-            // Название трейла
-            TextFormField(
-              controller: nameController,
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_trailName,
-              ),
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return Localization.current.I18nDatabase_enterTrailName;
-                } else {
-                  name = value;
-                  return null;
-                }
-              },
-            ),
-            BlocBuilder<TrailsBloc, TrailsState>(
-              builder: (context, state) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: TextFormField(
-                        controller: filePickerController,
-                        decoration: InputDecoration(
-                          labelText:
-                              Localization.current.I18nDatabase_trailGpxTrack,
-                        ),
-                        keyboardType: TextInputType.none,
-                        autovalidateMode: AutovalidateMode.always,
-                        validator: (_) {
-                          return state.maybeMap(
-                            initialized: (state) {
-                              final size = state.track?.size;
-                              // max upload size in bytes
-                              if (size != null && size > uploadMaxSize) {
-                                return Localization.current
-                                    .I18nDatabase_uploadLimit(
-                                  uploadMaxSize / 1024 / 1024,
-                                );
-                              } else {
-                                return null;
-                              }
+    builder:
+        (context) => ExpandedAlertDialog(
+          title: trail == null ? Text(Localization.current.I18nDatabase_editRace) : Text(name),
+          content: Form(
+            key: formKey,
+            child: ListView(
+              // shrinkWrap: true,
+              children: <Widget>[
+                // Название трейла
+                TextFormField(
+                  controller: nameController,
+                  autofocus: true,
+                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trailName),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return Localization.current.I18nDatabase_enterTrailName;
+                    } else {
+                      name = value;
+                      return null;
+                    }
+                  },
+                ),
+                BlocBuilder<TrailsBloc, TrailsState>(
+                  builder: (context, state) {
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: TextFormField(
+                            controller: filePickerController,
+                            decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trailGpxTrack),
+                            keyboardType: TextInputType.none,
+                            autovalidateMode: AutovalidateMode.always,
+                            validator: (_) {
+                              return state.maybeMap(
+                                initialized: (state) {
+                                  final size = state.track?.size;
+                                  // max upload size in bytes
+                                  if (size != null && size > uploadMaxSize) {
+                                    return Localization.current.I18nDatabase_uploadLimit(uploadMaxSize / 1024 / 1024);
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                orElse: () => null,
+                              );
                             },
-                            orElse: () => null,
-                          );
-                        },
-                      ),
-                    ),
-                    state.map(
-                      initial: (_) {
-                        return const SizedBox.shrink();
-                      },
-                      initialized: (state) {
-                        final bloc = context.read<TrailsBloc>();
-                        if (state.track == null) {
-                          return addTrackIconButton(bloc);
-                        } else {
-                          return removeTrackIconButton(bloc);
-                        }
-                      },
-                      loadingTrack: (state) {
-                        final size = Theme.of(context).iconTheme.size ?? 24;
-                        return Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: SizedBox(
-                            height: size,
-                            width: size,
-                            child: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
                           ),
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
+                        ),
+                        state.map(
+                          initial: (_) {
+                            return const SizedBox.shrink();
+                          },
+                          initialized: (state) {
+                            final bloc = context.read<TrailsBloc>();
+                            if (state.track == null) {
+                              return addTrackIconButton(bloc);
+                            } else {
+                              return removeTrackIconButton(bloc);
+                            }
+                          },
+                          loadingTrack: (state) {
+                            final size = Theme.of(context).iconTheme.size ?? 24;
+                            return Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: SizedBox(
+                                height: size,
+                                width: size,
+                                child: const Center(child: CircularProgressIndicator()),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                // distance
+                TextFormField(
+                  initialValue: (distance ?? '').toString(),
+                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trailDistance),
+                  keyboardType: TextInputType.number,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      distance = null;
+                      return null;
+                    } else {
+                      final number = int.tryParse(value);
+                      if (number != null) {
+                        distance = number;
+                        return null;
+                      } else {
+                        return Localization.current.I18nDatabase_incorrectTrailDistance;
+                      }
+                    }
+                  },
+                ),
+                // elevation
+                TextFormField(
+                  initialValue: (elevation ?? '').toString(),
+                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trailElevation),
+                  keyboardType: TextInputType.number,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      elevation = null;
+                      return null;
+                    } else {
+                      final number = int.tryParse(value);
+                      if (number != null) {
+                        elevation = number;
+                        return null;
+                      } else {
+                        return Localization.current.I18nDatabase_incorrectTrailElevation;
+                      }
+                    }
+                  },
+                ),
+                TextFormField(
+                  initialValue: url,
+                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trailUrl),
+                  keyboardType: TextInputType.url,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if (value.isNullOrEmpty) {
+                      url = '';
+                      return null;
+                    } else {
+                      if (value.isValidUrl) {
+                        url = value;
+                        return null;
+                      } else {
+                        return Localization.current.I18nDatabase_incorrectTrailUrl;
+                      }
+                    }
+                  },
+                ),
+                TextFormField(
+                  initialValue: description,
+                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trailDescription),
+                  onChanged: (value) {
+                    description = value;
+                  },
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                ),
+              ],
             ),
-            // distance
-            TextFormField(
-              initialValue: (distance ?? '').toString(),
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_trailDistance,
-              ),
-              keyboardType: TextInputType.number,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  distance = null;
-                  return null;
-                } else {
-                  final number = int.tryParse(value);
-                  if (number != null) {
-                    distance = number;
-                    return null;
-                  } else {
-                    return Localization
-                        .current.I18nDatabase_incorrectTrailDistance;
-                  }
-                }
-              },
-            ),
-            // elevation
-            TextFormField(
-              initialValue: (elevation ?? '').toString(),
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_trailElevation,
-              ),
-              keyboardType: TextInputType.number,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  elevation = null;
-                  return null;
-                } else {
-                  final number = int.tryParse(value);
-                  if (number != null) {
-                    elevation = number;
-                    return null;
-                  } else {
-                    return Localization
-                        .current.I18nDatabase_incorrectTrailElevation;
-                  }
-                }
-              },
-            ),
-            TextFormField(
-              initialValue: url,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_trailUrl,
-              ),
-              keyboardType: TextInputType.url,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value.isNullOrEmpty) {
-                  url = '';
-                  return null;
-                } else {
-                  if (value.isValidUrl) {
-                    url = value;
-                    return null;
-                  } else {
-                    return Localization.current.I18nDatabase_incorrectTrailUrl;
-                  }
-                }
-              },
-            ),
-            TextFormField(
-              initialValue: description,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_trailDescription,
-              ),
-              onChanged: (value) {
-                description = value;
-              },
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-            ),
-          ],
-        ),
-      ),
-      actions: cancelOkButtons(
-        context: context,
-        onCancelPressed: () {
-          Navigator.of(context).pop();
-        },
-        onOkPressed: () {
-          if (formKey.currentState!.validate()) {
-            final path = file?.path;
-            // Создаём новую запись
-            if (trail == null) {
-              context.read<TrailsBloc>().add(
+          ),
+          actions: cancelOkButtons(
+            context: context,
+            onCancelPressed: () {
+              Navigator.of(context).pop();
+            },
+            onOkPressed: () {
+              if (formKey.currentState!.validate()) {
+                final path = file?.path;
+                // Создаём новую запись
+                if (trail == null) {
+                  context.read<TrailsBloc>().add(
                     TrailsEvent.addTrail(
                       name: name,
                       elevation: elevation,
@@ -268,8 +238,8 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                       filePath: path,
                     ),
                   );
-            } else {
-              context.read<TrailsBloc>().add(
+                } else {
+                  context.read<TrailsBloc>().add(
                     TrailsEvent.updateTrail(
                       id: trail.id,
                       name: name,
@@ -282,11 +252,11 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                       filePath: path,
                     ),
                   );
-            }
-            Navigator.of(context).pop();
-          }
-        },
-      ),
-    ),
+                }
+                Navigator.of(context).pop();
+              }
+            },
+          ),
+        ),
   );
 }

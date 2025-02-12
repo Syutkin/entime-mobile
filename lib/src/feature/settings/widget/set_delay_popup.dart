@@ -1,10 +1,6 @@
 part of 'settings_popups.dart';
 
-Future<int?> setDelayPopup(
-  BuildContext context,
-  int delay,
-  String title,
-) async {
+Future<int?> setDelayPopup(BuildContext context, int delay, String title) async {
   var newDelay = delay;
 
   final delayController = TextEditingController()..text = newDelay.toString();
@@ -25,9 +21,7 @@ Future<int?> setDelayPopup(
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: Localization.current.I18nSettings_delay,
-                  ),
+                  decoration: InputDecoration(labelText: Localization.current.I18nSettings_delay),
                   controller: delayController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {

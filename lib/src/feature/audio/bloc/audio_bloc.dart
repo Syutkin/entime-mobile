@@ -13,8 +13,7 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
       await event.map(
         init: (event) async {
           final engine = (await ttsProvider.getDefaultEngine).toString();
-          final voice =
-              (await ttsProvider.getDefaultVoice) as Map<Object?, Object?>;
+          final voice = (await ttsProvider.getDefaultVoice) as Map<Object?, Object?>;
           final voiceName = voice['name'].toString();
           emit(AudioState.initialized(engine: engine, voice: voiceName));
         },

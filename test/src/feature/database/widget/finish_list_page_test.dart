@@ -17,11 +17,9 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 part 'helpers/database_state.dart';
 
-class MockSettingsCubit extends MockCubit<AppSettings>
-    implements SettingsCubit {}
+class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
-class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
-    implements DatabaseBloc {}
+class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
 void main() {
   late SettingsCubit settingsCubit;
@@ -39,10 +37,7 @@ void main() {
       home: Material(
         child: BlocProvider.value(
           value: databaseBloc,
-          child: BlocProvider.value(
-            value: settingsCubit,
-            child: const FinishListPage(),
-          ),
+          child: BlocProvider.value(value: settingsCubit, child: const FinishListPage()),
         ),
       ),
     );
@@ -56,13 +51,7 @@ void main() {
     databaseBloc = MockDatabaseBloc();
     settingsCubit = MockSettingsCubit();
     settings = const AppSettings.defaults();
-    stage = const Stage(
-      id: 1,
-      raceId: 1,
-      name: 'Stage name',
-      isActive: true,
-      isDeleted: false,
-    );
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
   });
 
   group('FinishListPage tests', () {
@@ -80,18 +69,14 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNothing);
       });
 
-      patrolWidgetTest('Show 8 finishes with any states', (
-        PatrolTester $,
-      ) async {
+      patrolWidgetTest('Show 8 finishes with any states', (PatrolTester $) async {
         settings = settings.copyWith(showHidden: true);
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
@@ -105,9 +90,7 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -129,9 +112,7 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -154,9 +135,7 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -179,23 +158,15 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter manual and with numbers finishes', (
-        PatrolTester $,
-      ) async {
-        settings = settings.copyWith(
-          showHidden: true,
-          showManual: false,
-          showNumbers: false,
-        );
+      patrolWidgetTest('Filter manual and with numbers finishes', (PatrolTester $) async {
+        settings = settings.copyWith(showHidden: true, showManual: false, showNumbers: false);
         const count = 11;
         // filter 6 from 11
         const expected = 5;
@@ -210,23 +181,15 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden and with numbers finishes', (
-        PatrolTester $,
-      ) async {
-        settings = settings.copyWith(
-          showHidden: false,
-          showManual: true,
-          showNumbers: false,
-        );
+      patrolWidgetTest('Filter hidden and with numbers finishes', (PatrolTester $) async {
+        settings = settings.copyWith(showHidden: false, showManual: true, showNumbers: false);
         const count = 10;
         // filter 6 from 10
         const expected = 4;
@@ -241,23 +204,15 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden and manual finishes', (
-        PatrolTester $,
-      ) async {
-        settings = settings.copyWith(
-          showHidden: false,
-          showManual: false,
-          showNumbers: true,
-        );
+      patrolWidgetTest('Filter hidden and manual finishes', (PatrolTester $) async {
+        settings = settings.copyWith(showHidden: false, showManual: false, showNumbers: true);
         const count = 10;
         // filter 6 from 10
         const expected = 4;
@@ -272,23 +227,15 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden, manual and with numbers finishes', (
-        PatrolTester $,
-      ) async {
-        settings = settings.copyWith(
-          showHidden: false,
-          showManual: false,
-          showNumbers: false,
-        );
+      patrolWidgetTest('Filter hidden, manual and with numbers finishes', (PatrolTester $) async {
+        settings = settings.copyWith(showHidden: false, showManual: false, showNumbers: false);
         const count = 12;
         // filter 7 from 12
         const expected = 5;
@@ -303,17 +250,13 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Tap FinishItemTile and get AlertDialog', (
-        PatrolTester $,
-      ) async {
+      patrolWidgetTest('Tap FinishItemTile and get AlertDialog', (PatrolTester $) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -327,18 +270,14 @@ void main() {
             stage: stage,
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(FinishItemTile).tap();
         expect($(AlertDialog), findsOneWidget);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile w/o number', (
-        PatrolTester $,
-      ) async {
+      patrolWidgetTest('Long press on FinishItemTile w/o number', (PatrolTester $) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -352,9 +291,7 @@ void main() {
             stage: stage,
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(FinishItemTile).longPress();
@@ -363,9 +300,7 @@ void main() {
         expect($(Localization.current.I18nCore_details), findsOneWidget);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile with number', (
-        PatrolTester $,
-      ) async {
+      patrolWidgetTest('Long press on FinishItemTile with number', (PatrolTester $) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -379,23 +314,16 @@ void main() {
             stage: stage,
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(FinishItemTile).at(1).longPress();
-        expect(
-          $(Localization.current.I18nProtocol_clearNumber),
-          findsOneWidget,
-        );
+        expect($(Localization.current.I18nProtocol_clearNumber), findsOneWidget);
         expect($(Localization.current.I18nProtocol_hideAll), findsOneWidget);
         expect($(Localization.current.I18nCore_details), findsOneWidget);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile and select clearNumber', (
-        PatrolTester $,
-      ) async {
+      patrolWidgetTest('Long press on FinishItemTile and select clearNumber', (PatrolTester $) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -409,23 +337,15 @@ void main() {
             stage: stage,
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(FinishItemTile).at(1).longPress();
         await $(Localization.current.I18nProtocol_clearNumber).tap();
-        verify(
-          () => databaseBloc.add(
-            DatabaseEvent.clearNumberAtFinish(stage: stage, number: 1),
-          ),
-        ).called(1);
+        verify(() => databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: 1))).called(1);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile and select hideAll', (
-        PatrolTester $,
-      ) async {
+      patrolWidgetTest('Long press on FinishItemTile and select hideAll', (PatrolTester $) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -439,21 +359,15 @@ void main() {
             stage: stage,
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(FinishItemTile).at(1).longPress();
         await $(Localization.current.I18nProtocol_hideAll).tap();
-        verify(
-          () => databaseBloc.add(DatabaseEvent.hideAllFinishes(stage.id)),
-        ).called(1);
+        verify(() => databaseBloc.add(DatabaseEvent.hideAllFinishes(stage.id))).called(1);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile and select details', (
-        PatrolTester $,
-      ) async {
+      patrolWidgetTest('Long press on FinishItemTile and select details', (PatrolTester $) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -467,9 +381,7 @@ void main() {
             stage: stage,
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(FinishItemTile).at(1).longPress();
@@ -491,9 +403,7 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -513,9 +423,7 @@ void main() {
             numbersOnTrace: numbersOnTrace(n),
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -535,9 +443,7 @@ void main() {
             numbersOnTrace: numbersOnTrace(n),
           ),
         );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
 
@@ -554,13 +460,7 @@ void main() {
       late int autoFinishNumber;
       setUp(() {
         autoFinishNumber = 21;
-        stage = const Stage(
-          id: 1,
-          raceId: 1,
-          name: 'name',
-          isActive: true,
-          isDeleted: false,
-        );
+        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
 
         emptyState = const DatabaseState(
           races: [],
@@ -572,16 +472,13 @@ void main() {
           numbersOnTrace: [],
         );
 
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+        when(() => settingsCubit.state).thenReturn(settings);
 
         when(() => databaseBloc.state).thenReturn(emptyState);
       });
 
       group('autoFinishNumber listener', () {
-        patrolWidgetTest('Show toast with automatically added number',
-            (PatrolTester $) async {
+        patrolWidgetTest('Show toast with automatically added number', (PatrolTester $) async {
           final expectedStates = [
             emptyState,
             DatabaseState(
@@ -596,27 +493,16 @@ void main() {
             ),
           ];
 
-          whenListen(
-            databaseBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
 
           await $.pumpWidget(testWidget());
           expect($(ListTile), findsNothing);
           await $.pumpAndSettle();
-          expect(
-            $(
-              Localization.current.I18nProtocol_finishNumber(
-                '$autoFinishNumber',
-              ),
-            ),
-            findsOneWidget,
-          );
+          expect($(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')), findsOneWidget);
         });
 
         group('changeFinishTimeToNumber listener', () {
-          patrolWidgetTest('Show updateFinishTimePopup and accept it',
-              (PatrolTester $) async {
+          patrolWidgetTest('Show updateFinishTimePopup and accept it', (PatrolTester $) async {
             const number = 2;
             const finishTime = '10:10:10';
             final notification = Notification.changeFinishTimeToNumber(
@@ -640,10 +526,7 @@ void main() {
               ),
             ];
 
-            whenListen(
-              databaseBloc,
-              Stream.fromIterable(expectedStates),
-            );
+            whenListen(databaseBloc, Stream.fromIterable(expectedStates));
 
             await $.pumpWidget(testWidget());
             expect($(UpdateFinishTimePopup), findsNothing);
@@ -656,10 +539,7 @@ void main() {
               changeFinishTimeToNumber: (notification) {
                 verify(
                   () => databaseBloc.add(
-                    DatabaseEvent.clearNumberAtFinish(
-                      stage: notification.stage,
-                      number: notification.number,
-                    ),
+                    DatabaseEvent.clearNumberAtFinish(stage: notification.stage, number: notification.number),
                   ),
                 ).called(1);
                 verify(
@@ -676,9 +556,7 @@ void main() {
             );
           });
 
-          patrolWidgetTest(
-              'Show updateFinishTimePopup and do nothing if cancel pressed',
-              (PatrolTester $) async {
+          patrolWidgetTest('Show updateFinishTimePopup and do nothing if cancel pressed', (PatrolTester $) async {
             const number = 2;
             const finishTime = '10:10:10';
             final notification = Notification.changeFinishTimeToNumber(
@@ -702,10 +580,7 @@ void main() {
               ),
             ];
 
-            whenListen(
-              databaseBloc,
-              Stream.fromIterable(expectedStates),
-            );
+            whenListen(databaseBloc, Stream.fromIterable(expectedStates));
 
             await $.pumpWidget(testWidget());
             expect($(UpdateFinishTimePopup), findsNothing);
@@ -714,9 +589,7 @@ void main() {
             await $(#cancelButton).tap();
             expect($(UpdateFinishTimePopup), findsNothing);
 
-            verifyNever(
-              () => databaseBloc.add(any()),
-            );
+            verifyNever(() => databaseBloc.add(any()));
           });
         });
       });

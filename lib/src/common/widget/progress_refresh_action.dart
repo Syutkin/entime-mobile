@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProgressRefreshAction extends StatelessWidget {
-  const ProgressRefreshAction({
-    required this.isLoading,
-    required this.onPressed,
-    super.key,
-  });
+  const ProgressRefreshAction({required this.isLoading, required this.onPressed, super.key});
 
   final bool isLoading;
   final void Function() onPressed;
@@ -14,8 +10,7 @@ class ProgressRefreshAction extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isLoading) {
       final theme = Theme.of(context);
-      final iconTheme =
-          theme.appBarTheme.actionsIconTheme ?? theme.primaryIconTheme;
+      final iconTheme = theme.appBarTheme.actionsIconTheme ?? theme.primaryIconTheme;
       return GestureDetector(
         onTap: onPressed,
         child: Column(
@@ -27,9 +22,7 @@ class ProgressRefreshAction extends StatelessWidget {
                 width: iconTheme.size ?? 24,
                 height: iconTheme.size ?? 24,
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    iconTheme.color ?? Colors.white,
-                  ),
+                  valueColor: AlwaysStoppedAnimation<Color>(iconTheme.color ?? Colors.white),
                 ),
               ),
             ),

@@ -1,12 +1,7 @@
 part of '../start_list_page.dart';
 
-Future<void> shiftStartsTime({
-  required BuildContext context,
-  required ParticipantAtStart item,
-}) async => showDialog<void>(
-  context: context,
-  builder: (context) => ShiftStartsTimePopup(item: item),
-);
+Future<void> shiftStartsTime({required BuildContext context, required ParticipantAtStart item}) async =>
+    showDialog<void>(context: context, builder: (context) => ShiftStartsTimePopup(item: item));
 
 class ShiftStartsTimePopup extends StatefulWidget {
   const ShiftStartsTimePopup({required this.item, super.key});
@@ -31,17 +26,10 @@ class _ShiftStartsTimePopupState extends State<ShiftStartsTimePopup> {
           spacing: 8,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              Localization.current.I18nStart_shiftStartsTimeFromNumber(
-                widget.item.number,
-                widget.item.startTime,
-              ),
-            ),
+            Text(Localization.current.I18nStart_shiftStartsTimeFromNumber(widget.item.number, widget.item.startTime)),
             TextFormField(
               autofocus: true,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nStart_shiftMinutes,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nStart_shiftMinutes),
               keyboardType: TextInputType.number,
               controller: minutesController,
               validator: validateShift,

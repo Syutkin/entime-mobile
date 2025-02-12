@@ -26,10 +26,7 @@ void main() {
               onPressed: () {
                 finishDetails(context, finish);
               },
-              child: const Text(
-                'textButton',
-                key: Key('button'),
-              ),
+              child: const Text('textButton', key: Key('button')),
             );
           },
         ),
@@ -57,8 +54,7 @@ void main() {
   });
 
   group('FinishDetailsPopup tests', () {
-    patrolWidgetTest('Open dialog then close it when ok button pressed',
-        (PatrolTester $) async {
+    patrolWidgetTest('Open dialog then close it when ok button pressed', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(#button).tap();
       expect($(FinishDetailsPopup), findsOneWidget);
@@ -69,15 +65,9 @@ void main() {
     patrolWidgetTest('Dialog details', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(#button).tap();
-      expect(
-        $(Localization.current.I18nProtocol_finishTimeCutoff),
-        findsOneWidget,
-      );
+      expect($(Localization.current.I18nProtocol_finishTimeCutoff), findsOneWidget);
       expect($(Localization.current.I18nFinish_finishTime), findsOneWidget);
-      expect(
-        $(Localization.current.I18nFinish_finishTimestamp),
-        findsOneWidget,
-      );
+      expect($(Localization.current.I18nFinish_finishTimestamp), findsOneWidget);
       expect($(Localization.current.I18nNtp_ntpOffset), findsOneWidget);
       expect($(Localization.current.I18nProtocol_number), findsOneWidget);
       expect($(Localization.current.I18nProtocol_type), findsOneWidget);
@@ -88,14 +78,8 @@ void main() {
     patrolWidgetTest('Show finish info', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(#button).tap();
-      expect(
-        $(finish.finishTime),
-        findsOneWidget,
-      );
-      expect(
-        $(DateFormat(longTimeFormat).format(finish.timestamp)),
-        findsOneWidget,
-      );
+      expect($(finish.finishTime), findsOneWidget);
+      expect($(DateFormat(longTimeFormat).format(finish.timestamp)), findsOneWidget);
       expect($('${finish.ntpOffset}'), findsOneWidget);
       expect($('$number'), findsOneWidget);
       expect($(Localization.current.I18nFinish_automaticTime), findsOneWidget);
@@ -114,14 +98,8 @@ void main() {
       );
       await $.pumpWidgetAndSettle(testWidget());
       await $(#button).tap();
-      expect(
-        $(finish.finishTime),
-        findsOneWidget,
-      );
-      expect(
-        $(DateFormat(longTimeFormat).format(finish.timestamp)),
-        findsOneWidget,
-      );
+      expect($(finish.finishTime), findsOneWidget);
+      expect($(DateFormat(longTimeFormat).format(finish.timestamp)), findsOneWidget);
       expect($('${finish.ntpOffset}'), findsOneWidget);
       expect($('$number'), findsNothing);
       expect($(Localization.current.I18nFinish_manualTime), findsOneWidget);

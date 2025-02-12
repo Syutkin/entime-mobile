@@ -13,10 +13,7 @@ void main() async {
     });
 
     test('CsvToMapConverter and mapListToCsv', () {
-      final csvMap = CsvToMapConverter(
-        fieldDelimiter: ';',
-        eol: '\n',
-      ).convert(csv);
+      final csvMap = CsvToMapConverter(fieldDelimiter: ';', eol: '\n').convert(csv);
       final converted = mapListToCsv(csvMap, eol: '\n');
       expect(converted, csv);
     });

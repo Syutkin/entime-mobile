@@ -17,11 +17,9 @@ class MenuButton extends StatelessWidget {
   final AppTab activeTab;
 
   @override
-  Widget build(
-    BuildContext context,
-  ) =>
-      BlocBuilder<SettingsCubit, AppSettings>(
-        builder: (context, state) => BlocBuilder<DatabaseBloc, DatabaseState>(
+  Widget build(BuildContext context) => BlocBuilder<SettingsCubit, AppSettings>(
+    builder:
+        (context, state) => BlocBuilder<DatabaseBloc, DatabaseState>(
           builder: (context, protocolState) {
             final settingsCubit = context.read<SettingsCubit>();
             final settings = settingsCubit.state;
@@ -44,9 +42,7 @@ class MenuButton extends StatelessWidget {
                       value: HomeMenuButton.countdownPage,
                       child: ListTile(
                         leading: Icon(MdiIcons.timer),
-                        title: Text(
-                          Localization.current.I18nHome_countdownPage,
-                        ),
+                        title: Text(Localization.current.I18nHome_countdownPage),
                       ),
                     ),
                   )
@@ -55,9 +51,7 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.countdown,
                       child: ListTile(
-                        leading: settings.countdown
-                            ? const Icon(Icons.check)
-                            : const SizedBox.shrink(),
+                        leading: settings.countdown ? const Icon(Icons.check) : const SizedBox.shrink(),
                         // leading: Icon(MdiIcons.timer),
                         title: Text(Localization.current.I18nHome_countdown),
                       ),
@@ -70,12 +64,8 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showFinishDifference,
                       child: ListTile(
-                        leading: settings.showFinishDifference
-                            ? const Icon(Icons.check)
-                            : const SizedBox.shrink(),
-                        title: Text(
-                          Localization.current.I18nHome_showFinishDifference,
-                        ),
+                        leading: settings.showFinishDifference ? const Icon(Icons.check) : const SizedBox.shrink(),
+                        title: Text(Localization.current.I18nHome_showFinishDifference),
                       ),
                     ),
                   )
@@ -83,28 +73,21 @@ class MenuButton extends StatelessWidget {
                     PopupMenuItem(
                       value: HomeMenuButton.showColorFinishDifference,
                       child: ListTile(
-                        leading: settings.showColorFinishDifference
-                            ? const Icon(Icons.check)
-                            : const SizedBox.shrink(),
-                        title: Text(
-                          Localization
-                              .current.I18nHome_showColorFinishDifference,
-                        ),
+                        leading: settings.showColorFinishDifference ? const Icon(Icons.check) : const SizedBox.shrink(),
+                        title: Text(Localization.current.I18nHome_showColorFinishDifference),
                       ),
                     ),
                   );
               }
               final checkedFAB =
                   (activeTab == AppTab.start && settings.startFab) ||
-                      (activeTab == AppTab.finish && settings.finishFab);
+                  (activeTab == AppTab.finish && settings.finishFab);
               menuItems
                 ..add(
                   PopupMenuItem(
                     value: HomeMenuButton.fab,
                     child: ListTile(
-                      leading: checkedFAB
-                          ? const Icon(Icons.check)
-                          : const SizedBox.shrink(),
+                      leading: checkedFAB ? const Icon(Icons.check) : const SizedBox.shrink(),
                       // leading: Icon(MdiIcons.handBackLeft),
                       title: Text(Localization.current.I18nHome_fab),
                     ),
@@ -114,10 +97,7 @@ class MenuButton extends StatelessWidget {
                 ..add(
                   PopupMenuItem(
                     value: HomeMenuButton.share,
-                    child: ListTile(
-                      leading: const Icon(Icons.share),
-                      title: Text(Localization.current.I18nCore_share),
-                    ),
+                    child: ListTile(leading: const Icon(Icons.share), title: Text(Localization.current.I18nCore_share)),
                   ),
                 );
             } else {
@@ -144,17 +124,9 @@ class MenuButton extends StatelessWidget {
                     }
                   case HomeMenuButton.fab:
                     if (activeTab == AppTab.start) {
-                      settingsCubit.update(
-                        settings.copyWith(
-                          startFab: !settings.startFab,
-                        ),
-                      );
+                      settingsCubit.update(settings.copyWith(startFab: !settings.startFab));
                     } else if (activeTab == AppTab.finish) {
-                      settingsCubit.update(
-                        settings.copyWith(
-                          finishFab: !settings.finishFab,
-                        ),
-                      );
+                      settingsCubit.update(settings.copyWith(finishFab: !settings.finishFab));
                     }
                   case HomeMenuButton.addRacer:
                     final stage = databaseBloc.state.stage;
@@ -162,42 +134,27 @@ class MenuButton extends StatelessWidget {
                       await addRacerPopup(context: context, stage: stage);
                     }
                   case HomeMenuButton.selectRace:
-                    await Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (context) => const RacesListPage(),
-                      ),
-                    );
+                    await Navigator.of(
+                      context,
+                    ).push(MaterialPageRoute<void>(builder: (context) => const RacesListPage()));
                   case HomeMenuButton.bluetooth:
                     await selectBluetoothDevice(context);
                   case HomeMenuButton.countdown:
-                    settingsCubit.update(
-                      settings.copyWith(
-                        countdown: !settings.countdown,
-                      ),
-                    );
+                    settingsCubit.update(settings.copyWith(countdown: !settings.countdown));
                   case HomeMenuButton.countdownPage:
-                    await Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (context) => const CountdownPage(),
-                      ),
-                    );
+                    await Navigator.of(
+                      context,
+                    ).push(MaterialPageRoute<void>(builder: (context) => const CountdownPage()));
                   case HomeMenuButton.showFinishDifference:
-                    settingsCubit.update(
-                      settings.copyWith(
-                        showFinishDifference: !settings.showFinishDifference,
-                      ),
-                    );
+                    settingsCubit.update(settings.copyWith(showFinishDifference: !settings.showFinishDifference));
                   case HomeMenuButton.showColorFinishDifference:
                     settingsCubit.update(
-                      settings.copyWith(
-                        showColorFinishDifference:
-                            !settings.showColorFinishDifference,
-                      ),
+                      settings.copyWith(showColorFinishDifference: !settings.showColorFinishDifference),
                     );
                 }
               },
             );
           },
         ),
-      );
+  );
 }

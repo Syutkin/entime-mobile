@@ -38,10 +38,9 @@ class FinishItemTile extends StatelessWidget {
         margin: const EdgeInsets.all(2),
         child: Text(
           Localization.current.I18nProtocol_hide,
-          style: DefaultTextStyle.of(context).style.apply(
-                fontSizeFactor: 1.5,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-              ),
+          style: DefaultTextStyle.of(
+            context,
+          ).style.apply(fontSizeFactor: 1.5, color: Theme.of(context).colorScheme.onPrimaryContainer),
         ),
       ),
       onDismissed: (direction) {
@@ -73,20 +72,19 @@ class FinishItemTile extends StatelessWidget {
           builder: (context, candidateData, rejectedData) {
             return BlocBuilder<SettingsCubit, AppSettings>(
               builder: (context, state) {
-                final difference = item.finishTime.toDateTime()?.difference(
-                          item.timestamp
-                              // При подсчёте разницы учитываем записанный NTP офсет
-                              .add(Duration(milliseconds: item.ntpOffset)),
-                        ) ??
+                final difference =
+                    item.finishTime.toDateTime()?.difference(
+                      item.timestamp
+                      // При подсчёте разницы учитываем записанный NTP офсет
+                      .add(Duration(milliseconds: item.ntpOffset)),
+                    ) ??
                     Duration.zero;
                 final showDifference = state.showFinishDifference;
                 Color? cardColor;
                 Color? textColor;
-                final isBigDifference = difference.inMilliseconds.abs() >
-                    state.finishDifferenceThreshold;
+                final isBigDifference = difference.inMilliseconds.abs() > state.finishDifferenceThreshold;
 
-                if (isBigDifference &&
-                    state.showColorFinishDifference) {
+                if (isBigDifference && state.showColorFinishDifference) {
                   cardColor = Theme.of(context).colorScheme.error;
                   textColor = Theme.of(context).colorScheme.onError;
                 }
@@ -109,11 +107,7 @@ class FinishItemTile extends StatelessWidget {
                         Flexible(
                           flex: 15,
                           child: Align(
-                            child: _addIcon(
-                              context,
-                              item.isManual,
-                              textColor,
-                            ), //Icon(Icons.add_circle),
+                            child: _addIcon(context, item.isManual, textColor), //Icon(Icons.add_circle),
                           ),
                         ),
                         Flexible(
@@ -122,10 +116,7 @@ class FinishItemTile extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               item.finishTime.strip(),
-                              style: DefaultTextStyle.of(context).style.apply(
-                                    fontSizeFactor: 1.5,
-                                    color: textColor,
-                                  ),
+                              style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5, color: textColor),
                             ),
                           ),
                         ),
@@ -135,9 +126,7 @@ class FinishItemTile extends StatelessWidget {
                             child: Align(
                               child: Text(
                                 '${difference.inMilliseconds}',
-                                style: DefaultTextStyle.of(
-                                  context,
-                                ).style.apply(color: textColor),
+                                style: DefaultTextStyle.of(context).style.apply(color: textColor),
                               ),
                             ),
                           ),
@@ -145,13 +134,8 @@ class FinishItemTile extends StatelessWidget {
                           flex: 20,
                           child: Align(
                             child: Text(
-                              candidateData.isEmpty
-                                  ? item.number.toString().strip()
-                                  : candidateData.first.toString(),
-                              style: DefaultTextStyle.of(context).style.apply(
-                                    fontSizeFactor: 2,
-                                    color: textColor,
-                                  ),
+                              candidateData.isEmpty ? item.number.toString().strip() : candidateData.first.toString(),
+                              style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2, color: textColor),
                             ),
                           ),
                         ),
@@ -169,15 +153,9 @@ class FinishItemTile extends StatelessWidget {
 
   Widget _addIcon(BuildContext context, bool manual, Color? color) {
     if (manual) {
-      return Icon(
-        MdiIcons.handBackLeft,
-        color: color ?? Theme.of(context).colorScheme.onSurface,
-      );
+      return Icon(MdiIcons.handBackLeft, color: color ?? Theme.of(context).colorScheme.onSurface);
     } else {
-      return Icon(
-        MdiIcons.cpu64Bit,
-        color: color ?? Theme.of(context).colorScheme.onSurface,
-      );
+      return Icon(MdiIcons.cpu64Bit, color: color ?? Theme.of(context).colorScheme.onSurface);
     }
   }
 }

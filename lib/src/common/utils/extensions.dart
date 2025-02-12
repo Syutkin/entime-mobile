@@ -31,10 +31,7 @@ extension StringExtensions on String? {
   bool get isValidUrl {
     // Простой валидатор домена
     return isNotNullOrEmpty &&
-        RegExp(
-          r'^[a-z0-9а-яё]+([\-\.]{1}[a-z0-9а-яё]+)*\.[a-zа-яё]{2,6}$',
-          caseSensitive: false,
-        ).hasMatch(this!);
+        RegExp(r'^[a-z0-9а-яё]+([\-\.]{1}[a-z0-9а-яё]+)*\.[a-zа-яё]{2,6}$', caseSensitive: false).hasMatch(this!);
   }
 
   /// Return [DateTime] from [String] with time only.

@@ -13,9 +13,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
     logger.i('Updating modsettings from json');
 
     try {
-      _modSettingsModel = ModSettingsModelLed.fromJson(
-        jsonDecode(jsonString) as Map<String, dynamic>,
-      );
+      _modSettingsModel = ModSettingsModelLed.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
 
       // Module type
       type = _modSettingsModel.type;
@@ -49,11 +47,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
       read: false,
       type: type,
       // Bluetooth
-      bluetooth: Bluetooth(
-        active: bluetooth,
-        name: bluetoothName,
-        number: bluetoothNumber,
-      ),
+      bluetooth: Bluetooth(active: bluetooth, name: bluetoothName, number: bluetoothNumber),
       // WiFi
       wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
       //LedPanel

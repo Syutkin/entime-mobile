@@ -8,11 +8,7 @@ Future<void> updateStagePopup(BuildContext context, {required Stage stage}) {
   return _upsertStagePopup(context, stage: stage);
 }
 
-Future<void> _upsertStagePopup(
-  BuildContext context, {
-  Stage? stage,
-  Race? race,
-}) async {
+Future<void> _upsertStagePopup(BuildContext context, {Stage? stage, Race? race}) async {
   late int raceId;
   if (stage == null) {
     raceId = race!.id;
@@ -32,10 +28,7 @@ Future<void> _upsertStagePopup(
     context: context,
     builder:
         (context) => ExpandedAlertDialog(
-          title:
-              stage == null
-                  ? Text(Localization.current.I18nDatabase_addStage)
-                  : Text(name),
+          title: stage == null ? Text(Localization.current.I18nDatabase_addStage) : Text(name),
           content: Form(
             key: formKey,
             child: ListView(
@@ -45,9 +38,7 @@ Future<void> _upsertStagePopup(
                 TextFormField(
                   autofocus: true,
                   initialValue: stage?.name,
-                  decoration: InputDecoration(
-                    labelText: Localization.current.I18nDatabase_stageName,
-                  ),
+                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_stageName),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -60,10 +51,7 @@ Future<void> _upsertStagePopup(
                 // Описание этапа
                 TextFormField(
                   initialValue: description,
-                  decoration: InputDecoration(
-                    labelText:
-                        Localization.current.I18nDatabase_stageDescription,
-                  ),
+                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_stageDescription),
                   onChanged: (value) {
                     description = value;
                   },
@@ -103,24 +91,14 @@ Future<void> _upsertStagePopup(
                             trailId = trail?.id;
                           },
                           decoratorProps: DropDownDecoratorProps(
-                            decoration: InputDecoration(
-                              labelText:
-                                  Localization.current.I18nDatabase_trail,
-                            ),
+                            decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trail),
                           ),
-                          suffixProps: const DropdownSuffixProps(
-                            clearButtonProps: ClearButtonProps(isVisible: true),
-                          ),
+                          suffixProps: const DropdownSuffixProps(clearButtonProps: ClearButtonProps(isVisible: true)),
                           popupProps: PopupProps.menu(
                             showSearchBox: true,
                             searchDelay: Duration.zero,
                             searchFieldProps: TextFieldProps(
-                              decoration: InputDecoration(
-                                hintText:
-                                    Localization
-                                        .current
-                                        .I18nDatabase_searchTrail,
-                              ),
+                              decoration: InputDecoration(hintText: Localization.current.I18nDatabase_searchTrail),
                             ),
                             // fit: FlexFit.loose,
                           ),
@@ -135,9 +113,7 @@ Future<void> _upsertStagePopup(
                   initialValue: isActive,
                   builder: (FormFieldState<bool> state) {
                     return SwitchListTile(
-                      title: Text(
-                        Localization.current.I18nDatabase_trailIsActive,
-                      ),
+                      title: Text(Localization.current.I18nDatabase_trailIsActive),
                       value: isActive,
                       onChanged: (bool value) {
                         isActive = value;

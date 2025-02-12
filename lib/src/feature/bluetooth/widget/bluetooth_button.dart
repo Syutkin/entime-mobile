@@ -7,22 +7,12 @@ class BluetoothButton extends StatelessWidget {
   const BluetoothButton({super.key});
 
   @override
-  Widget build(
-    BuildContext context,
-  ) => BlocBuilder<BluetoothBloc, BluetoothBlocState>(
+  Widget build(BuildContext context) => BlocBuilder<BluetoothBloc, BluetoothBlocState>(
     builder: (context, state) {
       final bloc = BlocProvider.of<BluetoothBloc>(context);
       return state.when(
-        notInitialized:
-            () => const IconButton(
-              icon: Icon(Icons.bluetooth_disabled),
-              onPressed: null,
-            ),
-        notAvailable:
-            () => const IconButton(
-              icon: Icon(Icons.bluetooth_disabled),
-              onPressed: null,
-            ),
+        notInitialized: () => const IconButton(icon: Icon(Icons.bluetooth_disabled), onPressed: null),
+        notAvailable: () => const IconButton(icon: Icon(Icons.bluetooth_disabled), onPressed: null),
         notEnabled:
             () => IconButton(
               icon: const Icon(Icons.bluetooth_disabled),
@@ -44,17 +34,13 @@ class BluetoothButton extends StatelessWidget {
                 bloc.add(const BluetoothEvent.disconnect());
               },
             ),
-        disconnecting:
-            () =>
-                IconButton(icon: const Icon(Icons.bluetooth), onPressed: () {}),
+        disconnecting: () => IconButton(icon: const Icon(Icons.bluetooth), onPressed: () {}),
         disconnected: (device) {
           if (device != null) {
             return IconButton(
               icon: const Icon(Icons.bluetooth),
               onPressed: () async {
-                bloc.add(
-                  BluetoothEvent.connect(selectedDevice: bloc.bluetoothDevice),
-                );
+                bloc.add(BluetoothEvent.connect(selectedDevice: bloc.bluetoothDevice));
               },
             );
           } else {

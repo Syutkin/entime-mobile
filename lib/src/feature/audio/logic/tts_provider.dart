@@ -32,8 +32,7 @@ class TtsProvider {
     return flutterTts.getDefaultVoice;
   }
 
-  Future<dynamic> setLanguage(String language) =>
-      flutterTts.setLanguage(language);
+  Future<dynamic> setLanguage(String language) => flutterTts.setLanguage(language);
 
   Future<dynamic> setVolume(double volume) => flutterTts.setVolume(volume);
 

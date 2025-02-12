@@ -10,17 +10,12 @@ class TrailsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void routeToTrailsListPage() {
-      Navigator.of(
-        context,
-      ).push(MaterialPageRoute<void>(builder: (context) => TrailsListPage()));
+      Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => TrailsListPage()));
     }
 
     return ListTile(
       onTap: routeToTrailsListPage,
-      leading: IconButton(
-        icon: Icon(MdiIcons.mapMarkerOutline),
-        onPressed: routeToTrailsListPage,
-      ),
+      leading: IconButton(icon: Icon(MdiIcons.mapMarkerOutline), onPressed: routeToTrailsListPage),
       title: Text(Localization.current.I18nInit_trails),
       // subtitle: Text(Localization.current.I18nInit_selectStage),
     );

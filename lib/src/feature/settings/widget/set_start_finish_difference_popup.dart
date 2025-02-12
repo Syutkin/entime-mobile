@@ -7,8 +7,7 @@ Future<int?> setStartFinishDifferencePopup(
 }) async {
   var newDifference = difference;
 
-  final delayController =
-      TextEditingController()..text = newDifference.toString();
+  final delayController = TextEditingController()..text = newDifference.toString();
 
   final formKey = GlobalKey<FormState>();
 
@@ -26,23 +25,16 @@ Future<int?> setStartFinishDifferencePopup(
                 TextFormField(
                   keyboardType: TextInputType.number,
                   autofocus: true,
-                  decoration: InputDecoration(
-                    labelText:
-                        Localization.current.I18nSettings_startFinishDifference,
-                  ),
+                  decoration: InputDecoration(labelText: Localization.current.I18nSettings_startFinishDifference),
                   controller: delayController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value == null) {
-                      return Localization
-                          .current
-                          .I18nSettings_incorrectStartFinishDifference;
+                      return Localization.current.I18nSettings_incorrectStartFinishDifference;
                     }
                     final integer = int.tryParse(value);
                     if (integer == null || integer < 0) {
-                      return Localization
-                          .current
-                          .I18nSettings_incorrectStartFinishDifference;
+                      return Localization.current.I18nSettings_incorrectStartFinishDifference;
                     }
                     newDifference = integer;
                     return null;

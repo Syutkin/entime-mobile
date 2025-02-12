@@ -52,10 +52,7 @@ void main() {
       test('Get race successfully', () async {
         filepicker = startlistPicker;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final race = await startlistProvider.getRaceFromFile();
         expect(race != null, true);
         expect(race!.fileName, 'filename');
@@ -66,10 +63,7 @@ void main() {
       test('Race csv with errors loaded', () async {
         filepicker = startlistPickerWithErrors;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
@@ -77,10 +71,7 @@ void main() {
       test('Incorrect race csv loaded', () async {
         filepicker = incorrectPicker;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
@@ -88,10 +79,7 @@ void main() {
       test('Null race csv file', () async {
         filepicker = nullPicker;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
@@ -101,29 +89,20 @@ void main() {
       test('Get stages successfully', () async {
         filepicker = stageslistPicker;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages != null, true);
         expect(stages!.stageNames.length, 4);
         expect(stages.startItems.length, 18);
         expect(stages.stageNames.last, 'СУ 4');
         expect(stages.startItems.last.number, 18);
-        expect(
-          stages.startItems.last.startTimes?[stages.stageNames.last],
-          '13:17:00',
-        );
+        expect(stages.startItems.last.startTimes?[stages.stageNames.last], '13:17:00');
       });
 
       test('Stages csv with errorsloaded', () async {
         filepicker = stageslistPickerWithErrors;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });
@@ -131,10 +110,7 @@ void main() {
       test('Incorrect stages csv loaded', () async {
         filepicker = incorrectPicker;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });
@@ -142,10 +118,7 @@ void main() {
       test('Null stages csv file', () async {
         filepicker = nullPicker;
         decoder = testDecoder;
-        startlistProvider = StartlistProvider(
-          filepicker: filepicker,
-          decoder: decoder,
-        );
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });

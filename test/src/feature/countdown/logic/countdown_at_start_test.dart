@@ -18,9 +18,7 @@ void main() {
   late AppSettings defaults;
 
   setUp(() {
-    db = AppDatabase.customConnection(
-      DatabaseConnection(NativeDatabase.memory()),
-    );
+    db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory()));
 
     // populate DB
     for (final query in PopDB().queries) {
@@ -130,8 +128,7 @@ void main() {
       const deltaInSeconds = 5;
       defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
       when(() => settings.settings).thenReturn(defaults);
-      countdown = CountdownAtStart(database: db, settingsProvider: settings)
-        ..customTimeNow = '11:47:59'.toDateTime();
+      countdown = CountdownAtStart(database: db, settingsProvider: settings)..customTimeNow = '11:47:59'.toDateTime();
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 3));
       countdown.stop();
@@ -143,8 +140,7 @@ void main() {
       var result = 0;
       defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
       when(() => settings.settings).thenReturn(defaults);
-      countdown = CountdownAtStart(database: db, settingsProvider: settings)
-        ..customTimeNow = '11:47:59'.toDateTime();
+      countdown = CountdownAtStart(database: db, settingsProvider: settings)..customTimeNow = '11:47:59'.toDateTime();
       countdown.ticks.listen((data) {
         if (data.callNextParticipant) {
           result++;
@@ -160,8 +156,7 @@ void main() {
       const deltaInSeconds = 2;
       defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
       when(() => settings.settings).thenReturn(defaults);
-      countdown = CountdownAtStart(database: db, settingsProvider: settings)
-        ..customTimeNow = '10:00:59.5'.toDateTime();
+      countdown = CountdownAtStart(database: db, settingsProvider: settings)..customTimeNow = '10:00:59.5'.toDateTime();
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 2));
       countdown.stop();

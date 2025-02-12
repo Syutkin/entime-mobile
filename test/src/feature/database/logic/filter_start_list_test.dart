@@ -140,104 +140,45 @@ void main() {
     showDSQ = true;
   });
 
-  group(
-    'filterStartList tests',
-    () {
-      test(
-        'Show all',
-        () async {
-          final result = filterStartList(
-            list,
-            showDNS: showDNS,
-            showDNF: showDNF,
-            showDSQ: showDSQ,
-          );
-          expect(result.length, 9);
-        },
-      );
-      test(
-        'Hide DNS',
-        () async {
-          showDNS = false;
-          final result = filterStartList(
-            list,
-            showDNS: showDNS,
-            showDNF: showDNF,
-            showDSQ: showDSQ,
-          );
-          expect(result.length, 7);
-        },
-      );
-      test(
-        'Hide DNF',
-        () async {
-          showDNF = false;
-          final result = filterStartList(
-            list,
-            showDNS: showDNS,
-            showDNF: showDNF,
-            showDSQ: showDSQ,
-          );
-          expect(result.length, 7);
-        },
-      );
-      test(
-        'Hide DSQ',
-        () async {
-          showDSQ = false;
-          final result = filterStartList(
-            list,
-            showDNS: showDNS,
-            showDNF: showDNF,
-            showDSQ: showDSQ,
-          );
-          expect(result.length, 7);
-        },
-      );
-      test(
-        'Hide DNS+DNF',
-        () async {
-          showDNS = false;
-          showDNF = false;
-          final result = filterStartList(
-            list,
-            showDNS: showDNS,
-            showDNF: showDNF,
-            showDSQ: showDSQ,
-          );
-          expect(result.length, 5);
-        },
-      );
-      test(
-        'Hide DNS+DSQ',
-        () async {
-          showDNS = false;
-          showDSQ = false;
-          final result = filterStartList(
-            list,
-            showDNS: showDNS,
-            showDNF: showDNF,
-            showDSQ: showDSQ,
-          );
-          expect(result.length, 5);
-        },
-      );
+  group('filterStartList tests', () {
+    test('Show all', () async {
+      final result = filterStartList(list, showDNS: showDNS, showDNF: showDNF, showDSQ: showDSQ);
+      expect(result.length, 9);
+    });
+    test('Hide DNS', () async {
+      showDNS = false;
+      final result = filterStartList(list, showDNS: showDNS, showDNF: showDNF, showDSQ: showDSQ);
+      expect(result.length, 7);
+    });
+    test('Hide DNF', () async {
+      showDNF = false;
+      final result = filterStartList(list, showDNS: showDNS, showDNF: showDNF, showDSQ: showDSQ);
+      expect(result.length, 7);
+    });
+    test('Hide DSQ', () async {
+      showDSQ = false;
+      final result = filterStartList(list, showDNS: showDNS, showDNF: showDNF, showDSQ: showDSQ);
+      expect(result.length, 7);
+    });
+    test('Hide DNS+DNF', () async {
+      showDNS = false;
+      showDNF = false;
+      final result = filterStartList(list, showDNS: showDNS, showDNF: showDNF, showDSQ: showDSQ);
+      expect(result.length, 5);
+    });
+    test('Hide DNS+DSQ', () async {
+      showDNS = false;
+      showDSQ = false;
+      final result = filterStartList(list, showDNS: showDNS, showDNF: showDNF, showDSQ: showDSQ);
+      expect(result.length, 5);
+    });
 
-      test(
-        'Hide DNS+DNF+DSQ',
-        () async {
-          showDNS = false;
-          showDNF = false;
-          showDSQ = false;
-          final result = filterStartList(
-            list,
-            showDNS: showDNS,
-            showDNF: showDNF,
-            showDSQ: showDSQ,
-          );
-          expect(result.length, 3);
-        },
-      );
-    },
-  );
+    test('Hide DNS+DNF+DSQ', () async {
+      showDNS = false;
+      showDNF = false;
+      showDSQ = false;
+      final result = filterStartList(list, showDNS: showDNS, showDNF: showDNF, showDSQ: showDSQ);
+      expect(result.length, 3);
+    });
+  });
 }

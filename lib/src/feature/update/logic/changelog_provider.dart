@@ -1,10 +1,7 @@
 import 'package:flutter/services.dart';
 
 class ChangelogProvider {
-  Future<String> changelog([
-    String? currentVersion,
-    String fromVersion = '0.0.0',
-  ]) async {
+  Future<String> changelog([String? currentVersion, String fromVersion = '0.0.0']) async {
     final prev = '[$fromVersion]';
     final markdown = await rootBundle.loadString('CHANGELOG.md');
     var current = '';

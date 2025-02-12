@@ -17,24 +17,16 @@ class Updater extends StatelessWidget {
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: Text(Localization.current.I18nUpdate_checkForUpdates),
             onTap: () {
-              BlocProvider.of<UpdateBloc>(
-                context,
-              ).add(const UpdateEvent.checkUpdate());
+              BlocProvider.of<UpdateBloc>(context).add(const UpdateEvent.checkUpdate());
             },
           );
         },
         updateAvailable: (updateAvailable) {
           return ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-            title: Text(
-              Localization.current.I18nUpdate_updateToVersion(
-                updateAvailable.version,
-              ),
-            ),
+            title: Text(Localization.current.I18nUpdate_updateToVersion(updateAvailable.version)),
             onTap: () {
-              BlocProvider.of<UpdateBloc>(
-                context,
-              ).add(const UpdateEvent.downloadUpdate());
+              BlocProvider.of<UpdateBloc>(context).add(const UpdateEvent.downloadUpdate());
             },
           );
         },
@@ -44,10 +36,7 @@ class Updater extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 const LinearProgressIndicator(minHeight: 24),
-                Text(
-                  Localization.current.I18nUpdate_connecting,
-                  textAlign: TextAlign.center,
-                ),
+                Text(Localization.current.I18nUpdate_connecting, textAlign: TextAlign.center),
               ],
             ),
           );
@@ -57,15 +46,9 @@ class Updater extends StatelessWidget {
             title: Stack(
               alignment: Alignment.center,
               children: [
-                LinearProgressIndicator(
-                  minHeight: 24,
-                  value: downloading.bytes / downloading.total,
-                ),
+                LinearProgressIndicator(minHeight: 24, value: downloading.bytes / downloading.total),
                 Text(
-                  Localization.current.I18nUpdate_downloaded(
-                    filesize(downloading.bytes),
-                    filesize(downloading.total),
-                  ),
+                  Localization.current.I18nUpdate_downloaded(filesize(downloading.bytes), filesize(downloading.total)),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -78,9 +61,7 @@ class Updater extends StatelessWidget {
             // title: Text(Localization.current.I18nUpdate_checkForUpdates),
             title: Text(downloadError.error),
             onTap: () {
-              BlocProvider.of<UpdateBloc>(
-                context,
-              ).add(const UpdateEvent.checkUpdate());
+              BlocProvider.of<UpdateBloc>(context).add(const UpdateEvent.checkUpdate());
             },
           );
         },

@@ -14,19 +14,15 @@ part 'log_event.dart';
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
-  LogBloc({
-    required AppDatabase database,
-    required ISettingsProvider settingsProvider,
-  }) : _db = database,
-       _settingsProvider = settingsProvider,
-       super(const LogState(log: [])) {
+  LogBloc({required AppDatabase database, required ISettingsProvider settingsProvider})
+    : _db = database,
+      _settingsProvider = settingsProvider,
+      super(const LogState(log: [])) {
     _settingsProvider.state.listen((AppSettings state) {
       _limit = state.logLimit;
     });
 
-    _logsSubscription = _db.managers.logs.limit(1).watch().listen((
-      event,
-    ) async {
+    _logsSubscription = _db.managers.logs.limit(1).watch().listen((event) async {
       logger.d('LogBloc -> (_db.logs).watch()');
       _log = await _db.getLog(limit: _limit);
       add(const LogEvent.emitState());
@@ -38,11 +34,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
           emit(LogState(log: _log));
         },
         add: (_AddLog event) {
-          _db.addLog(
-            level: event.level,
-            source: event.source,
-            rawData: event.rawData,
-          );
+          _db.addLog(level: event.level, source: event.source, rawData: event.rawData);
         },
       );
     });

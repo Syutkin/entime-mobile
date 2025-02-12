@@ -13,13 +13,10 @@ part 'countdown_event.dart';
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
-  CountdownBloc({
-    required IAudioController audioController,
-    required CountdownAtStart countdown,
-    required int stageId,
-  })  : _audioController = audioController,
-        _countdown = countdown,
-        super(const CountdownState.initial()) {
+  CountdownBloc({required IAudioController audioController, required CountdownAtStart countdown, required int stageId})
+    : _audioController = audioController,
+      _countdown = countdown,
+      super(const CountdownState.initial()) {
     if (stageId > 0) {
       _countdown.start(stageId);
     }
@@ -35,17 +32,9 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         tick: (event) {
           final nextStartTime = event.tick.nextStartTime;
           if (nextStartTime == null) {
-            emit(
-              CountdownState.working(
-                tick: Tick(text: event.tick.text, second: event.tick.second),
-              ),
-            );
+            emit(CountdownState.working(tick: Tick(text: event.tick.text, second: event.tick.second)));
           } else {
-            emit(
-              CountdownState.working(
-                tick: event.tick,
-              ),
-            );
+            emit(CountdownState.working(tick: event.tick));
           }
         },
         beep: (_) {

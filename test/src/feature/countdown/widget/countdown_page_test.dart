@@ -9,8 +9,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState>
-    implements CountdownBloc {}
+class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState> implements CountdownBloc {}
 
 void main() {
   late CountdownBloc countdownBloc;
@@ -24,75 +23,58 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(
-          value: countdownBloc,
-          child: const CountdownPage(),
-        ),
-      ),
+      home: Material(child: BlocProvider.value(value: countdownBloc, child: const CountdownPage())),
     );
   }
 
-  setUpAll(
-    () {
-      countdownBloc = MockCountdownBloc();
-    },
-  );
+  setUpAll(() {
+    countdownBloc = MockCountdownBloc();
+  });
 
-  setUp(
-    () {
-      second = 0;
-      text = 'text';
-      number = 99;
+  setUp(() {
+    second = 0;
+    text = 'text';
+    number = 99;
 
-      tick = Tick(second: second, text: text, number: number);
-      when(() => countdownBloc.state)
-          .thenReturn(CountdownState.working(tick: tick));
-    },
-  );
+    tick = Tick(second: second, text: text, number: number);
+    when(() => countdownBloc.state).thenReturn(CountdownState.working(tick: tick));
+  });
 
-  group(
-    'CountdownPage tests',
-    () {
-      patrolWidgetTest('Initial build', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+  group('CountdownPage tests', () {
+    patrolWidgetTest('Initial build', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
 
-        expect($(Localization.current.I18nCountdown_countdown), findsOneWidget);
-        expect($(Center), findsOneWidget);
-      });
+      expect($(Localization.current.I18nCountdown_countdown), findsOneWidget);
+      expect($(Center), findsOneWidget);
+    });
 
-      patrolWidgetTest('Initial bloc state', (PatrolTester $) async {
-        when(() => countdownBloc.state)
-            .thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+    patrolWidgetTest('Initial bloc state', (PatrolTester $) async {
+      when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
+      await $.pumpWidgetAndSettle(testWidget());
 
-        expect($(Row), findsNothing);
-        expect($(Column), findsNothing);
-        expect($(FittedBox), findsOneWidget);
-        expect($(''), findsOneWidget);
-      });
+      expect($(Row), findsNothing);
+      expect($(Column), findsNothing);
+      expect($(FittedBox), findsOneWidget);
+      expect($(''), findsOneWidget);
+    });
 
-      patrolWidgetTest(
-          'Working bloc state, landscape (default for test) orientation',
-          (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+    patrolWidgetTest('Working bloc state, landscape (default for test) orientation', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
 
-        expect($(Row), findsOneWidget);
-        expect($(Column), findsNothing);
-        expect($(text), findsOneWidget);
-        expect($('$number'), findsOneWidget);
-      });
+      expect($(Row), findsOneWidget);
+      expect($(Column), findsNothing);
+      expect($(text), findsOneWidget);
+      expect($('$number'), findsOneWidget);
+    });
 
-      patrolWidgetTest('Working bloc state, portrait orientation',
-          (PatrolTester $) async {
-        $.tester.view.physicalSize = const Size(1024, 2400);
-        await $.pumpWidgetAndSettle(testWidget());
+    patrolWidgetTest('Working bloc state, portrait orientation', (PatrolTester $) async {
+      $.tester.view.physicalSize = const Size(1024, 2400);
+      await $.pumpWidgetAndSettle(testWidget());
 
-        expect($(Row), findsNothing);
-        expect($(Column), findsOneWidget);
-        expect($(text), findsOneWidget);
-        expect($('$number'), findsOneWidget);
-      });
-    },
-  );
+      expect($(Row), findsNothing);
+      expect($(Column), findsOneWidget);
+      expect($(text), findsOneWidget);
+      expect($('$number'), findsOneWidget);
+    });
+  });
 }

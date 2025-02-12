@@ -4,10 +4,7 @@ import '../../../../common/localization/localization.dart';
 import '../../../../common/widget/cancel_ok_buttons.dart';
 
 Future<bool?> updateFinishTimePopup(BuildContext context, int number) async =>
-    showDialog<bool>(
-      context: context,
-      builder: (context) => UpdateFinishTimePopup(number: number),
-    );
+    showDialog<bool>(context: context, builder: (context) => UpdateFinishTimePopup(number: number));
 
 class UpdateFinishTimePopup extends StatelessWidget {
   const UpdateFinishTimePopup({required this.number, super.key});

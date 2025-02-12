@@ -7,10 +7,7 @@ import '../../../../constants/date_time_formats.dart';
 import '../../database.dart';
 
 Future<void> finishDetails(BuildContext context, Finish item) async =>
-    showDialog<void>(
-      context: context,
-      builder: (context) => FinishDetailsPopup(item),
-    );
+    showDialog<void>(context: context, builder: (context) => FinishDetailsPopup(item));
 
 class FinishDetailsPopup extends StatelessWidget {
   const FinishDetailsPopup(this.item, {super.key});
@@ -39,24 +36,15 @@ class FinishDetailsPopup extends StatelessWidget {
             child: Text(DateFormat(longTimeFormat).format(item.timestamp)),
           ),
           InputDecorator(
-            decoration: InputDecoration(
-              labelText: Localization.current.I18nNtp_ntpOffset,
-              border: InputBorder.none,
-            ),
+            decoration: InputDecoration(labelText: Localization.current.I18nNtp_ntpOffset, border: InputBorder.none),
             child: Text('${item.ntpOffset}'),
           ),
           InputDecorator(
-            decoration: InputDecoration(
-              labelText: Localization.current.I18nProtocol_number,
-              border: InputBorder.none,
-            ),
+            decoration: InputDecoration(labelText: Localization.current.I18nProtocol_number, border: InputBorder.none),
             child: Text('${item.number ?? ""}'),
           ),
           InputDecorator(
-            decoration: InputDecoration(
-              labelText: Localization.current.I18nProtocol_type,
-              border: InputBorder.none,
-            ),
+            decoration: InputDecoration(labelText: Localization.current.I18nProtocol_type, border: InputBorder.none),
             child:
                 item.isManual
                     ? Text(Localization.current.I18nFinish_manualTime)
@@ -67,10 +55,7 @@ class FinishDetailsPopup extends StatelessWidget {
               labelText: Localization.current.I18nFinish_hiddenCutoff,
               border: InputBorder.none,
             ),
-            child:
-                item.isHidden
-                    ? Text(Localization.current.I18nCore_yes)
-                    : Text(Localization.current.I18nCore_no),
+            child: item.isHidden ? Text(Localization.current.I18nCore_yes) : Text(Localization.current.I18nCore_no),
           ),
         ],
       ),

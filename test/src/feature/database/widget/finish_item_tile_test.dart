@@ -12,8 +12,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockSettingsCubit extends MockCubit<AppSettings>
-    implements SettingsCubit {}
+class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
 void main() {
   late String finishTime;
@@ -28,12 +27,7 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(
-          value: settingsCubit,
-          child: FinishItemTile(item: item),
-        ),
-      ),
+      home: Material(child: BlocProvider.value(value: settingsCubit, child: FinishItemTile(item: item))),
     );
   }
 
@@ -48,9 +42,7 @@ void main() {
     });
 
     patrolWidgetTest('Show all basic info', (PatrolTester $) async {
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+      when(() => settingsCubit.state).thenReturn(settings);
 
       final item = Finish(
         id: 1,
@@ -72,12 +64,8 @@ void main() {
       expect(icon, MdiIcons.cpu64Bit);
     });
 
-    patrolWidgetTest('Correct hand icon for manual time', (
-      PatrolTester $,
-    ) async {
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+    patrolWidgetTest('Correct hand icon for manual time', (PatrolTester $) async {
+      when(() => settingsCubit.state).thenReturn(settings);
 
       final item = Finish(
         id: 1,
@@ -92,19 +80,12 @@ void main() {
 
       await $.pumpWidgetAndSettle(testWidget(item));
 
-      expect(
-        ($.tester.firstWidget($(Icon)) as Icon).icon,
-        MdiIcons.handBackLeft,
-      );
+      expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.handBackLeft);
     });
 
-    patrolWidgetTest('Show difference if enabled at settings', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Show difference if enabled at settings', (PatrolTester $) async {
       settings = settings.copyWith(showFinishDifference: true);
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+      when(() => settingsCubit.state).thenReturn(settings);
 
       final item = Finish(
         id: 1,
@@ -122,93 +103,79 @@ void main() {
       expect($(difference), findsOneWidget);
     });
 
-    patrolWidgetTest(
-      'Change color if difference more than threshold and enabled at settings',
-      (PatrolTester $) async {
-        settings = settings.copyWith(
-          showFinishDifference: false,
-          showColorFinishDifference: true,
-          finishDifferenceThreshold: 1,
-        );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
+    patrolWidgetTest('Change color if difference more than threshold and enabled at settings', (PatrolTester $) async {
+      settings = settings.copyWith(
+        showFinishDifference: false,
+        showColorFinishDifference: true,
+        finishDifferenceThreshold: 1,
+      );
+      when(() => settingsCubit.state).thenReturn(settings);
 
-        final item = Finish(
-          id: 1,
-          stageId: 1,
-          timestamp: timestamp,
-          ntpOffset: 0,
-          finishTime: finishTime,
-          isHidden: false,
-          isManual: true,
-          number: number,
-        );
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: true,
+        number: number,
+      );
 
-        await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(testWidget(item));
 
-        final context = $.tester.element($(FinishItemTile));
-        final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
-        final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
-        final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
+      final context = $.tester.element($(FinishItemTile));
+      final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
+      final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
+      final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
 
-        expect(cardColor, Theme.of(context).colorScheme.error);
-        expect(textColor, Theme.of(context).colorScheme.onError);
-        expect(iconColor, Theme.of(context).colorScheme.onError);
-        expect($(difference), findsNothing);
-        expect($(Flexible), findsNWidgets(3));
-      },
-    );
+      expect(cardColor, Theme.of(context).colorScheme.error);
+      expect(textColor, Theme.of(context).colorScheme.onError);
+      expect(iconColor, Theme.of(context).colorScheme.onError);
+      expect($(difference), findsNothing);
+      expect($(Flexible), findsNWidgets(3));
+    });
 
-    patrolWidgetTest(
-      'Change color and show difference if enabled at settings',
-      (PatrolTester $) async {
-        settings = settings.copyWith(
-          showFinishDifference: true,
-          showColorFinishDifference: true,
-          finishDifferenceThreshold: 1,
-        );
-        when(
-          () => settingsCubit.state,
-        ).thenReturn(settings);
-
-        final item = Finish(
-          id: 1,
-          stageId: 1,
-          timestamp: timestamp,
-          ntpOffset: 0,
-          finishTime: finishTime,
-          isHidden: false,
-          isManual: true,
-          number: number,
-        );
-
-        await $.pumpWidgetAndSettle(testWidget(item));
-
-        final context = $.tester.element($(FinishItemTile));
-        final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
-        final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
-        final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
-
-        expect(cardColor, Theme.of(context).colorScheme.error);
-        expect(textColor, Theme.of(context).colorScheme.onError);
-        expect(iconColor, Theme.of(context).colorScheme.onError);
-        expect($(difference), findsOneWidget);
-        expect($(Flexible), findsNWidgets(4));
-      },
-    );
-
-    patrolWidgetTest('Take into account ntpOffset when show difference', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Change color and show difference if enabled at settings', (PatrolTester $) async {
       settings = settings.copyWith(
         showFinishDifference: true,
         showColorFinishDifference: true,
         finishDifferenceThreshold: 1,
       );
-      when(
-        () => settingsCubit.state,
-      ).thenReturn(settings);
+      when(() => settingsCubit.state).thenReturn(settings);
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: true,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+
+      final context = $.tester.element($(FinishItemTile));
+      final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
+      final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
+      final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
+
+      expect(cardColor, Theme.of(context).colorScheme.error);
+      expect(textColor, Theme.of(context).colorScheme.onError);
+      expect(iconColor, Theme.of(context).colorScheme.onError);
+      expect($(difference), findsOneWidget);
+      expect($(Flexible), findsNWidgets(4));
+    });
+
+    patrolWidgetTest('Take into account ntpOffset when show difference', (PatrolTester $) async {
+      settings = settings.copyWith(
+        showFinishDifference: true,
+        showColorFinishDifference: true,
+        finishDifferenceThreshold: 1,
+      );
+      when(() => settingsCubit.state).thenReturn(settings);
 
       const offset = -300;
       final curDifference = int.parse(difference) - offset;

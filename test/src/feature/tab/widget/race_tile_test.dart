@@ -9,8 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
-    implements DatabaseBloc {}
+class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
 void main() {
   late DatabaseBloc databaseBloc;
@@ -21,33 +20,40 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(
-          value: databaseBloc,
-          child: const RaceTile(),
-        ),
-      ),
+      home: Material(child: BlocProvider.value(value: databaseBloc, child: const RaceTile())),
     );
   }
 
-  setUpAll(
-    () {
-      databaseBloc = MockDatabaseBloc();
-    },
-  );
+  setUpAll(() {
+    databaseBloc = MockDatabaseBloc();
+  });
 
-  setUp(
-    () {
-      race = const Race(id: 1, name: 'Race name', isDeleted: false);
-      stage = const Stage(
-        id: 1,
-        raceId: 1,
-        name: 'Stage name',
-        isActive: true,
-        isDeleted: false,
-      );
+  setUp(() {
+    race = const Race(id: 1, name: 'Race name', isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    when(() => databaseBloc.state).thenReturn(
+      const DatabaseState(
+        races: [],
+        stages: [],
+        categories: [],
+        riders: [],
+        participants: [],
+        finishes: [],
+        numbersOnTrace: [],
+      ),
+    );
+  });
+
+  group('RaceTile tests', () {
+    patrolWidgetTest('Initial build', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(RaceTile), findsOneWidget);
+      expect($(ListTile), findsOneWidget);
+    });
+
+    patrolWidgetTest('Race selected and stage not selected', (PatrolTester $) async {
       when(() => databaseBloc.state).thenReturn(
-        const DatabaseState(
+        DatabaseState(
           races: [],
           stages: [],
           categories: [],
@@ -55,91 +61,56 @@ void main() {
           participants: [],
           finishes: [],
           numbersOnTrace: [],
+          race: race,
         ),
       );
-    },
-  );
 
-  group(
-    'RaceTile tests',
-    () {
-      patrolWidgetTest('Initial build', (
-        PatrolTester $,
-      ) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(RaceTile), findsOneWidget);
-        expect($(ListTile), findsOneWidget);
-      });
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(Localization.current.I18nInit_selectRace), findsNothing);
+      expect($(race.name), findsOneWidget);
+      expect($(Localization.current.I18nInit_selectStage), findsOneWidget);
+    });
 
-      patrolWidgetTest('Race selected and stage not selected', (
-        PatrolTester $,
-      ) async {
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-          ),
-        );
+    patrolWidgetTest('Race and stage selected', (PatrolTester $) async {
+      when(() => databaseBloc.state).thenReturn(
+        DatabaseState(
+          races: [],
+          stages: [],
+          categories: [],
+          riders: [],
+          participants: [],
+          finishes: [],
+          numbersOnTrace: [],
+          race: race,
+          stage: stage,
+        ),
+      );
 
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(Localization.current.I18nInit_selectRace), findsNothing);
-        expect($(race.name), findsOneWidget);
-        expect($(Localization.current.I18nInit_selectStage), findsOneWidget);
-      });
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(Localization.current.I18nInit_selectRace), findsNothing);
+      expect($(race.name), findsOneWidget);
+      expect($(Localization.current.I18nInit_selectStage), findsNothing);
+      expect($(stage.name), findsOneWidget);
+    });
 
-      patrolWidgetTest('Race and stage selected', (
-        PatrolTester $,
-      ) async {
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-            stage: stage,
-          ),
-        );
-
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(Localization.current.I18nInit_selectRace), findsNothing);
-        expect($(race.name), findsOneWidget);
-        expect($(Localization.current.I18nInit_selectStage), findsNothing);
-        expect($(stage.name), findsOneWidget);
-      });
-
-      patrolWidgetTest('Tap import protocol', (
-        PatrolTester $,
-      ) async {
-        when(() => databaseBloc.state).thenReturn(
-          DatabaseState(
-            races: [],
-            stages: [],
-            categories: [],
-            riders: [],
-            participants: [],
-            finishes: [],
-            numbersOnTrace: [],
-            race: race,
-            stage: stage,
-          ),
-        );
-        await $.pumpWidgetAndSettle(testWidget());
-        await $(PopupMenuButton<RaceMenuButton>).tap();
-        await $(Localization.current.I18nInit_importFromCsv).tap();
-        verify(
-          () => databaseBloc.add(const DatabaseEvent.createRaceFromFile()),
-        ).called(1);
-      });
-    },
-  );
+    patrolWidgetTest('Tap import protocol', (PatrolTester $) async {
+      when(() => databaseBloc.state).thenReturn(
+        DatabaseState(
+          races: [],
+          stages: [],
+          categories: [],
+          riders: [],
+          participants: [],
+          finishes: [],
+          numbersOnTrace: [],
+          race: race,
+          stage: stage,
+        ),
+      );
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(PopupMenuButton<RaceMenuButton>).tap();
+      await $(Localization.current.I18nInit_importFromCsv).tap();
+      verify(() => databaseBloc.add(const DatabaseEvent.createRaceFromFile())).called(1);
+    });
+  });
 }

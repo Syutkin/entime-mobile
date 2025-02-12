@@ -30,8 +30,7 @@ class Release with _$Release {
     required String body,
   }) = _Release;
 
-  factory Release.fromJson(Map<String, dynamic> json) =>
-      _$ReleaseFromJson(json);
+  factory Release.fromJson(Map<String, dynamic> json) => _$ReleaseFromJson(json);
 }
 
 @freezed

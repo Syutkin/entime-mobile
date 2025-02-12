@@ -44,108 +44,100 @@ class _StartListPage extends State<StartListPage> {
   }
 
   Widget _startList(List<ParticipantAtStart> startList) => CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: SliverSubHeaderDelegate(
-              minHeight: 56,
-              maxHeight: 56,
-              child: _SliverStartSubHeader(),
-            ),
-          ),
-          BlocBuilder<SettingsCubit, AppSettings>(
-            buildWhen: (previous, current) =>
+    slivers: [
+      SliverPersistentHeader(
+        pinned: true,
+        delegate: SliverSubHeaderDelegate(minHeight: 56, maxHeight: 56, child: _SliverStartSubHeader()),
+      ),
+      BlocBuilder<SettingsCubit, AppSettings>(
+        buildWhen:
+            (previous, current) =>
                 previous.showDNS != current.showDNS ||
                 previous.showDNF != current.showDNF ||
                 previous.showDSQ != current.showDSQ,
-            builder: (context, state) {
-              final filteredList = filterStartList(
-                startList,
-                showDNS: state.showDNS,
-                showDNF: state.showDNF,
-                showDSQ: state.showDSQ,
-              );
-              return SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: filteredList.length,
-                  (context, index) {
-                    final item = filteredList[index];
-                    var isHighlighted = false;
-                    return BlocBuilder<CountdownBloc, CountdownState>(
-                      buildWhen: (previous, current) {
-                        final previousIsHighlighted =
-                            item.startTime == _activeStartTime(previous);
-                        isHighlighted =
-                            item.startTime == _activeStartTime(current);
-                        // Обновлять при сдвигании следующего старта (убирать подсветку)
-                        if (previousIsHighlighted && !isHighlighted) {
-                          return true;
-                        } else {
-                          // Обновлять только там, где есть обратный отсчёт
-                          return isHighlighted &&
-                              (previous.mapOrNull(
-                                    working: (state) => state.tick.text,
-                                  ) !=
-                                  current.mapOrNull(
-                                    working: (state) => state.tick.text,
-                                  ));
-                        }
-                      },
-                      builder: (context, countdownState) =>
-                          BlocBuilder<SettingsCubit, AppSettings>(
-                        buildWhen: (previous, current) =>
-                            previous.countdownAtStartTime !=
-                            current.countdownAtStartTime,
-                        builder: (context, settingsState) => StartItemTile(
-                          item: item,
-                          onTap: () async {
-                            await editStartTime(context, item);
-                          },
-                          onTapDown: _storePosition,
-                          onLongPress: () async {
-                            await _startTilePopup(item);
-                          },
-
-                          /// Set DNS on dismissed
-                          onDismissed: (direction) {
-                            BlocProvider.of<DatabaseBloc>(context).add(
-                              DatabaseEvent.setStatusForStartId(
-                                startId: item.startId,
-                                status: ParticipantStatus.dns,
-                              ),
-                            );
-                          },
-                          isHighlighted: isHighlighted,
-                          countdown: settingsState.countdownAtStartTime &&
-                                  isHighlighted
-                              ? _countdownFromState(countdownState)
-                              : null,
-                        ),
-                      ),
-                    );
+        builder: (context, state) {
+          final filteredList = filterStartList(
+            startList,
+            showDNS: state.showDNS,
+            showDNF: state.showDNF,
+            showDSQ: state.showDSQ,
+          );
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: filteredList.length,
+              (context, index) {
+                final item = filteredList[index];
+                var isHighlighted = false;
+                return BlocBuilder<CountdownBloc, CountdownState>(
+                  buildWhen: (previous, current) {
+                    final previousIsHighlighted = item.startTime == _activeStartTime(previous);
+                    isHighlighted = item.startTime == _activeStartTime(current);
+                    // Обновлять при сдвигании следующего старта (убирать подсветку)
+                    if (previousIsHighlighted && !isHighlighted) {
+                      return true;
+                    } else {
+                      // Обновлять только там, где есть обратный отсчёт
+                      return isHighlighted &&
+                          (previous.mapOrNull(working: (state) => state.tick.text) !=
+                              current.mapOrNull(working: (state) => state.tick.text));
+                    }
                   },
-                  // childCount: startList.length,
-                ),
-              );
-            },
-          ),
-        ],
-      );
+                  builder:
+                      (context, countdownState) => BlocBuilder<SettingsCubit, AppSettings>(
+                        buildWhen: (previous, current) => previous.countdownAtStartTime != current.countdownAtStartTime,
+                        builder:
+                            (context, settingsState) => StartItemTile(
+                              item: item,
+                              onTap: () async {
+                                await editStartTime(context, item);
+                              },
+                              onTapDown: _storePosition,
+                              onLongPress: () async {
+                                await _startTilePopup(item);
+                              },
+
+                              /// Set DNS on dismissed
+                              onDismissed: (direction) {
+                                BlocProvider.of<DatabaseBloc>(context).add(
+                                  DatabaseEvent.setStatusForStartId(
+                                    startId: item.startId,
+                                    status: ParticipantStatus.dns,
+                                  ),
+                                );
+                              },
+                              isHighlighted: isHighlighted,
+                              countdown:
+                                  settingsState.countdownAtStartTime && isHighlighted
+                                      ? _countdownFromState(countdownState)
+                                      : null,
+                            ),
+                      ),
+                );
+              },
+              // childCount: startList.length,
+            ),
+          );
+        },
+      ),
+    ],
+  );
 
   Widget _showCountdown() => BlocBuilder<SettingsCubit, AppSettings>(
-        //ребилдим, только если изменяются настройки, касаемые обратного отсчёта в круге
-        buildWhen: (previous, current) =>
+    //ребилдим, только если изменяются настройки, касаемые обратного отсчёта в круге
+    buildWhen:
+        (previous, current) =>
             previous.countdown != current.countdown ||
             previous.countdownTop != current.countdownTop ||
             previous.countdownLeft != current.countdownLeft ||
             previous.countdownSize != current.countdownSize,
-        builder: (context, settingsState) {
-          if (settingsState.countdown) {
-            return Positioned(
-              left: settingsState.countdownLeft,
-              top: settingsState.countdownTop,
-              child: BlocBuilder<CountdownBloc, CountdownState>(
-                builder: (context, state) => state.maybeMap(
+    builder: (context, settingsState) {
+      if (settingsState.countdown) {
+        return Positioned(
+          left: settingsState.countdownLeft,
+          top: settingsState.countdownTop,
+          child: BlocBuilder<CountdownBloc, CountdownState>(
+            builder:
+                (context, state) => state.maybeMap(
                   working: (state) {
                     final countdownWidget = CountdownWidget(
                       key: _countdownKey,
@@ -160,10 +152,7 @@ class _StartListPage extends State<StartListPage> {
                     );
                   },
                   orElse: () {
-                    final countdownWidget = CountdownWidget(
-                      key: _countdownKey,
-                      size: settingsState.countdownSize,
-                    );
+                    final countdownWidget = CountdownWidget(key: _countdownKey, size: settingsState.countdownSize);
                     return Draggable(
                       feedback: countdownWidget,
                       childWhenDragging: const SizedBox.shrink(),
@@ -172,13 +161,13 @@ class _StartListPage extends State<StartListPage> {
                     );
                   },
                 ),
-              ),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
-        },
-      );
+          ),
+        );
+      } else {
+        return const SizedBox.shrink();
+      }
+    },
+  );
 
   void _placeCountdownWidget(DraggableDetails dragDetails) {
     final stackRenderBox = _getRenderBox(_stackKey);
@@ -205,20 +194,13 @@ class _StartListPage extends State<StartListPage> {
 
       final settingsCubit = context.read<SettingsCubit>();
       final settings = settingsCubit.state;
-      settingsCubit.update(
-        settings.copyWith(countdownLeft: dx, countdownTop: dy),
-      );
+      settingsCubit.update(settings.copyWith(countdownLeft: dx, countdownTop: dy));
     }
   }
 
-  RenderBox? _getRenderBox(GlobalKey key) =>
-      key.currentContext!.findRenderObject() as RenderBox?;
+  RenderBox? _getRenderBox(GlobalKey key) => key.currentContext!.findRenderObject() as RenderBox?;
 
-  Future<void> _addManualStartTime(
-    DatabaseBloc bloc,
-    DateTime now,
-    int offset,
-  ) async {
+  Future<void> _addManualStartTime(DatabaseBloc bloc, DateTime now, int offset) async {
     final stageId = bloc.state.stage?.id;
     if (stageId != null) {
       final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
@@ -233,12 +215,9 @@ class _StartListPage extends State<StartListPage> {
     }
   }
 
-  String? _activeStartTime(CountdownState countdownState) =>
-      countdownState.whenOrNull(
-        working: (tick) => tick.nextStartTime != null
-            ? DateFormat(shortTimeFormat).format(tick.nextStartTime!)
-            : '',
-      );
+  String? _activeStartTime(CountdownState countdownState) => countdownState.whenOrNull(
+    working: (tick) => tick.nextStartTime != null ? DateFormat(shortTimeFormat).format(tick.nextStartTime!) : '',
+  );
 
   String? _countdownFromState(CountdownState countdownState) =>
       countdownState.mapOrNull(working: (state) => state.tick.text);
@@ -255,8 +234,7 @@ class _StartListPage extends State<StartListPage> {
             updateStartNumber: (notification) async {
               var text = '';
               for (final element in notification.existedStartingParticipants) {
-                if (element.automaticStartTime == null &&
-                    element.manualStartTime == null) {
+                if (element.automaticStartTime == null && element.manualStartTime == null) {
                   text += Localization.current.I18nHome_equalStartTime(
                     notification.startTime,
                     element.number,
@@ -264,14 +242,12 @@ class _StartListPage extends State<StartListPage> {
                   );
                 } else {
                   if (element.automaticStartTime != null) {
-                    text += Localization.current
-                        .I18nHome_updateAutomaticStartCorrection(
+                    text += Localization.current.I18nHome_updateAutomaticStartCorrection(
                       notification.number,
                       element.automaticStartTime!,
                     );
                   } else if (element.manualStartTime != null) {
-                    text += Localization.current
-                        .I18nHome_updateAutomaticStartCorrection(
+                    text += Localization.current.I18nHome_updateAutomaticStartCorrection(
                       notification.number,
                       element.manualStartTime!,
                     );
@@ -282,10 +258,7 @@ class _StartListPage extends State<StartListPage> {
                   }
                 }
               }
-              final update = await overwriteStartTimePopup(
-                context: context,
-                text: text,
-              );
+              final update = await overwriteStartTimePopup(context: context, text: text);
 
               if (update ?? false) {
                 final stage = state.stage;
@@ -309,15 +282,10 @@ class _StartListPage extends State<StartListPage> {
         builder: (context, state) {
           final databaseBloc = context.read<DatabaseBloc>();
           return Scaffold(
-            body: Stack(
-              key: _stackKey,
-              children: [_startList(state.participants), _showCountdown()],
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+            body: Stack(key: _stackKey, children: [_startList(state.participants), _showCountdown()]),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
             floatingActionButton: BlocBuilder<SettingsCubit, AppSettings>(
-              buildWhen: (previous, current) =>
-                  previous.startFab != current.startFab,
+              buildWhen: (previous, current) => previous.startFab != current.startFab,
               builder: (context, settingsState) {
                 if (settingsState.startFab) {
                   return SizedBox(
@@ -457,8 +425,7 @@ class _StartListPage extends State<StartListPage> {
         context: context,
         position: RelativeRect.fromRect(
           _tapPosition & const Size(60, 60), // smaller rect, the touch area
-          Offset.zero &
-              overlay.semanticBounds.size, // Bigger rect, the entire screen
+          Offset.zero & overlay.semanticBounds.size, // Bigger rect, the entire screen
         ),
       );
       if (result != null) {
@@ -470,8 +437,7 @@ class _StartListPage extends State<StartListPage> {
                 context: currentContext,
                 participantAtStart: item,
                 riders: currentContext.read<DatabaseBloc>().state.riders,
-                categories:
-                    currentContext.read<DatabaseBloc>().state.categories,
+                categories: currentContext.read<DatabaseBloc>().state.categories,
               );
             }
           case StartPopupMenu.shift:
@@ -484,20 +450,11 @@ class _StartListPage extends State<StartListPage> {
     }
   }
 
-  List<PopupMenuEntry<StartPopupMenu>> _getPopupMenu(
-    BuildContext context,
-    ParticipantAtStart item,
-  ) {
+  List<PopupMenuEntry<StartPopupMenu>> _getPopupMenu(BuildContext context, ParticipantAtStart item) {
     return <PopupMenuEntry<StartPopupMenu>>[
-      PopupMenuItem(
-        value: StartPopupMenu.edit,
-        child: Text(Localization.current.I18nCore_edit),
-      ),
+      PopupMenuItem(value: StartPopupMenu.edit, child: Text(Localization.current.I18nCore_edit)),
       const PopupMenuDivider(),
-      PopupMenuItem(
-        value: StartPopupMenu.shift,
-        child: Text(Localization.current.I18nStart_shiftStartsTime),
-      ),
+      PopupMenuItem(value: StartPopupMenu.shift, child: Text(Localization.current.I18nStart_shiftStartsTime)),
     ];
   }
 }
@@ -505,45 +462,33 @@ class _StartListPage extends State<StartListPage> {
 class _SliverStartSubHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
-        margin: const EdgeInsets.all(2),
-        color: Theme.of(context).colorScheme.surface,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            children: <Widget>[
-              Flexible(
-                flex: 20,
-                child: Align(
-                  child: Text(Localization.current.I18nStart_sliverNumber),
-                ),
-              ),
-              Flexible(
-                flex: 30,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(Localization.current.I18nStart_sliverStart),
-                ),
-              ),
-              Flexible(
-                flex: 25,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    Localization.current.I18nStart_sliverManualCorrection,
-                  ),
-                ),
-              ),
-              Flexible(
-                flex: 25,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    Localization.current.I18nStart_sliverAutomaticCorrection,
-                  ),
-                ),
-              ),
-            ],
+    margin: const EdgeInsets.all(2),
+    color: Theme.of(context).colorScheme.surface,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: <Widget>[
+          Flexible(flex: 20, child: Align(child: Text(Localization.current.I18nStart_sliverNumber))),
+          Flexible(
+            flex: 30,
+            child: Align(alignment: Alignment.centerLeft, child: Text(Localization.current.I18nStart_sliverStart)),
           ),
-        ),
-      );
+          Flexible(
+            flex: 25,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(Localization.current.I18nStart_sliverManualCorrection),
+            ),
+          ),
+          Flexible(
+            flex: 25,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(Localization.current.I18nStart_sliverAutomaticCorrection),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

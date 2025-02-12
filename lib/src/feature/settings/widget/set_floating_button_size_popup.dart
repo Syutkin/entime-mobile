@@ -1,10 +1,6 @@
 part of 'settings_popups.dart';
 
-Future<double?> setFloatingButtonSizePopup(
-  BuildContext context,
-  double value, {
-  String text = '',
-}) async {
+Future<double?> setFloatingButtonSizePopup(BuildContext context, double value, {String text = ''}) async {
   // text = 'Размер кнопки "+"';
   var newValue = value;
   return showDialog<double>(
@@ -21,9 +17,7 @@ Future<double?> setFloatingButtonSizePopup(
                       value: newValue,
                       min: 50,
                       max: 200,
-                      label: Localization.current.I18nSettings_pixelSize(
-                        newValue.round(),
-                      ),
+                      label: Localization.current.I18nSettings_pixelSize(newValue.round()),
                       divisions: 150,
                       onChanged: (value) {
                         setState(() => newValue = value);

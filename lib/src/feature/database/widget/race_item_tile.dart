@@ -12,24 +12,20 @@ class RaceItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = DateFormat.yMd(
-      Localizations.localeOf(context).languageCode,
-    );
+    final formatter = DateFormat.yMd(Localizations.localeOf(context).languageCode);
     return ListTile(
       title: Text(race.name),
-      subtitle: (race.startDate != null && race.finishDate != null)
-          ? Text(
-              '${formatter.format(DateTime.parse(race.startDate!))} - '
-              '${formatter.format(DateTime.parse(race.finishDate!))}',
-            )
-          : const SizedBox.shrink(),
+      subtitle:
+          (race.startDate != null && race.finishDate != null)
+              ? Text(
+                '${formatter.format(DateTime.parse(race.startDate!))} - '
+                '${formatter.format(DateTime.parse(race.finishDate!))}',
+              )
+              : const SizedBox.shrink(),
       onTap: () {
         context.read<DatabaseBloc>().add(DatabaseEvent.selectRace(race));
       },
-      trailing: PopupMenuButton<void>(
-        icon: const Icon(Icons.more_vert),
-        itemBuilder: _menuEntryList,
-      ),
+      trailing: PopupMenuButton<void>(icon: const Icon(Icons.more_vert), itemBuilder: _menuEntryList),
     );
   }
 
@@ -39,40 +35,24 @@ class RaceItemTile extends StatelessWidget {
         onTap: () {
           updateRacePopup(context, race);
         },
-        child: ListTile(
-          leading: const Icon(Icons.edit),
-          title: Text(Localization.current.I18nCore_edit),
-        ),
+        child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
       ),
       PopupMenuItem<void>(
         onTap: () async {
-          context.read<DatabaseBloc>().add(
-                DatabaseEvent.createStagesFromFile(
-                  raceId: race.id,
-                ),
-              );
+          context.read<DatabaseBloc>().add(DatabaseEvent.createStagesFromFile(raceId: race.id));
         },
-        child: ListTile(
-          leading: const Icon(Icons.add),
-          title: Text(Localization.current.I18nHome_importStagesCsv),
-        ),
+        child: ListTile(leading: const Icon(Icons.add), title: Text(Localization.current.I18nHome_importStagesCsv)),
       ),
       const PopupMenuDivider(),
       PopupMenuItem<void>(
         onTap: () async {
           final bloc = context.read<DatabaseBloc>();
-          final deleteRace = await deleteRacePopup(
-            context: context,
-            raceName: race.name,
-          );
+          final deleteRace = await deleteRacePopup(context: context, raceName: race.name);
           if (deleteRace ?? false) {
             bloc.add(DatabaseEvent.deleteRace(race.id));
           }
         },
-        child: ListTile(
-          leading: const Icon(Icons.delete),
-          title: Text(Localization.current.I18nCore_delete),
-        ),
+        child: ListTile(leading: const Icon(Icons.delete), title: Text(Localization.current.I18nCore_delete)),
       ),
     ];
   }

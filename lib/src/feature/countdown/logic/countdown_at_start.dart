@@ -26,10 +26,7 @@ class CountdownAtStart {
 
   Future<void> start(int stageId) async {
     //subscribe to changes at starts table
-    database
-        .getParticipantsAtStart(stageId: stageId)
-        .watch()
-        .listen((event) async {
+    database.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
       _isFinished = false;
       _nextStartingParticipant = await _getNextStartingParticipant(
         time: customTimeNow ?? DateTime.now(),
@@ -67,31 +64,15 @@ class CountdownAtStart {
     if (nextStartingParticipant != null) {
       final nextStartTime = nextStartingParticipant.startTime.toDateTime();
       if (nextStartTime != null) {
-        final text = _formatDuration(
-          nextStartTime.difference(now),
-        );
+        final text = _formatDuration(nextStartTime.difference(now));
         if (nextStartTime.isAfter(now)) {
           ticks.add(
-            Tick(
-              second: second,
-              text: text,
-              nextStartTime: nextStartTime,
-              number: nextStartingParticipant.number,
-            ),
+            Tick(second: second, text: text, nextStartTime: nextStartTime, number: nextStartingParticipant.number),
           );
         } else {
-          if (nextStartTime.isAfter(
-            now.subtract(
-              Duration(seconds: settingsProvider.settings.deltaInSeconds - 1),
-            ),
-          )) {
+          if (nextStartTime.isAfter(now.subtract(Duration(seconds: settingsProvider.settings.deltaInSeconds - 1)))) {
             ticks.add(
-              Tick(
-                second: second,
-                text: text,
-                nextStartTime: nextStartTime,
-                number: nextStartingParticipant.number,
-              ),
+              Tick(second: second, text: text, nextStartTime: nextStartTime, number: nextStartingParticipant.number),
             );
           } else {
             ticks.add(
@@ -109,10 +90,7 @@ class CountdownAtStart {
       }
     } else {
       if (!_isFinished) {
-        _nextStartingParticipant = await _getNextStartingParticipant(
-          time: now,
-          stageId: stageId,
-        );
+        _nextStartingParticipant = await _getNextStartingParticipant(time: now, stageId: stageId);
         final nextStartingParticipant = _nextStartingParticipant;
         if (nextStartingParticipant != null) {
           final nextStartTime = nextStartingParticipant.startTime.toDateTime();
@@ -134,16 +112,11 @@ class CountdownAtStart {
     }
   }
 
-  Future<NextStartingParticipant?> _getNextStartingParticipant({
-    required DateTime time,
-    required int stageId,
-  }) async {
-    final nextStart = await database
-        .getNextStartingParticipants(
-          stageId: stageId,
-          time: DateFormat(shortTimeFormat).format(time),
-        )
-        .get();
+  Future<NextStartingParticipant?> _getNextStartingParticipant({required DateTime time, required int stageId}) async {
+    final nextStart =
+        await database
+            .getNextStartingParticipants(stageId: stageId, time: DateFormat(shortTimeFormat).format(time))
+            .get();
     return nextStart.isNotEmpty ? nextStart.first : null;
   }
 

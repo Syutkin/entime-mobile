@@ -39,35 +39,26 @@ void main() async {
     settingsProvider: settings,
   );
   final flutterBluetoothSerial = FlutterBluetoothSerial.instance;
-  final IBluetoothBackgroundConnection bluetoothBackgroundConnection =
-      BluetoothBackgroundConnection();
+  final IBluetoothBackgroundConnection bluetoothBackgroundConnection = BluetoothBackgroundConnection();
   final IBluetoothProvider bluetoothProvider = BluetoothProvider(
     flutterBluetoothSerial: flutterBluetoothSerial,
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
-    final flutterTts = FlutterTts();
-    final pool =
-        await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
-    final ttsProvider = TtsProvider(flutterTts);
-    final beepProvider = AudioPoolProvider(pool);
+  final flutterTts = FlutterTts();
+  final pool = await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
+  final ttsProvider = TtsProvider(flutterTts);
+  final beepProvider = AudioPoolProvider(pool);
 
-  final audioProvider =
-      AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
+  final audioProvider = AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
   final audioService = AudioService(settings: settings, audio: audioProvider);
-  final audioController = AudioController(
-    audioService: audioService,
-    database: database,
-    settingsProvider: settings,
-  );
+  final audioController = AudioController(audioService: audioService, database: database, settingsProvider: settings);
   final countdown = CountdownAtStart(database: database, settingsProvider: settings);
 
   final INtpProvider ntpProvider = NtpProvider();
 
   final connectivity = Connectivity();
-  final IConnectivityProvider connectivityProvider = ConnectivityProvider.init(
-    connectivity,
-  );
+  final IConnectivityProvider connectivityProvider = ConnectivityProvider.init(connectivity);
 
   testWidgets('Smoke test', (tester) async {
     await tester.pumpWidget(

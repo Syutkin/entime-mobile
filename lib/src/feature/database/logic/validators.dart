@@ -15,10 +15,7 @@ String? validateName(String? name) {
   if (name.isNullOrEmpty) {
     return Localization.current.I18nStart_emptyName;
   }
-  if (RegExp(
-    r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$',
-    caseSensitive: false,
-  ).hasMatch(name!)) {
+  if (RegExp(r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$', caseSensitive: false).hasMatch(name!)) {
     return null;
   }
   return Localization.current.I18nStart_incorrectName;
@@ -28,10 +25,7 @@ String? validateNickname(String? nickname) {
   if (nickname.isNullOrEmpty) {
     return null;
   }
-  if (RegExp(
-    r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$',
-    caseSensitive: false,
-  ).hasMatch(nickname!)) {
+  if (RegExp(r'^[ a-zA-Zа-яёА-ЯЁ0-9._-]+$', caseSensitive: false).hasMatch(nickname!)) {
     return null;
   }
   return Localization.current.I18nStart_incorrectNickname;
@@ -67,10 +61,7 @@ String? validateCity(String? city) {
   if (city.isNullOrEmpty) {
     return null;
   }
-  if (RegExp(
-    r'^[ a-zA-Zа-яёА-ЯЁ0-9_-]+$',
-    caseSensitive: false,
-  ).hasMatch(city!)) {
+  if (RegExp(r'^[ a-zA-Zа-яёА-ЯЁ0-9_-]+$', caseSensitive: false).hasMatch(city!)) {
     return null;
   }
   return Localization.current.I18nStart_incorrectCity;

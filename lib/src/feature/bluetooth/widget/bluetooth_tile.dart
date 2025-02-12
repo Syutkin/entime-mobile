@@ -24,19 +24,14 @@ class BluetoothTile extends StatelessWidget {
             onTap: () => selectBluetoothDevice(context),
             leading: const BluetoothButton(),
             title: state.maybeMap(
-              notAvailable:
-                  (_) => Text(
-                    Localization.current.I18nBluetooth_bluetoothNotAvailable,
-                  ),
+              notAvailable: (_) => Text(Localization.current.I18nBluetooth_bluetoothNotAvailable),
               orElse: () => Text(Localization.current.I18nInit_bluetoothModule),
             ),
             subtitle: state.maybeMap(
               notAvailable: (_) => null,
               orElse:
                   () => Text(
-                    BlocProvider.of<BluetoothBloc>(
-                          context,
-                        ).bluetoothDevice?.name ??
+                    BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
                         Localization.current.I18nInit_pressToSelect,
                   ),
             ),
@@ -77,13 +72,7 @@ class BluetoothTile extends StatelessWidget {
   );
 
   void _moduleSettings(BuildContext context) {
-    BlocProvider.of<BluetoothBloc>(
-      context,
-    ).add(const BluetoothEvent.sendMessage(message: '{"Read": true}'));
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (context) => const ModuleSettingsInitScreen(),
-      ),
-    );
+    BlocProvider.of<BluetoothBloc>(context).add(const BluetoothEvent.sendMessage(message: '{"Read": true}'));
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
   }
 }

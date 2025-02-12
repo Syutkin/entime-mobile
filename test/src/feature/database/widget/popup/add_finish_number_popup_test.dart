@@ -8,8 +8,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
-    implements DatabaseBloc {}
+class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
 void main() {
   late DatabaseBloc databaseBloc;
@@ -32,10 +31,7 @@ void main() {
                 onPressed: () {
                   addFinishNumberPopup(context, finish);
                 },
-                child: const Text(
-                  'textButton',
-                  key: Key('button'),
-                ),
+                child: const Text('textButton', key: Key('button')),
               );
             },
           ),
@@ -61,13 +57,7 @@ void main() {
       isHidden: false,
       isManual: false,
     );
-    stage = const Stage(
-      id: 1,
-      raceId: 1,
-      name: 'Stage name',
-      isActive: true,
-      isDeleted: false,
-    );
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
 
     when(() => databaseBloc.state).thenReturn(
       DatabaseState(
@@ -83,108 +73,71 @@ void main() {
     );
   });
 
-  group(
-    'addFinishNumberPopup tests',
-    () {
-      patrolWidgetTest(
-        'Show nothing when stage is null',
-        (PatrolTester $) async {
-          when(() => databaseBloc.state).thenReturn(
-            const DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-            ),
-          );
-
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          expect($(Form), findsNothing);
-        },
+  group('addFinishNumberPopup tests', () {
+    patrolWidgetTest('Show nothing when stage is null', (PatrolTester $) async {
+      when(() => databaseBloc.state).thenReturn(
+        const DatabaseState(
+          races: [],
+          stages: [],
+          categories: [],
+          riders: [],
+          participants: [],
+          finishes: [],
+          numbersOnTrace: [],
+        ),
       );
 
-      patrolWidgetTest(
-        'Show dialog if stage not null',
-        (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          expect($(Form), findsOneWidget);
-        },
-      );
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      expect($(Form), findsNothing);
+    });
 
-      patrolWidgetTest(
-        'Enter new number and add it to finish then close dialog',
-        (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          await $(TextFormField).enterText('$number');
-          await $(#okButton).tap();
-          verify(
-            () => databaseBloc.add(
-              DatabaseEvent.addNumberToFinish(
-                finishId: 1,
-                number: number,
-                finishTime: finishTime,
-                stage: stage,
-              ),
-            ),
-          ).called(1);
-          expect($(Form), findsNothing);
-        },
-      );
+    patrolWidgetTest('Show dialog if stage not null', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      expect($(Form), findsOneWidget);
+    });
 
-      patrolWidgetTest(
-        'Enter new number then press cancel button',
-        (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          await $(TextFormField).enterText('$number');
-          await $(#cancelButton).tap();
-          verifyNever(
-            () => databaseBloc.add(any()),
-          );
-          expect($(Form), findsNothing);
-        },
-      );
+    patrolWidgetTest('Enter new number and add it to finish then close dialog', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      await $(TextFormField).enterText('$number');
+      await $(#okButton).tap();
+      verify(
+        () => databaseBloc.add(
+          DatabaseEvent.addNumberToFinish(finishId: 1, number: number, finishTime: finishTime, stage: stage),
+        ),
+      ).called(1);
+      expect($(Form), findsNothing);
+    });
 
-      patrolWidgetTest(
-        'Check number validator',
-        (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(#button).tap();
-          // Negative
-          await $(TextFormField).enterText('-1');
-          expect(
-            $(Localization.current.I18nProtocol_incorrectNumber),
-            findsOneWidget,
-          );
+    patrolWidgetTest('Enter new number then press cancel button', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      await $(TextFormField).enterText('$number');
+      await $(#cancelButton).tap();
+      verifyNever(() => databaseBloc.add(any()));
+      expect($(Form), findsNothing);
+    });
 
-          // Double
-          await $(TextFormField).enterText('10.0');
-          expect(
-            $(Localization.current.I18nProtocol_incorrectNumber),
-            findsOneWidget,
-          );
+    patrolWidgetTest('Check number validator', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+      // Negative
+      await $(TextFormField).enterText('-1');
+      expect($(Localization.current.I18nProtocol_incorrectNumber), findsOneWidget);
 
-          // Custom string
-          await $(TextFormField).enterText('aas');
-          expect(
-            $(Localization.current.I18nProtocol_incorrectNumber),
-            findsOneWidget,
-          );
+      // Double
+      await $(TextFormField).enterText('10.0');
+      expect($(Localization.current.I18nProtocol_incorrectNumber), findsOneWidget);
 
-          // Correct number
-          await $(TextFormField).enterText('1');
-          expect(
-            $(Localization.current.I18nProtocol_incorrectNumber),
-            findsNothing,
-          );
-        },
-      );
-    },
-  );
+      // Custom string
+      await $(TextFormField).enterText('aas');
+      expect($(Localization.current.I18nProtocol_incorrectNumber), findsOneWidget);
+
+      // Correct number
+      await $(TextFormField).enterText('1');
+      expect($(Localization.current.I18nProtocol_incorrectNumber), findsNothing);
+    });
+  });
 }

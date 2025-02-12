@@ -12,10 +12,7 @@ import '../model/start_item_csv.dart';
 import '../model/start_number_and_times_csv.dart';
 
 class StartlistProvider {
-  const StartlistProvider({
-    this.filepicker = pickFile,
-    this.decoder = decodeBytes,
-  });
+  const StartlistProvider({this.filepicker = pickFile, this.decoder = decodeBytes});
 
   final Future<PlatformFile?> Function() filepicker;
   final Future<String> Function(Uint8List bytes) decoder;
@@ -50,11 +47,7 @@ class StartlistProvider {
           startItems: riders,
         );
       } catch (e, st) {
-        logger.e(
-          'CSV -> Error while parsing starting list',
-          error: e,
-          stackTrace: st,
-        );
+        logger.e('CSV -> Error while parsing starting list', error: e, stackTrace: st);
         return null;
       }
     }
@@ -73,16 +66,9 @@ class StartlistProvider {
           stages.add(rider);
         }
 
-        return StagesCsv(
-          stageNames: stages.first.startTimes?.keys.toList() ?? [],
-          startItems: stages,
-        );
+        return StagesCsv(stageNames: stages.first.startTimes?.keys.toList() ?? [], startItems: stages);
       } catch (e, st) {
-        logger.e(
-          'CSV -> Error at parsing starting list',
-          error: e,
-          stackTrace: st,
-        );
+        logger.e('CSV -> Error at parsing starting list', error: e, stackTrace: st);
         return null;
       }
     }

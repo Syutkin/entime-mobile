@@ -10,8 +10,7 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockQueryRow extends Mock implements QueryRow {}
 
-class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
-    implements DatabaseBloc {}
+class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
 void main() {
   late DatabaseBloc databaseBloc;
@@ -25,10 +24,11 @@ void main() {
       supportedLocales: Localization.supportedLocales,
       home: Material(
         child: Builder(
-          builder: (context) => TextButton(
-            onPressed: () => shiftStartsTime(context: context, item: item),
-            child: const Text('TextButton'),
-          ),
+          builder:
+              (context) => TextButton(
+                onPressed: () => shiftStartsTime(context: context, item: item),
+                child: const Text('TextButton'),
+              ),
         ),
       ),
     );
@@ -38,10 +38,7 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: BlocProvider.value(
-        value: databaseBloc,
-        child: Material(child: ShiftStartsTimePopup(item: item)),
-      ),
+      home: BlocProvider.value(value: databaseBloc, child: Material(child: ShiftStartsTimePopup(item: item))),
     );
   }
 
@@ -70,36 +67,18 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget(item));
 
       expect($(Localization.current.I18nCore_warning), findsNothing);
-      expect(
-        $(
-          Localization.current.I18nStart_shiftStartsTimeFromNumber(
-            number,
-            startTime,
-          ),
-        ),
-        findsNothing,
-      );
+      expect($(Localization.current.I18nStart_shiftStartsTimeFromNumber(number, startTime)), findsNothing);
       expect($(Localization.current.I18nStart_shiftMinutes), findsNothing);
 
       await $(TextButton).tap();
       await $.pumpAndSettle();
 
       expect($(Localization.current.I18nCore_warning), findsOneWidget);
-      expect(
-        $(
-          Localization.current.I18nStart_shiftStartsTimeFromNumber(
-            number,
-            startTime,
-          ),
-        ),
-        findsOneWidget,
-      );
+      expect($(Localization.current.I18nStart_shiftStartsTimeFromNumber(number, startTime)), findsOneWidget);
       expect($(Localization.current.I18nStart_shiftMinutes), findsOneWidget);
     });
 
-    patrolWidgetTest('Do not call bloc event, when shist is empty', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Do not call bloc event, when shist is empty', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testWidget(item));
       await $(TextButton).tap();
       await $.pumpAndSettle();
@@ -109,68 +88,32 @@ void main() {
       await $.pumpAndSettle();
 
       expect($(Localization.current.I18nCore_warning), findsNothing);
-      expect(
-        $(
-          Localization.current.I18nStart_shiftStartsTimeFromNumber(
-            number,
-            startTime,
-          ),
-        ),
-        findsNothing,
-      );
+      expect($(Localization.current.I18nStart_shiftStartsTimeFromNumber(number, startTime)), findsNothing);
       expect($(Localization.current.I18nStart_shiftMinutes), findsNothing);
     });
 
-    patrolWidgetTest('Do not call bloc event, when shift is empty', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Do not call bloc event, when shift is empty', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testWidget(item));
       await $(TextButton).tap();
       await $.pumpAndSettle();
 
       expect($(Localization.current.I18nCore_warning), findsOneWidget);
-      expect(
-        $(
-          Localization.current.I18nStart_shiftStartsTimeFromNumber(
-            number,
-            startTime,
-          ),
-        ),
-        findsOneWidget,
-      );
+      expect($(Localization.current.I18nStart_shiftStartsTimeFromNumber(number, startTime)), findsOneWidget);
       expect($(Localization.current.I18nStart_shiftMinutes), findsOneWidget);
 
       await $(#cancelButton).tap();
       await $.pumpAndSettle();
 
       expect($(Localization.current.I18nCore_warning), findsNothing);
-      expect(
-        $(
-          Localization.current.I18nStart_shiftStartsTimeFromNumber(
-            number,
-            startTime,
-          ),
-        ),
-        findsNothing,
-      );
+      expect($(Localization.current.I18nStart_shiftStartsTimeFromNumber(number, startTime)), findsNothing);
       expect($(Localization.current.I18nStart_shiftMinutes), findsNothing);
     });
 
-    patrolWidgetTest('Call bloc event on correct shift', (
-      PatrolTester $,
-    ) async {
+    patrolWidgetTest('Call bloc event on correct shift', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testShiftStartsTimePopup(item));
 
       expect($(Localization.current.I18nCore_warning), findsOneWidget);
-      expect(
-        $(
-          Localization.current.I18nStart_shiftStartsTimeFromNumber(
-            number,
-            startTime,
-          ),
-        ),
-        findsOneWidget,
-      );
+      expect($(Localization.current.I18nStart_shiftStartsTimeFromNumber(number, startTime)), findsOneWidget);
       expect($(Localization.current.I18nStart_shiftMinutes), findsOneWidget);
 
       await $(TextFormField).enterText('100');
@@ -178,25 +121,11 @@ void main() {
       await $.pumpAndSettle();
 
       expect($(Localization.current.I18nCore_warning), findsNothing);
-      expect(
-        $(
-          Localization.current.I18nStart_shiftStartsTimeFromNumber(
-            number,
-            startTime,
-          ),
-        ),
-        findsNothing,
-      );
+      expect($(Localization.current.I18nStart_shiftStartsTimeFromNumber(number, startTime)), findsNothing);
 
       expect($(Localization.current.I18nStart_shiftMinutes), findsNothing);
       verify(
-        () => databaseBloc.add(
-          DatabaseEvent.shiftStartsTime(
-            stageId: 1,
-            minutes: 100,
-            fromTime: startTime,
-          ),
-        ),
+        () => databaseBloc.add(DatabaseEvent.shiftStartsTime(stageId: 1, minutes: 100, fromTime: startTime)),
       ).called(1);
     });
   });

@@ -8,19 +8,12 @@ Future<void> editRiderPopup({
 }) async {
   return showDialog<void>(
     context: context,
-    builder:
-        (BuildContext context) =>
-            EditRiderPopup(rider: rider, teams: teams, cities: cities),
+    builder: (BuildContext context) => EditRiderPopup(rider: rider, teams: teams, cities: cities),
   );
 }
 
 class EditRiderPopup extends StatefulWidget {
-  const EditRiderPopup({
-    required this.rider,
-    required this.teams,
-    required this.cities,
-    super.key,
-  });
+  const EditRiderPopup({required this.rider, required this.teams, required this.cities, super.key});
 
   final Rider rider;
   final List<String?> teams;
@@ -70,26 +63,20 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
           children: <Widget>[
             TextFormField(
               controller: nameController,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_name,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_name),
               validator: validateName,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
             TextFormField(
               controller: nicknameController,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_nickname,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_nickname),
               validator: validateNickname,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
             TextFormField(
               controller: birthdayController,
               keyboardType: TextInputType.datetime,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_birthday,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_birthday),
               validator: validateBirthday,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
@@ -101,9 +88,7 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
               items: (f, cs) => widget.teams,
               compareFn: (item1, item2) => item1 == item2,
               decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-                  labelText: Localization.current.I18nDatabase_team,
-                ),
+                decoration: InputDecoration(labelText: Localization.current.I18nDatabase_team),
               ),
               popupProps: PopupProps.menu(
                 showSearchBox: true,
@@ -133,9 +118,7 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
               items: (f, cs) => widget.cities,
               compareFn: (item1, item2) => item1 == item2,
               decoratorProps: DropDownDecoratorProps(
-                decoration: InputDecoration(
-                  labelText: Localization.current.I18nDatabase_city,
-                ),
+                decoration: InputDecoration(labelText: Localization.current.I18nDatabase_city),
               ),
               validator: validateCity,
               autoValidateMode: AutovalidateMode.always,
@@ -161,9 +144,7 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
             TextFormField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_email,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_email),
               validator: validateEmail,
               autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
@@ -171,9 +152,7 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
             TextFormField(
               controller: phoneController,
               keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_phone,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_phone),
               // validator: validatePhone,
               // autovalidateMode: AutovalidateMode.onUserInteraction,
               // inputFormatters: phoneFormatter,
@@ -181,9 +160,7 @@ class _EditRiderPopupState extends State<EditRiderPopup> {
             TextFormField(
               controller: commentController,
               keyboardType: TextInputType.multiline,
-              decoration: InputDecoration(
-                labelText: Localization.current.I18nDatabase_comment,
-              ),
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_comment),
               maxLines: null,
             ),
           ],

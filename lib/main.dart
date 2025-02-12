@@ -62,22 +62,15 @@ Future<void> main() async {
   );
 
   final flutterTts = FlutterTts();
-  final pool =
-      await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
+  final pool = await AudioPool.createFromAsset(path: 'beeps.mp3', maxPlayers: 2);
   final ttsProvider = TtsProvider(flutterTts);
   final beepProvider = AudioPoolProvider(pool);
 
-  final audioProvider =
-      AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
+  final audioProvider = AudioProvider(ttsProvider: ttsProvider, beepProvider: beepProvider);
   final audioService = AudioService(settings: settings, audio: audioProvider);
-  final audioController = AudioController(
-    audioService: audioService,
-    database: database,
-    settingsProvider: settings,
-  );
+  final audioController = AudioController(audioService: audioService, database: database, settingsProvider: settings);
 
-  final countdown =
-      CountdownAtStart(database: database, settingsProvider: settings);
+  final countdown = CountdownAtStart(database: database, settingsProvider: settings);
 
   final ntpProvider = NtpProvider();
 
@@ -99,12 +92,9 @@ Future<void> main() async {
 
   if (kReleaseMode) {
     try {
-      await SentryFlutter.init(
-        (options) async {
-          options.tracesSampleRate = 1.0;
-        },
-        appRunner: () => runApp(app),
-      );
+      await SentryFlutter.init((options) async {
+        options.tracesSampleRate = 1.0;
+      }, appRunner: () => runApp(app));
     } catch (e) {
       logger.e('SentryFlutter error', error: e);
       runApp(app);
@@ -144,60 +134,47 @@ class EntimeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
-        providers: [
-          BlocProvider<TabCubit>(create: (context) => TabCubit()),
-          BlocProvider<SettingsCubit>(
-            create: (context) => SettingsCubit(settingsProvider),
-          ),
-          BlocProvider<ModuleSettingsBloc>(
-            create: (context) => ModuleSettingsBloc(),
-          ),
-          BlocProvider<LogBloc>(
-            create: (context) =>
-                LogBloc(settingsProvider: settingsProvider, database: database),
-          ),
-          BlocProvider<DatabaseBloc>(
-            create: (context) => DatabaseBloc(
-              database: database,
-              settingsProvider: settingsProvider,
-            )..add(const DatabaseEvent.initialize()),
-          ),
-          BlocProvider<TrailsBloc>(
-            create: (context) => TrailsBloc(database: database),
-          ),
-          BlocProvider<audio_bloc.AudioBloc>(
-            create: (context) => audio_bloc.AudioBloc(ttsProvider: ttsProvider)
-              ..add(const audio_bloc.AudioEvent.init()),
-          ),
-          BlocProvider<CountdownBloc>(
-            create: (context) => CountdownBloc(
+    providers: [
+      BlocProvider<TabCubit>(create: (context) => TabCubit()),
+      BlocProvider<SettingsCubit>(create: (context) => SettingsCubit(settingsProvider)),
+      BlocProvider<ModuleSettingsBloc>(create: (context) => ModuleSettingsBloc()),
+      BlocProvider<LogBloc>(create: (context) => LogBloc(settingsProvider: settingsProvider, database: database)),
+      BlocProvider<DatabaseBloc>(
+        create:
+            (context) =>
+                DatabaseBloc(database: database, settingsProvider: settingsProvider)
+                  ..add(const DatabaseEvent.initialize()),
+      ),
+      BlocProvider<TrailsBloc>(create: (context) => TrailsBloc(database: database)),
+      BlocProvider<audio_bloc.AudioBloc>(
+        create: (context) => audio_bloc.AudioBloc(ttsProvider: ttsProvider)..add(const audio_bloc.AudioEvent.init()),
+      ),
+      BlocProvider<CountdownBloc>(
+        create:
+            (context) => CountdownBloc(
               audioController: audioController,
               countdown: countdown,
               stageId: settingsProvider.settings.stageId,
             ),
-          ),
-          BlocProvider<BluetoothBloc>(
-            create: (context) => BluetoothBloc(
+      ),
+      BlocProvider<BluetoothBloc>(
+        create:
+            (context) => BluetoothBloc(
               audioController: audioController,
               bluetoothProvider: bluetoothProvider,
               settingsProvider: settingsProvider,
               database: database,
             )..add(const BluetoothEvent.initialize()),
-          ),
-          BlocProvider<UpdateBloc>(
-            create: (context) => UpdateBloc(updateProvider: updateProvider)
-              ..add(const UpdateEvent.popupChangelog()),
-          ),
-          BlocProvider<AppInfoCubit>(
-            create: (context) => AppInfoCubit(appInfo: appInfo),
-          ),
-          BlocProvider<NtpBloc>(create: (context) => NtpBloc(ntpProvider)),
-          BlocProvider<ConnectivityBloc>(
-            create: (context) => ConnectivityBloc(connectivityProvider),
-          ),
-        ],
-        child: const EntimeAppView(),
-      );
+      ),
+      BlocProvider<UpdateBloc>(
+        create: (context) => UpdateBloc(updateProvider: updateProvider)..add(const UpdateEvent.popupChangelog()),
+      ),
+      BlocProvider<AppInfoCubit>(create: (context) => AppInfoCubit(appInfo: appInfo)),
+      BlocProvider<NtpBloc>(create: (context) => NtpBloc(ntpProvider)),
+      BlocProvider<ConnectivityBloc>(create: (context) => ConnectivityBloc(connectivityProvider)),
+    ],
+    child: const EntimeAppView(),
+  );
 }
 
 class EntimeAppView extends StatelessWidget {
@@ -216,35 +193,37 @@ class EntimeAppView extends StatelessWidget {
     final isTest = Platform.environment.containsKey('FLUTTER_TEST');
 
     return BlocBuilder<SettingsCubit, AppSettings>(
-      buildWhen: (previousState, state) =>
-          previousState.seedColor != state.seedColor ||
-          previousState.brightness != state.brightness ||
-          previousState.contrastLevel != state.contrastLevel ||
-          previousState.dynamicSchemeVariant != state.dynamicSchemeVariant ||
-          previousState.language != state.language ||
-          previousState.isOLEDBackground != state.isOLEDBackground,
-      builder: (context, state) => MaterialApp(
-        theme: appThemeData(
-          seedColor: state.seedColor,
-          brightness: state.brightness,
-          contrastLevel: state.contrastLevel,
-          dynamicSchemeVariant: state.dynamicSchemeVariant,
-          isOLEDBackground: state.isOLEDBackground,
-        ),
-        title: pubspec.name,
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          Localization.delegate,
-        ],
-        supportedLocales: Localization.supportedLocales,
-        //1. call BotToastInit
-        builder: BotToastInit(),
-        //2. registered route observer
-        navigatorObservers: [BotToastNavigatorObserver()],
-        home: isTest ? const SizedBox.shrink() : const HomeScreen(),
-      ),
+      buildWhen:
+          (previousState, state) =>
+              previousState.seedColor != state.seedColor ||
+              previousState.brightness != state.brightness ||
+              previousState.contrastLevel != state.contrastLevel ||
+              previousState.dynamicSchemeVariant != state.dynamicSchemeVariant ||
+              previousState.language != state.language ||
+              previousState.isOLEDBackground != state.isOLEDBackground,
+      builder:
+          (context, state) => MaterialApp(
+            theme: appThemeData(
+              seedColor: state.seedColor,
+              brightness: state.brightness,
+              contrastLevel: state.contrastLevel,
+              dynamicSchemeVariant: state.dynamicSchemeVariant,
+              isOLEDBackground: state.isOLEDBackground,
+            ),
+            title: pubspec.name,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              Localization.delegate,
+            ],
+            supportedLocales: Localization.supportedLocales,
+            //1. call BotToastInit
+            builder: BotToastInit(),
+            //2. registered route observer
+            navigatorObservers: [BotToastNavigatorObserver()],
+            home: isTest ? const SizedBox.shrink() : const HomeScreen(),
+          ),
     );
   }
 }

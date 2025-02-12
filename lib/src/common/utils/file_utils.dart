@@ -7,10 +7,7 @@ import '../logger/logger.dart';
 
 /// Save csv to file
 Future<File?> saveToFile(String content, String filename, [String extension = 'csv']) async {
-  final directory =
-      Platform.isAndroid
-          ? await getExternalStorageDirectory()
-          : await getApplicationDocumentsDirectory();
+  final directory = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
   if (directory == null) {
     return null;
   }
@@ -20,14 +17,14 @@ Future<File?> saveToFile(String content, String filename, [String extension = 'c
   return file;
 }
 
-
 /// Pick file from filesystem
 Future<PlatformFile?> pickFile([List<String> extensions = const ['csv']]) async {
-  final file = (await FilePicker.platform.pickFiles(
-    type: FileType.custom,
-    allowedExtensions: extensions,
-    withData: true,
-  ))?.files.first;
+  final file =
+      (await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: extensions,
+        withData: true,
+      ))?.files.first;
 
   if (file == null || file.bytes == null) {
     return null;

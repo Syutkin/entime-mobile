@@ -22,8 +22,7 @@ class StartItemCsv with _$StartItemCsv {
     Map<String, String>? startTimes,
   }) = _StartItemCsv;
 
-  factory StartItemCsv.fromJson(Map<String, dynamic> cvs) =>
-      _$StartItemCsvFromJson(cvs);
+  factory StartItemCsv.fromJson(Map<String, dynamic> cvs) => _$StartItemCsvFromJson(cvs);
 
   factory StartItemCsv.fromMap(Map<String, dynamic> map) {
     String? category;

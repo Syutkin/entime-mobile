@@ -25,8 +25,7 @@ String filesize(int size, [int round = 2]) {
     return '${(size / (divider * divider)).toStringAsFixed(round)} MB';
   }
 
-  if (size < divider * divider * divider * divider &&
-      size % (divider * divider * divider) == 0) {
+  if (size < divider * divider * divider * divider && size % (divider * divider * divider) == 0) {
     return '${(size / (divider * divider * divider)).toStringAsFixed(0)} GB';
   }
 
@@ -34,8 +33,7 @@ String filesize(int size, [int round = 2]) {
     return '${(size / (divider * divider * divider)).toStringAsFixed(round)} GB';
   }
 
-  if (size < divider * divider * divider * divider * divider &&
-      size % (divider * divider * divider * divider) == 0) {
+  if (size < divider * divider * divider * divider * divider && size % (divider * divider * divider * divider) == 0) {
     return '${(size / (divider * divider * divider * divider)).toStringAsFixed(0)} TB';
   }
 

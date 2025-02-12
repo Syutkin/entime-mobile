@@ -18,8 +18,7 @@ void main() {
   late AppSettings defaults;
 
   setUp(() async {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMessageHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
       (obj) async => obj,
     );
@@ -28,45 +27,27 @@ void main() {
     settingsProvider = MockSettingsProvider();
     audioProvider = MockAudioProvider();
 
-    when(
-      () => audioProvider.setLanguage(any()),
-    ).thenAnswer((_) => Future.value(''));
-    when(
-      () => audioProvider.setVolume(any()),
-    ).thenAnswer((_) => Future.value(''));
-    when(
-      () => audioProvider.setSpeechRate(any()),
-    ).thenAnswer((_) => Future.value(''));
-    when(
-      () => audioProvider.setPitch(any()),
-    ).thenAnswer((_) => Future.value(''));
+    when(() => audioProvider.setLanguage(any())).thenAnswer((_) => Future.value(''));
+    when(() => audioProvider.setVolume(any())).thenAnswer((_) => Future.value(''));
+    when(() => audioProvider.setSpeechRate(any())).thenAnswer((_) => Future.value(''));
+    when(() => audioProvider.setPitch(any())).thenAnswer((_) => Future.value(''));
     when(() => audioProvider.speak(any())).thenAnswer((_) => Future.value());
     when(() => audioProvider.beep()).thenAnswer((_) => Future.value());
   });
 
   group('AudioService tests', () {
     test('Call speak when sound enabled', () async {
-      when(
-        () => settingsProvider.state,
-      ).thenAnswer((_) => BehaviorSubject.seeded(defaults));
-      audioService = AudioService(
-        settings: settingsProvider,
-        audio: audioProvider,
-      );
+      when(() => settingsProvider.state).thenAnswer((_) => BehaviorSubject.seeded(defaults));
+      audioService = AudioService(settings: settingsProvider, audio: audioProvider);
 
       expect(await audioService.speak('fgh'), true);
     });
 
     test('Do not call speak when sound disabled', () async {
       settings = defaults.copyWith(sound: false);
-      when(
-        () => settingsProvider.state,
-      ).thenAnswer((_) => BehaviorSubject.seeded(settings));
+      when(() => settingsProvider.state).thenAnswer((_) => BehaviorSubject.seeded(settings));
 
-      audioService = AudioService(
-        settings: settingsProvider,
-        audio: audioProvider,
-      );
+      audioService = AudioService(settings: settingsProvider, audio: audioProvider);
       // wait for settings change
       await Future<void>.delayed(Duration.zero);
       expect(await audioService.speak('fgh'), false);
@@ -74,14 +55,9 @@ void main() {
 
     test('Do not call speak when voice disabled', () async {
       settings = defaults.copyWith(voice: false);
-      when(
-        () => settingsProvider.state,
-      ).thenAnswer((_) => BehaviorSubject.seeded(settings));
+      when(() => settingsProvider.state).thenAnswer((_) => BehaviorSubject.seeded(settings));
 
-      audioService = AudioService(
-        settings: settingsProvider,
-        audio: audioProvider,
-      );
+      audioService = AudioService(settings: settingsProvider, audio: audioProvider);
       // wait for settings change
       await Future<void>.delayed(Duration.zero);
       expect(await audioService.speak('fgh'), false);
@@ -93,14 +69,9 @@ void main() {
 
     test('Do not call countdown when sound disabled', () async {
       settings = defaults.copyWith(sound: false);
-      when(
-        () => settingsProvider.state,
-      ).thenAnswer((_) => BehaviorSubject.seeded(settings));
+      when(() => settingsProvider.state).thenAnswer((_) => BehaviorSubject.seeded(settings));
 
-      audioService = AudioService(
-        settings: settingsProvider,
-        audio: audioProvider,
-      );
+      audioService = AudioService(settings: settingsProvider, audio: audioProvider);
       // wait for settings change
       await Future<void>.delayed(Duration.zero);
       expect(await audioService.countdown(), false);
@@ -108,14 +79,9 @@ void main() {
 
     test('Do not call countdown when voice disabled', () async {
       settings = defaults.copyWith(beep: false);
-      when(
-        () => settingsProvider.state,
-      ).thenAnswer((_) => BehaviorSubject.seeded(settings));
+      when(() => settingsProvider.state).thenAnswer((_) => BehaviorSubject.seeded(settings));
 
-      audioService = AudioService(
-        settings: settingsProvider,
-        audio: audioProvider,
-      );
+      audioService = AudioService(settings: settingsProvider, audio: audioProvider);
       // wait for settings change
       await Future<void>.delayed(Duration.zero);
       expect(await audioService.countdown(), false);

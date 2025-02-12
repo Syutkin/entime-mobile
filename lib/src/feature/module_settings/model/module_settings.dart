@@ -7,12 +7,9 @@ part 'module_settings.g.dart';
 
 @freezed
 class ModSettingsModelType with _$ModSettingsModelType {
-  const factory ModSettingsModelType({
-    @JsonKey(name: 'Type') required String type,
-  }) = _ModSettingsModelType;
+  const factory ModSettingsModelType({@JsonKey(name: 'Type') required String type}) = _ModSettingsModelType;
 
-  factory ModSettingsModelType.fromJson(Map<String, dynamic> json) =>
-      _$ModSettingsModelTypeFromJson(json);
+  factory ModSettingsModelType.fromJson(Map<String, dynamic> json) => _$ModSettingsModelTypeFromJson(json);
 }
 
 @freezed
@@ -25,8 +22,7 @@ class ModSettingsModelLed with _$ModSettingsModelLed {
     @JsonKey(name: 'LedPanel') required LedPanel ledPanel,
   }) = _ModSettingsModelLed;
 
-  factory ModSettingsModelLed.fromJson(Map<String, dynamic> json) =>
-      _$ModSettingsModelLedFromJson(json);
+  factory ModSettingsModelLed.fromJson(Map<String, dynamic> json) => _$ModSettingsModelLedFromJson(json);
 }
 
 @freezed
@@ -42,29 +38,19 @@ class ModSettingsModel with _$ModSettingsModel {
     @JsonKey(name: 'VCC') required Vcc vcc,
   }) = _ModSettingsModel;
 
-  factory ModSettingsModel.fromJson(Map<String, dynamic> json) =>
-      _$ModSettingsModelFromJson(json);
+  factory ModSettingsModel.fromJson(Map<String, dynamic> json) => _$ModSettingsModelFromJson(json);
 }
 
 @freezed
 class Bluetooth with _$Bluetooth {
-  const factory Bluetooth({
-    required bool active,
-    required String name,
-    required int number,
-  }) = _Bluetooth;
+  const factory Bluetooth({required bool active, required String name, required int number}) = _Bluetooth;
 
-  factory Bluetooth.fromJson(Map<String, dynamic> json) =>
-      _$BluetoothFromJson(json);
+  factory Bluetooth.fromJson(Map<String, dynamic> json) => _$BluetoothFromJson(json);
 }
 
 @freezed
 class Buzzer with _$Buzzer {
-  const factory Buzzer({
-    required bool active,
-    required int shortFrequency,
-    required int longFrequency,
-  }) = _Buzzer;
+  const factory Buzzer({required bool active, required int shortFrequency, required int longFrequency}) = _Buzzer;
 
   factory Buzzer.fromJson(Map<String, dynamic> json) => _$BuzzerFromJson(json);
 }
@@ -107,11 +93,7 @@ class Vcc with _$Vcc {
 
 @freezed
 class WiFi with _$WiFi {
-  const factory WiFi({
-    required bool active,
-    required String ssid,
-    required String passwd,
-  }) = _WiFi;
+  const factory WiFi({required bool active, required String ssid, required String passwd}) = _WiFi;
 
   factory WiFi.fromJson(Map<String, dynamic> json) => _$WiFiFromJson(json);
 }
@@ -120,6 +102,5 @@ class WiFi with _$WiFi {
 class LedPanel with _$LedPanel {
   const factory LedPanel({required int brightness}) = _LedPanel;
 
-  factory LedPanel.fromJson(Map<String, dynamic> json) =>
-      _$LedPanelFromJson(json);
+  factory LedPanel.fromJson(Map<String, dynamic> json) => _$LedPanelFromJson(json);
 }

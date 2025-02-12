@@ -82,9 +82,7 @@ void main() {
         yield [ConnectivityResult.vpn, ConnectivityResult.mobile];
       }
 
-      when(
-        () => connectivity.onConnectivityChanged,
-      ).thenAnswer((_) => connectivityStream());
+      when(() => connectivity.onConnectivityChanged).thenAnswer((_) => connectivityStream());
 
       connectivityProvider = ConnectivityProvider.init(connectivity);
       bool? prevData;
@@ -102,9 +100,7 @@ void main() {
         yield [ConnectivityResult.vpn, ConnectivityResult.mobile];
       }
 
-      when(
-        () => connectivity.onConnectivityChanged,
-      ).thenAnswer((_) => connectivityStream());
+      when(() => connectivity.onConnectivityChanged).thenAnswer((_) => connectivityStream());
 
       connectivityProvider = ConnectivityProvider.init(connectivity);
 

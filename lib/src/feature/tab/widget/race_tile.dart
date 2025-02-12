@@ -11,38 +11,30 @@ class RaceTile extends StatelessWidget {
   const RaceTile({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<DatabaseBloc, DatabaseState>(
-        builder: (context, databaseState) {
-          void routeToSelectRace() {
-            if (databaseState.race != null && databaseState.stage != null) {
-              context.read<DatabaseBloc>().add(
-                    const DatabaseEvent.deselectRace(),
-                  );
-            }
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (context) => const RaceAndStageSelector(),
-              ),
-            );
-          }
+  Widget build(BuildContext context) => BlocBuilder<DatabaseBloc, DatabaseState>(
+    builder: (context, databaseState) {
+      void routeToSelectRace() {
+        if (databaseState.race != null && databaseState.stage != null) {
+          context.read<DatabaseBloc>().add(const DatabaseEvent.deselectRace());
+        }
+        Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const RaceAndStageSelector()));
+      }
 
-          return ListTile(
-            onTap: routeToSelectRace,
-            leading: IconButton(
-              icon: Icon(MdiIcons.flagCheckered),
-              onPressed: routeToSelectRace,
-            ),
-            title: databaseState.race == null
+      return ListTile(
+        onTap: routeToSelectRace,
+        leading: IconButton(icon: Icon(MdiIcons.flagCheckered), onPressed: routeToSelectRace),
+        title:
+            databaseState.race == null
                 ? Text(Localization.current.I18nInit_selectRace)
                 : Text(databaseState.race!.name),
-            subtitle: databaseState.stage == null
+        subtitle:
+            databaseState.stage == null
                 ? Text(Localization.current.I18nInit_selectStage)
                 : Text(databaseState.stage!.name),
-            trailing: const _RaceMenuButton(),
-          );
-        },
+        trailing: const _RaceMenuButton(),
       );
+    },
+  );
 }
 
 class _RaceMenuButton extends StatelessWidget {

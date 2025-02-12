@@ -21,9 +21,7 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
             child: Image.asset('assets/fraction_logo.png'),
           ),
           ListTile(
@@ -31,11 +29,7 @@ class AppDrawer extends StatelessWidget {
             title: Text(Localization.current.I18nDrawer_settings),
             onTap: () {
               Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (context) => const SettingsScreen(),
-                ),
-              );
+              Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const SettingsScreen()));
             },
           ),
           ListTile(
@@ -43,9 +37,7 @@ class AppDrawer extends StatelessWidget {
             title: Text(Localization.current.I18nDrawer_help),
             onTap: () {
               Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(builder: (context) => const HelpPage()),
-              );
+              Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const HelpPage()));
             },
           ),
           const Updater(),
@@ -53,36 +45,32 @@ class AppDrawer extends StatelessWidget {
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: Text(Localization.current.I18nDrawer_about),
             onTap: () {
-              showDialog<void>(
-                context: context,
-                builder: (context) => const AboutPopup(),
-              );
+              showDialog<void>(context: context, builder: (context) => const AboutPopup());
             },
           ),
           BlocBuilder<AppInfoCubit, AppInfoProvider>(
-            builder: (context, appInfo) => Padding(
-              padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                  style: ButtonStyle(overlayColor: WidgetStateProperty.all(Colors.transparent)),
-                  onPressed: () {
-                    shareDBCounter++;
-                    if (shareDBCounter > 7) {
-                      shareDBCounter = 0;
-                      context
-                          .read<DatabaseBloc>()
-                          .add(const DatabaseEvent.shareDatabase());
-                    }
-                  },
-                  child: Text(
-                    Localization.current.I18nDrawer_version(appInfo.version),
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.right,
+            builder:
+                (context, appInfo) => Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: TextButton(
+                      style: ButtonStyle(overlayColor: WidgetStateProperty.all(Colors.transparent)),
+                      onPressed: () {
+                        shareDBCounter++;
+                        if (shareDBCounter > 7) {
+                          shareDBCounter = 0;
+                          context.read<DatabaseBloc>().add(const DatabaseEvent.shareDatabase());
+                        }
+                      },
+                      child: Text(
+                        Localization.current.I18nDrawer_version(appInfo.version),
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
           ),
         ],
       ),

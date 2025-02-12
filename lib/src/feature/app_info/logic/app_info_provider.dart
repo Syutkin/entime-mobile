@@ -7,9 +7,7 @@ class AppInfoProvider {
   final AndroidDeviceInfo _deviceInfo;
   final List<String> _supportedAbis = ['armeabi-v7a', 'arm64-v8a', 'x86_64'];
 
-  static Future<AppInfoProvider> load({
-    required AndroidDeviceInfo deviceInfo,
-  }) async => AppInfoProvider._(deviceInfo);
+  static Future<AppInfoProvider> load({required AndroidDeviceInfo deviceInfo}) async => AppInfoProvider._(deviceInfo);
 
   // => AppInfoProvider(
   // final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -59,10 +57,7 @@ class AppInfoProvider {
 
   String get buildNumber => pubspec.build.first;
 
-  String get version =>
-      pubspec.pre.isEmpty
-          ? '${pubspec.major}.${pubspec.minor}.${pubspec.patch}'
-          : pubspec.version;
+  String get version => pubspec.pre.isEmpty ? '${pubspec.major}.${pubspec.minor}.${pubspec.patch}' : pubspec.version;
 
   String? get abi {
     for (final deviceSupportedAbi in _deviceInfo.supportedAbis) {

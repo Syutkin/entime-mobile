@@ -24,59 +24,40 @@ class TrailItemTile extends StatelessWidget {
     ];
     return ListTile(
       title: Text(trail.name),
-      subtitle: subtitle.isNotEmpty
-          ? Text(
-              subtitle.join(', '),
-              style: DefaultTextStyle.of(
-                context,
-              ).style.apply(fontSizeFactor: 0.75),
-            )
-          : null,
-      leading: trail.fileId != null
-          ? Icon(MdiIcons.mapMarkerOutline)
-          : Icon(MdiIcons.mapMarkerOffOutline),
+      subtitle:
+          subtitle.isNotEmpty
+              ? Text(subtitle.join(', '), style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75))
+              : null,
+      leading: trail.fileId != null ? Icon(MdiIcons.mapMarkerOutline) : Icon(MdiIcons.mapMarkerOffOutline),
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
-        itemBuilder: (context) => <PopupMenuEntry<void>>[
-          if (trail.fileExtension != null && trail.fileExtension!.isNotEmpty)
-            PopupMenuItem<void>(
-              onTap: () async {
-                context.read<DatabaseBloc>().add(
-                      DatabaseEvent.shareTrack(trail: trail),
-                    );
-              },
-              child: ListTile(
-                leading: const Icon(Icons.share),
-                title: Text(Localization.current.I18nCore_share),
+        itemBuilder:
+            (context) => <PopupMenuEntry<void>>[
+              if (trail.fileExtension != null && trail.fileExtension!.isNotEmpty)
+                PopupMenuItem<void>(
+                  onTap: () async {
+                    context.read<DatabaseBloc>().add(DatabaseEvent.shareTrack(trail: trail));
+                  },
+                  child: ListTile(leading: const Icon(Icons.share), title: Text(Localization.current.I18nCore_share)),
+                ),
+              PopupMenuItem<void>(
+                onTap: () {
+                  updateTrailPopup(context, trail);
+                },
+                child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
               ),
-            ),
-          PopupMenuItem<void>(
-            onTap: () {
-              updateTrailPopup(context, trail);
-            },
-            child: ListTile(
-              leading: const Icon(Icons.edit),
-              title: Text(Localization.current.I18nCore_edit),
-            ),
-          ),
-          const PopupMenuDivider(),
-          PopupMenuItem<void>(
-            onTap: () async {
-              final bloc = context.read<TrailsBloc>();
-              final deleteTrail = await deleteTrailPopup(
-                context: context,
-                trailName: trail.name,
-              );
-              if (deleteTrail ?? false) {
-                bloc.add(TrailsEvent.deleteTrail(trail.id));
-              }
-            },
-            child: ListTile(
-              leading: const Icon(Icons.delete),
-              title: Text(Localization.current.I18nCore_delete),
-            ),
-          ),
-        ],
+              const PopupMenuDivider(),
+              PopupMenuItem<void>(
+                onTap: () async {
+                  final bloc = context.read<TrailsBloc>();
+                  final deleteTrail = await deleteTrailPopup(context: context, trailName: trail.name);
+                  if (deleteTrail ?? false) {
+                    bloc.add(TrailsEvent.deleteTrail(trail.id));
+                  }
+                },
+                child: ListTile(leading: const Icon(Icons.delete), title: Text(Localization.current.I18nCore_delete)),
+              ),
+            ],
       ),
     );
   }

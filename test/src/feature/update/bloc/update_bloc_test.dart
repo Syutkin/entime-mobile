@@ -14,18 +14,10 @@ void main() {
   setUp(() {
     updateProvider = MockUpdateProvider();
     latestVersion = '1.1.1';
-    when(
-      () => updateProvider.isUpdateAvailable,
-    ).thenAnswer((_) => Future.value(true));
-    when(
-      () => updateProvider.latestVersion,
-    ).thenReturn(latestVersion);
-    when(
-      () => updateProvider.downloadUpdate(),
-    ).thenAnswer((_) => Future.value());
-    when(
-      () => updateProvider.installApk(),
-    ).thenAnswer((_) => Future.value());
+    when(() => updateProvider.isUpdateAvailable).thenAnswer((_) => Future.value(true));
+    when(() => updateProvider.latestVersion).thenReturn(latestVersion);
+    when(() => updateProvider.downloadUpdate()).thenAnswer((_) => Future.value());
+    when(() => updateProvider.installApk()).thenAnswer((_) => Future.value());
   });
 
   group('UpdateBloc tests', () {
@@ -40,9 +32,7 @@ void main() {
       blocTest<UpdateBloc, UpdateState>(
         'Update not available',
         setUp: () {
-          when(
-            () => updateProvider.isUpdateAvailable,
-          ).thenAnswer((_) => Future.value(false));
+          when(() => updateProvider.isUpdateAvailable).thenAnswer((_) => Future.value(false));
         },
         build: () => UpdateBloc(updateProvider: updateProvider),
         act: (bloc) => bloc.add(const UpdateEvent.checkUpdate()),
@@ -59,10 +49,7 @@ void main() {
             ..add(const UpdateEvent.checkUpdate())
             ..add(const UpdateEvent.downloadUpdate());
         },
-        expect: () => [
-          UpdateState.updateAvailable(version: latestVersion),
-          const UpdateState.connecting(),
-        ],
+        expect: () => [UpdateState.updateAvailable(version: latestVersion), const UpdateState.connecting()],
         verify: (bloc) {
           verify(() => updateProvider.downloadUpdate()).called(1);
         },
@@ -71,9 +58,7 @@ void main() {
       blocTest<UpdateBloc, UpdateState>(
         'Download update but update not available',
         setUp: () {
-          when(
-            () => updateProvider.isUpdateAvailable,
-          ).thenAnswer((_) => Future.value(false));
+          when(() => updateProvider.isUpdateAvailable).thenAnswer((_) => Future.value(false));
         },
         build: () => UpdateBloc(updateProvider: updateProvider),
         act: (bloc) {
@@ -100,13 +85,14 @@ void main() {
             ..add(const UpdateEvent.downloading(bytes: 103, total: 1000))
             ..add(const UpdateEvent.downloading(bytes: 104, total: 1000));
         },
-        expect: () => [
-          const UpdateState.downloading(bytes: 100, total: 1000),
-          const UpdateState.downloading(bytes: 101, total: 1000),
-          const UpdateState.downloading(bytes: 102, total: 1000),
-          const UpdateState.downloading(bytes: 103, total: 1000),
-          const UpdateState.downloading(bytes: 104, total: 1000),
-        ],
+        expect:
+            () => [
+              const UpdateState.downloading(bytes: 100, total: 1000),
+              const UpdateState.downloading(bytes: 101, total: 1000),
+              const UpdateState.downloading(bytes: 102, total: 1000),
+              const UpdateState.downloading(bytes: 103, total: 1000),
+              const UpdateState.downloading(bytes: 104, total: 1000),
+            ],
       );
     });
 
@@ -153,9 +139,7 @@ void main() {
       blocTest<UpdateBloc, UpdateState>(
         'Popup changelog',
         setUp: () {
-          when(
-            () => updateProvider.showChangelog(),
-          ).thenAnswer((_) => Future.value('changelog'));
+          when(() => updateProvider.showChangelog()).thenAnswer((_) => Future.value('changelog'));
         },
         build: () => UpdateBloc(updateProvider: updateProvider),
         act: (bloc) {

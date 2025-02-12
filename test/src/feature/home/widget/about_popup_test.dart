@@ -11,8 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockAppInfoCubit extends MockCubit<AppInfoProvider>
-    implements AppInfoCubit {}
+class MockAppInfoCubit extends MockCubit<AppInfoProvider> implements AppInfoCubit {}
 
 void main() {
   late AppInfoCubit appInfoCubit;
@@ -21,73 +20,48 @@ void main() {
 
   Widget testWidget() {
     return MaterialApp(
-      localizationsDelegates: const [
-        GlobalWidgetsLocalizations.delegate,
-        Localization.delegate,
-      ],
+      localizationsDelegates: const [GlobalWidgetsLocalizations.delegate, Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Scaffold(
-        body: BlocProvider.value(
-          value: appInfoCubit,
-          child: const AboutPopup(),
-        ),
-      ),
+      home: Scaffold(body: BlocProvider.value(value: appInfoCubit, child: const AboutPopup())),
     );
   }
 
-  setUp(
-    () {
-      appInfoCubit = MockAppInfoCubit();
-      when(() => appInfoCubit.appName).thenReturn(appName);
-      when(() => appInfoCubit.version).thenReturn(version);
-    },
-  );
+  setUp(() {
+    appInfoCubit = MockAppInfoCubit();
+    when(() => appInfoCubit.appName).thenReturn(appName);
+    when(() => appInfoCubit.version).thenReturn(version);
+  });
 
-  group(
-    'AboutPopup tests',
-    () {
-      patrolWidgetTest('Initial state', (
-        PatrolTester $,
-      ) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        expect($(AlertDialog), findsOneWidget);
-        expect($(appName), findsOneWidget);
-        expect(
-          $(Localization.current.I18nAbout_version(version)),
-          findsOneWidget,
-        );
-        expect($(Localization.current.I18nAbout_copyright), findsOneWidget);
-        expect(
-          $('${Localization.current.I18nAbout_about}syutkin@fraction.team'),
-          findsOneWidget,
-        );
-        expect($(Localization.current.I18nAbout_changelog), findsOneWidget);
-        expect($(TextButton), findsNWidgets(2));
-      });
+  group('AboutPopup tests', () {
+    patrolWidgetTest('Initial state', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(AlertDialog), findsOneWidget);
+      expect($(appName), findsOneWidget);
+      expect($(Localization.current.I18nAbout_version(version)), findsOneWidget);
+      expect($(Localization.current.I18nAbout_copyright), findsOneWidget);
+      expect($('${Localization.current.I18nAbout_about}syutkin@fraction.team'), findsOneWidget);
+      expect($(Localization.current.I18nAbout_changelog), findsOneWidget);
+      expect($(TextButton), findsNWidgets(2));
+    });
 
-      patrolWidgetTest('Press changelog', (
-        PatrolTester $,
-      ) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        await $(Localization.current.I18nAbout_changelog).tap();
-        expect($(ChangelogScreen), findsOneWidget);
-      });
+    patrolWidgetTest('Press changelog', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(Localization.current.I18nAbout_changelog).tap();
+      expect($(ChangelogScreen), findsOneWidget);
+    });
 
-      patrolWidgetTest('Press close button', (
-        PatrolTester $,
-      ) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        await $(TextButton).at(1).tap();
-        expect($(AboutPopup), findsNothing);
-      });
+    patrolWidgetTest('Press close button', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(TextButton).at(1).tap();
+      expect($(AboutPopup), findsNothing);
+    });
 
-      // patrolWidgetTest('Press send mail', (
-      //   PatrolTester $,
-      // ) async {
-      //   await $.pumpWidgetAndSettle(testWidget());
-      //   // await $(TapGestureRecognizer).at(1).tap();
-      //   expect($(TapGestureRecognizer), findsOneWidget);
-      // });
-    },
-  );
+    // patrolWidgetTest('Press send mail', (
+    //   PatrolTester $,
+    // ) async {
+    //   await $.pumpWidgetAndSettle(testWidget());
+    //   // await $(TapGestureRecognizer).at(1).tap();
+    //   expect($(TapGestureRecognizer), findsOneWidget);
+    // });
+  });
 }

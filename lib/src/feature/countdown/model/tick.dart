@@ -18,6 +18,5 @@ class Tick extends Equatable {
   final bool callNextParticipant;
 
   @override
-  List<Object?> get props =>
-      [second, text, nextStartTime, number, callNextParticipant];
+  List<Object?> get props => [second, text, nextStartTime, number, callNextParticipant];
 }

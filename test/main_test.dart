@@ -33,16 +33,13 @@ class MockAudioService extends Mock implements AudioService {}
 
 class MockIAudioController extends Mock implements IAudioController {}
 
-class MockSettingsCubit extends MockCubit<AppSettings>
-    implements SettingsCubit {}
+class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
 class MockTabCubit extends MockCubit<AppTab> implements TabCubit {}
 
-class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState>
-    implements UpdateBloc {}
+class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState> implements UpdateBloc {}
 
-class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState>
-    implements BluetoothBloc {}
+class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
 class MockAppDatabase extends Mock implements AppDatabase {}
 
@@ -68,8 +65,7 @@ void main() {
     Bloc.observer = AppBlocObserver();
     Bloc.transformer = bloc_concurrency.sequential<dynamic>();
 
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMessageHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
       (obj) async => obj,
     );
@@ -82,46 +78,32 @@ void main() {
     ttsProvider = MockTtsProvider();
     audioController = MockIAudioController();
     database = MockAppDatabase();
-    countdown = CountdownAtStart(
-      database: database,
-      settingsProvider: settingsProvider,
-    );
+    countdown = CountdownAtStart(database: database, settingsProvider: settingsProvider);
     ntpProvider = MockINtpProvider();
     connectivityProvider = MockIConnectivityProvider();
 
-    when(
-      () => updateProvider.showChangelog(),
-    ).thenAnswer(
-      (_) => Future.value(''),
-    );
+    when(() => updateProvider.showChangelog()).thenAnswer((_) => Future.value(''));
 
-    when(
-      () => updateProvider.isUpdateAvailable,
-    ).thenAnswer(
-      (_) => Future.value(false),
-    );
+    when(() => updateProvider.isUpdateAvailable).thenAnswer((_) => Future.value(false));
   });
 
-  group(
-    'EntimeApp',
-    () {
-      patrolWidgetTest('Renders home widget', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(
-          EntimeApp(
-            settingsProvider: settingsProvider,
-            updateProvider: updateProvider,
-            bluetoothProvider: bluetoothProvider,
-            ttsProvider: ttsProvider,
-            audioController: audioController,
-            appInfo: appInfo,
-            database: database,
-            countdown: countdown,
-            ntpProvider: ntpProvider,
-            connectivityProvider: connectivityProvider,
-          ),
-        ); // Create main app
-        expect($(SizedBox), findsOneWidget);
-      });
-    },
-  );
+  group('EntimeApp', () {
+    patrolWidgetTest('Renders home widget', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(
+        EntimeApp(
+          settingsProvider: settingsProvider,
+          updateProvider: updateProvider,
+          bluetoothProvider: bluetoothProvider,
+          ttsProvider: ttsProvider,
+          audioController: audioController,
+          appInfo: appInfo,
+          database: database,
+          countdown: countdown,
+          ntpProvider: ntpProvider,
+          connectivityProvider: connectivityProvider,
+        ),
+      ); // Create main app
+      expect($(SizedBox), findsOneWidget);
+    });
+  });
 }

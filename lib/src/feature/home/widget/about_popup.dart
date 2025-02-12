@@ -16,9 +16,7 @@ class AboutPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final bodyTextStyle = textTheme.bodyLarge!.apply(
-      color: colorScheme.onSurface,
-    );
+    final bodyTextStyle = textTheme.bodyLarge!.apply(color: colorScheme.onSurface);
     return AlertDialog(
       content: ListBody(
         children: <Widget>[
@@ -35,47 +33,38 @@ class AboutPopup extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
-                        Localization.current.I18nAbout_version(
-                          BlocProvider.of<AppInfoCubit>(context).version,
-                        ),
+                        Localization.current.I18nAbout_version(BlocProvider.of<AppInfoCubit>(context).version),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: _textVerticalSeparation),
-                      Text(
-                        Localization.current.I18nAbout_copyright,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
+                      Text(Localization.current.I18nAbout_copyright, style: Theme.of(context).textTheme.bodySmall),
                       const SizedBox(height: _textVerticalSeparation),
                       RichText(
                         text: TextSpan(
                           children: [
+                            TextSpan(style: bodyTextStyle, text: Localization.current.I18nAbout_about),
                             TextSpan(
-                              style: bodyTextStyle,
-                              text: Localization.current.I18nAbout_about,
-                            ),
-                            TextSpan(
-                              style: bodyTextStyle.copyWith(
-                                color: colorScheme.primary,
-                              ),
+                              style: bodyTextStyle.copyWith(color: colorScheme.primary),
                               text: 'syutkin@fraction.team',
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  final emailLaunchUri = Uri(
-                                    scheme: 'mailto',
-                                    path: 'syutkin@fraction.team',
-                                    queryParameters: <String, String>{
-                                      'subject': Localization.current.I18nAbout_emailSubject,
+                              recognizer:
+                                  TapGestureRecognizer()
+                                    ..onTap = () async {
+                                      final emailLaunchUri = Uri(
+                                        scheme: 'mailto',
+                                        path: 'syutkin@fraction.team',
+                                        queryParameters: <String, String>{
+                                          'subject': Localization.current.I18nAbout_emailSubject,
+                                        },
+                                      );
+                                      if (await canLaunchUrl(emailLaunchUri)) {
+                                        await launchUrl(emailLaunchUri);
+                                      } else {
+                                        final Error error = ArgumentError(
+                                          Localization.current.I18nAbout_emailSendError(emailLaunchUri),
+                                        );
+                                        throw error;
+                                      }
                                     },
-                                  );
-                                  if (await canLaunchUrl(emailLaunchUri)) {
-                                    await launchUrl(emailLaunchUri);
-                                  } else {
-                                    final Error error = ArgumentError(
-                                      Localization.current.I18nAbout_emailSendError(emailLaunchUri),
-                                    );
-                                    throw error;
-                                  }
-                                },
                             ),
                           ],
                         ),
@@ -94,10 +83,7 @@ class AboutPopup extends StatelessWidget {
             final navigator = Navigator.of(context);
             final changelogData = await rootBundle.loadString('CHANGELOG.md');
             await navigator.push(
-              MaterialPageRoute<void>(
-                builder: (context) =>
-                    ChangelogScreen(markdownData: changelogData),
-              ),
+              MaterialPageRoute<void>(builder: (context) => ChangelogScreen(markdownData: changelogData)),
             );
           },
           child: Text(Localization.current.I18nAbout_changelog),

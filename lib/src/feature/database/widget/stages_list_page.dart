@@ -17,24 +17,24 @@ class StagesListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(race.name)),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            addStagePopup(context, race: race);
+    appBar: AppBar(title: Text(race.name)),
+    floatingActionButton: FloatingActionButton(
+      child: const Icon(Icons.add),
+      onPressed: () {
+        addStagePopup(context, race: race);
+      },
+    ),
+    body: BlocBuilder<DatabaseBloc, DatabaseState>(
+      builder: (context, state) {
+        final count = state.stages.length;
+        return ListView.builder(
+          itemCount: count,
+          itemBuilder: (context, index) {
+            final stage = state.stages[index];
+            return StageItemTile(stage: stage);
           },
-        ),
-        body: BlocBuilder<DatabaseBloc, DatabaseState>(
-          builder: (context, state) {
-            final count = state.stages.length;
-            return ListView.builder(
-              itemCount: count,
-              itemBuilder: (context, index) {
-                final stage = state.stages[index];
-                return StageItemTile(stage: stage);
-              },
-            );
-          },
-        ),
-      );
+        );
+      },
+    ),
+  );
 }

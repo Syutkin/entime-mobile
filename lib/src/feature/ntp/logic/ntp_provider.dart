@@ -12,20 +12,10 @@ abstract interface class INtpProvider {
     // ToDo: start offset stream
   }
 
-  Future<DateTime> now({
-    String? lookUpAddress,
-    int? port,
-    Duration? timeout,
-    Duration? cacheDuration,
-  });
+  Future<DateTime> now({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration});
 
   /// Return NTP delay in milliseconds
-  Future<int> getNtpOffset({
-    String? lookUpAddress,
-    int? port,
-    Duration? timeout,
-    Duration? cacheDuration,
-  });
+  Future<int> getNtpOffset({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration});
 
   Stream<int> get offset;
 }
@@ -36,12 +26,7 @@ class NtpProvider implements INtpProvider {
   Stream<int> get offset => throw UnimplementedError();
 
   @override
-  Future<int> getNtpOffset({
-    String? lookUpAddress,
-    int? port,
-    Duration? timeout,
-    Duration? cacheDuration,
-  }) async {
+  Future<int> getNtpOffset({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration}) async {
     final offset = await FlutterNTP.getNtpOffset(
       lookUpAddress: lookUpAddress,
       port: port,
@@ -52,12 +37,7 @@ class NtpProvider implements INtpProvider {
   }
 
   @override
-  Future<DateTime> now({
-    String? lookUpAddress,
-    int? port,
-    Duration? timeout,
-    Duration? cacheDuration,
-  }) {
+  Future<DateTime> now({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration}) {
     final now = FlutterNTP.now(
       lookUpAddress: lookUpAddress,
       port: port,

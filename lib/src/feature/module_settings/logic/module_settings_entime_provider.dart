@@ -15,9 +15,7 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
     logger.i('Updating modsettings from json');
 
     try {
-      _modSettingsModel = ModSettingsModel.fromJson(
-        jsonDecode(jsonString) as Map<String, dynamic>,
-      );
+      _modSettingsModel = ModSettingsModel.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
 
       // Module type
       type = _modSettingsModel.type;
@@ -75,11 +73,7 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
       read: false,
       type: type,
       // Bluetooth
-      bluetooth: Bluetooth(
-        active: bluetooth,
-        name: bluetoothName,
-        number: bluetoothNumber,
-      ),
+      bluetooth: Bluetooth(active: bluetooth, name: bluetoothName, number: bluetoothNumber),
       // LoRa
       loRa: LoRa(
         active: lora,
@@ -96,18 +90,9 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
       wiFi: WiFi(active: wifi, ssid: ssid, passwd: password),
 
       // TFT
-      tft: Tft(
-        active: tft,
-        timeout: timeout,
-        timeoutDuration: timeoutDuration,
-        turnOnAtEvent: turnOnAtEvent,
-      ),
+      tft: Tft(active: tft, timeout: timeout, timeoutDuration: timeoutDuration, turnOnAtEvent: turnOnAtEvent),
       //Buzzer
-      buzzer: Buzzer(
-        active: buzzer,
-        shortFrequency: shortFrequency,
-        longFrequency: longFrequency,
-      ),
+      buzzer: Buzzer(active: buzzer, shortFrequency: shortFrequency, longFrequency: longFrequency),
       //VCC
       vcc: Vcc(r1: r1, r2: r2, vbat: vBat),
     ).toJson(),

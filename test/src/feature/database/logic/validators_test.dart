@@ -39,37 +39,19 @@ void main() {
       });
 
       test('Some forbidden characters in name name', () {
-        expect(
-          validateName('sdf,sdf'),
-          Localization.current.I18nStart_incorrectName,
-        );
-        expect(
-          validateName('sdf!s!f'),
-          Localization.current.I18nStart_incorrectName,
-        );
-        expect(
-          validateName('sdf^sdf'),
-          Localization.current.I18nStart_incorrectName,
-        );
-        expect(
-          validateName('s@f,sdf'),
-          Localization.current.I18nStart_incorrectName,
-        );
-        expect(
-          validateName('sdfsd?f'),
-          Localization.current.I18nStart_incorrectName,
-        );
+        expect(validateName('sdf,sdf'), Localization.current.I18nStart_incorrectName);
+        expect(validateName('sdf!s!f'), Localization.current.I18nStart_incorrectName);
+        expect(validateName('sdf^sdf'), Localization.current.I18nStart_incorrectName);
+        expect(validateName('s@f,sdf'), Localization.current.I18nStart_incorrectName);
+        expect(validateName('sdfsd?f'), Localization.current.I18nStart_incorrectName);
       });
     });
 
     group('validateNickname tests', () {
-      test(
-        'Correct nickname, pass letters, digits, symbols: [.-_] and space',
-        () {
-          const nickname = 'NamE 9. -21 Фыва_0';
-          expect(validateNickname(nickname), null);
-        },
-      );
+      test('Correct nickname, pass letters, digits, symbols: [.-_] and space', () {
+        const nickname = 'NamE 9. -21 Фыва_0';
+        expect(validateNickname(nickname), null);
+      });
 
       test('Nickname can be null', () {
         String? nickname;
@@ -81,26 +63,11 @@ void main() {
       });
 
       test('Some forbidden characters in nickname', () {
-        expect(
-          validateNickname('sdf,sdf'),
-          Localization.current.I18nStart_incorrectNickname,
-        );
-        expect(
-          validateNickname('sdf!s!f'),
-          Localization.current.I18nStart_incorrectNickname,
-        );
-        expect(
-          validateNickname('sdf^sdf'),
-          Localization.current.I18nStart_incorrectNickname,
-        );
-        expect(
-          validateNickname('s@f,sdf'),
-          Localization.current.I18nStart_incorrectNickname,
-        );
-        expect(
-          validateNickname('sdfsd?f'),
-          Localization.current.I18nStart_incorrectNickname,
-        );
+        expect(validateNickname('sdf,sdf'), Localization.current.I18nStart_incorrectNickname);
+        expect(validateNickname('sdf!s!f'), Localization.current.I18nStart_incorrectNickname);
+        expect(validateNickname('sdf^sdf'), Localization.current.I18nStart_incorrectNickname);
+        expect(validateNickname('s@f,sdf'), Localization.current.I18nStart_incorrectNickname);
+        expect(validateNickname('sdfsd?f'), Localization.current.I18nStart_incorrectNickname);
       });
     });
 
@@ -121,18 +88,9 @@ void main() {
       });
 
       test('Incorrect age', () {
-        expect(
-          validateBirthday('0'),
-          Localization.current.I18nStart_incorrectAge,
-        );
-        expect(
-          validateBirthday('150'),
-          Localization.current.I18nStart_incorrectAge,
-        );
-        expect(
-          validateBirthday('-1'),
-          Localization.current.I18nStart_incorrectAge,
-        );
+        expect(validateBirthday('0'), Localization.current.I18nStart_incorrectAge);
+        expect(validateBirthday('150'), Localization.current.I18nStart_incorrectAge);
+        expect(validateBirthday('-1'), Localization.current.I18nStart_incorrectAge);
       });
 
       test('Correct birthday', () {
@@ -145,14 +103,8 @@ void main() {
       });
 
       test('Incorrect birthday', () {
-        expect(
-          validateBirthday('0 13 3'),
-          Localization.current.I18nStart_incorrectBirthday,
-        );
-        expect(
-          validateBirthday('0-13 32'),
-          Localization.current.I18nStart_incorrectBirthday,
-        );
+        expect(validateBirthday('0 13 3'), Localization.current.I18nStart_incorrectBirthday);
+        expect(validateBirthday('0-13 32'), Localization.current.I18nStart_incorrectBirthday);
       });
     });
 
@@ -166,20 +118,14 @@ void main() {
         expect(validateCity(''), null);
       });
 
-      test(
-        'Correct city name, pass letters, digits, symbols: [-_] and space',
-        () {
-          const city = 'NamE 9 -21 Фыва_0';
-          expect(validateCity(city), null);
-        },
-      );
+      test('Correct city name, pass letters, digits, symbols: [-_] and space', () {
+        const city = 'NamE 9 -21 Фыва_0';
+        expect(validateCity(city), null);
+      });
 
       test('Some forbidden characters in city name', () {
         const city = 'NamE, 9 -21! Фыва_0';
-        expect(
-          validateCity(city),
-          Localization.current.I18nStart_incorrectCity,
-        );
+        expect(validateCity(city), Localization.current.I18nStart_incorrectCity);
       });
     });
 
@@ -200,10 +146,7 @@ void main() {
 
       test('Incorrect email', () {
         const city = 'mail!mail!mail.mail';
-        expect(
-          validateEmail(city),
-          Localization.current.I18nStart_incorrectEmail,
-        );
+        expect(validateEmail(city), Localization.current.I18nStart_incorrectEmail);
       });
     });
     group('validateShift tests', () {
@@ -217,21 +160,12 @@ void main() {
       });
 
       test('Incorrect shift', () {
-        expect(
-          validateShift('a'),
-          Localization.current.I18nStart_incorrectShiftMinutes,
-        );
+        expect(validateShift('a'), Localization.current.I18nStart_incorrectShiftMinutes);
       });
 
       test('Incorrect range for shift', () {
-        expect(
-          validateShift('-121'),
-          Localization.current.I18nStart_wrongRangeShiftMinutes,
-        );
-        expect(
-          validateShift('700'),
-          Localization.current.I18nStart_wrongRangeShiftMinutes,
-        );
+        expect(validateShift('-121'), Localization.current.I18nStart_wrongRangeShiftMinutes);
+        expect(validateShift('700'), Localization.current.I18nStart_wrongRangeShiftMinutes);
       });
 
       test('Correct shift', () {

@@ -28,27 +28,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../helpers/shared_prefs_defaults.dart';
 
-class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState>
-    implements BluetoothBloc {}
+class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
-class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState>
-    implements CountdownBloc {}
+class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState> implements CountdownBloc {}
 
-class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState>
-    implements UpdateBloc {}
+class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState> implements UpdateBloc {}
 
-class MockConnectivityBloc
-    extends MockBloc<ConnectivityEvent, ConnectivityState>
-    implements ConnectivityBloc {}
+class MockConnectivityBloc extends MockBloc<ConnectivityEvent, ConnectivityState> implements ConnectivityBloc {}
 
 class MockNtpBloc extends MockBloc<NtpEvent, NtpState> implements NtpBloc {}
 
-class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState>
-    implements DatabaseBloc {}
+class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
-class MockModuleSettingsBloc
-    extends MockBloc<ModuleSettingsEvent, ModuleSettingsState>
-    implements ModuleSettingsBloc {}
+class MockModuleSettingsBloc extends MockBloc<ModuleSettingsEvent, ModuleSettingsState> implements ModuleSettingsBloc {}
 
 class MockQueryRow extends Mock implements QueryRow {}
 
@@ -71,8 +63,7 @@ void main() {
   late int deltaInSeconds;
 
   setUpAll(() async {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMessageHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
       (obj) async => obj,
     );
@@ -97,34 +88,12 @@ void main() {
     offset = 100;
     deltaInSeconds = 10;
 
-    when(
-      () => bluetoothBloc.state,
-    ).thenReturn(
-      const BluetoothBlocState.notInitialized(),
-    );
-    when(
-      () => countdownBloc.state,
-    ).thenReturn(
-      const CountdownState.working(tick: Tick(second: 0, text: 'text')),
-    );
-    when(
-      () => updateBloc.state,
-    ).thenReturn(
-      const UpdateState.initial(),
-    );
-    when(
-      () => connectivityBloc.state,
-    ).thenReturn(
-      const ConnectivityState.state(isConnected: true),
-    );
-    when(
-      () => ntpBloc.state,
-    ).thenReturn(
-      NtpState.initial(offset),
-    );
-    when(
-      () => databaseBloc.state,
-    ).thenReturn(
+    when(() => bluetoothBloc.state).thenReturn(const BluetoothBlocState.notInitialized());
+    when(() => countdownBloc.state).thenReturn(const CountdownState.working(tick: Tick(second: 0, text: 'text')));
+    when(() => updateBloc.state).thenReturn(const UpdateState.initial());
+    when(() => connectivityBloc.state).thenReturn(const ConnectivityState.state(isConnected: true));
+    when(() => ntpBloc.state).thenReturn(NtpState.initial(offset));
+    when(() => databaseBloc.state).thenReturn(
       const DatabaseState(
         races: [],
         stages: [],
@@ -135,11 +104,7 @@ void main() {
         numbersOnTrace: [],
       ),
     );
-    when(
-      () => moduleSettingsBloc.state,
-    ).thenReturn(
-      const ModuleSettingsState.uninitialized(),
-    );
+    when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.uninitialized());
   });
 
   Widget testWidget() {
@@ -164,10 +129,7 @@ void main() {
                       value: connectivityBloc,
                       child: BlocProvider.value(
                         value: ntpBloc,
-                        child: BlocProvider.value(
-                          value: moduleSettingsBloc,
-                          child: const HomeScreen(),
-                        ),
+                        child: BlocProvider.value(value: moduleSettingsBloc, child: const HomeScreen()),
                       ),
                     ),
                   ),
@@ -189,8 +151,7 @@ void main() {
         expect($(#FinishTab), findsOneWidget);
       });
 
-      patrolWidgetTest('Switch screens when tap on tabs',
-          (PatrolTester $) async {
+      patrolWidgetTest('Switch screens when tap on tabs', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect($(InitPage), findsOneWidget);
         expect($(StartPage), findsNothing);
@@ -211,8 +172,7 @@ void main() {
     });
 
     group('FilterButton widget tests', () {
-      patrolWidgetTest("Didn't visible at initial screen",
-          (PatrolTester $) async {
+      patrolWidgetTest("Didn't visible at initial screen", (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect($(FilterButton).$(PopupMenuButton), findsNothing);
       });
@@ -269,8 +229,7 @@ void main() {
         expect(settingsCubit.state.showDSQ, false);
       });
 
-      patrolWidgetTest('Filter button at finish screen',
-          (PatrolTester $) async {
+      patrolWidgetTest('Filter button at finish screen', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(#FinishTab).tap();
         await $(FilterButton).tap();
@@ -326,21 +285,10 @@ void main() {
 
     group('Listeners tests', () {
       group('Bluetooth listener', () {
-        patrolWidgetTest(
-            'Get AutomaticStart message and add starttime from it to to database',
-            (PatrolTester $) async {
-          const stage = Stage(
-            id: 1,
-            raceId: 1,
-            name: 'name',
-            isActive: true,
-            isDeleted: false,
-          );
-          final automaticStart =
-              AutomaticStart('10:10:10', 1111, DateTime.now());
-          when(
-            () => databaseBloc.state,
-          ).thenReturn(
+        patrolWidgetTest('Get AutomaticStart message and add starttime from it to to database', (PatrolTester $) async {
+          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+          final automaticStart = AutomaticStart('10:10:10', 1111, DateTime.now());
+          when(() => databaseBloc.state).thenReturn(
             const DatabaseState(
               races: [],
               stages: [],
@@ -355,16 +303,9 @@ void main() {
 
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            BluetoothBlocState.connected(
-              message: BluetoothMessage.automaticStart(
-                automaticStart: automaticStart,
-              ),
-            ),
+            BluetoothBlocState.connected(message: BluetoothMessage.automaticStart(automaticStart: automaticStart)),
           ];
-          whenListen(
-            bluetoothBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(testWidget());
           verify(
             () => databaseBloc.add(
@@ -381,41 +322,21 @@ void main() {
           ).called(1);
         });
 
-        patrolWidgetTest(
-            'Get AutomaticStart message and do nothing if stage not selected',
-            (PatrolTester $) async {
+        patrolWidgetTest('Get AutomaticStart message and do nothing if stage not selected', (PatrolTester $) async {
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            BluetoothBlocState.connected(
-              message: BluetoothMessage.finish(
-                time: 'time',
-                timestamp: DateTime.now(),
-              ),
-            ),
+            BluetoothBlocState.connected(message: BluetoothMessage.finish(time: 'time', timestamp: DateTime.now())),
           ];
-          whenListen(
-            bluetoothBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(testWidget());
           verifyNever(() => databaseBloc.add(any()));
         });
 
-        patrolWidgetTest(
-            'Get Finish message and add finishtime from it to to database',
-            (PatrolTester $) async {
-          const stage = Stage(
-            id: 1,
-            raceId: 1,
-            name: 'name',
-            isActive: true,
-            isDeleted: false,
-          );
+        patrolWidgetTest('Get Finish message and add finishtime from it to to database', (PatrolTester $) async {
+          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
           const time = '10:10:10';
           final timestamp = DateTime.now();
-          when(
-            () => databaseBloc.state,
-          ).thenReturn(
+          when(() => databaseBloc.state).thenReturn(
             const DatabaseState(
               races: [],
               stages: [],
@@ -429,46 +350,27 @@ void main() {
           );
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            BluetoothBlocState.connected(
-              message: BluetoothMessage.finish(
-                time: time,
-                timestamp: timestamp,
-              ),
-            ),
+            BluetoothBlocState.connected(message: BluetoothMessage.finish(time: time, timestamp: timestamp)),
           ];
-          whenListen(
-            bluetoothBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(testWidget());
           verify(
             () => databaseBloc.add(
-              DatabaseEvent.addFinishTime(
-                stage: stage,
-                finishTime: time,
-                timestamp: timestamp,
-                ntpOffset: offset,
-              ),
+              DatabaseEvent.addFinishTime(stage: stage, finishTime: time, timestamp: timestamp, ntpOffset: offset),
             ),
           ).called(1);
         });
 
-        patrolWidgetTest(
-            'Get Finish message and do nothing if stage not selected',
-            (PatrolTester $) async {
+        patrolWidgetTest('Get Finish message and do nothing if stage not selected', (PatrolTester $) async {
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
             BluetoothBlocState.connected(
               message: BluetoothMessage.automaticStart(
-                automaticStart:
-                    AutomaticStart('10:10:10', 1111, DateTime.now()),
+                automaticStart: AutomaticStart('10:10:10', 1111, DateTime.now()),
               ),
             ),
           ];
-          whenListen(
-            bluetoothBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(testWidget());
           verifyNever(() => databaseBloc.add(any()));
         });
@@ -477,26 +379,17 @@ void main() {
           const json = '{}';
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            const BluetoothBlocState.connected(
-              message: BluetoothMessage.moduleSettings(json: json),
-            ),
+            const BluetoothBlocState.connected(message: BluetoothMessage.moduleSettings(json: json)),
           ];
-          whenListen(
-            bluetoothBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(testWidget());
-          verify(
-            () => moduleSettingsBloc.add(const ModuleSettingsEvent.get(json)),
-          ).called(1);
+          verify(() => moduleSettingsBloc.add(const ModuleSettingsEvent.get(json))).called(1);
         });
       });
 
       group('Update start time listener', () {
-        patrolWidgetTest(
-            'Popup update correction dialog and accept it, '
-            'if new correction more than updateStartCorrectionDelay at settings',
-            (PatrolTester $) async {
+        patrolWidgetTest('Popup update correction dialog and accept it, '
+            'if new correction more than updateStartCorrectionDelay at settings', (PatrolTester $) async {
           const number = 1;
           const startTime = '10:10:10';
           final timestamp = DateTime.now();
@@ -551,10 +444,7 @@ void main() {
               notification: notification,
             ),
           ];
-          whenListen(
-            databaseBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidget(testWidget());
           expect($(AlertDialog), findsNothing);
           await $.pump();
@@ -575,8 +465,7 @@ void main() {
           ).called(1);
         });
 
-        patrolWidgetTest('Popup update correction dialog and cancel it',
-            (PatrolTester $) async {
+        patrolWidgetTest('Popup update correction dialog and cancel it', (PatrolTester $) async {
           const number = 1;
           const startTime = '10:10:10';
           final timestamp = DateTime.now();
@@ -631,22 +520,15 @@ void main() {
               notification: notification,
             ),
           ];
-          whenListen(
-            databaseBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidget(testWidget());
           expect($(AlertDialog), findsNothing);
           await $.pump();
           await $(#cancelButton).tap();
-          verifyNever(
-            () => databaseBloc.add(any()),
-          );
+          verifyNever(() => databaseBloc.add(any()));
         });
 
-        patrolWidgetTest(
-            'Do nothing if delta correction less than updateStartCorrectionDelay',
-            (PatrolTester $) async {
+        patrolWidgetTest('Do nothing if delta correction less than updateStartCorrectionDelay', (PatrolTester $) async {
           const number = 1;
           const startTime = '10:10:10';
           final timestamp = DateTime.now();
@@ -701,132 +583,92 @@ void main() {
               notification: notification,
             ),
           ];
-          whenListen(
-            databaseBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(testWidget());
           expect($(AlertDialog), findsNothing);
-          verifyNever(
-            () => databaseBloc.add(any()),
-          );
+          verifyNever(() => databaseBloc.add(any()));
         });
       });
 
       group('Updater listener', () {
-        patrolWidgetTest(
-          'Update available, show SnackBar with version number and tap it',
-          (PatrolTester $) async {
-            const version = '0.1.1';
-            final expectedStates = [
-              const UpdateState.initial(),
-              const UpdateState.updateAvailable(version: version),
-            ];
-            whenListen(
-              updateBloc,
-              Stream.fromIterable(expectedStates),
-            );
+        patrolWidgetTest('Update available, show SnackBar with version number and tap it', (PatrolTester $) async {
+          const version = '0.1.1';
+          final expectedStates = [const UpdateState.initial(), const UpdateState.updateAvailable(version: version)];
+          whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-            await $.pumpWidget(testWidget());
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect(
-              $(Localization.current.I18nHome_updateAvailable(version)),
-              findsOneWidget,
-            );
-          },
-        );
+          await $.pumpWidget(testWidget());
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nHome_updateAvailable(version)), findsOneWidget);
+        });
 
-        patrolWidgetTest(
-          'Show changelog and close it',
-          (PatrolTester $) async {
-            final expectedStates = [
-              const UpdateState.initial(),
-              const UpdateState.initial(changelog: 'changelog'),
-            ];
-            whenListen(
-              updateBloc,
-              Stream.fromIterable(expectedStates),
-            );
+        patrolWidgetTest('Show changelog and close it', (PatrolTester $) async {
+          final expectedStates = [const UpdateState.initial(), const UpdateState.initial(changelog: 'changelog')];
+          whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-            await $.pumpWidget(testWidget());
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsOneWidget);
-            await $(TextButton).tap();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-          },
-        );
+          await $.pumpWidget(testWidget());
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsOneWidget);
+          await $(TextButton).tap();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+        });
 
-        patrolWidgetTest(
-          'Show nothing if prev state not initial',
-          (PatrolTester $) async {
-            final expectedStates = [
-              const UpdateState.connecting(),
-              const UpdateState.initial(changelog: 'changelog'),
-            ];
-            whenListen(
-              updateBloc,
-              Stream.fromIterable(expectedStates),
-            );
+        patrolWidgetTest('Show nothing if prev state not initial', (PatrolTester $) async {
+          final expectedStates = [const UpdateState.connecting(), const UpdateState.initial(changelog: 'changelog')];
+          whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-            await $.pumpWidgetAndSettle(testWidget());
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-          },
-        );
+          await $.pumpWidgetAndSettle(testWidget());
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+        });
 
-        patrolWidgetTest(
-          'Show nothing if prev state initial and current not initial or updateAvailable',
-          (PatrolTester $) async {
-            final expectedStates = [
-              const UpdateState.initial(),
-              const UpdateState.connecting(),
-              const UpdateState.initial(),
-              const UpdateState.downloading(bytes: 1, total: 2),
-              const UpdateState.initial(),
-              const UpdateState.downloadError(error: 'error'),
-            ];
-            whenListen(
-              updateBloc,
-              Stream.fromIterable(expectedStates),
-            );
+        patrolWidgetTest('Show nothing if prev state initial and current not initial or updateAvailable', (
+          PatrolTester $,
+        ) async {
+          final expectedStates = [
+            const UpdateState.initial(),
+            const UpdateState.connecting(),
+            const UpdateState.initial(),
+            const UpdateState.downloading(bytes: 1, total: 2),
+            const UpdateState.initial(),
+            const UpdateState.downloadError(error: 'error'),
+          ];
+          whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-            await $.pumpWidget(testWidget());
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-            await $.pump();
-            expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
-            expect($(SnackBar), findsNothing);
-          },
-        );
+          await $.pumpWidget(testWidget());
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+          await $.pump();
+          expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
+          expect($(SnackBar), findsNothing);
+        });
       });
 
       group('Countdown listener', () {
-        patrolWidgetTest('Call beep from app if enable at settings',
-            (PatrolTester $) async {
+        patrolWidgetTest('Call beep from app if enable at settings', (PatrolTester $) async {
           settingsCubit.update(settingsCubit.state.copyWith(beepFromApp: true));
 
           final expectedStates = [
@@ -838,48 +680,29 @@ void main() {
             const CountdownState.initial(),
             const CountdownState.working(tick: Tick(second: 59, text: '1')),
           ];
-          whenListen(
-            countdownBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
           await $.pumpWidgetAndSettle(testWidget());
-          verify(
-            () => countdownBloc.add(const CountdownEvent.beep()),
-          ).called(1);
+          verify(() => countdownBloc.add(const CountdownEvent.beep())).called(1);
         });
 
-        patrolWidgetTest("Don't call beep from app if disabled at settings",
-            (PatrolTester $) async {
+        patrolWidgetTest("Don't call beep from app if disabled at settings", (PatrolTester $) async {
           final expectedStates = [
             const CountdownState.working(tick: Tick(second: 56, text: '4')),
             const CountdownState.working(tick: Tick(second: 57, text: '3')),
             const CountdownState.working(tick: Tick(second: 58, text: '2')),
             const CountdownState.working(tick: Tick(second: 59, text: '1')),
           ];
-          whenListen(
-            countdownBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
           await $.pumpWidgetAndSettle(testWidget());
-          verifyNever(
-            () => countdownBloc.add(any()),
-          );
+          verifyNever(() => countdownBloc.add(any()));
         });
 
-        patrolWidgetTest('Call participant from app if enable at settings',
-            (PatrolTester $) async {
-          settingsCubit
-              .update(settingsCubit.state.copyWith(voiceFromApp: true));
+        patrolWidgetTest('Call participant from app if enable at settings', (PatrolTester $) async {
+          settingsCubit.update(settingsCubit.state.copyWith(voiceFromApp: true));
 
-          const stage = Stage(
-            id: 1,
-            raceId: 1,
-            name: 'name',
-            isActive: true,
-            isDeleted: false,
-          );
+          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
 
           when(() => databaseBloc.state).thenReturn(
             const DatabaseState(
@@ -897,27 +720,17 @@ void main() {
           final expectedStates = [
             const CountdownState.working(tick: Tick(second: 8, text: '')),
             const CountdownState.working(tick: Tick(second: 9, text: '')),
-            const CountdownState.working(
-              tick: Tick(second: 10, text: '', callNextParticipant: true),
-            ),
+            const CountdownState.working(tick: Tick(second: 10, text: '', callNextParticipant: true)),
             const CountdownState.working(tick: Tick(second: 11, text: '')),
             const CountdownState.working(tick: Tick(second: 12, text: '')),
           ];
-          whenListen(
-            countdownBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
           await $.pumpWidgetAndSettle(testWidget());
-          verify(
-            () => countdownBloc
-                .add(CountdownEvent.callParticipant(stageId: stage.id)),
-          ).called(1);
+          verify(() => countdownBloc.add(CountdownEvent.callParticipant(stageId: stage.id))).called(1);
         });
 
-        patrolWidgetTest(
-            "Don't call participant from app if disabled at settings",
-            (PatrolTester $) async {
+        patrolWidgetTest("Don't call participant from app if disabled at settings", (PatrolTester $) async {
           final expectedStates = [
             const CountdownState.working(tick: Tick(second: 13, text: '')),
             const CountdownState.working(tick: Tick(second: 14, text: '')),
@@ -925,22 +738,14 @@ void main() {
             const CountdownState.working(tick: Tick(second: 16, text: '')),
             const CountdownState.working(tick: Tick(second: 17, text: '')),
           ];
-          whenListen(
-            countdownBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
           await $.pumpWidgetAndSettle(testWidget());
-          verifyNever(
-            () => countdownBloc.add(any()),
-          );
+          verifyNever(() => countdownBloc.add(any()));
         });
 
-        patrolWidgetTest(
-            "Don't call participant from app if stage not selected",
-            (PatrolTester $) async {
-          settingsCubit
-              .update(settingsCubit.state.copyWith(voiceFromApp: true));
+        patrolWidgetTest("Don't call participant from app if stage not selected", (PatrolTester $) async {
+          settingsCubit.update(settingsCubit.state.copyWith(voiceFromApp: true));
 
           final expectedStates = [
             const CountdownState.working(tick: Tick(second: 13, text: '')),
@@ -949,15 +754,10 @@ void main() {
             const CountdownState.working(tick: Tick(second: 16, text: '')),
             const CountdownState.working(tick: Tick(second: 17, text: '')),
           ];
-          whenListen(
-            countdownBloc,
-            Stream.fromIterable(expectedStates),
-          );
+          whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
           await $.pumpWidgetAndSettle(testWidget());
-          verifyNever(
-            () => countdownBloc.add(any()),
-          );
+          verifyNever(() => countdownBloc.add(any()));
         });
       });
     });
@@ -965,97 +765,75 @@ void main() {
     group('TextTitle tests', () {
       const raceName = 'race name123';
       const stageName = 'stage name123';
-      const race = Race(
-        id: 1,
-        name: raceName,
-        isDeleted: false,
-      );
-      const stage = Stage(
-        id: 1,
-        raceId: 1,
-        name: stageName,
-        isActive: true,
-        isDeleted: false,
-      );
-      patrolWidgetTest(
-        'App name if race or stage not selected',
-        (PatrolTester $) async {
-          when(() => databaseBloc.state).thenReturn(
-            const DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-            ),
-          );
-          await $.pumpWidgetAndSettle(testWidget());
-          expect($(TextTitle).$(pubspec.name), findsOneWidget);
-        },
-      );
+      const race = Race(id: 1, name: raceName, isDeleted: false);
+      const stage = Stage(id: 1, raceId: 1, name: stageName, isActive: true, isDeleted: false);
+      patrolWidgetTest('App name if race or stage not selected', (PatrolTester $) async {
+        when(() => databaseBloc.state).thenReturn(
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+          ),
+        );
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(TextTitle).$(pubspec.name), findsOneWidget);
+      });
 
-      patrolWidgetTest(
-        'Race name if selected',
-        (PatrolTester $) async {
-          when(() => databaseBloc.state).thenReturn(
-            const DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-              race: race,
-            ),
-          );
-          await $.pumpWidgetAndSettle(testWidget());
-          expect($(TextTitle).$(race.name), findsOneWidget);
-        },
-      );
+      patrolWidgetTest('Race name if selected', (PatrolTester $) async {
+        when(() => databaseBloc.state).thenReturn(
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            race: race,
+          ),
+        );
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(TextTitle).$(race.name), findsOneWidget);
+      });
 
-      patrolWidgetTest(
-        'Stage name if selected',
-        (PatrolTester $) async {
-          when(() => databaseBloc.state).thenReturn(
-            const DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-              race: race,
-              stage: stage,
-            ),
-          );
-          await $.pumpWidgetAndSettle(testWidget());
-          expect($(TextTitle).$(stageName), findsOneWidget);
-        },
-      );
+      patrolWidgetTest('Stage name if selected', (PatrolTester $) async {
+        when(() => databaseBloc.state).thenReturn(
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            race: race,
+            stage: stage,
+          ),
+        );
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(TextTitle).$(stageName), findsOneWidget);
+      });
 
-      patrolWidgetTest(
-        'Stage name if selected w/o race',
-        (PatrolTester $) async {
-          when(() => databaseBloc.state).thenReturn(
-            const DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-              stage: stage,
-            ),
-          );
-          await $.pumpWidgetAndSettle(testWidget());
-          expect($(TextTitle).$(stageName), findsOneWidget);
-        },
-      );
+      patrolWidgetTest('Stage name if selected w/o race', (PatrolTester $) async {
+        when(() => databaseBloc.state).thenReturn(
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(TextTitle).$(stageName), findsOneWidget);
+      });
     });
   });
 }

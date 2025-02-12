@@ -1,9 +1,6 @@
 part of '../start_list_page.dart';
 
-Future<bool?> overwriteStartTimePopup({
-  required BuildContext context,
-  required String text,
-}) async => showDialog<bool>(
+Future<bool?> overwriteStartTimePopup({required BuildContext context, required String text}) async => showDialog<bool>(
   context: context,
   builder:
       (context) => AlertDialog(

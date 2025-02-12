@@ -9,11 +9,9 @@ abstract interface class IAudioService {
 }
 
 class AudioService implements IAudioService {
-  AudioService({
-    required ISettingsProvider settings,
-    required IAudioProvider audio,
-  }) : _settings = settings,
-       _audio = audio {
+  AudioService({required ISettingsProvider settings, required IAudioProvider audio})
+    : _settings = settings,
+      _audio = audio {
     _settings.state.listen((settings) {
       _sound = settings.sound;
       _voice = settings.voice;
