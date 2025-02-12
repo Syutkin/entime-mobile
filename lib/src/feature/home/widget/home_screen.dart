@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../constants/pubspec.yaml.g.dart';
+import '../../../constants/pubspec.yaml.g.dart' as pubspec;
 import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
@@ -301,7 +301,7 @@ class TextTitle extends StatelessWidget {
             if (race != null) {
               return Text(race.name);
             } else {
-              return const Text(Pubspec.name);
+              return const Text(pubspec.name);
             }
           }
         },

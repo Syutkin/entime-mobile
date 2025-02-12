@@ -5,7 +5,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:entime/src/constants/pubspec.yaml.g.dart';
+import 'package:entime/src/constants/pubspec.yaml.g.dart' as pubspec;
 import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/ntp/bloc/ntp_bloc.dart';
@@ -231,7 +231,7 @@ class EntimeAppView extends StatelessWidget {
           dynamicSchemeVariant: state.dynamicSchemeVariant,
           isOLEDBackground: state.isOLEDBackground,
         ),
-        title: Pubspec.name,
+        title: pubspec.name,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

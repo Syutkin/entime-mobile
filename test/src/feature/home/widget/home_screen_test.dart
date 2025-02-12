@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
-import 'package:entime/src/constants/pubspec.yaml.g.dart';
+import 'package:entime/src/constants/pubspec.yaml.g.dart' as pubspec;
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
 import 'package:entime/src/feature/countdown/countdown.dart';
@@ -992,7 +992,7 @@ void main() {
             ),
           );
           await $.pumpWidgetAndSettle(testWidget());
-          expect($(TextTitle).$(Pubspec.name), findsOneWidget);
+          expect($(TextTitle).$(pubspec.name), findsOneWidget);
         },
       );
 

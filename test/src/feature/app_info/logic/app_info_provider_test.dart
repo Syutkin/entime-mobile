@@ -1,5 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:entime/src/constants/pubspec.yaml.g.dart';
+import 'package:entime/src/constants/pubspec.yaml.g.dart' as pubspec;
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -29,21 +29,21 @@ void main() {
     });
 
     test('Get appName', () async {
-      expect(appInfoProvider.appName, Pubspec.name);
+      expect(appInfoProvider.appName, pubspec.name);
     });
 
     test('Get buildNumber', () async {
-      expect(appInfoProvider.buildNumber, Pubspec.version.build[0]);
+      expect(appInfoProvider.buildNumber, pubspec.build[0]);
     });
 
     test('Get version', () async {
-      if (Pubspec.version.preRelease.isEmpty) {
+      if (pubspec.pre.isEmpty) {
         expect(
           appInfoProvider.version,
-          '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}',
+          '${pubspec.major}.${pubspec.minor}.${pubspec.patch}',
         );
       } else {
-        expect(appInfoProvider.version, Pubspec.version.canonical);
+        expect(appInfoProvider.version, pubspec.version);
       }
     });
 
