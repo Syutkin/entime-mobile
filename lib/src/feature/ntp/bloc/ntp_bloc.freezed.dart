@@ -12,7 +12,8 @@ part of 'ntp_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$NtpEvent {
@@ -22,42 +23,48 @@ mixin _$NtpEvent {
   Duration? get cacheDuration => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? lookUpAddress, int? port,
-            Duration? timeout, Duration? cacheDuration)
-        getNtpOffset,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(
+      String? lookUpAddress,
+      int? port,
+      Duration? timeout,
+      Duration? cacheDuration,
+    )
+    getNtpOffset,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? lookUpAddress, int? port, Duration? timeout,
-            Duration? cacheDuration)?
-        getNtpOffset,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function(
+      String? lookUpAddress,
+      int? port,
+      Duration? timeout,
+      Duration? cacheDuration,
+    )?
+    getNtpOffset,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? lookUpAddress, int? port, Duration? timeout,
-            Duration? cacheDuration)?
-        getNtpOffset,
+    TResult Function(
+      String? lookUpAddress,
+      int? port,
+      Duration? timeout,
+      Duration? cacheDuration,
+    )?
+    getNtpOffset,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNtpOffset value) getNtpOffset,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetNtpOffset value)? getNtpOffset,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNtpOffset value)? getNtpOffset,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 
   /// Create a copy of NtpEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -71,11 +78,12 @@ abstract class $NtpEventCopyWith<$Res> {
   factory $NtpEventCopyWith(NtpEvent value, $Res Function(NtpEvent) then) =
       _$NtpEventCopyWithImpl<$Res, NtpEvent>;
   @useResult
-  $Res call(
-      {String? lookUpAddress,
-      int? port,
-      Duration? timeout,
-      Duration? cacheDuration});
+  $Res call({
+    String? lookUpAddress,
+    int? port,
+    Duration? timeout,
+    Duration? cacheDuration,
+  });
 }
 
 /// @nodoc
@@ -98,24 +106,31 @@ class _$NtpEventCopyWithImpl<$Res, $Val extends NtpEvent>
     Object? timeout = freezed,
     Object? cacheDuration = freezed,
   }) {
-    return _then(_value.copyWith(
-      lookUpAddress: freezed == lookUpAddress
-          ? _value.lookUpAddress
-          : lookUpAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      port: freezed == port
-          ? _value.port
-          : port // ignore: cast_nullable_to_non_nullable
-              as int?,
-      timeout: freezed == timeout
-          ? _value.timeout
-          : timeout // ignore: cast_nullable_to_non_nullable
-              as Duration?,
-      cacheDuration: freezed == cacheDuration
-          ? _value.cacheDuration
-          : cacheDuration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            lookUpAddress:
+                freezed == lookUpAddress
+                    ? _value.lookUpAddress
+                    : lookUpAddress // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            port:
+                freezed == port
+                    ? _value.port
+                    : port // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            timeout:
+                freezed == timeout
+                    ? _value.timeout
+                    : timeout // ignore: cast_nullable_to_non_nullable
+                        as Duration?,
+            cacheDuration:
+                freezed == cacheDuration
+                    ? _value.cacheDuration
+                    : cacheDuration // ignore: cast_nullable_to_non_nullable
+                        as Duration?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -123,15 +138,17 @@ class _$NtpEventCopyWithImpl<$Res, $Val extends NtpEvent>
 abstract class _$$GetNtpOffsetImplCopyWith<$Res>
     implements $NtpEventCopyWith<$Res> {
   factory _$$GetNtpOffsetImplCopyWith(
-          _$GetNtpOffsetImpl value, $Res Function(_$GetNtpOffsetImpl) then) =
-      __$$GetNtpOffsetImplCopyWithImpl<$Res>;
+    _$GetNtpOffsetImpl value,
+    $Res Function(_$GetNtpOffsetImpl) then,
+  ) = __$$GetNtpOffsetImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? lookUpAddress,
-      int? port,
-      Duration? timeout,
-      Duration? cacheDuration});
+  $Res call({
+    String? lookUpAddress,
+    int? port,
+    Duration? timeout,
+    Duration? cacheDuration,
+  });
 }
 
 /// @nodoc
@@ -139,8 +156,9 @@ class __$$GetNtpOffsetImplCopyWithImpl<$Res>
     extends _$NtpEventCopyWithImpl<$Res, _$GetNtpOffsetImpl>
     implements _$$GetNtpOffsetImplCopyWith<$Res> {
   __$$GetNtpOffsetImplCopyWithImpl(
-      _$GetNtpOffsetImpl _value, $Res Function(_$GetNtpOffsetImpl) _then)
-      : super(_value, _then);
+    _$GetNtpOffsetImpl _value,
+    $Res Function(_$GetNtpOffsetImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of NtpEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -152,32 +170,42 @@ class __$$GetNtpOffsetImplCopyWithImpl<$Res>
     Object? timeout = freezed,
     Object? cacheDuration = freezed,
   }) {
-    return _then(_$GetNtpOffsetImpl(
-      lookUpAddress: freezed == lookUpAddress
-          ? _value.lookUpAddress
-          : lookUpAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      port: freezed == port
-          ? _value.port
-          : port // ignore: cast_nullable_to_non_nullable
-              as int?,
-      timeout: freezed == timeout
-          ? _value.timeout
-          : timeout // ignore: cast_nullable_to_non_nullable
-              as Duration?,
-      cacheDuration: freezed == cacheDuration
-          ? _value.cacheDuration
-          : cacheDuration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
-    ));
+    return _then(
+      _$GetNtpOffsetImpl(
+        lookUpAddress:
+            freezed == lookUpAddress
+                ? _value.lookUpAddress
+                : lookUpAddress // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        port:
+            freezed == port
+                ? _value.port
+                : port // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        timeout:
+            freezed == timeout
+                ? _value.timeout
+                : timeout // ignore: cast_nullable_to_non_nullable
+                    as Duration?,
+        cacheDuration:
+            freezed == cacheDuration
+                ? _value.cacheDuration
+                : cacheDuration // ignore: cast_nullable_to_non_nullable
+                    as Duration?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$GetNtpOffsetImpl implements _GetNtpOffset {
-  const _$GetNtpOffsetImpl(
-      {this.lookUpAddress, this.port, this.timeout, this.cacheDuration});
+  const _$GetNtpOffsetImpl({
+    this.lookUpAddress,
+    this.port,
+    this.timeout,
+    this.cacheDuration,
+  });
 
   @override
   final String? lookUpAddress;
@@ -221,9 +249,13 @@ class _$GetNtpOffsetImpl implements _GetNtpOffset {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? lookUpAddress, int? port,
-            Duration? timeout, Duration? cacheDuration)
-        getNtpOffset,
+    required TResult Function(
+      String? lookUpAddress,
+      int? port,
+      Duration? timeout,
+      Duration? cacheDuration,
+    )
+    getNtpOffset,
   }) {
     return getNtpOffset(lookUpAddress, port, timeout, cacheDuration);
   }
@@ -231,9 +263,13 @@ class _$GetNtpOffsetImpl implements _GetNtpOffset {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? lookUpAddress, int? port, Duration? timeout,
-            Duration? cacheDuration)?
-        getNtpOffset,
+    TResult? Function(
+      String? lookUpAddress,
+      int? port,
+      Duration? timeout,
+      Duration? cacheDuration,
+    )?
+    getNtpOffset,
   }) {
     return getNtpOffset?.call(lookUpAddress, port, timeout, cacheDuration);
   }
@@ -241,9 +277,13 @@ class _$GetNtpOffsetImpl implements _GetNtpOffset {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? lookUpAddress, int? port, Duration? timeout,
-            Duration? cacheDuration)?
-        getNtpOffset,
+    TResult Function(
+      String? lookUpAddress,
+      int? port,
+      Duration? timeout,
+      Duration? cacheDuration,
+    )?
+    getNtpOffset,
     required TResult orElse(),
   }) {
     if (getNtpOffset != null) {
@@ -282,11 +322,12 @@ class _$GetNtpOffsetImpl implements _GetNtpOffset {
 }
 
 abstract class _GetNtpOffset implements NtpEvent {
-  const factory _GetNtpOffset(
-      {final String? lookUpAddress,
-      final int? port,
-      final Duration? timeout,
-      final Duration? cacheDuration}) = _$GetNtpOffsetImpl;
+  const factory _GetNtpOffset({
+    final String? lookUpAddress,
+    final int? port,
+    final Duration? timeout,
+    final Duration? cacheDuration,
+  }) = _$GetNtpOffsetImpl;
 
   @override
   String? get lookUpAddress;
@@ -314,16 +355,14 @@ mixin _$NtpState {
     required TResult Function(int offset) loading,
     required TResult Function(int offset) success,
     required TResult Function(int offset) failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int offset)? initial,
     TResult? Function(int offset)? loading,
     TResult? Function(int offset)? success,
     TResult? Function(int offset)? failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int offset)? initial,
@@ -331,24 +370,21 @@ mixin _$NtpState {
     TResult Function(int offset)? success,
     TResult Function(int offset)? failure,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialState value) initial,
     required TResult Function(_LoadingState value) loading,
     required TResult Function(_SuccessState value) success,
     required TResult Function(_FailureState value) failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitialState value)? initial,
     TResult? Function(_LoadingState value)? loading,
     TResult? Function(_SuccessState value)? success,
     TResult? Function(_FailureState value)? failure,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialState value)? initial,
@@ -356,8 +392,7 @@ mixin _$NtpState {
     TResult Function(_SuccessState value)? success,
     TResult Function(_FailureState value)? failure,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 
   /// Create a copy of NtpState
   /// with the given fields replaced by the non-null parameter values.
@@ -388,15 +423,17 @@ class _$NtpStateCopyWithImpl<$Res, $Val extends NtpState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? offset = null,
-  }) {
-    return _then(_value.copyWith(
-      offset: null == offset
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  $Res call({Object? offset = null}) {
+    return _then(
+      _value.copyWith(
+            offset:
+                null == offset
+                    ? _value.offset
+                    : offset // ignore: cast_nullable_to_non_nullable
+                        as int,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -404,8 +441,9 @@ class _$NtpStateCopyWithImpl<$Res, $Val extends NtpState>
 abstract class _$$InitialStateImplCopyWith<$Res>
     implements $NtpStateCopyWith<$Res> {
   factory _$$InitialStateImplCopyWith(
-          _$InitialStateImpl value, $Res Function(_$InitialStateImpl) then) =
-      __$$InitialStateImplCopyWithImpl<$Res>;
+    _$InitialStateImpl value,
+    $Res Function(_$InitialStateImpl) then,
+  ) = __$$InitialStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int offset});
@@ -416,22 +454,23 @@ class __$$InitialStateImplCopyWithImpl<$Res>
     extends _$NtpStateCopyWithImpl<$Res, _$InitialStateImpl>
     implements _$$InitialStateImplCopyWith<$Res> {
   __$$InitialStateImplCopyWithImpl(
-      _$InitialStateImpl _value, $Res Function(_$InitialStateImpl) _then)
-      : super(_value, _then);
+    _$InitialStateImpl _value,
+    $Res Function(_$InitialStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of NtpState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? offset = null,
-  }) {
-    return _then(_$InitialStateImpl(
-      null == offset
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? offset = null}) {
+    return _then(
+      _$InitialStateImpl(
+        null == offset
+            ? _value.offset
+            : offset // ignore: cast_nullable_to_non_nullable
+                as int,
+      ),
+    );
   }
 }
 
@@ -560,8 +599,9 @@ abstract class _InitialState implements NtpState {
 abstract class _$$LoadingStateImplCopyWith<$Res>
     implements $NtpStateCopyWith<$Res> {
   factory _$$LoadingStateImplCopyWith(
-          _$LoadingStateImpl value, $Res Function(_$LoadingStateImpl) then) =
-      __$$LoadingStateImplCopyWithImpl<$Res>;
+    _$LoadingStateImpl value,
+    $Res Function(_$LoadingStateImpl) then,
+  ) = __$$LoadingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int offset});
@@ -572,22 +612,23 @@ class __$$LoadingStateImplCopyWithImpl<$Res>
     extends _$NtpStateCopyWithImpl<$Res, _$LoadingStateImpl>
     implements _$$LoadingStateImplCopyWith<$Res> {
   __$$LoadingStateImplCopyWithImpl(
-      _$LoadingStateImpl _value, $Res Function(_$LoadingStateImpl) _then)
-      : super(_value, _then);
+    _$LoadingStateImpl _value,
+    $Res Function(_$LoadingStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of NtpState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? offset = null,
-  }) {
-    return _then(_$LoadingStateImpl(
-      null == offset
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? offset = null}) {
+    return _then(
+      _$LoadingStateImpl(
+        null == offset
+            ? _value.offset
+            : offset // ignore: cast_nullable_to_non_nullable
+                as int,
+      ),
+    );
   }
 }
 
@@ -716,8 +757,9 @@ abstract class _LoadingState implements NtpState {
 abstract class _$$SuccessStateImplCopyWith<$Res>
     implements $NtpStateCopyWith<$Res> {
   factory _$$SuccessStateImplCopyWith(
-          _$SuccessStateImpl value, $Res Function(_$SuccessStateImpl) then) =
-      __$$SuccessStateImplCopyWithImpl<$Res>;
+    _$SuccessStateImpl value,
+    $Res Function(_$SuccessStateImpl) then,
+  ) = __$$SuccessStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int offset});
@@ -728,22 +770,23 @@ class __$$SuccessStateImplCopyWithImpl<$Res>
     extends _$NtpStateCopyWithImpl<$Res, _$SuccessStateImpl>
     implements _$$SuccessStateImplCopyWith<$Res> {
   __$$SuccessStateImplCopyWithImpl(
-      _$SuccessStateImpl _value, $Res Function(_$SuccessStateImpl) _then)
-      : super(_value, _then);
+    _$SuccessStateImpl _value,
+    $Res Function(_$SuccessStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of NtpState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? offset = null,
-  }) {
-    return _then(_$SuccessStateImpl(
-      null == offset
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? offset = null}) {
+    return _then(
+      _$SuccessStateImpl(
+        null == offset
+            ? _value.offset
+            : offset // ignore: cast_nullable_to_non_nullable
+                as int,
+      ),
+    );
   }
 }
 
@@ -872,8 +915,9 @@ abstract class _SuccessState implements NtpState {
 abstract class _$$FailureStateImplCopyWith<$Res>
     implements $NtpStateCopyWith<$Res> {
   factory _$$FailureStateImplCopyWith(
-          _$FailureStateImpl value, $Res Function(_$FailureStateImpl) then) =
-      __$$FailureStateImplCopyWithImpl<$Res>;
+    _$FailureStateImpl value,
+    $Res Function(_$FailureStateImpl) then,
+  ) = __$$FailureStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int offset});
@@ -884,22 +928,23 @@ class __$$FailureStateImplCopyWithImpl<$Res>
     extends _$NtpStateCopyWithImpl<$Res, _$FailureStateImpl>
     implements _$$FailureStateImplCopyWith<$Res> {
   __$$FailureStateImplCopyWithImpl(
-      _$FailureStateImpl _value, $Res Function(_$FailureStateImpl) _then)
-      : super(_value, _then);
+    _$FailureStateImpl _value,
+    $Res Function(_$FailureStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of NtpState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? offset = null,
-  }) {
-    return _then(_$FailureStateImpl(
-      null == offset
-          ? _value.offset
-          : offset // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? offset = null}) {
+    return _then(
+      _$FailureStateImpl(
+        null == offset
+            ? _value.offset
+            : offset // ignore: cast_nullable_to_non_nullable
+                as int,
+      ),
+    );
   }
 }
 

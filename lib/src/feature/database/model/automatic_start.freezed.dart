@@ -12,7 +12,8 @@ part of 'automatic_start.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AutomaticStart {
@@ -35,8 +36,9 @@ mixin _$AutomaticStart {
 /// @nodoc
 abstract class $AutomaticStartCopyWith<$Res> {
   factory $AutomaticStartCopyWith(
-          AutomaticStart value, $Res Function(AutomaticStart) then) =
-      _$AutomaticStartCopyWithImpl<$Res, AutomaticStart>;
+    AutomaticStart value,
+    $Res Function(AutomaticStart) then,
+  ) = _$AutomaticStartCopyWithImpl<$Res, AutomaticStart>;
   @useResult
   $Res call({String time, int correction, DateTime timestamp, bool updating});
 }
@@ -61,33 +63,41 @@ class _$AutomaticStartCopyWithImpl<$Res, $Val extends AutomaticStart>
     Object? timestamp = null,
     Object? updating = null,
   }) {
-    return _then(_value.copyWith(
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as String,
-      correction: null == correction
-          ? _value.correction
-          : correction // ignore: cast_nullable_to_non_nullable
-              as int,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updating: null == updating
-          ? _value.updating
-          : updating // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            time:
+                null == time
+                    ? _value.time
+                    : time // ignore: cast_nullable_to_non_nullable
+                        as String,
+            correction:
+                null == correction
+                    ? _value.correction
+                    : correction // ignore: cast_nullable_to_non_nullable
+                        as int,
+            timestamp:
+                null == timestamp
+                    ? _value.timestamp
+                    : timestamp // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+            updating:
+                null == updating
+                    ? _value.updating
+                    : updating // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AutomaticStartImplCopyWith<$Res>
     implements $AutomaticStartCopyWith<$Res> {
-  factory _$$AutomaticStartImplCopyWith(_$AutomaticStartImpl value,
-          $Res Function(_$AutomaticStartImpl) then) =
-      __$$AutomaticStartImplCopyWithImpl<$Res>;
+  factory _$$AutomaticStartImplCopyWith(
+    _$AutomaticStartImpl value,
+    $Res Function(_$AutomaticStartImpl) then,
+  ) = __$$AutomaticStartImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String time, int correction, DateTime timestamp, bool updating});
@@ -98,8 +108,9 @@ class __$$AutomaticStartImplCopyWithImpl<$Res>
     extends _$AutomaticStartCopyWithImpl<$Res, _$AutomaticStartImpl>
     implements _$$AutomaticStartImplCopyWith<$Res> {
   __$$AutomaticStartImplCopyWithImpl(
-      _$AutomaticStartImpl _value, $Res Function(_$AutomaticStartImpl) _then)
-      : super(_value, _then);
+    _$AutomaticStartImpl _value,
+    $Res Function(_$AutomaticStartImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AutomaticStart
   /// with the given fields replaced by the non-null parameter values.
@@ -111,32 +122,39 @@ class __$$AutomaticStartImplCopyWithImpl<$Res>
     Object? timestamp = null,
     Object? updating = null,
   }) {
-    return _then(_$AutomaticStartImpl(
-      null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == correction
-          ? _value.correction
-          : correction // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updating: null == updating
-          ? _value.updating
-          : updating // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$AutomaticStartImpl(
+        null == time
+            ? _value.time
+            : time // ignore: cast_nullable_to_non_nullable
+                as String,
+        null == correction
+            ? _value.correction
+            : correction // ignore: cast_nullable_to_non_nullable
+                as int,
+        null == timestamp
+            ? _value.timestamp
+            : timestamp // ignore: cast_nullable_to_non_nullable
+                as DateTime,
+        updating:
+            null == updating
+                ? _value.updating
+                : updating // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$AutomaticStartImpl implements _AutomaticStart {
-  _$AutomaticStartImpl(this.time, this.correction, this.timestamp,
-      {this.updating = false});
+  _$AutomaticStartImpl(
+    this.time,
+    this.correction,
+    this.timestamp, {
+    this.updating = false,
+  });
 
   @override
   String time;
@@ -160,12 +178,18 @@ class _$AutomaticStartImpl implements _AutomaticStart {
   @pragma('vm:prefer-inline')
   _$$AutomaticStartImplCopyWith<_$AutomaticStartImpl> get copyWith =>
       __$$AutomaticStartImplCopyWithImpl<_$AutomaticStartImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 }
 
 abstract class _AutomaticStart implements AutomaticStart {
-  factory _AutomaticStart(String time, int correction, DateTime timestamp,
-      {bool updating}) = _$AutomaticStartImpl;
+  factory _AutomaticStart(
+    String time,
+    int correction,
+    DateTime timestamp, {
+    bool updating,
+  }) = _$AutomaticStartImpl;
 
   @override
   String get time;

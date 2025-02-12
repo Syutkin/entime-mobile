@@ -12,7 +12,8 @@ part of 'connectivity_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$ConnectivityEvent {
@@ -20,35 +21,29 @@ mixin _$ConnectivityEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isConnected) emit,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isConnected)? emit,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isConnected)? emit,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Emit value) emit,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Emit value)? emit,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Emit value)? emit,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 
   /// Create a copy of ConnectivityEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -60,8 +55,9 @@ mixin _$ConnectivityEvent {
 /// @nodoc
 abstract class $ConnectivityEventCopyWith<$Res> {
   factory $ConnectivityEventCopyWith(
-          ConnectivityEvent value, $Res Function(ConnectivityEvent) then) =
-      _$ConnectivityEventCopyWithImpl<$Res, ConnectivityEvent>;
+    ConnectivityEvent value,
+    $Res Function(ConnectivityEvent) then,
+  ) = _$ConnectivityEventCopyWithImpl<$Res, ConnectivityEvent>;
   @useResult
   $Res call({bool isConnected});
 }
@@ -80,15 +76,17 @@ class _$ConnectivityEventCopyWithImpl<$Res, $Val extends ConnectivityEvent>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isConnected = null,
-  }) {
-    return _then(_value.copyWith(
-      isConnected: null == isConnected
-          ? _value.isConnected
-          : isConnected // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  $Res call({Object? isConnected = null}) {
+    return _then(
+      _value.copyWith(
+            isConnected:
+                null == isConnected
+                    ? _value.isConnected
+                    : isConnected // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -96,8 +94,9 @@ class _$ConnectivityEventCopyWithImpl<$Res, $Val extends ConnectivityEvent>
 abstract class _$$EmitImplCopyWith<$Res>
     implements $ConnectivityEventCopyWith<$Res> {
   factory _$$EmitImplCopyWith(
-          _$EmitImpl value, $Res Function(_$EmitImpl) then) =
-      __$$EmitImplCopyWithImpl<$Res>;
+    _$EmitImpl value,
+    $Res Function(_$EmitImpl) then,
+  ) = __$$EmitImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isConnected});
@@ -108,21 +107,22 @@ class __$$EmitImplCopyWithImpl<$Res>
     extends _$ConnectivityEventCopyWithImpl<$Res, _$EmitImpl>
     implements _$$EmitImplCopyWith<$Res> {
   __$$EmitImplCopyWithImpl(_$EmitImpl _value, $Res Function(_$EmitImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of ConnectivityEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isConnected = null,
-  }) {
-    return _then(_$EmitImpl(
-      isConnected: null == isConnected
-          ? _value.isConnected
-          : isConnected // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+  $Res call({Object? isConnected = null}) {
+    return _then(
+      _$EmitImpl(
+        isConnected:
+            null == isConnected
+                ? _value.isConnected
+                : isConnected // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
@@ -236,35 +236,29 @@ mixin _$ConnectivityState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isConnected) state,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isConnected)? state,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isConnected)? state,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ConnectivityState value) state,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ConnectivityState value)? state,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ConnectivityState value)? state,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 
   /// Create a copy of ConnectivityState
   /// with the given fields replaced by the non-null parameter values.
@@ -276,8 +270,9 @@ mixin _$ConnectivityState {
 /// @nodoc
 abstract class $ConnectivityStateCopyWith<$Res> {
   factory $ConnectivityStateCopyWith(
-          ConnectivityState value, $Res Function(ConnectivityState) then) =
-      _$ConnectivityStateCopyWithImpl<$Res, ConnectivityState>;
+    ConnectivityState value,
+    $Res Function(ConnectivityState) then,
+  ) = _$ConnectivityStateCopyWithImpl<$Res, ConnectivityState>;
   @useResult
   $Res call({bool isConnected});
 }
@@ -296,24 +291,27 @@ class _$ConnectivityStateCopyWithImpl<$Res, $Val extends ConnectivityState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isConnected = null,
-  }) {
-    return _then(_value.copyWith(
-      isConnected: null == isConnected
-          ? _value.isConnected
-          : isConnected // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  $Res call({Object? isConnected = null}) {
+    return _then(
+      _value.copyWith(
+            isConnected:
+                null == isConnected
+                    ? _value.isConnected
+                    : isConnected // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$ConnectivityStateImplCopyWith<$Res>
     implements $ConnectivityStateCopyWith<$Res> {
-  factory _$$ConnectivityStateImplCopyWith(_$ConnectivityStateImpl value,
-          $Res Function(_$ConnectivityStateImpl) then) =
-      __$$ConnectivityStateImplCopyWithImpl<$Res>;
+  factory _$$ConnectivityStateImplCopyWith(
+    _$ConnectivityStateImpl value,
+    $Res Function(_$ConnectivityStateImpl) then,
+  ) = __$$ConnectivityStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isConnected});
@@ -323,23 +321,25 @@ abstract class _$$ConnectivityStateImplCopyWith<$Res>
 class __$$ConnectivityStateImplCopyWithImpl<$Res>
     extends _$ConnectivityStateCopyWithImpl<$Res, _$ConnectivityStateImpl>
     implements _$$ConnectivityStateImplCopyWith<$Res> {
-  __$$ConnectivityStateImplCopyWithImpl(_$ConnectivityStateImpl _value,
-      $Res Function(_$ConnectivityStateImpl) _then)
-      : super(_value, _then);
+  __$$ConnectivityStateImplCopyWithImpl(
+    _$ConnectivityStateImpl _value,
+    $Res Function(_$ConnectivityStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ConnectivityState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isConnected = null,
-  }) {
-    return _then(_$ConnectivityStateImpl(
-      isConnected: null == isConnected
-          ? _value.isConnected
-          : isConnected // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+  $Res call({Object? isConnected = null}) {
+    return _then(
+      _$ConnectivityStateImpl(
+        isConnected:
+            null == isConnected
+                ? _value.isConnected
+                : isConnected // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
@@ -375,7 +375,9 @@ class _$ConnectivityStateImpl implements _ConnectivityState {
   @pragma('vm:prefer-inline')
   _$$ConnectivityStateImplCopyWith<_$ConnectivityStateImpl> get copyWith =>
       __$$ConnectivityStateImplCopyWithImpl<_$ConnectivityStateImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs

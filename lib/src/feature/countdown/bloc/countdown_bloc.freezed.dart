@@ -12,7 +12,8 @@ part of 'countdown_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$CountdownEvent {
@@ -22,16 +23,14 @@ mixin _$CountdownEvent {
     required TResult Function(int stageId) start,
     required TResult Function() beep,
     required TResult Function(int stageId) callParticipant,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Tick tick)? tick,
     TResult? Function(int stageId)? start,
     TResult? Function()? beep,
     TResult? Function(int stageId)? callParticipant,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Tick tick)? tick,
@@ -39,24 +38,21 @@ mixin _$CountdownEvent {
     TResult Function()? beep,
     TResult Function(int stageId)? callParticipant,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_CountdownTick value) tick,
     required TResult Function(_CountdownStart value) start,
     required TResult Function(_CountdownBeep value) beep,
     required TResult Function(_CountdownCallParticipant value) callParticipant,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CountdownTick value)? tick,
     TResult? Function(_CountdownStart value)? start,
     TResult? Function(_CountdownBeep value)? beep,
     TResult? Function(_CountdownCallParticipant value)? callParticipant,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CountdownTick value)? tick,
@@ -64,15 +60,15 @@ mixin _$CountdownEvent {
     TResult Function(_CountdownBeep value)? beep,
     TResult Function(_CountdownCallParticipant value)? callParticipant,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CountdownEventCopyWith<$Res> {
   factory $CountdownEventCopyWith(
-          CountdownEvent value, $Res Function(CountdownEvent) then) =
-      _$CountdownEventCopyWithImpl<$Res, CountdownEvent>;
+    CountdownEvent value,
+    $Res Function(CountdownEvent) then,
+  ) = _$CountdownEventCopyWithImpl<$Res, CountdownEvent>;
 }
 
 /// @nodoc
@@ -92,8 +88,9 @@ class _$CountdownEventCopyWithImpl<$Res, $Val extends CountdownEvent>
 /// @nodoc
 abstract class _$$CountdownTickImplCopyWith<$Res> {
   factory _$$CountdownTickImplCopyWith(
-          _$CountdownTickImpl value, $Res Function(_$CountdownTickImpl) then) =
-      __$$CountdownTickImplCopyWithImpl<$Res>;
+    _$CountdownTickImpl value,
+    $Res Function(_$CountdownTickImpl) then,
+  ) = __$$CountdownTickImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Tick tick});
 }
@@ -103,22 +100,23 @@ class __$$CountdownTickImplCopyWithImpl<$Res>
     extends _$CountdownEventCopyWithImpl<$Res, _$CountdownTickImpl>
     implements _$$CountdownTickImplCopyWith<$Res> {
   __$$CountdownTickImplCopyWithImpl(
-      _$CountdownTickImpl _value, $Res Function(_$CountdownTickImpl) _then)
-      : super(_value, _then);
+    _$CountdownTickImpl _value,
+    $Res Function(_$CountdownTickImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CountdownEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? tick = null,
-  }) {
-    return _then(_$CountdownTickImpl(
-      null == tick
-          ? _value.tick
-          : tick // ignore: cast_nullable_to_non_nullable
-              as Tick,
-    ));
+  $Res call({Object? tick = null}) {
+    return _then(
+      _$CountdownTickImpl(
+        null == tick
+            ? _value.tick
+            : tick // ignore: cast_nullable_to_non_nullable
+                as Tick,
+      ),
+    );
   }
 }
 
@@ -243,9 +241,10 @@ abstract class _CountdownTick implements CountdownEvent {
 
 /// @nodoc
 abstract class _$$CountdownStartImplCopyWith<$Res> {
-  factory _$$CountdownStartImplCopyWith(_$CountdownStartImpl value,
-          $Res Function(_$CountdownStartImpl) then) =
-      __$$CountdownStartImplCopyWithImpl<$Res>;
+  factory _$$CountdownStartImplCopyWith(
+    _$CountdownStartImpl value,
+    $Res Function(_$CountdownStartImpl) then,
+  ) = __$$CountdownStartImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int stageId});
 }
@@ -255,22 +254,24 @@ class __$$CountdownStartImplCopyWithImpl<$Res>
     extends _$CountdownEventCopyWithImpl<$Res, _$CountdownStartImpl>
     implements _$$CountdownStartImplCopyWith<$Res> {
   __$$CountdownStartImplCopyWithImpl(
-      _$CountdownStartImpl _value, $Res Function(_$CountdownStartImpl) _then)
-      : super(_value, _then);
+    _$CountdownStartImpl _value,
+    $Res Function(_$CountdownStartImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CountdownEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? stageId = null,
-  }) {
-    return _then(_$CountdownStartImpl(
-      stageId: null == stageId
-          ? _value.stageId
-          : stageId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? stageId = null}) {
+    return _then(
+      _$CountdownStartImpl(
+        stageId:
+            null == stageId
+                ? _value.stageId
+                : stageId // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -305,7 +306,9 @@ class _$CountdownStartImpl implements _CountdownStart {
   @pragma('vm:prefer-inline')
   _$$CountdownStartImplCopyWith<_$CountdownStartImpl> get copyWith =>
       __$$CountdownStartImplCopyWithImpl<_$CountdownStartImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -398,8 +401,9 @@ abstract class _CountdownStart implements CountdownEvent {
 /// @nodoc
 abstract class _$$CountdownBeepImplCopyWith<$Res> {
   factory _$$CountdownBeepImplCopyWith(
-          _$CountdownBeepImpl value, $Res Function(_$CountdownBeepImpl) then) =
-      __$$CountdownBeepImplCopyWithImpl<$Res>;
+    _$CountdownBeepImpl value,
+    $Res Function(_$CountdownBeepImpl) then,
+  ) = __$$CountdownBeepImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -407,8 +411,9 @@ class __$$CountdownBeepImplCopyWithImpl<$Res>
     extends _$CountdownEventCopyWithImpl<$Res, _$CountdownBeepImpl>
     implements _$$CountdownBeepImplCopyWith<$Res> {
   __$$CountdownBeepImplCopyWithImpl(
-      _$CountdownBeepImpl _value, $Res Function(_$CountdownBeepImpl) _then)
-      : super(_value, _then);
+    _$CountdownBeepImpl _value,
+    $Res Function(_$CountdownBeepImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CountdownEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -515,9 +520,9 @@ abstract class _CountdownBeep implements CountdownEvent {
 /// @nodoc
 abstract class _$$CountdownCallParticipantImplCopyWith<$Res> {
   factory _$$CountdownCallParticipantImplCopyWith(
-          _$CountdownCallParticipantImpl value,
-          $Res Function(_$CountdownCallParticipantImpl) then) =
-      __$$CountdownCallParticipantImplCopyWithImpl<$Res>;
+    _$CountdownCallParticipantImpl value,
+    $Res Function(_$CountdownCallParticipantImpl) then,
+  ) = __$$CountdownCallParticipantImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int stageId});
 }
@@ -527,23 +532,24 @@ class __$$CountdownCallParticipantImplCopyWithImpl<$Res>
     extends _$CountdownEventCopyWithImpl<$Res, _$CountdownCallParticipantImpl>
     implements _$$CountdownCallParticipantImplCopyWith<$Res> {
   __$$CountdownCallParticipantImplCopyWithImpl(
-      _$CountdownCallParticipantImpl _value,
-      $Res Function(_$CountdownCallParticipantImpl) _then)
-      : super(_value, _then);
+    _$CountdownCallParticipantImpl _value,
+    $Res Function(_$CountdownCallParticipantImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CountdownEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? stageId = null,
-  }) {
-    return _then(_$CountdownCallParticipantImpl(
-      stageId: null == stageId
-          ? _value.stageId
-          : stageId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? stageId = null}) {
+    return _then(
+      _$CountdownCallParticipantImpl(
+        stageId:
+            null == stageId
+                ? _value.stageId
+                : stageId // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -577,8 +583,9 @@ class _$CountdownCallParticipantImpl implements _CountdownCallParticipant {
   @override
   @pragma('vm:prefer-inline')
   _$$CountdownCallParticipantImplCopyWith<_$CountdownCallParticipantImpl>
-      get copyWith => __$$CountdownCallParticipantImplCopyWithImpl<
-          _$CountdownCallParticipantImpl>(this, _$identity);
+  get copyWith => __$$CountdownCallParticipantImplCopyWithImpl<
+    _$CountdownCallParticipantImpl
+  >(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -665,7 +672,7 @@ abstract class _CountdownCallParticipant implements CountdownEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CountdownCallParticipantImplCopyWith<_$CountdownCallParticipantImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -674,47 +681,42 @@ mixin _$CountdownState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(Tick tick) working,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(Tick tick)? working,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(Tick tick)? working,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_CountdownInitialState value) initial,
     required TResult Function(_CountdownWorkingState value) working,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CountdownInitialState value)? initial,
     TResult? Function(_CountdownWorkingState value)? working,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CountdownInitialState value)? initial,
     TResult Function(_CountdownWorkingState value)? working,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CountdownStateCopyWith<$Res> {
   factory $CountdownStateCopyWith(
-          CountdownState value, $Res Function(CountdownState) then) =
-      _$CountdownStateCopyWithImpl<$Res, CountdownState>;
+    CountdownState value,
+    $Res Function(CountdownState) then,
+  ) = _$CountdownStateCopyWithImpl<$Res, CountdownState>;
 }
 
 /// @nodoc
@@ -734,18 +736,19 @@ class _$CountdownStateCopyWithImpl<$Res, $Val extends CountdownState>
 /// @nodoc
 abstract class _$$CountdownInitialStateImplCopyWith<$Res> {
   factory _$$CountdownInitialStateImplCopyWith(
-          _$CountdownInitialStateImpl value,
-          $Res Function(_$CountdownInitialStateImpl) then) =
-      __$$CountdownInitialStateImplCopyWithImpl<$Res>;
+    _$CountdownInitialStateImpl value,
+    $Res Function(_$CountdownInitialStateImpl) then,
+  ) = __$$CountdownInitialStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$CountdownInitialStateImplCopyWithImpl<$Res>
     extends _$CountdownStateCopyWithImpl<$Res, _$CountdownInitialStateImpl>
     implements _$$CountdownInitialStateImplCopyWith<$Res> {
-  __$$CountdownInitialStateImplCopyWithImpl(_$CountdownInitialStateImpl _value,
-      $Res Function(_$CountdownInitialStateImpl) _then)
-      : super(_value, _then);
+  __$$CountdownInitialStateImplCopyWithImpl(
+    _$CountdownInitialStateImpl _value,
+    $Res Function(_$CountdownInitialStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CountdownState
   /// with the given fields replaced by the non-null parameter values.
@@ -841,9 +844,9 @@ abstract class _CountdownInitialState implements CountdownState {
 /// @nodoc
 abstract class _$$CountdownWorkingStateImplCopyWith<$Res> {
   factory _$$CountdownWorkingStateImplCopyWith(
-          _$CountdownWorkingStateImpl value,
-          $Res Function(_$CountdownWorkingStateImpl) then) =
-      __$$CountdownWorkingStateImplCopyWithImpl<$Res>;
+    _$CountdownWorkingStateImpl value,
+    $Res Function(_$CountdownWorkingStateImpl) then,
+  ) = __$$CountdownWorkingStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Tick tick});
 }
@@ -852,23 +855,25 @@ abstract class _$$CountdownWorkingStateImplCopyWith<$Res> {
 class __$$CountdownWorkingStateImplCopyWithImpl<$Res>
     extends _$CountdownStateCopyWithImpl<$Res, _$CountdownWorkingStateImpl>
     implements _$$CountdownWorkingStateImplCopyWith<$Res> {
-  __$$CountdownWorkingStateImplCopyWithImpl(_$CountdownWorkingStateImpl _value,
-      $Res Function(_$CountdownWorkingStateImpl) _then)
-      : super(_value, _then);
+  __$$CountdownWorkingStateImplCopyWithImpl(
+    _$CountdownWorkingStateImpl _value,
+    $Res Function(_$CountdownWorkingStateImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of CountdownState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? tick = null,
-  }) {
-    return _then(_$CountdownWorkingStateImpl(
-      tick: null == tick
-          ? _value.tick
-          : tick // ignore: cast_nullable_to_non_nullable
-              as Tick,
-    ));
+  $Res call({Object? tick = null}) {
+    return _then(
+      _$CountdownWorkingStateImpl(
+        tick:
+            null == tick
+                ? _value.tick
+                : tick // ignore: cast_nullable_to_non_nullable
+                    as Tick,
+      ),
+    );
   }
 }
 
@@ -902,8 +907,11 @@ class _$CountdownWorkingStateImpl implements _CountdownWorkingState {
   @override
   @pragma('vm:prefer-inline')
   _$$CountdownWorkingStateImplCopyWith<_$CountdownWorkingStateImpl>
-      get copyWith => __$$CountdownWorkingStateImplCopyWithImpl<
-          _$CountdownWorkingStateImpl>(this, _$identity);
+  get copyWith =>
+      __$$CountdownWorkingStateImplCopyWithImpl<_$CountdownWorkingStateImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -978,5 +986,5 @@ abstract class _CountdownWorkingState implements CountdownState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CountdownWorkingStateImplCopyWith<_$CountdownWorkingStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }

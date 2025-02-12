@@ -12,17 +12,18 @@ part of 'app_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AppSettings {
-// язык
+  // язык
   String get language =>
       throw _privateConstructorUsedError; // = "ru", // локаль
-// восстанавливать Bluetooth подключение при обрыве
+  // восстанавливать Bluetooth подключение при обрыве
   bool get reconnect => throw _privateConstructorUsedError; // звук
   bool get sound => throw _privateConstructorUsedError; // вкл/выкл
-// звук обратного отсчёта
+  // звук обратного отсчёта
   bool get beep =>
       throw _privateConstructorUsedError; // звуком обратного отсчёта управляет приложение
   bool get beepFromApp =>
@@ -35,7 +36,7 @@ mixin _$AppSettings {
   double get rate => throw _privateConstructorUsedError; // скорость речи
   String get voiceLanguage =>
       throw _privateConstructorUsedError; // = "ru-RU", // язык tts
-// id выбранного соревнования и участка
+  // id выбранного соревнования и участка
   int get raceId => throw _privateConstructorUsedError;
   int get stageId =>
       throw _privateConstructorUsedError; // всегда включённый экран
@@ -72,25 +73,25 @@ mixin _$AppSettings {
       throw _privateConstructorUsedError; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
   bool get showColorStartDifference =>
       throw _privateConstructorUsedError; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  // при превышении которого будет цветовая индикация
   int get startDifferenceThreshold =>
       throw _privateConstructorUsedError; // показывать разницу между временем финиша с модуля и временем устройства
   bool get showFinishDifference =>
       throw _privateConstructorUsedError; // показывать разницу цветом между временем финиша с модуля и временем устройства
   bool get showColorFinishDifference =>
       throw _privateConstructorUsedError; // разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  // при превышении которого будет цветовая индикация
   int get finishDifferenceThreshold =>
       throw _privateConstructorUsedError; // дельта в секундах для автоматического подставления стартового времени
   int get deltaInSeconds =>
       throw _privateConstructorUsedError; // задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
+  // если она уже была установлена
   int get updateStartCorrectionDelay =>
       throw _privateConstructorUsedError; // лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
+  // ограничение количества показываемых строк в окне лога
+  // -1 = без ограничений
   int get logLimit => throw _privateConstructorUsedError; // активная тема
-// required AppTheme appTheme,
+  // required AppTheme appTheme,
   ColorSeed get seedColor => throw _privateConstructorUsedError;
   Brightness get brightness => throw _privateConstructorUsedError;
   double get contrastLevel => throw _privateConstructorUsedError;
@@ -104,363 +105,7 @@ mixin _$AppSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)
-        $default, {
-    required TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)
-        defaults,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        $default, {
-    TResult? Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        defaults,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        $default, {
-    TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        defaults,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_AppSettings value) $default, {
-    required TResult Function(_AppSettingsDefaults value) defaults,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_AppSettings value)? $default, {
-    TResult? Function(_AppSettingsDefaults value)? defaults,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of AppSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppSettingsCopyWith<AppSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppSettingsCopyWith<$Res> {
-  factory $AppSettingsCopyWith(
-          AppSettings value, $Res Function(AppSettings) then) =
-      _$AppSettingsCopyWithImpl<$Res, AppSettings>;
-  @useResult
-  $Res call(
-      {String language,
+      String language,
       bool reconnect,
       bool sound,
       bool beep,
@@ -509,7 +154,365 @@ abstract class $AppSettingsCopyWith<$Res> {
       DynamicSchemeVariant dynamicSchemeVariant,
       bool isOLEDBackground,
       String previousVersion,
-      bool updateNtpOffsetAtStartup});
+      bool updateNtpOffsetAtStartup,
+    )
+    $default, {
+    required TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )
+    defaults,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    $default, {
+    TResult? Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    defaults,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    $default, {
+    TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    defaults,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppSettings value) $default, {
+    required TResult Function(_AppSettingsDefaults value) defaults,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AppSettingsCopyWith<AppSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AppSettingsCopyWith<$Res> {
+  factory $AppSettingsCopyWith(
+    AppSettings value,
+    $Res Function(AppSettings) then,
+  ) = _$AppSettingsCopyWithImpl<$Res, AppSettings>;
+  @useResult
+  $Res call({
+    String language,
+    bool reconnect,
+    bool sound,
+    bool beep,
+    bool beepFromApp,
+    bool voice,
+    bool voiceFromApp,
+    bool voiceName,
+    double volume,
+    double pitch,
+    double rate,
+    String voiceLanguage,
+    int raceId,
+    int stageId,
+    bool wakelock,
+    bool startFab,
+    double startFabSize,
+    bool finishFab,
+    double finishFabSize,
+    bool countdown,
+    double countdownSize,
+    double countdownLeft,
+    double countdownTop,
+    bool countdownAtStartTime,
+    bool checkUpdates,
+    bool showDNS,
+    bool showDNF,
+    bool showDSQ,
+    bool showHidden,
+    bool showNumbers,
+    bool showManual,
+    int finishDelay,
+    bool substituteNumbers,
+    int substituteNumbersDelay,
+    bool showStartDifference,
+    bool showColorStartDifference,
+    int startDifferenceThreshold,
+    bool showFinishDifference,
+    bool showColorFinishDifference,
+    int finishDifferenceThreshold,
+    int deltaInSeconds,
+    int updateStartCorrectionDelay,
+    int logLimit,
+    ColorSeed seedColor,
+    Brightness brightness,
+    double contrastLevel,
+    DynamicSchemeVariant dynamicSchemeVariant,
+    bool isOLEDBackground,
+    String previousVersion,
+    bool updateNtpOffsetAtStartup,
+  });
 }
 
 /// @nodoc
@@ -578,208 +581,261 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
     Object? previousVersion = null,
     Object? updateNtpOffsetAtStartup = null,
   }) {
-    return _then(_value.copyWith(
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
-      reconnect: null == reconnect
-          ? _value.reconnect
-          : reconnect // ignore: cast_nullable_to_non_nullable
-              as bool,
-      sound: null == sound
-          ? _value.sound
-          : sound // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beep: null == beep
-          ? _value.beep
-          : beep // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beepFromApp: null == beepFromApp
-          ? _value.beepFromApp
-          : beepFromApp // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voice: null == voice
-          ? _value.voice
-          : voice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceFromApp: null == voiceFromApp
-          ? _value.voiceFromApp
-          : voiceFromApp // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceName: null == voiceName
-          ? _value.voiceName
-          : voiceName // ignore: cast_nullable_to_non_nullable
-              as bool,
-      volume: null == volume
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pitch: null == pitch
-          ? _value.pitch
-          : pitch // ignore: cast_nullable_to_non_nullable
-              as double,
-      rate: null == rate
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-      voiceLanguage: null == voiceLanguage
-          ? _value.voiceLanguage
-          : voiceLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
-      raceId: null == raceId
-          ? _value.raceId
-          : raceId // ignore: cast_nullable_to_non_nullable
-              as int,
-      stageId: null == stageId
-          ? _value.stageId
-          : stageId // ignore: cast_nullable_to_non_nullable
-              as int,
-      wakelock: null == wakelock
-          ? _value.wakelock
-          : wakelock // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startFab: null == startFab
-          ? _value.startFab
-          : startFab // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startFabSize: null == startFabSize
-          ? _value.startFabSize
-          : startFabSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      finishFab: null == finishFab
-          ? _value.finishFab
-          : finishFab // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishFabSize: null == finishFabSize
-          ? _value.finishFabSize
-          : finishFabSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdown: null == countdown
-          ? _value.countdown
-          : countdown // ignore: cast_nullable_to_non_nullable
-              as bool,
-      countdownSize: null == countdownSize
-          ? _value.countdownSize
-          : countdownSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownLeft: null == countdownLeft
-          ? _value.countdownLeft
-          : countdownLeft // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownTop: null == countdownTop
-          ? _value.countdownTop
-          : countdownTop // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownAtStartTime: null == countdownAtStartTime
-          ? _value.countdownAtStartTime
-          : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
-              as bool,
-      checkUpdates: null == checkUpdates
-          ? _value.checkUpdates
-          : checkUpdates // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDNS: null == showDNS
-          ? _value.showDNS
-          : showDNS // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDNF: null == showDNF
-          ? _value.showDNF
-          : showDNF // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDSQ: null == showDSQ
-          ? _value.showDSQ
-          : showDSQ // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showHidden: null == showHidden
-          ? _value.showHidden
-          : showHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showNumbers: null == showNumbers
-          ? _value.showNumbers
-          : showNumbers // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showManual: null == showManual
-          ? _value.showManual
-          : showManual // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishDelay: null == finishDelay
-          ? _value.finishDelay
-          : finishDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      substituteNumbers: null == substituteNumbers
-          ? _value.substituteNumbers
-          : substituteNumbers // ignore: cast_nullable_to_non_nullable
-              as bool,
-      substituteNumbersDelay: null == substituteNumbersDelay
-          ? _value.substituteNumbersDelay
-          : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      showStartDifference: null == showStartDifference
-          ? _value.showStartDifference
-          : showStartDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showColorStartDifference: null == showColorStartDifference
-          ? _value.showColorStartDifference
-          : showColorStartDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startDifferenceThreshold: null == startDifferenceThreshold
-          ? _value.startDifferenceThreshold
-          : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
-              as int,
-      showFinishDifference: null == showFinishDifference
-          ? _value.showFinishDifference
-          : showFinishDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showColorFinishDifference: null == showColorFinishDifference
-          ? _value.showColorFinishDifference
-          : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishDifferenceThreshold: null == finishDifferenceThreshold
-          ? _value.finishDifferenceThreshold
-          : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
-              as int,
-      deltaInSeconds: null == deltaInSeconds
-          ? _value.deltaInSeconds
-          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
-      updateStartCorrectionDelay: null == updateStartCorrectionDelay
-          ? _value.updateStartCorrectionDelay
-          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      logLimit: null == logLimit
-          ? _value.logLimit
-          : logLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-      seedColor: null == seedColor
-          ? _value.seedColor
-          : seedColor // ignore: cast_nullable_to_non_nullable
-              as ColorSeed,
-      brightness: null == brightness
-          ? _value.brightness
-          : brightness // ignore: cast_nullable_to_non_nullable
-              as Brightness,
-      contrastLevel: null == contrastLevel
-          ? _value.contrastLevel
-          : contrastLevel // ignore: cast_nullable_to_non_nullable
-              as double,
-      dynamicSchemeVariant: null == dynamicSchemeVariant
-          ? _value.dynamicSchemeVariant
-          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
-              as DynamicSchemeVariant,
-      isOLEDBackground: null == isOLEDBackground
-          ? _value.isOLEDBackground
-          : isOLEDBackground // ignore: cast_nullable_to_non_nullable
-              as bool,
-      previousVersion: null == previousVersion
-          ? _value.previousVersion
-          : previousVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
-          ? _value.updateNtpOffsetAtStartup
-          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            language:
+                null == language
+                    ? _value.language
+                    : language // ignore: cast_nullable_to_non_nullable
+                        as String,
+            reconnect:
+                null == reconnect
+                    ? _value.reconnect
+                    : reconnect // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            sound:
+                null == sound
+                    ? _value.sound
+                    : sound // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            beep:
+                null == beep
+                    ? _value.beep
+                    : beep // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            beepFromApp:
+                null == beepFromApp
+                    ? _value.beepFromApp
+                    : beepFromApp // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            voice:
+                null == voice
+                    ? _value.voice
+                    : voice // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            voiceFromApp:
+                null == voiceFromApp
+                    ? _value.voiceFromApp
+                    : voiceFromApp // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            voiceName:
+                null == voiceName
+                    ? _value.voiceName
+                    : voiceName // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            volume:
+                null == volume
+                    ? _value.volume
+                    : volume // ignore: cast_nullable_to_non_nullable
+                        as double,
+            pitch:
+                null == pitch
+                    ? _value.pitch
+                    : pitch // ignore: cast_nullable_to_non_nullable
+                        as double,
+            rate:
+                null == rate
+                    ? _value.rate
+                    : rate // ignore: cast_nullable_to_non_nullable
+                        as double,
+            voiceLanguage:
+                null == voiceLanguage
+                    ? _value.voiceLanguage
+                    : voiceLanguage // ignore: cast_nullable_to_non_nullable
+                        as String,
+            raceId:
+                null == raceId
+                    ? _value.raceId
+                    : raceId // ignore: cast_nullable_to_non_nullable
+                        as int,
+            stageId:
+                null == stageId
+                    ? _value.stageId
+                    : stageId // ignore: cast_nullable_to_non_nullable
+                        as int,
+            wakelock:
+                null == wakelock
+                    ? _value.wakelock
+                    : wakelock // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            startFab:
+                null == startFab
+                    ? _value.startFab
+                    : startFab // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            startFabSize:
+                null == startFabSize
+                    ? _value.startFabSize
+                    : startFabSize // ignore: cast_nullable_to_non_nullable
+                        as double,
+            finishFab:
+                null == finishFab
+                    ? _value.finishFab
+                    : finishFab // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            finishFabSize:
+                null == finishFabSize
+                    ? _value.finishFabSize
+                    : finishFabSize // ignore: cast_nullable_to_non_nullable
+                        as double,
+            countdown:
+                null == countdown
+                    ? _value.countdown
+                    : countdown // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            countdownSize:
+                null == countdownSize
+                    ? _value.countdownSize
+                    : countdownSize // ignore: cast_nullable_to_non_nullable
+                        as double,
+            countdownLeft:
+                null == countdownLeft
+                    ? _value.countdownLeft
+                    : countdownLeft // ignore: cast_nullable_to_non_nullable
+                        as double,
+            countdownTop:
+                null == countdownTop
+                    ? _value.countdownTop
+                    : countdownTop // ignore: cast_nullable_to_non_nullable
+                        as double,
+            countdownAtStartTime:
+                null == countdownAtStartTime
+                    ? _value.countdownAtStartTime
+                    : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            checkUpdates:
+                null == checkUpdates
+                    ? _value.checkUpdates
+                    : checkUpdates // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showDNS:
+                null == showDNS
+                    ? _value.showDNS
+                    : showDNS // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showDNF:
+                null == showDNF
+                    ? _value.showDNF
+                    : showDNF // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showDSQ:
+                null == showDSQ
+                    ? _value.showDSQ
+                    : showDSQ // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showHidden:
+                null == showHidden
+                    ? _value.showHidden
+                    : showHidden // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showNumbers:
+                null == showNumbers
+                    ? _value.showNumbers
+                    : showNumbers // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showManual:
+                null == showManual
+                    ? _value.showManual
+                    : showManual // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            finishDelay:
+                null == finishDelay
+                    ? _value.finishDelay
+                    : finishDelay // ignore: cast_nullable_to_non_nullable
+                        as int,
+            substituteNumbers:
+                null == substituteNumbers
+                    ? _value.substituteNumbers
+                    : substituteNumbers // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            substituteNumbersDelay:
+                null == substituteNumbersDelay
+                    ? _value.substituteNumbersDelay
+                    : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
+                        as int,
+            showStartDifference:
+                null == showStartDifference
+                    ? _value.showStartDifference
+                    : showStartDifference // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showColorStartDifference:
+                null == showColorStartDifference
+                    ? _value.showColorStartDifference
+                    : showColorStartDifference // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            startDifferenceThreshold:
+                null == startDifferenceThreshold
+                    ? _value.startDifferenceThreshold
+                    : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+                        as int,
+            showFinishDifference:
+                null == showFinishDifference
+                    ? _value.showFinishDifference
+                    : showFinishDifference // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            showColorFinishDifference:
+                null == showColorFinishDifference
+                    ? _value.showColorFinishDifference
+                    : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            finishDifferenceThreshold:
+                null == finishDifferenceThreshold
+                    ? _value.finishDifferenceThreshold
+                    : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+                        as int,
+            deltaInSeconds:
+                null == deltaInSeconds
+                    ? _value.deltaInSeconds
+                    : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+                        as int,
+            updateStartCorrectionDelay:
+                null == updateStartCorrectionDelay
+                    ? _value.updateStartCorrectionDelay
+                    : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+                        as int,
+            logLimit:
+                null == logLimit
+                    ? _value.logLimit
+                    : logLimit // ignore: cast_nullable_to_non_nullable
+                        as int,
+            seedColor:
+                null == seedColor
+                    ? _value.seedColor
+                    : seedColor // ignore: cast_nullable_to_non_nullable
+                        as ColorSeed,
+            brightness:
+                null == brightness
+                    ? _value.brightness
+                    : brightness // ignore: cast_nullable_to_non_nullable
+                        as Brightness,
+            contrastLevel:
+                null == contrastLevel
+                    ? _value.contrastLevel
+                    : contrastLevel // ignore: cast_nullable_to_non_nullable
+                        as double,
+            dynamicSchemeVariant:
+                null == dynamicSchemeVariant
+                    ? _value.dynamicSchemeVariant
+                    : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+                        as DynamicSchemeVariant,
+            isOLEDBackground:
+                null == isOLEDBackground
+                    ? _value.isOLEDBackground
+                    : isOLEDBackground // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            previousVersion:
+                null == previousVersion
+                    ? _value.previousVersion
+                    : previousVersion // ignore: cast_nullable_to_non_nullable
+                        as String,
+            updateNtpOffsetAtStartup:
+                null == updateNtpOffsetAtStartup
+                    ? _value.updateNtpOffsetAtStartup
+                    : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+                        as bool,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -787,61 +843,63 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
 abstract class _$$AppSettingsImplCopyWith<$Res>
     implements $AppSettingsCopyWith<$Res> {
   factory _$$AppSettingsImplCopyWith(
-          _$AppSettingsImpl value, $Res Function(_$AppSettingsImpl) then) =
-      __$$AppSettingsImplCopyWithImpl<$Res>;
+    _$AppSettingsImpl value,
+    $Res Function(_$AppSettingsImpl) then,
+  ) = __$$AppSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String language,
-      bool reconnect,
-      bool sound,
-      bool beep,
-      bool beepFromApp,
-      bool voice,
-      bool voiceFromApp,
-      bool voiceName,
-      double volume,
-      double pitch,
-      double rate,
-      String voiceLanguage,
-      int raceId,
-      int stageId,
-      bool wakelock,
-      bool startFab,
-      double startFabSize,
-      bool finishFab,
-      double finishFabSize,
-      bool countdown,
-      double countdownSize,
-      double countdownLeft,
-      double countdownTop,
-      bool countdownAtStartTime,
-      bool checkUpdates,
-      bool showDNS,
-      bool showDNF,
-      bool showDSQ,
-      bool showHidden,
-      bool showNumbers,
-      bool showManual,
-      int finishDelay,
-      bool substituteNumbers,
-      int substituteNumbersDelay,
-      bool showStartDifference,
-      bool showColorStartDifference,
-      int startDifferenceThreshold,
-      bool showFinishDifference,
-      bool showColorFinishDifference,
-      int finishDifferenceThreshold,
-      int deltaInSeconds,
-      int updateStartCorrectionDelay,
-      int logLimit,
-      ColorSeed seedColor,
-      Brightness brightness,
-      double contrastLevel,
-      DynamicSchemeVariant dynamicSchemeVariant,
-      bool isOLEDBackground,
-      String previousVersion,
-      bool updateNtpOffsetAtStartup});
+  $Res call({
+    String language,
+    bool reconnect,
+    bool sound,
+    bool beep,
+    bool beepFromApp,
+    bool voice,
+    bool voiceFromApp,
+    bool voiceName,
+    double volume,
+    double pitch,
+    double rate,
+    String voiceLanguage,
+    int raceId,
+    int stageId,
+    bool wakelock,
+    bool startFab,
+    double startFabSize,
+    bool finishFab,
+    double finishFabSize,
+    bool countdown,
+    double countdownSize,
+    double countdownLeft,
+    double countdownTop,
+    bool countdownAtStartTime,
+    bool checkUpdates,
+    bool showDNS,
+    bool showDNF,
+    bool showDSQ,
+    bool showHidden,
+    bool showNumbers,
+    bool showManual,
+    int finishDelay,
+    bool substituteNumbers,
+    int substituteNumbersDelay,
+    bool showStartDifference,
+    bool showColorStartDifference,
+    int startDifferenceThreshold,
+    bool showFinishDifference,
+    bool showColorFinishDifference,
+    int finishDifferenceThreshold,
+    int deltaInSeconds,
+    int updateStartCorrectionDelay,
+    int logLimit,
+    ColorSeed seedColor,
+    Brightness brightness,
+    double contrastLevel,
+    DynamicSchemeVariant dynamicSchemeVariant,
+    bool isOLEDBackground,
+    String previousVersion,
+    bool updateNtpOffsetAtStartup,
+  });
 }
 
 /// @nodoc
@@ -849,8 +907,9 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     extends _$AppSettingsCopyWithImpl<$Res, _$AppSettingsImpl>
     implements _$$AppSettingsImplCopyWith<$Res> {
   __$$AppSettingsImplCopyWithImpl(
-      _$AppSettingsImpl _value, $Res Function(_$AppSettingsImpl) _then)
-      : super(_value, _then);
+    _$AppSettingsImpl _value,
+    $Res Function(_$AppSettingsImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AppSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -908,284 +967,337 @@ class __$$AppSettingsImplCopyWithImpl<$Res>
     Object? previousVersion = null,
     Object? updateNtpOffsetAtStartup = null,
   }) {
-    return _then(_$AppSettingsImpl(
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
-      reconnect: null == reconnect
-          ? _value.reconnect
-          : reconnect // ignore: cast_nullable_to_non_nullable
-              as bool,
-      sound: null == sound
-          ? _value.sound
-          : sound // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beep: null == beep
-          ? _value.beep
-          : beep // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beepFromApp: null == beepFromApp
-          ? _value.beepFromApp
-          : beepFromApp // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voice: null == voice
-          ? _value.voice
-          : voice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceFromApp: null == voiceFromApp
-          ? _value.voiceFromApp
-          : voiceFromApp // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceName: null == voiceName
-          ? _value.voiceName
-          : voiceName // ignore: cast_nullable_to_non_nullable
-              as bool,
-      volume: null == volume
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pitch: null == pitch
-          ? _value.pitch
-          : pitch // ignore: cast_nullable_to_non_nullable
-              as double,
-      rate: null == rate
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-      voiceLanguage: null == voiceLanguage
-          ? _value.voiceLanguage
-          : voiceLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
-      raceId: null == raceId
-          ? _value.raceId
-          : raceId // ignore: cast_nullable_to_non_nullable
-              as int,
-      stageId: null == stageId
-          ? _value.stageId
-          : stageId // ignore: cast_nullable_to_non_nullable
-              as int,
-      wakelock: null == wakelock
-          ? _value.wakelock
-          : wakelock // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startFab: null == startFab
-          ? _value.startFab
-          : startFab // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startFabSize: null == startFabSize
-          ? _value.startFabSize
-          : startFabSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      finishFab: null == finishFab
-          ? _value.finishFab
-          : finishFab // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishFabSize: null == finishFabSize
-          ? _value.finishFabSize
-          : finishFabSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdown: null == countdown
-          ? _value.countdown
-          : countdown // ignore: cast_nullable_to_non_nullable
-              as bool,
-      countdownSize: null == countdownSize
-          ? _value.countdownSize
-          : countdownSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownLeft: null == countdownLeft
-          ? _value.countdownLeft
-          : countdownLeft // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownTop: null == countdownTop
-          ? _value.countdownTop
-          : countdownTop // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownAtStartTime: null == countdownAtStartTime
-          ? _value.countdownAtStartTime
-          : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
-              as bool,
-      checkUpdates: null == checkUpdates
-          ? _value.checkUpdates
-          : checkUpdates // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDNS: null == showDNS
-          ? _value.showDNS
-          : showDNS // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDNF: null == showDNF
-          ? _value.showDNF
-          : showDNF // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDSQ: null == showDSQ
-          ? _value.showDSQ
-          : showDSQ // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showHidden: null == showHidden
-          ? _value.showHidden
-          : showHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showNumbers: null == showNumbers
-          ? _value.showNumbers
-          : showNumbers // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showManual: null == showManual
-          ? _value.showManual
-          : showManual // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishDelay: null == finishDelay
-          ? _value.finishDelay
-          : finishDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      substituteNumbers: null == substituteNumbers
-          ? _value.substituteNumbers
-          : substituteNumbers // ignore: cast_nullable_to_non_nullable
-              as bool,
-      substituteNumbersDelay: null == substituteNumbersDelay
-          ? _value.substituteNumbersDelay
-          : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      showStartDifference: null == showStartDifference
-          ? _value.showStartDifference
-          : showStartDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showColorStartDifference: null == showColorStartDifference
-          ? _value.showColorStartDifference
-          : showColorStartDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startDifferenceThreshold: null == startDifferenceThreshold
-          ? _value.startDifferenceThreshold
-          : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
-              as int,
-      showFinishDifference: null == showFinishDifference
-          ? _value.showFinishDifference
-          : showFinishDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showColorFinishDifference: null == showColorFinishDifference
-          ? _value.showColorFinishDifference
-          : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishDifferenceThreshold: null == finishDifferenceThreshold
-          ? _value.finishDifferenceThreshold
-          : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
-              as int,
-      deltaInSeconds: null == deltaInSeconds
-          ? _value.deltaInSeconds
-          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
-      updateStartCorrectionDelay: null == updateStartCorrectionDelay
-          ? _value.updateStartCorrectionDelay
-          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      logLimit: null == logLimit
-          ? _value.logLimit
-          : logLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-      seedColor: null == seedColor
-          ? _value.seedColor
-          : seedColor // ignore: cast_nullable_to_non_nullable
-              as ColorSeed,
-      brightness: null == brightness
-          ? _value.brightness
-          : brightness // ignore: cast_nullable_to_non_nullable
-              as Brightness,
-      contrastLevel: null == contrastLevel
-          ? _value.contrastLevel
-          : contrastLevel // ignore: cast_nullable_to_non_nullable
-              as double,
-      dynamicSchemeVariant: null == dynamicSchemeVariant
-          ? _value.dynamicSchemeVariant
-          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
-              as DynamicSchemeVariant,
-      isOLEDBackground: null == isOLEDBackground
-          ? _value.isOLEDBackground
-          : isOLEDBackground // ignore: cast_nullable_to_non_nullable
-              as bool,
-      previousVersion: null == previousVersion
-          ? _value.previousVersion
-          : previousVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
-          ? _value.updateNtpOffsetAtStartup
-          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$AppSettingsImpl(
+        language:
+            null == language
+                ? _value.language
+                : language // ignore: cast_nullable_to_non_nullable
+                    as String,
+        reconnect:
+            null == reconnect
+                ? _value.reconnect
+                : reconnect // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        sound:
+            null == sound
+                ? _value.sound
+                : sound // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        beep:
+            null == beep
+                ? _value.beep
+                : beep // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        beepFromApp:
+            null == beepFromApp
+                ? _value.beepFromApp
+                : beepFromApp // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        voice:
+            null == voice
+                ? _value.voice
+                : voice // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        voiceFromApp:
+            null == voiceFromApp
+                ? _value.voiceFromApp
+                : voiceFromApp // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        voiceName:
+            null == voiceName
+                ? _value.voiceName
+                : voiceName // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        volume:
+            null == volume
+                ? _value.volume
+                : volume // ignore: cast_nullable_to_non_nullable
+                    as double,
+        pitch:
+            null == pitch
+                ? _value.pitch
+                : pitch // ignore: cast_nullable_to_non_nullable
+                    as double,
+        rate:
+            null == rate
+                ? _value.rate
+                : rate // ignore: cast_nullable_to_non_nullable
+                    as double,
+        voiceLanguage:
+            null == voiceLanguage
+                ? _value.voiceLanguage
+                : voiceLanguage // ignore: cast_nullable_to_non_nullable
+                    as String,
+        raceId:
+            null == raceId
+                ? _value.raceId
+                : raceId // ignore: cast_nullable_to_non_nullable
+                    as int,
+        stageId:
+            null == stageId
+                ? _value.stageId
+                : stageId // ignore: cast_nullable_to_non_nullable
+                    as int,
+        wakelock:
+            null == wakelock
+                ? _value.wakelock
+                : wakelock // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        startFab:
+            null == startFab
+                ? _value.startFab
+                : startFab // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        startFabSize:
+            null == startFabSize
+                ? _value.startFabSize
+                : startFabSize // ignore: cast_nullable_to_non_nullable
+                    as double,
+        finishFab:
+            null == finishFab
+                ? _value.finishFab
+                : finishFab // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        finishFabSize:
+            null == finishFabSize
+                ? _value.finishFabSize
+                : finishFabSize // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdown:
+            null == countdown
+                ? _value.countdown
+                : countdown // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        countdownSize:
+            null == countdownSize
+                ? _value.countdownSize
+                : countdownSize // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdownLeft:
+            null == countdownLeft
+                ? _value.countdownLeft
+                : countdownLeft // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdownTop:
+            null == countdownTop
+                ? _value.countdownTop
+                : countdownTop // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdownAtStartTime:
+            null == countdownAtStartTime
+                ? _value.countdownAtStartTime
+                : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        checkUpdates:
+            null == checkUpdates
+                ? _value.checkUpdates
+                : checkUpdates // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showDNS:
+            null == showDNS
+                ? _value.showDNS
+                : showDNS // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showDNF:
+            null == showDNF
+                ? _value.showDNF
+                : showDNF // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showDSQ:
+            null == showDSQ
+                ? _value.showDSQ
+                : showDSQ // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showHidden:
+            null == showHidden
+                ? _value.showHidden
+                : showHidden // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showNumbers:
+            null == showNumbers
+                ? _value.showNumbers
+                : showNumbers // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showManual:
+            null == showManual
+                ? _value.showManual
+                : showManual // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        finishDelay:
+            null == finishDelay
+                ? _value.finishDelay
+                : finishDelay // ignore: cast_nullable_to_non_nullable
+                    as int,
+        substituteNumbers:
+            null == substituteNumbers
+                ? _value.substituteNumbers
+                : substituteNumbers // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        substituteNumbersDelay:
+            null == substituteNumbersDelay
+                ? _value.substituteNumbersDelay
+                : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
+                    as int,
+        showStartDifference:
+            null == showStartDifference
+                ? _value.showStartDifference
+                : showStartDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showColorStartDifference:
+            null == showColorStartDifference
+                ? _value.showColorStartDifference
+                : showColorStartDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        startDifferenceThreshold:
+            null == startDifferenceThreshold
+                ? _value.startDifferenceThreshold
+                : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+                    as int,
+        showFinishDifference:
+            null == showFinishDifference
+                ? _value.showFinishDifference
+                : showFinishDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showColorFinishDifference:
+            null == showColorFinishDifference
+                ? _value.showColorFinishDifference
+                : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        finishDifferenceThreshold:
+            null == finishDifferenceThreshold
+                ? _value.finishDifferenceThreshold
+                : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+                    as int,
+        deltaInSeconds:
+            null == deltaInSeconds
+                ? _value.deltaInSeconds
+                : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+                    as int,
+        updateStartCorrectionDelay:
+            null == updateStartCorrectionDelay
+                ? _value.updateStartCorrectionDelay
+                : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+                    as int,
+        logLimit:
+            null == logLimit
+                ? _value.logLimit
+                : logLimit // ignore: cast_nullable_to_non_nullable
+                    as int,
+        seedColor:
+            null == seedColor
+                ? _value.seedColor
+                : seedColor // ignore: cast_nullable_to_non_nullable
+                    as ColorSeed,
+        brightness:
+            null == brightness
+                ? _value.brightness
+                : brightness // ignore: cast_nullable_to_non_nullable
+                    as Brightness,
+        contrastLevel:
+            null == contrastLevel
+                ? _value.contrastLevel
+                : contrastLevel // ignore: cast_nullable_to_non_nullable
+                    as double,
+        dynamicSchemeVariant:
+            null == dynamicSchemeVariant
+                ? _value.dynamicSchemeVariant
+                : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+                    as DynamicSchemeVariant,
+        isOLEDBackground:
+            null == isOLEDBackground
+                ? _value.isOLEDBackground
+                : isOLEDBackground // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        previousVersion:
+            null == previousVersion
+                ? _value.previousVersion
+                : previousVersion // ignore: cast_nullable_to_non_nullable
+                    as String,
+        updateNtpOffsetAtStartup:
+            null == updateNtpOffsetAtStartup
+                ? _value.updateNtpOffsetAtStartup
+                : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$AppSettingsImpl implements _AppSettings {
-  const _$AppSettingsImpl(
-      {required this.language,
-      required this.reconnect,
-      required this.sound,
-      required this.beep,
-      required this.beepFromApp,
-      required this.voice,
-      required this.voiceFromApp,
-      required this.voiceName,
-      required this.volume,
-      required this.pitch,
-      required this.rate,
-      required this.voiceLanguage,
-      required this.raceId,
-      required this.stageId,
-      required this.wakelock,
-      required this.startFab,
-      required this.startFabSize,
-      required this.finishFab,
-      required this.finishFabSize,
-      required this.countdown,
-      required this.countdownSize,
-      required this.countdownLeft,
-      required this.countdownTop,
-      required this.countdownAtStartTime,
-      required this.checkUpdates,
-      required this.showDNS,
-      required this.showDNF,
-      required this.showDSQ,
-      required this.showHidden,
-      required this.showNumbers,
-      required this.showManual,
-      required this.finishDelay,
-      required this.substituteNumbers,
-      required this.substituteNumbersDelay,
-      required this.showStartDifference,
-      required this.showColorStartDifference,
-      required this.startDifferenceThreshold,
-      required this.showFinishDifference,
-      required this.showColorFinishDifference,
-      required this.finishDifferenceThreshold,
-      required this.deltaInSeconds,
-      required this.updateStartCorrectionDelay,
-      required this.logLimit,
-      required this.seedColor,
-      required this.brightness,
-      required this.contrastLevel,
-      required this.dynamicSchemeVariant,
-      required this.isOLEDBackground,
-      required this.previousVersion,
-      required this.updateNtpOffsetAtStartup});
+  const _$AppSettingsImpl({
+    required this.language,
+    required this.reconnect,
+    required this.sound,
+    required this.beep,
+    required this.beepFromApp,
+    required this.voice,
+    required this.voiceFromApp,
+    required this.voiceName,
+    required this.volume,
+    required this.pitch,
+    required this.rate,
+    required this.voiceLanguage,
+    required this.raceId,
+    required this.stageId,
+    required this.wakelock,
+    required this.startFab,
+    required this.startFabSize,
+    required this.finishFab,
+    required this.finishFabSize,
+    required this.countdown,
+    required this.countdownSize,
+    required this.countdownLeft,
+    required this.countdownTop,
+    required this.countdownAtStartTime,
+    required this.checkUpdates,
+    required this.showDNS,
+    required this.showDNF,
+    required this.showDSQ,
+    required this.showHidden,
+    required this.showNumbers,
+    required this.showManual,
+    required this.finishDelay,
+    required this.substituteNumbers,
+    required this.substituteNumbersDelay,
+    required this.showStartDifference,
+    required this.showColorStartDifference,
+    required this.startDifferenceThreshold,
+    required this.showFinishDifference,
+    required this.showColorFinishDifference,
+    required this.finishDifferenceThreshold,
+    required this.deltaInSeconds,
+    required this.updateStartCorrectionDelay,
+    required this.logLimit,
+    required this.seedColor,
+    required this.brightness,
+    required this.contrastLevel,
+    required this.dynamicSchemeVariant,
+    required this.isOLEDBackground,
+    required this.previousVersion,
+    required this.updateNtpOffsetAtStartup,
+  });
 
-// язык
+  // язык
   @override
   final String language;
-// = "ru", // локаль
-// восстанавливать Bluetooth подключение при обрыве
+  // = "ru", // локаль
+  // восстанавливать Bluetooth подключение при обрыве
   @override
   final bool reconnect;
-// звук
+  // звук
   @override
   final bool sound;
-// вкл/выкл
-// звук обратного отсчёта
+  // вкл/выкл
+  // звук обратного отсчёта
   @override
   final bool beep;
-// звуком обратного отсчёта управляет приложение
+  // звуком обратного отсчёта управляет приложение
   @override
   final bool beepFromApp;
-// голосовые сообщения
+  // голосовые сообщения
   @override
   final bool voice;
   @override
@@ -1194,25 +1306,25 @@ class _$AppSettingsImpl implements _AppSettings {
   final bool voiceName;
   @override
   final double volume;
-// громкость
+  // громкость
   @override
   final double pitch;
-// тон речи
+  // тон речи
   @override
   final double rate;
-// скорость речи
+  // скорость речи
   @override
   final String voiceLanguage;
-// = "ru-RU", // язык tts
-// id выбранного соревнования и участка
+  // = "ru-RU", // язык tts
+  // id выбранного соревнования и участка
   @override
   final int raceId;
   @override
   final int stageId;
-// всегда включённый экран
+  // всегда включённый экран
   @override
   final bool wakelock;
-// кнопки "добавить вручную" на экранах старта и финиша
+  // кнопки "добавить вручную" на экранах старта и финиша
   @override
   final bool startFab;
   @override
@@ -1221,7 +1333,7 @@ class _$AppSettingsImpl implements _AppSettings {
   final bool finishFab;
   @override
   final double finishFabSize;
-// обратный отсчёт на экране старта
+  // обратный отсчёт на экране старта
   @override
   final bool countdown;
   @override
@@ -1230,68 +1342,68 @@ class _$AppSettingsImpl implements _AppSettings {
   final double countdownLeft;
   @override
   final double countdownTop;
-// показывать обратный отсчёт вместо стартового времени
+  // показывать обратный отсчёт вместо стартового времени
   @override
   final bool countdownAtStartTime;
-// проверка обновлений
+  // проверка обновлений
   @override
   final bool checkUpdates;
-// выборка значений на старте
+  // выборка значений на старте
   @override
   final bool showDNS;
   @override
   final bool showDNF;
   @override
   final bool showDSQ;
-// выборка значений на финише
+  // выборка значений на финише
   @override
   final bool showHidden;
   @override
   final bool showNumbers;
   @override
   final bool showManual;
-// задержка в миллисекундах перед показыванием нового финишного времени
+  // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   final int finishDelay;
-// автоподстановка номеров в финишном протоколе
+  // автоподстановка номеров в финишном протоколе
   @override
   final bool substituteNumbers;
   @override
   final int substituteNumbersDelay;
-// показывать разницу между автоматическим временем старта с модуля и временем устройства
+  // показывать разницу между автоматическим временем старта с модуля и временем устройства
   @override
   final bool showStartDifference;
-// показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
   @override
   final bool showColorStartDifference;
-// разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
   @override
   final int startDifferenceThreshold;
-// показывать разницу между временем финиша с модуля и временем устройства
+  // показывать разницу между временем финиша с модуля и временем устройства
   @override
   final bool showFinishDifference;
-// показывать разницу цветом между временем финиша с модуля и временем устройства
+  // показывать разницу цветом между временем финиша с модуля и временем устройства
   @override
   final bool showColorFinishDifference;
-// разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  // разница между временем финиша с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
   @override
   final int finishDifferenceThreshold;
-// дельта в секундах для автоматического подставления стартового времени
+  // дельта в секундах для автоматического подставления стартового времени
   @override
   final int deltaInSeconds;
-// задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
+  // задержка в миллисекундах перед обновлением стартовой поправки,
+  // если она уже была установлена
   @override
   final int updateStartCorrectionDelay;
-// лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
+  // лог
+  // ограничение количества показываемых строк в окне лога
+  // -1 = без ограничений
   @override
   final int logLimit;
-// активная тема
-// required AppTheme appTheme,
+  // активная тема
+  // required AppTheme appTheme,
   @override
   final ColorSeed seedColor;
   @override
@@ -1302,10 +1414,10 @@ class _$AppSettingsImpl implements _AppSettings {
   final DynamicSchemeVariant dynamicSchemeVariant;
   @override
   final bool isOLEDBackground;
-// версия при предыдущем запуске
+  // версия при предыдущем запуске
   @override
   final String previousVersion;
-// обновлять ntp offset при запуске
+  // обновлять ntp offset при запуске
   @override
   final bool updateNtpOffsetAtStartup;
 
@@ -1378,19 +1490,34 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
             (identical(other.showStartDifference, showStartDifference) ||
                 other.showStartDifference == showStartDifference) &&
-            (identical(other.showColorStartDifference, showColorStartDifference) ||
+            (identical(
+                  other.showColorStartDifference,
+                  showColorStartDifference,
+                ) ||
                 other.showColorStartDifference == showColorStartDifference) &&
-            (identical(other.startDifferenceThreshold, startDifferenceThreshold) ||
+            (identical(
+                  other.startDifferenceThreshold,
+                  startDifferenceThreshold,
+                ) ||
                 other.startDifferenceThreshold == startDifferenceThreshold) &&
             (identical(other.showFinishDifference, showFinishDifference) ||
                 other.showFinishDifference == showFinishDifference) &&
-            (identical(other.showColorFinishDifference, showColorFinishDifference) ||
+            (identical(
+                  other.showColorFinishDifference,
+                  showColorFinishDifference,
+                ) ||
                 other.showColorFinishDifference == showColorFinishDifference) &&
-            (identical(other.finishDifferenceThreshold, finishDifferenceThreshold) ||
+            (identical(
+                  other.finishDifferenceThreshold,
+                  finishDifferenceThreshold,
+                ) ||
                 other.finishDifferenceThreshold == finishDifferenceThreshold) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
-            (identical(other.updateStartCorrectionDelay, updateStartCorrectionDelay) ||
+            (identical(
+                  other.updateStartCorrectionDelay,
+                  updateStartCorrectionDelay,
+                ) ||
                 other.updateStartCorrectionDelay ==
                     updateStartCorrectionDelay) &&
             (identical(other.logLimit, logLimit) ||
@@ -1407,63 +1534,67 @@ class _$AppSettingsImpl implements _AppSettings {
                 other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
-            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) || other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
+            (identical(
+                  other.updateNtpOffsetAtStartup,
+                  updateNtpOffsetAtStartup,
+                ) ||
+                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
   int get hashCode => Object.hashAll([
-        runtimeType,
-        language,
-        reconnect,
-        sound,
-        beep,
-        beepFromApp,
-        voice,
-        voiceFromApp,
-        voiceName,
-        volume,
-        pitch,
-        rate,
-        voiceLanguage,
-        raceId,
-        stageId,
-        wakelock,
-        startFab,
-        startFabSize,
-        finishFab,
-        finishFabSize,
-        countdown,
-        countdownSize,
-        countdownLeft,
-        countdownTop,
-        countdownAtStartTime,
-        checkUpdates,
-        showDNS,
-        showDNF,
-        showDSQ,
-        showHidden,
-        showNumbers,
-        showManual,
-        finishDelay,
-        substituteNumbers,
-        substituteNumbersDelay,
-        showStartDifference,
-        showColorStartDifference,
-        startDifferenceThreshold,
-        showFinishDifference,
-        showColorFinishDifference,
-        finishDifferenceThreshold,
-        deltaInSeconds,
-        updateStartCorrectionDelay,
-        logLimit,
-        seedColor,
-        brightness,
-        contrastLevel,
-        dynamicSchemeVariant,
-        isOLEDBackground,
-        previousVersion,
-        updateNtpOffsetAtStartup
-      ]);
+    runtimeType,
+    language,
+    reconnect,
+    sound,
+    beep,
+    beepFromApp,
+    voice,
+    voiceFromApp,
+    voiceName,
+    volume,
+    pitch,
+    rate,
+    voiceLanguage,
+    raceId,
+    stageId,
+    wakelock,
+    startFab,
+    startFabSize,
+    finishFab,
+    finishFabSize,
+    countdown,
+    countdownSize,
+    countdownLeft,
+    countdownTop,
+    countdownAtStartTime,
+    checkUpdates,
+    showDNS,
+    showDNF,
+    showDSQ,
+    showHidden,
+    showNumbers,
+    showManual,
+    finishDelay,
+    substituteNumbers,
+    substituteNumbersDelay,
+    showStartDifference,
+    showColorStartDifference,
+    startDifferenceThreshold,
+    showFinishDifference,
+    showColorFinishDifference,
+    finishDifferenceThreshold,
+    deltaInSeconds,
+    updateStartCorrectionDelay,
+    logLimit,
+    seedColor,
+    brightness,
+    contrastLevel,
+    dynamicSchemeVariant,
+    isOLEDBackground,
+    previousVersion,
+    updateNtpOffsetAtStartup,
+  ]);
 
   /// Create a copy of AppSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -1477,709 +1608,7 @@ class _$AppSettingsImpl implements _AppSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)
-        $default, {
-    required TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)
-        defaults,
-  }) {
-    return $default(
-        language,
-        reconnect,
-        sound,
-        beep,
-        beepFromApp,
-        voice,
-        voiceFromApp,
-        voiceName,
-        volume,
-        pitch,
-        rate,
-        voiceLanguage,
-        raceId,
-        stageId,
-        wakelock,
-        startFab,
-        startFabSize,
-        finishFab,
-        finishFabSize,
-        countdown,
-        countdownSize,
-        countdownLeft,
-        countdownTop,
-        countdownAtStartTime,
-        checkUpdates,
-        showDNS,
-        showDNF,
-        showDSQ,
-        showHidden,
-        showNumbers,
-        showManual,
-        finishDelay,
-        substituteNumbers,
-        substituteNumbersDelay,
-        showStartDifference,
-        showColorStartDifference,
-        startDifferenceThreshold,
-        showFinishDifference,
-        showColorFinishDifference,
-        finishDifferenceThreshold,
-        deltaInSeconds,
-        updateStartCorrectionDelay,
-        logLimit,
-        seedColor,
-        brightness,
-        contrastLevel,
-        dynamicSchemeVariant,
-        isOLEDBackground,
-        previousVersion,
-        updateNtpOffsetAtStartup);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        $default, {
-    TResult? Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        defaults,
-  }) {
-    return $default?.call(
-        language,
-        reconnect,
-        sound,
-        beep,
-        beepFromApp,
-        voice,
-        voiceFromApp,
-        voiceName,
-        volume,
-        pitch,
-        rate,
-        voiceLanguage,
-        raceId,
-        stageId,
-        wakelock,
-        startFab,
-        startFabSize,
-        finishFab,
-        finishFabSize,
-        countdown,
-        countdownSize,
-        countdownLeft,
-        countdownTop,
-        countdownAtStartTime,
-        checkUpdates,
-        showDNS,
-        showDNF,
-        showDSQ,
-        showHidden,
-        showNumbers,
-        showManual,
-        finishDelay,
-        substituteNumbers,
-        substituteNumbersDelay,
-        showStartDifference,
-        showColorStartDifference,
-        startDifferenceThreshold,
-        showFinishDifference,
-        showColorFinishDifference,
-        finishDifferenceThreshold,
-        deltaInSeconds,
-        updateStartCorrectionDelay,
-        logLimit,
-        seedColor,
-        brightness,
-        contrastLevel,
-        dynamicSchemeVariant,
-        isOLEDBackground,
-        previousVersion,
-        updateNtpOffsetAtStartup);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        $default, {
-    TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        defaults,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(
-          language,
-          reconnect,
-          sound,
-          beep,
-          beepFromApp,
-          voice,
-          voiceFromApp,
-          voiceName,
-          volume,
-          pitch,
-          rate,
-          voiceLanguage,
-          raceId,
-          stageId,
-          wakelock,
-          startFab,
-          startFabSize,
-          finishFab,
-          finishFabSize,
-          countdown,
-          countdownSize,
-          countdownLeft,
-          countdownTop,
-          countdownAtStartTime,
-          checkUpdates,
-          showDNS,
-          showDNF,
-          showDSQ,
-          showHidden,
-          showNumbers,
-          showManual,
-          finishDelay,
-          substituteNumbers,
-          substituteNumbersDelay,
-          showStartDifference,
-          showColorStartDifference,
-          startDifferenceThreshold,
-          showFinishDifference,
-          showColorFinishDifference,
-          finishDifferenceThreshold,
-          deltaInSeconds,
-          updateStartCorrectionDelay,
-          logLimit,
-          seedColor,
-          brightness,
-          contrastLevel,
-          dynamicSchemeVariant,
-          isOLEDBackground,
-          previousVersion,
-          updateNtpOffsetAtStartup);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_AppSettings value) $default, {
-    required TResult Function(_AppSettingsDefaults value) defaults,
-  }) {
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_AppSettings value)? $default, {
-    TResult? Function(_AppSettingsDefaults value)? defaults,
-  }) {
-    return $default?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_AppSettings value)? $default, {
-    TResult Function(_AppSettingsDefaults value)? defaults,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AppSettings implements AppSettings {
-  const factory _AppSettings(
-      {required final String language,
-      required final bool reconnect,
-      required final bool sound,
-      required final bool beep,
-      required final bool beepFromApp,
-      required final bool voice,
-      required final bool voiceFromApp,
-      required final bool voiceName,
-      required final double volume,
-      required final double pitch,
-      required final double rate,
-      required final String voiceLanguage,
-      required final int raceId,
-      required final int stageId,
-      required final bool wakelock,
-      required final bool startFab,
-      required final double startFabSize,
-      required final bool finishFab,
-      required final double finishFabSize,
-      required final bool countdown,
-      required final double countdownSize,
-      required final double countdownLeft,
-      required final double countdownTop,
-      required final bool countdownAtStartTime,
-      required final bool checkUpdates,
-      required final bool showDNS,
-      required final bool showDNF,
-      required final bool showDSQ,
-      required final bool showHidden,
-      required final bool showNumbers,
-      required final bool showManual,
-      required final int finishDelay,
-      required final bool substituteNumbers,
-      required final int substituteNumbersDelay,
-      required final bool showStartDifference,
-      required final bool showColorStartDifference,
-      required final int startDifferenceThreshold,
-      required final bool showFinishDifference,
-      required final bool showColorFinishDifference,
-      required final int finishDifferenceThreshold,
-      required final int deltaInSeconds,
-      required final int updateStartCorrectionDelay,
-      required final int logLimit,
-      required final ColorSeed seedColor,
-      required final Brightness brightness,
-      required final double contrastLevel,
-      required final DynamicSchemeVariant dynamicSchemeVariant,
-      required final bool isOLEDBackground,
-      required final String previousVersion,
-      required final bool updateNtpOffsetAtStartup}) = _$AppSettingsImpl;
-
-// язык
-  @override
-  String get language; // = "ru", // локаль
-// восстанавливать Bluetooth подключение при обрыве
-  @override
-  bool get reconnect; // звук
-  @override
-  bool get sound; // вкл/выкл
-// звук обратного отсчёта
-  @override
-  bool get beep; // звуком обратного отсчёта управляет приложение
-  @override
-  bool get beepFromApp; // голосовые сообщения
-  @override
-  bool get voice;
-  @override
-  bool get voiceFromApp;
-  @override
-  bool get voiceName;
-  @override
-  double get volume; // громкость
-  @override
-  double get pitch; // тон речи
-  @override
-  double get rate; // скорость речи
-  @override
-  String get voiceLanguage; // = "ru-RU", // язык tts
-// id выбранного соревнования и участка
-  @override
-  int get raceId;
-  @override
-  int get stageId; // всегда включённый экран
-  @override
-  bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
-  @override
-  bool get startFab;
-  @override
-  double get startFabSize;
-  @override
-  bool get finishFab;
-  @override
-  double get finishFabSize; // обратный отсчёт на экране старта
-  @override
-  bool get countdown;
-  @override
-  double get countdownSize;
-  @override
-  double get countdownLeft;
-  @override
-  double
-      get countdownTop; // показывать обратный отсчёт вместо стартового времени
-  @override
-  bool get countdownAtStartTime; // проверка обновлений
-  @override
-  bool get checkUpdates; // выборка значений на старте
-  @override
-  bool get showDNS;
-  @override
-  bool get showDNF;
-  @override
-  bool get showDSQ; // выборка значений на финише
-  @override
-  bool get showHidden;
-  @override
-  bool get showNumbers;
-  @override
-  bool
-      get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
-  @override
-  int get finishDelay; // автоподстановка номеров в финишном протоколе
-  @override
-  bool get substituteNumbers;
-  @override
-  int get substituteNumbersDelay; // показывать разницу между автоматическим временем старта с модуля и временем устройства
-  @override
-  bool
-      get showStartDifference; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
-  @override
-  bool
-      get showColorStartDifference; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
-  @override
-  int get startDifferenceThreshold; // показывать разницу между временем финиша с модуля и временем устройства
-  @override
-  bool
-      get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
-  @override
-  bool
-      get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
-  @override
-  int get finishDifferenceThreshold; // дельта в секундах для автоматического подставления стартового времени
-  @override
-  int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
-  @override
-  int get updateStartCorrectionDelay; // лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
-  @override
-  int get logLimit; // активная тема
-// required AppTheme appTheme,
-  @override
-  ColorSeed get seedColor;
-  @override
-  Brightness get brightness;
-  @override
-  double get contrastLevel;
-  @override
-  DynamicSchemeVariant get dynamicSchemeVariant;
-  @override
-  bool get isOLEDBackground; // версия при предыдущем запуске
-  @override
-  String get previousVersion; // обновлять ntp offset при запуске
-  @override
-  bool get updateNtpOffsetAtStartup;
-
-  /// Create a copy of AppSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
-    implements $AppSettingsCopyWith<$Res> {
-  factory _$$AppSettingsDefaultsImplCopyWith(_$AppSettingsDefaultsImpl value,
-          $Res Function(_$AppSettingsDefaultsImpl) then) =
-      __$$AppSettingsDefaultsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String language,
+      String language,
       bool reconnect,
       bool sound,
       bool beep,
@@ -2228,16 +1657,725 @@ abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
       DynamicSchemeVariant dynamicSchemeVariant,
       bool isOLEDBackground,
       String previousVersion,
-      bool updateNtpOffsetAtStartup});
+      bool updateNtpOffsetAtStartup,
+    )
+    $default, {
+    required TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )
+    defaults,
+  }) {
+    return $default(
+      language,
+      reconnect,
+      sound,
+      beep,
+      beepFromApp,
+      voice,
+      voiceFromApp,
+      voiceName,
+      volume,
+      pitch,
+      rate,
+      voiceLanguage,
+      raceId,
+      stageId,
+      wakelock,
+      startFab,
+      startFabSize,
+      finishFab,
+      finishFabSize,
+      countdown,
+      countdownSize,
+      countdownLeft,
+      countdownTop,
+      countdownAtStartTime,
+      checkUpdates,
+      showDNS,
+      showDNF,
+      showDSQ,
+      showHidden,
+      showNumbers,
+      showManual,
+      finishDelay,
+      substituteNumbers,
+      substituteNumbersDelay,
+      showStartDifference,
+      showColorStartDifference,
+      startDifferenceThreshold,
+      showFinishDifference,
+      showColorFinishDifference,
+      finishDifferenceThreshold,
+      deltaInSeconds,
+      updateStartCorrectionDelay,
+      logLimit,
+      seedColor,
+      brightness,
+      contrastLevel,
+      dynamicSchemeVariant,
+      isOLEDBackground,
+      previousVersion,
+      updateNtpOffsetAtStartup,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    $default, {
+    TResult? Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    defaults,
+  }) {
+    return $default?.call(
+      language,
+      reconnect,
+      sound,
+      beep,
+      beepFromApp,
+      voice,
+      voiceFromApp,
+      voiceName,
+      volume,
+      pitch,
+      rate,
+      voiceLanguage,
+      raceId,
+      stageId,
+      wakelock,
+      startFab,
+      startFabSize,
+      finishFab,
+      finishFabSize,
+      countdown,
+      countdownSize,
+      countdownLeft,
+      countdownTop,
+      countdownAtStartTime,
+      checkUpdates,
+      showDNS,
+      showDNF,
+      showDSQ,
+      showHidden,
+      showNumbers,
+      showManual,
+      finishDelay,
+      substituteNumbers,
+      substituteNumbersDelay,
+      showStartDifference,
+      showColorStartDifference,
+      startDifferenceThreshold,
+      showFinishDifference,
+      showColorFinishDifference,
+      finishDifferenceThreshold,
+      deltaInSeconds,
+      updateStartCorrectionDelay,
+      logLimit,
+      seedColor,
+      brightness,
+      contrastLevel,
+      dynamicSchemeVariant,
+      isOLEDBackground,
+      previousVersion,
+      updateNtpOffsetAtStartup,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    $default, {
+    TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    defaults,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(
+        language,
+        reconnect,
+        sound,
+        beep,
+        beepFromApp,
+        voice,
+        voiceFromApp,
+        voiceName,
+        volume,
+        pitch,
+        rate,
+        voiceLanguage,
+        raceId,
+        stageId,
+        wakelock,
+        startFab,
+        startFabSize,
+        finishFab,
+        finishFabSize,
+        countdown,
+        countdownSize,
+        countdownLeft,
+        countdownTop,
+        countdownAtStartTime,
+        checkUpdates,
+        showDNS,
+        showDNF,
+        showDSQ,
+        showHidden,
+        showNumbers,
+        showManual,
+        finishDelay,
+        substituteNumbers,
+        substituteNumbersDelay,
+        showStartDifference,
+        showColorStartDifference,
+        startDifferenceThreshold,
+        showFinishDifference,
+        showColorFinishDifference,
+        finishDifferenceThreshold,
+        deltaInSeconds,
+        updateStartCorrectionDelay,
+        logLimit,
+        seedColor,
+        brightness,
+        contrastLevel,
+        dynamicSchemeVariant,
+        isOLEDBackground,
+        previousVersion,
+        updateNtpOffsetAtStartup,
+      );
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppSettings value) $default, {
+    required TResult Function(_AppSettingsDefaults value) defaults,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AppSettings value)? $default, {
+    TResult? Function(_AppSettingsDefaults value)? defaults,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppSettings value)? $default, {
+    TResult Function(_AppSettingsDefaults value)? defaults,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AppSettings implements AppSettings {
+  const factory _AppSettings({
+    required final String language,
+    required final bool reconnect,
+    required final bool sound,
+    required final bool beep,
+    required final bool beepFromApp,
+    required final bool voice,
+    required final bool voiceFromApp,
+    required final bool voiceName,
+    required final double volume,
+    required final double pitch,
+    required final double rate,
+    required final String voiceLanguage,
+    required final int raceId,
+    required final int stageId,
+    required final bool wakelock,
+    required final bool startFab,
+    required final double startFabSize,
+    required final bool finishFab,
+    required final double finishFabSize,
+    required final bool countdown,
+    required final double countdownSize,
+    required final double countdownLeft,
+    required final double countdownTop,
+    required final bool countdownAtStartTime,
+    required final bool checkUpdates,
+    required final bool showDNS,
+    required final bool showDNF,
+    required final bool showDSQ,
+    required final bool showHidden,
+    required final bool showNumbers,
+    required final bool showManual,
+    required final int finishDelay,
+    required final bool substituteNumbers,
+    required final int substituteNumbersDelay,
+    required final bool showStartDifference,
+    required final bool showColorStartDifference,
+    required final int startDifferenceThreshold,
+    required final bool showFinishDifference,
+    required final bool showColorFinishDifference,
+    required final int finishDifferenceThreshold,
+    required final int deltaInSeconds,
+    required final int updateStartCorrectionDelay,
+    required final int logLimit,
+    required final ColorSeed seedColor,
+    required final Brightness brightness,
+    required final double contrastLevel,
+    required final DynamicSchemeVariant dynamicSchemeVariant,
+    required final bool isOLEDBackground,
+    required final String previousVersion,
+    required final bool updateNtpOffsetAtStartup,
+  }) = _$AppSettingsImpl;
+
+  // язык
+  @override
+  String get language; // = "ru", // локаль
+  // восстанавливать Bluetooth подключение при обрыве
+  @override
+  bool get reconnect; // звук
+  @override
+  bool get sound; // вкл/выкл
+  // звук обратного отсчёта
+  @override
+  bool get beep; // звуком обратного отсчёта управляет приложение
+  @override
+  bool get beepFromApp; // голосовые сообщения
+  @override
+  bool get voice;
+  @override
+  bool get voiceFromApp;
+  @override
+  bool get voiceName;
+  @override
+  double get volume; // громкость
+  @override
+  double get pitch; // тон речи
+  @override
+  double get rate; // скорость речи
+  @override
+  String get voiceLanguage; // = "ru-RU", // язык tts
+  // id выбранного соревнования и участка
+  @override
+  int get raceId;
+  @override
+  int get stageId; // всегда включённый экран
+  @override
+  bool get wakelock; // кнопки "добавить вручную" на экранах старта и финиша
+  @override
+  bool get startFab;
+  @override
+  double get startFabSize;
+  @override
+  bool get finishFab;
+  @override
+  double get finishFabSize; // обратный отсчёт на экране старта
+  @override
+  bool get countdown;
+  @override
+  double get countdownSize;
+  @override
+  double get countdownLeft;
+  @override
+  double get countdownTop; // показывать обратный отсчёт вместо стартового времени
+  @override
+  bool get countdownAtStartTime; // проверка обновлений
+  @override
+  bool get checkUpdates; // выборка значений на старте
+  @override
+  bool get showDNS;
+  @override
+  bool get showDNF;
+  @override
+  bool get showDSQ; // выборка значений на финише
+  @override
+  bool get showHidden;
+  @override
+  bool get showNumbers;
+  @override
+  bool get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
+  @override
+  int get finishDelay; // автоподстановка номеров в финишном протоколе
+  @override
+  bool get substituteNumbers;
+  @override
+  int get substituteNumbersDelay; // показывать разницу между автоматическим временем старта с модуля и временем устройства
+  @override
+  bool get showStartDifference; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  @override
+  bool get showColorStartDifference; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
+  @override
+  int get startDifferenceThreshold; // показывать разницу между временем финиша с модуля и временем устройства
+  @override
+  bool get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
+  @override
+  bool get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
+  @override
+  int get finishDifferenceThreshold; // дельта в секундах для автоматического подставления стартового времени
+  @override
+  int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
+  // если она уже была установлена
+  @override
+  int get updateStartCorrectionDelay; // лог
+  // ограничение количества показываемых строк в окне лога
+  // -1 = без ограничений
+  @override
+  int get logLimit; // активная тема
+  // required AppTheme appTheme,
+  @override
+  ColorSeed get seedColor;
+  @override
+  Brightness get brightness;
+  @override
+  double get contrastLevel;
+  @override
+  DynamicSchemeVariant get dynamicSchemeVariant;
+  @override
+  bool get isOLEDBackground; // версия при предыдущем запуске
+  @override
+  String get previousVersion; // обновлять ntp offset при запуске
+  @override
+  bool get updateNtpOffsetAtStartup;
+
+  /// Create a copy of AppSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AppSettingsImplCopyWith<_$AppSettingsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AppSettingsDefaultsImplCopyWith<$Res>
+    implements $AppSettingsCopyWith<$Res> {
+  factory _$$AppSettingsDefaultsImplCopyWith(
+    _$AppSettingsDefaultsImpl value,
+    $Res Function(_$AppSettingsDefaultsImpl) then,
+  ) = __$$AppSettingsDefaultsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String language,
+    bool reconnect,
+    bool sound,
+    bool beep,
+    bool beepFromApp,
+    bool voice,
+    bool voiceFromApp,
+    bool voiceName,
+    double volume,
+    double pitch,
+    double rate,
+    String voiceLanguage,
+    int raceId,
+    int stageId,
+    bool wakelock,
+    bool startFab,
+    double startFabSize,
+    bool finishFab,
+    double finishFabSize,
+    bool countdown,
+    double countdownSize,
+    double countdownLeft,
+    double countdownTop,
+    bool countdownAtStartTime,
+    bool checkUpdates,
+    bool showDNS,
+    bool showDNF,
+    bool showDSQ,
+    bool showHidden,
+    bool showNumbers,
+    bool showManual,
+    int finishDelay,
+    bool substituteNumbers,
+    int substituteNumbersDelay,
+    bool showStartDifference,
+    bool showColorStartDifference,
+    int startDifferenceThreshold,
+    bool showFinishDifference,
+    bool showColorFinishDifference,
+    int finishDifferenceThreshold,
+    int deltaInSeconds,
+    int updateStartCorrectionDelay,
+    int logLimit,
+    ColorSeed seedColor,
+    Brightness brightness,
+    double contrastLevel,
+    DynamicSchemeVariant dynamicSchemeVariant,
+    bool isOLEDBackground,
+    String previousVersion,
+    bool updateNtpOffsetAtStartup,
+  });
 }
 
 /// @nodoc
 class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     extends _$AppSettingsCopyWithImpl<$Res, _$AppSettingsDefaultsImpl>
     implements _$$AppSettingsDefaultsImplCopyWith<$Res> {
-  __$$AppSettingsDefaultsImplCopyWithImpl(_$AppSettingsDefaultsImpl _value,
-      $Res Function(_$AppSettingsDefaultsImpl) _then)
-      : super(_value, _then);
+  __$$AppSettingsDefaultsImplCopyWithImpl(
+    _$AppSettingsDefaultsImpl _value,
+    $Res Function(_$AppSettingsDefaultsImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AppSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -2295,328 +2433,381 @@ class __$$AppSettingsDefaultsImplCopyWithImpl<$Res>
     Object? previousVersion = null,
     Object? updateNtpOffsetAtStartup = null,
   }) {
-    return _then(_$AppSettingsDefaultsImpl(
-      language: null == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String,
-      reconnect: null == reconnect
-          ? _value.reconnect
-          : reconnect // ignore: cast_nullable_to_non_nullable
-              as bool,
-      sound: null == sound
-          ? _value.sound
-          : sound // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beep: null == beep
-          ? _value.beep
-          : beep // ignore: cast_nullable_to_non_nullable
-              as bool,
-      beepFromApp: null == beepFromApp
-          ? _value.beepFromApp
-          : beepFromApp // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voice: null == voice
-          ? _value.voice
-          : voice // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceFromApp: null == voiceFromApp
-          ? _value.voiceFromApp
-          : voiceFromApp // ignore: cast_nullable_to_non_nullable
-              as bool,
-      voiceName: null == voiceName
-          ? _value.voiceName
-          : voiceName // ignore: cast_nullable_to_non_nullable
-              as bool,
-      volume: null == volume
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-      pitch: null == pitch
-          ? _value.pitch
-          : pitch // ignore: cast_nullable_to_non_nullable
-              as double,
-      rate: null == rate
-          ? _value.rate
-          : rate // ignore: cast_nullable_to_non_nullable
-              as double,
-      voiceLanguage: null == voiceLanguage
-          ? _value.voiceLanguage
-          : voiceLanguage // ignore: cast_nullable_to_non_nullable
-              as String,
-      raceId: null == raceId
-          ? _value.raceId
-          : raceId // ignore: cast_nullable_to_non_nullable
-              as int,
-      stageId: null == stageId
-          ? _value.stageId
-          : stageId // ignore: cast_nullable_to_non_nullable
-              as int,
-      wakelock: null == wakelock
-          ? _value.wakelock
-          : wakelock // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startFab: null == startFab
-          ? _value.startFab
-          : startFab // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startFabSize: null == startFabSize
-          ? _value.startFabSize
-          : startFabSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      finishFab: null == finishFab
-          ? _value.finishFab
-          : finishFab // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishFabSize: null == finishFabSize
-          ? _value.finishFabSize
-          : finishFabSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdown: null == countdown
-          ? _value.countdown
-          : countdown // ignore: cast_nullable_to_non_nullable
-              as bool,
-      countdownSize: null == countdownSize
-          ? _value.countdownSize
-          : countdownSize // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownLeft: null == countdownLeft
-          ? _value.countdownLeft
-          : countdownLeft // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownTop: null == countdownTop
-          ? _value.countdownTop
-          : countdownTop // ignore: cast_nullable_to_non_nullable
-              as double,
-      countdownAtStartTime: null == countdownAtStartTime
-          ? _value.countdownAtStartTime
-          : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
-              as bool,
-      checkUpdates: null == checkUpdates
-          ? _value.checkUpdates
-          : checkUpdates // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDNS: null == showDNS
-          ? _value.showDNS
-          : showDNS // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDNF: null == showDNF
-          ? _value.showDNF
-          : showDNF // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showDSQ: null == showDSQ
-          ? _value.showDSQ
-          : showDSQ // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showHidden: null == showHidden
-          ? _value.showHidden
-          : showHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showNumbers: null == showNumbers
-          ? _value.showNumbers
-          : showNumbers // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showManual: null == showManual
-          ? _value.showManual
-          : showManual // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishDelay: null == finishDelay
-          ? _value.finishDelay
-          : finishDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      substituteNumbers: null == substituteNumbers
-          ? _value.substituteNumbers
-          : substituteNumbers // ignore: cast_nullable_to_non_nullable
-              as bool,
-      substituteNumbersDelay: null == substituteNumbersDelay
-          ? _value.substituteNumbersDelay
-          : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      showStartDifference: null == showStartDifference
-          ? _value.showStartDifference
-          : showStartDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showColorStartDifference: null == showColorStartDifference
-          ? _value.showColorStartDifference
-          : showColorStartDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      startDifferenceThreshold: null == startDifferenceThreshold
-          ? _value.startDifferenceThreshold
-          : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
-              as int,
-      showFinishDifference: null == showFinishDifference
-          ? _value.showFinishDifference
-          : showFinishDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showColorFinishDifference: null == showColorFinishDifference
-          ? _value.showColorFinishDifference
-          : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
-              as bool,
-      finishDifferenceThreshold: null == finishDifferenceThreshold
-          ? _value.finishDifferenceThreshold
-          : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
-              as int,
-      deltaInSeconds: null == deltaInSeconds
-          ? _value.deltaInSeconds
-          : deltaInSeconds // ignore: cast_nullable_to_non_nullable
-              as int,
-      updateStartCorrectionDelay: null == updateStartCorrectionDelay
-          ? _value.updateStartCorrectionDelay
-          : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
-              as int,
-      logLimit: null == logLimit
-          ? _value.logLimit
-          : logLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-      seedColor: null == seedColor
-          ? _value.seedColor
-          : seedColor // ignore: cast_nullable_to_non_nullable
-              as ColorSeed,
-      brightness: null == brightness
-          ? _value.brightness
-          : brightness // ignore: cast_nullable_to_non_nullable
-              as Brightness,
-      contrastLevel: null == contrastLevel
-          ? _value.contrastLevel
-          : contrastLevel // ignore: cast_nullable_to_non_nullable
-              as double,
-      dynamicSchemeVariant: null == dynamicSchemeVariant
-          ? _value.dynamicSchemeVariant
-          : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
-              as DynamicSchemeVariant,
-      isOLEDBackground: null == isOLEDBackground
-          ? _value.isOLEDBackground
-          : isOLEDBackground // ignore: cast_nullable_to_non_nullable
-              as bool,
-      previousVersion: null == previousVersion
-          ? _value.previousVersion
-          : previousVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      updateNtpOffsetAtStartup: null == updateNtpOffsetAtStartup
-          ? _value.updateNtpOffsetAtStartup
-          : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      _$AppSettingsDefaultsImpl(
+        language:
+            null == language
+                ? _value.language
+                : language // ignore: cast_nullable_to_non_nullable
+                    as String,
+        reconnect:
+            null == reconnect
+                ? _value.reconnect
+                : reconnect // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        sound:
+            null == sound
+                ? _value.sound
+                : sound // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        beep:
+            null == beep
+                ? _value.beep
+                : beep // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        beepFromApp:
+            null == beepFromApp
+                ? _value.beepFromApp
+                : beepFromApp // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        voice:
+            null == voice
+                ? _value.voice
+                : voice // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        voiceFromApp:
+            null == voiceFromApp
+                ? _value.voiceFromApp
+                : voiceFromApp // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        voiceName:
+            null == voiceName
+                ? _value.voiceName
+                : voiceName // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        volume:
+            null == volume
+                ? _value.volume
+                : volume // ignore: cast_nullable_to_non_nullable
+                    as double,
+        pitch:
+            null == pitch
+                ? _value.pitch
+                : pitch // ignore: cast_nullable_to_non_nullable
+                    as double,
+        rate:
+            null == rate
+                ? _value.rate
+                : rate // ignore: cast_nullable_to_non_nullable
+                    as double,
+        voiceLanguage:
+            null == voiceLanguage
+                ? _value.voiceLanguage
+                : voiceLanguage // ignore: cast_nullable_to_non_nullable
+                    as String,
+        raceId:
+            null == raceId
+                ? _value.raceId
+                : raceId // ignore: cast_nullable_to_non_nullable
+                    as int,
+        stageId:
+            null == stageId
+                ? _value.stageId
+                : stageId // ignore: cast_nullable_to_non_nullable
+                    as int,
+        wakelock:
+            null == wakelock
+                ? _value.wakelock
+                : wakelock // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        startFab:
+            null == startFab
+                ? _value.startFab
+                : startFab // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        startFabSize:
+            null == startFabSize
+                ? _value.startFabSize
+                : startFabSize // ignore: cast_nullable_to_non_nullable
+                    as double,
+        finishFab:
+            null == finishFab
+                ? _value.finishFab
+                : finishFab // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        finishFabSize:
+            null == finishFabSize
+                ? _value.finishFabSize
+                : finishFabSize // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdown:
+            null == countdown
+                ? _value.countdown
+                : countdown // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        countdownSize:
+            null == countdownSize
+                ? _value.countdownSize
+                : countdownSize // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdownLeft:
+            null == countdownLeft
+                ? _value.countdownLeft
+                : countdownLeft // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdownTop:
+            null == countdownTop
+                ? _value.countdownTop
+                : countdownTop // ignore: cast_nullable_to_non_nullable
+                    as double,
+        countdownAtStartTime:
+            null == countdownAtStartTime
+                ? _value.countdownAtStartTime
+                : countdownAtStartTime // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        checkUpdates:
+            null == checkUpdates
+                ? _value.checkUpdates
+                : checkUpdates // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showDNS:
+            null == showDNS
+                ? _value.showDNS
+                : showDNS // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showDNF:
+            null == showDNF
+                ? _value.showDNF
+                : showDNF // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showDSQ:
+            null == showDSQ
+                ? _value.showDSQ
+                : showDSQ // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showHidden:
+            null == showHidden
+                ? _value.showHidden
+                : showHidden // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showNumbers:
+            null == showNumbers
+                ? _value.showNumbers
+                : showNumbers // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showManual:
+            null == showManual
+                ? _value.showManual
+                : showManual // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        finishDelay:
+            null == finishDelay
+                ? _value.finishDelay
+                : finishDelay // ignore: cast_nullable_to_non_nullable
+                    as int,
+        substituteNumbers:
+            null == substituteNumbers
+                ? _value.substituteNumbers
+                : substituteNumbers // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        substituteNumbersDelay:
+            null == substituteNumbersDelay
+                ? _value.substituteNumbersDelay
+                : substituteNumbersDelay // ignore: cast_nullable_to_non_nullable
+                    as int,
+        showStartDifference:
+            null == showStartDifference
+                ? _value.showStartDifference
+                : showStartDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showColorStartDifference:
+            null == showColorStartDifference
+                ? _value.showColorStartDifference
+                : showColorStartDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        startDifferenceThreshold:
+            null == startDifferenceThreshold
+                ? _value.startDifferenceThreshold
+                : startDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+                    as int,
+        showFinishDifference:
+            null == showFinishDifference
+                ? _value.showFinishDifference
+                : showFinishDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        showColorFinishDifference:
+            null == showColorFinishDifference
+                ? _value.showColorFinishDifference
+                : showColorFinishDifference // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        finishDifferenceThreshold:
+            null == finishDifferenceThreshold
+                ? _value.finishDifferenceThreshold
+                : finishDifferenceThreshold // ignore: cast_nullable_to_non_nullable
+                    as int,
+        deltaInSeconds:
+            null == deltaInSeconds
+                ? _value.deltaInSeconds
+                : deltaInSeconds // ignore: cast_nullable_to_non_nullable
+                    as int,
+        updateStartCorrectionDelay:
+            null == updateStartCorrectionDelay
+                ? _value.updateStartCorrectionDelay
+                : updateStartCorrectionDelay // ignore: cast_nullable_to_non_nullable
+                    as int,
+        logLimit:
+            null == logLimit
+                ? _value.logLimit
+                : logLimit // ignore: cast_nullable_to_non_nullable
+                    as int,
+        seedColor:
+            null == seedColor
+                ? _value.seedColor
+                : seedColor // ignore: cast_nullable_to_non_nullable
+                    as ColorSeed,
+        brightness:
+            null == brightness
+                ? _value.brightness
+                : brightness // ignore: cast_nullable_to_non_nullable
+                    as Brightness,
+        contrastLevel:
+            null == contrastLevel
+                ? _value.contrastLevel
+                : contrastLevel // ignore: cast_nullable_to_non_nullable
+                    as double,
+        dynamicSchemeVariant:
+            null == dynamicSchemeVariant
+                ? _value.dynamicSchemeVariant
+                : dynamicSchemeVariant // ignore: cast_nullable_to_non_nullable
+                    as DynamicSchemeVariant,
+        isOLEDBackground:
+            null == isOLEDBackground
+                ? _value.isOLEDBackground
+                : isOLEDBackground // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        previousVersion:
+            null == previousVersion
+                ? _value.previousVersion
+                : previousVersion // ignore: cast_nullable_to_non_nullable
+                    as String,
+        updateNtpOffsetAtStartup:
+            null == updateNtpOffsetAtStartup
+                ? _value.updateNtpOffsetAtStartup
+                : updateNtpOffsetAtStartup // ignore: cast_nullable_to_non_nullable
+                    as bool,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
-  const _$AppSettingsDefaultsImpl(
-      {this.language = 'ru',
-      this.reconnect = true,
-      this.sound = true,
-      this.beep = true,
-      this.beepFromApp = false,
-      this.voice = true,
-      this.voiceFromApp = false,
-      this.voiceName = true,
-      this.volume = 1.0,
-      this.pitch = 1.0,
-      this.rate = 0.5,
-      this.voiceLanguage = 'ru-RU',
-      this.raceId = -1,
-      this.stageId = -1,
-      this.wakelock = true,
-      this.startFab = true,
-      this.startFabSize = 75,
-      this.finishFab = true,
-      this.finishFabSize = 75,
-      this.countdown = false,
-      this.countdownSize = 75,
-      this.countdownLeft = 0,
-      this.countdownTop = 0,
-      this.countdownAtStartTime = true,
-      this.checkUpdates = true,
-      this.showDNS = false,
-      this.showDNF = false,
-      this.showDSQ = false,
-      this.showHidden = false,
-      this.showNumbers = true,
-      this.showManual = true,
-      this.finishDelay = 350,
-      this.substituteNumbers = false,
-      this.substituteNumbersDelay = 500,
-      this.showStartDifference = false,
-      this.showColorStartDifference = false,
-      this.startDifferenceThreshold = 2000,
-      this.showFinishDifference = false,
-      this.showColorFinishDifference = false,
-      this.finishDifferenceThreshold = 2000,
-      this.deltaInSeconds = 10,
-      this.updateStartCorrectionDelay = 2000,
-      this.logLimit = 100,
-      this.seedColor = ColorSeed.blue,
-      this.brightness = Brightness.light,
-      this.contrastLevel = -1.0,
-      this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
-      this.isOLEDBackground = false,
-      this.previousVersion = '0.0.0',
-      this.updateNtpOffsetAtStartup = false});
+  const _$AppSettingsDefaultsImpl({
+    this.language = 'ru',
+    this.reconnect = true,
+    this.sound = true,
+    this.beep = true,
+    this.beepFromApp = false,
+    this.voice = true,
+    this.voiceFromApp = false,
+    this.voiceName = true,
+    this.volume = 1.0,
+    this.pitch = 1.0,
+    this.rate = 0.5,
+    this.voiceLanguage = 'ru-RU',
+    this.raceId = -1,
+    this.stageId = -1,
+    this.wakelock = true,
+    this.startFab = true,
+    this.startFabSize = 75,
+    this.finishFab = true,
+    this.finishFabSize = 75,
+    this.countdown = false,
+    this.countdownSize = 75,
+    this.countdownLeft = 0,
+    this.countdownTop = 0,
+    this.countdownAtStartTime = true,
+    this.checkUpdates = true,
+    this.showDNS = false,
+    this.showDNF = false,
+    this.showDSQ = false,
+    this.showHidden = false,
+    this.showNumbers = true,
+    this.showManual = true,
+    this.finishDelay = 350,
+    this.substituteNumbers = false,
+    this.substituteNumbersDelay = 500,
+    this.showStartDifference = false,
+    this.showColorStartDifference = false,
+    this.startDifferenceThreshold = 2000,
+    this.showFinishDifference = false,
+    this.showColorFinishDifference = false,
+    this.finishDifferenceThreshold = 2000,
+    this.deltaInSeconds = 10,
+    this.updateStartCorrectionDelay = 2000,
+    this.logLimit = 100,
+    this.seedColor = ColorSeed.blue,
+    this.brightness = Brightness.light,
+    this.contrastLevel = -1.0,
+    this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant,
+    this.isOLEDBackground = false,
+    this.previousVersion = '0.0.0',
+    this.updateNtpOffsetAtStartup = false,
+  });
 
-// язык
+  // язык
   @override
   @JsonKey()
   final String language;
-// восстанавливать Bluetooth подключение при обрыве
+  // восстанавливать Bluetooth подключение при обрыве
   @override
   @JsonKey()
   final bool reconnect;
-// звук
+  // звук
   @override
   @JsonKey()
   final bool sound;
-// вкл/выкл
-// звук обратного отсчёта
+  // вкл/выкл
+  // звук обратного отсчёта
   @override
   @JsonKey()
   final bool beep;
-// звуком обратного отсчёта управляет приложение
+  // звуком обратного отсчёта управляет приложение
   @override
   @JsonKey()
   final bool beepFromApp;
-// голосовые сообщения
+  // голосовые сообщения
   @override
   @JsonKey()
   final bool voice;
-// использовать голосовые сообщения
+  // использовать голосовые сообщения
   @override
   @JsonKey()
   final bool voiceFromApp;
-// использовать голосовые сообщения и брать данные из приложения
+  // использовать голосовые сообщения и брать данные из приложения
   @override
   @JsonKey()
   final bool voiceName;
-// называть имена участников
+  // называть имена участников
   @override
   @JsonKey()
   final double volume;
-// громкость
+  // громкость
   @override
   @JsonKey()
   final double pitch;
-// тон речи
+  // тон речи
   @override
   @JsonKey()
   final double rate;
-// скорость речи
+  // скорость речи
   @override
   @JsonKey()
   final String voiceLanguage;
-// = "ru-RU", // язык
-// id выбранного соревнования и участка
+  // = "ru-RU", // язык
+  // id выбранного соревнования и участка
   @override
   @JsonKey()
   final int raceId;
   @override
   @JsonKey()
   final int stageId;
-// всегда включённый экран
+  // всегда включённый экран
   @override
   @JsonKey()
   final bool wakelock;
-// кнопки "добавить вручную" на экранах старта и финиша
+  // кнопки "добавить вручную" на экранах старта и финиша
   @override
   @JsonKey()
   final bool startFab;
@@ -2629,7 +2820,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final double finishFabSize;
-// обратный отсчёт на экране старта
+  // обратный отсчёт на экране старта
   @override
   @JsonKey()
   final bool countdown;
@@ -2642,15 +2833,15 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final double countdownTop;
-// показывать обратный отсчёт вместо стартового времени
+  // показывать обратный отсчёт вместо стартового времени
   @override
   @JsonKey()
   final bool countdownAtStartTime;
-// проверка обновлений
+  // проверка обновлений
   @override
   @JsonKey()
   final bool checkUpdates;
-// выборка значений на старте
+  // выборка значений на старте
   @override
   @JsonKey()
   final bool showDNS;
@@ -2660,7 +2851,7 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool showDSQ;
-// выборка значений на финише
+  // выборка значений на финише
   @override
   @JsonKey()
   final bool showHidden;
@@ -2670,60 +2861,60 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool showManual;
-// задержка в миллисекундах перед показыванием нового финишного времени
+  // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   @JsonKey()
   final int finishDelay;
-// автоподстановка номеров в финишном протоколе
+  // автоподстановка номеров в финишном протоколе
   @override
   @JsonKey()
   final bool substituteNumbers;
   @override
   @JsonKey()
   final int substituteNumbersDelay;
-// показывать разницу между автоматическим временем старта с модуля и временем устройства
+  // показывать разницу между автоматическим временем старта с модуля и временем устройства
   @override
   @JsonKey()
   final bool showStartDifference;
-// показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
   @override
   @JsonKey()
   final bool showColorStartDifference;
-// разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
   @override
   @JsonKey()
   final int startDifferenceThreshold;
-// показывать разницу между временем финиша с модуля и временем устройства
+  // показывать разницу между временем финиша с модуля и временем устройства
   @override
   @JsonKey()
   final bool showFinishDifference;
-// показывать разницу цветом между временем финиша с модуля и временем устройства
+  // показывать разницу цветом между временем финиша с модуля и временем устройства
   @override
   @JsonKey()
   final bool showColorFinishDifference;
-// разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  // разница между временем финиша с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
   @override
   @JsonKey()
   final int finishDifferenceThreshold;
-// дельта в секундах для автоматического подставления стартового времени
+  // дельта в секундах для автоматического подставления стартового времени
   @override
   @JsonKey()
   final int deltaInSeconds;
-// задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
+  // задержка в миллисекундах перед обновлением стартовой поправки,
+  // если она уже была установлена
   @override
   @JsonKey()
   final int updateStartCorrectionDelay;
-// лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
+  // лог
+  // ограничение количества показываемых строк в окне лога
+  // -1 = без ограничений
   @override
   @JsonKey()
   final int logLimit;
-// активная тема
-// @Default(AppTheme.lightBlue) AppTheme appTheme,
+  // активная тема
+  // @Default(AppTheme.lightBlue) AppTheme appTheme,
   @override
   @JsonKey()
   final ColorSeed seedColor;
@@ -2739,11 +2930,11 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @override
   @JsonKey()
   final bool isOLEDBackground;
-// версия при предыдущем запуске
+  // версия при предыдущем запуске
   @override
   @JsonKey()
   final String previousVersion;
-// обновлять ntp offset при запуске
+  // обновлять ntp offset при запуске
   @override
   @JsonKey()
   final bool updateNtpOffsetAtStartup;
@@ -2817,19 +3008,34 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.substituteNumbersDelay == substituteNumbersDelay) &&
             (identical(other.showStartDifference, showStartDifference) ||
                 other.showStartDifference == showStartDifference) &&
-            (identical(other.showColorStartDifference, showColorStartDifference) ||
+            (identical(
+                  other.showColorStartDifference,
+                  showColorStartDifference,
+                ) ||
                 other.showColorStartDifference == showColorStartDifference) &&
-            (identical(other.startDifferenceThreshold, startDifferenceThreshold) ||
+            (identical(
+                  other.startDifferenceThreshold,
+                  startDifferenceThreshold,
+                ) ||
                 other.startDifferenceThreshold == startDifferenceThreshold) &&
             (identical(other.showFinishDifference, showFinishDifference) ||
                 other.showFinishDifference == showFinishDifference) &&
-            (identical(other.showColorFinishDifference, showColorFinishDifference) ||
+            (identical(
+                  other.showColorFinishDifference,
+                  showColorFinishDifference,
+                ) ||
                 other.showColorFinishDifference == showColorFinishDifference) &&
-            (identical(other.finishDifferenceThreshold, finishDifferenceThreshold) ||
+            (identical(
+                  other.finishDifferenceThreshold,
+                  finishDifferenceThreshold,
+                ) ||
                 other.finishDifferenceThreshold == finishDifferenceThreshold) &&
             (identical(other.deltaInSeconds, deltaInSeconds) ||
                 other.deltaInSeconds == deltaInSeconds) &&
-            (identical(other.updateStartCorrectionDelay, updateStartCorrectionDelay) ||
+            (identical(
+                  other.updateStartCorrectionDelay,
+                  updateStartCorrectionDelay,
+                ) ||
                 other.updateStartCorrectionDelay ==
                     updateStartCorrectionDelay) &&
             (identical(other.logLimit, logLimit) ||
@@ -2846,63 +3052,67 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
                 other.isOLEDBackground == isOLEDBackground) &&
             (identical(other.previousVersion, previousVersion) ||
                 other.previousVersion == previousVersion) &&
-            (identical(other.updateNtpOffsetAtStartup, updateNtpOffsetAtStartup) || other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
+            (identical(
+                  other.updateNtpOffsetAtStartup,
+                  updateNtpOffsetAtStartup,
+                ) ||
+                other.updateNtpOffsetAtStartup == updateNtpOffsetAtStartup));
   }
 
   @override
   int get hashCode => Object.hashAll([
-        runtimeType,
-        language,
-        reconnect,
-        sound,
-        beep,
-        beepFromApp,
-        voice,
-        voiceFromApp,
-        voiceName,
-        volume,
-        pitch,
-        rate,
-        voiceLanguage,
-        raceId,
-        stageId,
-        wakelock,
-        startFab,
-        startFabSize,
-        finishFab,
-        finishFabSize,
-        countdown,
-        countdownSize,
-        countdownLeft,
-        countdownTop,
-        countdownAtStartTime,
-        checkUpdates,
-        showDNS,
-        showDNF,
-        showDSQ,
-        showHidden,
-        showNumbers,
-        showManual,
-        finishDelay,
-        substituteNumbers,
-        substituteNumbersDelay,
-        showStartDifference,
-        showColorStartDifference,
-        startDifferenceThreshold,
-        showFinishDifference,
-        showColorFinishDifference,
-        finishDifferenceThreshold,
-        deltaInSeconds,
-        updateStartCorrectionDelay,
-        logLimit,
-        seedColor,
-        brightness,
-        contrastLevel,
-        dynamicSchemeVariant,
-        isOLEDBackground,
-        previousVersion,
-        updateNtpOffsetAtStartup
-      ]);
+    runtimeType,
+    language,
+    reconnect,
+    sound,
+    beep,
+    beepFromApp,
+    voice,
+    voiceFromApp,
+    voiceName,
+    volume,
+    pitch,
+    rate,
+    voiceLanguage,
+    raceId,
+    stageId,
+    wakelock,
+    startFab,
+    startFabSize,
+    finishFab,
+    finishFabSize,
+    countdown,
+    countdownSize,
+    countdownLeft,
+    countdownTop,
+    countdownAtStartTime,
+    checkUpdates,
+    showDNS,
+    showDNF,
+    showDSQ,
+    showHidden,
+    showNumbers,
+    showManual,
+    finishDelay,
+    substituteNumbers,
+    substituteNumbersDelay,
+    showStartDifference,
+    showColorStartDifference,
+    startDifferenceThreshold,
+    showFinishDifference,
+    showColorFinishDifference,
+    finishDifferenceThreshold,
+    deltaInSeconds,
+    updateStartCorrectionDelay,
+    logLimit,
+    seedColor,
+    brightness,
+    contrastLevel,
+    dynamicSchemeVariant,
+    isOLEDBackground,
+    previousVersion,
+    updateNtpOffsetAtStartup,
+  ]);
 
   /// Create a copy of AppSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -2911,278 +3121,451 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
   @pragma('vm:prefer-inline')
   _$$AppSettingsDefaultsImplCopyWith<_$AppSettingsDefaultsImpl> get copyWith =>
       __$$AppSettingsDefaultsImplCopyWithImpl<_$AppSettingsDefaultsImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)
-        $default, {
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )
+    $default, {
     required TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)
-        defaults,
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )
+    defaults,
   }) {
     return defaults(
-        language,
-        reconnect,
-        sound,
-        beep,
-        beepFromApp,
-        voice,
-        voiceFromApp,
-        voiceName,
-        volume,
-        pitch,
-        rate,
-        voiceLanguage,
-        raceId,
-        stageId,
-        wakelock,
-        startFab,
-        startFabSize,
-        finishFab,
-        finishFabSize,
-        countdown,
-        countdownSize,
-        countdownLeft,
-        countdownTop,
-        countdownAtStartTime,
-        checkUpdates,
-        showDNS,
-        showDNF,
-        showDSQ,
-        showHidden,
-        showNumbers,
-        showManual,
-        finishDelay,
-        substituteNumbers,
-        substituteNumbersDelay,
-        showStartDifference,
-        showColorStartDifference,
-        startDifferenceThreshold,
-        showFinishDifference,
-        showColorFinishDifference,
-        finishDifferenceThreshold,
-        deltaInSeconds,
-        updateStartCorrectionDelay,
-        logLimit,
-        seedColor,
-        brightness,
-        contrastLevel,
-        dynamicSchemeVariant,
-        isOLEDBackground,
-        previousVersion,
-        updateNtpOffsetAtStartup);
+      language,
+      reconnect,
+      sound,
+      beep,
+      beepFromApp,
+      voice,
+      voiceFromApp,
+      voiceName,
+      volume,
+      pitch,
+      rate,
+      voiceLanguage,
+      raceId,
+      stageId,
+      wakelock,
+      startFab,
+      startFabSize,
+      finishFab,
+      finishFabSize,
+      countdown,
+      countdownSize,
+      countdownLeft,
+      countdownTop,
+      countdownAtStartTime,
+      checkUpdates,
+      showDNS,
+      showDNF,
+      showDSQ,
+      showHidden,
+      showNumbers,
+      showManual,
+      finishDelay,
+      substituteNumbers,
+      substituteNumbersDelay,
+      showStartDifference,
+      showColorStartDifference,
+      startDifferenceThreshold,
+      showFinishDifference,
+      showColorFinishDifference,
+      finishDifferenceThreshold,
+      deltaInSeconds,
+      updateStartCorrectionDelay,
+      logLimit,
+      seedColor,
+      brightness,
+      contrastLevel,
+      dynamicSchemeVariant,
+      isOLEDBackground,
+      previousVersion,
+      updateNtpOffsetAtStartup,
+    );
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        $default, {
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    $default, {
     TResult? Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        defaults,
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    defaults,
   }) {
     return defaults?.call(
+      language,
+      reconnect,
+      sound,
+      beep,
+      beepFromApp,
+      voice,
+      voiceFromApp,
+      voiceName,
+      volume,
+      pitch,
+      rate,
+      voiceLanguage,
+      raceId,
+      stageId,
+      wakelock,
+      startFab,
+      startFabSize,
+      finishFab,
+      finishFabSize,
+      countdown,
+      countdownSize,
+      countdownLeft,
+      countdownTop,
+      countdownAtStartTime,
+      checkUpdates,
+      showDNS,
+      showDNF,
+      showDSQ,
+      showHidden,
+      showNumbers,
+      showManual,
+      finishDelay,
+      substituteNumbers,
+      substituteNumbersDelay,
+      showStartDifference,
+      showColorStartDifference,
+      startDifferenceThreshold,
+      showFinishDifference,
+      showColorFinishDifference,
+      finishDifferenceThreshold,
+      deltaInSeconds,
+      updateStartCorrectionDelay,
+      logLimit,
+      seedColor,
+      brightness,
+      contrastLevel,
+      dynamicSchemeVariant,
+      isOLEDBackground,
+      previousVersion,
+      updateNtpOffsetAtStartup,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    $default, {
+    TResult Function(
+      String language,
+      bool reconnect,
+      bool sound,
+      bool beep,
+      bool beepFromApp,
+      bool voice,
+      bool voiceFromApp,
+      bool voiceName,
+      double volume,
+      double pitch,
+      double rate,
+      String voiceLanguage,
+      int raceId,
+      int stageId,
+      bool wakelock,
+      bool startFab,
+      double startFabSize,
+      bool finishFab,
+      double finishFabSize,
+      bool countdown,
+      double countdownSize,
+      double countdownLeft,
+      double countdownTop,
+      bool countdownAtStartTime,
+      bool checkUpdates,
+      bool showDNS,
+      bool showDNF,
+      bool showDSQ,
+      bool showHidden,
+      bool showNumbers,
+      bool showManual,
+      int finishDelay,
+      bool substituteNumbers,
+      int substituteNumbersDelay,
+      bool showStartDifference,
+      bool showColorStartDifference,
+      int startDifferenceThreshold,
+      bool showFinishDifference,
+      bool showColorFinishDifference,
+      int finishDifferenceThreshold,
+      int deltaInSeconds,
+      int updateStartCorrectionDelay,
+      int logLimit,
+      ColorSeed seedColor,
+      Brightness brightness,
+      double contrastLevel,
+      DynamicSchemeVariant dynamicSchemeVariant,
+      bool isOLEDBackground,
+      String previousVersion,
+      bool updateNtpOffsetAtStartup,
+    )?
+    defaults,
+    required TResult orElse(),
+  }) {
+    if (defaults != null) {
+      return defaults(
         language,
         reconnect,
         sound,
@@ -3232,170 +3615,8 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
         dynamicSchemeVariant,
         isOLEDBackground,
         previousVersion,
-        updateNtpOffsetAtStartup);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        $default, {
-    TResult Function(
-            String language,
-            bool reconnect,
-            bool sound,
-            bool beep,
-            bool beepFromApp,
-            bool voice,
-            bool voiceFromApp,
-            bool voiceName,
-            double volume,
-            double pitch,
-            double rate,
-            String voiceLanguage,
-            int raceId,
-            int stageId,
-            bool wakelock,
-            bool startFab,
-            double startFabSize,
-            bool finishFab,
-            double finishFabSize,
-            bool countdown,
-            double countdownSize,
-            double countdownLeft,
-            double countdownTop,
-            bool countdownAtStartTime,
-            bool checkUpdates,
-            bool showDNS,
-            bool showDNF,
-            bool showDSQ,
-            bool showHidden,
-            bool showNumbers,
-            bool showManual,
-            int finishDelay,
-            bool substituteNumbers,
-            int substituteNumbersDelay,
-            bool showStartDifference,
-            bool showColorStartDifference,
-            int startDifferenceThreshold,
-            bool showFinishDifference,
-            bool showColorFinishDifference,
-            int finishDifferenceThreshold,
-            int deltaInSeconds,
-            int updateStartCorrectionDelay,
-            int logLimit,
-            ColorSeed seedColor,
-            Brightness brightness,
-            double contrastLevel,
-            DynamicSchemeVariant dynamicSchemeVariant,
-            bool isOLEDBackground,
-            String previousVersion,
-            bool updateNtpOffsetAtStartup)?
-        defaults,
-    required TResult orElse(),
-  }) {
-    if (defaults != null) {
-      return defaults(
-          language,
-          reconnect,
-          sound,
-          beep,
-          beepFromApp,
-          voice,
-          voiceFromApp,
-          voiceName,
-          volume,
-          pitch,
-          rate,
-          voiceLanguage,
-          raceId,
-          stageId,
-          wakelock,
-          startFab,
-          startFabSize,
-          finishFab,
-          finishFabSize,
-          countdown,
-          countdownSize,
-          countdownLeft,
-          countdownTop,
-          countdownAtStartTime,
-          checkUpdates,
-          showDNS,
-          showDNF,
-          showDSQ,
-          showHidden,
-          showNumbers,
-          showManual,
-          finishDelay,
-          substituteNumbers,
-          substituteNumbersDelay,
-          showStartDifference,
-          showColorStartDifference,
-          startDifferenceThreshold,
-          showFinishDifference,
-          showColorFinishDifference,
-          finishDifferenceThreshold,
-          deltaInSeconds,
-          updateStartCorrectionDelay,
-          logLimit,
-          seedColor,
-          brightness,
-          contrastLevel,
-          dynamicSchemeVariant,
-          isOLEDBackground,
-          previousVersion,
-          updateNtpOffsetAtStartup);
+        updateNtpOffsetAtStartup,
+      );
     }
     return orElse();
   }
@@ -3433,66 +3654,67 @@ class _$AppSettingsDefaultsImpl implements _AppSettingsDefaults {
 }
 
 abstract class _AppSettingsDefaults implements AppSettings {
-  const factory _AppSettingsDefaults(
-      {final String language,
-      final bool reconnect,
-      final bool sound,
-      final bool beep,
-      final bool beepFromApp,
-      final bool voice,
-      final bool voiceFromApp,
-      final bool voiceName,
-      final double volume,
-      final double pitch,
-      final double rate,
-      final String voiceLanguage,
-      final int raceId,
-      final int stageId,
-      final bool wakelock,
-      final bool startFab,
-      final double startFabSize,
-      final bool finishFab,
-      final double finishFabSize,
-      final bool countdown,
-      final double countdownSize,
-      final double countdownLeft,
-      final double countdownTop,
-      final bool countdownAtStartTime,
-      final bool checkUpdates,
-      final bool showDNS,
-      final bool showDNF,
-      final bool showDSQ,
-      final bool showHidden,
-      final bool showNumbers,
-      final bool showManual,
-      final int finishDelay,
-      final bool substituteNumbers,
-      final int substituteNumbersDelay,
-      final bool showStartDifference,
-      final bool showColorStartDifference,
-      final int startDifferenceThreshold,
-      final bool showFinishDifference,
-      final bool showColorFinishDifference,
-      final int finishDifferenceThreshold,
-      final int deltaInSeconds,
-      final int updateStartCorrectionDelay,
-      final int logLimit,
-      final ColorSeed seedColor,
-      final Brightness brightness,
-      final double contrastLevel,
-      final DynamicSchemeVariant dynamicSchemeVariant,
-      final bool isOLEDBackground,
-      final String previousVersion,
-      final bool updateNtpOffsetAtStartup}) = _$AppSettingsDefaultsImpl;
+  const factory _AppSettingsDefaults({
+    final String language,
+    final bool reconnect,
+    final bool sound,
+    final bool beep,
+    final bool beepFromApp,
+    final bool voice,
+    final bool voiceFromApp,
+    final bool voiceName,
+    final double volume,
+    final double pitch,
+    final double rate,
+    final String voiceLanguage,
+    final int raceId,
+    final int stageId,
+    final bool wakelock,
+    final bool startFab,
+    final double startFabSize,
+    final bool finishFab,
+    final double finishFabSize,
+    final bool countdown,
+    final double countdownSize,
+    final double countdownLeft,
+    final double countdownTop,
+    final bool countdownAtStartTime,
+    final bool checkUpdates,
+    final bool showDNS,
+    final bool showDNF,
+    final bool showDSQ,
+    final bool showHidden,
+    final bool showNumbers,
+    final bool showManual,
+    final int finishDelay,
+    final bool substituteNumbers,
+    final int substituteNumbersDelay,
+    final bool showStartDifference,
+    final bool showColorStartDifference,
+    final int startDifferenceThreshold,
+    final bool showFinishDifference,
+    final bool showColorFinishDifference,
+    final int finishDifferenceThreshold,
+    final int deltaInSeconds,
+    final int updateStartCorrectionDelay,
+    final int logLimit,
+    final ColorSeed seedColor,
+    final Brightness brightness,
+    final double contrastLevel,
+    final DynamicSchemeVariant dynamicSchemeVariant,
+    final bool isOLEDBackground,
+    final String previousVersion,
+    final bool updateNtpOffsetAtStartup,
+  }) = _$AppSettingsDefaultsImpl;
 
-// язык
+  // язык
   @override
   String get language; // восстанавливать Bluetooth подключение при обрыве
   @override
   bool get reconnect; // звук
   @override
   bool get sound; // вкл/выкл
-// звук обратного отсчёта
+  // звук обратного отсчёта
   @override
   bool get beep; // звуком обратного отсчёта управляет приложение
   @override
@@ -3500,8 +3722,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get voice; // использовать голосовые сообщения
   @override
-  bool
-      get voiceFromApp; // использовать голосовые сообщения и брать данные из приложения
+  bool get voiceFromApp; // использовать голосовые сообщения и брать данные из приложения
   @override
   bool get voiceName; // называть имена участников
   @override
@@ -3512,7 +3733,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
   double get rate; // скорость речи
   @override
   String get voiceLanguage; // = "ru-RU", // язык
-// id выбранного соревнования и участка
+  // id выбранного соревнования и участка
   @override
   int get raceId;
   @override
@@ -3534,8 +3755,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   double get countdownLeft;
   @override
-  double
-      get countdownTop; // показывать обратный отсчёт вместо стартового времени
+  double get countdownTop; // показывать обратный отсчёт вместо стартового времени
   @override
   bool get countdownAtStartTime; // проверка обновлений
   @override
@@ -3551,8 +3771,7 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   bool get showNumbers;
   @override
-  bool
-      get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
+  bool get showManual; // задержка в миллисекундах перед показыванием нового финишного времени
   @override
   int get finishDelay; // автоподстановка номеров в финишном протоколе
   @override
@@ -3560,33 +3779,29 @@ abstract class _AppSettingsDefaults implements AppSettings {
   @override
   int get substituteNumbersDelay; // показывать разницу между автоматическим временем старта с модуля и временем устройства
   @override
-  bool
-      get showStartDifference; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
+  bool get showStartDifference; // показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
   @override
-  bool
-      get showColorStartDifference; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  bool get showColorStartDifference; // разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
   @override
   int get startDifferenceThreshold; // показывать разницу между временем финиша с модуля и временем устройства
   @override
-  bool
-      get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
+  bool get showFinishDifference; // показывать разницу цветом между временем финиша с модуля и временем устройства
   @override
-  bool
-      get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
+  bool get showColorFinishDifference; // разница между временем финиша с модуля и временем устройства в миллисекундах
+  // при превышении которого будет цветовая индикация
   @override
   int get finishDifferenceThreshold; // дельта в секундах для автоматического подставления стартового времени
   @override
   int get deltaInSeconds; // задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
+  // если она уже была установлена
   @override
   int get updateStartCorrectionDelay; // лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
+  // ограничение количества показываемых строк в окне лога
+  // -1 = без ограничений
   @override
   int get logLimit; // активная тема
-// @Default(AppTheme.lightBlue) AppTheme appTheme,
+  // @Default(AppTheme.lightBlue) AppTheme appTheme,
   @override
   ColorSeed get seedColor;
   @override

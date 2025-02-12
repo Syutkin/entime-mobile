@@ -12,49 +12,43 @@ part of 'audio_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AudioEvent {
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-  }) =>
+  TResult when<TResult extends Object?>({required TResult Function() init}) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-  }) =>
+  TResult? whenOrNull<TResult extends Object?>({TResult? Function()? init}) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AudioEventCopyWith<$Res> {
   factory $AudioEventCopyWith(
-          AudioEvent value, $Res Function(AudioEvent) then) =
-      _$AudioEventCopyWithImpl<$Res, AudioEvent>;
+    AudioEvent value,
+    $Res Function(AudioEvent) then,
+  ) = _$AudioEventCopyWithImpl<$Res, AudioEvent>;
 }
 
 /// @nodoc
@@ -74,8 +68,9 @@ class _$AudioEventCopyWithImpl<$Res, $Val extends AudioEvent>
 /// @nodoc
 abstract class _$$InitImplCopyWith<$Res> {
   factory _$$InitImplCopyWith(
-          _$InitImpl value, $Res Function(_$InitImpl) then) =
-      __$$InitImplCopyWithImpl<$Res>;
+    _$InitImpl value,
+    $Res Function(_$InitImpl) then,
+  ) = __$$InitImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -83,7 +78,7 @@ class __$$InitImplCopyWithImpl<$Res>
     extends _$AudioEventCopyWithImpl<$Res, _$InitImpl>
     implements _$$InitImplCopyWith<$Res> {
   __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   /// Create a copy of AudioEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -110,17 +105,13 @@ class _$InitImpl implements _Init {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-  }) {
+  TResult when<TResult extends Object?>({required TResult Function() init}) {
     return init();
   }
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-  }) {
+  TResult? whenOrNull<TResult extends Object?>({TResult? Function()? init}) {
     return init?.call();
   }
 
@@ -175,47 +166,42 @@ mixin _$AudioState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String? engine, String? voice) initialized,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String? engine, String? voice)? initialized,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String? engine, String? voice)? initialized,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Initialized value) initialized,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Initialized value)? initialized,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Initialized value)? initialized,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AudioStateCopyWith<$Res> {
   factory $AudioStateCopyWith(
-          AudioState value, $Res Function(AudioState) then) =
-      _$AudioStateCopyWithImpl<$Res, AudioState>;
+    AudioState value,
+    $Res Function(AudioState) then,
+  ) = _$AudioStateCopyWithImpl<$Res, AudioState>;
 }
 
 /// @nodoc
@@ -235,8 +221,9 @@ class _$AudioStateCopyWithImpl<$Res, $Val extends AudioState>
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+    _$InitialImpl value,
+    $Res Function(_$InitialImpl) then,
+  ) = __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -244,8 +231,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$AudioStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
+    _$InitialImpl _value,
+    $Res Function(_$InitialImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AudioState
   /// with the given fields replaced by the non-null parameter values.
@@ -340,8 +328,9 @@ abstract class _Initial implements AudioState {
 /// @nodoc
 abstract class _$$InitializedImplCopyWith<$Res> {
   factory _$$InitializedImplCopyWith(
-          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
-      __$$InitializedImplCopyWithImpl<$Res>;
+    _$InitializedImpl value,
+    $Res Function(_$InitializedImpl) then,
+  ) = __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String? engine, String? voice});
 }
@@ -351,27 +340,29 @@ class __$$InitializedImplCopyWithImpl<$Res>
     extends _$AudioStateCopyWithImpl<$Res, _$InitializedImpl>
     implements _$$InitializedImplCopyWith<$Res> {
   __$$InitializedImplCopyWithImpl(
-      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
-      : super(_value, _then);
+    _$InitializedImpl _value,
+    $Res Function(_$InitializedImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of AudioState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? engine = freezed,
-    Object? voice = freezed,
-  }) {
-    return _then(_$InitializedImpl(
-      engine: freezed == engine
-          ? _value.engine
-          : engine // ignore: cast_nullable_to_non_nullable
-              as String?,
-      voice: freezed == voice
-          ? _value.voice
-          : voice // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? engine = freezed, Object? voice = freezed}) {
+    return _then(
+      _$InitializedImpl(
+        engine:
+            freezed == engine
+                ? _value.engine
+                : engine // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        voice:
+            freezed == voice
+                ? _value.voice
+                : voice // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 

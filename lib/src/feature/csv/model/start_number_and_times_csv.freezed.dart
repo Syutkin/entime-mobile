@@ -12,10 +12,12 @@ part of 'start_number_and_times_csv.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 StartNumberAndTimesCsv _$StartNumberAndTimesCsvFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _StartNumberAndTimesCsv.fromJson(json);
 }
 
@@ -36,16 +38,19 @@ mixin _$StartNumberAndTimesCsv {
 
 /// @nodoc
 abstract class $StartNumberAndTimesCsvCopyWith<$Res> {
-  factory $StartNumberAndTimesCsvCopyWith(StartNumberAndTimesCsv value,
-          $Res Function(StartNumberAndTimesCsv) then) =
-      _$StartNumberAndTimesCsvCopyWithImpl<$Res, StartNumberAndTimesCsv>;
+  factory $StartNumberAndTimesCsvCopyWith(
+    StartNumberAndTimesCsv value,
+    $Res Function(StartNumberAndTimesCsv) then,
+  ) = _$StartNumberAndTimesCsvCopyWithImpl<$Res, StartNumberAndTimesCsv>;
   @useResult
   $Res call({int number, Map<String, String>? startTimes});
 }
 
 /// @nodoc
-class _$StartNumberAndTimesCsvCopyWithImpl<$Res,
-        $Val extends StartNumberAndTimesCsv>
+class _$StartNumberAndTimesCsvCopyWithImpl<
+  $Res,
+  $Val extends StartNumberAndTimesCsv
+>
     implements $StartNumberAndTimesCsvCopyWith<$Res> {
   _$StartNumberAndTimesCsvCopyWithImpl(this._value, this._then);
 
@@ -58,20 +63,22 @@ class _$StartNumberAndTimesCsvCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? number = null,
-    Object? startTimes = freezed,
-  }) {
-    return _then(_value.copyWith(
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      startTimes: freezed == startTimes
-          ? _value.startTimes
-          : startTimes // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
-    ) as $Val);
+  $Res call({Object? number = null, Object? startTimes = freezed}) {
+    return _then(
+      _value.copyWith(
+            number:
+                null == number
+                    ? _value.number
+                    : number // ignore: cast_nullable_to_non_nullable
+                        as int,
+            startTimes:
+                freezed == startTimes
+                    ? _value.startTimes
+                    : startTimes // ignore: cast_nullable_to_non_nullable
+                        as Map<String, String>?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -79,9 +86,9 @@ class _$StartNumberAndTimesCsvCopyWithImpl<$Res,
 abstract class _$$StartNumberAndTimesCsvImplCopyWith<$Res>
     implements $StartNumberAndTimesCsvCopyWith<$Res> {
   factory _$$StartNumberAndTimesCsvImplCopyWith(
-          _$StartNumberAndTimesCsvImpl value,
-          $Res Function(_$StartNumberAndTimesCsvImpl) then) =
-      __$$StartNumberAndTimesCsvImplCopyWithImpl<$Res>;
+    _$StartNumberAndTimesCsvImpl value,
+    $Res Function(_$StartNumberAndTimesCsvImpl) then,
+  ) = __$$StartNumberAndTimesCsvImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int number, Map<String, String>? startTimes});
@@ -89,41 +96,43 @@ abstract class _$$StartNumberAndTimesCsvImplCopyWith<$Res>
 
 /// @nodoc
 class __$$StartNumberAndTimesCsvImplCopyWithImpl<$Res>
-    extends _$StartNumberAndTimesCsvCopyWithImpl<$Res,
-        _$StartNumberAndTimesCsvImpl>
+    extends
+        _$StartNumberAndTimesCsvCopyWithImpl<$Res, _$StartNumberAndTimesCsvImpl>
     implements _$$StartNumberAndTimesCsvImplCopyWith<$Res> {
   __$$StartNumberAndTimesCsvImplCopyWithImpl(
-      _$StartNumberAndTimesCsvImpl _value,
-      $Res Function(_$StartNumberAndTimesCsvImpl) _then)
-      : super(_value, _then);
+    _$StartNumberAndTimesCsvImpl _value,
+    $Res Function(_$StartNumberAndTimesCsvImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of StartNumberAndTimesCsv
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? number = null,
-    Object? startTimes = freezed,
-  }) {
-    return _then(_$StartNumberAndTimesCsvImpl(
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      startTimes: freezed == startTimes
-          ? _value._startTimes
-          : startTimes // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
-    ));
+  $Res call({Object? number = null, Object? startTimes = freezed}) {
+    return _then(
+      _$StartNumberAndTimesCsvImpl(
+        number:
+            null == number
+                ? _value.number
+                : number // ignore: cast_nullable_to_non_nullable
+                    as int,
+        startTimes:
+            freezed == startTimes
+                ? _value._startTimes
+                : startTimes // ignore: cast_nullable_to_non_nullable
+                    as Map<String, String>?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$StartNumberAndTimesCsvImpl implements _StartNumberAndTimesCsv {
-  const _$StartNumberAndTimesCsvImpl(
-      {required this.number, final Map<String, String>? startTimes})
-      : _startTimes = startTimes;
+  const _$StartNumberAndTimesCsvImpl({
+    required this.number,
+    final Map<String, String>? startTimes,
+  }) : _startTimes = startTimes;
 
   factory _$StartNumberAndTimesCsvImpl.fromJson(Map<String, dynamic> json) =>
       _$$StartNumberAndTimesCsvImplFromJson(json);
@@ -151,14 +160,19 @@ class _$StartNumberAndTimesCsvImpl implements _StartNumberAndTimesCsv {
         (other.runtimeType == runtimeType &&
             other is _$StartNumberAndTimesCsvImpl &&
             (identical(other.number, number) || other.number == number) &&
-            const DeepCollectionEquality()
-                .equals(other._startTimes, _startTimes));
+            const DeepCollectionEquality().equals(
+              other._startTimes,
+              _startTimes,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, number, const DeepCollectionEquality().hash(_startTimes));
+    runtimeType,
+    number,
+    const DeepCollectionEquality().hash(_startTimes),
+  );
 
   /// Create a copy of StartNumberAndTimesCsv
   /// with the given fields replaced by the non-null parameter values.
@@ -166,21 +180,23 @@ class _$StartNumberAndTimesCsvImpl implements _StartNumberAndTimesCsv {
   @override
   @pragma('vm:prefer-inline')
   _$$StartNumberAndTimesCsvImplCopyWith<_$StartNumberAndTimesCsvImpl>
-      get copyWith => __$$StartNumberAndTimesCsvImplCopyWithImpl<
-          _$StartNumberAndTimesCsvImpl>(this, _$identity);
+  get copyWith =>
+      __$$StartNumberAndTimesCsvImplCopyWithImpl<_$StartNumberAndTimesCsvImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$StartNumberAndTimesCsvImplToJson(
-      this,
-    );
+    return _$$StartNumberAndTimesCsvImplToJson(this);
   }
 }
 
 abstract class _StartNumberAndTimesCsv implements StartNumberAndTimesCsv {
-  const factory _StartNumberAndTimesCsv(
-      {required final int number,
-      final Map<String, String>? startTimes}) = _$StartNumberAndTimesCsvImpl;
+  const factory _StartNumberAndTimesCsv({
+    required final int number,
+    final Map<String, String>? startTimes,
+  }) = _$StartNumberAndTimesCsvImpl;
 
   factory _StartNumberAndTimesCsv.fromJson(Map<String, dynamic> json) =
       _$StartNumberAndTimesCsvImpl.fromJson;
@@ -195,5 +211,5 @@ abstract class _StartNumberAndTimesCsv implements StartNumberAndTimesCsv {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StartNumberAndTimesCsvImplCopyWith<_$StartNumberAndTimesCsvImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
