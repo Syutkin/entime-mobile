@@ -34,7 +34,7 @@ dependencies:
 #  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
   dropdown_search: ^6.0.2
   equatable: ^2.0.7
-  file_picker: ^8.3.3
+  file_picker: ^9.0.0
 #  filesize: ^2.0.1
   flutter:
     sdk: flutter
