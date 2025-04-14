@@ -58,7 +58,7 @@ dependencies:
   # package_info_plus: any
   path: ^1.9.0
   path_provider: ^2.1.5
-  permission_handler: ^11.3.1
+  permission_handler: ^12.0.0+1
   pub_semver: ^2.1.5
   rxdart: ^0.28.0
   sentry_flutter: ^8.13.0
