@@ -34,6 +34,7 @@ pubspec.lock
 devtools_options.yaml
 coverage/
 /integration_test/test_bundle.dart
+android/app/.cxx/
 
 # Web related
 lib/generated_plugin_registrant.dart
