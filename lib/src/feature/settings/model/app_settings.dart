@@ -6,7 +6,7 @@ import '../settings.dart';
 part 'app_settings.freezed.dart';
 
 @freezed
-class AppSettings with _$AppSettings {
+abstract class AppSettings with _$AppSettings {
   const factory AppSettings({
     // язык
     required String language, // = "ru", // локаль

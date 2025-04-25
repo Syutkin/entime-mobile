@@ -421,12 +421,12 @@ void main() {
         bloc.add(DatabaseEvent.addStartNumber(stage: stage, number: 1, startTime: '10:00:00'));
       },
       verify: (bloc) {
-        bloc.state.notification?.mapOrNull(
-          updateStartNumber: (notification) {
-            expect(notification.number, 1);
-            expect(notification.startTime, '10:00:00');
-          },
-        );
+        switch (bloc.state.notification) {
+          case NotificationUpdateStartNumber(number: final number, startTime: final startTime):
+            expect(number, 1);
+            expect(startTime, '10:00:00');
+          default:
+        }
       },
     );
 

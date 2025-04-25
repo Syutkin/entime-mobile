@@ -7,7 +7,7 @@ part 'start_number_and_times_csv.freezed.dart';
 part 'start_number_and_times_csv.g.dart';
 
 @freezed
-class StartNumberAndTimesCsv with _$StartNumberAndTimesCsv {
+abstract class StartNumberAndTimesCsv with _$StartNumberAndTimesCsv {
   const factory StartNumberAndTimesCsv({required int number, Map<String, String>? startTimes}) =
       _StartNumberAndTimesCsv;
 

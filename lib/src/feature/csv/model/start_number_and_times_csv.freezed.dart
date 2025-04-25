@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,207 +10,150 @@ part of 'start_number_and_times_csv.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
-StartNumberAndTimesCsv _$StartNumberAndTimesCsvFromJson(
-  Map<String, dynamic> json,
-) {
-  return _StartNumberAndTimesCsv.fromJson(json);
-}
 
 /// @nodoc
 mixin _$StartNumberAndTimesCsv {
-  int get number => throw _privateConstructorUsedError;
-  Map<String, String>? get startTimes => throw _privateConstructorUsedError;
+
+ int get number; Map<String, String>? get startTimes;
+/// Create a copy of StartNumberAndTimesCsv
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$StartNumberAndTimesCsvCopyWith<StartNumberAndTimesCsv> get copyWith => _$StartNumberAndTimesCsvCopyWithImpl<StartNumberAndTimesCsv>(this as StartNumberAndTimesCsv, _$identity);
 
   /// Serializes this StartNumberAndTimesCsv to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of StartNumberAndTimesCsv
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $StartNumberAndTimesCsvCopyWith<StartNumberAndTimesCsv> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartNumberAndTimesCsv&&(identical(other.number, number) || other.number == number)&&const DeepCollectionEquality().equals(other.startTimes, startTimes));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,number,const DeepCollectionEquality().hash(startTimes));
+
+@override
+String toString() {
+  return 'StartNumberAndTimesCsv(number: $number, startTimes: $startTimes)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $StartNumberAndTimesCsvCopyWith<$Res> {
-  factory $StartNumberAndTimesCsvCopyWith(
-    StartNumberAndTimesCsv value,
-    $Res Function(StartNumberAndTimesCsv) then,
-  ) = _$StartNumberAndTimesCsvCopyWithImpl<$Res, StartNumberAndTimesCsv>;
-  @useResult
-  $Res call({int number, Map<String, String>? startTimes});
-}
+abstract mixin class $StartNumberAndTimesCsvCopyWith<$Res>  {
+  factory $StartNumberAndTimesCsvCopyWith(StartNumberAndTimesCsv value, $Res Function(StartNumberAndTimesCsv) _then) = _$StartNumberAndTimesCsvCopyWithImpl;
+@useResult
+$Res call({
+ int number, Map<String, String>? startTimes
+});
 
+
+
+
+}
 /// @nodoc
-class _$StartNumberAndTimesCsvCopyWithImpl<
-  $Res,
-  $Val extends StartNumberAndTimesCsv
->
+class _$StartNumberAndTimesCsvCopyWithImpl<$Res>
     implements $StartNumberAndTimesCsvCopyWith<$Res> {
-  _$StartNumberAndTimesCsvCopyWithImpl(this._value, this._then);
+  _$StartNumberAndTimesCsvCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final StartNumberAndTimesCsv _self;
+  final $Res Function(StartNumberAndTimesCsv) _then;
 
-  /// Create a copy of StartNumberAndTimesCsv
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? number = null, Object? startTimes = freezed}) {
-    return _then(
-      _value.copyWith(
-            number:
-                null == number
-                    ? _value.number
-                    : number // ignore: cast_nullable_to_non_nullable
-                        as int,
-            startTimes:
-                freezed == startTimes
-                    ? _value.startTimes
-                    : startTimes // ignore: cast_nullable_to_non_nullable
-                        as Map<String, String>?,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of StartNumberAndTimesCsv
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? number = null,Object? startTimes = freezed,}) {
+  return _then(_self.copyWith(
+number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
+as int,startTimes: freezed == startTimes ? _self.startTimes : startTimes // ignore: cast_nullable_to_non_nullable
+as Map<String, String>?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$StartNumberAndTimesCsvImplCopyWith<$Res>
-    implements $StartNumberAndTimesCsvCopyWith<$Res> {
-  factory _$$StartNumberAndTimesCsvImplCopyWith(
-    _$StartNumberAndTimesCsvImpl value,
-    $Res Function(_$StartNumberAndTimesCsvImpl) then,
-  ) = __$$StartNumberAndTimesCsvImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int number, Map<String, String>? startTimes});
 }
 
-/// @nodoc
-class __$$StartNumberAndTimesCsvImplCopyWithImpl<$Res>
-    extends
-        _$StartNumberAndTimesCsvCopyWithImpl<$Res, _$StartNumberAndTimesCsvImpl>
-    implements _$$StartNumberAndTimesCsvImplCopyWith<$Res> {
-  __$$StartNumberAndTimesCsvImplCopyWithImpl(
-    _$StartNumberAndTimesCsvImpl _value,
-    $Res Function(_$StartNumberAndTimesCsvImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of StartNumberAndTimesCsv
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? number = null, Object? startTimes = freezed}) {
-    return _then(
-      _$StartNumberAndTimesCsvImpl(
-        number:
-            null == number
-                ? _value.number
-                : number // ignore: cast_nullable_to_non_nullable
-                    as int,
-        startTimes:
-            freezed == startTimes
-                ? _value._startTimes
-                : startTimes // ignore: cast_nullable_to_non_nullable
-                    as Map<String, String>?,
-      ),
-    );
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$StartNumberAndTimesCsvImpl implements _StartNumberAndTimesCsv {
-  const _$StartNumberAndTimesCsvImpl({
-    required this.number,
-    final Map<String, String>? startTimes,
-  }) : _startTimes = startTimes;
 
-  factory _$StartNumberAndTimesCsvImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StartNumberAndTimesCsvImplFromJson(json);
+class _StartNumberAndTimesCsv implements StartNumberAndTimesCsv {
+  const _StartNumberAndTimesCsv({required this.number, final  Map<String, String>? startTimes}): _startTimes = startTimes;
+  factory _StartNumberAndTimesCsv.fromJson(Map<String, dynamic> json) => _$StartNumberAndTimesCsvFromJson(json);
 
-  @override
-  final int number;
-  final Map<String, String>? _startTimes;
-  @override
-  Map<String, String>? get startTimes {
-    final value = _startTimes;
-    if (value == null) return null;
-    if (_startTimes is EqualUnmodifiableMapView) return _startTimes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
-  @override
-  String toString() {
-    return 'StartNumberAndTimesCsv(number: $number, startTimes: $startTimes)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$StartNumberAndTimesCsvImpl &&
-            (identical(other.number, number) || other.number == number) &&
-            const DeepCollectionEquality().equals(
-              other._startTimes,
-              _startTimes,
-            ));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    number,
-    const DeepCollectionEquality().hash(_startTimes),
-  );
-
-  /// Create a copy of StartNumberAndTimesCsv
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$StartNumberAndTimesCsvImplCopyWith<_$StartNumberAndTimesCsvImpl>
-  get copyWith =>
-      __$$StartNumberAndTimesCsvImplCopyWithImpl<_$StartNumberAndTimesCsvImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StartNumberAndTimesCsvImplToJson(this);
-  }
+@override final  int number;
+ final  Map<String, String>? _startTimes;
+@override Map<String, String>? get startTimes {
+  final value = _startTimes;
+  if (value == null) return null;
+  if (_startTimes is EqualUnmodifiableMapView) return _startTimes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
 }
 
-abstract class _StartNumberAndTimesCsv implements StartNumberAndTimesCsv {
-  const factory _StartNumberAndTimesCsv({
-    required final int number,
-    final Map<String, String>? startTimes,
-  }) = _$StartNumberAndTimesCsvImpl;
 
-  factory _StartNumberAndTimesCsv.fromJson(Map<String, dynamic> json) =
-      _$StartNumberAndTimesCsvImpl.fromJson;
+/// Create a copy of StartNumberAndTimesCsv
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$StartNumberAndTimesCsvCopyWith<_StartNumberAndTimesCsv> get copyWith => __$StartNumberAndTimesCsvCopyWithImpl<_StartNumberAndTimesCsv>(this, _$identity);
 
-  @override
-  int get number;
-  @override
-  Map<String, String>? get startTimes;
-
-  /// Create a copy of StartNumberAndTimesCsv
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StartNumberAndTimesCsvImplCopyWith<_$StartNumberAndTimesCsvImpl>
-  get copyWith => throw _privateConstructorUsedError;
+@override
+Map<String, dynamic> toJson() {
+  return _$StartNumberAndTimesCsvToJson(this, );
 }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartNumberAndTimesCsv&&(identical(other.number, number) || other.number == number)&&const DeepCollectionEquality().equals(other._startTimes, _startTimes));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,number,const DeepCollectionEquality().hash(_startTimes));
+
+@override
+String toString() {
+  return 'StartNumberAndTimesCsv(number: $number, startTimes: $startTimes)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$StartNumberAndTimesCsvCopyWith<$Res> implements $StartNumberAndTimesCsvCopyWith<$Res> {
+  factory _$StartNumberAndTimesCsvCopyWith(_StartNumberAndTimesCsv value, $Res Function(_StartNumberAndTimesCsv) _then) = __$StartNumberAndTimesCsvCopyWithImpl;
+@override @useResult
+$Res call({
+ int number, Map<String, String>? startTimes
+});
+
+
+
+
+}
+/// @nodoc
+class __$StartNumberAndTimesCsvCopyWithImpl<$Res>
+    implements _$StartNumberAndTimesCsvCopyWith<$Res> {
+  __$StartNumberAndTimesCsvCopyWithImpl(this._self, this._then);
+
+  final _StartNumberAndTimesCsv _self;
+  final $Res Function(_StartNumberAndTimesCsv) _then;
+
+/// Create a copy of StartNumberAndTimesCsv
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? number = null,Object? startTimes = freezed,}) {
+  return _then(_StartNumberAndTimesCsv(
+number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
+as int,startTimes: freezed == startTimes ? _self._startTimes : startTimes // ignore: cast_nullable_to_non_nullable
+as Map<String, String>?,
+  ));
+}
+
+
+}
+
+// dart format on

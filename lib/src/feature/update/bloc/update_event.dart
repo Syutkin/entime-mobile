@@ -1,15 +1,15 @@
 part of 'update_bloc.dart';
 
 @freezed
-class UpdateEvent with _$UpdateEvent {
-  const factory UpdateEvent.checkUpdate() = _CheckUpdateEvent;
-  const factory UpdateEvent.popupChangelog() = _PopupChangelogEvent;
-  const factory UpdateEvent.downloadUpdate() = _DownloadUpdateEvent;
+sealed class UpdateEvent with _$UpdateEvent {
+  const factory UpdateEvent.checkUpdate() = _CheckUpdate;
+  const factory UpdateEvent.popupChangelog() = _PopupChangelog;
+  const factory UpdateEvent.downloadUpdate() = _DownloadUpdate;
 
-  const factory UpdateEvent.downloading({required int bytes, required int total}) = _UpdateDownloadingEvent;
+  const factory UpdateEvent.downloading({required int bytes, required int total}) = _Downloading;
 
-  const factory UpdateEvent.cancelDownload() = _CancelDownloadEvent;
-  const factory UpdateEvent.downloadError({required String error}) = _DownloadErrorEvent;
+  const factory UpdateEvent.cancelDownload() = _CancelDownload;
+  const factory UpdateEvent.downloadError({required String error}) = _DownloadError;
 
-  const factory UpdateEvent.updateFromFile() = _UpdateFromFileEvent;
+  const factory UpdateEvent.updateFromFile() = _UpdateFromFile;
 }

@@ -61,7 +61,7 @@ class _FinishListPage extends State<FinishListPage> {
 
   @override
   Widget build(BuildContext context) => BlocListener<DatabaseBloc, DatabaseState>(
-    listener: (context, state) {
+    listener: (context, state) async {
       final databaseBloc = context.read<DatabaseBloc>();
 
       // toast с автоматически проставленным номером
@@ -95,23 +95,28 @@ class _FinishListPage extends State<FinishListPage> {
       }
 
       // Вызывается, если номеру уже присвоена финишная отсечка
-      state.notification?.mapOrNull(
-        changeFinishTimeToNumber: (notification) async {
-          final update = await updateFinishTimePopup(context, notification.number);
+      switch (state.notification) {
+        case NotificationChangeFinishTimeToNumber(
+          number: final number,
+          stage: final stage,
+          finishId: final finishId,
+          finishTime: final finishTime,
+        ):
+          final update = await updateFinishTimePopup(context, number);
           if (update ?? false) {
             databaseBloc
-              ..add(DatabaseEvent.clearNumberAtFinish(stage: notification.stage, number: notification.number))
+              ..add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: number))
               ..add(
                 DatabaseEvent.addNumberToFinish(
-                  finishId: notification.finishId,
-                  number: notification.number,
-                  finishTime: notification.finishTime,
-                  stage: notification.stage,
+                  finishId: finishId,
+                  number: number,
+                  finishTime: finishTime,
+                  stage: stage,
                 ),
               );
           }
-        },
-      );
+        default:
+      }
     },
     child: Scaffold(
       body: BlocBuilder<DatabaseBloc, DatabaseState>(

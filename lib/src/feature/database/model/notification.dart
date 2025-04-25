@@ -5,14 +5,14 @@ import '../drift/app_database.dart';
 part 'notification.freezed.dart';
 
 @freezed
-class Notification with _$Notification {
+sealed class Notification with _$Notification {
   /// Добавление нового стартового времени
   /// если стартовое время уже присвоено другому номеру
   const factory Notification.updateStartNumber({
     required List<StartingParticipant> existedStartingParticipants,
     required int number,
     required String startTime,
-  }) = _UpdateStartNumber;
+  }) = NotificationUpdateStartNumber;
 
   /// Обновить автоматическую стартовую отсечку
   const factory Notification.updateAutomaticCorrection({
@@ -21,7 +21,7 @@ class Notification with _$Notification {
     required String startTime,
     required DateTime timestamp,
     required int correction,
-  }) = _UpdateAutomaticCorrection;
+  }) = NotificationUpdateAutomaticCorrection;
 
   /// Изменить время финиша для номера
   const factory Notification.changeFinishTimeToNumber({
@@ -29,5 +29,5 @@ class Notification with _$Notification {
     required int number,
     required String finishTime,
     required Stage stage,
-  }) = _ChangeFinishTimeToNumber;
+  }) = NotificationChangeFinishTimeToNumber;
 }

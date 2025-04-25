@@ -109,7 +109,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                       onToggle: (value) {
                         onChanged();
                         bloc.moduleSettings.buzzer = value;
-                        bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                        bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                       },
                     ),
                     SettingsTile(
@@ -127,7 +127,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (hz != null) {
                           onChanged();
                           bloc.moduleSettings.shortFrequency = hz;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -146,7 +146,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (hz != null) {
                           onChanged();
                           bloc.moduleSettings.longFrequency = hz;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -323,7 +323,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (number != null) {
                           onChanged();
                           bloc.moduleSettings.bluetoothNumber = number;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -378,7 +378,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (r1 != null) {
                           onChanged();
                           bloc.moduleSettings.r1 = r1;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -395,7 +395,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (r2 != null) {
                           onChanged();
                           bloc.moduleSettings.r2 = r2;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -412,7 +412,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (mv != null) {
                           onChanged();
                           bloc.moduleSettings.vBat = mv;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -469,7 +469,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (number != null) {
                           onChanged();
                           bloc.moduleSettings.bluetoothNumber = number;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -486,7 +486,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (number != null) {
                           onChanged();
                           bloc.moduleSettings.brightness = number;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -502,7 +502,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                       onToggle: (value) {
                         onChanged();
                         bloc.moduleSettings.wifi = value;
-                        bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                        bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                       },
                     ),
                     SettingsTile(
@@ -518,7 +518,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (ssid != null) {
                           onChanged();
                           bloc.moduleSettings.ssid = ssid;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),
@@ -535,7 +535,7 @@ class ModuleSettingsScreen extends StatelessWidget {
                         if (password != null) {
                           onChanged();
                           bloc.moduleSettings.password = password;
-                          bloc.add(UpdateModuleSettings(bloc.moduleSettings));
+                          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
                         }
                       },
                     ),

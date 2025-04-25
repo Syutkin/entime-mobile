@@ -45,8 +45,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
          ),
        ) {
     on<DatabaseEvent>(transformer: sequential(), (event, emit) async {
-      await event.map(
-        initialize: (event) async {
+      switch (event) {
+        case _Initialize():
           final raceId = _settingsProvider.settings.raceId;
           final stageId = _settingsProvider.settings.stageId;
 
@@ -106,8 +106,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             _substituteNumbers = state.substituteNumbers;
             _substituteNumbersDelay = state.substituteNumbersDelay;
           });
-        },
-        emitState: (event) async {
+        case _EmitState():
           emit(
             DatabaseState(
               race: event.race,
@@ -124,8 +123,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               awaitingNumber: _awaitingNumber,
             ),
           );
-        },
-        addRace: (event) async {
+        case _AddRace():
           await _db.addRace(
             name: event.name,
             startDate: event.startDate,
@@ -134,11 +132,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             url: event.url,
             description: event.description,
           );
-        },
-        deleteRace: (event) async {
+        case _DeleteRace():
           await _db.deleteRace(event.id);
-        },
-        updateRace: (event) async {
+        case _UpdateRace():
           await _db.updateRace(
             id: event.id,
             name: event.name,
@@ -148,8 +144,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             url: event.url,
             description: event.description,
           );
-        },
-        upsertRace: (event) async {
+        case _UpsertRace():
           await _db.upsertRace(
             id: event.id,
             name: event.name,
@@ -159,28 +154,23 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             url: event.url,
             description: event.description,
           );
-        },
-        getRaces: (event) async {
+        case _GetRaces():
           _races = await _db.getRaces().get();
-        },
-        selectRace: (event) async {
+        case _SelectRace():
           _race = event.race;
           final raceId = event.race.id;
           final settings = _settingsProvider.settings.copyWith(raceId: raceId);
           await _settingsProvider.update(settings);
           add(const DatabaseEvent.initialize());
-        },
-        deselectRace: (event) async {
+        case _DeselectRace():
           _race = null;
           _stage = null;
           final settings = _settingsProvider.settings.copyWith(raceId: -1, stageId: -1);
           await _settingsProvider.update(settings);
           add(const DatabaseEvent.initialize());
-        },
-        addStage: (event) async {
+        case _AddStage():
           await _db.addStage(raceId: event.raceId, name: event.name, trailId: event.trailId);
-        },
-        upsertStage: (event) async {
+        case _UpsertStage():
           await _db.upsertStage(
             id: event.id,
             name: event.name,
@@ -191,26 +181,21 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             isDeleted: event.isDeleted,
             removeTrailId: event.removeTrailId,
           );
-        },
-        deleteStage: (event) async {
+        case _DeleteStage():
           await _db.deleteStage(event.id);
-        },
-        getStages: (event) async {
+        case _GetStages():
           _stages = await _db.getStages(raceId: event.raceId).get();
           await _emitState();
-        },
-        selectStage: (event) async {
+        case _SelectStage():
           _stage = event.stage;
           final stageId = event.stage.id;
           final settings = _settingsProvider.settings.copyWith(stageId: stageId);
           await _settingsProvider.update(settings);
           add(const DatabaseEvent.initialize());
-        },
-        getParticipantsAtStart: (event) async {
+        case _GetParticipantsAtStart():
           _participants = await _db.getParticipantsAtStart(stageId: event.stageId).get();
           await _emitState();
-        },
-        addStartNumber: (event) async {
+        case _AddStartNumber():
           final startingParticipants = await _db.addStartNumber(
             stage: event.stage,
             number: event.number,
@@ -225,8 +210,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             );
             await _emitState(notification: notification);
           }
-        },
-        updateRider: (event) async {
+        case _UpdateRider():
           await _db.updateRider(
             id: event.riderId,
             name: event.name,
@@ -239,8 +223,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             comment: event.comment,
             isDeleted: event.isDeleted,
           );
-        },
-        updateRacer: (event) async {
+        case _UpdateRacer():
           if (event.riderId >= 0) {
             await _db.updateRider(
               id: event.riderId,
@@ -267,8 +250,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             );
             await _db.updateParticipant(id: event.participantId, riderId: riderId, category: event.category);
           }
-        },
-        updateStartingInfo: (event) async {
+        case _UpdateStartingInfo():
           await _db.setStartingInfo(
             startTime: event.startTime,
             automaticStartTime: event.automaticStartTime,
@@ -278,19 +260,16 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             stageId: event.stageId,
             participantId: event.participantId,
           );
-        },
-        updateManualStartTime: (event) async {
+        case DatabaseEventUpdateManualStartTime():
           await _db.updateManualStartTime(
             stageId: event.stageId,
             timestamp: event.timestamp,
             ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds,
           );
-        },
-        setStatusForStartId: (event) async {
+        case _SetStatusForStartId():
           await _db.setStatusForStartId(startId: event.startId, status: ParticipantStatus.dns);
-        },
-        updateAutomaticCorrection: (event) async {
+        case _UpdateAutomaticCorrection():
           final previousStarts = await _db.updateAutomaticCorrection(
             stageId: event.stageId,
             time: event.startTime,
@@ -311,8 +290,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               ),
             );
           }
-        },
-        addFinishTime: (event) async {
+        case _AddFinishTime():
           final autoFinishNumber = await _db.addFinishTime(
             stage: event.stage,
             finish: event.finishTime,
@@ -329,38 +307,29 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             _awaitingNumber = null;
             await _emitState(autoFinishNumber: autoFinishNumber);
           }
-        },
-        addFinishTimeManual: (event) async {
+        case _AddFinishTimeManual():
           await _db.addFinishTimeManual(
             stageId: event.stageId,
             timestamp: event.timestamp,
             ntpOffset: event.ntpOffset,
             number: event.number,
           );
-        },
-        clearStartResultsDebug: (event) async {
+        case _ClearStartResultsDebug():
           await _db.clearStartResultsDebug(stageId: event.stageId);
-        },
-        clearFinishResultsDebug: (event) async {
+        case _ClearFinishResultsDebug():
           await _db.clearFinishResultsDebug(event.stageId);
-        },
-        hideFinish: (event) async {
+        case _HideFinish():
           await _db.hideFinish(event.id);
-        },
-        hideAllFinishes: (event) async {
+        case _HideAllFinishes():
           await _db.hideAllFinishes(event.stageId);
-        },
-        clearNumberAtFinish: (event) async {
+        case _ClearNumberAtFinish():
           // _autoFinishNumber = null;
           await _db.clearNumberAtFinish(stage: event.stage, number: event.number);
-        },
-        setDNSForStage: (event) async {
+        case _SetDNSForStage():
           await _db.setDNSForStage(stage: event.stage, number: event.number);
-        },
-        setDNFForStage: (event) async {
+        case _SetDNFForStage():
           await _db.setDNFForStage(stage: event.stage, number: event.number);
-        },
-        addNumberToFinish: (event) async {
+        case _AddNumberToFinish():
           final success = await _db.addNumberToFinish(
             stage: event.stage,
             finishId: event.finishId,
@@ -379,24 +348,19 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               ),
             );
           }
-        },
-        getNumbersOnTraceNow: (event) async {
+        case _GetNumbersOnTraceNow():
           _numbersOnTrace =
               await _db.getNumbersOnTraceNow(stageId: event.stageId, dateTimeNow: event.dateTimeNow).get();
           await _emitState();
-        },
-        shiftStartsTime: (event) async {
+        case _ShiftStartsTime():
           await _db.shiftStartsTime(stageId: event.stageId, minutes: event.minutes, fromTime: event.fromTime);
-        },
-        selectAwaitingNumber: (event) {
+        case _SelectAwaitingNumber():
           _awaitingNumber = event.number;
-          _emitState();
-        },
-        deselectAwaitingNumber: (event) {
+          await _emitState();
+        case _DeselectAwaitingNumber():
           _awaitingNumber = null;
-          _emitState();
-        },
-        createRaceFromFile: (event) async {
+          await _emitState();
+        case _CreateRaceFromFile():
           final raceCsv = await fileProvider.getRaceFromFile();
           if (raceCsv != null) {
             final id = await _db.createRaceFromRaceCsv(raceCsv);
@@ -406,14 +370,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               add(DatabaseEvent.selectRace(race));
             }
           }
-        },
-        createStagesFromFile: (event) async {
+        case _CreateStagesFromFile():
           final stageCsv = await fileProvider.getStagesFromFile();
           if (stageCsv != null) {
             await _db.createStagesFromStagesCsv(event.raceId, stageCsv);
           }
-        },
-        shareStart: (event) async {
+        case _ShareStart():
           final race = _race;
           final stage = _stage;
           final stageId = stage?.id;
@@ -437,8 +399,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               }
             }
           }
-        },
-        shareFinish: (event) async {
+        case _ShareFinish():
           final race = _race;
           final stage = _stage;
           final stageId = stage?.id;
@@ -462,15 +423,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               }
             }
           }
-        },
-        shareDatabase: (event) async {
+        case _ShareDatabase():
           final timeStamp = DateFormat(longDateFormat).format(DateTime.now());
           final dbDir = await getApplicationDocumentsDirectory();
           final file = File(path.join(dbDir.path, 'database_backup_$timeStamp.sqlite'));
           await _db.exportInto(file);
           await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
-        },
-        shareTrack: (event) async {
+        case _ShareTrack():
           final fileId = event.trail.fileId;
           if (fileId != null) {
             final track = await _db.getTrack(fileId);
@@ -489,8 +448,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
             }
           }
-        },
-      );
+      }
     });
     add(const DatabaseEvent.initialize());
   }

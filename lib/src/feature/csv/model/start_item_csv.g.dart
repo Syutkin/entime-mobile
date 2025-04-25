@@ -6,8 +6,8 @@ part of 'start_item_csv.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$StartItemCsvImpl _$$StartItemCsvImplFromJson(Map<String, dynamic> json) =>
-    _$StartItemCsvImpl(
+_StartItemCsv _$StartItemCsvFromJson(Map<String, dynamic> json) =>
+    _StartItemCsv(
       number: (json['number'] as num).toInt(),
       name: json['name'] as String,
       category: json['category'] as String?,
@@ -23,7 +23,7 @@ _$StartItemCsvImpl _$$StartItemCsvImplFromJson(Map<String, dynamic> json) =>
       ),
     );
 
-Map<String, dynamic> _$$StartItemCsvImplToJson(_$StartItemCsvImpl instance) =>
+Map<String, dynamic> _$StartItemCsvToJson(_StartItemCsv instance) =>
     <String, dynamic>{
       'number': instance.number,
       'name': instance.name,

@@ -11,8 +11,8 @@ class Updater extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<UpdateBloc, UpdateState>(
     builder: (context, state) {
-      return state.map(
-        initial: (_) {
+      switch (state) {
+        case UpdateStateInitial():
           return ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: Text(Localization.current.I18nUpdate_checkForUpdates),
@@ -20,17 +20,15 @@ class Updater extends StatelessWidget {
               BlocProvider.of<UpdateBloc>(context).add(const UpdateEvent.checkUpdate());
             },
           );
-        },
-        updateAvailable: (updateAvailable) {
+        case UpdateStateUpdateAvailable():
           return ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
-            title: Text(Localization.current.I18nUpdate_updateToVersion(updateAvailable.version)),
+            title: Text(Localization.current.I18nUpdate_updateToVersion(state.version)),
             onTap: () {
               BlocProvider.of<UpdateBloc>(context).add(const UpdateEvent.downloadUpdate());
             },
           );
-        },
-        connecting: (_) {
+        case UpdateStateConnecting():
           return ListTile(
             title: Stack(
               alignment: Alignment.center,
@@ -40,32 +38,29 @@ class Updater extends StatelessWidget {
               ],
             ),
           );
-        },
-        downloading: (downloading) {
+        case UpdateStateDownloading():
           return ListTile(
             title: Stack(
               alignment: Alignment.center,
               children: [
-                LinearProgressIndicator(minHeight: 24, value: downloading.bytes / downloading.total),
+                LinearProgressIndicator(minHeight: 24, value: state.bytes / state.total),
                 Text(
-                  Localization.current.I18nUpdate_downloaded(filesize(downloading.bytes), filesize(downloading.total)),
+                  Localization.current.I18nUpdate_downloaded(filesize(state.bytes), filesize(state.total)),
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
           );
-        },
-        downloadError: (downloadError) {
+        case UpdateStateDownloadError():
           return ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             // title: Text(Localization.current.I18nUpdate_checkForUpdates),
-            title: Text(downloadError.error),
+            title: Text(state.error),
             onTap: () {
               BlocProvider.of<UpdateBloc>(context).add(const UpdateEvent.checkUpdate());
             },
           );
-        },
-      );
+      }
     },
   );
 }

@@ -24,41 +24,34 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
       });
 
     on<UpdateEvent>(transformer: sequential(), (event, emit) async {
-      await event.map(
-        checkUpdate: (event) async {
+      switch (event) {
+        case _CheckUpdate():
           final update = await updateProvider.isUpdateAvailable;
           if (update) {
             emit(UpdateState.updateAvailable(version: updateProvider.latestVersion));
           } else {
             emit(const UpdateState.initial());
           }
-        },
-        downloadUpdate: (event) async {
-          await state.mapOrNull(
-            updateAvailable: (state) async {
+        case _DownloadUpdate():
+          switch (state) {
+            case UpdateStateUpdateAvailable():
               emit(const UpdateState.connecting());
               await updateProvider.downloadUpdate();
-            },
-          );
-        },
-        downloading: (event) {
+            default:
+          }
+        case _Downloading():
           emit(UpdateState.downloading(bytes: event.bytes, total: event.total));
-        },
-        updateFromFile: (_UpdateFromFileEvent value) {
-          updateProvider.installApk();
+        case _UpdateFromFile():
+          await updateProvider.installApk();
           emit(UpdateState.updateAvailable(version: updateProvider.latestVersion));
-        },
-        cancelDownload: (event) {
+        case _CancelDownload():
           updateProvider.stop();
           emit(UpdateState.updateAvailable(version: updateProvider.latestVersion));
-        },
-        downloadError: (event) {
+        case _DownloadError():
           emit(UpdateState.downloadError(error: event.error));
-        },
-        popupChangelog: (event) async {
+        case _PopupChangelog():
           emit(UpdateState.initial(changelog: await updateProvider.showChangelog()));
-        },
-      );
+      }
     });
   }
   final IUpdateProvider updateProvider;

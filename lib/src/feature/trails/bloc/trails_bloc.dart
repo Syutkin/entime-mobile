@@ -28,23 +28,24 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
     });
 
     on<TrailsEvent>(transformer: sequential(), (event, emit) async {
-      await event.map(
-        getTrails: (_GetTrails event) async {
+      switch (event) {
+        case _GetTrails():
           emit(TrailsState.initialized(trails: _trails));
-        },
-        addTrail: (_AddTrail event) async {
+        case _AddTrail():
           int? trackId;
           final filePath = event.filePath;
+
           // Сохраняем трек если указан путь к файлу
           if (filePath != null && filePath.isNotEmpty) {
-            await state.whenOrNull(
-              initialized: (_, track) async {
+            switch (state) {
+              case Initialized(track: final track):
                 if (track != null) {
                   trackId = await _db.addTrack(track);
                 }
-              },
-            );
+              default:
+            }
           }
+
           // Записываем трейл
           await _db.addTrail(
             name: event.name,
@@ -54,8 +55,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             description: event.description,
             fileId: trackId,
           );
-        },
-        updateTrail: (_UpdateTrail event) async {
+        case _UpdateTrail():
           final fileId = event.fileId;
           Value<int?>? trackId;
           // Если надо удалить старый файл, ставим null в trackId
@@ -65,13 +65,13 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
           final filePath = event.filePath;
           // Сохраняем трек если указан путь к файлу
           if (filePath != null && filePath.isNotEmpty) {
-            await state.whenOrNull(
-              initialized: (_, track) async {
+            switch (state) {
+              case Initialized(track: final track):
                 if (track != null) {
                   trackId = Value(await _db.addTrack(track));
                 }
-              },
-            );
+              default:
+            }
           }
           // Обновляем трейл
           await _db.updateTrail(
@@ -88,11 +88,9 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
           if (event.deleteTrack && fileId != null) {
             await _db.deleteTrack(fileId);
           }
-        },
-        deleteTrail: (_DeleteTrail event) async {
+        case _DeleteTrail():
           await _db.deleteTrail(event.id);
-        },
-        loadTrack: (event) async {
+        case _LoadTrack():
           final file = File(event.filePath);
           if (file.existsSync()) {
             emit(TrailsState.loadingTrack(trails: _trails));
@@ -148,14 +146,11 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
               emit(TrailsState.initialized(trails: _trails));
             }
           }
-        },
-        unloadTrack: (event) {
+        case _UnloadTrack():
           emit(TrailsState.initialized(trails: _trails));
-        },
-        emitTrack: (event) {
+        case _EmitTrack():
           emit(TrailsState.initialized(trails: _trails, track: event.track));
-        },
-      );
+      }
     });
   }
 

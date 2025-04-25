@@ -1,7 +1,7 @@
 part of 'log_bloc.dart';
 
 @freezed
-class LogEvent with _$LogEvent {
+sealed class LogEvent with _$LogEvent {
   const factory LogEvent.emitState() = _EmitState;
 
   const factory LogEvent.add({
@@ -9,5 +9,5 @@ class LogEvent with _$LogEvent {
     required LogSource source,
     required LogSourceDirection direction,
     required String rawData,
-  }) = _AddLog;
+  }) = _Add;
 }

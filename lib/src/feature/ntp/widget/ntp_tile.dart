@@ -26,20 +26,16 @@ class NtpTile extends StatelessWidget {
         title: Text(Localization.current.I18nNtp_ntpOffset),
         subtitle: BlocBuilder<NtpBloc, NtpState>(
           builder: (context, state) {
-            return state.map(
-              initial: (state) {
+            switch (state) {
+              case Initial():
                 return Text(Localization.current.I18nNtp_sync);
-              },
-              loading: (state) {
+              case Loading():
                 return Text(Localization.current.I18nNtp_syncing);
-              },
-              success: (state) {
+              case Success():
                 return Text(Localization.current.I18nNtp_offsetInMilliseconds(state.offset));
-              },
-              failure: (state) {
+              case Failure():
                 return Text(Localization.current.I18nNtp_syncError);
-              },
-            );
+            }
           },
         ),
       );

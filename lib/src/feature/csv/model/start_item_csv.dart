@@ -7,7 +7,7 @@ part 'start_item_csv.freezed.dart';
 part 'start_item_csv.g.dart';
 
 @freezed
-class StartItemCsv with _$StartItemCsv {
+abstract class StartItemCsv with _$StartItemCsv {
   const factory StartItemCsv({
     required int number,
     required String name,

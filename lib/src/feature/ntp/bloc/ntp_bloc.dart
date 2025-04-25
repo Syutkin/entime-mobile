@@ -14,8 +14,8 @@ part 'ntp_state.dart';
 class NtpBloc extends Bloc<NtpEvent, NtpState> {
   NtpBloc(INtpProvider ntpProvider) : _ntpProvider = ntpProvider, super(const NtpState.initial(0)) {
     on<NtpEvent>(transformer: sequential(), (event, emit) async {
-      await event.map(
-        getNtpOffset: (event) async {
+      switch (event) {
+        case _GetNtpOffset():
           emit(NtpState.loading(_offset));
           try {
             _offset = await _ntpProvider.getNtpOffset(
@@ -29,8 +29,7 @@ class NtpBloc extends Bloc<NtpEvent, NtpState> {
             logger.e('Can not get ntp offset: $e');
             emit(NtpState.failure(_offset));
           }
-        },
-      );
+      }
     });
   }
   final INtpProvider _ntpProvider;

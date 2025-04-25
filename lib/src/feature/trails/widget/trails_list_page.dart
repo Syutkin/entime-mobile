@@ -29,8 +29,8 @@ class TrailsListPage extends StatelessWidget {
       appBar: AppBar(title: Text(Localization.current.I18nDatabase_trails)),
       body: BlocBuilder<TrailsBloc, TrailsState>(
         builder: (context, state) {
-          return state.maybeMap(
-            initialized: (state) {
+          switch (state) {
+            case Initialized():
               final trails = state.trails;
               return Scrollbar(
                 child: ListView.builder(
@@ -43,11 +43,9 @@ class TrailsListPage extends StatelessWidget {
                   },
                 ),
               );
-            },
-            orElse: () {
+            default:
               return const CircularProgressIndicator();
-            },
-          );
+          }
         },
       ),
       floatingActionButton: FloatingActionButton(

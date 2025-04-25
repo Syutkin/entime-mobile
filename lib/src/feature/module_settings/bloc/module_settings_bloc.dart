@@ -10,16 +10,16 @@ part 'module_settings_state.dart';
 
 class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> {
   ModuleSettingsBloc() : super(const ModuleSettingsUninitialized()) {
-    on<GetModuleSettings>(_handleGetModuleSettings);
+    on<_Get>(_handleGetModuleSettings);
     // on<ModuleSettingsLoaded>((event, emit) {});
-    on<UpdateModuleSettings>((event, emit) {
+    on<_Update>((event, emit) {
       emit(const ModuleSettingsLoading());
       emit(ModuleSettingsLoaded(moduleSettings));
     });
   }
   late ModuleSettingsProvider moduleSettings;
 
-  Future<void> _handleGetModuleSettings(GetModuleSettings event, Emitter<ModuleSettingsState> emit) async {
+  Future<void> _handleGetModuleSettings(_Get event, Emitter<ModuleSettingsState> emit) async {
     emit(const ModuleSettingsLoading());
     moduleSettings = ModuleSettingsType();
     var isLoaded = await moduleSettings.update(event.json);

@@ -1,7 +1,7 @@
 part of 'database_bloc.dart';
 
 @freezed
-class DatabaseEvent with _$DatabaseEvent {
+sealed class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.initialize() = _Initialize;
 
   const factory DatabaseEvent.emitState({
@@ -138,7 +138,7 @@ class DatabaseEvent with _$DatabaseEvent {
     required DateTime timestamp,
     required int ntpOffset,
     required int deltaInSeconds,
-  }) = _UpdateManualStartTime;
+  }) = DatabaseEventUpdateManualStartTime;
 
   const factory DatabaseEvent.setStatusForStartId({required int startId, required ParticipantStatus status}) =
       _SetStatusForStartId;

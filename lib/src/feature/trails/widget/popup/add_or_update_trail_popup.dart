@@ -92,6 +92,8 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                 ),
                 BlocBuilder<TrailsBloc, TrailsState>(
                   builder: (context, state) {
+                    final bloc = context.read<TrailsBloc>();
+                    final size = Theme.of(context).iconTheme.size ?? 24;
                     return Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -102,8 +104,8 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                             keyboardType: TextInputType.none,
                             autovalidateMode: AutovalidateMode.always,
                             validator: (_) {
-                              return state.maybeMap(
-                                initialized: (state) {
+                              switch (state) {
+                                case Initialized():
                                   final size = state.track?.size;
                                   // max upload size in bytes
                                   if (size != null && size > uploadMaxSize) {
@@ -111,36 +113,25 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                                   } else {
                                     return null;
                                   }
-                                },
-                                orElse: () => null,
-                              );
+                                default:
+                                  return null;
+                              }
                             },
                           ),
                         ),
-                        state.map(
-                          initial: (_) {
-                            return const SizedBox.shrink();
-                          },
-                          initialized: (state) {
-                            final bloc = context.read<TrailsBloc>();
-                            if (state.track == null) {
-                              return addTrackIconButton(bloc);
-                            } else {
-                              return removeTrackIconButton(bloc);
-                            }
-                          },
-                          loadingTrack: (state) {
-                            final size = Theme.of(context).iconTheme.size ?? 24;
-                            return Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: SizedBox(
-                                height: size,
-                                width: size,
-                                child: const Center(child: CircularProgressIndicator()),
-                              ),
-                            );
-                          },
-                        ),
+
+                        switch (state) {
+                          Initial() => const SizedBox.shrink(),
+                          Initialized() => state.track == null ? addTrackIconButton(bloc) : removeTrackIconButton(bloc),
+                          LoadingTrack() => Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: SizedBox(
+                              height: size,
+                              width: size,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          ),
+                        },
                       ],
                     );
                   },

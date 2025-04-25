@@ -1,3 +1,4 @@
+import 'package:entime/src/feature/database/model/notification.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,10 +83,10 @@ class HomeScreen extends StatelessWidget {
 
   SingleChildWidget _listenToBluetooth() => BlocListener<BluetoothBloc, BluetoothBlocState>(
     listener: (context, state) {
-      state.whenOrNull(
-        connected: (message) {
-          message?.whenOrNull(
-            automaticStart: (automaticStart) {
+      switch (state) {
+        case BluetoothBlocStateConnected(message: final message):
+          switch (message) {
+            case BluetoothMessageAutomaticStart(automaticStart: final automaticStart):
               final databaseBloc = context.read<DatabaseBloc>();
               final offset = context.read<NtpBloc>().state.offset;
               final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
@@ -103,8 +104,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 );
               }
-            },
-            finish: (time, timestamp) {
+            case BluetoothMessageFinish(time: final time, timestamp: final timestamp):
               final databaseBloc = context.read<DatabaseBloc>();
               final offset = context.read<NtpBloc>().state.offset;
               final stage = databaseBloc.state.stage;
@@ -113,13 +113,12 @@ class HomeScreen extends StatelessWidget {
                   DatabaseEvent.addFinishTime(stage: stage, finishTime: time, timestamp: timestamp, ntpOffset: offset),
                 );
               }
-            },
-            moduleSettings: (moduleSettings) {
-              context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(moduleSettings));
-            },
-          );
-        },
-      );
+            case BluetoothMessageModuleSettings(json: final json):
+              context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(json));
+            default:
+          }
+        default:
+      }
     },
   );
 
@@ -130,66 +129,60 @@ class HomeScreen extends StatelessWidget {
       if (notification != null) {
         final databaseBloc = context.read<DatabaseBloc>();
         final offset = context.read<NtpBloc>().state.offset;
-        await notification.mapOrNull(
-          updateAutomaticCorrection: (data) async {
-            final prevCorrection = data.previousStarts.first.automaticCorrection;
+        switch (notification) {
+          case NotificationUpdateAutomaticCorrection():
+            final prevCorrection = notification.previousStarts.first.automaticCorrection;
             // Если новая поправка для номера отличается от предыдущей
             // более чем на две секунды (updateStartCorrectionDelay в настройках),
             // то уточняем, точно ли обновлять?
             // Если разница настройки, то молча игнорируем отсечку
             final updateStartCorrectionDelay = context.read<SettingsCubit>().state.updateStartCorrectionDelay;
-            if (prevCorrection != null && prevCorrection - data.correction > updateStartCorrectionDelay) {
+            if (prevCorrection != null && prevCorrection - notification.correction > updateStartCorrectionDelay) {
               final text = Localization.current.I18nHome_updateAutomaticCorrection(
-                data.number,
-                data.previousStarts.first.automaticCorrection!,
-                data.correction,
+                notification.number,
+                notification.previousStarts.first.automaticCorrection!,
+                notification.correction,
               );
               final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
               final update = await overwriteStartTimePopup(context: context, text: text);
               if (update ?? false) {
                 databaseBloc.add(
                   DatabaseEvent.updateAutomaticCorrection(
-                    stageId: data.previousStarts.first.stageId,
-                    startTime: data.startTime,
-                    timestamp: data.timestamp,
+                    stageId: notification.previousStarts.first.stageId,
+                    startTime: notification.startTime,
+                    timestamp: notification.timestamp,
                     ntpOffset: offset,
-                    correction: data.correction,
+                    correction: notification.correction,
                     deltaInSeconds: deltaInSeconds,
                     forceUpdate: true,
                   ),
                 );
               }
             }
-          },
-        );
+          default:
+        }
       }
     },
   );
 
   SingleChildWidget _listenToUpdater() => BlocListener<UpdateBloc, UpdateState>(
     listenWhen: (previousState, state) {
-      return previousState.maybeMap(
-        initial: (initial) {
-          return state.maybeMap(
-            initial: (_) {
-              return true;
-            },
-            updateAvailable: (_) {
-              return true;
-            },
-            orElse: () {
-              return false;
-            },
-          );
+      return switch (previousState) {
+        UpdateStateInitial() => switch (state) {
+          UpdateStateInitial() => true,
+          UpdateStateUpdateAvailable() => true,
+          _ => false,
         },
-        orElse: () {
-          return false;
-        },
-      );
+        _ => false,
+      };
     },
     listener: (context, state) async {
-      await state.whenOrNull(
-        updateAvailable: (version) {
+      switch (state) {
+        case UpdateStateInitial(changelog: final changelog):
+          if (changelog != null) {
+            await showChangelogAtStartup(context, changelog);
+          }
+        case UpdateStateUpdateAvailable(version: final version):
           if (!Scaffold.of(context).isDrawerOpen) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -205,13 +198,8 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           }
-        },
-        initial: (changelog) async {
-          if (changelog != null) {
-            await showChangelogAtStartup(context, changelog);
-          }
-        },
-      );
+        default:
+      }
     },
   );
 
@@ -219,18 +207,18 @@ class HomeScreen extends StatelessWidget {
     return BlocListener<CountdownBloc, CountdownState>(
       listener: (context, state) {
         if (context.read<SettingsCubit>().state.beepFromApp) {
-          state.whenOrNull(
-            working: (tick) {
+          switch (state) {
+            case CountdownStateWorking(tick: final tick):
               // за три секунды до старта запускаем "бип"
               if (tick.text == '3') {
                 context.read<CountdownBloc>().add(const CountdownEvent.beep());
               }
-            },
-          );
+            default:
+          }
         }
         if (context.read<SettingsCubit>().state.voiceFromApp) {
-          state.whenOrNull(
-            working: (tick) {
+          switch (state) {
+            case CountdownStateWorking(tick: final tick):
               // Ищем участников для голосового вызова
               // если получили информацию от обратного отсчёта
               if (tick.callNextParticipant) {
@@ -239,8 +227,8 @@ class HomeScreen extends StatelessWidget {
                   context.read<CountdownBloc>().add(CountdownEvent.callParticipant(stageId: stageId));
                 }
               }
-            },
-          );
+            default:
+          }
         }
       },
     );

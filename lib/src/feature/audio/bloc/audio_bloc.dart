@@ -8,16 +8,15 @@ part 'audio_state.dart';
 part 'audio_bloc.freezed.dart';
 
 class AudioBloc extends Bloc<AudioEvent, AudioState> {
-  AudioBloc({required this.ttsProvider}) : super(const _Initial()) {
+  AudioBloc({required this.ttsProvider}) : super(const AudioStateInitial()) {
     on<AudioEvent>((event, emit) async {
-      await event.map(
-        init: (event) async {
+      switch (event) {
+        case _Init():
           final engine = (await ttsProvider.getDefaultEngine).toString();
           final voice = (await ttsProvider.getDefaultVoice) as Map<Object?, Object?>;
           final voiceName = voice['name'].toString();
           emit(AudioState.initialized(engine: engine, voice: voiceName));
-        },
-      );
+      }
     });
   }
   final TtsProvider ttsProvider;

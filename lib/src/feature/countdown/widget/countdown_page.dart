@@ -12,22 +12,15 @@ class CountdownPage extends StatelessWidget {
     appBar: AppBar(title: Text(Localization.current.I18nCountdown_countdown)),
     body: BlocBuilder<CountdownBloc, CountdownState>(
       builder: (context, state) {
-        final text = state.maybeMap(
-          working: (state) {
-            return state.tick.text;
-          },
-          orElse: () {
-            return '';
-          },
-        );
-        final number = state.maybeMap(
-          working: (state) {
-            return state.tick.number;
-          },
-          orElse: () {
-            return null;
-          },
-        );
+        final text = switch (state) {
+          CountdownStateInitial() => '',
+          CountdownStateWorking() => state.tick.text,
+        };
+
+        final number = switch (state) {
+          CountdownStateInitial() => null,
+          CountdownStateWorking() => state.tick.number,
+        };
 
         return Center(
           child:

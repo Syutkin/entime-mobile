@@ -187,10 +187,10 @@ class _SettingsList extends StatelessWidget {
                     title: Text(Localization.current.I18nSettings_ttsEngine),
                     trailing: BlocBuilder<AudioBloc, AudioState>(
                       builder: (context, state) {
-                        return state.map(
-                          initial: (value) => const SizedBox.shrink(),
-                          initialized: (value) => Text(value.engine ?? ''),
-                        );
+                        return switch (state) {
+                          AudioStateInitial() => const SizedBox.shrink(),
+                          AudioStateInitialized() =>Text(state.engine ?? ''),
+                        };
                       },
                     ),
                   ),
@@ -199,10 +199,10 @@ class _SettingsList extends StatelessWidget {
                     title: Text(Localization.current.I18nSettings_ttsVoice),
                     trailing: BlocBuilder<AudioBloc, AudioState>(
                       builder: (context, state) {
-                        return state.map(
-                          initial: (value) => const SizedBox.shrink(),
-                          initialized: (value) => Text(value.voice ?? ''),
-                        );
+                        return switch (state) {
+                          AudioStateInitial() => const SizedBox.shrink(),
+                          AudioStateInitialized() =>Text(state.voice ?? ''),
+                        };
                       },
                     ),
                   ),

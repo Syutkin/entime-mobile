@@ -78,8 +78,14 @@ class _StartListPage extends State<StartListPage> {
                     } else {
                       // Обновлять только там, где есть обратный отсчёт
                       return isHighlighted &&
-                          (previous.mapOrNull(working: (state) => state.tick.text) !=
-                              current.mapOrNull(working: (state) => state.tick.text));
+                          (switch (previous) {
+                                CountdownStateInitial() => null,
+                                CountdownStateWorking() => previous.tick.text,
+                              } !=
+                              switch (current) {
+                                CountdownStateInitial() => null,
+                                CountdownStateWorking() => current.tick.text,
+                              });
                     }
                   },
                   builder:
@@ -136,31 +142,30 @@ class _StartListPage extends State<StartListPage> {
           left: settingsState.countdownLeft,
           top: settingsState.countdownTop,
           child: BlocBuilder<CountdownBloc, CountdownState>(
-            builder:
-                (context, state) => state.maybeMap(
-                  working: (state) {
-                    final countdownWidget = CountdownWidget(
-                      key: _countdownKey,
-                      size: settingsState.countdownSize,
-                      text: state.tick.text,
-                    );
-                    return Draggable(
-                      feedback: countdownWidget,
-                      childWhenDragging: const SizedBox.shrink(),
-                      onDragEnd: _placeCountdownWidget,
-                      child: countdownWidget,
-                    );
-                  },
-                  orElse: () {
-                    final countdownWidget = CountdownWidget(key: _countdownKey, size: settingsState.countdownSize);
-                    return Draggable(
-                      feedback: countdownWidget,
-                      childWhenDragging: const SizedBox.shrink(),
-                      onDragEnd: _placeCountdownWidget,
-                      child: countdownWidget,
-                    );
-                  },
-                ),
+            builder: (context, state) {
+              switch (state) {
+                case CountdownStateInitial():
+                  final countdownWidget = CountdownWidget(key: _countdownKey, size: settingsState.countdownSize);
+                  return Draggable(
+                    feedback: countdownWidget,
+                    childWhenDragging: const SizedBox.shrink(),
+                    onDragEnd: _placeCountdownWidget,
+                    child: countdownWidget,
+                  );
+                case CountdownStateWorking():
+                  final countdownWidget = CountdownWidget(
+                    key: _countdownKey,
+                    size: settingsState.countdownSize,
+                    text: state.tick.text,
+                  );
+                  return Draggable(
+                    feedback: countdownWidget,
+                    childWhenDragging: const SizedBox.shrink(),
+                    onDragEnd: _placeCountdownWidget,
+                    child: countdownWidget,
+                  );
+              }
+            },
           ),
         );
       } else {
@@ -215,40 +220,44 @@ class _StartListPage extends State<StartListPage> {
     }
   }
 
-  String? _activeStartTime(CountdownState countdownState) => countdownState.whenOrNull(
-    working: (tick) => tick.nextStartTime != null ? DateFormat(shortTimeFormat).format(tick.nextStartTime!) : '',
-  );
+  String? _activeStartTime(CountdownState countdownState) => switch (countdownState) {
+    CountdownStateInitial() => null,
+    CountdownStateWorking(tick: final tick) =>
+      tick.nextStartTime != null ? DateFormat(shortTimeFormat).format(tick.nextStartTime!) : '',
+  };
 
-  String? _countdownFromState(CountdownState countdownState) =>
-      countdownState.mapOrNull(working: (state) => state.tick.text);
+  String? _countdownFromState(CountdownState countdownState) => switch (countdownState) {
+    CountdownStateInitial() => null,
+    CountdownStateWorking() => countdownState.tick.text,
+  };
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<DatabaseBloc, DatabaseState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         final databaseBloc = context.read<DatabaseBloc>();
         {
           // Добавление нового стартового времени
           // Если стартовое время уже присвоено другому номеру
-          state.notification?.mapOrNull(
-            updateStartNumber: (notification) async {
+          switch (state.notification) {
+            case NotificationUpdateStartNumber(
+              existedStartingParticipants: final existedStartingParticipants,
+              number: final number,
+              startTime: final startTime,
+            ):
               var text = '';
-              for (final element in notification.existedStartingParticipants) {
+              for (final element in existedStartingParticipants) {
                 if (element.automaticStartTime == null && element.manualStartTime == null) {
-                  text += Localization.current.I18nHome_equalStartTime(
-                    notification.startTime,
-                    element.number,
-                    notification.number,
-                  );
+                  text += Localization.current.I18nHome_equalStartTime(startTime, element.number, number);
                 } else {
                   if (element.automaticStartTime != null) {
                     text += Localization.current.I18nHome_updateAutomaticStartCorrection(
-                      notification.number,
+                      number,
                       element.automaticStartTime!,
                     );
                   } else if (element.manualStartTime != null) {
                     text += Localization.current.I18nHome_updateAutomaticStartCorrection(
-                      notification.number,
+                      number,
                       element.manualStartTime!,
                     );
                   } else {
@@ -267,15 +276,15 @@ class _StartListPage extends State<StartListPage> {
                     DatabaseEvent.addStartNumber(
                       stage: stage,
                       // stage: widget.stage,
-                      number: notification.number,
-                      startTime: notification.startTime,
+                      number: number,
+                      startTime: startTime,
                       forceAdd: true,
                     ),
                   );
                 }
               }
-            },
-          );
+            default:
+          }
         }
       },
       child: BlocBuilder<DatabaseBloc, DatabaseState>(

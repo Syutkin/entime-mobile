@@ -20,11 +20,10 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
     });
 
     on<ConnectivityEvent>(transformer: sequential(), (event, emit) {
-      event.map(
-        emit: (value) {
+      switch (event) {
+        case _Emit():
           emit(ConnectivityState.state(isConnected: event.isConnected));
-        },
-      );
+      }
     });
   }
 

@@ -29,14 +29,12 @@ class LogBloc extends Bloc<LogEvent, LogState> {
     });
 
     on<LogEvent>(transformer: sequential(), (event, emit) async {
-      await event.map(
-        emitState: (_EmitState event) async {
+      switch (event) {
+        case _EmitState():
           emit(LogState(log: _log));
-        },
-        add: (_AddLog event) {
-          _db.addLog(level: event.level, source: event.source, rawData: event.rawData);
-        },
-      );
+        case _Add():
+          await _db.addLog(level: event.level, source: event.source, rawData: event.rawData);
+      }
     });
   }
   final AppDatabase _db;

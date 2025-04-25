@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,555 +10,273 @@ part of 'log_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
 mixin _$LogEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() emitState,
-    required TResult Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )
-    add,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? emitState,
-    TResult? Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )?
-    add,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emitState,
-    TResult Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )?
-    add,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddLog value) add,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddLog value)? add,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddLog value)? add,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LogEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LogEvent()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $LogEventCopyWith<$Res> {
-  factory $LogEventCopyWith(LogEvent value, $Res Function(LogEvent) then) =
-      _$LogEventCopyWithImpl<$Res, LogEvent>;
+class $LogEventCopyWith<$Res>  {
+$LogEventCopyWith(LogEvent _, $Res Function(LogEvent) __);
 }
 
-/// @nodoc
-class _$LogEventCopyWithImpl<$Res, $Val extends LogEvent>
-    implements $LogEventCopyWith<$Res> {
-  _$LogEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of LogEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$EmitStateImplCopyWith<$Res> {
-  factory _$$EmitStateImplCopyWith(
-    _$EmitStateImpl value,
-    $Res Function(_$EmitStateImpl) then,
-  ) = __$$EmitStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$EmitStateImplCopyWithImpl<$Res>
-    extends _$LogEventCopyWithImpl<$Res, _$EmitStateImpl>
-    implements _$$EmitStateImplCopyWith<$Res> {
-  __$$EmitStateImplCopyWithImpl(
-    _$EmitStateImpl _value,
-    $Res Function(_$EmitStateImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of LogEvent
-  /// with the given fields replaced by the non-null parameter values.
-}
 
 /// @nodoc
 
-class _$EmitStateImpl implements _EmitState {
-  const _$EmitStateImpl();
 
-  @override
-  String toString() {
-    return 'LogEvent.emitState()';
-  }
+class _EmitState implements LogEvent {
+  const _EmitState();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EmitStateImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() emitState,
-    required TResult Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )
-    add,
-  }) {
-    return emitState();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? emitState,
-    TResult? Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )?
-    add,
-  }) {
-    return emitState?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emitState,
-    TResult Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )?
-    add,
-    required TResult orElse(),
-  }) {
-    if (emitState != null) {
-      return emitState();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddLog value) add,
-  }) {
-    return emitState(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddLog value)? add,
-  }) {
-    return emitState?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddLog value)? add,
-    required TResult orElse(),
-  }) {
-    if (emitState != null) {
-      return emitState(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EmitState);
 }
 
-abstract class _EmitState implements LogEvent {
-  const factory _EmitState() = _$EmitStateImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LogEvent.emitState()';
 }
 
-/// @nodoc
-abstract class _$$AddLogImplCopyWith<$Res> {
-  factory _$$AddLogImplCopyWith(
-    _$AddLogImpl value,
-    $Res Function(_$AddLogImpl) then,
-  ) = __$$AddLogImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({
-    LogLevel level,
-    LogSource source,
-    LogSourceDirection direction,
-    String rawData,
-  });
+
 }
 
-/// @nodoc
-class __$$AddLogImplCopyWithImpl<$Res>
-    extends _$LogEventCopyWithImpl<$Res, _$AddLogImpl>
-    implements _$$AddLogImplCopyWith<$Res> {
-  __$$AddLogImplCopyWithImpl(
-    _$AddLogImpl _value,
-    $Res Function(_$AddLogImpl) _then,
-  ) : super(_value, _then);
 
-  /// Create a copy of LogEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? level = null,
-    Object? source = null,
-    Object? direction = null,
-    Object? rawData = null,
-  }) {
-    return _then(
-      _$AddLogImpl(
-        level:
-            null == level
-                ? _value.level
-                : level // ignore: cast_nullable_to_non_nullable
-                    as LogLevel,
-        source:
-            null == source
-                ? _value.source
-                : source // ignore: cast_nullable_to_non_nullable
-                    as LogSource,
-        direction:
-            null == direction
-                ? _value.direction
-                : direction // ignore: cast_nullable_to_non_nullable
-                    as LogSourceDirection,
-        rawData:
-            null == rawData
-                ? _value.rawData
-                : rawData // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
-  }
-}
+
 
 /// @nodoc
 
-class _$AddLogImpl implements _AddLog {
-  const _$AddLogImpl({
-    required this.level,
-    required this.source,
-    required this.direction,
-    required this.rawData,
-  });
 
-  @override
-  final LogLevel level;
-  @override
-  final LogSource source;
-  @override
-  final LogSourceDirection direction;
-  @override
-  final String rawData;
+class _Add implements LogEvent {
+  const _Add({required this.level, required this.source, required this.direction, required this.rawData});
+  
 
-  @override
-  String toString() {
-    return 'LogEvent.add(level: $level, source: $source, direction: $direction, rawData: $rawData)';
-  }
+ final  LogLevel level;
+ final  LogSource source;
+ final  LogSourceDirection direction;
+ final  String rawData;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddLogImpl &&
-            (identical(other.level, level) || other.level == level) &&
-            (identical(other.source, source) || other.source == source) &&
-            (identical(other.direction, direction) ||
-                other.direction == direction) &&
-            (identical(other.rawData, rawData) || other.rawData == rawData));
-  }
+/// Create a copy of LogEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AddCopyWith<_Add> get copyWith => __$AddCopyWithImpl<_Add>(this, _$identity);
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, level, source, direction, rawData);
 
-  /// Create a copy of LogEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddLogImplCopyWith<_$AddLogImpl> get copyWith =>
-      __$$AddLogImplCopyWithImpl<_$AddLogImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() emitState,
-    required TResult Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )
-    add,
-  }) {
-    return add(level, source, direction, rawData);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? emitState,
-    TResult? Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )?
-    add,
-  }) {
-    return add?.call(level, source, direction, rawData);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emitState,
-    TResult Function(
-      LogLevel level,
-      LogSource source,
-      LogSourceDirection direction,
-      String rawData,
-    )?
-    add,
-    required TResult orElse(),
-  }) {
-    if (add != null) {
-      return add(level, source, direction, rawData);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_EmitState value) emitState,
-    required TResult Function(_AddLog value) add,
-  }) {
-    return add(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_EmitState value)? emitState,
-    TResult? Function(_AddLog value)? add,
-  }) {
-    return add?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EmitState value)? emitState,
-    TResult Function(_AddLog value)? add,
-    required TResult orElse(),
-  }) {
-    if (add != null) {
-      return add(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Add&&(identical(other.level, level) || other.level == level)&&(identical(other.source, source) || other.source == source)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.rawData, rawData) || other.rawData == rawData));
 }
 
-abstract class _AddLog implements LogEvent {
-  const factory _AddLog({
-    required final LogLevel level,
-    required final LogSource source,
-    required final LogSourceDirection direction,
-    required final String rawData,
-  }) = _$AddLogImpl;
 
-  LogLevel get level;
-  LogSource get source;
-  LogSourceDirection get direction;
-  String get rawData;
+@override
+int get hashCode => Object.hash(runtimeType,level,source,direction,rawData);
 
-  /// Create a copy of LogEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddLogImplCopyWith<_$AddLogImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'LogEvent.add(level: $level, source: $source, direction: $direction, rawData: $rawData)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AddCopyWith<$Res> implements $LogEventCopyWith<$Res> {
+  factory _$AddCopyWith(_Add value, $Res Function(_Add) _then) = __$AddCopyWithImpl;
+@useResult
+$Res call({
+ LogLevel level, LogSource source, LogSourceDirection direction, String rawData
+});
+
+
+
+
+}
+/// @nodoc
+class __$AddCopyWithImpl<$Res>
+    implements _$AddCopyWith<$Res> {
+  __$AddCopyWithImpl(this._self, this._then);
+
+  final _Add _self;
+  final $Res Function(_Add) _then;
+
+/// Create a copy of LogEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? level = null,Object? source = null,Object? direction = null,Object? rawData = null,}) {
+  return _then(_Add(
+level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
+as LogLevel,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as LogSource,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as LogSourceDirection,rawData: null == rawData ? _self.rawData : rawData // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 /// @nodoc
 mixin _$LogState {
-  List<Log> get log => throw _privateConstructorUsedError;
 
-  /// Create a copy of LogState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $LogStateCopyWith<LogState> get copyWith =>
-      throw _privateConstructorUsedError;
+ List<Log> get log;
+/// Create a copy of LogState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LogStateCopyWith<LogState> get copyWith => _$LogStateCopyWithImpl<LogState>(this as LogState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LogState&&const DeepCollectionEquality().equals(other.log, log));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(log));
+
+@override
+String toString() {
+  return 'LogState(log: $log)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $LogStateCopyWith<$Res> {
-  factory $LogStateCopyWith(LogState value, $Res Function(LogState) then) =
-      _$LogStateCopyWithImpl<$Res, LogState>;
-  @useResult
-  $Res call({List<Log> log});
-}
+abstract mixin class $LogStateCopyWith<$Res>  {
+  factory $LogStateCopyWith(LogState value, $Res Function(LogState) _then) = _$LogStateCopyWithImpl;
+@useResult
+$Res call({
+ List<Log> log
+});
 
+
+
+
+}
 /// @nodoc
-class _$LogStateCopyWithImpl<$Res, $Val extends LogState>
+class _$LogStateCopyWithImpl<$Res>
     implements $LogStateCopyWith<$Res> {
-  _$LogStateCopyWithImpl(this._value, this._then);
+  _$LogStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final LogState _self;
+  final $Res Function(LogState) _then;
 
-  /// Create a copy of LogState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? log = null}) {
-    return _then(
-      _value.copyWith(
-            log:
-                null == log
-                    ? _value.log
-                    : log // ignore: cast_nullable_to_non_nullable
-                        as List<Log>,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of LogState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? log = null,}) {
+  return _then(_self.copyWith(
+log: null == log ? _self.log : log // ignore: cast_nullable_to_non_nullable
+as List<Log>,
+  ));
 }
 
-/// @nodoc
-abstract class _$$LogStateImplCopyWith<$Res>
-    implements $LogStateCopyWith<$Res> {
-  factory _$$LogStateImplCopyWith(
-    _$LogStateImpl value,
-    $Res Function(_$LogStateImpl) then,
-  ) = __$$LogStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<Log> log});
 }
 
-/// @nodoc
-class __$$LogStateImplCopyWithImpl<$Res>
-    extends _$LogStateCopyWithImpl<$Res, _$LogStateImpl>
-    implements _$$LogStateImplCopyWith<$Res> {
-  __$$LogStateImplCopyWithImpl(
-    _$LogStateImpl _value,
-    $Res Function(_$LogStateImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of LogState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? log = null}) {
-    return _then(
-      _$LogStateImpl(
-        log:
-            null == log
-                ? _value._log
-                : log // ignore: cast_nullable_to_non_nullable
-                    as List<Log>,
-      ),
-    );
-  }
-}
 
 /// @nodoc
 
-class _$LogStateImpl implements _LogState {
-  const _$LogStateImpl({required final List<Log> log}) : _log = log;
 
-  final List<Log> _log;
-  @override
-  List<Log> get log {
-    if (_log is EqualUnmodifiableListView) return _log;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_log);
-  }
+class LogStat implements LogState {
+  const LogStat({required final  List<Log> log}): _log = log;
+  
 
-  @override
-  String toString() {
-    return 'LogState(log: $log)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LogStateImpl &&
-            const DeepCollectionEquality().equals(other._log, _log));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_log));
-
-  /// Create a copy of LogState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LogStateImplCopyWith<_$LogStateImpl> get copyWith =>
-      __$$LogStateImplCopyWithImpl<_$LogStateImpl>(this, _$identity);
+ final  List<Log> _log;
+@override List<Log> get log {
+  if (_log is EqualUnmodifiableListView) return _log;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_log);
 }
 
-abstract class _LogState implements LogState {
-  const factory _LogState({required final List<Log> log}) = _$LogStateImpl;
 
-  @override
-  List<Log> get log;
+/// Create a copy of LogState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LogStatCopyWith<LogStat> get copyWith => _$LogStatCopyWithImpl<LogStat>(this, _$identity);
 
-  /// Create a copy of LogState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LogStateImplCopyWith<_$LogStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LogStat&&const DeepCollectionEquality().equals(other._log, _log));
 }
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_log));
+
+@override
+String toString() {
+  return 'LogState(log: $log)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LogStatCopyWith<$Res> implements $LogStateCopyWith<$Res> {
+  factory $LogStatCopyWith(LogStat value, $Res Function(LogStat) _then) = _$LogStatCopyWithImpl;
+@override @useResult
+$Res call({
+ List<Log> log
+});
+
+
+
+
+}
+/// @nodoc
+class _$LogStatCopyWithImpl<$Res>
+    implements $LogStatCopyWith<$Res> {
+  _$LogStatCopyWithImpl(this._self, this._then);
+
+  final LogStat _self;
+  final $Res Function(LogStat) _then;
+
+/// Create a copy of LogState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? log = null,}) {
+  return _then(LogStat(
+log: null == log ? _self._log : log // ignore: cast_nullable_to_non_nullable
+as List<Log>,
+  ));
+}
+
+
+}
+
+// dart format on

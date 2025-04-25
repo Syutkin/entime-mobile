@@ -1,7 +1,7 @@
 part of 'module_settings_bloc.dart';
 
 @freezed
-class ModuleSettingsState with _$ModuleSettingsState {
+sealed class ModuleSettingsState with _$ModuleSettingsState {
   const factory ModuleSettingsState.uninitialized() = ModuleSettingsUninitialized;
   const factory ModuleSettingsState.loading() = ModuleSettingsLoading;
 

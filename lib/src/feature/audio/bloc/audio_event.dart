@@ -1,6 +1,6 @@
 part of 'audio_bloc.dart';
 
 @freezed
-class AudioEvent with _$AudioEvent {
+sealed class AudioEvent with _$AudioEvent {
   const factory AudioEvent.init() = _Init;
 }

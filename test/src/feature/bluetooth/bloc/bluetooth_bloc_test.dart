@@ -345,7 +345,10 @@ void main() {
         expect:
             () => <Matcher>[
               isA<BluetoothBlocState>().having(
-                (state) => state.maybeMap(connected: (state) => state.message, orElse: () => null),
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.message,
+                  BluetoothBlocState() => null,
+                },
                 'BluetoothMessageFinish',
                 isA<BluetoothMessageFinish>().having((message) => message.time, 'finish', '10:10:10,123'),
               ),
@@ -529,7 +532,10 @@ void main() {
         expect:
             () => <Matcher>[
               isA<BluetoothBlocState>().having(
-                (state) => state.maybeMap(connected: (state) => state.message, orElse: () => null),
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.message,
+                  BluetoothBlocState() => null,
+                },
                 'BluetoothMessageAutomaticStart',
                 isA<BluetoothMessageAutomaticStart>().having(
                   (bluetoothMessage) => bluetoothMessage.automaticStart,
@@ -593,7 +599,10 @@ void main() {
         expect:
             () => <Matcher>[
               isA<BluetoothBlocState>().having(
-                (state) => state.maybeMap(connected: (state) => state.message, orElse: () => null),
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.message,
+                  BluetoothBlocState() => null,
+                },
                 'BluetoothMessageFinish',
                 isA<BluetoothMessageFinish>().having((message) => message.time, 'finish', '10:00:01,123'),
               ),
@@ -684,7 +693,10 @@ void main() {
         expect:
             () => <Matcher>[
               isA<BluetoothBlocState>().having(
-                (state) => state.maybeMap(connected: (state) => state.message, orElse: () => null),
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.message,
+                  BluetoothBlocState() => null,
+                },
                 'BluetoothMessageModuleSettings',
                 isA<BluetoothMessageModuleSettings>().having(
                   (settings) => settings.json,

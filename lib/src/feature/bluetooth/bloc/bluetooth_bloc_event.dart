@@ -1,10 +1,10 @@
 part of 'bluetooth_bloc.dart';
 
 @freezed
-class BluetoothEvent with _$BluetoothEvent {
-  const factory BluetoothEvent.initialize() = _InitializeBluetooth;
+sealed class BluetoothEvent with _$BluetoothEvent {
+  const factory BluetoothEvent.initialize() = _Initialize;
 
-  const factory BluetoothEvent.enable() = _EnableBluetooth;
+  const factory BluetoothEvent.enable() = _Enable;
 
   const factory BluetoothEvent.selectDevice({BluetoothDeviceWithAvailability? deviceWithAvailability}) = _SelectDevice;
 

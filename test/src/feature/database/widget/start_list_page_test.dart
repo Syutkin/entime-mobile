@@ -203,14 +203,10 @@ void main() {
         await $(FloatingActionButton).tap();
         final captured = verify(() => databaseBloc.add(captureAny())).captured;
 
-        expect(
-          (captured.first as DatabaseEvent).mapOrNull(
-            updateManualStartTime: (event) {
-              return event.ntpOffset;
-            },
-          ),
-          offset,
-        );
+        expect(switch (captured.first as DatabaseEvent) {
+          DatabaseEventUpdateManualStartTime(ntpOffset: final ntpOffset) => ntpOffset,
+          DatabaseEvent() => null,
+        }, offset);
       });
 
       patrolWidgetTest('Tap FAB and do nothing when stage not selected', (PatrolTester $) async {

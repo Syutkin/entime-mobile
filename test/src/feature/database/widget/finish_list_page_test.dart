@@ -535,8 +535,8 @@ void main() {
             await $(#okButton).tap();
             expect($(UpdateFinishTimePopup), findsNothing);
 
-            notification.mapOrNull(
-              changeFinishTimeToNumber: (notification) {
+            switch (notification) {
+              case NotificationChangeFinishTimeToNumber():
                 verify(
                   () => databaseBloc.add(
                     DatabaseEvent.clearNumberAtFinish(stage: notification.stage, number: notification.number),
@@ -552,8 +552,8 @@ void main() {
                     ),
                   ),
                 ).called(1);
-              },
-            );
+              default:
+            }
           });
 
           patrolWidgetTest('Show updateFinishTimePopup and do nothing if cancel pressed', (PatrolTester $) async {

@@ -1,8 +1,8 @@
 part of 'countdown_bloc.dart';
 
 @freezed
-class CountdownState with _$CountdownState {
-  const factory CountdownState.initial() = _CountdownInitialState;
+sealed class CountdownState with _$CountdownState {
+  const factory CountdownState.initial() = CountdownStateInitial;
 
-  const factory CountdownState.working({required Tick tick}) = _CountdownWorkingState;
+  const factory CountdownState.working({required Tick tick}) = CountdownStateWorking;
 }

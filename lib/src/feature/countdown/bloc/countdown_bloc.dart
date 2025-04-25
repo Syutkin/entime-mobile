@@ -24,29 +24,25 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       add(CountdownEvent.tick(value));
     });
 
-    on<CountdownEvent>(transformer: sequential(), (event, emit) {
-      event.map(
-        start: (event) async {
-          await _countdown.start(event.stageId);
-        },
-        tick: (event) {
+    on<CountdownEvent>(transformer: sequential(), (event, emit) async {
+      switch (event) {
+        case _Tick():
           final nextStartTime = event.tick.nextStartTime;
           if (nextStartTime == null) {
             emit(CountdownState.working(tick: Tick(text: event.tick.text, second: event.tick.second)));
           } else {
             emit(CountdownState.working(tick: event.tick));
           }
-        },
-        beep: (_) {
-          _audioController.beep();
-        },
-        callParticipant: (event) {
-          _audioController.callParticipant(
+        case _Start():
+          await _countdown.start(event.stageId);
+        case _Beep():
+          await _audioController.beep();
+        case _CallParticipant():
+          await _audioController.callParticipant(
             time: DateFormat(shortTimeFormat).format(DateTime.now()),
             stageId: event.stageId,
           );
-        },
-      );
+      }
     });
   }
 

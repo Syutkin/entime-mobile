@@ -40,7 +40,7 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.5.1-dev+443';
+const String version = r'0.5.1-dev+444';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
@@ -55,10 +55,10 @@ const int patch = 1;
 const List<String> pre = <String>[r'dev'];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'443'];
+const List<String> build = <String>[r'444'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1745569738;
+const int timestamp = 1745590314;
 
 /// Name [name]
 const String name = r'entime';
@@ -113,7 +113,7 @@ const Map<String, Object> dependencies = <String, Object>{
   'flutter_markdown': r'^0.7.6+2',
   'flutter_ntp': r'^0.0.2',
   'flutter_tts': r'^4.2.2',
-  'freezed_annotation': r'^2.4.4',
+  'freezed_annotation': r'^3.0.0',
   'http': r'^1.3.0',
   'intl': r'^0.19.0',
   'json_annotation': r'^4.9.0',
@@ -147,11 +147,11 @@ const Map<String, Object> devDependencies = <String, Object>{
   'flutter_test': <String, Object>{
     'sdk': r'flutter',
   },
-  'freezed': r'^2.5.8',
+  'freezed': r'^3.0.6',
   'integration_test': <String, Object>{
     'sdk': r'flutter',
   },
-  'json_serializable': r'^6.9.4',
+  'json_serializable': r'^6.9.5',
   'mocktail': r'^1.0.4',
   'patrol': r'^3.15.1',
   'patrol_finders': r'^2.7.2',

@@ -61,25 +61,23 @@ Future<void> _upsertStagePopup(BuildContext context, {Stage? stage, Race? race})
                 // Трейл этапа
                 BlocBuilder<TrailsBloc, TrailsState>(
                   builder: (context, state) {
-                    return state.map(
-                      initial: (_) {
+                    switch (state) {
+                      case Initial():
                         return const SizedBox.shrink();
-                      },
-                      loadingTrack: (_) {
+                      case LoadingTrack():
                         return const SizedBox.shrink();
-                      },
-                      initialized: (state) {
+                      case Initialized():
                         if (trailId != null) {
-                          context.read<TrailsBloc>().state.mapOrNull(
-                            initialized: (state) {
+                          switch (context.read<TrailsBloc>().state) {
+                            case Initialized():
                               for (final t in state.trails) {
                                 if (t.id == trailId) {
                                   trail = t;
                                   break;
                                 }
                               }
-                            },
-                          );
+                            default:
+                          }
                         }
                         return DropdownSearch<TrailInfo>(
                           selectedItem: trail,
@@ -103,8 +101,7 @@ Future<void> _upsertStagePopup(BuildContext context, {Stage? stage, Race? race})
                             // fit: FlexFit.loose,
                           ),
                         );
-                      },
-                    );
+                    }
                   },
                 ),
 

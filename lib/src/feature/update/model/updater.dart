@@ -7,7 +7,7 @@ part 'updater.freezed.dart';
 part 'updater.g.dart';
 
 @freezed
-class Release with _$Release {
+abstract class Release with _$Release {
   @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
   const factory Release({
     required String url,
@@ -34,7 +34,7 @@ class Release with _$Release {
 }
 
 @freezed
-class Asset with _$Asset {
+abstract class Asset with _$Asset {
   @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
   const factory Asset({
     required String url,
@@ -56,7 +56,7 @@ class Asset with _$Asset {
 }
 
 @freezed
-class Author with _$Author {
+abstract class Author with _$Author {
   @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
   const factory Author({
     required String login,

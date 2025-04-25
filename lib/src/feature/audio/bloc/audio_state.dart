@@ -1,7 +1,7 @@
 part of 'audio_bloc.dart';
 
 @freezed
-class AudioState with _$AudioState {
-  const factory AudioState.initial() = _Initial;
-  const factory AudioState.initialized({String? engine, String? voice}) = _Initialized;
+sealed class AudioState with _$AudioState {
+  const factory AudioState.initial() = AudioStateInitial;
+  const factory AudioState.initialized({String? engine, String? voice}) = AudioStateInitialized;
 }
