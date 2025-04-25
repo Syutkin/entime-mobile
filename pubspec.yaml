@@ -15,7 +15,7 @@ repository: https://github.com/Syutkin/entime-mobile
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.5.1-dev+441
+version: 0.5.1-dev+442
 
 environment:
   sdk: ^3.7.0
@@ -23,24 +23,24 @@ environment:
 
 dependencies:
   any_date: ^1.1.2
-  audioplayers: ^6.1.2
+  audioplayers: ^6.4.0
   bloc_concurrency: ^0.3.0
   bot_toast: ^4.1.3
-  connectivity_plus: ^6.1.3
+  connectivity_plus: ^6.1.4
   crypto: ^3.0.6
   csv: ^6.0.0
-  device_info_plus: ^11.3.0
-  drift: ^2.25.0
+  device_info_plus: ^11.4.0
+  drift: ^2.26.0
 #  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
   dropdown_search: ^6.0.2
   equatable: ^2.0.7
-  file_picker: ^8.3.5
+  file_picker: ^10.1.2
 #  filesize: ^2.0.1
   flutter:
     sdk: flutter
-  flutter_bloc: ^9.0.0
+  flutter_bloc: ^9.1.0
   flutter_bluetooth_serial: ^0.4.0
-  flutter_charset_detector: ^4.0.0
+  flutter_charset_detector: ^5.0.0
   flutter_localizations:
     sdk: flutter
   flutter_markdown: ^0.7.6+2
@@ -58,17 +58,17 @@ dependencies:
   # package_info_plus: any
   path: ^1.9.1
   path_provider: ^2.1.5
-  permission_handler: ^11.3.1
-  pub_semver: ^2.1.5
+  permission_handler: ^12.0.0+1
+  pub_semver: ^2.2.0
   rxdart: ^0.28.0
-  sentry_flutter: ^8.13.0
+  sentry_flutter: ^8.14.2
   settings_ui: ^2.0.2
-  share_plus: ^10.1.4
-  shared_preferences: ^2.5.2
-  sqlite3: ^2.7.3
-  sqlite3_flutter_libs: ^0.5.30
+  share_plus: ^11.0.0
+  shared_preferences: ^2.5.3
+  sqlite3: ^2.7.5
+  sqlite3_flutter_libs: ^0.5.32
   url_launcher: ^6.3.1
-  wakelock_plus: ^1.2.10
+  wakelock_plus: ^1.3.2
 
 dependency_overrides:
   flutter_bluetooth_serial:
@@ -87,7 +87,7 @@ dev_dependencies:
   bloc_test: ^10.0.0
   build_runner: ^2.4.15
   dart_style: ^3.0.1
-  drift_dev: ^2.25.1
+  drift_dev: ^2.26.0
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
@@ -96,8 +96,8 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.9.4
   mocktail: ^1.0.4
-  patrol: ^3.14.0
-  patrol_finders: ^2.7.0
+  patrol: ^3.15.1
+  patrol_finders: ^2.7.2
   pubspec_generator: ^3.0.1
   test: ^1.25.15
   very_good_analysis: ^7.0.0

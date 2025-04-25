@@ -4551,7 +4551,6 @@ class Logs extends Table with TableInfo<Logs, Log> {
     requiredDuringInsert: false,
     $customConstraints: 'PRIMARY KEY NOT NULL',
   );
-  static const VerificationMeta _levelMeta = const VerificationMeta('level');
   late final GeneratedColumnWithTypeConverter<LogLevel, String> level =
       GeneratedColumn<String>(
         'level',
@@ -4572,7 +4571,6 @@ class Logs extends Table with TableInfo<Logs, Log> {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
   late final GeneratedColumnWithTypeConverter<LogSource, String> source =
       GeneratedColumn<String>(
         'source',
@@ -4582,9 +4580,6 @@ class Logs extends Table with TableInfo<Logs, Log> {
         requiredDuringInsert: true,
         $customConstraints: 'NOT NULL',
       ).withConverter<LogSource>(Logs.$convertersource);
-  static const VerificationMeta _directionMeta = const VerificationMeta(
-    'direction',
-  );
   late final GeneratedColumnWithTypeConverter<LogSourceDirection, String>
   direction = GeneratedColumn<String>(
     'direction',
@@ -4629,7 +4624,6 @@ class Logs extends Table with TableInfo<Logs, Log> {
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    context.handle(_levelMeta, const VerificationResult.success());
     if (data.containsKey('timestamp')) {
       context.handle(
         _timestampMeta,
@@ -4638,8 +4632,6 @@ class Logs extends Table with TableInfo<Logs, Log> {
     } else if (isInserting) {
       context.missing(_timestampMeta);
     }
-    context.handle(_sourceMeta, const VerificationResult.success());
-    context.handle(_directionMeta, const VerificationResult.success());
     if (data.containsKey('raw_data')) {
       context.handle(
         _rawDataMeta,

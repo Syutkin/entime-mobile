@@ -40,7 +40,7 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.5.1-dev+441';
+const String version = r'0.5.1-dev+442';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
@@ -55,10 +55,10 @@ const int patch = 1;
 const List<String> pre = <String>[r'dev'];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'441'];
+const List<String> build = <String>[r'442'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1739393643;
+const int timestamp = 1745569187;
 
 /// Name [name]
 const String name = r'entime';
@@ -90,23 +90,23 @@ const Map<String, String> environment = <String, String>{
 /// Dependencies
 const Map<String, Object> dependencies = <String, Object>{
   'any_date': r'^1.1.2',
-  'audioplayers': r'^6.1.2',
+  'audioplayers': r'^6.4.0',
   'bloc_concurrency': r'^0.3.0',
   'bot_toast': r'^4.1.3',
-  'connectivity_plus': r'^6.1.3',
+  'connectivity_plus': r'^6.1.4',
   'crypto': r'^3.0.6',
   'csv': r'^6.0.0',
-  'device_info_plus': r'^11.3.0',
-  'drift': r'^2.25.0',
+  'device_info_plus': r'^11.4.0',
+  'drift': r'^2.26.0',
   'dropdown_search': r'^6.0.2',
   'equatable': r'^2.0.7',
-  'file_picker': r'^8.3.5',
+  'file_picker': r'^10.1.2',
   'flutter': <String, Object>{
     'sdk': r'flutter',
   },
-  'flutter_bloc': r'^9.0.0',
+  'flutter_bloc': r'^9.1.0',
   'flutter_bluetooth_serial': r'^0.4.0',
-  'flutter_charset_detector': r'^4.0.0',
+  'flutter_charset_detector': r'^5.0.0',
   'flutter_localizations': <String, Object>{
     'sdk': r'flutter',
   },
@@ -124,17 +124,17 @@ const Map<String, Object> dependencies = <String, Object>{
   'open_file': r'^3.5.10',
   'path': r'^1.9.1',
   'path_provider': r'^2.1.5',
-  'permission_handler': r'^11.3.1',
-  'pub_semver': r'^2.1.5',
+  'permission_handler': r'^12.0.0+1',
+  'pub_semver': r'^2.2.0',
   'rxdart': r'^0.28.0',
-  'sentry_flutter': r'^8.13.0',
+  'sentry_flutter': r'^8.14.2',
   'settings_ui': r'^2.0.2',
-  'share_plus': r'^10.1.4',
-  'shared_preferences': r'^2.5.2',
-  'sqlite3': r'^2.7.3',
-  'sqlite3_flutter_libs': r'^0.5.30',
+  'share_plus': r'^11.0.0',
+  'shared_preferences': r'^2.5.3',
+  'sqlite3': r'^2.7.5',
+  'sqlite3_flutter_libs': r'^0.5.32',
   'url_launcher': r'^6.3.1',
-  'wakelock_plus': r'^1.2.10',
+  'wakelock_plus': r'^1.3.2',
 };
 
 /// Developer dependencies
@@ -142,7 +142,7 @@ const Map<String, Object> devDependencies = <String, Object>{
   'bloc_test': r'^10.0.0',
   'build_runner': r'^2.4.15',
   'dart_style': r'^3.0.1',
-  'drift_dev': r'^2.25.1',
+  'drift_dev': r'^2.26.0',
   'flutter_lints': r'^5.0.0',
   'flutter_test': <String, Object>{
     'sdk': r'flutter',
@@ -153,8 +153,8 @@ const Map<String, Object> devDependencies = <String, Object>{
   },
   'json_serializable': r'^6.9.4',
   'mocktail': r'^1.0.4',
-  'patrol': r'^3.14.0',
-  'patrol_finders': r'^2.7.0',
+  'patrol': r'^3.15.1',
+  'patrol_finders': r'^2.7.2',
   'pubspec_generator': r'^3.0.1',
   'test': r'^1.25.15',
   'very_good_analysis': r'^7.0.0',
