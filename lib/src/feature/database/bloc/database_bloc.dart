@@ -428,9 +428,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               final filename = '${race.name}-${stage.name}-start';
               final file = await saveToFile(csv, filename);
               if (file != null) {
-                await Share.shareXFiles([
-                  XFile(file.path),
-                ], text: Localization.current.I18nProtocol_shareStartResults(race.name, stage.name));
+                await SharePlus.instance.share(
+                  ShareParams(
+                    files: [XFile(file.path)],
+                    text: Localization.current.I18nProtocol_shareStartResults(race.name, stage.name),
+                  ),
+                );
               }
             }
           }
@@ -450,9 +453,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               final filename = '${race.name}-${stage.name}-finish';
               final file = await saveToFile(csv, filename);
               if (file != null) {
-                await Share.shareXFiles([
-                  XFile(file.path),
-                ], text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name));
+                await SharePlus.instance.share(
+                  ShareParams(
+                    files: [XFile(file.path)],
+                    text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
+                  ),
+                );
               }
             }
           }
@@ -462,7 +468,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           final dbDir = await getApplicationDocumentsDirectory();
           final file = File(path.join(dbDir.path, 'database_backup_$timeStamp.sqlite'));
           await _db.exportInto(file);
-          await Share.shareXFiles([XFile(file.path)]);
+          await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
         },
         shareTrack: (event) async {
           final fileId = event.trail.fileId;
@@ -480,7 +486,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               //   ..write(track.data);
               // await sink.close();
               await file.writeAsBytes(track.data);
-              await Share.shareXFiles([XFile(file.path)]);
+              await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
             }
           }
         },
