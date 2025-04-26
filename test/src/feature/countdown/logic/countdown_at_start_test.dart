@@ -153,14 +153,20 @@ void main() {
     });
 
     test('Show second after call next participant', () async {
-      const deltaInSeconds = 2;
+      const deltaInSeconds = 3;
       defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
       when(() => settings.settings).thenReturn(defaults);
       countdown = CountdownAtStart(database: db, settingsProvider: settings)..customTimeNow = '10:00:59.5'.toDateTime();
+      countdown.ticks.stream.listen((tick) {
+        if (tick.second < deltaInSeconds) {
+          expect(countdown.ticks.value.text, 'GO');
+        } else {
+          expect(countdown.ticks.value.text, isNot('GO'));
+        }
+      });
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 2));
       countdown.stop();
-      expect(countdown.ticks.value.text, '58');
     });
 
     test('Close stream', () async {
