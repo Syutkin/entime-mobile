@@ -674,8 +674,7 @@ void main() {
           expect($(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')), findsOneWidget);
         });
 
-        // Can not tap on cancel button at toast (dunno why)
-        patrolWidgetTest('Tap cancel on toast with automatically added number', skip: true, (PatrolTester $) async {
+        patrolWidgetTest('Tap cancel on toast with automatically added number', (PatrolTester $) async {
           final expectedStates = [
             emptyState,
             DatabaseState(
@@ -687,6 +686,7 @@ void main() {
               finishes: [],
               numbersOnTrace: [],
               autoFinishNumber: autoFinishNumber,
+              stage: stage,
             ),
           ];
 
@@ -696,7 +696,11 @@ void main() {
           expect($(#cancelToast), findsNothing);
           await $.pumpAndSettle();
           expect($(#cancelToast), findsOneWidget);
-          await $(#cancelToast).tap();
+          final btn = $(#cancelToast).evaluate().first.widget as TextButton;
+          btn.onPressed!();
+          // ToDo: Dunno why this .tap() didn't work
+          // await $(#cancelToast).tap();
+          verify(() => databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: autoFinishNumber))).called(1);
         });
       });
 
