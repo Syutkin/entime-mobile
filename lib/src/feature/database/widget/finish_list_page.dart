@@ -313,14 +313,14 @@ class _FinishListPage extends State<FinishListPage> {
           case ParticipantStatus.active:
             break;
           case ParticipantStatus.dns:
-            if (!mounted) {
-              return;
-            }
+            // if (!mounted) {
+            //   return;
+            // }
             databaseBloc.add(DatabaseEvent.setDNSForStage(stage: stage, number: number));
           case ParticipantStatus.dnf:
-            if (!mounted) {
-              return;
-            }
+            // if (!mounted) {
+            //   return;
+            // }
             databaseBloc.add(DatabaseEvent.setDNFForStage(stage: stage, number: number));
           case ParticipantStatus.dsq:
             break;
