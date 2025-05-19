@@ -11,21 +11,21 @@ import '../database.dart';
 class FinishItemTile extends StatelessWidget {
   const FinishItemTile({
     required this.item,
+    required this.useLocalTime,
     super.key,
     this.onTap,
     this.onTapDown,
     this.onLongPress,
     this.onDismissed,
     this.onAccept,
-    bool useLocalTime = true,
-  }) : _useLocalTime = useLocalTime;
+  });
   final GestureTapCallback? onTap;
   final GestureTapDownCallback? onTapDown;
   final GestureLongPressCallback? onLongPress;
   final DismissDirectionCallback? onDismissed;
   final DragTargetAcceptWithDetails<int>? onAccept;
   final Finish item;
-  final bool _useLocalTime;
+  final bool useLocalTime;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +110,7 @@ class FinishItemTile extends StatelessWidget {
                         Flexible(
                           flex: 15,
                           child: Align(
-                            child: _addIcon(context, item.isManual, _useLocalTime, textColor), //Icon(Icons.add_circle),
+                            child: _addIcon(context, item.isManual, useLocalTime, textColor), //Icon(Icons.add_circle),
                           ),
                         ),
                         Flexible(
@@ -118,7 +118,7 @@ class FinishItemTile extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              !item.isManual & !_useLocalTime
+                              !item.isManual & !useLocalTime
                                   ? item.finishTime.strip()
                                   : item.timestamp.format(longTimeFormat),
                               style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5, color: textColor),
