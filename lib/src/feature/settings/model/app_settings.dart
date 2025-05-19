@@ -115,6 +115,9 @@ abstract class AppSettings with _$AppSettings {
 
     // обновлять ntp offset при запуске
     required bool updateNtpOffsetAtStartup,
+
+    // использовать время устройства для автоматических отсечек
+    required bool useTimestampForAutomaticStamps,
   }) = _AppSettings;
 
   const factory AppSettings.defaults({
@@ -226,5 +229,8 @@ abstract class AppSettings with _$AppSettings {
 
     // обновлять ntp offset при запуске
     @Default(false) bool updateNtpOffsetAtStartup,
+
+    // использовать время устройства для автоматических отсечек
+    @Default(false) bool useTimestampForAutomaticStamps,
   }) = _AppSettingsDefaults;
 }
