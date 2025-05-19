@@ -664,6 +664,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Настройки темы",
     ),
     "I18nSettings_themes": MessageLookupByLibrary.simpleMessage("Темы"),
+    "I18nSettings_timeForAutomaticStamps": MessageLookupByLibrary.simpleMessage(
+      "Время для автоматических отсечек",
+    ),
+    "I18nSettings_timeForAutomaticStampsDescription":
+        MessageLookupByLibrary.simpleMessage("Использовать время приложения"),
     "I18nSettings_ttsEngine": MessageLookupByLibrary.simpleMessage(
       "Синтезатор речи",
     ),

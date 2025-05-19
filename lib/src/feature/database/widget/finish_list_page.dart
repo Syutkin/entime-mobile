@@ -180,6 +180,7 @@ class _FinishListPage extends State<FinishListPage> {
               final item = filteredList[index];
               return FinishItemTile(
                 item: item,
+                useLocalTime: state.useTimestampForAutomaticStamps,
                 onTap: () async {
                   await addFinishNumberPopup(context, item);
                 },

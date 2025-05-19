@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-02-07T15:21:53.273260",
+  "@@last_modified": "2025-05-20T01:37:53.040928",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -484,6 +484,16 @@
   },
   "I18nSettings_ntpOffsetDescription": "Синхронизировать при старте приложения",
   "@I18nSettings_ntpOffsetDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_timeForAutomaticStamps": "Время для автоматических отсечек",
+  "@I18nSettings_timeForAutomaticStamps": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_timeForAutomaticStampsDescription": "Использовать время приложения",
+  "@I18nSettings_timeForAutomaticStampsDescription": {
     "type": "text",
     "placeholders": {}
   },

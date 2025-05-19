@@ -973,6 +973,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Время для автоматических отсечек`
+  String get I18nSettings_timeForAutomaticStamps {
+    return Intl.message(
+      'Время для автоматических отсечек',
+      name: 'I18nSettings_timeForAutomaticStamps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Использовать время приложения`
+  String get I18nSettings_timeForAutomaticStampsDescription {
+    return Intl.message(
+      'Использовать время приложения',
+      name: 'I18nSettings_timeForAutomaticStampsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Введите номер финишировавшего участника`
   String get I18nProtocol_enterFinishNumber {
     return Intl.message(

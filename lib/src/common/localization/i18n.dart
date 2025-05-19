@@ -241,6 +241,12 @@ class I18nSettings {
 
   static String get ntpOffsetDescription =>
       Intl.message('Синхронизировать при старте приложения', name: 'I18nSettings_ntpOffsetDescription');
+
+  static String get timeForAutomaticStamps =>
+      Intl.message('Время для автоматических отсечек', name: 'I18nSettings_timeForAutomaticStamps');
+
+  static String get timeForAutomaticStampsDescription =>
+      Intl.message('Использовать время приложения', name: 'I18nSettings_timeForAutomaticStampsDescription');
 }
 
 class I18nProtocol {

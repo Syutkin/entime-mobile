@@ -56,6 +56,14 @@ class _SettingsList extends StatelessWidget {
                       settingsCubit.update(settingsState.copyWith(updateNtpOffsetAtStartup: value));
                     },
                   ),
+                                    SettingsTile.switchTile(
+                    title: Text(Localization.current.I18nSettings_timeForAutomaticStamps),
+                    description: Text(Localization.current.I18nSettings_timeForAutomaticStampsDescription),
+                    initialValue: settingsState.useTimestampForAutomaticStamps,
+                    onToggle: (value) {
+                      settingsCubit.update(settingsState.copyWith(useTimestampForAutomaticStamps: value));
+                    },
+                  ),
                   SettingsTile.switchTile(
                     title: Text(Localization.current.I18nSettings_wakelock),
                     // titleMaxLines: 2,
