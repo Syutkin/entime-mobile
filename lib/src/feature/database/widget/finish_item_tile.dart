@@ -4,6 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../common/localization/localization.dart';
 import '../../../common/utils/extensions.dart';
+import '../../../constants/date_time_formats.dart';
 import '../../settings/settings.dart';
 import '../database.dart';
 
@@ -16,13 +17,15 @@ class FinishItemTile extends StatelessWidget {
     this.onLongPress,
     this.onDismissed,
     this.onAccept,
-  });
+    bool useLocalTime = true,
+  }) : _useLocalTime = useLocalTime;
   final GestureTapCallback? onTap;
   final GestureTapDownCallback? onTapDown;
   final GestureLongPressCallback? onLongPress;
   final DismissDirectionCallback? onDismissed;
   final DragTargetAcceptWithDetails<int>? onAccept;
   final Finish item;
+  final bool _useLocalTime;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +110,7 @@ class FinishItemTile extends StatelessWidget {
                         Flexible(
                           flex: 15,
                           child: Align(
-                            child: _addIcon(context, item.isManual, textColor), //Icon(Icons.add_circle),
+                            child: _addIcon(context, item.isManual, _useLocalTime, textColor), //Icon(Icons.add_circle),
                           ),
                         ),
                         Flexible(
@@ -115,7 +118,9 @@ class FinishItemTile extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              item.finishTime.strip(),
+                              !item.isManual & !_useLocalTime
+                                  ? item.finishTime.strip()
+                                  : item.timestamp.format(longTimeFormat),
                               style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5, color: textColor),
                             ),
                           ),
@@ -151,11 +156,15 @@ class FinishItemTile extends StatelessWidget {
     );
   }
 
-  Widget _addIcon(BuildContext context, bool manual, Color? color) {
-    if (manual) {
+  Widget _addIcon(BuildContext context, bool isManual, bool useLocalTime, Color? color) {
+    if (isManual) {
       return Icon(MdiIcons.handBackLeft, color: color ?? Theme.of(context).colorScheme.onSurface);
     } else {
-      return Icon(MdiIcons.cpu64Bit, color: color ?? Theme.of(context).colorScheme.onSurface);
+      if (useLocalTime) {
+        return Icon(MdiIcons.cellphone, color: color ?? Theme.of(context).colorScheme.onSurface);
+      } else {
+        return Icon(MdiIcons.cpu64Bit, color: color ?? Theme.of(context).colorScheme.onSurface);
+      }
     }
   }
 }
