@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-05-20T01:37:53.040928",
+  "@@last_modified": "2025-05-21T02:23:34.618443",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -191,8 +191,18 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nSettings_ttsEngineNotFound": "Не найден",
+  "@I18nSettings_ttsEngineNotFound": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nSettings_ttsVoice": "Голос",
   "@I18nSettings_ttsVoice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_ttsVoiceNotFound": "Не найден",
+  "@I18nSettings_ttsVoiceNotFound": {
     "type": "text",
     "placeholders": {}
   },

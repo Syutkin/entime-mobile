@@ -1,9 +1,7 @@
-import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../feature/settings/settings.dart';
 import '../../database/logic/validators.dart';
 
 part 'set_delay_popup.dart';

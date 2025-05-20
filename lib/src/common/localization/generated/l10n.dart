@@ -393,11 +393,31 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Не найден`
+  String get I18nSettings_ttsEngineNotFound {
+    return Intl.message(
+      'Не найден',
+      name: 'I18nSettings_ttsEngineNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Голос`
   String get I18nSettings_ttsVoice {
     return Intl.message(
       'Голос',
       name: 'I18nSettings_ttsVoice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не найден`
+  String get I18nSettings_ttsVoiceNotFound {
+    return Intl.message(
+      'Не найден',
+      name: 'I18nSettings_ttsVoiceNotFound',
       desc: '',
       args: [],
     );

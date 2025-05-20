@@ -92,7 +92,11 @@ class I18nSettings {
 
   static String get ttsEngine => Intl.message('Синтезатор речи', name: 'I18nSettings_ttsEngine');
 
+  static String get ttsEngineNotFound => Intl.message('Не найден', name: 'I18nSettings_ttsEngineNotFound');
+
   static String get ttsVoice => Intl.message('Голос', name: 'I18nSettings_ttsVoice');
+
+  static String get ttsVoiceNotFound => Intl.message('Не найден', name: 'I18nSettings_ttsVoiceNotFound');
 
   static String get voiceLanguage => Intl.message('Язык', name: 'I18nSettings_voiceLanguage');
 

@@ -7,7 +7,6 @@ import 'package:settings_ui/settings_ui.dart';
 import '../../../common/localization/localization.dart';
 import '../../audio/bloc/audio_bloc.dart';
 import '../settings.dart';
-import 'select_theme_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -191,7 +190,9 @@ class SettingsScreen extends StatelessWidget {
                         builder: (context, state) {
                           return switch (state) {
                             AudioStateInitial() => const SizedBox.shrink(),
-                            AudioStateInitialized() => Text(state.engine ?? ''),
+                            AudioStateInitialized() => Text(
+                              state.engine ?? Localization.current.I18nSettings_ttsEngineNotFound,
+                            ),
                           };
                         },
                       ),
@@ -203,7 +204,9 @@ class SettingsScreen extends StatelessWidget {
                         builder: (context, state) {
                           return switch (state) {
                             AudioStateInitial() => const SizedBox.shrink(),
-                            AudioStateInitialized() => Text(state.voice ?? ''),
+                            AudioStateInitialized() => Text(
+                              state.voice ?? Localization.current.I18nSettings_ttsVoiceNotFound,
+                            ),
                           };
                         },
                       ),
