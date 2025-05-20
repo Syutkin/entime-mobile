@@ -7,6 +7,7 @@ import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -176,6 +177,48 @@ void main() {
         verify(() => settingsCubit.update(settings.copyWith(voiceName: !settings.voiceName))).called(1);
       });
 
+      patrolWidgetTest('Set volume when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_volume)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(volume: settings.volume))).called(1);
+      });
+
+      patrolWidgetTest('Do not set volume when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_volume)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
+      });
+
+      patrolWidgetTest('Set pitch when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_pitch)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(pitch: settings.pitch))).called(1);
+      });
+
+      patrolWidgetTest('Do not set pitch when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_pitch)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
+      });
+
+      patrolWidgetTest('Set rate when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_rate)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(rate: settings.rate))).called(1);
+      });
+
+      patrolWidgetTest('Do not set rate when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_rate)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
+      });
+
       patrolWidgetTest('Show TTS engine', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(engine).scrollTo(maxScrolls: 100), findsOneWidget);
@@ -218,10 +261,38 @@ void main() {
         verify(() => settingsCubit.update(settings.copyWith(startFab: !settings.startFab))).called(1);
       });
 
+      patrolWidgetTest('Set startButtonSize when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_startButtonSize)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(startFabSize: settings.startFabSize))).called(1);
+      });
+
+      patrolWidgetTest('Do not set startButtonSize when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_startButtonSize)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
+      });
+
       patrolWidgetTest('Switch countdownAtStart', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_countdownAtStart)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(countdown: !settings.countdown))).called(1);
+      });
+
+      patrolWidgetTest('Set countdownAtStartSize when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_countdownAtStartSize)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(countdownSize: settings.countdownSize))).called(1);
+      });
+
+      patrolWidgetTest('Do not set countdownAtStartSize when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_countdownAtStartSize)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
       });
 
       patrolWidgetTest('Switch replaceStartCountdown', (PatrolTester $) async {
@@ -234,6 +305,34 @@ void main() {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_showColorStartDifference)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(showColorStartDifference: !settings.showColorStartDifference))).called(1);
+      });
+
+      patrolWidgetTest('Set startDifferenceThreshold when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(startDifferenceThreshold: settings.startDifferenceThreshold))).called(1);
+      });
+
+      patrolWidgetTest('Do not set startDifferenceThreshold when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
+      });
+
+      patrolWidgetTest('Set startDeltaInSeconds when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_startDeltaInSeconds)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(deltaInSeconds: settings.deltaInSeconds))).called(1);
+      });
+
+      patrolWidgetTest('Do not set startDeltaInSeconds when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_startDeltaInSeconds)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
       });
     });
 
@@ -262,10 +361,38 @@ void main() {
         );
       });
 
+      patrolWidgetTest('Set delayForNewEvents when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_delayForNewEvents)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(finishDelay: settings.finishDelay))).called(1);
+      });
+
+      patrolWidgetTest('Do not set delayForNewEvents when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_delayForNewEvents)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
+      });
+
       patrolWidgetTest('Switch substituteNumbers', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_autoSubstitution)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(substituteNumbers: !settings.substituteNumbers))).called(1);
+      });
+
+      patrolWidgetTest('Set autoSubstitutionDelay when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_autoSubstitutionDelay)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(substituteNumbersDelay: settings.substituteNumbersDelay))).called(1);
+      });
+
+      patrolWidgetTest('Do not set autoSubstitutionDelay when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_autoSubstitutionDelay)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
       });
 
       patrolWidgetTest('Switch finishFab', (PatrolTester $) async {
@@ -274,6 +401,20 @@ void main() {
           SettingsSection,
         ).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_finishButton)).scrollTo(maxScrolls: 50).tap();
         verify(() => settingsCubit.update(settings.copyWith(finishFab: !settings.finishFab))).called(1);
+      });
+
+      patrolWidgetTest('Set finishButtonSize when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_finishButtonSize)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(finishFabSize: settings.finishFabSize))).called(1);
+      });
+
+      patrolWidgetTest('Do not set finishButtonSize when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_finishButtonSize)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
       });
 
       patrolWidgetTest('Switch showFinishDifference', (PatrolTester $) async {
@@ -288,6 +429,20 @@ void main() {
           SettingsSection,
         ).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_showColorFinishDifference)).scrollTo(maxScrolls: 50).tap();
         verify(() => settingsCubit.update(settings.copyWith(showColorFinishDifference: !settings.showColorFinishDifference))).called(1);
+      });
+
+      patrolWidgetTest('Set finishDifferenceThreshold when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(finishDifferenceThreshold: settings.finishDifferenceThreshold))).called(1);
+      });
+
+      patrolWidgetTest('Do not set finishDifferenceThreshold when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
       });
     });
 
@@ -329,6 +484,16 @@ void main() {
         await $(SettingsTile).containing($(Localization.current.I18nSettings_oLEDBackground)).scrollTo(maxScrolls: 50).tap();
         verify(() => settingsCubit.update(settings.copyWith(isOLEDBackground: !settings.isOLEDBackground))).called(1);
       });
+
+      // Error: Could not find the correct Provider<SettingsCubit> above this SelectThemeScreen Widget
+      patrolWidgetTest('Open theme settings screen', skip: true, (PatrolTester $) async {
+        settings = const AppSettings.defaults().copyWith(logLimit: -1);
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsSection).containing(Localization.current.I18nSettings_themes).$(SettingsTile).$(Localization.current.I18nSettings_themeSettings).scrollTo(maxScrolls: 100).tap();
+        expect($(SelectThemeScreen), findsOneWidget);
+      });
     });
 
     group('Journal section tests', () {
@@ -338,6 +503,29 @@ void main() {
           await $(SettingsSection).containing(Localization.current.I18nSettings_journal).$(SettingsTile).$(Localization.current.I18nSettings_journalLinesNumber).scrollTo(maxScrolls: 100),
           findsOneWidget,
         );
+      });
+
+      patrolWidgetTest('Set logLimit when OK button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_journalLinesNumber)).scrollTo(maxScrolls: 100).tap();
+        await $(#okButton).tap();
+        verify(() => settingsCubit.update(settings.copyWith(logLimit: settings.logLimit))).called(1);
+      });
+
+      patrolWidgetTest('Do not set logLimit when cancel button pressed from popup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_journalLinesNumber)).scrollTo(maxScrolls: 100).tap();
+        await $(#cancelButton).tap();
+        verifyNever(() => settingsCubit.update(any()));
+      });
+
+      patrolWidgetTest('Show icon when unlimited log lines', (PatrolTester $) async {
+        settings = const AppSettings.defaults().copyWith(logLimit: -1);
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(testWidget());
+        final icon = (await $(SettingsTile).containing($(Localization.current.I18nSettings_journalLinesNumber)).$(Icon).scrollTo(maxScrolls: 100)).evaluate().single.widget as Icon;
+        expect(icon.icon, MdiIcons.infinity);
       });
     });
 

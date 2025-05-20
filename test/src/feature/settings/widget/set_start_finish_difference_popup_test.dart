@@ -6,11 +6,13 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
 void main() {
-  late int limit;
+  late int difference;
+  late String title;
   int? result;
 
   setUp(() {
-    limit = 100;
+    difference = 100;
+    title = 'title';
     result = null;
   });
 
@@ -24,7 +26,7 @@ void main() {
           builder: (context) {
             return TextButton(
               onPressed: () async {
-                result = await setLogLimitPopup(context, limit);
+                result = await setStartFinishDifferencePopup(context, difference: difference, title: title);
               },
               child: const Text('textButton', key: Key('button')),
             );
@@ -34,45 +36,42 @@ void main() {
     );
   }
 
-  group('setLogLimitPopup tests', () {
+  group('setStartFinishDifferencePopup tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(limit));
+      await $.pumpWidgetAndSettle(testWidget(difference));
       await $(#button).tap();
-      expect($(Localization.current.I18nSettings_journalLinesNumberPopup), findsOneWidget);
+      expect($(title), findsOneWidget);
       expect($(AlertDialog), findsOneWidget);
       expect($(TextFormField), findsOneWidget);
-      expect($(limit.toString()), findsOneWidget);
+      expect($(difference.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter wrong limit', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(limit));
+    patrolWidgetTest('Enter wrong difference', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
       await $(#okButton).tap();
-
-      expect($(Localization.current.I18nSettings_enterNumber), findsOneWidget);
+      expect($(Localization.current.I18nSettings_incorrectStartFinishDifference), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter empty limit', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(limit));
+    patrolWidgetTest('Enter empty difference', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('');
       await $(#okButton).tap();
-      await expectLater(result, -1);
-      expect($(TextFormField), findsNothing);
+      expect($(Localization.current.I18nSettings_incorrectStartFinishDifference), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter negative limit', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(limit));
+    patrolWidgetTest('Enter negative difference', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('-10');
       await $(#okButton).tap();
-      await expectLater(result, -1);
-      expect($(TextFormField), findsNothing);
+      expect($(Localization.current.I18nSettings_incorrectStartFinishDifference), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter correct limit and return it from ok pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(limit));
+    patrolWidgetTest('Enter correct difference and return it from ok pressed', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
       await $(#okButton).tap();
@@ -80,7 +79,7 @@ void main() {
     });
 
     patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(limit));
+      await $.pumpWidgetAndSettle(testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
       await $(#cancelButton).tap();
