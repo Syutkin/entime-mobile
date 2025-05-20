@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../feature/settings/settings.dart';
+import '../../database/logic/validators.dart';
 
 part 'set_delay_popup.dart';
 part 'set_floating_button_size_popup.dart';

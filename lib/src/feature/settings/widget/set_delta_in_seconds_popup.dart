@@ -1,9 +1,7 @@
 part of 'settings_popups.dart';
 
 Future<int?> setDeltaInSecondsPopup(BuildContext context, {required int delta}) async {
-  var newDelta = delta;
-
-  final deltaController = TextEditingController()..text = newDelta.toString();
+  final deltaController = TextEditingController()..text = delta.toString();
   final formKey = GlobalKey<FormState>();
 
   return showDialog<int>(
@@ -26,17 +24,7 @@ Future<int?> setDeltaInSecondsPopup(BuildContext context, {required int delta}) 
                       decoration: InputDecoration(labelText: Localization.current.I18nSettings_startDelta),
                       controller: deltaController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value.isNullOrEmpty) {
-                          return Localization.current.I18nSettings_incorrectStartDelta;
-                        }
-                        final integer = int.tryParse(value!);
-                        if (integer == null || integer < 0) {
-                          return Localization.current.I18nSettings_incorrectStartDelta;
-                        }
-                        newDelta = integer;
-                        return null;
-                      },
+                      validator: validateDelta,
                     ),
                   ],
                 ),
@@ -50,7 +38,7 @@ Future<int?> setDeltaInSecondsPopup(BuildContext context, {required int delta}) 
             },
             onOkPressed: () {
               if (formKey.currentState!.validate()) {
-                Navigator.of(context).pop(newDelta);
+                Navigator.of(context).pop(int.parse(deltaController.text));
               }
             },
           ),

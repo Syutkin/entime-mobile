@@ -6,10 +6,16 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
 void main() {
-  late int delta;
+  late int delay;
+  late String title;
   int? result;
 
-  Widget testWidget(int delta) {
+  setUp(() {
+    delay = 555;
+    title = 'title';
+  });
+
+  Widget testWidget(int delay) {
     initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
@@ -19,7 +25,7 @@ void main() {
           builder: (context) {
             return TextButton(
               onPressed: () async {
-                result = await setDeltaInSecondsPopup(context, delta: delta);
+                result = await setDelayPopup(context, delay, title);
               },
               child: const Text('textButton', key: Key('button')),
             );
@@ -29,46 +35,34 @@ void main() {
     );
   }
 
-  setUp(() {
-    delta = 100;
-    result = null;
-  });
-
-  group('setDeltaInSecondsPopup tests', () {
+  group('setDelayPopup tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(testWidget(delay));
       await $(#button).tap();
+      expect($(title), findsOneWidget);
       expect($(AlertDialog), findsOneWidget);
       expect($(TextFormField), findsOneWidget);
-      expect($(delta.toString()), findsOneWidget);
+      expect($(delay.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter wrong seconds', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+    patrolWidgetTest('Enter wrong delay', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
       await $(#okButton).tap();
-      expect($(Localization.current.I18nSettings_incorrectStartDelta), findsOneWidget);
-    });
-
-    patrolWidgetTest('Enter empty seconds', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
-      await $(#button).tap();
-      await $(TextFormField).enterText('');
-      await $(#okButton).tap();
-      expect($(Localization.current.I18nSettings_incorrectStartDelta), findsOneWidget);
+      expect($(Localization.current.I18nSettings_incorrectDelay), findsOneWidget);
     });
 
     patrolWidgetTest('Enter correct seconds and return it from ok pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(testWidget(delay));
       await $(#button).tap();
-      await $(TextFormField).enterText('1234');
+      await $(TextFormField).enterText((delay + delay).toString());
       await $(#okButton).tap();
-      await expectLater(result, 1234);
+      await expectLater(result, delay + delay);
     });
 
     patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
       await $(#cancelButton).tap();

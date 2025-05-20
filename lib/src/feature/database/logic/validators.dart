@@ -4,25 +4,47 @@ import 'package:entime/src/common/utils/extensions.dart';
 import '../../../common/localization/localization.dart';
 import '../database.dart';
 
- String? validateCorrection(String? value) {
-    if (value == '' || value == null) {
-      return null;
-    }
-    if (int.tryParse(value) == null) {
-      return Localization.current.I18nStart_incorrectCorrection;
-    }
+String? validateCorrection(String? value) {
+  if (value == '' || value == null) {
     return null;
   }
+  if (int.tryParse(value) == null) {
+    return Localization.current.I18nStart_incorrectCorrection;
+  }
+  return null;
+}
 
-  String? validateStartTime(String? value) {
-    if (value == '' || value == null) {
-      return null;
-    }
-    if (value.toDateTime() == null) {
-      return Localization.current.I18nStart_incorrectTime;
-    }
+String? validateStartTime(String? value) {
+  if (value == '' || value == null) {
     return null;
   }
+  if (value.toDateTime() == null) {
+    return Localization.current.I18nStart_incorrectTime;
+  }
+  return null;
+}
+
+String? validateDelay(String? delay) {
+  if (delay == null) {
+    return Localization.current.I18nSettings_incorrectDelay;
+  }
+  final integer = int.tryParse(delay);
+  if (integer == null || integer < 0) {
+    return Localization.current.I18nSettings_incorrectDelay;
+  }
+  return null;
+}
+
+String? validateDelta(String? delta) {
+  if (delta == null) {
+    return Localization.current.I18nSettings_incorrectStartDelta;
+  }
+  final integer = int.tryParse(delta);
+  if (integer == null || integer < 0) {
+    return Localization.current.I18nSettings_incorrectStartDelta;
+  }
+  return null;
+}
 
 String? validateRider(Rider? rider) {
   if (rider == null) {
