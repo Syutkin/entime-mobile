@@ -6,8 +6,11 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
   final manualCorrectionController = TextEditingController();
   final manualStartTimeController = TextEditingController();
   final startTimeController = TextEditingController();
+  final timestampCorrectionController = TextEditingController();
   final automaticCorrectionController = TextEditingController();
   startTimeController.text = item.startTime;
+  // ToDo: 
+  // timestampCorrectionController.text = (item.automaticCorrection ?? '').toString();
   manualCorrectionController.text = (item.manualCorrection ?? '').toString();
   manualStartTimeController.text = item.manualStartTime ?? '';
   automaticCorrectionController.text = (item.automaticCorrection ?? '').toString();
@@ -97,10 +100,20 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
                   validator: validateStartTime,
                 ),
                 TextFormField(
+                  controller: automaticPhoneTimeController,
+                  // keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
+                    labelText: Localization.current.I18nStart_startTimeAtSmartphone,
+                    icon: Icon(MdiIcons.cellphone),
+                  ),
+                  readOnly: true,
+                  // validator: (value) => validateStartTime(value),
+                ),
+                TextFormField(
                   controller: automaticCorrectionController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    icon: Icon(MdiIcons.cpu64Bit),
+                    icon: Icon(MdiIcons.cellphone),
                     labelText: Localization.current.I18nCore_correction,
                   ),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -117,20 +130,10 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
                   validator: validateStartTime,
                 ),
                 TextFormField(
-                  controller: automaticPhoneTimeController,
-                  // keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                    labelText: Localization.current.I18nStart_startTimeAtSmartphone,
-                    icon: Icon(MdiIcons.cellphone),
-                  ),
-                  readOnly: true,
-                  // validator: (value) => validateStartTime(value),
-                ),
-                TextFormField(
-                  controller: manualCorrectionController,
+                  controller: automaticCorrectionController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    icon: Icon(MdiIcons.handBackLeft),
+                    icon: Icon(MdiIcons.cpu64Bit),
                     labelText: Localization.current.I18nCore_correction,
                   ),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -145,6 +148,16 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
                   ),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: validateStartTime,
+                ),
+                TextFormField(
+                  controller: manualCorrectionController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    icon: Icon(MdiIcons.handBackLeft),
+                    labelText: Localization.current.I18nCore_correction,
+                  ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: validateCorrection,
                 ),
               ],
             ),

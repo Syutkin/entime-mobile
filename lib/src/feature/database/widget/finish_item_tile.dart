@@ -11,7 +11,6 @@ import '../database.dart';
 class FinishItemTile extends StatelessWidget {
   const FinishItemTile({
     required this.item,
-    required this.useLocalTime,
     super.key,
     this.onTap,
     this.onTapDown,
@@ -25,7 +24,6 @@ class FinishItemTile extends StatelessWidget {
   final DismissDirectionCallback? onDismissed;
   final DragTargetAcceptWithDetails<int>? onAccept;
   final Finish item;
-  final bool useLocalTime;
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +89,8 @@ class FinishItemTile extends StatelessWidget {
                   cardColor = Theme.of(context).colorScheme.error;
                   textColor = Theme.of(context).colorScheme.onError;
                 }
+
+                final useLocalTime = state.useTimestampForAutomaticStamps;
                 // if (state.settings.showFinishDifference) {
                 //   final isBigDifference = difference.inMilliseconds.abs() >
                 //       state.settings.finishDifferenceThreshold;

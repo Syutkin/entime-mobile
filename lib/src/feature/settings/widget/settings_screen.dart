@@ -56,7 +56,7 @@ class _SettingsList extends StatelessWidget {
                       settingsCubit.update(settingsState.copyWith(updateNtpOffsetAtStartup: value));
                     },
                   ),
-                                    SettingsTile.switchTile(
+                  SettingsTile.switchTile(
                     title: Text(Localization.current.I18nSettings_timeForAutomaticStamps),
                     description: Text(Localization.current.I18nSettings_timeForAutomaticStampsDescription),
                     initialValue: settingsState.useTimestampForAutomaticStamps,
@@ -197,7 +197,7 @@ class _SettingsList extends StatelessWidget {
                       builder: (context, state) {
                         return switch (state) {
                           AudioStateInitial() => const SizedBox.shrink(),
-                          AudioStateInitialized() =>Text(state.engine ?? ''),
+                          AudioStateInitialized() => Text(state.engine ?? ''),
                         };
                       },
                     ),
@@ -209,7 +209,7 @@ class _SettingsList extends StatelessWidget {
                       builder: (context, state) {
                         return switch (state) {
                           AudioStateInitial() => const SizedBox.shrink(),
-                          AudioStateInitialized() =>Text(state.voice ?? ''),
+                          AudioStateInitialized() => Text(state.voice ?? ''),
                         };
                       },
                     ),
