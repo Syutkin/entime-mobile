@@ -256,7 +256,7 @@ void main() {
         await $.pumpWidgetAndSettle(testWidget());
         expect($(TextFormField), findsNothing);
         await $(StartItemTile).tap();
-        expect($(TextFormField), findsNWidgets(6));
+        expect($(TextFormField), findsNWidgets(7));
       });
 
       patrolWidgetTest('Long press then popup appears', (PatrolTester $) async {

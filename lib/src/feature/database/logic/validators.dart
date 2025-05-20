@@ -4,6 +4,26 @@ import 'package:entime/src/common/utils/extensions.dart';
 import '../../../common/localization/localization.dart';
 import '../database.dart';
 
+ String? validateCorrection(String? value) {
+    if (value == '' || value == null) {
+      return null;
+    }
+    if (int.tryParse(value) == null) {
+      return Localization.current.I18nStart_incorrectCorrection;
+    }
+    return null;
+  }
+
+  String? validateStartTime(String? value) {
+    if (value == '' || value == null) {
+      return null;
+    }
+    if (value.toDateTime() == null) {
+      return Localization.current.I18nStart_incorrectTime;
+    }
+    return null;
+  }
+
 String? validateRider(Rider? rider) {
   if (rider == null) {
     return Localization.current.I18nStart_emptyName;

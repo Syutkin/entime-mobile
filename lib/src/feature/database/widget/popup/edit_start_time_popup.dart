@@ -1,42 +1,23 @@
 part of '../start_list_page.dart';
 
 Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async {
+  final databaseBloc = context.read<DatabaseBloc>();
+
   final automaticStartTimeController = TextEditingController();
-  final automaticPhoneTimeController = TextEditingController();
+  final timestampController = TextEditingController();
   final manualCorrectionController = TextEditingController();
   final manualStartTimeController = TextEditingController();
   final startTimeController = TextEditingController();
   final timestampCorrectionController = TextEditingController();
   final automaticCorrectionController = TextEditingController();
   startTimeController.text = item.startTime;
-  // ToDo: 
-  // timestampCorrectionController.text = (item.automaticCorrection ?? '').toString();
   manualCorrectionController.text = (item.manualCorrection ?? '').toString();
   manualStartTimeController.text = item.manualStartTime ?? '';
   automaticCorrectionController.text = (item.automaticCorrection ?? '').toString();
   automaticStartTimeController.text = item.automaticStartTime ?? '';
-  automaticPhoneTimeController.text = item.timestamp != null ? DateFormat(longTimeFormat).format(item.timestamp!) : '';
+  timestampController.text = item.timestamp != null ? DateFormat(longTimeFormat).format(item.timestamp!) : '';
+  timestampCorrectionController.text = (item.timestampCorrection ?? '').toString();
   final formKey = GlobalKey<FormState>();
-
-  String? validateCorrection(String? value) {
-    if (value == '' || value == null) {
-      return null;
-    }
-    if (int.tryParse(value) == null) {
-      return Localization.current.I18nStart_incorrectCorrection;
-    }
-    return null;
-  }
-
-  String? validateStartTime(String? value) {
-    if (value == '' || value == null) {
-      return null;
-    }
-    if (value.toDateTime() == null) {
-      return Localization.current.I18nStart_incorrectTime;
-    }
-    return null;
-  }
 
   return showDialog<void>(
     context: context,
@@ -100,7 +81,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
                   validator: validateStartTime,
                 ),
                 TextFormField(
-                  controller: automaticPhoneTimeController,
+                  controller: timestampController,
                   // keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
                     labelText: Localization.current.I18nStart_startTimeAtSmartphone,
@@ -110,14 +91,13 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
                   // validator: (value) => validateStartTime(value),
                 ),
                 TextFormField(
-                  controller: automaticCorrectionController,
-                  keyboardType: TextInputType.number,
+                  controller: timestampCorrectionController,
+                  // keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     icon: Icon(MdiIcons.cellphone),
                     labelText: Localization.current.I18nCore_correction,
                   ),
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: validateCorrection,
+                  readOnly: true,
                 ),
                 TextFormField(
                   controller: automaticStartTimeController,
@@ -171,7 +151,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               if (formKey.currentState!.validate()) {
                 final automaticCorrection = int.tryParse(automaticCorrectionController.text);
                 final manualCorrection = int.tryParse(manualCorrectionController.text);
-                context.read<DatabaseBloc>().add(
+                databaseBloc.add(
                   DatabaseEvent.updateStartingInfo(
                     startTime: startTimeController.text,
                     automaticStartTime:
