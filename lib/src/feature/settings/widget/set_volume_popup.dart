@@ -1,7 +1,7 @@
 part of 'settings_popups.dart';
 
-Future<double?> setVolumePopup(BuildContext context, AppSettings settings) async {
-  var value = settings.volume;
+Future<double?> setVolumePopup(BuildContext context, double volume) async {
+  var value = volume;
   return showDialog<double>(
     context: context,
     builder:

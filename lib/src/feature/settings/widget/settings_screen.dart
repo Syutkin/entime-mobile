@@ -154,7 +154,7 @@ class SettingsScreen extends StatelessWidget {
                       //leading:  Icon(Icons.volume_up),
                       trailing: Text('${(settingsState.volume * 100).round()}%'),
                       onPressed: (context) async {
-                        final value = await setVolumePopup(context, settingsState);
+                        final value = await setVolumePopup(context, settingsState.volume);
                         if (value != null) {
                           settingsCubit.update(settingsState.copyWith(volume: value));
                         }
@@ -166,7 +166,7 @@ class SettingsScreen extends StatelessWidget {
                       //leading:  Icon(Icons.record_voice_over),
                       trailing: Text(settingsState.pitch.toStringAsFixed(2)),
                       onPressed: (context) async {
-                        final value = await setPitchPopup(context, settingsState);
+                        final value = await setPitchPopup(context, settingsState.pitch);
                         if (value != null) {
                           settingsCubit.update(settingsState.copyWith(pitch: value));
                         }
@@ -178,7 +178,7 @@ class SettingsScreen extends StatelessWidget {
                       //leading:  Icon(MdiIcons.playSpeed),
                       trailing: Text(settingsState.rate.toStringAsFixed(2)),
                       onPressed: (context) async {
-                        final value = await setRatePopup(context, settingsState);
+                        final value = await setRatePopup(context, settingsState.rate);
                         if (value != null) {
                           settingsCubit.update(settingsState.copyWith(rate: value));
                         }
@@ -238,7 +238,7 @@ class SettingsScreen extends StatelessWidget {
                         final value = await setFloatingButtonSizePopup(
                           context,
                           settingsState.startFabSize,
-                          text: Localization.current.I18nSettings_startButtonSizeDescription,
+                          title: Localization.current.I18nSettings_startButtonSizeDescription,
                         );
                         if (value != null) {
                           settingsCubit.update(settingsState.copyWith(startFabSize: value));
@@ -261,7 +261,7 @@ class SettingsScreen extends StatelessWidget {
                         final value = await setFloatingButtonSizePopup(
                           context,
                           settingsState.countdownSize,
-                          text: Localization.current.I18nSettings_countdownAtStartSize,
+                          title: Localization.current.I18nSettings_countdownAtStartSize,
                         );
                         if (value != null) {
                           settingsCubit.update(settingsState.copyWith(countdownSize: value));
@@ -391,7 +391,7 @@ class SettingsScreen extends StatelessWidget {
                         final value = await setFloatingButtonSizePopup(
                           context,
                           settingsState.finishFabSize,
-                          text: Localization.current.I18nSettings_finishButtonSizeDescription,
+                          title: Localization.current.I18nSettings_finishButtonSizeDescription,
                         );
                         if (value != null) {
                           settingsCubit.update(settingsState.copyWith(finishFabSize: value));
