@@ -16,12 +16,13 @@ import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/extensions.dart';
 import '../../log/log.dart';
+import 'app_database.steps.dart';
 
 part 'app_database.g.dart';
 
 @DriftDatabase(include: {'tables.drift'})
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(_openConnection());
+AppDatabase([QueryExecutor? e]): super(e ?? _openConnection());
 
   AppDatabase.customConnection(DatabaseConnection super.connection);
 
@@ -39,6 +40,11 @@ class AppDatabase extends _$AppDatabase {
         (3, '${ParticipantStatus.dnf.name}'),
         (4, '${ParticipantStatus.dsq.name}');''');
       },
+      onUpgrade: stepByStep(
+        from1To2: (m, schema) async {
+          await m.addColumn(schema.starts, schema.starts.timestampCorrection);
+        },
+      ),
       beforeOpen: (details) async {
         // Enable foreign_keys
         await customStatement('PRAGMA foreign_keys = ON');
@@ -47,7 +53,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   /// Весь список гонок, кроме "удалённых" (is_deleted = true)
   Selectable<Race> getRaces() {
@@ -326,7 +332,7 @@ class AppDatabase extends _$AppDatabase {
         .getSingleOrNull();
   }
 
-  /// Список "неудалённых" гонщиков, отсортированных по именам
+  /// Список "не удалённых" гонщиков, отсортированных по именам
   Selectable<Rider> get getRiders {
     return _getRiders(isDeleted: false);
   }
@@ -608,7 +614,7 @@ class AppDatabase extends _$AppDatabase {
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
-    // в этом случае устанавливаем время старта и вовращаем null.
+    // в этом случае устанавливаем время старта и возвращаем null.
     // В противном случае возвращаем StartItem.
     logger.i('Database -> Checking existing start time around $time...');
     final participantsAroundTime =
@@ -648,7 +654,7 @@ class AppDatabase extends _$AppDatabase {
   ///Ищет участника с временем рядом с текущим (плюс-минус [deltaInSeconds] секунд)
   ///и устанавливает ему текущее время старта в ручную отсечку
   ///
-  ///Возращает 0 если участник не найден и количество обновлённых участников в случае успеха
+  ///Возвращает 0 если участник не найден и количество обновлённых участников в случае успеха
   ///
   /// Конечно, участник по хорошему должен быть один, но мало ли что там в бд записано
   Future<int> updateManualStartTime({
@@ -711,7 +717,7 @@ class AppDatabase extends _$AppDatabase {
   ///
   ///[deltaInSeconds] в каком секундном диапазоне от [time] искать участников
   ///
-  ///Возвращает количество стартущих и 0 если последние не найдены
+  ///Возвращает количество стартующих и 0 если последние не найдены
   Future<int> checkParticipantAroundStartTime({
     required String time,
     required int stageId,

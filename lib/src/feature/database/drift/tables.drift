@@ -66,6 +66,7 @@ CREATE TABLE starts (
 	participant_id integer NOT NULL,
 	start_time text NOT NULL,
 	timestamp DATETIME,
+	timestamp_correction integer,
 	ntp_offset integer,
 	automatic_start_time text,
 	automatic_correction integer,
@@ -214,6 +215,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	timestamp_correction,
 	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
@@ -256,6 +258,7 @@ SELECT
 	starts.participant_id as participant_id,
 	starts.start_time as start_time,
 	starts.timestamp as timestamp,
+	starts.timestamp_correction as timestamp_correction,
 	starts.ntp_offset as ntp_offset,
 	starts.automatic_start_time as automatic_start_time,
 	starts.automatic_correction as automatic_correction,
@@ -278,6 +281,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	timestamp_correction,
 	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
@@ -302,6 +306,7 @@ WHERE
 _setStartingInfo:
 UPDATE starts
 SET start_time = :start_time,
+    timestamp_correction = :timestamp_correction,
 	automatic_start_time = :automatic_start_time,
     automatic_correction = :automatic_correction,
     manual_start_time = :manual_start_time,
@@ -317,6 +322,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	timestamp_correction,
 	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
@@ -399,6 +405,7 @@ SET
 	manual_correction = NULL,
 	manual_start_time = NULL,
 	timestamp = NULL,
+	timestamp_correction = NULL,
 	ntp_offset = NULL
 WHERE
 	id = :id;
@@ -410,6 +417,7 @@ SELECT
 	participant_id,
 	start_time,
 	timestamp,
+	timestamp_correction,
 	ntp_offset,
 	automatic_start_time,
 	automatic_correction,
@@ -442,6 +450,7 @@ SET
 	manual_correction = NULL,
 	manual_start_time = NULL,
 	timestamp = NULL,
+	timestamp_correction = NULL,
 	ntp_offset = NULL
 WHERE stage_id = :stage_id AND start_time >= :from_time;
 
