@@ -330,7 +330,7 @@ class _StartListPage extends State<StartListPage> {
   List<Widget> _persistentFooterButtons(BuildContext context) {
     final databaseBloc = context.read<DatabaseBloc>();
     final stage = databaseBloc.state.stage;
-    final stageId = stage!.id;
+    final stageId = stage?.id;
     return <Widget>[
       // TextButton(
       //   onPressed: () {
@@ -376,7 +376,7 @@ class _StartListPage extends State<StartListPage> {
       //   },
       //   child: const Icon(Icons.play_arrow),
       // ),
-      TextButton(
+      if (stage != null && stageId != null) TextButton(
         onPressed: () {
           databaseBloc.add(
             DatabaseEvent.addStartNumber(stage: stage, number: 111, startTime: '15:31:00', forceAdd: true),

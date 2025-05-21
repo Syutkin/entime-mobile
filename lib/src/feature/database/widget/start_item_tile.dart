@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/utils/extensions.dart';
@@ -30,9 +31,7 @@ class StartItemTile extends StatelessWidget {
     return BlocBuilder<SettingsCubit, AppSettings>(
       builder: (context, state) {
         var difference = Duration.zero;
-
         var cardColor = isHighlighted ? Theme.of(context).colorScheme.primaryContainer : null;
-
         var textColor = isHighlighted ? Theme.of(context).colorScheme.onPrimaryContainer : null;
 
         if (item.timestamp != null) {
@@ -122,7 +121,7 @@ class StartItemTile extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      flex: 25,
+                      flex: 20,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -131,12 +130,19 @@ class StartItemTile extends StatelessWidget {
                         ),
                       ),
                     ),
+                    if (state.useTimestampForAutomaticStamps)
+                      Flexible(
+                        flex: 5,
+                        child: Align(alignment: Alignment.centerLeft, child: Icon(MdiIcons.cellphone, size: 20)),
+                      ),
                     Flexible(
-                      flex: 25,
+                      flex: state.useTimestampForAutomaticStamps ? 25 : 30,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          item.automaticCorrection.toString().strip(),
+                          state.useTimestampForAutomaticStamps
+                              ? item.timestampCorrection.toString().strip()
+                              : item.automaticCorrection.toString().strip(),
                           style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5, color: textColor),
                         ),
                       ),
