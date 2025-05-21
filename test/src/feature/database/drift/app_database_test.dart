@@ -2276,6 +2276,7 @@ void main() {
 
     group('Test getStartResults', () {
       test('Get automatic correction for start result', () async {
+        const useTimestamp = false;
         final stage = (await db.getStages(raceId: 1).get()).first;
         const time = '10:00:01,222';
         final timestamp = time.toDateTime()!;
@@ -2293,13 +2294,14 @@ void main() {
 
         expect(result, null);
 
-        final results = await db.getStartResults(stage.id);
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
         expect(results.length, 1);
         expect(results.first.correction, '$correction');
         expect(results.first.startTime, '10:00:00');
       });
 
       test('Get manual correction for start result if automatic is not set', () async {
+        const useTimestamp = false;
         final stage = (await db.getStages(raceId: 1).get()).first;
         const time = '10:00:01,222';
         final timestamp = time.toDateTime()!;
@@ -2315,13 +2317,14 @@ void main() {
 
         expect(result, 1);
 
-        final results = await db.getStartResults(stage.id);
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
         expect(results.length, 1);
         expect(results.first.correction, '$correction');
         expect(results.first.startTime, '10:00:00');
       });
 
       test('If all correction sets, get automatic', () async {
+        const useTimestamp = false;
         final stage = (await db.getStages(raceId: 1).get()).first;
         const time = '10:00:01,222';
         final timestamp = time.toDateTime()!;
@@ -2354,18 +2357,125 @@ void main() {
         expect(participant.first.automaticCorrection, automaticCorrection);
         expect(participant.first.manualCorrection, manualCorrection);
 
-        final results = await db.getStartResults(stage.id);
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
         expect(results.length, 1);
         expect(results.first.correction, '$automaticCorrection');
         expect(results.first.startTime, '10:00:00');
       });
 
       test('Participants with DNS status gets to the list', () async {
+        const useTimestamp = false;
         final stage = (await db.getStages(raceId: 1).get()).first;
         const number = 1;
 
         await db.setDNSForStage(stage: stage, number: number);
-        final results = await db.getStartResults(stage.id);
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
+        expect(results.length, 1);
+        expect(results.first.correction, 'DNS');
+        expect(results.first.number, number);
+      });
+
+      test('Get timestamp correction for start result', () async {
+        const useTimestamp = true;
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const time = '10:00:01,222';
+        final timestamp = time.toDateTime()!;
+        const correction = 555;
+        const ntpOffset = 1111;
+
+        // timestampCorrection = 10:00:00 - (time + ntpOffset)
+        const timestampCorrection = -2333;
+
+        final result = await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: time,
+          correction: correction,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
+        );
+
+        expect(result, null);
+
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
+        expect(results.length, 1);
+        expect(results.first.correction, '$timestampCorrection');
+        expect(results.first.startTime, '10:00:00');
+      });
+
+      test('Get manual correction for start result if timestamp correction is not set', () async {
+        const useTimestamp = true;
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const time = '10:00:01,222';
+        final timestamp = time.toDateTime()!;
+        const ntpOffset = 1111;
+        const correction = -(1222 + ntpOffset);
+
+        final result = await db.updateManualStartTime(
+          stageId: stage.id,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
+        );
+
+        expect(result, 1);
+
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
+        expect(results.length, 1);
+        expect(results.first.correction, '$correction');
+        expect(results.first.startTime, '10:00:00');
+      });
+
+      test('If all correction sets, get timestamp correction', () async {
+        const useTimestamp = true;
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const time = '10:00:01,222';
+        final timestamp = time.toDateTime()!;
+        const ntpOffset = 1111;
+        const automaticCorrection = 555;
+        const manualCorrection = -(1222 + ntpOffset);
+
+        // timestampCorrection = 10:00:00 - (time + ntpOffset)
+        const timestampCorrection = -2333;
+
+        final automaticResult = await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: time,
+          correction: automaticCorrection,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
+        );
+
+        expect(automaticResult, null);
+
+        final manualResult = await db.updateManualStartTime(
+          stageId: stage.id,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
+        );
+
+        expect(manualResult, 1);
+
+        final participant = await db.getParticipantsAtStart(stageId: stage.id).get();
+
+        expect(participant.first.automaticCorrection, automaticCorrection);
+        expect(participant.first.manualCorrection, manualCorrection);
+
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
+        expect(results.length, 1);
+        expect(results.first.correction, '$timestampCorrection');
+        expect(results.first.startTime, '10:00:00');
+      });
+
+      test('Participants with DNS status gets to the list when timestamp correction used', () async {
+        const useTimestamp = true;
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const number = 1;
+
+        await db.setDNSForStage(stage: stage, number: number);
+        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
         expect(results.length, 1);
         expect(results.first.correction, 'DNS');
         expect(results.first.number, number);
@@ -2374,6 +2484,7 @@ void main() {
 
     group('Test getFinishResults', () {
       test('Get results from finish', () async {
+        const useTimestamp = false;
         final stage = (await db.getStages(raceId: 1).get()).first;
         const ntpOffset = 555;
         await db.addFinishTime(
@@ -2418,10 +2529,69 @@ void main() {
           ntpOffset: ntpOffset,
         );
 
-        final finishes = await db.getFinishResults(stage.id);
+        final finishes = await db.getFinishResults(stage.id, useTimestamp: useTimestamp);
         expect(finishes.length, 4);
         expect(finishes[0].number, 1);
         expect(finishes[0].finishTime, '10:10:11,123');
+        expect(finishes[3].number, 4);
+        expect(finishes[3].finishTime, finishTimeManual);
+      });
+
+      test('Get results from finish when using timestamps for automatic stamps', () async {
+        const useTimestamp = true;
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const ntpOffset = 555;
+        final timestamp1 = '09:11:11,123'.toDateTime()!;
+        final timestamp2 = '09:11:12,223'.toDateTime()!;
+
+        await db.addFinishTime(
+          stage: stage,
+          finish: '10:10:11,123',
+          timestamp: timestamp1,
+          ntpOffset: ntpOffset,
+          number: 1,
+        );
+        await db.addFinishTime(
+          stage: stage,
+          finish: '10:10:12,123',
+          timestamp: timestamp2,
+          ntpOffset: ntpOffset,
+          number: 2,
+        );
+        await db.addFinishTime(stage: stage, finish: '10:10:13,123', timestamp: DateTime.now(), ntpOffset: ntpOffset);
+        var id = await db.addFinishTimeManual(
+          stageId: stage.id,
+          timestamp: '10:10:14,123'.toDateTime()!,
+          ntpOffset: ntpOffset,
+        );
+        id = await db.addFinishTimeManual(
+          stageId: stage.id,
+          timestamp: '10:10:15,123'.toDateTime()!,
+          ntpOffset: ntpOffset,
+        );
+        await db.addNumberToFinish(stage: stage, finishId: id, number: 3, finishTime: 'finishTime');
+        final finishTimeManual = '10:10:16,123'
+            .toDateTime()!
+            .add(const Duration(milliseconds: ntpOffset))
+            .format(longTimeFormat);
+        id = await db.addFinishTimeManual(
+          stageId: stage.id,
+          timestamp: '10:10:16,123'.toDateTime()!,
+          ntpOffset: ntpOffset,
+        );
+        await db.addNumberToFinish(stage: stage, finishId: id, number: 4, finishTime: 'finishTime');
+        id = await db.addFinishTimeManual(
+          stageId: stage.id,
+          timestamp: '10:10:17,123'.toDateTime()!,
+          ntpOffset: ntpOffset,
+        );
+
+        final finishes = await db.getFinishResults(stage.id, useTimestamp: useTimestamp);
+        expect(finishes.length, 4);
+        expect(finishes[0].number, 1);
+        expect(finishes[0].finishTime, timestamp1.add(const Duration(milliseconds: ntpOffset)).format(longTimeFormat));
+        expect(finishes[1].number, 2);
+        expect(finishes[1].finishTime, timestamp2.add(const Duration(milliseconds: ntpOffset)).format(longTimeFormat));
         expect(finishes[3].number, 4);
         expect(finishes[3].finishTime, finishTimeManual);
       });

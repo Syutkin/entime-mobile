@@ -381,7 +381,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           final stage = _stage;
           final stageId = stage?.id;
           if (race != null && stage != null && stageId != null) {
-            final startList = await _db.getStartResults(stageId);
+            final startList = await _db.getStartResults(stageId, useTimestamp: event.useTimestamp);
             final startMap = <Map<String, dynamic>>[];
             for (final start in startList) {
               startMap.add(start.row.data);
@@ -405,10 +405,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           final stage = _stage;
           final stageId = stage?.id;
           if (race != null && stage != null && stageId != null) {
-            final finishList = await _db.getFinishResults(stageId);
+            final finishList = await _db.getFinishResults(stageId, useTimestamp: event.useTimestamp);
             final finishMap = <Map<String, dynamic>>[];
-            for (final start in finishList) {
-              finishMap.add(start.row.data);
+            for (final finish in finishList) {
+              finishMap.add(finish.row.data);
             }
             final csv = mapListToCsv(finishMap);
             if (csv != null) {

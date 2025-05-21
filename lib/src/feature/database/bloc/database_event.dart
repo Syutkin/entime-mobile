@@ -202,9 +202,9 @@ sealed class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.createStagesFromFile({required int raceId}) = _CreateStagesFromFile;
 
-  const factory DatabaseEvent.shareStart() = _ShareStart;
+  const factory DatabaseEvent.shareStart({required bool useTimestamp}) = _ShareStart;
 
-  const factory DatabaseEvent.shareFinish() = _ShareFinish;
+  const factory DatabaseEvent.shareFinish({required bool useTimestamp}) = _ShareFinish;
 
   const factory DatabaseEvent.shareDatabase() = _ShareDatabase;
 

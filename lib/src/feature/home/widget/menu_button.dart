@@ -115,12 +115,14 @@ class MenuButton extends StatelessWidget {
             return PopupMenuButton<HomeMenuButton>(
               itemBuilder: (context) => menuItems,
               onSelected: (value) async {
+                final useTimestampForAutomaticStamps =
+                    context.read<SettingsCubit>().state.useTimestampForAutomaticStamps;
                 switch (value) {
                   case HomeMenuButton.share:
                     if (activeTab == AppTab.start) {
-                      databaseBloc.add(const DatabaseEvent.shareStart());
+                      databaseBloc.add(DatabaseEvent.shareStart(useTimestamp: useTimestampForAutomaticStamps));
                     } else if (activeTab == AppTab.finish) {
-                      databaseBloc.add(const DatabaseEvent.shareFinish());
+                      databaseBloc.add(DatabaseEvent.shareFinish(useTimestamp: useTimestampForAutomaticStamps));
                     }
                   case HomeMenuButton.fab:
                     if (activeTab == AppTab.start) {

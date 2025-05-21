@@ -5632,6 +5632,23 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<StartForCsv> _getStartsForCsvWithTimestampCorrection({
+    required int stageId,
+  }) {
+    return customSelect(
+      'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.timestamp_correction, IFNULL(starts.manual_correction, \'DNS\')) AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+      variables: [Variable<int>(stageId)],
+      readsFrom: {participants, starts},
+    ).map(
+      (QueryRow row) => StartForCsv(
+        row: row,
+        number: row.read<int>('number'),
+        startTime: row.read<String>('start_time'),
+        correction: row.read<String>('correction'),
+      ),
+    );
+  }
+
   Selectable<FinishForCsv> _getFinishesForCsv({required int stageId}) {
     return customSelect(
       'SELECT number, finish_time FROM finishes WHERE stage_id = ?1 AND number NOTNULL ORDER BY finish_time ASC',
@@ -5642,6 +5659,22 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         row: row,
         number: row.readNullable<int>('number'),
         finishTime: row.read<String>('finish_time'),
+      ),
+    );
+  }
+
+  Selectable<FinishForCsvWithTimestampCorrection>
+  _getFinishesForCsvWithTimestampCorrection({required int stageId}) {
+    return customSelect(
+      'SELECT number, timestamp, ntp_offset FROM finishes WHERE stage_id = ?1 AND number NOTNULL ORDER BY finish_time ASC',
+      variables: [Variable<int>(stageId)],
+      readsFrom: {finishes},
+    ).map(
+      (QueryRow row) => FinishForCsvWithTimestampCorrection(
+        row: row,
+        number: row.readNullable<int>('number'),
+        timestamp: row.read<DateTime>('timestamp'),
+        ntpOffset: row.read<int>('ntp_offset'),
       ),
     );
   }
@@ -8460,6 +8493,18 @@ class FinishForCsv extends CustomResultSet {
   final String finishTime;
   FinishForCsv({required QueryRow row, this.number, required this.finishTime})
     : super(row);
+}
+
+class FinishForCsvWithTimestampCorrection extends CustomResultSet {
+  final int? number;
+  final DateTime timestamp;
+  final int ntpOffset;
+  FinishForCsvWithTimestampCorrection({
+    required QueryRow row,
+    this.number,
+    required this.timestamp,
+    required this.ntpOffset,
+  }) : super(row);
 }
 
 typedef GetLog$predicate = Expression<bool> Function(Logs logs);

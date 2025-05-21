@@ -120,7 +120,7 @@ class FinishItemTile extends StatelessWidget {
                             child: Text(
                               !item.isManual & !useLocalTime
                                   ? item.finishTime.strip()
-                                  : item.timestamp.format(longTimeFormat),
+                                  : item.timestamp.add(Duration(milliseconds: item.ntpOffset)).format(longTimeFormat),
                               style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5, color: textColor),
                             ),
                           ),

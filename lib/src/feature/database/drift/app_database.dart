@@ -1036,12 +1036,31 @@ class AppDatabase extends _$AppDatabase {
     return stages.length;
   }
 
-  Future<List<StartForCsv>> getStartResults(int stageId) async {
-    return _getStartsForCsv(stageId: stageId).get();
+  Future<List<StartForCsv>> getStartResults(int stageId, {required bool useTimestamp}) async {
+    if (useTimestamp) {
+      return _getStartsForCsvWithTimestampCorrection(stageId: stageId).get();
+    } else {
+      return _getStartsForCsv(stageId: stageId).get();
+    }
   }
 
-  Future<List<FinishForCsv>> getFinishResults(int stageId) async {
-    return _getFinishesForCsv(stageId: stageId).get();
+  Future<List<FinishForCsv>> getFinishResults(int stageId, {required bool useTimestamp}) async {
+    if (useTimestamp) {
+      final list = <FinishForCsv>[];
+      final finishes = await _getFinishesForCsvWithTimestampCorrection(stageId: stageId).get();
+      for (final finish in finishes) {
+        list.add(
+          FinishForCsv(
+            row: finish.row,
+            number: finish.number,
+            finishTime: finish.timestamp.add(Duration(milliseconds: finish.ntpOffset)).format(longTimeFormat),
+          ),
+        );
+      }
+      return list;
+    } else {
+      return _getFinishesForCsv(stageId: stageId).get();
+    }
   }
 
   // -------------------------

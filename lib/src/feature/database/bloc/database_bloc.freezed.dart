@@ -2868,77 +2868,145 @@ as int,
 
 
 class _ShareStart with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _ShareStart();
+  const _ShareStart({required this.useTimestamp});
   
 
+ final  bool useTimestamp;
 
-
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ShareStartCopyWith<_ShareStart> get copyWith => __$ShareStartCopyWithImpl<_ShareStart>(this, _$identity);
 
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.shareStart'))
-    ;
+    ..add(DiagnosticsProperty('useTimestamp', useTimestamp));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareStart);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareStart&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,useTimestamp);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.shareStart()';
+  return 'DatabaseEvent.shareStart(useTimestamp: $useTimestamp)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$ShareStartCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
+  factory _$ShareStartCopyWith(_ShareStart value, $Res Function(_ShareStart) _then) = __$ShareStartCopyWithImpl;
+@useResult
+$Res call({
+ bool useTimestamp
+});
 
 
+
+
+}
+/// @nodoc
+class __$ShareStartCopyWithImpl<$Res>
+    implements _$ShareStartCopyWith<$Res> {
+  __$ShareStartCopyWithImpl(this._self, this._then);
+
+  final _ShareStart _self;
+  final $Res Function(_ShareStart) _then;
+
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? useTimestamp = null,}) {
+  return _then(_ShareStart(
+useTimestamp: null == useTimestamp ? _self.useTimestamp : useTimestamp // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
 
 class _ShareFinish with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _ShareFinish();
+  const _ShareFinish({required this.useTimestamp});
   
 
+ final  bool useTimestamp;
 
-
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ShareFinishCopyWith<_ShareFinish> get copyWith => __$ShareFinishCopyWithImpl<_ShareFinish>(this, _$identity);
 
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.shareFinish'))
-    ;
+    ..add(DiagnosticsProperty('useTimestamp', useTimestamp));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareFinish);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareFinish&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,useTimestamp);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.shareFinish()';
+  return 'DatabaseEvent.shareFinish(useTimestamp: $useTimestamp)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$ShareFinishCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
+  factory _$ShareFinishCopyWith(_ShareFinish value, $Res Function(_ShareFinish) _then) = __$ShareFinishCopyWithImpl;
+@useResult
+$Res call({
+ bool useTimestamp
+});
 
 
+
+
+}
+/// @nodoc
+class __$ShareFinishCopyWithImpl<$Res>
+    implements _$ShareFinishCopyWith<$Res> {
+  __$ShareFinishCopyWithImpl(this._self, this._then);
+
+  final _ShareFinish _self;
+  final $Res Function(_ShareFinish) _then;
+
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? useTimestamp = null,}) {
+  return _then(_ShareFinish(
+useTimestamp: null == useTimestamp ? _self.useTimestamp : useTimestamp // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/common/utils/extensions.dart';
+import 'package:entime/src/constants/date_time_formats.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
@@ -124,6 +125,33 @@ void main() {
 
       await $.pumpWidgetAndSettle(testWidget(item));
       expect($(timestampStr), findsOneWidget);
+      expect($(finishTime), findsNothing);
+    });
+
+    patrolWidgetTest('Take into account ntpOffset for timestamp if using local time for automatic stamps', (
+      PatrolTester $,
+    ) async {
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
+
+      const ntpOffset = -4378;
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: ntpOffset,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      final result = timestampStr.toDateTime()?.add(const Duration(milliseconds: ntpOffset)).format(longTimeFormat);
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+      expect($(result), findsOneWidget);
       expect($(finishTime), findsNothing);
     });
 
