@@ -81,29 +81,15 @@ void main() {
       patrolWidgetTest('Check general section', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_reconnect).scrollTo(), findsOneWidget);
-        expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_ntpOffset).scrollTo(), findsOneWidget);
-        expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_timeForAutomaticStamps).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_wakelock).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_sound).scrollTo(), findsOneWidget);
-        // Disabled and didn't visible for tests
+        // Disabled and didn't visible for tests?
         // expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_language).scrollTo(), findsOneWidget);
       });
       patrolWidgetTest('Switch reconnect', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_reconnect)).tap();
         verify(() => settingsCubit.update(settings.copyWith(reconnect: !settings.reconnect))).called(1);
-      });
-
-      patrolWidgetTest('Switch updateNtpOffsetAtStartup', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        await $(SettingsTile).containing($(Localization.current.I18nSettings_ntpOffset)).scrollTo().tap();
-        verify(() => settingsCubit.update(settings.copyWith(updateNtpOffsetAtStartup: !settings.updateNtpOffsetAtStartup))).called(1);
-      });
-
-      patrolWidgetTest('Switch useTimestampForAutomaticStamps', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
-        await $(SettingsTile).containing($(Localization.current.I18nSettings_timeForAutomaticStamps)).tap();
-        verify(() => settingsCubit.update(settings.copyWith(useTimestampForAutomaticStamps: !settings.useTimestampForAutomaticStamps))).called(1);
       });
 
       patrolWidgetTest('Switch wakelock', (PatrolTester $) async {
@@ -119,6 +105,29 @@ void main() {
       });
     });
 
+    group('Time control section tests', () {
+      patrolWidgetTest('Check time control section', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        expect(await $(SettingsSection).containing(Localization.current.I18nSettings_timeControl).$(SettingsTile).$(Localization.current.I18nSettings_ntpOffset).scrollTo(), findsOneWidget);
+        expect(
+          await $(SettingsSection).containing(Localization.current.I18nSettings_timeControl).$(SettingsTile).$(Localization.current.I18nSettings_timeForAutomaticStamps).scrollTo(),
+          findsOneWidget,
+        );
+      });
+
+      patrolWidgetTest('Switch updateNtpOffsetAtStartup', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_ntpOffset)).scrollTo().tap();
+        verify(() => settingsCubit.update(settings.copyWith(updateNtpOffsetAtStartup: !settings.updateNtpOffsetAtStartup))).called(1);
+      });
+
+      patrolWidgetTest('Switch useTimestampForAutomaticStamps', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(SettingsTile).containing($(Localization.current.I18nSettings_timeForAutomaticStamps)).tap();
+        verify(() => settingsCubit.update(settings.copyWith(useTimestampForAutomaticStamps: !settings.useTimestampForAutomaticStamps))).called(1);
+      });
+    });
+
     group('Countdown section tests', () {
       patrolWidgetTest('Check countdown section', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
@@ -128,7 +137,7 @@ void main() {
 
       patrolWidgetTest('Switch countdown', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
-        await $(SettingsSection).containing(Localization.current.I18nSettings_countdown).$(SettingsTile).containing($(Localization.current.I18nSettings_countdown)).tap();
+        await $(SettingsSection).containing(Localization.current.I18nSettings_countdown).$(SettingsTile).containing($(Localization.current.I18nSettings_countdown)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(beep: !settings.beep))).called(1);
       });
 

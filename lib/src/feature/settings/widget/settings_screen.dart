@@ -42,22 +42,6 @@ class SettingsScreen extends StatelessWidget {
                       },
                     ),
                     SettingsTile.switchTile(
-                      title: Text(Localization.current.I18nSettings_ntpOffset),
-                      description: Text(Localization.current.I18nSettings_ntpOffsetDescription),
-                      initialValue: settingsState.updateNtpOffsetAtStartup,
-                      onToggle: (value) {
-                        settingsCubit.update(settingsState.copyWith(updateNtpOffsetAtStartup: value));
-                      },
-                    ),
-                    SettingsTile.switchTile(
-                      title: Text(Localization.current.I18nSettings_timeForAutomaticStamps),
-                      description: Text(Localization.current.I18nSettings_timeForAutomaticStampsDescription),
-                      initialValue: settingsState.useTimestampForAutomaticStamps,
-                      onToggle: (value) {
-                        settingsCubit.update(settingsState.copyWith(useTimestampForAutomaticStamps: value));
-                      },
-                    ),
-                    SettingsTile.switchTile(
                       title: Text(Localization.current.I18nSettings_wakelock),
                       // titleMaxLines: 2,
                       //leading:  Icon(Icons.lightbulb_outline),
@@ -89,6 +73,27 @@ class SettingsScreen extends StatelessWidget {
                           }
                         },
                       ),
+                    ),
+                  ],
+                ),
+                SettingsSection(
+                  title: Text(Localization.current.I18nSettings_timeControl),
+                  tiles: [
+                    SettingsTile.switchTile(
+                      title: Text(Localization.current.I18nSettings_ntpOffset),
+                      description: Text(Localization.current.I18nSettings_ntpOffsetDescription),
+                      initialValue: settingsState.updateNtpOffsetAtStartup,
+                      onToggle: (value) {
+                        settingsCubit.update(settingsState.copyWith(updateNtpOffsetAtStartup: value));
+                      },
+                    ),
+                    SettingsTile.switchTile(
+                      title: Text(Localization.current.I18nSettings_timeForAutomaticStamps),
+                      description: Text(Localization.current.I18nSettings_timeForAutomaticStampsDescription),
+                      initialValue: settingsState.useTimestampForAutomaticStamps,
+                      onToggle: (value) {
+                        settingsCubit.update(settingsState.copyWith(useTimestampForAutomaticStamps: value));
+                      },
                     ),
                   ],
                 ),
@@ -301,13 +306,14 @@ class SettingsScreen extends StatelessWidget {
                     SettingsTile.switchTile(
                       title: Text(Localization.current.I18nSettings_showColorStartDifference),
                       description: Text(Localization.current.I18nSettings_showColorStartDifferenceDescription),
+                      enabled: !settingsState.useTimestampForAutomaticStamps,
                       initialValue: settingsState.showColorStartDifference,
                       onToggle: (value) {
                         settingsCubit.update(settingsState.copyWith(showColorStartDifference: value));
                       },
                     ),
                     SettingsTile(
-                      enabled: settingsState.showColorStartDifference,
+                      enabled: settingsState.showColorStartDifference && !settingsState.useTimestampForAutomaticStamps,
                       title: Text(Localization.current.I18nSettings_startFinishDifference),
                       trailing: Text(
                         Localization.current.I18nSettings_milliseconds(settingsState.startDifferenceThreshold),
@@ -412,13 +418,14 @@ class SettingsScreen extends StatelessWidget {
                     SettingsTile.switchTile(
                       title: Text(Localization.current.I18nSettings_showColorFinishDifference),
                       description: Text(Localization.current.I18nSettings_showColorFinishDifferenceDescription),
+                      enabled: !settingsState.useTimestampForAutomaticStamps,
                       initialValue: settingsState.showColorFinishDifference,
                       onToggle: (value) {
                         settingsCubit.update(settingsState.copyWith(showColorFinishDifference: value));
                       },
                     ),
                     SettingsTile(
-                      enabled: settingsState.showColorFinishDifference,
+                      enabled: settingsState.showColorFinishDifference && !settingsState.useTimestampForAutomaticStamps,
                       title: Text(Localization.current.I18nSettings_startFinishDifference),
                       trailing: Text(
                         Localization.current.I18nSettings_milliseconds(settingsState.finishDifferenceThreshold),

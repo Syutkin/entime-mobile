@@ -46,7 +46,7 @@ class StartItemTile extends StatelessWidget {
 
           final isBigDifference = difference.inMilliseconds.abs() > state.startDifferenceThreshold;
 
-          if (isBigDifference && state.showColorStartDifference) {
+          if (isBigDifference && state.showColorStartDifference && !state.useTimestampForAutomaticStamps) {
             cardColor = Theme.of(context).colorScheme.error;
             textColor = Theme.of(context).colorScheme.onError;
           }
@@ -143,7 +143,7 @@ class StartItemTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                                        if (state.useTimestampForAutomaticStamps)
+                    if (state.useTimestampForAutomaticStamps)
                       Flexible(
                         flex: 10,
                         child: Align(alignment: Alignment.centerLeft, child: Icon(MdiIcons.cellphone, size: 20)),

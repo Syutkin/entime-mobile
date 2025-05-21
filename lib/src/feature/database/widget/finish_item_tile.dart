@@ -85,7 +85,7 @@ class FinishItemTile extends StatelessWidget {
                 Color? textColor;
                 final isBigDifference = difference.inMilliseconds.abs() > state.finishDifferenceThreshold;
 
-                if (isBigDifference && state.showColorFinishDifference) {
+                if (isBigDifference && state.showColorFinishDifference && !state.useTimestampForAutomaticStamps) {
                   cardColor = Theme.of(context).colorScheme.error;
                   textColor = Theme.of(context).colorScheme.onError;
                 }

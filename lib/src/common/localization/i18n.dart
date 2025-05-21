@@ -53,6 +53,8 @@ class I18nSettings {
 
   static String get general => Intl.message('Основные', name: 'I18nSettings_general');
 
+  static String get timeControl => Intl.message('Учёт времени', name: 'I18nSettings_timeControl');
+
   static String get reconnect => Intl.message('Переподключение', name: 'I18nSettings_reconnect');
 
   static String get reconnectDescription =>

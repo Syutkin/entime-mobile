@@ -228,6 +228,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Учёт времени`
+  String get I18nSettings_timeControl {
+    return Intl.message(
+      'Учёт времени',
+      name: 'I18nSettings_timeControl',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Переподключение`
   String get I18nSettings_reconnect {
     return Intl.message(

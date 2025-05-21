@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-05-21T05:43:38.818243",
+  "@@last_modified": "2025-05-21T11:53:00.009205",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -103,6 +103,11 @@
   },
   "I18nSettings_general": "Основные",
   "@I18nSettings_general": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nSettings_timeControl": "Учёт времени",
+  "@I18nSettings_timeControl": {
     "type": "text",
     "placeholders": {}
   },

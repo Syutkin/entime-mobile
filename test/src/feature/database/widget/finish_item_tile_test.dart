@@ -241,6 +241,43 @@ void main() {
       expect($(Flexible), findsNWidgets(4));
     });
 
+    patrolWidgetTest(
+      'Do not change color if difference more than threshold but useTimestampForAutomaticStamps enabled',
+      (PatrolTester $) async {
+        settings = settings.copyWith(
+          showFinishDifference: false,
+          showColorFinishDifference: true,
+          finishDifferenceThreshold: 1,
+          useTimestampForAutomaticStamps: true,
+        );
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        final item = Finish(
+          id: 1,
+          stageId: 1,
+          timestamp: timestamp,
+          ntpOffset: 0,
+          finishTime: finishTime,
+          isHidden: false,
+          isManual: true,
+          number: number,
+        );
+
+        await $.pumpWidgetAndSettle(testWidget(item));
+
+        final context = $.tester.element($(FinishItemTile));
+        final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
+        final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
+        final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
+
+        expect(cardColor, null);
+        expect(textColor, Theme.of(context).colorScheme.onSurface);
+        expect(iconColor, Theme.of(context).colorScheme.onSurface);
+        expect($(difference), findsNothing);
+        expect($(Flexible), findsNWidgets(3));
+      },
+    );
+
     patrolWidgetTest('Take into account ntpOffset when show difference', (PatrolTester $) async {
       settings = settings.copyWith(
         showFinishDifference: true,
