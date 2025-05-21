@@ -25,6 +25,7 @@
 				"-o=coverage/lcov.info",
 				"'lib/**.freezed.dart'",
 				"'lib/**.g.dart'",
+				"'lib/**.steps.dart'",
 				"'lib/src/common/localization/**.dart'",
 				"--ignore-errors=unused"
 			],

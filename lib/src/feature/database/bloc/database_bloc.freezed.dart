@@ -1506,7 +1506,7 @@ as int?,
 
 
 class _UpdateAutomaticCorrection with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _UpdateAutomaticCorrection({required this.stageId, required this.startTime, required this.correction, required this.timestamp, required this.ntpOffset, required this.deltaInSeconds, this.forceUpdate = false});
+  const _UpdateAutomaticCorrection({required this.stageId, required this.startTime, required this.correction, required this.timestamp, required this.ntpOffset, required this.deltaInSeconds, this.forceUpdate = false, this.useTimestampForTime = false});
   
 
  final  int stageId;
@@ -1516,6 +1516,7 @@ class _UpdateAutomaticCorrection with DiagnosticableTreeMixin implements Databas
  final  int ntpOffset;
  final  int deltaInSeconds;
 @JsonKey() final  bool forceUpdate;
+@JsonKey() final  bool useTimestampForTime;
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -1528,21 +1529,21 @@ _$UpdateAutomaticCorrectionCopyWith<_UpdateAutomaticCorrection> get copyWith => 
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateAutomaticCorrection'))
-    ..add(DiagnosticsProperty('stageId', stageId))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('correction', correction))..add(DiagnosticsProperty('timestamp', timestamp))..add(DiagnosticsProperty('ntpOffset', ntpOffset))..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds))..add(DiagnosticsProperty('forceUpdate', forceUpdate));
+    ..add(DiagnosticsProperty('stageId', stageId))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('correction', correction))..add(DiagnosticsProperty('timestamp', timestamp))..add(DiagnosticsProperty('ntpOffset', ntpOffset))..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds))..add(DiagnosticsProperty('forceUpdate', forceUpdate))..add(DiagnosticsProperty('useTimestampForTime', useTimestampForTime));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAutomaticCorrection&&(identical(other.stageId, stageId) || other.stageId == stageId)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.correction, correction) || other.correction == correction)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.ntpOffset, ntpOffset) || other.ntpOffset == ntpOffset)&&(identical(other.deltaInSeconds, deltaInSeconds) || other.deltaInSeconds == deltaInSeconds)&&(identical(other.forceUpdate, forceUpdate) || other.forceUpdate == forceUpdate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAutomaticCorrection&&(identical(other.stageId, stageId) || other.stageId == stageId)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.correction, correction) || other.correction == correction)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.ntpOffset, ntpOffset) || other.ntpOffset == ntpOffset)&&(identical(other.deltaInSeconds, deltaInSeconds) || other.deltaInSeconds == deltaInSeconds)&&(identical(other.forceUpdate, forceUpdate) || other.forceUpdate == forceUpdate)&&(identical(other.useTimestampForTime, useTimestampForTime) || other.useTimestampForTime == useTimestampForTime));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stageId,startTime,correction,timestamp,ntpOffset,deltaInSeconds,forceUpdate);
+int get hashCode => Object.hash(runtimeType,stageId,startTime,correction,timestamp,ntpOffset,deltaInSeconds,forceUpdate,useTimestampForTime);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds, forceUpdate: $forceUpdate)';
+  return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds, forceUpdate: $forceUpdate, useTimestampForTime: $useTimestampForTime)';
 }
 
 
@@ -1553,7 +1554,7 @@ abstract mixin class _$UpdateAutomaticCorrectionCopyWith<$Res> implements $Datab
   factory _$UpdateAutomaticCorrectionCopyWith(_UpdateAutomaticCorrection value, $Res Function(_UpdateAutomaticCorrection) _then) = __$UpdateAutomaticCorrectionCopyWithImpl;
 @useResult
 $Res call({
- int stageId, String startTime, int correction, DateTime timestamp, int ntpOffset, int deltaInSeconds, bool forceUpdate
+ int stageId, String startTime, int correction, DateTime timestamp, int ntpOffset, int deltaInSeconds, bool forceUpdate, bool useTimestampForTime
 });
 
 
@@ -1570,7 +1571,7 @@ class __$UpdateAutomaticCorrectionCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stageId = null,Object? startTime = null,Object? correction = null,Object? timestamp = null,Object? ntpOffset = null,Object? deltaInSeconds = null,Object? forceUpdate = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? stageId = null,Object? startTime = null,Object? correction = null,Object? timestamp = null,Object? ntpOffset = null,Object? deltaInSeconds = null,Object? forceUpdate = null,Object? useTimestampForTime = null,}) {
   return _then(_UpdateAutomaticCorrection(
 stageId: null == stageId ? _self.stageId : stageId // ignore: cast_nullable_to_non_nullable
 as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
@@ -1579,6 +1580,7 @@ as int,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cas
 as DateTime,ntpOffset: null == ntpOffset ? _self.ntpOffset : ntpOffset // ignore: cast_nullable_to_non_nullable
 as int,deltaInSeconds: null == deltaInSeconds ? _self.deltaInSeconds : deltaInSeconds // ignore: cast_nullable_to_non_nullable
 as int,forceUpdate: null == forceUpdate ? _self.forceUpdate : forceUpdate // ignore: cast_nullable_to_non_nullable
+as bool,useTimestampForTime: null == useTimestampForTime ? _self.useTimestampForTime : useTimestampForTime // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

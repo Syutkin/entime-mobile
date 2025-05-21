@@ -247,7 +247,7 @@ class I18nSettings {
       Intl.message('Синхронизировать при старте приложения', name: 'I18nSettings_ntpOffsetDescription');
 
   static String get timeForAutomaticStamps =>
-      Intl.message('Время для автоматических отсечек', name: 'I18nSettings_timeForAutomaticStamps');
+      Intl.message('Время автоматических отсечек', name: 'I18nSettings_timeForAutomaticStamps');
 
   static String get timeForAutomaticStampsDescription =>
       Intl.message('Использовать время приложения', name: 'I18nSettings_timeForAutomaticStampsDescription');

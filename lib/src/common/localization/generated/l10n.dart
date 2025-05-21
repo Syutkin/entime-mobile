@@ -993,10 +993,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Время для автоматических отсечек`
+  /// `Время автоматических отсечек`
   String get I18nSettings_timeForAutomaticStamps {
     return Intl.message(
-      'Время для автоматических отсечек',
+      'Время автоматических отсечек',
       name: 'I18nSettings_timeForAutomaticStamps',
       desc: '',
       args: [],

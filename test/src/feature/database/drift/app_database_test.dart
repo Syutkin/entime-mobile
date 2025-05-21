@@ -872,7 +872,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestampNew);
-        expect(start.first.timestampCorrection, timestampCorrection);        
+        expect(start.first.timestampCorrection, timestampCorrection);
         expect(start.first.ntpOffset, offsetNew);
       });
 
@@ -925,6 +925,41 @@ void main() {
         expect(start.first.timestamp, null);
         expect(start.first.timestampCorrection, null);
         expect(start.first.ntpOffset, null);
+      });
+
+      test('Use timestamp instead of automatic time', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const startTime = '11:15:00';
+        const automaticStartTime = '10:15:01,123';
+        const timestampStr = '11:15:01,001';
+        final timestamp = timestampStr.toDateTime()!;
+        const correction = 1234;
+        const offset = 3456;
+
+        // startTime - (timestamp + offset)
+        const timestampCorrection = -4457;
+
+        final result = await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: automaticStartTime,
+          correction: correction,
+          timestamp: timestamp,
+          ntpOffset: offset,
+          deltaInSeconds: deltaInSeconds,
+          useTimestampForTime: true,
+        );
+        expect(result, null);
+
+        final start = await startsByStartTime(db: db, startTime: startTime, stageId: stage.id);
+
+        expect(start.length, 1);
+        expect(start.first.automaticStartTime, automaticStartTime);
+        expect(start.first.automaticCorrection, correction);
+        expect(start.first.startTime, startTime);
+        expect(start.first.statusId, 1);
+        expect(start.first.timestamp, timestamp);
+        expect(start.first.timestampCorrection, timestampCorrection);
+        expect(start.first.ntpOffset, offset);
       });
     });
 

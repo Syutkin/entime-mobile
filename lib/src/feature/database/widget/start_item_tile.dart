@@ -130,13 +130,9 @@ class StartItemTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (state.useTimestampForAutomaticStamps)
-                      Flexible(
-                        flex: 5,
-                        child: Align(alignment: Alignment.centerLeft, child: Icon(MdiIcons.cellphone, size: 20)),
-                      ),
+
                     Flexible(
-                      flex: state.useTimestampForAutomaticStamps ? 25 : 30,
+                      flex: state.useTimestampForAutomaticStamps ? 20 : 30,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -147,6 +143,11 @@ class StartItemTile extends StatelessWidget {
                         ),
                       ),
                     ),
+                                        if (state.useTimestampForAutomaticStamps)
+                      Flexible(
+                        flex: 10,
+                        child: Align(alignment: Alignment.centerLeft, child: Icon(MdiIcons.cellphone, size: 20)),
+                      ),
                   ],
                 ),
               ),

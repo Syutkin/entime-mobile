@@ -16,6 +16,7 @@ class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit 
 
 void main() {
   late String finishTime;
+  late String timestampStr;
   late DateTime timestamp;
   late String difference;
   late int number;
@@ -27,9 +28,7 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(value: settingsCubit, child: FinishItemTile(item: item)),
-      ),
+      home: Material(child: BlocProvider.value(value: settingsCubit, child: FinishItemTile(item: item))),
     );
   }
 
@@ -37,7 +36,8 @@ void main() {
     setUp(() {
       number = 7;
       finishTime = '10:00:03,123';
-      timestamp = '10:00:03.456'.toDateTime()!;
+      timestampStr = '10:00:03,456';
+      timestamp = timestampStr.toDateTime()!;
       difference = '-333';
       settingsCubit = MockSettingsCubit();
       settings = const AppSettings.defaults();
@@ -83,6 +83,48 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget(item));
 
       expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.handBackLeft);
+    });
+
+    patrolWidgetTest('Correct cellphone icon if using local time for automatic stamps', (PatrolTester $) async {
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+
+      expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.cellphone);
+    });
+
+    patrolWidgetTest('Show timestamp if using local time for automatic stamps', (PatrolTester $) async {
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+      expect($(timestampStr), findsOneWidget);
+      expect($(finishTime), findsNothing);
     });
 
     patrolWidgetTest('Show difference if enabled at settings', (PatrolTester $) async {

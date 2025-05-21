@@ -278,6 +278,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds,
             forceUpdate: event.forceUpdate,
+            useTimestampForTime: event.useTimestampForTime,
           );
           if (previousStarts != null && !event.forceUpdate) {
             await _emitState(

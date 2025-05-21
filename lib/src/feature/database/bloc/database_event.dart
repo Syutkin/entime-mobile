@@ -131,6 +131,7 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     required int ntpOffset,
     required int deltaInSeconds,
     @Default(false) bool forceUpdate,
+    @Default(false) bool useTimestampForTime,
   }) = _UpdateAutomaticCorrection;
 
   const factory DatabaseEvent.updateManualStartTime({

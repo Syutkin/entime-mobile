@@ -601,22 +601,26 @@ class AppDatabase extends _$AppDatabase {
     required int ntpOffset,
     required int deltaInSeconds,
     bool forceUpdate = false,
+    bool useTimestampForTime = false,
   }) async {
-    final dateGoTime = time.toDateTime();
-    if (dateGoTime == null) {
-      throw FormatException('Invalid time format: $time');
-      // assert(dateGoTime != null, 'dateGoTime must not be null');
-      //   return null;
+    final DateTime? dateGoTime;
+    if (useTimestampForTime) {
+      dateGoTime = timestamp;
+    } else {
+      dateGoTime = time.toDateTime();
+      if (dateGoTime == null) {
+        throw FormatException('Invalid time format: $time');
+      }
     }
+
     final before = DateFormat(shortTimeFormat).format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
     final after = DateFormat(shortTimeFormat).format(dateGoTime.add(Duration(seconds: deltaInSeconds)));
-    // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
     // в этом случае устанавливаем время старта и возвращаем null.
     // В противном случае возвращаем StartItem.
-    logger.i('Database -> Checking existing start time around $time...');
+    logger.i('Database -> Checking existing start time around ${DateFormat(longTimeFormat).format(dateGoTime)}...');
     final participantsAroundTime =
         await _getParticipantAroundTime(stageId: stageId, before: before, after: after).get();
 
@@ -651,7 +655,7 @@ class AppDatabase extends _$AppDatabase {
       logger.i('Database -> updated: $result lines');
     } else {
       logger.i(
-        'Database -> Can not find participant with start time around $time '
+        'Database -> Can not find participant with start time around ${DateFormat(longTimeFormat).format(dateGoTime)} '
         'with $deltaInSeconds seconds delta',
       );
     }

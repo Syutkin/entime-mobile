@@ -90,6 +90,7 @@ class HomeScreen extends StatelessWidget {
               final databaseBloc = context.read<DatabaseBloc>();
               final offset = context.read<NtpBloc>().state.offset;
               final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
+              final useTimestampForTime = context.read<SettingsCubit>().state.useTimestampForAutomaticStamps;
               final stageId = databaseBloc.state.stage?.id;
               if (stageId != null) {
                 databaseBloc.add(
@@ -101,6 +102,7 @@ class HomeScreen extends StatelessWidget {
                     ntpOffset: offset,
                     deltaInSeconds: deltaInSeconds,
                     forceUpdate: automaticStart.updating,
+                    useTimestampForTime: useTimestampForTime,
                   ),
                 );
               }
@@ -144,6 +146,7 @@ class HomeScreen extends StatelessWidget {
                 notification.correction,
               );
               final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
+              final useTimestampForTime = context.read<SettingsCubit>().state.useTimestampForAutomaticStamps;
               final update = await overwriteStartTimePopup(context: context, text: text);
               if (update ?? false) {
                 databaseBloc.add(
@@ -155,6 +158,7 @@ class HomeScreen extends StatelessWidget {
                     correction: notification.correction,
                     deltaInSeconds: deltaInSeconds,
                     forceUpdate: true,
+                    useTimestampForTime: useTimestampForTime,
                   ),
                 );
               }
