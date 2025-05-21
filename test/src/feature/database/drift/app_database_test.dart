@@ -756,6 +756,9 @@ void main() {
         const correction = 1234;
         const offset = 3456;
 
+        // startTime - (timestamp + offset)
+        const timestampCorrection = -4457;
+
         final result = await db.updateAutomaticCorrection(
           stageId: stage.id,
           time: automaticStartTime,
@@ -774,10 +777,11 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestamp);
+        expect(start.first.timestampCorrection, timestampCorrection);
         expect(start.first.ntpOffset, offset);
       });
 
-      test('Add correct correction to started participant', () async {
+      test('Do not update correction to started participant (with existing starttime)', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const startTime = '10:15:00';
         const automaticStartTime = '10:15:01,123';
@@ -788,6 +792,9 @@ void main() {
         const correctionNew = 5678;
         const offset = 3456;
         const offsetNew = 9876;
+
+        // startTime - (timestamp + offset)
+        const timestampCorrection = -4457;
 
         var result = await db.updateAutomaticCorrection(
           stageId: stage.id,
@@ -817,6 +824,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestamp);
+        expect(start.first.timestampCorrection, timestampCorrection);
         expect(start.first.ntpOffset, offset);
       });
 
@@ -831,6 +839,9 @@ void main() {
         const correctionNew = 5678;
         const offset = 3456;
         const offsetNew = 9876;
+
+        // startTime - (timestampNew + offsetNew)
+        const timestampCorrection = -15431;
 
         var result = await db.updateAutomaticCorrection(
           stageId: stage.id,
@@ -861,6 +872,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, timestampNew);
+        expect(start.first.timestampCorrection, timestampCorrection);        
         expect(start.first.ntpOffset, offsetNew);
       });
 
@@ -911,6 +923,7 @@ void main() {
         expect(start.first.startTime, startTime);
         expect(start.first.statusId, 1);
         expect(start.first.timestamp, null);
+        expect(start.first.timestampCorrection, null);
         expect(start.first.ntpOffset, null);
       });
     });

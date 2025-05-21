@@ -22,7 +22,7 @@ part 'app_database.g.dart';
 
 @DriftDatabase(include: {'tables.drift'})
 class AppDatabase extends _$AppDatabase {
-AppDatabase([QueryExecutor? e]): super(e ?? _openConnection());
+  AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());
 
   AppDatabase.customConnection(DatabaseConnection super.connection);
 
@@ -588,7 +588,7 @@ AppDatabase([QueryExecutor? e]): super(e ?? _openConnection());
     );
   }
 
-  /// Обновляет automaticStartTime и automaticCorrection
+  /// Обновляет automaticStartTime, automaticCorrection и timestampCorrection
   /// для !первого участника, стартовое время которого лежит в пределах
   /// плюс/минус [deltaInSeconds] от заданного [time].
   ///
@@ -626,9 +626,17 @@ AppDatabase([QueryExecutor? e]): super(e ?? _openConnection());
         '${participantsAroundTime.first.startTime}...',
       );
       if (!forceUpdate && participantsAroundTime.first.automaticStartTime != null) {
-        logger.i('Database -> Start time already exists');
+        logger.i('Database -> Start time already exists, do not updating');
         return participantsAroundTime;
       }
+
+      // Высчитываем поправку относительно времени устройства
+      final startTime = participantsAroundTime.first.startTime.toDateTime();
+      if (startTime == null) {
+        throw FormatException('Invalid time format: $startTime');
+      }
+      // И не забываем про offset
+      final timestampCorrection = startTime.difference(timestamp.add(Duration(milliseconds: ntpOffset)));
 
       final result = await (update(starts)
         ..where((start) => start.stageId.equals(stageId) & start.startTime.isBetweenValues(before, after))).write(
@@ -636,6 +644,7 @@ AppDatabase([QueryExecutor? e]): super(e ?? _openConnection());
           automaticCorrection: Value(correction),
           automaticStartTime: Value(time),
           timestamp: Value(timestamp),
+          timestampCorrection: Value(timestampCorrection.inMilliseconds),
           ntpOffset: Value(ntpOffset),
         ),
       );
@@ -1208,3 +1217,12 @@ LazyDatabase _openConnection() {
     return NativeDatabase.createInBackground(file);
   });
 }
+
+// Duration? _getDifference(String startTime, DateTime time) {
+//   final start = startTime.toDateTime();
+//   if (start == null) {
+//     logger.e('Wrong time format: $startTime, can not convert to DateTime');
+//     return null;
+//   }
+//   return start.difference(time);
+// }
