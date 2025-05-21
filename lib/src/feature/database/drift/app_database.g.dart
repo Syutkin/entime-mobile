@@ -173,16 +173,14 @@ class Races extends Table with TableInfo<Races, Race> {
   Race map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Race(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       startDate: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}start_date'],
@@ -203,11 +201,10 @@ class Races extends Table with TableInfo<Races, Race> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -267,23 +264,19 @@ class Race extends DataClass implements Insertable<Race> {
     return RacesCompanion(
       id: Value(id),
       name: Value(name),
-      startDate:
-          startDate == null && nullToAbsent
-              ? const Value.absent()
-              : Value(startDate),
-      finishDate:
-          finishDate == null && nullToAbsent
-              ? const Value.absent()
-              : Value(finishDate),
-      location:
-          location == null && nullToAbsent
-              ? const Value.absent()
-              : Value(location),
+      startDate: startDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(startDate),
+      finishDate: finishDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(finishDate),
+      location: location == null && nullToAbsent
+          ? const Value.absent()
+          : Value(location),
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isDeleted: Value(isDeleted),
     );
   }
@@ -343,12 +336,14 @@ class Race extends DataClass implements Insertable<Race> {
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       startDate: data.startDate.present ? data.startDate.value : this.startDate,
-      finishDate:
-          data.finishDate.present ? data.finishDate.value : this.finishDate,
+      finishDate: data.finishDate.present
+          ? data.finishDate.value
+          : this.finishDate,
       location: data.location.present ? data.location.value : this.location,
       url: data.url.present ? data.url.value : this.url,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
@@ -687,44 +682,38 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFile> {
   TrackFile map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return TrackFile(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       extension: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}extension'],
       ),
-      size:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}size'],
-          )!,
+      size: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}size'],
+      )!,
       description: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      hashSha1:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}hash_sha1'],
-          )!,
-      data:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.blob,
-            data['${effectivePrefix}data'],
-          )!,
-      timestamp:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}timestamp'],
-          )!,
+      hashSha1: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}hash_sha1'],
+      )!,
+      data: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}data'],
+      )!,
+      timestamp: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}timestamp'],
+      )!,
     );
   }
 
@@ -778,15 +767,13 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
     return TrackFilesCompanion(
       id: Value(id),
       name: Value(name),
-      extension:
-          extension == null && nullToAbsent
-              ? const Value.absent()
-              : Value(extension),
+      extension: extension == null && nullToAbsent
+          ? const Value.absent()
+          : Value(extension),
       size: Value(size),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       hashSha1: Value(hashSha1),
       data: Value(data),
       timestamp: Value(timestamp),
@@ -849,8 +836,9 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
       name: data.name.present ? data.name.value : this.name,
       extension: data.extension.present ? data.extension.value : this.extension,
       size: data.size.present ? data.size.value : this.size,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       hashSha1: data.hashSha1.present ? data.hashSha1.value : this.hashSha1,
       data: data.data.present ? data.data.value : this.data,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
@@ -1188,16 +1176,14 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   Trail map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Trail(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       distance: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}distance'],
@@ -1218,11 +1204,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -1286,21 +1271,19 @@ class Trail extends DataClass implements Insertable<Trail> {
     return TrailsCompanion(
       id: Value(id),
       name: Value(name),
-      distance:
-          distance == null && nullToAbsent
-              ? const Value.absent()
-              : Value(distance),
-      elevation:
-          elevation == null && nullToAbsent
-              ? const Value.absent()
-              : Value(elevation),
-      fileId:
-          fileId == null && nullToAbsent ? const Value.absent() : Value(fileId),
+      distance: distance == null && nullToAbsent
+          ? const Value.absent()
+          : Value(distance),
+      elevation: elevation == null && nullToAbsent
+          ? const Value.absent()
+          : Value(elevation),
+      fileId: fileId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fileId),
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isDeleted: Value(isDeleted),
     );
   }
@@ -1363,8 +1346,9 @@ class Trail extends DataClass implements Insertable<Trail> {
       elevation: data.elevation.present ? data.elevation.value : this.elevation,
       fileId: data.fileId.present ? data.fileId.value : this.fileId,
       url: data.url.present ? data.url.value : this.url,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
@@ -1683,39 +1667,34 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   Stage map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Stage(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
       trailId: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}trail_id'],
       ),
-      raceId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}race_id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      raceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}race_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       description: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isActive:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_active'],
-          )!,
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isActive: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_active'],
+      )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -1770,16 +1749,14 @@ class Stage extends DataClass implements Insertable<Stage> {
   StagesCompanion toCompanion(bool nullToAbsent) {
     return StagesCompanion(
       id: Value(id),
-      trailId:
-          trailId == null && nullToAbsent
-              ? const Value.absent()
-              : Value(trailId),
+      trailId: trailId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(trailId),
       raceId: Value(raceId),
       name: Value(name),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isActive: Value(isActive),
       isDeleted: Value(isDeleted),
     );
@@ -1837,8 +1814,9 @@ class Stage extends DataClass implements Insertable<Stage> {
       trailId: data.trailId.present ? data.trailId.value : this.trailId,
       raceId: data.raceId.present ? data.raceId.value : this.raceId,
       name: data.name.present ? data.name.value : this.name,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       isActive: data.isActive.present ? data.isActive.value : this.isActive,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
@@ -2180,16 +2158,14 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   Rider map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Rider(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       nickname: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}nickname'],
@@ -2218,11 +2194,10 @@ class Riders extends Table with TableInfo<Riders, Rider> {
         DriftSqlType.string,
         data['${effectivePrefix}comment'],
       ),
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -2296,24 +2271,23 @@ class Rider extends DataClass implements Insertable<Rider> {
     return RidersCompanion(
       id: Value(id),
       name: Value(name),
-      nickname:
-          nickname == null && nullToAbsent
-              ? const Value.absent()
-              : Value(nickname),
-      birthday:
-          birthday == null && nullToAbsent
-              ? const Value.absent()
-              : Value(birthday),
+      nickname: nickname == null && nullToAbsent
+          ? const Value.absent()
+          : Value(nickname),
+      birthday: birthday == null && nullToAbsent
+          ? const Value.absent()
+          : Value(birthday),
       team: team == null && nullToAbsent ? const Value.absent() : Value(team),
       city: city == null && nullToAbsent ? const Value.absent() : Value(city),
-      email:
-          email == null && nullToAbsent ? const Value.absent() : Value(email),
-      phone:
-          phone == null && nullToAbsent ? const Value.absent() : Value(phone),
-      comment:
-          comment == null && nullToAbsent
-              ? const Value.absent()
-              : Value(comment),
+      email: email == null && nullToAbsent
+          ? const Value.absent()
+          : Value(email),
+      phone: phone == null && nullToAbsent
+          ? const Value.absent()
+          : Value(phone),
+      comment: comment == null && nullToAbsent
+          ? const Value.absent()
+          : Value(comment),
       isDeleted: Value(isDeleted),
     );
   }
@@ -2635,16 +2609,14 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   Status map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Status(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      type:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}type'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
     );
   }
 
@@ -2935,26 +2907,22 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   Participant map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Participant(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      raceId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}race_id'],
-          )!,
-      riderId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}rider_id'],
-          )!,
-      number:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}number'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      raceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}race_id'],
+      )!,
+      riderId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rider_id'],
+      )!,
+      number: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}number'],
+      )!,
       category: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}category'],
@@ -2963,16 +2931,14 @@ class Participants extends Table with TableInfo<Participants, Participant> {
         DriftSqlType.string,
         data['${effectivePrefix}rfid'],
       ),
-      statusId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}status_id'],
-          )!,
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      statusId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}status_id'],
+      )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -3036,10 +3002,9 @@ class Participant extends DataClass implements Insertable<Participant> {
       raceId: Value(raceId),
       riderId: Value(riderId),
       number: Value(number),
-      category:
-          category == null && nullToAbsent
-              ? const Value.absent()
-              : Value(category),
+      category: category == null && nullToAbsent
+          ? const Value.absent()
+          : Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
       isDeleted: Value(isDeleted),
@@ -3446,45 +3411,38 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
   Finish map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Finish(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      stageId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}stage_id'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      stageId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}stage_id'],
+      )!,
       number: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}number'],
       ),
-      timestamp:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}timestamp'],
-          )!,
-      ntpOffset:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}ntp_offset'],
-          )!,
-      finishTime:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}finish_time'],
-          )!,
-      isHidden:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_hidden'],
-          )!,
-      isManual:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_manual'],
-          )!,
+      timestamp: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}timestamp'],
+      )!,
+      ntpOffset: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}ntp_offset'],
+      )!,
+      finishTime: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}finish_time'],
+      )!,
+      isHidden: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_hidden'],
+      )!,
+      isManual: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_manual'],
+      )!,
     );
   }
 
@@ -3540,8 +3498,9 @@ class Finish extends DataClass implements Insertable<Finish> {
     return FinishesCompanion(
       id: Value(id),
       stageId: Value(stageId),
-      number:
-          number == null && nullToAbsent ? const Value.absent() : Value(number),
+      number: number == null && nullToAbsent
+          ? const Value.absent()
+          : Value(number),
       timestamp: Value(timestamp),
       ntpOffset: Value(ntpOffset),
       finishTime: Value(finishTime),
@@ -3607,8 +3566,9 @@ class Finish extends DataClass implements Insertable<Finish> {
       number: data.number.present ? data.number.value : this.number,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
       ntpOffset: data.ntpOffset.present ? data.ntpOffset.value : this.ntpOffset,
-      finishTime:
-          data.finishTime.present ? data.finishTime.value : this.finishTime,
+      finishTime: data.finishTime.present
+          ? data.finishTime.value
+          : this.finishTime,
       isHidden: data.isHidden.present ? data.isHidden.value : this.isHidden,
       isManual: data.isManual.present ? data.isManual.value : this.isManual,
     );
@@ -4057,26 +4017,22 @@ class Starts extends Table with TableInfo<Starts, Start> {
   Start map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Start(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      stageId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}stage_id'],
-          )!,
-      participantId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}participant_id'],
-          )!,
-      startTime:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}start_time'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      stageId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}stage_id'],
+      )!,
+      participantId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}participant_id'],
+      )!,
+      startTime: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}start_time'],
+      )!,
       timestamp: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}timestamp'],
@@ -4105,11 +4061,10 @@ class Starts extends Table with TableInfo<Starts, Start> {
         DriftSqlType.int,
         data['${effectivePrefix}manual_correction'],
       ),
-      statusId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}status_id'],
-          )!,
+      statusId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}status_id'],
+      )!,
       finishId: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}finish_id'],
@@ -4203,39 +4158,31 @@ class Start extends DataClass implements Insertable<Start> {
       stageId: Value(stageId),
       participantId: Value(participantId),
       startTime: Value(startTime),
-      timestamp:
-          timestamp == null && nullToAbsent
-              ? const Value.absent()
-              : Value(timestamp),
-      timestampCorrection:
-          timestampCorrection == null && nullToAbsent
-              ? const Value.absent()
-              : Value(timestampCorrection),
-      ntpOffset:
-          ntpOffset == null && nullToAbsent
-              ? const Value.absent()
-              : Value(ntpOffset),
-      automaticStartTime:
-          automaticStartTime == null && nullToAbsent
-              ? const Value.absent()
-              : Value(automaticStartTime),
-      automaticCorrection:
-          automaticCorrection == null && nullToAbsent
-              ? const Value.absent()
-              : Value(automaticCorrection),
-      manualStartTime:
-          manualStartTime == null && nullToAbsent
-              ? const Value.absent()
-              : Value(manualStartTime),
-      manualCorrection:
-          manualCorrection == null && nullToAbsent
-              ? const Value.absent()
-              : Value(manualCorrection),
+      timestamp: timestamp == null && nullToAbsent
+          ? const Value.absent()
+          : Value(timestamp),
+      timestampCorrection: timestampCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(timestampCorrection),
+      ntpOffset: ntpOffset == null && nullToAbsent
+          ? const Value.absent()
+          : Value(ntpOffset),
+      automaticStartTime: automaticStartTime == null && nullToAbsent
+          ? const Value.absent()
+          : Value(automaticStartTime),
+      automaticCorrection: automaticCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(automaticCorrection),
+      manualStartTime: manualStartTime == null && nullToAbsent
+          ? const Value.absent()
+          : Value(manualStartTime),
+      manualCorrection: manualCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(manualCorrection),
       statusId: Value(statusId),
-      finishId:
-          finishId == null && nullToAbsent
-              ? const Value.absent()
-              : Value(finishId),
+      finishId: finishId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(finishId),
     );
   }
 
@@ -4306,25 +4253,22 @@ class Start extends DataClass implements Insertable<Start> {
     participantId: participantId ?? this.participantId,
     startTime: startTime ?? this.startTime,
     timestamp: timestamp.present ? timestamp.value : this.timestamp,
-    timestampCorrection:
-        timestampCorrection.present
-            ? timestampCorrection.value
-            : this.timestampCorrection,
+    timestampCorrection: timestampCorrection.present
+        ? timestampCorrection.value
+        : this.timestampCorrection,
     ntpOffset: ntpOffset.present ? ntpOffset.value : this.ntpOffset,
-    automaticStartTime:
-        automaticStartTime.present
-            ? automaticStartTime.value
-            : this.automaticStartTime,
-    automaticCorrection:
-        automaticCorrection.present
-            ? automaticCorrection.value
-            : this.automaticCorrection,
-    manualStartTime:
-        manualStartTime.present ? manualStartTime.value : this.manualStartTime,
-    manualCorrection:
-        manualCorrection.present
-            ? manualCorrection.value
-            : this.manualCorrection,
+    automaticStartTime: automaticStartTime.present
+        ? automaticStartTime.value
+        : this.automaticStartTime,
+    automaticCorrection: automaticCorrection.present
+        ? automaticCorrection.value
+        : this.automaticCorrection,
+    manualStartTime: manualStartTime.present
+        ? manualStartTime.value
+        : this.manualStartTime,
+    manualCorrection: manualCorrection.present
+        ? manualCorrection.value
+        : this.manualCorrection,
     statusId: statusId ?? this.statusId,
     finishId: finishId.present ? finishId.value : this.finishId,
   );
@@ -4332,33 +4276,27 @@ class Start extends DataClass implements Insertable<Start> {
     return Start(
       id: data.id.present ? data.id.value : this.id,
       stageId: data.stageId.present ? data.stageId.value : this.stageId,
-      participantId:
-          data.participantId.present
-              ? data.participantId.value
-              : this.participantId,
+      participantId: data.participantId.present
+          ? data.participantId.value
+          : this.participantId,
       startTime: data.startTime.present ? data.startTime.value : this.startTime,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
-      timestampCorrection:
-          data.timestampCorrection.present
-              ? data.timestampCorrection.value
-              : this.timestampCorrection,
+      timestampCorrection: data.timestampCorrection.present
+          ? data.timestampCorrection.value
+          : this.timestampCorrection,
       ntpOffset: data.ntpOffset.present ? data.ntpOffset.value : this.ntpOffset,
-      automaticStartTime:
-          data.automaticStartTime.present
-              ? data.automaticStartTime.value
-              : this.automaticStartTime,
-      automaticCorrection:
-          data.automaticCorrection.present
-              ? data.automaticCorrection.value
-              : this.automaticCorrection,
-      manualStartTime:
-          data.manualStartTime.present
-              ? data.manualStartTime.value
-              : this.manualStartTime,
-      manualCorrection:
-          data.manualCorrection.present
-              ? data.manualCorrection.value
-              : this.manualCorrection,
+      automaticStartTime: data.automaticStartTime.present
+          ? data.automaticStartTime.value
+          : this.automaticStartTime,
+      automaticCorrection: data.automaticCorrection.present
+          ? data.automaticCorrection.value
+          : this.automaticCorrection,
+      manualStartTime: data.manualStartTime.present
+          ? data.manualStartTime.value
+          : this.manualStartTime,
+      manualCorrection: data.manualCorrection.present
+          ? data.manualCorrection.value
+          : this.manualCorrection,
       statusId: data.statusId.present ? data.statusId.value : this.statusId,
       finishId: data.finishId.present ? data.finishId.value : this.finishId,
     );
@@ -4708,22 +4646,20 @@ class Logs extends Table with TableInfo<Logs, Log> {
   Log map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Log(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
       level: Logs.$converterlevel.fromSql(
         attachedDatabase.typeMapping.read(
           DriftSqlType.string,
           data['${effectivePrefix}level'],
         )!,
       ),
-      timestamp:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}timestamp'],
-          )!,
+      timestamp: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}timestamp'],
+      )!,
       source: Logs.$convertersource.fromSql(
         attachedDatabase.typeMapping.read(
           DriftSqlType.string,
@@ -4804,10 +4740,9 @@ class Log extends DataClass implements Insertable<Log> {
       timestamp: Value(timestamp),
       source: Value(source),
       direction: Value(direction),
-      rawData:
-          rawData == null && nullToAbsent
-              ? const Value.absent()
-              : Value(rawData),
+      rawData: rawData == null && nullToAbsent
+          ? const Value.absent()
+          : Value(rawData),
     );
   }
 
@@ -5952,12 +5887,12 @@ class $RacesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $RacesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $RacesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $RacesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $RacesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $RacesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $RacesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -5998,16 +5933,9 @@ class $RacesTableManager
                 description: description,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6204,12 +6132,12 @@ class $TrackFilesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $TrackFilesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $TrackFilesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $TrackFilesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $TrackFilesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $TrackFilesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $TrackFilesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6250,16 +6178,9 @@ class $TrackFilesTableManager
                 data: data,
                 timestamp: timestamp,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6455,12 +6376,12 @@ class $TrailsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $TrailsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $TrailsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $TrailsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $TrailsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $TrailsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $TrailsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6501,16 +6422,9 @@ class $TrailsTableManager
                 description: description,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6691,12 +6605,12 @@ class $StagesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $StagesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $StagesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $StagesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $StagesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $StagesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $StagesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6733,16 +6647,9 @@ class $StagesTableManager
                 isActive: isActive,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6966,12 +6873,12 @@ class $RidersTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $RidersFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $RidersOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $RidersAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $RidersFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $RidersOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $RidersAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7020,16 +6927,9 @@ class $RidersTableManager
                 comment: comment,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7127,12 +7027,12 @@ class $StatusesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $StatusesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $StatusesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $StatusesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $StatusesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $StatusesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $StatusesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7141,16 +7041,9 @@ class $StatusesTableManager
           createCompanionCallback:
               ({Value<int> id = const Value.absent(), required String type}) =>
                   StatusesCompanion.insert(id: id, type: type),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7350,12 +7243,12 @@ class $ParticipantsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $ParticipantsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $ParticipantsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $ParticipantsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $ParticipantsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $ParticipantsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $ParticipantsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7396,16 +7289,9 @@ class $ParticipantsTableManager
                 statusId: statusId,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7601,12 +7487,12 @@ class $FinishesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $FinishesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $FinishesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $FinishesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $FinishesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $FinishesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $FinishesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7647,16 +7533,9 @@ class $FinishesTableManager
                 isHidden: isHidden,
                 isManual: isManual,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7937,12 +7816,12 @@ class $StartsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $StartsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $StartsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $StartsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $StartsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $StartsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $StartsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -8003,16 +7882,9 @@ class $StartsTableManager
                 statusId: statusId,
                 finishId: finishId,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -8179,12 +8051,12 @@ class $LogsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $LogsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $LogsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $LogsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $LogsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $LogsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $LogsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -8217,16 +8089,9 @@ class $LogsTableManager
                 direction: direction,
                 rawData: rawData,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
