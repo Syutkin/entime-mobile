@@ -381,48 +381,41 @@ class AppDatabase extends _$AppDatabase {
     return (update(riders)..where((r) => r.id.equals(id))).write(
       RidersCompanion(
         name: name == null ? const Value.absent() : Value(name),
-        nickname:
-            nickname == null
-                ? const Value.absent()
-                : nickname.isNotEmpty
-                ? Value(nickname)
-                : const Value(null),
-        birthday:
-            birthday == null
-                ? const Value.absent()
-                : birthday.isNotEmpty
-                ? Value(birthday)
-                : const Value(null),
-        team:
-            team == null
-                ? const Value.absent()
-                : team.isNotEmpty
-                ? Value(team)
-                : const Value(null),
-        city:
-            city == null
-                ? const Value.absent()
-                : city.isNotEmpty
-                ? Value(city)
-                : const Value(null),
-        email:
-            email == null
-                ? const Value.absent()
-                : email.isNotEmpty
-                ? Value(email)
-                : const Value(null),
-        phone:
-            phone == null
-                ? const Value.absent()
-                : phone.isNotEmpty
-                ? Value(phone)
-                : const Value(null),
-        comment:
-            comment == null
-                ? const Value.absent()
-                : comment.isNotEmpty
-                ? Value(comment)
-                : const Value(null),
+        nickname: nickname == null
+            ? const Value.absent()
+            : nickname.isNotEmpty
+            ? Value(nickname)
+            : const Value(null),
+        birthday: birthday == null
+            ? const Value.absent()
+            : birthday.isNotEmpty
+            ? Value(birthday)
+            : const Value(null),
+        team: team == null
+            ? const Value.absent()
+            : team.isNotEmpty
+            ? Value(team)
+            : const Value(null),
+        city: city == null
+            ? const Value.absent()
+            : city.isNotEmpty
+            ? Value(city)
+            : const Value(null),
+        email: email == null
+            ? const Value.absent()
+            : email.isNotEmpty
+            ? Value(email)
+            : const Value(null),
+        phone: phone == null
+            ? const Value.absent()
+            : phone.isNotEmpty
+            ? Value(phone)
+            : const Value(null),
+        comment: comment == null
+            ? const Value.absent()
+            : comment.isNotEmpty
+            ? Value(comment)
+            : const Value(null),
         isDeleted: isDeleted == null ? const Value.absent() : Value(isDeleted),
       ),
     );
@@ -513,9 +506,9 @@ class AppDatabase extends _$AppDatabase {
     }
 
     logger.i('Database -> Checking number $number at participants...');
-    final participantAtRace =
-        await (select(participants)
-          ..where((participant) => participant.number.equals(number) & participant.raceId.equals(stage.raceId))).get();
+    final participantAtRace = await (select(
+      participants,
+    )..where((participant) => participant.number.equals(number) & participant.raceId.equals(stage.raceId))).get();
 
     if (participantAtRace.isEmpty) {
       //Участника с заданным номером не было в соревновании, создаём запись в riders, participants и в starts
@@ -535,8 +528,9 @@ class AppDatabase extends _$AppDatabase {
       //Номер уже участвует в соревновании, ищем его на старте
       final start =
           await (select(starts)..where(
-            (start) => start.stageId.equals(stage.id) & start.participantId.equals(participantAtRace.first.id),
-          )).get();
+                (start) => start.stageId.equals(stage.id) & start.participantId.equals(participantAtRace.first.id),
+              ))
+              .get();
       // Если номера не было в стартовом протоколе на СУ, добавляем
       if (start.isEmpty) {
         logger.i('Database -> Adding number $number to starts...');
@@ -621,8 +615,11 @@ class AppDatabase extends _$AppDatabase {
     // в этом случае устанавливаем время старта и возвращаем null.
     // В противном случае возвращаем StartItem.
     logger.i('Database -> Checking existing start time around ${DateFormat(longTimeFormat).format(dateGoTime)}...');
-    final participantsAroundTime =
-        await _getParticipantAroundTime(stageId: stageId, before: before, after: after).get();
+    final participantsAroundTime = await _getParticipantAroundTime(
+      stageId: stageId,
+      before: before,
+      after: after,
+    ).get();
 
     if (participantsAroundTime.isNotEmpty) {
       logger.i(
@@ -642,16 +639,18 @@ class AppDatabase extends _$AppDatabase {
       // И не забываем про offset
       final timestampCorrection = startTime.difference(timestamp.add(Duration(milliseconds: ntpOffset)));
 
-      final result = await (update(starts)
-        ..where((start) => start.stageId.equals(stageId) & start.startTime.isBetweenValues(before, after))).write(
-        StartsCompanion(
-          automaticCorrection: Value(correction),
-          automaticStartTime: Value(time),
-          timestamp: Value(timestamp),
-          timestampCorrection: Value(timestampCorrection.inMilliseconds),
-          ntpOffset: Value(ntpOffset),
-        ),
-      );
+      final result =
+          await (update(
+            starts,
+          )..where((start) => start.stageId.equals(stageId) & start.startTime.isBetweenValues(before, after))).write(
+            StartsCompanion(
+              automaticCorrection: Value(correction),
+              automaticStartTime: Value(time),
+              timestamp: Value(timestamp),
+              timestampCorrection: Value(timestampCorrection.inMilliseconds),
+              ntpOffset: Value(ntpOffset),
+            ),
+          );
       logger.i('Database -> updated: $result lines');
     } else {
       logger.i(
@@ -685,8 +684,11 @@ class AppDatabase extends _$AppDatabase {
     final after = DateFormat(shortTimeFormat).format(timeAfter);
     final manualStartTime = DateFormat(longTimeFormat).format(time);
 
-    final participantsAroundTime =
-        await _getParticipantAroundTime(stageId: stageId, before: before, after: after).get();
+    final participantsAroundTime = await _getParticipantAroundTime(
+      stageId: stageId,
+      before: before,
+      after: after,
+    ).get();
 
     if (participantsAroundTime.isNotEmpty) {
       for (final participant in participantsAroundTime) {
@@ -784,7 +786,11 @@ class AppDatabase extends _$AppDatabase {
 
   Future<int> shiftStartsTime({required int stageId, required int minutes, String? fromTime}) async {
     fromTime ??= await _getFirstStartTime(stageId: stageId).getSingle();
-    return _shiftStartsTime(shift: Duration(minutes: minutes).format(), stageId: stageId, fromTime: fromTime);
+    return _shiftStartsTime(
+      shift: Duration(minutes: minutes).format(),
+      stageId: stageId,
+      fromTime: fromTime,
+    );
   }
 
   // ----------------финиш----------------
@@ -1149,16 +1155,22 @@ class AppDatabase extends _$AppDatabase {
   }
 
   // Share and backup
-  Future<void> exportInto(File file) async {
-    // Make sure the directory of the target file exists
-    await file.parent.create(recursive: true);
+  Future<bool> exportInto(File file) async {
+    try {
+      // Make sure the directory of the target file exists
+      await file.parent.create(recursive: true);
 
-    // Override an existing backup, sqlite expects the target file to be empty
-    if (file.existsSync()) {
-      file.deleteSync();
+      // Override an existing backup, sqlite expects the target file to be empty
+      if (file.existsSync()) {
+        file.deleteSync();
+      }
+
+      await customStatement('VACUUM INTO ?', [file.path]);
+      return true;
+    } catch (e) {
+      logger.e('Database -> Error when exporting db to file $file: $e');
+      return false;
     }
-
-    await customStatement('VACUUM INTO ?', [file.path]);
   }
 
   // -------------------------

@@ -438,10 +438,29 @@ void main() {
       },
       build: () => bloc,
       act: (bloc) async {
-        bloc.add(DatabaseEvent.updateRider(riderId: 1, name: 'name'));
+        bloc.add(
+          DatabaseEvent.updateRider(
+            riderId: 1,
+            name: 'name',
+            nickname: 'nickname',
+            birthday: 'birthday',
+            team: 'team',
+            city: 'city',
+            email: 'email',
+            phone: 'phone',
+            comment: 'comment',
+          ),
+        );
       },
       verify: (bloc) {
         expect(bloc.state.riders.first.name, 'name');
+        expect(bloc.state.riders.first.nickname, 'nickname');
+        expect(bloc.state.riders.first.birthday, 'birthday');
+        expect(bloc.state.riders.first.team, 'team');
+        expect(bloc.state.riders.first.city, 'city');
+        expect(bloc.state.riders.first.email, 'email');
+        expect(bloc.state.riders.first.phone, 'phone');
+        expect(bloc.state.riders.first.comment, 'comment');
       },
     );
 
@@ -461,6 +480,50 @@ void main() {
         expect(bloc.state.riders.first.name, 'name');
         expect(bloc.state.participants.first.name, 'name');
         expect(bloc.state.participants.first.category, 'category');
+      },
+    );
+
+    // Создание нового rider, при редактировании добавленных на старт новых,
+    // не связанных со списком riders номеров
+    // Ну по крайней мере так планировалось
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Update racer when it not exists',
+
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(
+            DatabaseEvent.updateRacer(
+              riderId: -1,
+              participantId: 1,
+              category: 'my_category',
+              name: 'my_name',
+              nickname: 'my_nickname',
+              birthday: 'my_birthday',
+              team: 'my_team',
+              city: 'my_city',
+              email: 'my_email',
+              phone: 'my_phone',
+              comment: 'my_comment',
+            ),
+          )
+          ..add(DatabaseEvent.selectStage(stage));
+      },
+      verify: (bloc) {
+        expect(bloc.state.riders.first.name, 'my_name');
+        expect(bloc.state.participants.first.name, 'my_name');
+        expect(bloc.state.participants.first.category, 'my_category');
+        expect(bloc.state.participants.first.nickname, 'my_nickname');
+        expect(bloc.state.participants.first.birthday, 'my_birthday');
+        expect(bloc.state.participants.first.team, 'my_team');
+        expect(bloc.state.participants.first.city, 'my_city');
+        expect(bloc.state.participants.first.email, 'my_email');
+        expect(bloc.state.participants.first.phone, 'my_phone');
+        expect(bloc.state.participants.first.comment, 'my_comment');
       },
     );
 
