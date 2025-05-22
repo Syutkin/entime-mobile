@@ -208,14 +208,14 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     @Default('start_time') String starttimeName,
     @Default('correction') String correctionName,
     String? text,
-  }) = _ShareStart;
+  }) = DatabaseEventShareStart;
 
   const factory DatabaseEvent.shareFinish({
     required bool useTimestamp,
     @Default('number') String numberName,
     @Default('finish_time') String finishtimeName,
     String? text,
-  }) = _ShareFinish;
+  }) = DatabaseEventShareFinish;
 
   const factory DatabaseEvent.shareDatabase() = _ShareDatabase;
 

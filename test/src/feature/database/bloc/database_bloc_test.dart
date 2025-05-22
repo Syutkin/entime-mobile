@@ -1017,6 +1017,7 @@ void main() {
           isA<DatabaseState>(),
           isA<DatabaseState>(),
           isA<DatabaseState>(),
+          isA<DatabaseState>(),
         ];
       },
       verify: (bloc) {

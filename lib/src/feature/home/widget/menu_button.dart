@@ -2,7 +2,6 @@ import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/countdown/widget/countdown_page.dart';
 import 'package:entime/src/feature/database/bloc/database_bloc.dart';
-import 'package:entime/src/feature/database/widget/races_list_page.dart';
 import 'package:entime/src/feature/database/widget/start_list_page.dart';
 import 'package:entime/src/feature/home/model/home_menu_button.dart';
 import 'package:entime/src/feature/tab/tab.dart';
@@ -30,12 +29,14 @@ class MenuButton extends StatelessWidget {
               ..add(
                 PopupMenuItem(
                   value: HomeMenuButton.addRacer,
+                  enabled: databaseBloc.state.stage != null,
                   child: ListTile(leading: const Icon(Icons.add), title: Text(Localization.current.I18nHome_addRacer)),
                 ),
               )
               ..add(
                 PopupMenuItem(
                   value: HomeMenuButton.countdownPage,
+                  enabled: databaseBloc.state.stage != null,
                   child: ListTile(
                     leading: Icon(MdiIcons.timer),
                     title: Text(Localization.current.I18nHome_countdownPage),
@@ -92,6 +93,7 @@ class MenuButton extends StatelessWidget {
             ..add(
               PopupMenuItem(
                 value: HomeMenuButton.share,
+                enabled: databaseBloc.state.stage != null,
                 child: ListTile(leading: const Icon(Icons.share), title: Text(Localization.current.I18nCore_share)),
               ),
             );
@@ -134,7 +136,8 @@ class MenuButton extends StatelessWidget {
                       finishtimeName: Localization.current.I18nHome_finish,
                       text: Localization.current.I18nProtocol_shareFinishResults(
                         databaseBloc.state.race?.name ?? '',
-                        databaseBloc.state.stage?.name ?? ''),
+                        databaseBloc.state.stage?.name ?? '',
+                      ),
                     ),
                   );
                 }
@@ -149,8 +152,6 @@ class MenuButton extends StatelessWidget {
                 if (stage != null) {
                   await addRacerPopup(context: context, stage: stage);
                 }
-              case HomeMenuButton.selectRace:
-                await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const RacesListPage()));
               case HomeMenuButton.bluetooth:
                 await selectBluetoothDevice(context);
               case HomeMenuButton.countdown:

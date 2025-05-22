@@ -377,7 +377,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           if (stageCsv != null) {
             await _db.createStagesFromStagesCsv(event.raceId, stageCsv);
           }
-        case _ShareStart():
+        case DatabaseEventShareStart():
           final race = _race;
           final stage = _stage;
           final stageId = stage?.id;
@@ -402,7 +402,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               ),
             );
           }
-        case _ShareFinish():
+        case DatabaseEventShareFinish():
           final race = _race;
           final stage = _stage;
           final stageId = stage?.id;

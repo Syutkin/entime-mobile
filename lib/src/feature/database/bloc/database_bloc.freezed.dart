@@ -2867,8 +2867,8 @@ as int,
 /// @nodoc
 
 
-class _ShareStart with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _ShareStart({required this.useTimestamp, this.numberName = 'number', this.starttimeName = 'start_time', this.correctionName = 'correction', this.text});
+class DatabaseEventShareStart with DiagnosticableTreeMixin implements DatabaseEvent {
+  const DatabaseEventShareStart({required this.useTimestamp, this.numberName = 'number', this.starttimeName = 'start_time', this.correctionName = 'correction', this.text});
   
 
  final  bool useTimestamp;
@@ -2881,7 +2881,7 @@ class _ShareStart with DiagnosticableTreeMixin implements DatabaseEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ShareStartCopyWith<_ShareStart> get copyWith => __$ShareStartCopyWithImpl<_ShareStart>(this, _$identity);
+$DatabaseEventShareStartCopyWith<DatabaseEventShareStart> get copyWith => _$DatabaseEventShareStartCopyWithImpl<DatabaseEventShareStart>(this, _$identity);
 
 
 @override
@@ -2893,7 +2893,7 @@ void debugFillProperties(DiagnosticPropertiesBuilder properties) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareStart&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp)&&(identical(other.numberName, numberName) || other.numberName == numberName)&&(identical(other.starttimeName, starttimeName) || other.starttimeName == starttimeName)&&(identical(other.correctionName, correctionName) || other.correctionName == correctionName)&&(identical(other.text, text) || other.text == text));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseEventShareStart&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp)&&(identical(other.numberName, numberName) || other.numberName == numberName)&&(identical(other.starttimeName, starttimeName) || other.starttimeName == starttimeName)&&(identical(other.correctionName, correctionName) || other.correctionName == correctionName)&&(identical(other.text, text) || other.text == text));
 }
 
 
@@ -2909,8 +2909,8 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 }
 
 /// @nodoc
-abstract mixin class _$ShareStartCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
-  factory _$ShareStartCopyWith(_ShareStart value, $Res Function(_ShareStart) _then) = __$ShareStartCopyWithImpl;
+abstract mixin class $DatabaseEventShareStartCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
+  factory $DatabaseEventShareStartCopyWith(DatabaseEventShareStart value, $Res Function(DatabaseEventShareStart) _then) = _$DatabaseEventShareStartCopyWithImpl;
 @useResult
 $Res call({
  bool useTimestamp, String numberName, String starttimeName, String correctionName, String? text
@@ -2921,17 +2921,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$ShareStartCopyWithImpl<$Res>
-    implements _$ShareStartCopyWith<$Res> {
-  __$ShareStartCopyWithImpl(this._self, this._then);
+class _$DatabaseEventShareStartCopyWithImpl<$Res>
+    implements $DatabaseEventShareStartCopyWith<$Res> {
+  _$DatabaseEventShareStartCopyWithImpl(this._self, this._then);
 
-  final _ShareStart _self;
-  final $Res Function(_ShareStart) _then;
+  final DatabaseEventShareStart _self;
+  final $Res Function(DatabaseEventShareStart) _then;
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? useTimestamp = null,Object? numberName = null,Object? starttimeName = null,Object? correctionName = null,Object? text = freezed,}) {
-  return _then(_ShareStart(
+  return _then(DatabaseEventShareStart(
 useTimestamp: null == useTimestamp ? _self.useTimestamp : useTimestamp // ignore: cast_nullable_to_non_nullable
 as bool,numberName: null == numberName ? _self.numberName : numberName // ignore: cast_nullable_to_non_nullable
 as String,starttimeName: null == starttimeName ? _self.starttimeName : starttimeName // ignore: cast_nullable_to_non_nullable
@@ -2947,8 +2947,8 @@ as String?,
 /// @nodoc
 
 
-class _ShareFinish with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _ShareFinish({required this.useTimestamp, this.numberName = 'number', this.finishtimeName = 'finish_time', this.text});
+class DatabaseEventShareFinish with DiagnosticableTreeMixin implements DatabaseEvent {
+  const DatabaseEventShareFinish({required this.useTimestamp, this.numberName = 'number', this.finishtimeName = 'finish_time', this.text});
   
 
  final  bool useTimestamp;
@@ -2960,7 +2960,7 @@ class _ShareFinish with DiagnosticableTreeMixin implements DatabaseEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ShareFinishCopyWith<_ShareFinish> get copyWith => __$ShareFinishCopyWithImpl<_ShareFinish>(this, _$identity);
+$DatabaseEventShareFinishCopyWith<DatabaseEventShareFinish> get copyWith => _$DatabaseEventShareFinishCopyWithImpl<DatabaseEventShareFinish>(this, _$identity);
 
 
 @override
@@ -2972,7 +2972,7 @@ void debugFillProperties(DiagnosticPropertiesBuilder properties) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareFinish&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp)&&(identical(other.numberName, numberName) || other.numberName == numberName)&&(identical(other.finishtimeName, finishtimeName) || other.finishtimeName == finishtimeName)&&(identical(other.text, text) || other.text == text));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseEventShareFinish&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp)&&(identical(other.numberName, numberName) || other.numberName == numberName)&&(identical(other.finishtimeName, finishtimeName) || other.finishtimeName == finishtimeName)&&(identical(other.text, text) || other.text == text));
 }
 
 
@@ -2988,8 +2988,8 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 }
 
 /// @nodoc
-abstract mixin class _$ShareFinishCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
-  factory _$ShareFinishCopyWith(_ShareFinish value, $Res Function(_ShareFinish) _then) = __$ShareFinishCopyWithImpl;
+abstract mixin class $DatabaseEventShareFinishCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
+  factory $DatabaseEventShareFinishCopyWith(DatabaseEventShareFinish value, $Res Function(DatabaseEventShareFinish) _then) = _$DatabaseEventShareFinishCopyWithImpl;
 @useResult
 $Res call({
  bool useTimestamp, String numberName, String finishtimeName, String? text
@@ -3000,17 +3000,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$ShareFinishCopyWithImpl<$Res>
-    implements _$ShareFinishCopyWith<$Res> {
-  __$ShareFinishCopyWithImpl(this._self, this._then);
+class _$DatabaseEventShareFinishCopyWithImpl<$Res>
+    implements $DatabaseEventShareFinishCopyWith<$Res> {
+  _$DatabaseEventShareFinishCopyWithImpl(this._self, this._then);
 
-  final _ShareFinish _self;
-  final $Res Function(_ShareFinish) _then;
+  final DatabaseEventShareFinish _self;
+  final $Res Function(DatabaseEventShareFinish) _then;
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? useTimestamp = null,Object? numberName = null,Object? finishtimeName = null,Object? text = freezed,}) {
-  return _then(_ShareFinish(
+  return _then(DatabaseEventShareFinish(
 useTimestamp: null == useTimestamp ? _self.useTimestamp : useTimestamp // ignore: cast_nullable_to_non_nullable
 as bool,numberName: null == numberName ? _self.numberName : numberName // ignore: cast_nullable_to_non_nullable
 as String,finishtimeName: null == finishtimeName ? _self.finishtimeName : finishtimeName // ignore: cast_nullable_to_non_nullable

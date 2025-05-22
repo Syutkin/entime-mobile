@@ -15,6 +15,7 @@
         "prefs",
         "pubspec",
         "rfid",
+        "rssi",
         "sandboxing",
         "Startlist",
         "strftime",

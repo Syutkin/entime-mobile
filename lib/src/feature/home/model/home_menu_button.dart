@@ -2,7 +2,7 @@ enum HomeMenuButton {
   share,
   fab,
   addRacer,
-  selectRace,
+  // selectRace,
   bluetooth,
   countdown,
   countdownPage,
