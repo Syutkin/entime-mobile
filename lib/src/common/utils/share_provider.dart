@@ -7,6 +7,8 @@ abstract interface class IShareProvider {
 }
 
 class ShareProvider implements IShareProvider {
+  const ShareProvider();
+  
   @override
   Future<void> share(ShareParams params) async {
     await SharePlus.instance.share(params);

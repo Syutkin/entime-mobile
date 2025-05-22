@@ -1055,13 +1055,8 @@ class AppDatabase extends _$AppDatabase {
       final list = <FinishForCsv>[];
       final finishes = await _getFinishesForCsvWithTimestampCorrection(stageId: stageId).get();
       for (final finish in finishes) {
-        list.add(
-          FinishForCsv(
-            row: finish.row,
-            number: finish.number,
-            finishTime: finish.timestamp.add(Duration(milliseconds: finish.ntpOffset)).format(longTimeFormat),
-          ),
-        );
+        final finishtime = finish.timestamp.add(Duration(milliseconds: finish.ntpOffset)).format(longTimeFormat);
+        list.add(FinishForCsv(row: finish.row, number: finish.number, finishTime: finishtime));
       }
       return list;
     } else {

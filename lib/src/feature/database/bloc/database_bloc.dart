@@ -15,7 +15,6 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
-import '../../../common/utils/csv_utils.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../../feature/csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
@@ -32,6 +31,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     required AppDatabase database,
     required ISettingsProvider settingsProvider,
     this.fileProvider = const StartlistProvider(),
+    this.shareProvider = const ShareProvider(),
   }) : _db = database,
        _settingsProvider = settingsProvider,
        super(
@@ -384,21 +384,26 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           final stageId = stage?.id;
           if (race != null && stage != null && stageId != null) {
             final startList = await _db.getStartResults(stageId, useTimestamp: event.useTimestamp);
-            final startMap = <Map<String, dynamic>>[];
+            // final startMap = <Map<String, dynamic>>[];
+            // for (final start in startList) {
+            //   startMap.add(start.row.data);
+            // }
+            // final csv = mapListToCsv(startMap);
+            final list = <String>[
+              '${Localization.current.I18nProtocol_number};${Localization.current.I18nHome_start};${Localization.current.I18nCore_correction}',
+            ];
             for (final start in startList) {
-              startMap.add(start.row.data);
+              list.add('${start.number};${start.startTime};${start.correction}');
             }
-            final csv = mapListToCsv(startMap);
-            if (csv != null) {
-              final filename = '${race.name}-${stage.name}-start.csv';
-              await ShareProvider().share(
-                ShareParams(
-                  files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
-                  fileNameOverrides: [filename],
-                  text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
-                ),
-              );
-            }
+            final csv = list.join('\n');
+            final filename = '${race.name}-${stage.name}-start.csv';
+            await shareProvider.share(
+              ShareParams(
+                files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
+                fileNameOverrides: [filename],
+                text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
+              ),
+            );
           }
         case _ShareFinish():
           final race = _race;
@@ -406,28 +411,33 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           final stageId = stage?.id;
           if (race != null && stage != null && stageId != null) {
             final finishList = await _db.getFinishResults(stageId, useTimestamp: event.useTimestamp);
-            final finishMap = <Map<String, dynamic>>[];
+            // final finishMap = <Map<String, dynamic>>[];
+            // for (final finish in finishList) {
+            //   finishMap.add(finish.row.data);
+            // }
+            // final csv = mapListToCsv(finishMap);
+            final list = <String>[
+              '${Localization.current.I18nProtocol_number};${Localization.current.I18nHome_finish}',
+            ];
             for (final finish in finishList) {
-              finishMap.add(finish.row.data);
+              list.add('${finish.number};${finish.finishTime}');
             }
-            final csv = mapListToCsv(finishMap);
-            if (csv != null) {
-              final filename = '${race.name}-${stage.name}-finish.csv';
-              await ShareProvider().share(
-                ShareParams(
-                  files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
-                  fileNameOverrides: [filename],
-                  text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
-                ),
-              );
-            }
+            final csv = list.join('\n');
+            final filename = '${race.name}-${stage.name}-finish.csv';
+            await shareProvider.share(
+              ShareParams(
+                files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
+                fileNameOverrides: [filename],
+                text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
+              ),
+            );
           }
         case _ShareDatabase():
           final timeStamp = DateFormat(longDateFormat).format(DateTime.now());
           final dbDir = await getApplicationDocumentsDirectory();
           final file = File(path.join(dbDir.path, 'database_backup_$timeStamp.sqlite'));
           if (await _db.exportInto(file)) {
-            await ShareProvider().share(ShareParams(files: [XFile(file.path)]));
+            await shareProvider.share(ShareParams(files: [XFile(file.path)]));
           }
         case _ShareTrack():
           final fileId = event.trail.fileId;
@@ -438,7 +448,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               if (track.extension != null) {
                 filename += '.${track.extension}';
               }
-              await ShareProvider().share(
+              await shareProvider.share(
                 ShareParams(
                   files: [XFile.fromData(track.data, mimeType: 'application/octet-stream')],
                   fileNameOverrides: [filename],
@@ -480,6 +490,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   StreamSubscription<AppSettings>? _appSettingsSubscription;
 
   StartlistProvider fileProvider;
+  ShareProvider shareProvider;
 
   Future<void> _emitState({Notification? notification, int? autoFinishNumber, bool? updateFinishNumber}) async {
     add(
