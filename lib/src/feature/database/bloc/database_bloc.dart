@@ -13,7 +13,6 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../../feature/csv/csv.dart';
@@ -389,9 +388,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             //   startMap.add(start.row.data);
             // }
             // final csv = mapListToCsv(startMap);
-            final list = <String>[
-              '${Localization.current.I18nProtocol_number};${Localization.current.I18nHome_start};${Localization.current.I18nCore_correction}',
-            ];
+            final list = <String>['${event.numberName};${event.starttimeName};${event.correctionName}'];
             for (final start in startList) {
               list.add('${start.number};${start.startTime};${start.correction}');
             }
@@ -401,7 +398,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               ShareParams(
                 files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
                 fileNameOverrides: [filename],
-                text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
+                text: event.text,
               ),
             );
           }
@@ -416,9 +413,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             //   finishMap.add(finish.row.data);
             // }
             // final csv = mapListToCsv(finishMap);
-            final list = <String>[
-              '${Localization.current.I18nProtocol_number};${Localization.current.I18nHome_finish}',
-            ];
+            final list = <String>['${event.numberName};${event.finishtimeName}'];
             for (final finish in finishList) {
               list.add('${finish.number};${finish.finishTime}');
             }
@@ -428,7 +423,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               ShareParams(
                 files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
                 fileNameOverrides: [filename],
-                text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
+                text: event.text,
               ),
             );
           }

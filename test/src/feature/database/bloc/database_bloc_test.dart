@@ -5,6 +5,8 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/common/logger/logger.dart';
+import 'package:entime/src/common/utils/extensions.dart';
+import 'package:entime/src/common/utils/share_provider.dart';
 import 'package:entime/src/feature/csv/csv.dart';
 import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/csv/model/start_number_and_times_csv.dart';
@@ -13,14 +15,17 @@ import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:share_plus/share_plus.dart' show ShareParams;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../helpers/shared_prefs_defaults.dart';
 import '../drift/app_database_test.dart';
 
-class MockAppDatabase extends Mock implements AppDatabase {}
-
 class MockFileProvider extends Mock implements StartlistProvider {}
+
+class MockShareProvider extends Mock implements ShareProvider {}
+
+class MockQueryRow extends Mock implements QueryRow {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +33,9 @@ void main() {
   late DatabaseBloc bloc;
   late AppDatabase db;
   late StartlistProvider fileProvider;
+  late ShareProvider shareProvider;
   late ISettingsProvider settingsProvider;
+  late QueryRow row;
   late Race race;
   late Stage stage;
   late RaceCsv raceCsv;
@@ -40,8 +47,10 @@ void main() {
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
       (obj) async => obj,
     );
-    db = MockAppDatabase();
+    registerFallbackValue(ShareParams());
     fileProvider = MockFileProvider();
+    shareProvider = MockShareProvider();
+    row = MockQueryRow();
   });
 
   setUp(() async {
@@ -58,6 +67,8 @@ void main() {
     race = const Race(id: 1, name: 'name', isDeleted: false);
     stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
     deltaInSeconds = 10;
+
+    when(() => shareProvider.share(any())).thenAnswer((_) => Future.value());
   });
 
   tearDown(() async {
@@ -488,7 +499,6 @@ void main() {
     // Ну по крайней мере так планировалось
     blocTest<DatabaseBloc, DatabaseState>(
       'Update racer when it not exists',
-
       setUp: () {
         Bloc.observer = AppBlocObserver();
         bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
@@ -601,7 +611,7 @@ void main() {
               stageId: stage.id,
               startTime: '10:00:01',
               correction: 1000,
-              timestamp: DateTime.now(),
+              timestamp: '10:00:01,456'.toDateTime()!,
               ntpOffset: 123,
               deltaInSeconds: deltaInSeconds,
             ),
@@ -612,6 +622,109 @@ void main() {
         expect(bloc.state.participants.first.automaticCorrection, 1000);
         expect(bloc.state.participants.first.ntpOffset, 123);
         expect(bloc.state.participants.first.startTime, '10:00:00');
+        expect(bloc.state.participants.first.timestamp, '10:00:01,456'.toDateTime());
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Force update automatic correction',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(
+            DatabaseEvent.updateAutomaticCorrection(
+              stageId: stage.id,
+              startTime: '10:00:01',
+              correction: 1000,
+              timestamp: '10:00:01,456'.toDateTime()!,
+              ntpOffset: 123,
+              deltaInSeconds: deltaInSeconds,
+            ),
+          )
+          ..add(
+            DatabaseEvent.updateAutomaticCorrection(
+              stageId: stage.id,
+              startTime: '10:00:01',
+              correction: 1123,
+              timestamp: '10:00:02,456'.toDateTime()!,
+              ntpOffset: 321,
+              deltaInSeconds: deltaInSeconds,
+              forceUpdate: true,
+            ),
+          )
+          ..add(DatabaseEvent.selectStage(stage));
+      },
+      verify: (bloc) {
+        expect(bloc.state.participants.first.automaticCorrection, 1123);
+        expect(bloc.state.participants.first.ntpOffset, 321);
+        expect(bloc.state.participants.first.startTime, '10:00:00');
+        expect(bloc.state.participants.first.timestamp, '10:00:02,456'.toDateTime());
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Show notification when updating existing automatic correction',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(
+            DatabaseEvent.updateAutomaticCorrection(
+              stageId: stage.id,
+              startTime: '10:00:01',
+              correction: 1000,
+              timestamp: '10:00:01,456'.toDateTime()!,
+              ntpOffset: 123,
+              deltaInSeconds: deltaInSeconds,
+            ),
+          )
+          ..add(
+            DatabaseEvent.updateAutomaticCorrection(
+              stageId: stage.id,
+              startTime: '10:00:01',
+              correction: 1123,
+              timestamp: '10:00:02,456'.toDateTime()!,
+              ntpOffset: 321,
+              deltaInSeconds: deltaInSeconds,
+            ),
+          );
+        // ..add(DatabaseEvent.selectStage(stage));
+      },
+      expect: () {
+        return [
+          isA<DatabaseState>(),
+          isA<DatabaseState>()
+              .having(
+                (state) => (state.notification! as NotificationUpdateAutomaticCorrection).previousStarts.length,
+                'previousStarts',
+                1,
+              )
+              .having(
+                (state) => (state.notification! as NotificationUpdateAutomaticCorrection).timestamp,
+                'timestamp',
+                '10:00:02,456'.toDateTime(),
+              )
+              .having(
+                (state) => (state.notification! as NotificationUpdateAutomaticCorrection).correction,
+                'correction',
+                1123,
+              )
+              .having(
+                (state) => (state.notification! as NotificationUpdateAutomaticCorrection).startTime,
+                'startTime',
+                '10:00:01',
+              )
+              .having((state) => (state.notification! as NotificationUpdateAutomaticCorrection).number, 'number', 2),
+          isA<DatabaseState>(),
+          isA<DatabaseState>(),
+        ];
       },
     );
 
@@ -639,6 +752,37 @@ void main() {
         expect(bloc.state.finishes.first.finishTime, '11:11:11,123');
         expect(bloc.state.finishes.first.ntpOffset, 123);
         expect(bloc.state.finishes.first.isManual, false);
+        expect(bloc.state.finishes.first.number, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Add finish time and deselect automatic number',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(DatabaseEvent.selectAwaitingNumber(number: 5))
+          ..add(
+            DatabaseEvent.addFinishTime(
+              stage: stage,
+              finishTime: '11:11:11,123',
+              timestamp: DateTime.now(),
+              ntpOffset: 123,
+            ),
+          )
+          ..add(DatabaseEvent.selectStage(stage));
+      },
+      verify: (bloc) {
+        expect(bloc.state.finishes.length, 1);
+        expect(bloc.state.finishes.first.finishTime, '11:11:11,123');
+        expect(bloc.state.finishes.first.ntpOffset, 123);
+        expect(bloc.state.finishes.first.isManual, false);
+        expect(bloc.state.finishes.first.number, 5);
+        expect(bloc.state.autoFinishNumber, null);
       },
     );
 
@@ -844,6 +988,44 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
+      'Show notification when trying to add new number to finish',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
+          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
+          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 2, finishTime: 'ft2', number: 5))
+          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: 'ft1', number: 5))
+          ..add(DatabaseEvent.selectStage(stage));
+      },
+      expect: () {
+        return [
+          isA<DatabaseState>(),
+          isA<DatabaseState>()
+              .having((state) => (state.notification! as NotificationChangeFinishTimeToNumber).finishId, 'finishId', 1)
+              .having((state) => (state.notification! as NotificationChangeFinishTimeToNumber).number, 'number', 5)
+              .having(
+                (state) => (state.notification! as NotificationChangeFinishTimeToNumber).finishTime,
+                'finishTime',
+                'ft1',
+              )
+              .having((state) => (state.notification! as NotificationChangeFinishTimeToNumber).stage, 'stage', stage),
+          isA<DatabaseState>(),
+          isA<DatabaseState>(),
+          isA<DatabaseState>(),
+        ];
+      },
+      verify: (bloc) {
+        expect(bloc.state.finishes.first.number, null);
+        expect(bloc.state.finishes.last.number, 5);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
       'Get numbers on trace now',
       setUp: () {
         Bloc.observer = AppBlocObserver();
@@ -969,6 +1151,110 @@ void main() {
       verify: (bloc) {
         expect(bloc.state.stages.length, 9);
         expect(bloc.state.stages.last.name, 'stage5');
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Share start',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          fileProvider: fileProvider,
+          shareProvider: shareProvider,
+        );
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(DatabaseEvent.selectRace(race))
+          ..add(DatabaseEvent.selectStage(stage))
+          ..add(
+            DatabaseEvent.updateAutomaticCorrection(
+              stageId: stage.id,
+              startTime: '10:00:00',
+              correction: 123,
+              timestamp: DateTime.now(),
+              ntpOffset: 0,
+              deltaInSeconds: deltaInSeconds,
+            ),
+          )
+          ..add(
+            DatabaseEvent.updateAutomaticCorrection(
+              stageId: stage.id,
+              startTime: '10:02:00',
+              correction: 456,
+              timestamp: DateTime.now(),
+              ntpOffset: 0,
+              deltaInSeconds: deltaInSeconds,
+            ),
+          )
+          ..add(DatabaseEvent.shareStart(useTimestamp: false));
+      },
+      verify: (bloc) {
+        verify(() => shareProvider.share(any())).called(1);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Share finish',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          fileProvider: fileProvider,
+          shareProvider: shareProvider,
+        );
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(DatabaseEvent.selectRace(race))
+          ..add(DatabaseEvent.selectStage(stage))
+          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
+          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
+          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: 'ft2', number: 1))
+          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 2, finishTime: 'ft1', number: 2))
+          ..add(DatabaseEvent.shareFinish(useTimestamp: false));
+      },
+      verify: (bloc) {
+        verify(() => shareProvider.share(any())).called(1);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Share track',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          fileProvider: fileProvider,
+          shareProvider: shareProvider,
+        );
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        await db.addTrack(
+          TrackFile(
+            id: 1,
+            name: 'name',
+            size: 123,
+            hashSha1: 'hashSha1',
+            data: Uint8List.fromList([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+            timestamp: DateTime.now(),
+          ),
+        );
+        bloc.add(
+          DatabaseEvent.shareTrack(
+            trail: TrailInfo(row: row, id: 1, name: 'name', fileId: 1),
+          ),
+        );
+      },
+      verify: (bloc) {
+        verify(() => shareProvider.share(any())).called(1);
       },
     );
   });
