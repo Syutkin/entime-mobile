@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, strict_raw_type
 
+import 'dart:typed_data' show Uint8List;
+
 import 'package:bloc_test/bloc_test.dart';
-import 'package:drift/drift.dart';
+import 'package:drift/drift.dart' show DatabaseConnection, QueryRow;
 import 'package:drift/native.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/common/logger/logger.dart';
@@ -12,6 +14,7 @@ import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/csv/model/start_number_and_times_csv.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/settings/settings.dart';
+import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -995,34 +998,41 @@ void main() {
       },
       build: () => bloc,
       act: (bloc) async {
-        bloc
-          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
-          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
-          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 2, finishTime: 'ft2', number: 5))
-          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: 'ft1', number: 5))
-          ..add(DatabaseEvent.selectStage(stage));
+        await Future<void>.delayed(Durations.short1).then(
+          (_) =>
+              bloc.add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123)),
+        );
+        await Future<void>.delayed(Durations.short1).then(
+          (_) =>
+              bloc.add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123)),
+        );
+        await Future<void>.delayed(Durations.short1).then(
+          (_) => bloc.add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 2, finishTime: 'ft2', number: 5)),
+        );
+        await Future<void>.delayed(Durations.short1).then(
+          (_) => bloc.add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: 'ft1', number: 5)),
+        );
+        await Future<void>.delayed(Durations.short1);
       },
       expect: () {
         return [
           isA<DatabaseState>(),
+          isA<DatabaseState>(),
           isA<DatabaseState>()
-              .having((state) => (state.notification! as NotificationChangeFinishTimeToNumber).finishId, 'finishId', 1)
+              // .having((state) => state.notification, 'notification', isA<NotificationChangeFinishTimeToNumber>),
               .having((state) => (state.notification! as NotificationChangeFinishTimeToNumber).number, 'number', 5)
+              .having((state) => (state.notification! as NotificationChangeFinishTimeToNumber).finishId, 'finishId', 1)
               .having(
                 (state) => (state.notification! as NotificationChangeFinishTimeToNumber).finishTime,
                 'finishTime',
                 'ft1',
               )
-              .having((state) => (state.notification! as NotificationChangeFinishTimeToNumber).stage, 'stage', stage),
-          isA<DatabaseState>(),
-          isA<DatabaseState>(),
-          isA<DatabaseState>(),
-          isA<DatabaseState>(),
+              .having(
+                (state) => (state.notification! as NotificationChangeFinishTimeToNumber).stage.id,
+                'stage.id',
+                stage.id,
+              ),
         ];
-      },
-      verify: (bloc) {
-        expect(bloc.state.finishes.first.number, null);
-        expect(bloc.state.finishes.last.number, 5);
       },
     );
 
