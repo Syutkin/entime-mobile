@@ -25,11 +25,21 @@ class TtsProvider {
   TtsState ttsState = TtsState.stopped;
 
   Future<dynamic> get getDefaultEngine async {
-    return flutterTts.getDefaultEngine;
+    try {
+      return await flutterTts.getDefaultEngine;
+    } catch (e) {
+      logger.e('FlutterTts -> Can not get default tts engine', error: e);
+      return;
+    }
   }
 
   Future<dynamic> get getDefaultVoice async {
-    return flutterTts.getDefaultVoice;
+    try {
+      return await flutterTts.getDefaultVoice;
+    } catch (e) {
+      logger.e('FlutterTts -> Can not get default tts voice', error: e);
+      return;
+    }
   }
 
   Future<dynamic> setLanguage(String language) => flutterTts.setLanguage(language);

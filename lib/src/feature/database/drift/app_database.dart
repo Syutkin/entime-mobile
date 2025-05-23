@@ -16,12 +16,13 @@ import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/extensions.dart';
 import '../../log/log.dart';
+import 'app_database.steps.dart';
 
 part 'app_database.g.dart';
 
 @DriftDatabase(include: {'tables.drift'})
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(_openConnection());
+  AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());
 
   AppDatabase.customConnection(DatabaseConnection super.connection);
 
@@ -39,6 +40,11 @@ class AppDatabase extends _$AppDatabase {
         (3, '${ParticipantStatus.dnf.name}'),
         (4, '${ParticipantStatus.dsq.name}');''');
       },
+      onUpgrade: stepByStep(
+        from1To2: (m, schema) async {
+          await m.addColumn(schema.starts, schema.starts.timestampCorrection);
+        },
+      ),
       beforeOpen: (details) async {
         // Enable foreign_keys
         await customStatement('PRAGMA foreign_keys = ON');
@@ -47,7 +53,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   /// Весь список гонок, кроме "удалённых" (is_deleted = true)
   Selectable<Race> getRaces() {
@@ -326,7 +332,7 @@ class AppDatabase extends _$AppDatabase {
         .getSingleOrNull();
   }
 
-  /// Список "неудалённых" гонщиков, отсортированных по именам
+  /// Список "не удалённых" гонщиков, отсортированных по именам
   Selectable<Rider> get getRiders {
     return _getRiders(isDeleted: false);
   }
@@ -375,48 +381,41 @@ class AppDatabase extends _$AppDatabase {
     return (update(riders)..where((r) => r.id.equals(id))).write(
       RidersCompanion(
         name: name == null ? const Value.absent() : Value(name),
-        nickname:
-            nickname == null
-                ? const Value.absent()
-                : nickname.isNotEmpty
-                ? Value(nickname)
-                : const Value(null),
-        birthday:
-            birthday == null
-                ? const Value.absent()
-                : birthday.isNotEmpty
-                ? Value(birthday)
-                : const Value(null),
-        team:
-            team == null
-                ? const Value.absent()
-                : team.isNotEmpty
-                ? Value(team)
-                : const Value(null),
-        city:
-            city == null
-                ? const Value.absent()
-                : city.isNotEmpty
-                ? Value(city)
-                : const Value(null),
-        email:
-            email == null
-                ? const Value.absent()
-                : email.isNotEmpty
-                ? Value(email)
-                : const Value(null),
-        phone:
-            phone == null
-                ? const Value.absent()
-                : phone.isNotEmpty
-                ? Value(phone)
-                : const Value(null),
-        comment:
-            comment == null
-                ? const Value.absent()
-                : comment.isNotEmpty
-                ? Value(comment)
-                : const Value(null),
+        nickname: nickname == null
+            ? const Value.absent()
+            : nickname.isNotEmpty
+            ? Value(nickname)
+            : const Value(null),
+        birthday: birthday == null
+            ? const Value.absent()
+            : birthday.isNotEmpty
+            ? Value(birthday)
+            : const Value(null),
+        team: team == null
+            ? const Value.absent()
+            : team.isNotEmpty
+            ? Value(team)
+            : const Value(null),
+        city: city == null
+            ? const Value.absent()
+            : city.isNotEmpty
+            ? Value(city)
+            : const Value(null),
+        email: email == null
+            ? const Value.absent()
+            : email.isNotEmpty
+            ? Value(email)
+            : const Value(null),
+        phone: phone == null
+            ? const Value.absent()
+            : phone.isNotEmpty
+            ? Value(phone)
+            : const Value(null),
+        comment: comment == null
+            ? const Value.absent()
+            : comment.isNotEmpty
+            ? Value(comment)
+            : const Value(null),
         isDeleted: isDeleted == null ? const Value.absent() : Value(isDeleted),
       ),
     );
@@ -507,9 +506,9 @@ class AppDatabase extends _$AppDatabase {
     }
 
     logger.i('Database -> Checking number $number at participants...');
-    final participantAtRace =
-        await (select(participants)
-          ..where((participant) => participant.number.equals(number) & participant.raceId.equals(stage.raceId))).get();
+    final participantAtRace = await (select(
+      participants,
+    )..where((participant) => participant.number.equals(number) & participant.raceId.equals(stage.raceId))).get();
 
     if (participantAtRace.isEmpty) {
       //Участника с заданным номером не было в соревновании, создаём запись в riders, participants и в starts
@@ -529,8 +528,9 @@ class AppDatabase extends _$AppDatabase {
       //Номер уже участвует в соревновании, ищем его на старте
       final start =
           await (select(starts)..where(
-            (start) => start.stageId.equals(stage.id) & start.participantId.equals(participantAtRace.first.id),
-          )).get();
+                (start) => start.stageId.equals(stage.id) & start.participantId.equals(participantAtRace.first.id),
+              ))
+              .get();
       // Если номера не было в стартовом протоколе на СУ, добавляем
       if (start.isEmpty) {
         logger.i('Database -> Adding number $number to starts...');
@@ -582,7 +582,7 @@ class AppDatabase extends _$AppDatabase {
     );
   }
 
-  /// Обновляет automaticStartTime и automaticCorrection
+  /// Обновляет automaticStartTime, automaticCorrection и timestampCorrection
   /// для !первого участника, стартовое время которого лежит в пределах
   /// плюс/минус [deltaInSeconds] от заданного [time].
   ///
@@ -595,24 +595,31 @@ class AppDatabase extends _$AppDatabase {
     required int ntpOffset,
     required int deltaInSeconds,
     bool forceUpdate = false,
+    bool useTimestampForTime = false,
   }) async {
-    final dateGoTime = time.toDateTime();
-    if (dateGoTime == null) {
-      throw FormatException('Invalid time format: $time');
-      // assert(dateGoTime != null, 'dateGoTime must not be null');
-      //   return null;
+    final DateTime? dateGoTime;
+    if (useTimestampForTime) {
+      dateGoTime = timestamp;
+    } else {
+      dateGoTime = time.toDateTime();
+      if (dateGoTime == null) {
+        throw FormatException('Invalid time format: $time');
+      }
     }
+
     final before = DateFormat(shortTimeFormat).format(dateGoTime.subtract(Duration(seconds: deltaInSeconds)));
     final after = DateFormat(shortTimeFormat).format(dateGoTime.add(Duration(seconds: deltaInSeconds)));
-    // final String phoneTime = DateFormat(longTimeFormat).format(timestamp);
 
     // Если не обновлять принудительно, то
     // проверяем что автоматическое время старта не установлено,
-    // в этом случае устанавливаем время старта и вовращаем null.
+    // в этом случае устанавливаем время старта и возвращаем null.
     // В противном случае возвращаем StartItem.
-    logger.i('Database -> Checking existing start time around $time...');
-    final participantsAroundTime =
-        await _getParticipantAroundTime(stageId: stageId, before: before, after: after).get();
+    logger.i('Database -> Checking existing start time around ${DateFormat(longTimeFormat).format(dateGoTime)}...');
+    final participantsAroundTime = await _getParticipantAroundTime(
+      stageId: stageId,
+      before: before,
+      after: after,
+    ).get();
 
     if (participantsAroundTime.isNotEmpty) {
       logger.i(
@@ -620,23 +627,34 @@ class AppDatabase extends _$AppDatabase {
         '${participantsAroundTime.first.startTime}...',
       );
       if (!forceUpdate && participantsAroundTime.first.automaticStartTime != null) {
-        logger.i('Database -> Start time already exists');
+        logger.i('Database -> Start time already exists, do not updating');
         return participantsAroundTime;
       }
 
-      final result = await (update(starts)
-        ..where((start) => start.stageId.equals(stageId) & start.startTime.isBetweenValues(before, after))).write(
-        StartsCompanion(
-          automaticCorrection: Value(correction),
-          automaticStartTime: Value(time),
-          timestamp: Value(timestamp),
-          ntpOffset: Value(ntpOffset),
-        ),
-      );
+      // Высчитываем поправку относительно времени устройства
+      final startTime = participantsAroundTime.first.startTime.toDateTime();
+      if (startTime == null) {
+        throw FormatException('Invalid time format: $startTime');
+      }
+      // И не забываем про offset
+      final timestampCorrection = startTime.difference(timestamp.add(Duration(milliseconds: ntpOffset)));
+
+      final result =
+          await (update(
+            starts,
+          )..where((start) => start.stageId.equals(stageId) & start.startTime.isBetweenValues(before, after))).write(
+            StartsCompanion(
+              automaticCorrection: Value(correction),
+              automaticStartTime: Value(time),
+              timestamp: Value(timestamp),
+              timestampCorrection: Value(timestampCorrection.inMilliseconds),
+              ntpOffset: Value(ntpOffset),
+            ),
+          );
       logger.i('Database -> updated: $result lines');
     } else {
       logger.i(
-        'Database -> Can not find participant with start time around $time '
+        'Database -> Can not find participant with start time around ${DateFormat(longTimeFormat).format(dateGoTime)} '
         'with $deltaInSeconds seconds delta',
       );
     }
@@ -648,7 +666,7 @@ class AppDatabase extends _$AppDatabase {
   ///Ищет участника с временем рядом с текущим (плюс-минус [deltaInSeconds] секунд)
   ///и устанавливает ему текущее время старта в ручную отсечку
   ///
-  ///Возращает 0 если участник не найден и количество обновлённых участников в случае успеха
+  ///Возвращает 0 если участник не найден и количество обновлённых участников в случае успеха
   ///
   /// Конечно, участник по хорошему должен быть один, но мало ли что там в бд записано
   Future<int> updateManualStartTime({
@@ -666,8 +684,11 @@ class AppDatabase extends _$AppDatabase {
     final after = DateFormat(shortTimeFormat).format(timeAfter);
     final manualStartTime = DateFormat(longTimeFormat).format(time);
 
-    final participantsAroundTime =
-        await _getParticipantAroundTime(stageId: stageId, before: before, after: after).get();
+    final participantsAroundTime = await _getParticipantAroundTime(
+      stageId: stageId,
+      before: before,
+      after: after,
+    ).get();
 
     if (participantsAroundTime.isNotEmpty) {
       for (final participant in participantsAroundTime) {
@@ -711,7 +732,7 @@ class AppDatabase extends _$AppDatabase {
   ///
   ///[deltaInSeconds] в каком секундном диапазоне от [time] искать участников
   ///
-  ///Возвращает количество стартущих и 0 если последние не найдены
+  ///Возвращает количество стартующих и 0 если последние не найдены
   Future<int> checkParticipantAroundStartTime({
     required String time,
     required int stageId,
@@ -765,7 +786,11 @@ class AppDatabase extends _$AppDatabase {
 
   Future<int> shiftStartsTime({required int stageId, required int minutes, String? fromTime}) async {
     fromTime ??= await _getFirstStartTime(stageId: stageId).getSingle();
-    return _shiftStartsTime(shift: Duration(minutes: minutes).format(), stageId: stageId, fromTime: fromTime);
+    return _shiftStartsTime(
+      shift: Duration(minutes: minutes).format(),
+      stageId: stageId,
+      fromTime: fromTime,
+    );
   }
 
   // ----------------финиш----------------
@@ -1017,12 +1042,26 @@ class AppDatabase extends _$AppDatabase {
     return stages.length;
   }
 
-  Future<List<StartForCsv>> getStartResults(int stageId) async {
-    return _getStartsForCsv(stageId: stageId).get();
+  Future<List<StartForCsv>> getStartResults(int stageId, {required bool useTimestamp}) async {
+    if (useTimestamp) {
+      return _getStartsForCsvWithTimestampCorrection(stageId: stageId).get();
+    } else {
+      return _getStartsForCsv(stageId: stageId).get();
+    }
   }
 
-  Future<List<FinishForCsv>> getFinishResults(int stageId) async {
-    return _getFinishesForCsv(stageId: stageId).get();
+  Future<List<FinishForCsv>> getFinishResults(int stageId, {required bool useTimestamp}) async {
+    if (useTimestamp) {
+      final list = <FinishForCsv>[];
+      final finishes = await _getFinishesForCsvWithTimestampCorrection(stageId: stageId).get();
+      for (final finish in finishes) {
+        final finishtime = finish.timestamp.add(Duration(milliseconds: finish.ntpOffset)).format(longTimeFormat);
+        list.add(FinishForCsv(row: finish.row, number: finish.number, finishTime: finishtime));
+      }
+      return list;
+    } else {
+      return _getFinishesForCsv(stageId: stageId).get();
+    }
   }
 
   // -------------------------
@@ -1111,16 +1150,23 @@ class AppDatabase extends _$AppDatabase {
   }
 
   // Share and backup
-  Future<void> exportInto(File file) async {
-    // Make sure the directory of the target file exists
-    await file.parent.create(recursive: true);
+  Future<bool> exportInto(File file) async {
+    try {
+      // Make sure the directory of the target file exists
+      await file.parent.create(recursive: true);
 
-    // Override an existing backup, sqlite expects the target file to be empty
-    if (file.existsSync()) {
-      file.deleteSync();
+      // Override an existing backup, sqlite expects the target file to be empty
+      if (file.existsSync()) {
+        file.deleteSync();
+      }
+
+      await customStatement('VACUUM INTO ?', [file.path]);
+      logger.d('Database -> Database exported to $file');
+      return true;
+    } catch (e) {
+      logger.e('Database -> Error when exporting db to file $file: $e');
+      return false;
     }
-
-    await customStatement('VACUUM INTO ?', [file.path]);
   }
 
   // -------------------------

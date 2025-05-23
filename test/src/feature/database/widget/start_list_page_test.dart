@@ -129,8 +129,8 @@ void main() {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.working(tick: Tick(second: 0, text: text)));
         await $.pumpWidgetAndSettle(testWidget());
-        expect(($(Container).evaluate().single.widget as Container).constraints?.maxWidth, 75);
-        expect(($(Container).evaluate().single.widget as Container).constraints?.maxHeight, 75);
+        expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxWidth, 75);
+        expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxHeight, 75);
       });
 
       patrolWidgetTest('Change size', (PatrolTester $) async {
@@ -139,8 +139,8 @@ void main() {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.working(tick: Tick(second: 0, text: text)));
         await $.pumpWidgetAndSettle(testWidget());
-        expect(($(Container).evaluate().single.widget as Container).constraints?.maxWidth, 150);
-        expect(($(Container).evaluate().single.widget as Container).constraints?.maxHeight, 150);
+        expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxWidth, 150);
+        expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxHeight, 150);
       });
 
       patrolWidgetTest('Drag countdown and update settings with new place', (PatrolTester $) async {
@@ -256,7 +256,7 @@ void main() {
         await $.pumpWidgetAndSettle(testWidget());
         expect($(TextFormField), findsNothing);
         await $(StartItemTile).tap();
-        expect($(TextFormField), findsNWidgets(6));
+        expect($(TextFormField), findsNWidgets(7));
       });
 
       patrolWidgetTest('Long press then popup appears', (PatrolTester $) async {

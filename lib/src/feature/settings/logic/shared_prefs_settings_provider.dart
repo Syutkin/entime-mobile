@@ -75,6 +75,7 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
       isOLEDBackground: prefs.getBool('isOLEDBackground') ?? defaults.isOLEDBackground,
       previousVersion: prefs.getString('previousVersion') ?? defaults.previousVersion,
       updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ?? defaults.updateNtpOffsetAtStartup,
+      useTimestampForAutomaticStamps: prefs.getBool('useTimestampForAutomaticStamps') ?? defaults.useTimestampForAutomaticStamps,
     );
 
     await WakelockPlus.toggle(enable: settings.wakelock);
@@ -155,6 +156,8 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     await _prefs.setBool('isOLEDBackground', settings.isOLEDBackground);
     await _prefs.setString('previousVersion', settings.previousVersion);
     await _prefs.setBool('updateNtpOffsetAtStartup', settings.updateNtpOffsetAtStartup);
+    await _prefs.setBool('useTimestampForAutomaticStamps', settings.useTimestampForAutomaticStamps);
+    
 
     _settings = settings;
     _appSettingsController.add(_settings);

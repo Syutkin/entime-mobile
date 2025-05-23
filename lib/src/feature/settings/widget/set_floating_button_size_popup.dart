@@ -1,13 +1,13 @@
 part of 'settings_popups.dart';
 
-Future<double?> setFloatingButtonSizePopup(BuildContext context, double value, {String text = ''}) async {
+Future<double?> setFloatingButtonSizePopup(BuildContext context, double value, {String title = ''}) async {
   // text = 'Размер кнопки "+"';
   var newValue = value;
   return showDialog<double>(
     context: context,
     builder:
         (context) => AlertDialog(
-          title: Text(text),
+          title: Text(title),
           content: StatefulBuilder(
             builder:
                 (context, setState) => Column(

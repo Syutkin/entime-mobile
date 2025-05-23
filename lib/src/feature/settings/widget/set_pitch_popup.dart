@@ -1,7 +1,7 @@
 part of 'settings_popups.dart';
 
-Future<double?> setPitchPopup(BuildContext context, AppSettings settings) async {
-  var value = settings.pitch;
+Future<double?> setPitchPopup(BuildContext context, double pitch) async {
+  var value = pitch;
   return showDialog<double>(
     context: context,
     builder:
@@ -16,7 +16,7 @@ Future<double?> setPitchPopup(BuildContext context, AppSettings settings) async 
                       value: value,
                       min: 0.5,
                       max: 2,
-                      label: ((value * 100).round() / 100).toStringAsFixed(2),
+                      label: value.toStringAsFixed(2),
                       divisions: 150,
                       onChanged: (newValue) {
                         setState(() => value = newValue);

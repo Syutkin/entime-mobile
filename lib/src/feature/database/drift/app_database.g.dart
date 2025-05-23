@@ -173,16 +173,14 @@ class Races extends Table with TableInfo<Races, Race> {
   Race map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Race(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       startDate: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}start_date'],
@@ -203,11 +201,10 @@ class Races extends Table with TableInfo<Races, Race> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -267,23 +264,19 @@ class Race extends DataClass implements Insertable<Race> {
     return RacesCompanion(
       id: Value(id),
       name: Value(name),
-      startDate:
-          startDate == null && nullToAbsent
-              ? const Value.absent()
-              : Value(startDate),
-      finishDate:
-          finishDate == null && nullToAbsent
-              ? const Value.absent()
-              : Value(finishDate),
-      location:
-          location == null && nullToAbsent
-              ? const Value.absent()
-              : Value(location),
+      startDate: startDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(startDate),
+      finishDate: finishDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(finishDate),
+      location: location == null && nullToAbsent
+          ? const Value.absent()
+          : Value(location),
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isDeleted: Value(isDeleted),
     );
   }
@@ -343,12 +336,14 @@ class Race extends DataClass implements Insertable<Race> {
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       startDate: data.startDate.present ? data.startDate.value : this.startDate,
-      finishDate:
-          data.finishDate.present ? data.finishDate.value : this.finishDate,
+      finishDate: data.finishDate.present
+          ? data.finishDate.value
+          : this.finishDate,
       location: data.location.present ? data.location.value : this.location,
       url: data.url.present ? data.url.value : this.url,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
@@ -687,44 +682,38 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFile> {
   TrackFile map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return TrackFile(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       extension: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}extension'],
       ),
-      size:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}size'],
-          )!,
+      size: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}size'],
+      )!,
       description: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      hashSha1:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}hash_sha1'],
-          )!,
-      data:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.blob,
-            data['${effectivePrefix}data'],
-          )!,
-      timestamp:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}timestamp'],
-          )!,
+      hashSha1: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}hash_sha1'],
+      )!,
+      data: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}data'],
+      )!,
+      timestamp: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}timestamp'],
+      )!,
     );
   }
 
@@ -778,15 +767,13 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
     return TrackFilesCompanion(
       id: Value(id),
       name: Value(name),
-      extension:
-          extension == null && nullToAbsent
-              ? const Value.absent()
-              : Value(extension),
+      extension: extension == null && nullToAbsent
+          ? const Value.absent()
+          : Value(extension),
       size: Value(size),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       hashSha1: Value(hashSha1),
       data: Value(data),
       timestamp: Value(timestamp),
@@ -849,8 +836,9 @@ class TrackFile extends DataClass implements Insertable<TrackFile> {
       name: data.name.present ? data.name.value : this.name,
       extension: data.extension.present ? data.extension.value : this.extension,
       size: data.size.present ? data.size.value : this.size,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       hashSha1: data.hashSha1.present ? data.hashSha1.value : this.hashSha1,
       data: data.data.present ? data.data.value : this.data,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
@@ -1188,16 +1176,14 @@ class Trails extends Table with TableInfo<Trails, Trail> {
   Trail map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Trail(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       distance: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}distance'],
@@ -1218,11 +1204,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -1286,21 +1271,19 @@ class Trail extends DataClass implements Insertable<Trail> {
     return TrailsCompanion(
       id: Value(id),
       name: Value(name),
-      distance:
-          distance == null && nullToAbsent
-              ? const Value.absent()
-              : Value(distance),
-      elevation:
-          elevation == null && nullToAbsent
-              ? const Value.absent()
-              : Value(elevation),
-      fileId:
-          fileId == null && nullToAbsent ? const Value.absent() : Value(fileId),
+      distance: distance == null && nullToAbsent
+          ? const Value.absent()
+          : Value(distance),
+      elevation: elevation == null && nullToAbsent
+          ? const Value.absent()
+          : Value(elevation),
+      fileId: fileId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fileId),
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isDeleted: Value(isDeleted),
     );
   }
@@ -1363,8 +1346,9 @@ class Trail extends DataClass implements Insertable<Trail> {
       elevation: data.elevation.present ? data.elevation.value : this.elevation,
       fileId: data.fileId.present ? data.fileId.value : this.fileId,
       url: data.url.present ? data.url.value : this.url,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
@@ -1683,39 +1667,34 @@ class Stages extends Table with TableInfo<Stages, Stage> {
   Stage map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Stage(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
       trailId: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}trail_id'],
       ),
-      raceId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}race_id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      raceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}race_id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       description: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isActive:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_active'],
-          )!,
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isActive: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_active'],
+      )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -1770,16 +1749,14 @@ class Stage extends DataClass implements Insertable<Stage> {
   StagesCompanion toCompanion(bool nullToAbsent) {
     return StagesCompanion(
       id: Value(id),
-      trailId:
-          trailId == null && nullToAbsent
-              ? const Value.absent()
-              : Value(trailId),
+      trailId: trailId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(trailId),
       raceId: Value(raceId),
       name: Value(name),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
       isActive: Value(isActive),
       isDeleted: Value(isDeleted),
     );
@@ -1837,8 +1814,9 @@ class Stage extends DataClass implements Insertable<Stage> {
       trailId: data.trailId.present ? data.trailId.value : this.trailId,
       raceId: data.raceId.present ? data.raceId.value : this.raceId,
       name: data.name.present ? data.name.value : this.name,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       isActive: data.isActive.present ? data.isActive.value : this.isActive,
       isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
@@ -2180,16 +2158,14 @@ class Riders extends Table with TableInfo<Riders, Rider> {
   Rider map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Rider(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       nickname: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}nickname'],
@@ -2218,11 +2194,10 @@ class Riders extends Table with TableInfo<Riders, Rider> {
         DriftSqlType.string,
         data['${effectivePrefix}comment'],
       ),
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -2296,24 +2271,23 @@ class Rider extends DataClass implements Insertable<Rider> {
     return RidersCompanion(
       id: Value(id),
       name: Value(name),
-      nickname:
-          nickname == null && nullToAbsent
-              ? const Value.absent()
-              : Value(nickname),
-      birthday:
-          birthday == null && nullToAbsent
-              ? const Value.absent()
-              : Value(birthday),
+      nickname: nickname == null && nullToAbsent
+          ? const Value.absent()
+          : Value(nickname),
+      birthday: birthday == null && nullToAbsent
+          ? const Value.absent()
+          : Value(birthday),
       team: team == null && nullToAbsent ? const Value.absent() : Value(team),
       city: city == null && nullToAbsent ? const Value.absent() : Value(city),
-      email:
-          email == null && nullToAbsent ? const Value.absent() : Value(email),
-      phone:
-          phone == null && nullToAbsent ? const Value.absent() : Value(phone),
-      comment:
-          comment == null && nullToAbsent
-              ? const Value.absent()
-              : Value(comment),
+      email: email == null && nullToAbsent
+          ? const Value.absent()
+          : Value(email),
+      phone: phone == null && nullToAbsent
+          ? const Value.absent()
+          : Value(phone),
+      comment: comment == null && nullToAbsent
+          ? const Value.absent()
+          : Value(comment),
       isDeleted: Value(isDeleted),
     );
   }
@@ -2635,16 +2609,14 @@ class Statuses extends Table with TableInfo<Statuses, Status> {
   Status map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Status(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      type:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}type'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
     );
   }
 
@@ -2935,26 +2907,22 @@ class Participants extends Table with TableInfo<Participants, Participant> {
   Participant map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Participant(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      raceId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}race_id'],
-          )!,
-      riderId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}rider_id'],
-          )!,
-      number:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}number'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      raceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}race_id'],
+      )!,
+      riderId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rider_id'],
+      )!,
+      number: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}number'],
+      )!,
       category: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}category'],
@@ -2963,16 +2931,14 @@ class Participants extends Table with TableInfo<Participants, Participant> {
         DriftSqlType.string,
         data['${effectivePrefix}rfid'],
       ),
-      statusId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}status_id'],
-          )!,
-      isDeleted:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_deleted'],
-          )!,
+      statusId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}status_id'],
+      )!,
+      isDeleted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_deleted'],
+      )!,
     );
   }
 
@@ -3036,10 +3002,9 @@ class Participant extends DataClass implements Insertable<Participant> {
       raceId: Value(raceId),
       riderId: Value(riderId),
       number: Value(number),
-      category:
-          category == null && nullToAbsent
-              ? const Value.absent()
-              : Value(category),
+      category: category == null && nullToAbsent
+          ? const Value.absent()
+          : Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
       isDeleted: Value(isDeleted),
@@ -3446,45 +3411,38 @@ class Finishes extends Table with TableInfo<Finishes, Finish> {
   Finish map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Finish(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      stageId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}stage_id'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      stageId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}stage_id'],
+      )!,
       number: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}number'],
       ),
-      timestamp:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}timestamp'],
-          )!,
-      ntpOffset:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}ntp_offset'],
-          )!,
-      finishTime:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}finish_time'],
-          )!,
-      isHidden:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_hidden'],
-          )!,
-      isManual:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}is_manual'],
-          )!,
+      timestamp: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}timestamp'],
+      )!,
+      ntpOffset: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}ntp_offset'],
+      )!,
+      finishTime: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}finish_time'],
+      )!,
+      isHidden: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_hidden'],
+      )!,
+      isManual: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_manual'],
+      )!,
     );
   }
 
@@ -3540,8 +3498,9 @@ class Finish extends DataClass implements Insertable<Finish> {
     return FinishesCompanion(
       id: Value(id),
       stageId: Value(stageId),
-      number:
-          number == null && nullToAbsent ? const Value.absent() : Value(number),
+      number: number == null && nullToAbsent
+          ? const Value.absent()
+          : Value(number),
       timestamp: Value(timestamp),
       ntpOffset: Value(ntpOffset),
       finishTime: Value(finishTime),
@@ -3607,8 +3566,9 @@ class Finish extends DataClass implements Insertable<Finish> {
       number: data.number.present ? data.number.value : this.number,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
       ntpOffset: data.ntpOffset.present ? data.ntpOffset.value : this.ntpOffset,
-      finishTime:
-          data.finishTime.present ? data.finishTime.value : this.finishTime,
+      finishTime: data.finishTime.present
+          ? data.finishTime.value
+          : this.finishTime,
       isHidden: data.isHidden.present ? data.isHidden.value : this.isHidden,
       isManual: data.isManual.present ? data.isManual.value : this.isManual,
     );
@@ -3834,6 +3794,16 @@ class Starts extends Table with TableInfo<Starts, Start> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
+  static const VerificationMeta _timestampCorrectionMeta =
+      const VerificationMeta('timestampCorrection');
+  late final GeneratedColumn<int> timestampCorrection = GeneratedColumn<int>(
+    'timestamp_correction',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: '',
+  );
   static const VerificationMeta _ntpOffsetMeta = const VerificationMeta(
     'ntpOffset',
   );
@@ -3918,6 +3888,7 @@ class Starts extends Table with TableInfo<Starts, Start> {
     participantId,
     startTime,
     timestamp,
+    timestampCorrection,
     ntpOffset,
     automaticStartTime,
     automaticCorrection,
@@ -3972,6 +3943,15 @@ class Starts extends Table with TableInfo<Starts, Start> {
       context.handle(
         _timestampMeta,
         timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta),
+      );
+    }
+    if (data.containsKey('timestamp_correction')) {
+      context.handle(
+        _timestampCorrectionMeta,
+        timestampCorrection.isAcceptableOrUnknown(
+          data['timestamp_correction']!,
+          _timestampCorrectionMeta,
+        ),
       );
     }
     if (data.containsKey('ntp_offset')) {
@@ -4037,29 +4017,29 @@ class Starts extends Table with TableInfo<Starts, Start> {
   Start map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Start(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      stageId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}stage_id'],
-          )!,
-      participantId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}participant_id'],
-          )!,
-      startTime:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}start_time'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      stageId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}stage_id'],
+      )!,
+      participantId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}participant_id'],
+      )!,
+      startTime: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}start_time'],
+      )!,
       timestamp: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}timestamp'],
+      ),
+      timestampCorrection: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}timestamp_correction'],
       ),
       ntpOffset: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
@@ -4081,11 +4061,10 @@ class Starts extends Table with TableInfo<Starts, Start> {
         DriftSqlType.int,
         data['${effectivePrefix}manual_correction'],
       ),
-      statusId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}status_id'],
-          )!,
+      statusId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}status_id'],
+      )!,
       finishId: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}finish_id'],
@@ -4115,6 +4094,7 @@ class Start extends DataClass implements Insertable<Start> {
   final int participantId;
   final String startTime;
   final DateTime? timestamp;
+  final int? timestampCorrection;
   final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
@@ -4128,6 +4108,7 @@ class Start extends DataClass implements Insertable<Start> {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.timestampCorrection,
     this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
@@ -4145,6 +4126,9 @@ class Start extends DataClass implements Insertable<Start> {
     map['start_time'] = Variable<String>(startTime);
     if (!nullToAbsent || timestamp != null) {
       map['timestamp'] = Variable<DateTime>(timestamp);
+    }
+    if (!nullToAbsent || timestampCorrection != null) {
+      map['timestamp_correction'] = Variable<int>(timestampCorrection);
     }
     if (!nullToAbsent || ntpOffset != null) {
       map['ntp_offset'] = Variable<int>(ntpOffset);
@@ -4174,35 +4158,31 @@ class Start extends DataClass implements Insertable<Start> {
       stageId: Value(stageId),
       participantId: Value(participantId),
       startTime: Value(startTime),
-      timestamp:
-          timestamp == null && nullToAbsent
-              ? const Value.absent()
-              : Value(timestamp),
-      ntpOffset:
-          ntpOffset == null && nullToAbsent
-              ? const Value.absent()
-              : Value(ntpOffset),
-      automaticStartTime:
-          automaticStartTime == null && nullToAbsent
-              ? const Value.absent()
-              : Value(automaticStartTime),
-      automaticCorrection:
-          automaticCorrection == null && nullToAbsent
-              ? const Value.absent()
-              : Value(automaticCorrection),
-      manualStartTime:
-          manualStartTime == null && nullToAbsent
-              ? const Value.absent()
-              : Value(manualStartTime),
-      manualCorrection:
-          manualCorrection == null && nullToAbsent
-              ? const Value.absent()
-              : Value(manualCorrection),
+      timestamp: timestamp == null && nullToAbsent
+          ? const Value.absent()
+          : Value(timestamp),
+      timestampCorrection: timestampCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(timestampCorrection),
+      ntpOffset: ntpOffset == null && nullToAbsent
+          ? const Value.absent()
+          : Value(ntpOffset),
+      automaticStartTime: automaticStartTime == null && nullToAbsent
+          ? const Value.absent()
+          : Value(automaticStartTime),
+      automaticCorrection: automaticCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(automaticCorrection),
+      manualStartTime: manualStartTime == null && nullToAbsent
+          ? const Value.absent()
+          : Value(manualStartTime),
+      manualCorrection: manualCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(manualCorrection),
       statusId: Value(statusId),
-      finishId:
-          finishId == null && nullToAbsent
-              ? const Value.absent()
-              : Value(finishId),
+      finishId: finishId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(finishId),
     );
   }
 
@@ -4217,6 +4197,9 @@ class Start extends DataClass implements Insertable<Start> {
       participantId: serializer.fromJson<int>(json['participant_id']),
       startTime: serializer.fromJson<String>(json['start_time']),
       timestamp: serializer.fromJson<DateTime?>(json['timestamp']),
+      timestampCorrection: serializer.fromJson<int?>(
+        json['timestamp_correction'],
+      ),
       ntpOffset: serializer.fromJson<int?>(json['ntp_offset']),
       automaticStartTime: serializer.fromJson<String?>(
         json['automatic_start_time'],
@@ -4239,6 +4222,7 @@ class Start extends DataClass implements Insertable<Start> {
       'participant_id': serializer.toJson<int>(participantId),
       'start_time': serializer.toJson<String>(startTime),
       'timestamp': serializer.toJson<DateTime?>(timestamp),
+      'timestamp_correction': serializer.toJson<int?>(timestampCorrection),
       'ntp_offset': serializer.toJson<int?>(ntpOffset),
       'automatic_start_time': serializer.toJson<String?>(automaticStartTime),
       'automatic_correction': serializer.toJson<int?>(automaticCorrection),
@@ -4255,6 +4239,7 @@ class Start extends DataClass implements Insertable<Start> {
     int? participantId,
     String? startTime,
     Value<DateTime?> timestamp = const Value.absent(),
+    Value<int?> timestampCorrection = const Value.absent(),
     Value<int?> ntpOffset = const Value.absent(),
     Value<String?> automaticStartTime = const Value.absent(),
     Value<int?> automaticCorrection = const Value.absent(),
@@ -4268,21 +4253,22 @@ class Start extends DataClass implements Insertable<Start> {
     participantId: participantId ?? this.participantId,
     startTime: startTime ?? this.startTime,
     timestamp: timestamp.present ? timestamp.value : this.timestamp,
+    timestampCorrection: timestampCorrection.present
+        ? timestampCorrection.value
+        : this.timestampCorrection,
     ntpOffset: ntpOffset.present ? ntpOffset.value : this.ntpOffset,
-    automaticStartTime:
-        automaticStartTime.present
-            ? automaticStartTime.value
-            : this.automaticStartTime,
-    automaticCorrection:
-        automaticCorrection.present
-            ? automaticCorrection.value
-            : this.automaticCorrection,
-    manualStartTime:
-        manualStartTime.present ? manualStartTime.value : this.manualStartTime,
-    manualCorrection:
-        manualCorrection.present
-            ? manualCorrection.value
-            : this.manualCorrection,
+    automaticStartTime: automaticStartTime.present
+        ? automaticStartTime.value
+        : this.automaticStartTime,
+    automaticCorrection: automaticCorrection.present
+        ? automaticCorrection.value
+        : this.automaticCorrection,
+    manualStartTime: manualStartTime.present
+        ? manualStartTime.value
+        : this.manualStartTime,
+    manualCorrection: manualCorrection.present
+        ? manualCorrection.value
+        : this.manualCorrection,
     statusId: statusId ?? this.statusId,
     finishId: finishId.present ? finishId.value : this.finishId,
   );
@@ -4290,29 +4276,27 @@ class Start extends DataClass implements Insertable<Start> {
     return Start(
       id: data.id.present ? data.id.value : this.id,
       stageId: data.stageId.present ? data.stageId.value : this.stageId,
-      participantId:
-          data.participantId.present
-              ? data.participantId.value
-              : this.participantId,
+      participantId: data.participantId.present
+          ? data.participantId.value
+          : this.participantId,
       startTime: data.startTime.present ? data.startTime.value : this.startTime,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      timestampCorrection: data.timestampCorrection.present
+          ? data.timestampCorrection.value
+          : this.timestampCorrection,
       ntpOffset: data.ntpOffset.present ? data.ntpOffset.value : this.ntpOffset,
-      automaticStartTime:
-          data.automaticStartTime.present
-              ? data.automaticStartTime.value
-              : this.automaticStartTime,
-      automaticCorrection:
-          data.automaticCorrection.present
-              ? data.automaticCorrection.value
-              : this.automaticCorrection,
-      manualStartTime:
-          data.manualStartTime.present
-              ? data.manualStartTime.value
-              : this.manualStartTime,
-      manualCorrection:
-          data.manualCorrection.present
-              ? data.manualCorrection.value
-              : this.manualCorrection,
+      automaticStartTime: data.automaticStartTime.present
+          ? data.automaticStartTime.value
+          : this.automaticStartTime,
+      automaticCorrection: data.automaticCorrection.present
+          ? data.automaticCorrection.value
+          : this.automaticCorrection,
+      manualStartTime: data.manualStartTime.present
+          ? data.manualStartTime.value
+          : this.manualStartTime,
+      manualCorrection: data.manualCorrection.present
+          ? data.manualCorrection.value
+          : this.manualCorrection,
       statusId: data.statusId.present ? data.statusId.value : this.statusId,
       finishId: data.finishId.present ? data.finishId.value : this.finishId,
     );
@@ -4326,6 +4310,7 @@ class Start extends DataClass implements Insertable<Start> {
           ..write('participantId: $participantId, ')
           ..write('startTime: $startTime, ')
           ..write('timestamp: $timestamp, ')
+          ..write('timestampCorrection: $timestampCorrection, ')
           ..write('ntpOffset: $ntpOffset, ')
           ..write('automaticStartTime: $automaticStartTime, ')
           ..write('automaticCorrection: $automaticCorrection, ')
@@ -4344,6 +4329,7 @@ class Start extends DataClass implements Insertable<Start> {
     participantId,
     startTime,
     timestamp,
+    timestampCorrection,
     ntpOffset,
     automaticStartTime,
     automaticCorrection,
@@ -4361,6 +4347,7 @@ class Start extends DataClass implements Insertable<Start> {
           other.participantId == this.participantId &&
           other.startTime == this.startTime &&
           other.timestamp == this.timestamp &&
+          other.timestampCorrection == this.timestampCorrection &&
           other.ntpOffset == this.ntpOffset &&
           other.automaticStartTime == this.automaticStartTime &&
           other.automaticCorrection == this.automaticCorrection &&
@@ -4376,6 +4363,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
   final Value<int> participantId;
   final Value<String> startTime;
   final Value<DateTime?> timestamp;
+  final Value<int?> timestampCorrection;
   final Value<int?> ntpOffset;
   final Value<String?> automaticStartTime;
   final Value<int?> automaticCorrection;
@@ -4389,6 +4377,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
     this.participantId = const Value.absent(),
     this.startTime = const Value.absent(),
     this.timestamp = const Value.absent(),
+    this.timestampCorrection = const Value.absent(),
     this.ntpOffset = const Value.absent(),
     this.automaticStartTime = const Value.absent(),
     this.automaticCorrection = const Value.absent(),
@@ -4403,6 +4392,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
     required int participantId,
     required String startTime,
     this.timestamp = const Value.absent(),
+    this.timestampCorrection = const Value.absent(),
     this.ntpOffset = const Value.absent(),
     this.automaticStartTime = const Value.absent(),
     this.automaticCorrection = const Value.absent(),
@@ -4419,6 +4409,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
     Expression<int>? participantId,
     Expression<String>? startTime,
     Expression<DateTime>? timestamp,
+    Expression<int>? timestampCorrection,
     Expression<int>? ntpOffset,
     Expression<String>? automaticStartTime,
     Expression<int>? automaticCorrection,
@@ -4433,6 +4424,8 @@ class StartsCompanion extends UpdateCompanion<Start> {
       if (participantId != null) 'participant_id': participantId,
       if (startTime != null) 'start_time': startTime,
       if (timestamp != null) 'timestamp': timestamp,
+      if (timestampCorrection != null)
+        'timestamp_correction': timestampCorrection,
       if (ntpOffset != null) 'ntp_offset': ntpOffset,
       if (automaticStartTime != null)
         'automatic_start_time': automaticStartTime,
@@ -4451,6 +4444,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
     Value<int>? participantId,
     Value<String>? startTime,
     Value<DateTime?>? timestamp,
+    Value<int?>? timestampCorrection,
     Value<int?>? ntpOffset,
     Value<String?>? automaticStartTime,
     Value<int?>? automaticCorrection,
@@ -4465,6 +4459,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
       participantId: participantId ?? this.participantId,
       startTime: startTime ?? this.startTime,
       timestamp: timestamp ?? this.timestamp,
+      timestampCorrection: timestampCorrection ?? this.timestampCorrection,
       ntpOffset: ntpOffset ?? this.ntpOffset,
       automaticStartTime: automaticStartTime ?? this.automaticStartTime,
       automaticCorrection: automaticCorrection ?? this.automaticCorrection,
@@ -4492,6 +4487,9 @@ class StartsCompanion extends UpdateCompanion<Start> {
     }
     if (timestamp.present) {
       map['timestamp'] = Variable<DateTime>(timestamp.value);
+    }
+    if (timestampCorrection.present) {
+      map['timestamp_correction'] = Variable<int>(timestampCorrection.value);
     }
     if (ntpOffset.present) {
       map['ntp_offset'] = Variable<int>(ntpOffset.value);
@@ -4525,6 +4523,7 @@ class StartsCompanion extends UpdateCompanion<Start> {
           ..write('participantId: $participantId, ')
           ..write('startTime: $startTime, ')
           ..write('timestamp: $timestamp, ')
+          ..write('timestampCorrection: $timestampCorrection, ')
           ..write('ntpOffset: $ntpOffset, ')
           ..write('automaticStartTime: $automaticStartTime, ')
           ..write('automaticCorrection: $automaticCorrection, ')
@@ -4647,22 +4646,20 @@ class Logs extends Table with TableInfo<Logs, Log> {
   Log map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Log(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
       level: Logs.$converterlevel.fromSql(
         attachedDatabase.typeMapping.read(
           DriftSqlType.string,
           data['${effectivePrefix}level'],
         )!,
       ),
-      timestamp:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}timestamp'],
-          )!,
+      timestamp: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}timestamp'],
+      )!,
       source: Logs.$convertersource.fromSql(
         attachedDatabase.typeMapping.read(
           DriftSqlType.string,
@@ -4743,10 +4740,9 @@ class Log extends DataClass implements Insertable<Log> {
       timestamp: Value(timestamp),
       source: Value(source),
       direction: Value(direction),
-      rawData:
-          rawData == null && nullToAbsent
-              ? const Value.absent()
-              : Value(rawData),
+      rawData: rawData == null && nullToAbsent
+          ? const Value.absent()
+          : Value(rawData),
     );
   }
 
@@ -5090,7 +5086,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required int number,
   }) {
     return customSelect(
-      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status_id, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status_id FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
+      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status_id, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status_id FROM starts,participants WHERE participants.id = starts.participant_id AND starts.stage_id = ?1 AND participants.number = ?2',
       variables: [Variable<int>(stageId), Variable<int>(number)],
       readsFrom: {starts, participants},
     ).map(
@@ -5101,6 +5097,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
         timestamp: row.readNullable<DateTime>('timestamp'),
+        timestampCorrection: row.readNullable<int>('timestamp_correction'),
         ntpOffset: row.readNullable<int>('ntp_offset'),
         automaticStartTime: row.readNullable<String>('automatic_start_time'),
         automaticCorrection: row.readNullable<int>('automatic_correction'),
@@ -5122,7 +5119,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required int stageId,
   }) {
     return customSelect(
-      'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, riders.name AS name, riders.nickname AS nickname, riders.birthday AS birthday, riders.team AS team, riders.city AS city, riders.email AS email, riders.phone AS phone, riders.comment AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.ntp_offset AS ntp_offset, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 ORDER BY start_time ASC',
+      'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, riders.name AS name, riders.nickname AS nickname, riders.birthday AS birthday, riders.team AS team, riders.city AS city, riders.email AS email, riders.phone AS phone, riders.comment AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.timestamp_correction AS timestamp_correction, starts.ntp_offset AS ntp_offset, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 ORDER BY start_time ASC',
       variables: [Variable<int>(stageId)],
       readsFrom: {participants, riders, starts},
     ).map(
@@ -5147,6 +5144,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
         timestamp: row.readNullable<DateTime>('timestamp'),
+        timestampCorrection: row.readNullable<int>('timestamp_correction'),
         ntpOffset: row.readNullable<int>('ntp_offset'),
         automaticStartTime: row.readNullable<String>('automatic_start_time'),
         automaticCorrection: row.readNullable<int>('automatic_correction'),
@@ -5163,7 +5161,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required int number,
   }) {
     return customSelect(
-      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND stage_id = ?1 AND(start_time IS ?2 OR(number IS ?3 AND(automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
+      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND stage_id = ?1 AND(start_time IS ?2 OR(number IS ?3 AND(automatic_start_time NOTNULL OR manual_start_time NOTNULL)))',
       variables: [
         Variable<int>(stageId),
         Variable<String>(startTime),
@@ -5178,6 +5176,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
         timestamp: row.readNullable<DateTime>('timestamp'),
+        timestampCorrection: row.readNullable<int>('timestamp_correction'),
         ntpOffset: row.readNullable<int>('ntp_offset'),
         automaticStartTime: row.readNullable<String>('automatic_start_time'),
         automaticCorrection: row.readNullable<int>('automatic_correction'),
@@ -5197,6 +5196,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Future<int> _setStartingInfo({
     required String startTime,
+    int? timestampCorrection,
     String? automaticStartTime,
     int? automaticCorrection,
     String? manualStartTime,
@@ -5205,9 +5205,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required int participantId,
   }) {
     return customUpdate(
-      'UPDATE starts SET start_time = ?1, automatic_start_time = ?2, automatic_correction = ?3, manual_start_time = ?4, manual_correction = ?5 WHERE stage_id = ?6 AND participant_id = ?7',
+      'UPDATE starts SET start_time = ?1, timestamp_correction = ?2, automatic_start_time = ?3, automatic_correction = ?4, manual_start_time = ?5, manual_correction = ?6 WHERE stage_id = ?7 AND participant_id = ?8',
       variables: [
         Variable<String>(startTime),
+        Variable<int>(timestampCorrection),
         Variable<String>(automaticStartTime),
         Variable<int>(automaticCorrection),
         Variable<String>(manualStartTime),
@@ -5226,7 +5227,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String after,
   }) {
     return customSelect(
-      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3',
+      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3',
       variables: [
         Variable<int>(stageId),
         Variable<String>(before),
@@ -5241,6 +5242,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
         timestamp: row.readNullable<DateTime>('timestamp'),
+        timestampCorrection: row.readNullable<int>('timestamp_correction'),
         ntpOffset: row.readNullable<int>('ntp_offset'),
         automaticStartTime: row.readNullable<String>('automatic_start_time'),
         automaticCorrection: row.readNullable<int>('automatic_correction'),
@@ -5345,7 +5347,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Future<int> _setDNSForStartId({required int statusId, required int id}) {
     return customUpdate(
-      'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, ntp_offset = NULL WHERE id = ?2',
+      'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, timestamp_correction = NULL, ntp_offset = NULL WHERE id = ?2',
       variables: [Variable<int>(statusId), Variable<int>(id)],
       updates: {starts},
       updateKind: UpdateKind.update,
@@ -5357,7 +5359,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String timeNow,
   }) {
     return customSelect(
-      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 AND starts.automatic_start_time ISNULL ORDER BY starts.start_time ASC',
+      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 AND starts.automatic_start_time ISNULL ORDER BY starts.start_time ASC',
       variables: [Variable<int>(stageId), Variable<String>(timeNow)],
       readsFrom: {starts, participants},
     ).map(
@@ -5368,6 +5370,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         participantId: row.read<int>('participant_id'),
         startTime: row.read<String>('start_time'),
         timestamp: row.readNullable<DateTime>('timestamp'),
+        timestampCorrection: row.readNullable<int>('timestamp_correction'),
         ntpOffset: row.readNullable<int>('ntp_offset'),
         automaticStartTime: row.readNullable<String>('automatic_start_time'),
         automaticCorrection: row.readNullable<int>('automatic_correction'),
@@ -5391,7 +5394,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String fromTime,
   }) {
     return customUpdate(
-      'UPDATE starts SET start_time = TIME(start_time, ?1), automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, ntp_offset = NULL WHERE stage_id = ?2 AND start_time >= ?3',
+      'UPDATE starts SET start_time = TIME(start_time, ?1), automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, timestamp_correction = NULL, ntp_offset = NULL WHERE stage_id = ?2 AND start_time >= ?3',
       variables: [
         Variable<String>(shift),
         Variable<int>(stageId),
@@ -5564,6 +5567,23 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
+  Selectable<StartForCsv> _getStartsForCsvWithTimestampCorrection({
+    required int stageId,
+  }) {
+    return customSelect(
+      'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.timestamp_correction, IFNULL(starts.manual_correction, \'DNS\')) AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+      variables: [Variable<int>(stageId)],
+      readsFrom: {participants, starts},
+    ).map(
+      (QueryRow row) => StartForCsv(
+        row: row,
+        number: row.read<int>('number'),
+        startTime: row.read<String>('start_time'),
+        correction: row.read<String>('correction'),
+      ),
+    );
+  }
+
   Selectable<FinishForCsv> _getFinishesForCsv({required int stageId}) {
     return customSelect(
       'SELECT number, finish_time FROM finishes WHERE stage_id = ?1 AND number NOTNULL ORDER BY finish_time ASC',
@@ -5574,6 +5594,22 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         row: row,
         number: row.readNullable<int>('number'),
         finishTime: row.read<String>('finish_time'),
+      ),
+    );
+  }
+
+  Selectable<FinishForCsvWithTimestampCorrection>
+  _getFinishesForCsvWithTimestampCorrection({required int stageId}) {
+    return customSelect(
+      'SELECT number, timestamp, ntp_offset FROM finishes WHERE stage_id = ?1 AND number NOTNULL ORDER BY finish_time ASC',
+      variables: [Variable<int>(stageId)],
+      readsFrom: {finishes},
+    ).map(
+      (QueryRow row) => FinishForCsvWithTimestampCorrection(
+        row: row,
+        number: row.readNullable<int>('number'),
+        timestamp: row.read<DateTime>('timestamp'),
+        ntpOffset: row.read<int>('ntp_offset'),
       ),
     );
   }
@@ -5851,12 +5887,12 @@ class $RacesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $RacesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $RacesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $RacesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $RacesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $RacesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $RacesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -5897,16 +5933,9 @@ class $RacesTableManager
                 description: description,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6103,12 +6132,12 @@ class $TrackFilesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $TrackFilesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $TrackFilesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $TrackFilesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $TrackFilesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $TrackFilesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $TrackFilesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6149,16 +6178,9 @@ class $TrackFilesTableManager
                 data: data,
                 timestamp: timestamp,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6354,12 +6376,12 @@ class $TrailsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $TrailsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $TrailsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $TrailsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $TrailsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $TrailsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $TrailsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6400,16 +6422,9 @@ class $TrailsTableManager
                 description: description,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6590,12 +6605,12 @@ class $StagesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $StagesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $StagesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $StagesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $StagesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $StagesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $StagesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6632,16 +6647,9 @@ class $StagesTableManager
                 isActive: isActive,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -6865,12 +6873,12 @@ class $RidersTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $RidersFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $RidersOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $RidersAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $RidersFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $RidersOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $RidersAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -6919,16 +6927,9 @@ class $RidersTableManager
                 comment: comment,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7026,12 +7027,12 @@ class $StatusesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $StatusesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $StatusesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $StatusesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $StatusesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $StatusesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $StatusesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7040,16 +7041,9 @@ class $StatusesTableManager
           createCompanionCallback:
               ({Value<int> id = const Value.absent(), required String type}) =>
                   StatusesCompanion.insert(id: id, type: type),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7249,12 +7243,12 @@ class $ParticipantsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $ParticipantsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $ParticipantsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $ParticipantsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $ParticipantsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $ParticipantsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $ParticipantsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7295,16 +7289,9 @@ class $ParticipantsTableManager
                 statusId: statusId,
                 isDeleted: isDeleted,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7500,12 +7487,12 @@ class $FinishesTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $FinishesFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $FinishesOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $FinishesAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $FinishesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $FinishesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $FinishesAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7546,16 +7533,9 @@ class $FinishesTableManager
                 isHidden: isHidden,
                 isManual: isManual,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -7582,6 +7562,7 @@ typedef $StartsCreateCompanionBuilder =
       required int participantId,
       required String startTime,
       Value<DateTime?> timestamp,
+      Value<int?> timestampCorrection,
       Value<int?> ntpOffset,
       Value<String?> automaticStartTime,
       Value<int?> automaticCorrection,
@@ -7597,6 +7578,7 @@ typedef $StartsUpdateCompanionBuilder =
       Value<int> participantId,
       Value<String> startTime,
       Value<DateTime?> timestamp,
+      Value<int?> timestampCorrection,
       Value<int?> ntpOffset,
       Value<String?> automaticStartTime,
       Value<int?> automaticCorrection,
@@ -7636,6 +7618,11 @@ class $StartsFilterComposer extends Composer<_$AppDatabase, Starts> {
 
   ColumnFilters<DateTime> get timestamp => $composableBuilder(
     column: $table.timestamp,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get timestampCorrection => $composableBuilder(
+    column: $table.timestampCorrection,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -7708,6 +7695,11 @@ class $StartsOrderingComposer extends Composer<_$AppDatabase, Starts> {
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get timestampCorrection => $composableBuilder(
+    column: $table.timestampCorrection,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get ntpOffset => $composableBuilder(
     column: $table.ntpOffset,
     builder: (column) => ColumnOrderings(column),
@@ -7769,6 +7761,11 @@ class $StartsAnnotationComposer extends Composer<_$AppDatabase, Starts> {
   GeneratedColumn<DateTime> get timestamp =>
       $composableBuilder(column: $table.timestamp, builder: (column) => column);
 
+  GeneratedColumn<int> get timestampCorrection => $composableBuilder(
+    column: $table.timestampCorrection,
+    builder: (column) => column,
+  );
+
   GeneratedColumn<int> get ntpOffset =>
       $composableBuilder(column: $table.ntpOffset, builder: (column) => column);
 
@@ -7819,12 +7816,12 @@ class $StartsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $StartsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $StartsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $StartsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $StartsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $StartsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $StartsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -7832,6 +7829,7 @@ class $StartsTableManager
                 Value<int> participantId = const Value.absent(),
                 Value<String> startTime = const Value.absent(),
                 Value<DateTime?> timestamp = const Value.absent(),
+                Value<int?> timestampCorrection = const Value.absent(),
                 Value<int?> ntpOffset = const Value.absent(),
                 Value<String?> automaticStartTime = const Value.absent(),
                 Value<int?> automaticCorrection = const Value.absent(),
@@ -7845,6 +7843,7 @@ class $StartsTableManager
                 participantId: participantId,
                 startTime: startTime,
                 timestamp: timestamp,
+                timestampCorrection: timestampCorrection,
                 ntpOffset: ntpOffset,
                 automaticStartTime: automaticStartTime,
                 automaticCorrection: automaticCorrection,
@@ -7860,6 +7859,7 @@ class $StartsTableManager
                 required int participantId,
                 required String startTime,
                 Value<DateTime?> timestamp = const Value.absent(),
+                Value<int?> timestampCorrection = const Value.absent(),
                 Value<int?> ntpOffset = const Value.absent(),
                 Value<String?> automaticStartTime = const Value.absent(),
                 Value<int?> automaticCorrection = const Value.absent(),
@@ -7873,6 +7873,7 @@ class $StartsTableManager
                 participantId: participantId,
                 startTime: startTime,
                 timestamp: timestamp,
+                timestampCorrection: timestampCorrection,
                 ntpOffset: ntpOffset,
                 automaticStartTime: automaticStartTime,
                 automaticCorrection: automaticCorrection,
@@ -7881,16 +7882,9 @@ class $StartsTableManager
                 statusId: statusId,
                 finishId: finishId,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -8057,12 +8051,12 @@ class $LogsTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $LogsFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $LogsOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $LogsAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $LogsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $LogsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $LogsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -8095,16 +8089,9 @@ class $LogsTableManager
                 direction: direction,
                 rawData: rawData,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -8182,6 +8169,7 @@ class NumberAtStart extends CustomResultSet {
   final int participantId;
   final String startTime;
   final DateTime? timestamp;
+  final int? timestampCorrection;
   final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
@@ -8202,6 +8190,7 @@ class NumberAtStart extends CustomResultSet {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.timestampCorrection,
     this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
@@ -8238,6 +8227,7 @@ class ParticipantAtStart extends CustomResultSet {
   final int participantId;
   final String startTime;
   final DateTime? timestamp;
+  final int? timestampCorrection;
   final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
@@ -8265,6 +8255,7 @@ class ParticipantAtStart extends CustomResultSet {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.timestampCorrection,
     this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
@@ -8280,6 +8271,7 @@ class StartingParticipant extends CustomResultSet {
   final int participantId;
   final String startTime;
   final DateTime? timestamp;
+  final int? timestampCorrection;
   final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
@@ -8300,6 +8292,7 @@ class StartingParticipant extends CustomResultSet {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.timestampCorrection,
     this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
@@ -8365,6 +8358,18 @@ class FinishForCsv extends CustomResultSet {
   final String finishTime;
   FinishForCsv({required QueryRow row, this.number, required this.finishTime})
     : super(row);
+}
+
+class FinishForCsvWithTimestampCorrection extends CustomResultSet {
+  final int? number;
+  final DateTime timestamp;
+  final int ntpOffset;
+  FinishForCsvWithTimestampCorrection({
+    required QueryRow row,
+    this.number,
+    required this.timestamp,
+    required this.ntpOffset,
+  }) : super(row);
 }
 
 typedef GetLog$predicate = Expression<bool> Function(Logs logs);

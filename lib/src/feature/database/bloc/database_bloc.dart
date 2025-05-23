@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:entime/src/common/utils/share_provider.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +13,7 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
-import '../../../common/utils/csv_utils.dart';
-import '../../../common/utils/file_utils.dart';
 import '../../../constants/date_time_formats.dart';
 import '../../../feature/csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
@@ -31,6 +30,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     required AppDatabase database,
     required ISettingsProvider settingsProvider,
     this.fileProvider = const StartlistProvider(),
+    this.shareProvider = const ShareProvider(),
   }) : _db = database,
        _settingsProvider = settingsProvider,
        super(
@@ -278,6 +278,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             ntpOffset: event.ntpOffset,
             deltaInSeconds: event.deltaInSeconds,
             forceUpdate: event.forceUpdate,
+            useTimestampForTime: event.useTimestampForTime,
           );
           if (previousStarts != null && !event.forceUpdate) {
             await _emitState(
@@ -349,8 +350,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             );
           }
         case _GetNumbersOnTraceNow():
-          _numbersOnTrace =
-              await _db.getNumbersOnTraceNow(stageId: event.stageId, dateTimeNow: event.dateTimeNow).get();
+          _numbersOnTrace = await _db
+              .getNumbersOnTraceNow(stageId: event.stageId, dateTimeNow: event.dateTimeNow)
+              .get();
           await _emitState();
         case _ShiftStartsTime():
           await _db.shiftStartsTime(stageId: event.stageId, minutes: event.minutes, fromTime: event.fromTime);
@@ -375,77 +377,78 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           if (stageCsv != null) {
             await _db.createStagesFromStagesCsv(event.raceId, stageCsv);
           }
-        case _ShareStart():
+        case DatabaseEventShareStart():
           final race = _race;
           final stage = _stage;
           final stageId = stage?.id;
           if (race != null && stage != null && stageId != null) {
-            final startList = await _db.getStartResults(stageId);
-            final startMap = <Map<String, dynamic>>[];
+            final startList = await _db.getStartResults(stageId, useTimestamp: event.useTimestamp);
+            // final startMap = <Map<String, dynamic>>[];
+            // for (final start in startList) {
+            //   startMap.add(start.row.data);
+            // }
+            // final csv = mapListToCsv(startMap);
+            final list = <String>['${event.numberName};${event.starttimeName};${event.correctionName}'];
             for (final start in startList) {
-              startMap.add(start.row.data);
+              list.add('${start.number};${start.startTime};${start.correction}');
             }
-            final csv = mapListToCsv(startMap);
-            if (csv != null) {
-              final filename = '${race.name}-${stage.name}-start';
-              final file = await saveToFile(csv, filename);
-              if (file != null) {
-                await SharePlus.instance.share(
-                  ShareParams(
-                    files: [XFile(file.path)],
-                    text: Localization.current.I18nProtocol_shareStartResults(race.name, stage.name),
-                  ),
-                );
-              }
-            }
+            final csv = list.join('\n');
+            final filename = '${race.name}-${stage.name}-start.csv';
+            await shareProvider.share(
+              ShareParams(
+                files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
+                fileNameOverrides: [filename],
+                text: event.text,
+              ),
+            );
           }
-        case _ShareFinish():
+        case DatabaseEventShareFinish():
           final race = _race;
           final stage = _stage;
           final stageId = stage?.id;
           if (race != null && stage != null && stageId != null) {
-            final finishList = await _db.getFinishResults(stageId);
-            final finishMap = <Map<String, dynamic>>[];
-            for (final start in finishList) {
-              finishMap.add(start.row.data);
+            final finishList = await _db.getFinishResults(stageId, useTimestamp: event.useTimestamp);
+            // final finishMap = <Map<String, dynamic>>[];
+            // for (final finish in finishList) {
+            //   finishMap.add(finish.row.data);
+            // }
+            // final csv = mapListToCsv(finishMap);
+            final list = <String>['${event.numberName};${event.finishtimeName}'];
+            for (final finish in finishList) {
+              list.add('${finish.number};${finish.finishTime}');
             }
-            final csv = mapListToCsv(finishMap);
-            if (csv != null) {
-              final filename = '${race.name}-${stage.name}-finish';
-              final file = await saveToFile(csv, filename);
-              if (file != null) {
-                await SharePlus.instance.share(
-                  ShareParams(
-                    files: [XFile(file.path)],
-                    text: Localization.current.I18nProtocol_shareFinishResults(race.name, stage.name),
-                  ),
-                );
-              }
-            }
+            final csv = list.join('\n');
+            final filename = '${race.name}-${stage.name}-finish.csv';
+            await shareProvider.share(
+              ShareParams(
+                files: [XFile.fromData(utf8.encode(csv), mimeType: 'text/plain')],
+                fileNameOverrides: [filename],
+                text: event.text,
+              ),
+            );
           }
         case _ShareDatabase():
           final timeStamp = DateFormat(longDateFormat).format(DateTime.now());
           final dbDir = await getApplicationDocumentsDirectory();
           final file = File(path.join(dbDir.path, 'database_backup_$timeStamp.sqlite'));
-          await _db.exportInto(file);
-          await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
+          if (await _db.exportInto(file)) {
+            await shareProvider.share(ShareParams(files: [XFile(file.path)]));
+          }
         case _ShareTrack():
           final fileId = event.trail.fileId;
           if (fileId != null) {
             final track = await _db.getTrack(fileId);
             if (track != null) {
-              final dir = await getTemporaryDirectory();
-              var fileName = track.name;
+              var filename = track.name;
               if (track.extension != null) {
-                fileName += '.${track.extension}';
+                filename += '.${track.extension}';
               }
-              final file = File(path.join(dir.path, fileName));
-              // final sink = file.openWrite()
-              //   // writeAsBytes(trail.info! as List<int>);
-              //   ..write(track.data);
-              // await sink.close();
-              await file.writeAsBytes(track.data);
-              await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
+              await shareProvider.share(
+                ShareParams(
+                  files: [XFile.fromData(track.data, mimeType: 'application/octet-stream')],
+                  fileNameOverrides: [filename],
+                ),
+              );
             }
           }
       }
@@ -482,6 +485,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   StreamSubscription<AppSettings>? _appSettingsSubscription;
 
   StartlistProvider fileProvider;
+  ShareProvider shareProvider;
 
   Future<void> _emitState({Notification? notification, int? autoFinishNumber, bool? updateFinishNumber}) async {
     add(

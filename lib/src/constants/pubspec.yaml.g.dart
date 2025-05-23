@@ -40,7 +40,7 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.5.1-dev+448';
+const String version = r'0.5.1-dev+478';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
@@ -55,10 +55,10 @@ const int patch = 1;
 const List<String> pre = <String>[r'dev'];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'448'];
+const List<String> build = <String>[r'478'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1745677874;
+const int timestamp = 1747960867;
 
 /// Name [name]
 const String name = r'entime';
@@ -83,8 +83,8 @@ const String publishTo = r'none';
 
 /// Environment
 const Map<String, String> environment = <String, String>{
-  'sdk': '^3.7.0',
-  'flutter': '^3.7.0',
+  'sdk': '^3.8.0',
+  'flutter': '^3.8.0',
 };
 
 /// Dependencies
@@ -97,25 +97,25 @@ const Map<String, Object> dependencies = <String, Object>{
   'crypto': r'^3.0.6',
   'csv': r'^6.0.0',
   'device_info_plus': r'^11.4.0',
-  'drift': r'^2.26.0',
+  'drift': r'^2.26.1',
   'dropdown_search': r'^6.0.2',
   'equatable': r'^2.0.7',
-  'file_picker': r'^10.1.2',
+  'file_picker': r'^10.1.9',
   'flutter': <String, Object>{
     'sdk': r'flutter',
   },
-  'flutter_bloc': r'^9.1.0',
+  'flutter_bloc': r'^9.1.1',
   'flutter_bluetooth_serial': r'^0.4.0',
   'flutter_charset_detector': r'^5.0.0',
   'flutter_localizations': <String, Object>{
     'sdk': r'flutter',
   },
-  'flutter_markdown': r'^0.7.6+2',
+  'flutter_markdown': r'^0.7.7+1',
   'flutter_ntp': r'^0.0.2',
   'flutter_tts': r'^4.2.2',
   'freezed_annotation': r'^3.0.0',
   'http': r'^1.3.0',
-  'intl': r'^0.19.0',
+  'intl': r'^0.20.2',
   'json_annotation': r'^4.9.0',
   'logger': r'^2.5.0',
   'material_design_icons_flutter': r'^7.0.7296',
@@ -141,8 +141,8 @@ const Map<String, Object> dependencies = <String, Object>{
 const Map<String, Object> devDependencies = <String, Object>{
   'bloc_test': r'^10.0.0',
   'build_runner': r'^2.4.15',
-  'dart_style': r'^3.0.1',
-  'drift_dev': r'^2.26.0',
+  'dart_style': r'^3.1.0',
+  'drift_dev': r'^2.26.1',
   'flutter_lints': r'^5.0.0',
   'flutter_test': <String, Object>{
     'sdk': r'flutter',
@@ -154,7 +154,7 @@ const Map<String, Object> devDependencies = <String, Object>{
   'json_serializable': r'^6.9.5',
   'mocktail': r'^1.0.4',
   'patrol': r'^3.15.1',
-  'patrol_finders': r'^2.7.2',
+  'patrol_finders': r'^2.8.2',
   'pubspec_generator': r'^3.0.1',
   'test': r'^1.25.15',
   'very_good_analysis': r'^7.0.0',

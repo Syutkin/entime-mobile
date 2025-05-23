@@ -131,6 +131,7 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     required int ntpOffset,
     required int deltaInSeconds,
     @Default(false) bool forceUpdate,
+    @Default(false) bool useTimestampForTime,
   }) = _UpdateAutomaticCorrection;
 
   const factory DatabaseEvent.updateManualStartTime({
@@ -201,9 +202,20 @@ sealed class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.createStagesFromFile({required int raceId}) = _CreateStagesFromFile;
 
-  const factory DatabaseEvent.shareStart() = _ShareStart;
+  const factory DatabaseEvent.shareStart({
+    required bool useTimestamp,
+    @Default('number') String numberName,
+    @Default('start_time') String starttimeName,
+    @Default('correction') String correctionName,
+    String? text,
+  }) = DatabaseEventShareStart;
 
-  const factory DatabaseEvent.shareFinish() = _ShareFinish;
+  const factory DatabaseEvent.shareFinish({
+    required bool useTimestamp,
+    @Default('number') String numberName,
+    @Default('finish_time') String finishtimeName,
+    String? text,
+  }) = DatabaseEventShareFinish;
 
   const factory DatabaseEvent.shareDatabase() = _ShareDatabase;
 

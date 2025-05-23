@@ -2,14 +2,130 @@ import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/database/logic/validators.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() {
     Localization.delegate.load(const Locale('ru'));
+    initializeDateFormatting();
   });
 
   group('Validators tests', () {
+    group('validateCorrection tests', () {
+      test('Correction is null', () {
+        String? correction;
+        final validator = validateCorrection(correction);
+        expect(validator, null);
+      });
+      test('Correction is empty', () {
+        const correction = '';
+        final validator = validateCorrection(correction);
+        expect(validator, null);
+      });
+      test('Correct correction', () {
+        const correction = '1234';
+        final validator = validateCorrection(correction);
+        expect(validator, null);
+      });
+
+      test('Incorrect correction', () {
+        const correction = 'Incorrect correction';
+        final validator = validateCorrection(correction);
+        expect(validator, Localization.current.I18nStart_incorrectCorrection);
+      });
+    });
+
+    group('validateStartTime tests', () {
+      test('StartTime is null', () {
+        String? startTime;
+        final validator = validateStartTime(startTime);
+        expect(validator, null);
+      });
+      test('StartTime is empty', () {
+        const startTime = '';
+        final validator = validateStartTime(startTime);
+        expect(validator, null);
+      });
+      test('Correct StartTime', () {
+        const startTime = '10:10:10,123';
+        final validator = validateStartTime(startTime);
+        expect(validator, null);
+      });
+
+      test('Incorrect StartTime', () {
+        const startTime = 'Incorrect StartTime';
+        final validator = validateStartTime(startTime);
+        expect(validator, Localization.current.I18nStart_incorrectTime);
+      });
+    });
+
+    group('validateDelay tests', () {
+      test('Delay is null', () {
+        String? delay;
+        final validator = validateDelay(delay);
+        expect(validator, Localization.current.I18nSettings_incorrectDelay);
+      });
+      test('Delay is empty', () {
+        const delay = '';
+        final validator = validateDelay(delay);
+        expect(validator, Localization.current.I18nSettings_incorrectDelay);
+      });
+      test('Delay is negative', () {
+        const delay = '-1';
+        final validator = validateDelay(delay);
+        expect(validator, Localization.current.I18nSettings_incorrectDelay);
+      });
+      test('Delay is zero', () {
+        const delay = '0';
+        final validator = validateDelay(delay);
+        expect(validator, null);
+      });
+      test('Correct delay', () {
+        const delay = '100';
+        final validator = validateDelay(delay);
+        expect(validator, null);
+      });
+      test('Incorrect delay', () {
+        const delay = 'Incorrect delay';
+        final validator = validateDelay(delay);
+        expect(validator, Localization.current.I18nSettings_incorrectDelay);
+      });
+    });
+
+    group('validateDelta tests', () {
+      test('Delta is null', () {
+        String? delta;
+        final validator = validateDelta(delta);
+        expect(validator, Localization.current.I18nSettings_incorrectStartDelta);
+      });
+      test('Delta is empty', () {
+        const delta = '';
+        final validator = validateDelta(delta);
+        expect(validator, Localization.current.I18nSettings_incorrectStartDelta);
+      });
+      test('Delta is negative', () {
+        const delta = '-1';
+        final validator = validateDelta(delta);
+        expect(validator, Localization.current.I18nSettings_incorrectStartDelta);
+      });
+      test('Delta is zero', () {
+        const delta = '0';
+        final validator = validateDelta(delta);
+        expect(validator, null);
+      });
+      test('Correct delta', () {
+        const delta = '100';
+        final validator = validateDelta(delta);
+        expect(validator, null);
+      });
+      test('Incorrect delta', () {
+        const delta = 'Incorrect delay';
+        final validator = validateDelta(delta);
+        expect(validator, Localization.current.I18nSettings_incorrectStartDelta);
+      });
+    });
+
     group('validateRider tests', () {
       test('Rider is null', () {
         Rider? rider;

@@ -53,6 +53,8 @@ class I18nSettings {
 
   static String get general => Intl.message('Основные', name: 'I18nSettings_general');
 
+  static String get timeControl => Intl.message('Учёт времени', name: 'I18nSettings_timeControl');
+
   static String get reconnect => Intl.message('Переподключение', name: 'I18nSettings_reconnect');
 
   static String get reconnectDescription =>
@@ -92,7 +94,11 @@ class I18nSettings {
 
   static String get ttsEngine => Intl.message('Синтезатор речи', name: 'I18nSettings_ttsEngine');
 
+  static String get ttsEngineNotFound => Intl.message('Не найден', name: 'I18nSettings_ttsEngineNotFound');
+
   static String get ttsVoice => Intl.message('Голос', name: 'I18nSettings_ttsVoice');
+
+  static String get ttsVoiceNotFound => Intl.message('Не найден', name: 'I18nSettings_ttsVoiceNotFound');
 
   static String get voiceLanguage => Intl.message('Язык', name: 'I18nSettings_voiceLanguage');
 
@@ -241,6 +247,12 @@ class I18nSettings {
 
   static String get ntpOffsetDescription =>
       Intl.message('Синхронизировать при старте приложения', name: 'I18nSettings_ntpOffsetDescription');
+
+  static String get timeForAutomaticStamps =>
+      Intl.message('Время автоматических отсечек', name: 'I18nSettings_timeForAutomaticStamps');
+
+  static String get timeForAutomaticStampsDescription =>
+      Intl.message('Использовать время приложения', name: 'I18nSettings_timeForAutomaticStampsDescription');
 }
 
 class I18nProtocol {

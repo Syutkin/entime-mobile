@@ -15,3 +15,10 @@ targets:
           named_parameters: true
           raw_result_set_data: true
           store_date_time_values_as_text: true
+          databases:
+            # Required: A name for the database and its path
+            my_database: lib/src/feature/database/drift/app_database.dart
+          # The directory where the test files are stored:
+          test_dir: test/src/feature/database/drift/
+          schema_dir: lib/src/feature/database/drift/
+          

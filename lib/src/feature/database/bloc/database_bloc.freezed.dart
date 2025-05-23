@@ -1506,7 +1506,7 @@ as int?,
 
 
 class _UpdateAutomaticCorrection with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _UpdateAutomaticCorrection({required this.stageId, required this.startTime, required this.correction, required this.timestamp, required this.ntpOffset, required this.deltaInSeconds, this.forceUpdate = false});
+  const _UpdateAutomaticCorrection({required this.stageId, required this.startTime, required this.correction, required this.timestamp, required this.ntpOffset, required this.deltaInSeconds, this.forceUpdate = false, this.useTimestampForTime = false});
   
 
  final  int stageId;
@@ -1516,6 +1516,7 @@ class _UpdateAutomaticCorrection with DiagnosticableTreeMixin implements Databas
  final  int ntpOffset;
  final  int deltaInSeconds;
 @JsonKey() final  bool forceUpdate;
+@JsonKey() final  bool useTimestampForTime;
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -1528,21 +1529,21 @@ _$UpdateAutomaticCorrectionCopyWith<_UpdateAutomaticCorrection> get copyWith => 
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateAutomaticCorrection'))
-    ..add(DiagnosticsProperty('stageId', stageId))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('correction', correction))..add(DiagnosticsProperty('timestamp', timestamp))..add(DiagnosticsProperty('ntpOffset', ntpOffset))..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds))..add(DiagnosticsProperty('forceUpdate', forceUpdate));
+    ..add(DiagnosticsProperty('stageId', stageId))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('correction', correction))..add(DiagnosticsProperty('timestamp', timestamp))..add(DiagnosticsProperty('ntpOffset', ntpOffset))..add(DiagnosticsProperty('deltaInSeconds', deltaInSeconds))..add(DiagnosticsProperty('forceUpdate', forceUpdate))..add(DiagnosticsProperty('useTimestampForTime', useTimestampForTime));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAutomaticCorrection&&(identical(other.stageId, stageId) || other.stageId == stageId)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.correction, correction) || other.correction == correction)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.ntpOffset, ntpOffset) || other.ntpOffset == ntpOffset)&&(identical(other.deltaInSeconds, deltaInSeconds) || other.deltaInSeconds == deltaInSeconds)&&(identical(other.forceUpdate, forceUpdate) || other.forceUpdate == forceUpdate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateAutomaticCorrection&&(identical(other.stageId, stageId) || other.stageId == stageId)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.correction, correction) || other.correction == correction)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp)&&(identical(other.ntpOffset, ntpOffset) || other.ntpOffset == ntpOffset)&&(identical(other.deltaInSeconds, deltaInSeconds) || other.deltaInSeconds == deltaInSeconds)&&(identical(other.forceUpdate, forceUpdate) || other.forceUpdate == forceUpdate)&&(identical(other.useTimestampForTime, useTimestampForTime) || other.useTimestampForTime == useTimestampForTime));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stageId,startTime,correction,timestamp,ntpOffset,deltaInSeconds,forceUpdate);
+int get hashCode => Object.hash(runtimeType,stageId,startTime,correction,timestamp,ntpOffset,deltaInSeconds,forceUpdate,useTimestampForTime);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds, forceUpdate: $forceUpdate)';
+  return 'DatabaseEvent.updateAutomaticCorrection(stageId: $stageId, startTime: $startTime, correction: $correction, timestamp: $timestamp, ntpOffset: $ntpOffset, deltaInSeconds: $deltaInSeconds, forceUpdate: $forceUpdate, useTimestampForTime: $useTimestampForTime)';
 }
 
 
@@ -1553,7 +1554,7 @@ abstract mixin class _$UpdateAutomaticCorrectionCopyWith<$Res> implements $Datab
   factory _$UpdateAutomaticCorrectionCopyWith(_UpdateAutomaticCorrection value, $Res Function(_UpdateAutomaticCorrection) _then) = __$UpdateAutomaticCorrectionCopyWithImpl;
 @useResult
 $Res call({
- int stageId, String startTime, int correction, DateTime timestamp, int ntpOffset, int deltaInSeconds, bool forceUpdate
+ int stageId, String startTime, int correction, DateTime timestamp, int ntpOffset, int deltaInSeconds, bool forceUpdate, bool useTimestampForTime
 });
 
 
@@ -1570,7 +1571,7 @@ class __$UpdateAutomaticCorrectionCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stageId = null,Object? startTime = null,Object? correction = null,Object? timestamp = null,Object? ntpOffset = null,Object? deltaInSeconds = null,Object? forceUpdate = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? stageId = null,Object? startTime = null,Object? correction = null,Object? timestamp = null,Object? ntpOffset = null,Object? deltaInSeconds = null,Object? forceUpdate = null,Object? useTimestampForTime = null,}) {
   return _then(_UpdateAutomaticCorrection(
 stageId: null == stageId ? _self.stageId : stageId // ignore: cast_nullable_to_non_nullable
 as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
@@ -1579,6 +1580,7 @@ as int,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cas
 as DateTime,ntpOffset: null == ntpOffset ? _self.ntpOffset : ntpOffset // ignore: cast_nullable_to_non_nullable
 as int,deltaInSeconds: null == deltaInSeconds ? _self.deltaInSeconds : deltaInSeconds // ignore: cast_nullable_to_non_nullable
 as int,forceUpdate: null == forceUpdate ? _self.forceUpdate : forceUpdate // ignore: cast_nullable_to_non_nullable
+as bool,useTimestampForTime: null == useTimestampForTime ? _self.useTimestampForTime : useTimestampForTime // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -2865,78 +2867,160 @@ as int,
 /// @nodoc
 
 
-class _ShareStart with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _ShareStart();
+class DatabaseEventShareStart with DiagnosticableTreeMixin implements DatabaseEvent {
+  const DatabaseEventShareStart({required this.useTimestamp, this.numberName = 'number', this.starttimeName = 'start_time', this.correctionName = 'correction', this.text});
   
 
+ final  bool useTimestamp;
+@JsonKey() final  String numberName;
+@JsonKey() final  String starttimeName;
+@JsonKey() final  String correctionName;
+ final  String? text;
 
-
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DatabaseEventShareStartCopyWith<DatabaseEventShareStart> get copyWith => _$DatabaseEventShareStartCopyWithImpl<DatabaseEventShareStart>(this, _$identity);
 
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.shareStart'))
-    ;
+    ..add(DiagnosticsProperty('useTimestamp', useTimestamp))..add(DiagnosticsProperty('numberName', numberName))..add(DiagnosticsProperty('starttimeName', starttimeName))..add(DiagnosticsProperty('correctionName', correctionName))..add(DiagnosticsProperty('text', text));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareStart);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseEventShareStart&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp)&&(identical(other.numberName, numberName) || other.numberName == numberName)&&(identical(other.starttimeName, starttimeName) || other.starttimeName == starttimeName)&&(identical(other.correctionName, correctionName) || other.correctionName == correctionName)&&(identical(other.text, text) || other.text == text));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,useTimestamp,numberName,starttimeName,correctionName,text);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.shareStart()';
+  return 'DatabaseEvent.shareStart(useTimestamp: $useTimestamp, numberName: $numberName, starttimeName: $starttimeName, correctionName: $correctionName, text: $text)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $DatabaseEventShareStartCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
+  factory $DatabaseEventShareStartCopyWith(DatabaseEventShareStart value, $Res Function(DatabaseEventShareStart) _then) = _$DatabaseEventShareStartCopyWithImpl;
+@useResult
+$Res call({
+ bool useTimestamp, String numberName, String starttimeName, String correctionName, String? text
+});
 
 
+
+
+}
+/// @nodoc
+class _$DatabaseEventShareStartCopyWithImpl<$Res>
+    implements $DatabaseEventShareStartCopyWith<$Res> {
+  _$DatabaseEventShareStartCopyWithImpl(this._self, this._then);
+
+  final DatabaseEventShareStart _self;
+  final $Res Function(DatabaseEventShareStart) _then;
+
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? useTimestamp = null,Object? numberName = null,Object? starttimeName = null,Object? correctionName = null,Object? text = freezed,}) {
+  return _then(DatabaseEventShareStart(
+useTimestamp: null == useTimestamp ? _self.useTimestamp : useTimestamp // ignore: cast_nullable_to_non_nullable
+as bool,numberName: null == numberName ? _self.numberName : numberName // ignore: cast_nullable_to_non_nullable
+as String,starttimeName: null == starttimeName ? _self.starttimeName : starttimeName // ignore: cast_nullable_to_non_nullable
+as String,correctionName: null == correctionName ? _self.correctionName : correctionName // ignore: cast_nullable_to_non_nullable
+as String,text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
 
-class _ShareFinish with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _ShareFinish();
+class DatabaseEventShareFinish with DiagnosticableTreeMixin implements DatabaseEvent {
+  const DatabaseEventShareFinish({required this.useTimestamp, this.numberName = 'number', this.finishtimeName = 'finish_time', this.text});
   
 
+ final  bool useTimestamp;
+@JsonKey() final  String numberName;
+@JsonKey() final  String finishtimeName;
+ final  String? text;
 
-
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DatabaseEventShareFinishCopyWith<DatabaseEventShareFinish> get copyWith => _$DatabaseEventShareFinishCopyWithImpl<DatabaseEventShareFinish>(this, _$identity);
 
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.shareFinish'))
-    ;
+    ..add(DiagnosticsProperty('useTimestamp', useTimestamp))..add(DiagnosticsProperty('numberName', numberName))..add(DiagnosticsProperty('finishtimeName', finishtimeName))..add(DiagnosticsProperty('text', text));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ShareFinish);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseEventShareFinish&&(identical(other.useTimestamp, useTimestamp) || other.useTimestamp == useTimestamp)&&(identical(other.numberName, numberName) || other.numberName == numberName)&&(identical(other.finishtimeName, finishtimeName) || other.finishtimeName == finishtimeName)&&(identical(other.text, text) || other.text == text));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,useTimestamp,numberName,finishtimeName,text);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.shareFinish()';
+  return 'DatabaseEvent.shareFinish(useTimestamp: $useTimestamp, numberName: $numberName, finishtimeName: $finishtimeName, text: $text)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $DatabaseEventShareFinishCopyWith<$Res> implements $DatabaseEventCopyWith<$Res> {
+  factory $DatabaseEventShareFinishCopyWith(DatabaseEventShareFinish value, $Res Function(DatabaseEventShareFinish) _then) = _$DatabaseEventShareFinishCopyWithImpl;
+@useResult
+$Res call({
+ bool useTimestamp, String numberName, String finishtimeName, String? text
+});
 
 
+
+
+}
+/// @nodoc
+class _$DatabaseEventShareFinishCopyWithImpl<$Res>
+    implements $DatabaseEventShareFinishCopyWith<$Res> {
+  _$DatabaseEventShareFinishCopyWithImpl(this._self, this._then);
+
+  final DatabaseEventShareFinish _self;
+  final $Res Function(DatabaseEventShareFinish) _then;
+
+/// Create a copy of DatabaseEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? useTimestamp = null,Object? numberName = null,Object? finishtimeName = null,Object? text = freezed,}) {
+  return _then(DatabaseEventShareFinish(
+useTimestamp: null == useTimestamp ? _self.useTimestamp : useTimestamp // ignore: cast_nullable_to_non_nullable
+as bool,numberName: null == numberName ? _self.numberName : numberName // ignore: cast_nullable_to_non_nullable
+as String,finishtimeName: null == finishtimeName ? _self.finishtimeName : finishtimeName // ignore: cast_nullable_to_non_nullable
+as String,text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

@@ -1,3 +1,4 @@
+
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
 import 'package:entime/src/feature/database/logic/validators.dart';
 import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
@@ -8,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../../common/utils/extensions.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
 import '../../../constants/date_time_formats.dart';
@@ -316,8 +316,7 @@ class _StartListPage extends State<StartListPage> {
                 }
               },
             ),
-            // persistentFooterButtons:
-            //     kReleaseMode ? null : _persistentFooterButtons(context),
+            // persistentFooterButtons: kReleaseMode ? null : _persistentFooterButtons(context),
           );
         },
       ),
@@ -327,22 +326,19 @@ class _StartListPage extends State<StartListPage> {
   // List<Widget> _persistentFooterButtons(BuildContext context) {
   //   final databaseBloc = context.read<DatabaseBloc>();
   //   final stage = databaseBloc.state.stage;
-  //   final stageId = stage!.id;
+  //   final stageId = stage?.id;
   //   return <Widget>[
-  //     TextButton(
-  //       onPressed: () {
-  //         BlocProvider.of<DatabaseBloc>(
-  //           context,
-  //         ).add(DatabaseEvent.clearStartResultsDebug(stageId));
-  //       },
-  //       child: const Icon(Icons.clear_all),
-  //     ),
+  // TextButton(
+  //   onPressed: () {
+  //     BlocProvider.of<DatabaseBloc>(context).add(DatabaseEvent.clearStartResultsDebug(stageId));
+  //   },
+  //   child: const Icon(Icons.clear_all),
+  // ),
   // TextButton(
   //   onPressed: () {
   //     BlocProvider.of<BluetoothBloc>(context).add(
   //       BluetoothEvent.messageReceived(
-  //         message:
-  //             'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+  //         message: 'V${DateFormat(shortTimeFormat).format(DateTime.now())}#',
   //         stageId: stageId,
   //       ),
   //     );
@@ -353,76 +349,73 @@ class _StartListPage extends State<StartListPage> {
   //   onPressed: () {
   //     BlocProvider.of<BluetoothBloc>(context).add(
   //       BluetoothEvent.messageReceived(
-  //         message:
-  //             'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
+  //         message: 'B${DateFormat(shortTimeFormat).format(DateTime.now())}#',
   //         stageId: stageId,
   //       ),
   //     );
   //   },
   //   child: const Icon(Icons.volume_up),
   // ),
-  // TextButton(
-  //   onPressed: () {
-  //     databaseBloc.add(
-  //       DatabaseEvent.updateAutomaticCorrection(
-  //         stageId: stageId,
-  //         correction: 1234,
-  //         timestamp: DateTime.timestamp(),
-  //         startTime: DateFormat(longTimeFormat).format(DateTime.now()),
-  //         ntpOffset: 2345,
-  //         // deltaInSeconds: ,
-  //         // forceUpdate: ,
-  //       ),
-  //     );
-  //   },
-  //   child: const Icon(Icons.play_arrow),
-  // ),
-  // TextButton(
-  //   onPressed: () {
-  //     databaseBloc.add(
-  //       DatabaseEvent.addStartNumber(
-  //         stage: stage,
-  //         number: 111,
-  //         startTime: '15:31:00',
-  //         forceAdd: true,
-  //       ),
-  //     );
-  // final AutomaticStart automaticStart = AutomaticStart(
+  // if (stage != null && stageId != null)
+  //   TextButton(
+  //     onPressed: () {
+  //       final cor = Random().nextInt(9999) - 5000;
+  //       BlocProvider.of<BluetoothBloc>(context).add(
+  //         BluetoothEvent.messageReceived(
+  //           message:
+  //               r'$'
+  //               '15:31:01,121;$cor#',
+  //           stageId: stageId,
+  //         ),
+  //       );
+  //     },
+  //     child: const Icon(Icons.play_arrow),
+  //   ),
+  // if (stage != null && stageId != null)
+  //   TextButton(
+  //     onPressed: () async {
+  //       final startTime = DateTime.now().format(shortTimeFormat);
+  //       databaseBloc.add(
+  //         DatabaseEvent.addStartNumber(
+  //           stage: stage,
+  //           number: Random().nextInt(100) + 1,
+  //           startTime: startTime,
+  //           forceAdd: true,
+  //         ),
+  //       );
+  // final automaticStart = AutomaticStart(
   //   DateFormat(longTimeFormat).format(DateTime.now()),
   //   1234,
   //   DateTime.now(),
   // );
-  // BlocProvider.of<ProtocolBloc>(context).add(
-  //   ProtocolEvent.updateAutomaticCorrection(
-  //     forceUpdate: true,
-  //     automaticStart: AutomaticStart(
-  //       '15:31:00',
-  //       Random().nextInt(9999) - 5000,
-  //       DateTime.now(),
-  //     ),
+  // BlocProvider.of<DatabaseBloc>(context).add(
+  //   DatabaseEvent.updateAutomaticCorrection(
+  //     stageId: stageId,
+  //     startTime: automaticStart.time,
+  //     correction: automaticStart.correction,
+  //     timestamp: automaticStart.timestamp,
+  //     ntpOffset: 0,
+  //     deltaInSeconds: 2000,
+  //     forceUpdate: automaticStart.updating,
+  //   ),
+  // DatabaseEvent.updateAutomaticCorrection(
+  //   forceUpdate: true,
+  //   automaticStart: AutomaticStart('15:31:00', Random().nextInt(9999) - 5000, DateTime.now()),
+  // ),
+  // );
+
+  // final cor2 = Random().nextInt(9999) - 5000;
+  // BlocProvider.of<BluetoothBloc>(context).add(
+  //   BluetoothEvent.messageReceived(
+  //     message:
+  //         r'$'
+  //         '15:31:01,121;$cor2#',
+  //     stageId: stageId,
   //   ),
   // );
-  //         final cor = Random().nextInt(9999) - 5000;
-  //         BlocProvider.of<BluetoothBloc>(context).add(
-  //           BluetoothEvent.messageReceived(
-  //             message:
-  //                 r'$'
-  //                 '15:31:01,121;$cor#',
-  //             stageId: stageId,
-  //           ),
-  //         );
-  //         final cor2 = Random().nextInt(9999) - 5000;
-  //         BlocProvider.of<BluetoothBloc>(context).add(
-  //           BluetoothEvent.messageReceived(
-  //             message:
-  //                 r'$'
-  //                 '15:31:01,121;$cor2#',
-  //             stageId: stageId,
-  //           ),
-  //         );
-  //       },
-  //       child: const Icon(Icons.bluetooth),
-  //     ),
+  //         },
+  //         child: const Icon(Icons.bluetooth),
+  //       ),
   //   ];
   // }
 
@@ -483,14 +476,14 @@ class _SliverStartSubHeader extends StatelessWidget {
             child: Align(alignment: Alignment.centerLeft, child: Text(Localization.current.I18nStart_sliverStart)),
           ),
           Flexible(
-            flex: 25,
+            flex: 20,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(Localization.current.I18nStart_sliverManualCorrection),
             ),
           ),
           Flexible(
-            flex: 25,
+            flex: 30,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(Localization.current.I18nStart_sliverAutomaticCorrection),

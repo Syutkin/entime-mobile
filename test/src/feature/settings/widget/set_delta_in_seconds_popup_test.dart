@@ -49,7 +49,6 @@ void main() {
       await $(TextFormField).enterText('999-00');
       await $(#okButton).tap();
       expect($(Localization.current.I18nSettings_incorrectStartDelta), findsOneWidget);
-      // expect($(delta.toString()), findsOneWidget);
     });
 
     patrolWidgetTest('Enter empty seconds', (PatrolTester $) async {

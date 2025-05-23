@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/common/utils/extensions.dart';
+import 'package:entime/src/constants/date_time_formats.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
@@ -16,6 +17,7 @@ class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit 
 
 void main() {
   late String finishTime;
+  late String timestampStr;
   late DateTime timestamp;
   late String difference;
   late int number;
@@ -35,7 +37,8 @@ void main() {
     setUp(() {
       number = 7;
       finishTime = '10:00:03,123';
-      timestamp = '10:00:03.456'.toDateTime()!;
+      timestampStr = '10:00:03,456';
+      timestamp = timestampStr.toDateTime()!;
       difference = '-333';
       settingsCubit = MockSettingsCubit();
       settings = const AppSettings.defaults();
@@ -81,6 +84,75 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget(item));
 
       expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.handBackLeft);
+    });
+
+    patrolWidgetTest('Correct cellphone icon if using local time for automatic stamps', (PatrolTester $) async {
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+
+      expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.cellphone);
+    });
+
+    patrolWidgetTest('Show timestamp if using local time for automatic stamps', (PatrolTester $) async {
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+      expect($(timestampStr), findsOneWidget);
+      expect($(finishTime), findsNothing);
+    });
+
+    patrolWidgetTest('Take into account ntpOffset for timestamp if using local time for automatic stamps', (
+      PatrolTester $,
+    ) async {
+      when(
+        () => settingsCubit.state,
+      ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
+
+      const ntpOffset = -4378;
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: ntpOffset,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      final result = timestampStr.toDateTime()?.add(const Duration(milliseconds: ntpOffset)).format(longTimeFormat);
+
+      await $.pumpWidgetAndSettle(testWidget(item));
+      expect($(result), findsOneWidget);
+      expect($(finishTime), findsNothing);
     });
 
     patrolWidgetTest('Show difference if enabled at settings', (PatrolTester $) async {
@@ -168,6 +240,43 @@ void main() {
       expect($(difference), findsOneWidget);
       expect($(Flexible), findsNWidgets(4));
     });
+
+    patrolWidgetTest(
+      'Do not change color if difference more than threshold but useTimestampForAutomaticStamps enabled',
+      (PatrolTester $) async {
+        settings = settings.copyWith(
+          showFinishDifference: false,
+          showColorFinishDifference: true,
+          finishDifferenceThreshold: 1,
+          useTimestampForAutomaticStamps: true,
+        );
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        final item = Finish(
+          id: 1,
+          stageId: 1,
+          timestamp: timestamp,
+          ntpOffset: 0,
+          finishTime: finishTime,
+          isHidden: false,
+          isManual: true,
+          number: number,
+        );
+
+        await $.pumpWidgetAndSettle(testWidget(item));
+
+        final context = $.tester.element($(FinishItemTile));
+        final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
+        final textColor = ($.tester.firstWidget($(Text)) as Text).style?.color;
+        final iconColor = ($.tester.firstWidget($(Icon)) as Icon).color;
+
+        expect(cardColor, null);
+        expect(textColor, Theme.of(context).colorScheme.onSurface);
+        expect(iconColor, Theme.of(context).colorScheme.onSurface);
+        expect($(difference), findsNothing);
+        expect($(Flexible), findsNWidgets(3));
+      },
+    );
 
     patrolWidgetTest('Take into account ntpOffset when show difference', (PatrolTester $) async {
       settings = settings.copyWith(

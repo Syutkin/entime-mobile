@@ -228,6 +228,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Учёт времени`
+  String get I18nSettings_timeControl {
+    return Intl.message(
+      'Учёт времени',
+      name: 'I18nSettings_timeControl',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Переподключение`
   String get I18nSettings_reconnect {
     return Intl.message(
@@ -393,11 +403,31 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Не найден`
+  String get I18nSettings_ttsEngineNotFound {
+    return Intl.message(
+      'Не найден',
+      name: 'I18nSettings_ttsEngineNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Голос`
   String get I18nSettings_ttsVoice {
     return Intl.message(
       'Голос',
       name: 'I18nSettings_ttsVoice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не найден`
+  String get I18nSettings_ttsVoiceNotFound {
+    return Intl.message(
+      'Не найден',
+      name: 'I18nSettings_ttsVoiceNotFound',
       desc: '',
       args: [],
     );
@@ -968,6 +998,26 @@ class GeneratedLocalization {
     return Intl.message(
       'Синхронизировать при старте приложения',
       name: 'I18nSettings_ntpOffsetDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Время автоматических отсечек`
+  String get I18nSettings_timeForAutomaticStamps {
+    return Intl.message(
+      'Время автоматических отсечек',
+      name: 'I18nSettings_timeForAutomaticStamps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Использовать время приложения`
+  String get I18nSettings_timeForAutomaticStampsDescription {
+    return Intl.message(
+      'Использовать время приложения',
+      name: 'I18nSettings_timeForAutomaticStampsDescription',
       desc: '',
       args: [],
     );

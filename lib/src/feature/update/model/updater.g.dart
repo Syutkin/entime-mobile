@@ -21,10 +21,9 @@ _Release _$ReleaseFromJson(Map<String, dynamic> json) => _Release(
   prerelease: json['prerelease'] as bool,
   createdAt: DateTime.parse(json['created_at'] as String),
   publishedAt: DateTime.parse(json['published_at'] as String),
-  assets:
-      (json['assets'] as List<dynamic>)
-          .map((e) => Asset.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  assets: (json['assets'] as List<dynamic>)
+      .map((e) => Asset.fromJson(e as Map<String, dynamic>))
+      .toList(),
   tarballUrl: json['tarball_url'] as String,
   zipballUrl: json['zipball_url'] as String,
   body: json['body'] as String,

@@ -1,9 +1,7 @@
 part of 'settings_popups.dart';
 
 Future<int?> setDelayPopup(BuildContext context, int delay, String title) async {
-  var newDelay = delay;
-
-  final delayController = TextEditingController()..text = newDelay.toString();
+  final delayController = TextEditingController()..text = delay.toString();
 
   final formKey = GlobalKey<FormState>();
 
@@ -24,17 +22,7 @@ Future<int?> setDelayPopup(BuildContext context, int delay, String title) async 
                   decoration: InputDecoration(labelText: Localization.current.I18nSettings_delay),
                   controller: delayController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (value == null) {
-                      return Localization.current.I18nSettings_incorrectDelay;
-                    }
-                    final integer = int.tryParse(value);
-                    if (integer == null || integer < 0) {
-                      return Localization.current.I18nSettings_incorrectDelay;
-                    }
-                    newDelay = integer;
-                    return null;
-                  },
+                  validator: validateDelay,
                 ),
               ],
             ),
@@ -46,7 +34,7 @@ Future<int?> setDelayPopup(BuildContext context, int delay, String title) async 
             },
             onOkPressed: () {
               if (formKey.currentState!.validate()) {
-                Navigator.of(context).pop(newDelay);
+                Navigator.of(context).pop(int.parse(delayController.text));
               }
             },
           ),
