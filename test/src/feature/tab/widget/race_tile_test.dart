@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/feature/countdown/countdown.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/tab/model/race_menu_button.dart';
 import 'package:entime/src/feature/tab/widget/race_tile.dart';
@@ -11,8 +12,11 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
+class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState> implements CountdownBloc {}
+
 void main() {
   late DatabaseBloc databaseBloc;
+  late CountdownBloc countdownBloc;
   late Race race;
   late Stage stage;
 
@@ -20,12 +24,18 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: databaseBloc, child: const RaceTile())),
+      home: Material(
+        child: BlocProvider.value(
+          value: countdownBloc,
+          child: BlocProvider.value(value: databaseBloc, child: const RaceTile()),
+        ),
+      ),
     );
   }
 
   setUpAll(() {
     databaseBloc = MockDatabaseBloc();
+    countdownBloc = MockCountdownBloc();
   });
 
   setUp(() {

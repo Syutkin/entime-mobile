@@ -40,7 +40,7 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.5.1-dev+478';
+const String version = r'0.5.1-dev+480';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
@@ -55,10 +55,10 @@ const int patch = 1;
 const List<String> pre = <String>[r'dev'];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'478'];
+const List<String> build = <String>[r'480'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1747960867;
+const int timestamp = 1747982320;
 
 /// Name [name]
 const String name = r'entime';
@@ -114,7 +114,7 @@ const Map<String, Object> dependencies = <String, Object>{
   'flutter_ntp': r'^0.0.2',
   'flutter_tts': r'^4.2.2',
   'freezed_annotation': r'^3.0.0',
-  'http': r'^1.3.0',
+  'http': r'^1.4.0',
   'intl': r'^0.20.2',
   'json_annotation': r'^4.9.0',
   'logger': r'^2.5.0',
@@ -131,8 +131,8 @@ const Map<String, Object> dependencies = <String, Object>{
   'settings_ui': r'^2.0.2',
   'share_plus': r'^11.0.0',
   'shared_preferences': r'^2.5.3',
-  'sqlite3': r'^2.7.5',
-  'sqlite3_flutter_libs': r'^0.5.32',
+  'sqlite3': r'^2.7.6',
+  'sqlite3_flutter_libs': r'^0.5.33',
   'url_launcher': r'^6.3.1',
   'wakelock_plus': r'^1.3.2',
 };

@@ -177,6 +177,38 @@ as int,
 /// @nodoc
 
 
+class _Stop implements CountdownEvent {
+  const _Stop();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Stop);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CountdownEvent.stop()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
 class _Beep implements CountdownEvent {
   const _Beep();
   
