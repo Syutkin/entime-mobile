@@ -29,7 +29,11 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
         case _Tick():
           final nextStartTime = event.tick.nextStartTime;
           if (nextStartTime == null) {
-            emit(CountdownState.working(tick: Tick(text: event.tick.text, second: event.tick.second)));
+            emit(
+              CountdownState.working(
+                tick: Tick(text: event.tick.text, second: event.tick.second),
+              ),
+            );
           } else {
             emit(CountdownState.working(tick: event.tick));
           }
@@ -42,6 +46,9 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
             time: DateFormat(shortTimeFormat).format(DateTime.now()),
             stageId: event.stageId,
           );
+        case _Stop():
+          _countdown.stop();
+          emit(const CountdownState.initial());
       }
     });
   }

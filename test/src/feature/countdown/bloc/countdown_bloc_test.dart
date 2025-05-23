@@ -30,14 +30,19 @@ void main() {
     tick = Tick(second: second, text: text);
     ticks = <Tick>[];
 
-    when(() => countdownAtStart.start(stageId)).thenAnswer((_) => Future.value());
+    when(() => countdownAtStart.start(stageId)).thenAnswer((_) async {});
+
+    when(() => countdownAtStart.stop()).thenAnswer((_) async {});
 
     when(() => countdownAtStart.ticks).thenAnswer((_) => BehaviorSubject<Tick>());
 
-    when(() => audioController.beep()).thenAnswer((_) => Future.value());
+    when(() => audioController.beep()).thenAnswer((_) async {});
 
     when(
-      () => audioController.callParticipant(time: any(named: 'time'), stageId: stageId),
+      () => audioController.callParticipant(
+        time: any(named: 'time'),
+        stageId: stageId,
+      ),
     ).thenAnswer((_) => Future.value(''));
   });
 
@@ -67,10 +72,9 @@ void main() {
         ).thenAnswer((_) => BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)));
       },
       build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
-      expect:
-          () => ticks.map((element) {
-            return CountdownState.working(tick: element);
-          }),
+      expect: () => ticks.map((element) {
+        return CountdownState.working(tick: element);
+      }),
     );
 
     blocTest<CountdownBloc, CountdownState>(
@@ -84,10 +88,9 @@ void main() {
         ).thenAnswer((_) => BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)));
       },
       build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
-      expect:
-          () => ticks.map((element) {
-            return CountdownState.working(tick: element);
-          }),
+      expect: () => ticks.map((element) {
+        return CountdownState.working(tick: element);
+      }),
     );
 
     blocTest<CountdownBloc, CountdownState>(
@@ -119,7 +122,26 @@ void main() {
       },
       build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
       verify: (_) {
-        verify(() => audioController.callParticipant(time: any(named: 'time'), stageId: stageId)).called(1);
+        verify(
+          () => audioController.callParticipant(
+            time: any(named: 'time'),
+            stageId: stageId,
+          ),
+        ).called(1);
+      },
+    );
+
+    blocTest<CountdownBloc, CountdownState>(
+      'Add "stop" event',
+      act: (bloc) {
+        bloc
+          ..add(CountdownEvent.tick(tick))
+          ..add(const CountdownEvent.stop());
+      },
+      build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
+      expect: () => [isA<CountdownStateWorking>(), isA<CountdownStateInitial>()],
+      verify: (_) {
+        verify(() => countdownAtStart.stop()).called(1);
       },
     );
   });
