@@ -478,9 +478,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nStart_sliverNumber": MessageLookupByLibrary.simpleMessage("No."),
     "I18nStart_sliverStart": MessageLookupByLibrary.simpleMessage("Start"),
     "I18nStart_startTime": MessageLookupByLibrary.simpleMessage("Start Time"),
-    "I18nStart_startTimeAtSmartphone": MessageLookupByLibrary.simpleMessage(
-      "App\'s start time",
-    ),
     "I18nUpdate_changelog": MessageLookupByLibrary.simpleMessage("Changelog"),
     "I18nUpdate_checkForUpdates": MessageLookupByLibrary.simpleMessage(
       "Check for updates",

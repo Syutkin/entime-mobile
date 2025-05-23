@@ -1867,13 +1867,36 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Время старта на смартфоне`
-  String get I18nStart_startTimeAtSmartphone {
+  /// `Время записи на устройстве`
+  String get I18nStart_startTimestamp {
     return Intl.message(
-      'Время старта на смартфоне',
-      name: 'I18nStart_startTimeAtSmartphone',
+      'Время записи на устройстве',
+      name: 'I18nStart_startTimestamp',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Заменить автоматическую поправку`
+  String get I18nStart_replaceAutomaticCorrection {
+    return Intl.message(
+      'Заменить автоматическую поправку',
+      name: 'I18nStart_replaceAutomaticCorrection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вы уверены что хотите заменить автоматическую поправку ({automaticCorrection}) на поправку относительно времени смартфона ({timestampCorrection})?`
+  String I18nStart_replaceAutomaticCorrectionConfirmation(
+    Object automaticCorrection,
+    Object timestampCorrection,
+  ) {
+    return Intl.message(
+      'Вы уверены что хотите заменить автоматическую поправку ($automaticCorrection) на поправку относительно времени смартфона ($timestampCorrection)?',
+      name: 'I18nStart_replaceAutomaticCorrectionConfirmation',
+      desc: '',
+      args: [automaticCorrection, timestampCorrection],
     );
   }
 

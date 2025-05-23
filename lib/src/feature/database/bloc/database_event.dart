@@ -117,6 +117,7 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     required int stageId,
     required int participantId,
     required String startTime,
+    int? timestampCorrection,
     String? automaticStartTime,
     int? automaticCorrection,
     String? manualStartTime,
