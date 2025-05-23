@@ -261,6 +261,7 @@ void main() {
         () => databaseBloc.add(
           DatabaseEvent.updateStartingInfo(
             startTime: startTime,
+            timestampCorrection: timestampCorrection,
             automaticStartTime: automaticStartTime,
             automaticCorrection: automaticCorrection,
             manualStartTime: manualStartTime,
