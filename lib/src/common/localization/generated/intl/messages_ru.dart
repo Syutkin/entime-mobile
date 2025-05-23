@@ -103,9 +103,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m27(year) => "Год/Возраст: ${year}";
 
-  static String m37(number) => "Участник с номером ${number} не стартовал?";
+  static String m37(automaticCorrection, timestampCorrection) =>
+      "Вы уверены что хотите заменить автоматическую поправку (${automaticCorrection}) на поправку относительно времени смартфона (${timestampCorrection})?";
 
-  static String m38(number, time) =>
+  static String m38(number) => "Участник с номером ${number} не стартовал?";
+
+  static String m39(number, time) =>
       "Сдвинуть время стартов на указанное количество минут от номера ${number} (время старта ${time}) и далее?";
 
   static String m28(current, total) => "${current} из ${total}";
@@ -748,12 +751,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nStart_participantNumberWithName": m25,
     "I18nStart_participantTeam": m26,
     "I18nStart_participantYear": m27,
-    "I18nStart_setDnsConfirmation": m37,
+    "I18nStart_replaceAutomaticCorrection":
+        MessageLookupByLibrary.simpleMessage(
+          "Заменить автоматическую поправку",
+        ),
+    "I18nStart_replaceAutomaticCorrectionConfirmation": m37,
+    "I18nStart_setDnsConfirmation": m38,
     "I18nStart_shiftMinutes": MessageLookupByLibrary.simpleMessage("Минуты"),
     "I18nStart_shiftStartsTime": MessageLookupByLibrary.simpleMessage(
       "Сдвинуть время стартов",
     ),
-    "I18nStart_shiftStartsTimeFromNumber": m38,
+    "I18nStart_shiftStartsTimeFromNumber": m39,
     "I18nStart_sliverAutomaticCorrection": MessageLookupByLibrary.simpleMessage(
       "Авто\r\nпоправка",
     ),
@@ -763,8 +771,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nStart_sliverNumber": MessageLookupByLibrary.simpleMessage("№"),
     "I18nStart_sliverStart": MessageLookupByLibrary.simpleMessage("Старт"),
     "I18nStart_startTime": MessageLookupByLibrary.simpleMessage("Время старта"),
-    "I18nStart_startTimeAtSmartphone": MessageLookupByLibrary.simpleMessage(
-      "Время старта на смартфоне",
+    "I18nStart_startTimestamp": MessageLookupByLibrary.simpleMessage(
+      "Время записи на устройстве",
     ),
     "I18nStart_wrongRangeShiftMinutes": MessageLookupByLibrary.simpleMessage(
       "Мин -2 часа, макс 10 часов",

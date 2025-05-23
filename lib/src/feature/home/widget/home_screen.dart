@@ -28,57 +28,56 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TabCubit, AppTab>(
-    builder:
-        (context, activeTab) => DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            key: const Key('HomeScaffold'),
-            drawer: const AppDrawer(),
-            appBar: AppBar(
-              title: const TextTitle(),
-              actions: <Widget>[
-                FilterButton(activeTab: activeTab),
-                const BluetoothButton(),
-                MenuButton(key: const Key('HomeAppBarMenuButton'), activeTab: activeTab),
-              ],
-              bottom: TabBar(
-                key: const Key('TabBar'),
-                onTap: (index) {
-                  final cubit = context.read<TabCubit>();
-                  switch (index) {
-                    case 0:
-                      cubit.update(AppTab.init);
-                    case 1:
-                      cubit.update(AppTab.start);
-                    case 2:
-                      cubit.update(AppTab.finish);
-                  }
-                },
-                tabs: <Widget>[
-                  Tab(key: const Key('InitTab'), icon: Text(Localization.current.I18nHome_home)),
-                  Tab(key: const Key('StartTab'), icon: Text(Localization.current.I18nHome_start)),
-                  Tab(key: const Key('FinishTab'), icon: Text(Localization.current.I18nHome_finish)),
-                ],
-              ),
-            ),
-            body: MultiBlocListener(
-              listeners: [
-                // Следим за поступающей информацией от Bluetooth
-                _listenToBluetooth(),
-                // Следим за повторной установкой стартового времени для участника
-                _listenToNewStartTime(),
-                // Используем обратный отсчёт из приложения для звуковых эффектов
-                _listenToCountdownEvents(),
-                // Следим за наличием новой версии
-                _listenToUpdater(),
-              ],
-              child: const TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: <Widget>[InitPage(), StartPage(), FinishPage()],
-              ),
-            ),
+    builder: (context, activeTab) => DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        key: const Key('HomeScaffold'),
+        drawer: const AppDrawer(),
+        appBar: AppBar(
+          title: const TextTitle(),
+          actions: <Widget>[
+            FilterButton(activeTab: activeTab),
+            const BluetoothButton(),
+            MenuButton(key: const Key('HomeAppBarMenuButton'), activeTab: activeTab),
+          ],
+          bottom: TabBar(
+            key: const Key('TabBar'),
+            onTap: (index) {
+              final cubit = context.read<TabCubit>();
+              switch (index) {
+                case 0:
+                  cubit.update(AppTab.init);
+                case 1:
+                  cubit.update(AppTab.start);
+                case 2:
+                  cubit.update(AppTab.finish);
+              }
+            },
+            tabs: <Widget>[
+              Tab(key: const Key('InitTab'), icon: Text(Localization.current.I18nHome_home)),
+              Tab(key: const Key('StartTab'), icon: Text(Localization.current.I18nHome_start)),
+              Tab(key: const Key('FinishTab'), icon: Text(Localization.current.I18nHome_finish)),
+            ],
           ),
         ),
+        body: MultiBlocListener(
+          listeners: [
+            // Следим за поступающей информацией от Bluetooth
+            _listenToBluetooth(),
+            // Следим за повторной установкой стартового времени для участника
+            _listenToNewStartTime(),
+            // Используем обратный отсчёт из приложения для звуковых эффектов
+            _listenToCountdownEvents(),
+            // Следим за наличием новой версии
+            _listenToUpdater(),
+          ],
+          child: const TabBarView(
+            physics: NeverScrollableScrollPhysics(),
+            children: <Widget>[InitPage(), StartPage(), FinishPage()],
+          ),
+        ),
+      ),
+    ),
   );
 
   SingleChildWidget _listenToBluetooth() => BlocListener<BluetoothBloc, BluetoothBlocState>(
@@ -147,7 +146,7 @@ class HomeScreen extends StatelessWidget {
               );
               final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
               final useTimestampForTime = context.read<SettingsCubit>().state.useTimestampForAutomaticStamps;
-              final update = await overwriteStartTimePopup(context: context, text: text);
+              final update = await warningCancelOkPopup(context: context, text: text);
               if (update ?? false) {
                 databaseBloc.add(
                   DatabaseEvent.updateAutomaticCorrection(

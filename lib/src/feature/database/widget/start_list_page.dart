@@ -1,8 +1,8 @@
-
+import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
 import 'package:entime/src/feature/database/logic/validators.dart';
 import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -20,11 +20,20 @@ import '../logic/filter_start_list.dart';
 
 part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
-part 'popup/overwrite_start_time_popup.dart';
+part '../../../common/widget/warning_cancel_ok_popup.dart';
 part 'popup/shift_starts_time.dart';
 part 'popup/set_dns_popup.dart';
 
-enum StartPopupMenu { /*detail,*/ edit, shift }
+enum StartPopupMenu {
+  /// Редактировать
+  edit,
+
+  /// Установить timestamp и timestamp поправку вместо автоматической отметки
+  setTimestamp,
+
+  /// Сдвинуть время стартов
+  shift,
+}
 
 class StartListPage extends StatefulWidget {
   const StartListPage({super.key});
@@ -50,11 +59,10 @@ class _StartListPage extends State<StartListPage> {
         delegate: SliverSubHeaderDelegate(minHeight: 56, maxHeight: 56, child: _SliverStartSubHeader()),
       ),
       BlocBuilder<SettingsCubit, AppSettings>(
-        buildWhen:
-            (previous, current) =>
-                previous.showDNS != current.showDNS ||
-                previous.showDNF != current.showDNF ||
-                previous.showDSQ != current.showDSQ,
+        buildWhen: (previous, current) =>
+            previous.showDNS != current.showDNS ||
+            previous.showDNF != current.showDNF ||
+            previous.showDSQ != current.showDSQ,
         builder: (context, state) {
           final filteredList = filterStartList(
             startList,
@@ -88,36 +96,30 @@ class _StartListPage extends State<StartListPage> {
                               });
                     }
                   },
-                  builder:
-                      (context, countdownState) => BlocBuilder<SettingsCubit, AppSettings>(
-                        buildWhen: (previous, current) => previous.countdownAtStartTime != current.countdownAtStartTime,
-                        builder:
-                            (context, settingsState) => StartItemTile(
-                              item: item,
-                              onTap: () async {
-                                await editStartTime(context, item);
-                              },
-                              onTapDown: _storePosition,
-                              onLongPress: () async {
-                                await _startTilePopup(item);
-                              },
+                  builder: (context, countdownState) => BlocBuilder<SettingsCubit, AppSettings>(
+                    buildWhen: (previous, current) => previous.countdownAtStartTime != current.countdownAtStartTime,
+                    builder: (context, settingsState) => StartItemTile(
+                      item: item,
+                      onTap: () async {
+                        await editStartTime(context, item);
+                      },
+                      onTapDown: _storePosition,
+                      onLongPress: () async {
+                        await _startTilePopup(item);
+                      },
 
-                              /// Set DNS on dismissed
-                              onDismissed: (direction) {
-                                BlocProvider.of<DatabaseBloc>(context).add(
-                                  DatabaseEvent.setStatusForStartId(
-                                    startId: item.startId,
-                                    status: ParticipantStatus.dns,
-                                  ),
-                                );
-                              },
-                              isHighlighted: isHighlighted,
-                              countdown:
-                                  settingsState.countdownAtStartTime && isHighlighted
-                                      ? _countdownFromState(countdownState)
-                                      : null,
-                            ),
-                      ),
+                      /// Set DNS on dismissed
+                      onDismissed: (direction) {
+                        BlocProvider.of<DatabaseBloc>(
+                          context,
+                        ).add(DatabaseEvent.setStatusForStartId(startId: item.startId, status: ParticipantStatus.dns));
+                      },
+                      isHighlighted: isHighlighted,
+                      countdown: settingsState.countdownAtStartTime && isHighlighted
+                          ? _countdownFromState(countdownState)
+                          : null,
+                    ),
+                  ),
                 );
               },
               // childCount: startList.length,
@@ -130,12 +132,11 @@ class _StartListPage extends State<StartListPage> {
 
   Widget _showCountdown() => BlocBuilder<SettingsCubit, AppSettings>(
     //ребилдим, только если изменяются настройки, касаемые обратного отсчёта в круге
-    buildWhen:
-        (previous, current) =>
-            previous.countdown != current.countdown ||
-            previous.countdownTop != current.countdownTop ||
-            previous.countdownLeft != current.countdownLeft ||
-            previous.countdownSize != current.countdownSize,
+    buildWhen: (previous, current) =>
+        previous.countdown != current.countdown ||
+        previous.countdownTop != current.countdownTop ||
+        previous.countdownLeft != current.countdownLeft ||
+        previous.countdownSize != current.countdownSize,
     builder: (context, settingsState) {
       if (settingsState.countdown) {
         return Positioned(
@@ -255,19 +256,22 @@ class _StartListPage extends State<StartListPage> {
                       number,
                       element.automaticStartTime!,
                     );
-                  } else if (element.manualStartTime != null) {
+                  } else
+                  //  if (element.manualStartTime != null)
+                  {
                     text += Localization.current.I18nHome_updateAutomaticStartCorrection(
                       number,
                       element.manualStartTime!,
                     );
-                  } else {
-                    text += Localization.current.I18nHome_errorAddParticipant(
-                      MaterialLocalizations.of(context).cancelButtonLabel,
-                    );
                   }
+                  // else {
+                  //   text += Localization.current.I18nHome_errorAddParticipant(
+                  //     MaterialLocalizations.of(context).cancelButtonLabel,
+                  //   );
+                  // }
                 }
               }
-              final update = await overwriteStartTimePopup(context: context, text: text);
+              final update = await warningCancelOkPopup(context: context, text: text);
 
               if (update ?? false) {
                 final stage = state.stage;
@@ -328,6 +332,7 @@ class _StartListPage extends State<StartListPage> {
   //   final stage = databaseBloc.state.stage;
   //   final stageId = stage?.id;
   //   return <Widget>[
+
   // TextButton(
   //   onPressed: () {
   //     BlocProvider.of<DatabaseBloc>(context).add(DatabaseEvent.clearStartResultsDebug(stageId));
@@ -371,48 +376,35 @@ class _StartListPage extends State<StartListPage> {
   //     },
   //     child: const Icon(Icons.play_arrow),
   //   ),
-  // if (stage != null && stageId != null)
-  //   TextButton(
-  //     onPressed: () async {
-  //       final startTime = DateTime.now().format(shortTimeFormat);
-  //       databaseBloc.add(
-  //         DatabaseEvent.addStartNumber(
-  //           stage: stage,
-  //           number: Random().nextInt(100) + 1,
-  //           startTime: startTime,
-  //           forceAdd: true,
-  //         ),
-  //       );
-  // final automaticStart = AutomaticStart(
-  //   DateFormat(longTimeFormat).format(DateTime.now()),
-  //   1234,
-  //   DateTime.now(),
-  // );
-  // BlocProvider.of<DatabaseBloc>(context).add(
-  //   DatabaseEvent.updateAutomaticCorrection(
-  //     stageId: stageId,
-  //     startTime: automaticStart.time,
-  //     correction: automaticStart.correction,
-  //     timestamp: automaticStart.timestamp,
-  //     ntpOffset: 0,
-  //     deltaInSeconds: 2000,
-  //     forceUpdate: automaticStart.updating,
-  //   ),
-  // DatabaseEvent.updateAutomaticCorrection(
-  //   forceUpdate: true,
-  //   automaticStart: AutomaticStart('15:31:00', Random().nextInt(9999) - 5000, DateTime.now()),
-  // ),
-  // );
 
-  // final cor2 = Random().nextInt(9999) - 5000;
-  // BlocProvider.of<BluetoothBloc>(context).add(
-  //   BluetoothEvent.messageReceived(
-  //     message:
-  //         r'$'
-  //         '15:31:01,121;$cor2#',
-  //     stageId: stageId,
-  //   ),
-  // );
+  //     if (stage != null && stageId != null)
+  //       TextButton(
+  //         onPressed: () async {
+  //           final startTime = DateTime.now().format(shortTimeFormat);
+  //           databaseBloc.add(
+  //             DatabaseEvent.addStartNumber(
+  //               stage: stage,
+  //               number: Random().nextInt(100) + 1,
+  //               startTime: startTime,
+  //               forceAdd: true,
+  //             ),
+  //           );
+  //           final automaticStart = AutomaticStart(
+  //             DateFormat(longTimeFormat).format(DateTime.now()),
+  //             1234,
+  //             DateTime.now(),
+  //           );
+  //           BlocProvider.of<DatabaseBloc>(context).add(
+  //             DatabaseEvent.updateAutomaticCorrection(
+  //               stageId: stageId,
+  //               startTime: automaticStart.time,
+  //               correction: automaticStart.correction,
+  //               timestamp: automaticStart.timestamp,
+  //               ntpOffset: 0,
+  //               deltaInSeconds: 2000,
+  //               forceUpdate: automaticStart.updating,
+  //             ),
+  //           );
   //         },
   //         child: const Icon(Icons.bluetooth),
   //       ),
@@ -447,17 +439,63 @@ class _StartListPage extends State<StartListPage> {
             if (currentContext.mounted) {
               await shiftStartsTime(context: currentContext, item: item);
             }
+          case StartPopupMenu.setTimestamp:
+            final currentContext = context;
+            if (currentContext.mounted) {
+              final bloc = currentContext.read<DatabaseBloc>();
+              final ac = item.automaticCorrection;
+              final tc = item.timestampCorrection;
+              // automaticCorrection и timestampCorrection в этом месте должны быть всегда не нулевые
+              // но мало ли что
+              if (ac != null &&
+                  tc != null &&
+                  (await warningCancelOkPopup(
+                        context: currentContext,
+                        text: Localization.current.I18nStart_replaceAutomaticCorrectionConfirmation(ac, tc),
+                      ) ??
+                      false)) {
+                bloc.add(
+                  DatabaseEvent.updateStartingInfo(
+                    stageId: item.stageId,
+                    participantId: item.participantId,
+                    startTime: item.startTime,
+                    timestampCorrection: item.timestampCorrection,
+                    automaticStartTime: item.timestamp?.format(longTimeFormat),
+                    automaticCorrection: item.timestampCorrection,
+                    manualStartTime: item.manualStartTime,
+                    manualCorrection: item.manualCorrection,
+                  ),
+                );
+              }
+            }
         }
       }
     }
   }
 
   List<PopupMenuEntry<StartPopupMenu>> _getPopupMenu(BuildContext context, ParticipantAtStart item) {
-    return <PopupMenuEntry<StartPopupMenu>>[
-      PopupMenuItem(value: StartPopupMenu.edit, child: Text(Localization.current.I18nCore_edit)),
-      const PopupMenuDivider(),
-      PopupMenuItem(value: StartPopupMenu.shift, child: Text(Localization.current.I18nStart_shiftStartsTime)),
-    ];
+    final list = <PopupMenuEntry<StartPopupMenu>>[];
+    for (final value in StartPopupMenu.values) {
+      switch (value) {
+        case StartPopupMenu.edit:
+          list.add(PopupMenuItem(value: StartPopupMenu.edit, child: Text(Localization.current.I18nCore_edit)));
+        case StartPopupMenu.setTimestamp:
+          if (item.automaticCorrection != null) {
+            list.add(
+              PopupMenuItem(
+                value: StartPopupMenu.setTimestamp,
+                child: Text(Localization.current.I18nStart_replaceAutomaticCorrection),
+              ),
+            );
+          }
+        case StartPopupMenu.shift:
+          list.add(const PopupMenuDivider());
+          list.add(
+            PopupMenuItem(value: StartPopupMenu.shift, child: Text(Localization.current.I18nStart_shiftStartsTime)),
+          );
+      }
+    }
+    return list;
   }
 }
 

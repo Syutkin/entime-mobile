@@ -1422,12 +1422,13 @@ as String?,
 
 
 class _UpdateStartingInfo with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _UpdateStartingInfo({required this.stageId, required this.participantId, required this.startTime, this.automaticStartTime, this.automaticCorrection, this.manualStartTime, this.manualCorrection});
+  const _UpdateStartingInfo({required this.stageId, required this.participantId, required this.startTime, this.timestampCorrection, this.automaticStartTime, this.automaticCorrection, this.manualStartTime, this.manualCorrection});
   
 
  final  int stageId;
  final  int participantId;
  final  String startTime;
+ final  int? timestampCorrection;
  final  String? automaticStartTime;
  final  int? automaticCorrection;
  final  String? manualStartTime;
@@ -1444,21 +1445,21 @@ _$UpdateStartingInfoCopyWith<_UpdateStartingInfo> get copyWith => __$UpdateStart
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateStartingInfo'))
-    ..add(DiagnosticsProperty('stageId', stageId))..add(DiagnosticsProperty('participantId', participantId))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('automaticStartTime', automaticStartTime))..add(DiagnosticsProperty('automaticCorrection', automaticCorrection))..add(DiagnosticsProperty('manualStartTime', manualStartTime))..add(DiagnosticsProperty('manualCorrection', manualCorrection));
+    ..add(DiagnosticsProperty('stageId', stageId))..add(DiagnosticsProperty('participantId', participantId))..add(DiagnosticsProperty('startTime', startTime))..add(DiagnosticsProperty('timestampCorrection', timestampCorrection))..add(DiagnosticsProperty('automaticStartTime', automaticStartTime))..add(DiagnosticsProperty('automaticCorrection', automaticCorrection))..add(DiagnosticsProperty('manualStartTime', manualStartTime))..add(DiagnosticsProperty('manualCorrection', manualCorrection));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateStartingInfo&&(identical(other.stageId, stageId) || other.stageId == stageId)&&(identical(other.participantId, participantId) || other.participantId == participantId)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.automaticStartTime, automaticStartTime) || other.automaticStartTime == automaticStartTime)&&(identical(other.automaticCorrection, automaticCorrection) || other.automaticCorrection == automaticCorrection)&&(identical(other.manualStartTime, manualStartTime) || other.manualStartTime == manualStartTime)&&(identical(other.manualCorrection, manualCorrection) || other.manualCorrection == manualCorrection));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateStartingInfo&&(identical(other.stageId, stageId) || other.stageId == stageId)&&(identical(other.participantId, participantId) || other.participantId == participantId)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.timestampCorrection, timestampCorrection) || other.timestampCorrection == timestampCorrection)&&(identical(other.automaticStartTime, automaticStartTime) || other.automaticStartTime == automaticStartTime)&&(identical(other.automaticCorrection, automaticCorrection) || other.automaticCorrection == automaticCorrection)&&(identical(other.manualStartTime, manualStartTime) || other.manualStartTime == manualStartTime)&&(identical(other.manualCorrection, manualCorrection) || other.manualCorrection == manualCorrection));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stageId,participantId,startTime,automaticStartTime,automaticCorrection,manualStartTime,manualCorrection);
+int get hashCode => Object.hash(runtimeType,stageId,participantId,startTime,timestampCorrection,automaticStartTime,automaticCorrection,manualStartTime,manualCorrection);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.updateStartingInfo(stageId: $stageId, participantId: $participantId, startTime: $startTime, automaticStartTime: $automaticStartTime, automaticCorrection: $automaticCorrection, manualStartTime: $manualStartTime, manualCorrection: $manualCorrection)';
+  return 'DatabaseEvent.updateStartingInfo(stageId: $stageId, participantId: $participantId, startTime: $startTime, timestampCorrection: $timestampCorrection, automaticStartTime: $automaticStartTime, automaticCorrection: $automaticCorrection, manualStartTime: $manualStartTime, manualCorrection: $manualCorrection)';
 }
 
 
@@ -1469,7 +1470,7 @@ abstract mixin class _$UpdateStartingInfoCopyWith<$Res> implements $DatabaseEven
   factory _$UpdateStartingInfoCopyWith(_UpdateStartingInfo value, $Res Function(_UpdateStartingInfo) _then) = __$UpdateStartingInfoCopyWithImpl;
 @useResult
 $Res call({
- int stageId, int participantId, String startTime, String? automaticStartTime, int? automaticCorrection, String? manualStartTime, int? manualCorrection
+ int stageId, int participantId, String startTime, int? timestampCorrection, String? automaticStartTime, int? automaticCorrection, String? manualStartTime, int? manualCorrection
 });
 
 
@@ -1486,12 +1487,13 @@ class __$UpdateStartingInfoCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? stageId = null,Object? participantId = null,Object? startTime = null,Object? automaticStartTime = freezed,Object? automaticCorrection = freezed,Object? manualStartTime = freezed,Object? manualCorrection = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? stageId = null,Object? participantId = null,Object? startTime = null,Object? timestampCorrection = freezed,Object? automaticStartTime = freezed,Object? automaticCorrection = freezed,Object? manualStartTime = freezed,Object? manualCorrection = freezed,}) {
   return _then(_UpdateStartingInfo(
 stageId: null == stageId ? _self.stageId : stageId // ignore: cast_nullable_to_non_nullable
 as int,participantId: null == participantId ? _self.participantId : participantId // ignore: cast_nullable_to_non_nullable
 as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
-as String,automaticStartTime: freezed == automaticStartTime ? _self.automaticStartTime : automaticStartTime // ignore: cast_nullable_to_non_nullable
+as String,timestampCorrection: freezed == timestampCorrection ? _self.timestampCorrection : timestampCorrection // ignore: cast_nullable_to_non_nullable
+as int?,automaticStartTime: freezed == automaticStartTime ? _self.automaticStartTime : automaticStartTime // ignore: cast_nullable_to_non_nullable
 as String?,automaticCorrection: freezed == automaticCorrection ? _self.automaticCorrection : automaticCorrection // ignore: cast_nullable_to_non_nullable
 as int?,manualStartTime: freezed == manualStartTime ? _self.manualStartTime : manualStartTime // ignore: cast_nullable_to_non_nullable
 as String?,manualCorrection: freezed == manualCorrection ? _self.manualCorrection : manualCorrection // ignore: cast_nullable_to_non_nullable

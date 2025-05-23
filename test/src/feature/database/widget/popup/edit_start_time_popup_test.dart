@@ -209,7 +209,7 @@ void main() {
 
       expect($(TextFormField), findsNWidgets(7));
       expect($(Localization.current.I18nStart_startTime), findsNWidgets(3));
-      expect($(Localization.current.I18nStart_startTimeAtSmartphone), findsOneWidget);
+      expect($(Localization.current.I18nStart_startTimestamp), findsOneWidget);
       expect($(Localization.current.I18nCore_correction), findsNWidgets(3));
     });
 
@@ -261,6 +261,7 @@ void main() {
         () => databaseBloc.add(
           DatabaseEvent.updateStartingInfo(
             startTime: startTime,
+            timestampCorrection: timestampCorrection,
             automaticStartTime: automaticStartTime,
             automaticCorrection: automaticCorrection,
             manualStartTime: manualStartTime,

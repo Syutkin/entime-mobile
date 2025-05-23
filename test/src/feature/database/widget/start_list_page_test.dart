@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/countdown/countdown.dart';
 import 'package:entime/src/feature/countdown/model/tick.dart';
 import 'package:entime/src/feature/database/database.dart';
@@ -23,12 +24,16 @@ class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState> impleme
 
 class MockNtpBloc extends MockBloc<NtpEvent, NtpState> implements NtpBloc {}
 
+class MockQueryRow extends Mock implements QueryRow {}
+
 void main() {
   late DatabaseBloc databaseBloc;
   late SettingsCubit settingsCubit;
   late CountdownBloc countdownBloc;
   late NtpBloc ntpBloc;
   late AppSettings settings;
+  late List<DatabaseState> expectedStates;
+  late Stage stage;
 
   setUpAll(() async {
     registerFallbackValue(const DatabaseEvent.addRace(name: 'name'));
@@ -270,6 +275,41 @@ void main() {
         expect($(Localization.current.I18nStart_shiftStartsTime), findsOneWidget);
       });
 
+      patrolWidgetTest('Long press on tile with automaticCorrection, then popup appears', (PatrolTester $) async {
+        when(() => settingsCubit.state).thenReturn(settings);
+        when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
+        await $('6').longPress();
+        expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(3));
+        expect($(Localization.current.I18nCore_edit), findsOneWidget);
+        expect($(Localization.current.I18nStart_shiftStartsTime), findsOneWidget);
+        expect($(Localization.current.I18nStart_replaceAutomaticCorrection), findsOneWidget);
+      });
+
+      patrolWidgetTest('Call replaceAutomaticCorrection popup, and confirm', (PatrolTester $) async {
+        when(() => settingsCubit.state).thenReturn(settings);
+        when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
+        await $('6').longPress();
+        await $(Localization.current.I18nStart_replaceAutomaticCorrection).tap();
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        await $(#okButton).tap();
+        verify(
+          () => databaseBloc.add(
+            const DatabaseEvent.updateStartingInfo(
+              stageId: 1,
+              participantId: 1,
+              startTime: '10:00:00',
+              timestampCorrection: -2000,
+              automaticStartTime: '10:00:02,000',
+              automaticCorrection: -2000,
+            ),
+          ),
+        ).called(1);
+      });
+
       patrolWidgetTest('Call edit racer popup', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
@@ -305,10 +345,232 @@ void main() {
         },
       );
     });
+
+    group('Listener tests, updating start time to number', () {
+      setUp(() {
+        when(() => databaseBloc.state).thenReturn(
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+          ),
+        );
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+        expectedStates = [
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+          ),
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            notification: NotificationUpdateStartNumber(
+              existedStartingParticipants: [],
+              number: 123,
+              startTime: 'startTime',
+            ),
+          ),
+        ];
+      });
+
+      patrolWidgetTest('Show notification when updating starttime', (PatrolTester $) async {
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidget(testWidget());
+        expect($(Localization.current.I18nCore_warning), findsNothing);
+        await $.pumpAndSettle();
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+      });
+
+      patrolWidgetTest('Do nothing when cancel pressed', (PatrolTester $) async {
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        await $(#cancelButton).tap();
+        expect($(Localization.current.I18nCore_warning), findsNothing);
+        verifyNever(() => databaseBloc.add(any()));
+      });
+
+      patrolWidgetTest('Do not update number when ok pressed, because stage must be selected', (PatrolTester $) async {
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        await $(#okButton).tap();
+        expect($(Localization.current.I18nCore_warning), findsNothing);
+        verifyNever(() => databaseBloc.add(any()));
+      });
+
+      patrolWidgetTest('Force update number when ok pressed', (PatrolTester $) async {
+        expectedStates = [
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+            notification: NotificationUpdateStartNumber(
+              existedStartingParticipants: [
+                StartingParticipant(
+                  row: MockQueryRow(),
+                  startId: 1,
+                  stageId: 1,
+                  participantId: 1,
+                  startTime: 'startTime1',
+                  startStatus: ParticipantStatus.active.index,
+                  raceId: 1,
+                  riderId: 1,
+                  number: 456,
+                  participantStatus: ParticipantStatus.active.index,
+                ),
+              ],
+              number: 123,
+              startTime: 'startTime2',
+            ),
+          ),
+        ];
+
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        expect($(Localization.current.I18nHome_equalStartTime('startTime2', 456, 123)), findsOneWidget);
+
+        await $(#okButton).tap();
+        expect($(Localization.current.I18nCore_warning), findsNothing);
+        verify(
+          () => databaseBloc.add(
+            DatabaseEvent.addStartNumber(stage: stage, number: 123, startTime: 'startTime2', forceAdd: true),
+          ),
+        ).called(1);
+      });
+
+      patrolWidgetTest('Show warning when automatic start already exists', (PatrolTester $) async {
+        expectedStates = [
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+            notification: NotificationUpdateStartNumber(
+              existedStartingParticipants: [
+                StartingParticipant(
+                  row: MockQueryRow(),
+                  startId: 1,
+                  stageId: 1,
+                  participantId: 1,
+                  startTime: 'startTime1',
+                  startStatus: ParticipantStatus.active.index,
+                  raceId: 1,
+                  riderId: 1,
+                  number: 456,
+                  participantStatus: ParticipantStatus.active.index,
+                  automaticStartTime: 'automaticStartTime',
+                ),
+              ],
+              number: 123,
+              startTime: 'startTime2',
+            ),
+          ),
+        ];
+
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        expect($(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'automaticStartTime')), findsOneWidget);
+      });
+
+        patrolWidgetTest('Show warning when manual start already exists', (PatrolTester $) async {
+        expectedStates = [
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+            notification: NotificationUpdateStartNumber(
+              existedStartingParticipants: [
+                StartingParticipant(
+                  row: MockQueryRow(),
+                  startId: 1,
+                  stageId: 1,
+                  participantId: 1,
+                  startTime: 'startTime1',
+                  startStatus: ParticipantStatus.active.index,
+                  raceId: 1,
+                  riderId: 1,
+                  number: 456,
+                  participantStatus: ParticipantStatus.active.index,
+                  manualStartTime: 'manualStartTime',
+                ),
+              ],
+              number: 123,
+              startTime: 'startTime2',
+            ),
+          ),
+        ];
+
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        expect($(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'manualStartTime')), findsOneWidget);
+      });
+    });
   });
 }
-
-class MockQueryRow extends Mock implements QueryRow {}
 
 final participants = <ParticipantAtStart>[
   ParticipantAtStart(
@@ -388,6 +650,10 @@ final participants = <ParticipantAtStart>[
     participantId: 1,
     startTime: '10:00:00',
     statusId: ParticipantStatus.active.index,
+    automaticStartTime: 'automaticStartTime',
+    automaticCorrection: 1234,
+    timestamp: '10:00:02'.toDateTime(),
+    timestampCorrection: -2000,
   ),
 ];
 

@@ -646,7 +646,6 @@ void main() {
         );
 
         when(() => settingsCubit.state).thenReturn(settings);
-
         when(() => databaseBloc.state).thenReturn(emptyState);
       });
 
@@ -700,7 +699,9 @@ void main() {
           btn.onPressed!();
           // ToDo: Dunno why this .tap() didn't work
           // await $(#cancelToast).tap();
-          verify(() => databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: autoFinishNumber))).called(1);
+          verify(
+            () => databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: autoFinishNumber)),
+          ).called(1);
         });
       });
 

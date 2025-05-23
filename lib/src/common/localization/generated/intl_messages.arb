@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-05-21T11:53:00.009205",
+  "@@last_modified": "2025-05-23T10:54:38.693702",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1007,10 +1007,23 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nStart_startTimeAtSmartphone": "Время старта на смартфоне",
-  "@I18nStart_startTimeAtSmartphone": {
+  "I18nStart_startTimestamp": "Время записи на устройстве",
+  "@I18nStart_startTimestamp": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nStart_replaceAutomaticCorrection": "Заменить автоматическую поправку",
+  "@I18nStart_replaceAutomaticCorrection": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_replaceAutomaticCorrectionConfirmation": "Вы уверены что хотите заменить автоматическую поправку ({automaticCorrection}) на поправку относительно времени смартфона ({timestampCorrection})?",
+  "@I18nStart_replaceAutomaticCorrectionConfirmation": {
+    "type": "text",
+    "placeholders": {
+      "automaticCorrection": {},
+      "timestampCorrection": {}
+    }
   },
   "I18nStart_shiftStartsTime": "Сдвинуть время стартов",
   "@I18nStart_shiftStartsTime": {

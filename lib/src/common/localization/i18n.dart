@@ -579,8 +579,19 @@ class I18nStart {
 
   static String get startTime => Intl.message('Время старта', name: 'I18nStart_startTime');
 
-  static String get startTimeAtSmartphone =>
-      Intl.message('Время старта на смартфоне', name: 'I18nStart_startTimeAtSmartphone');
+  static String get startTimestamp => Intl.message('Время записи на устройстве', name: 'I18nStart_startTimestamp');
+
+  static String get replaceAutomaticCorrection =>
+      Intl.message('Заменить автоматическую поправку', name: 'I18nStart_replaceAutomaticCorrection');
+
+  static String replaceAutomaticCorrectionConfirmation(
+    int automaticCorrection,
+    String timestampCorrection,
+  ) => Intl.message(
+    'Вы уверены что хотите заменить автоматическую поправку ($automaticCorrection) на поправку относительно времени смартфона ($timestampCorrection)?',
+    name: 'I18nStart_replaceAutomaticCorrectionConfirmation',
+    args: [automaticCorrection, timestampCorrection],
+  );
 
   static String get shiftStartsTime => Intl.message('Сдвинуть время стартов', name: 'I18nStart_shiftStartsTime');
 

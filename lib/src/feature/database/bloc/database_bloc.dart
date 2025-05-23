@@ -253,6 +253,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         case _UpdateStartingInfo():
           await _db.setStartingInfo(
             startTime: event.startTime,
+            timestampCorrection: event.timestampCorrection,
             automaticStartTime: event.automaticStartTime,
             automaticCorrection: event.automaticCorrection,
             manualStartTime: event.manualStartTime,
