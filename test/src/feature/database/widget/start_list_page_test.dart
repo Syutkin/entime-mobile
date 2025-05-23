@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/countdown/countdown.dart';
 import 'package:entime/src/feature/countdown/model/tick.dart';
 import 'package:entime/src/feature/database/database.dart';
@@ -270,6 +271,41 @@ void main() {
         expect($(Localization.current.I18nStart_shiftStartsTime), findsOneWidget);
       });
 
+      patrolWidgetTest('Long press on tile with automaticCorrection, then popup appears', (PatrolTester $) async {
+        when(() => settingsCubit.state).thenReturn(settings);
+        when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
+        await $('6').longPress();
+        expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(3));
+        expect($(Localization.current.I18nCore_edit), findsOneWidget);
+        expect($(Localization.current.I18nStart_shiftStartsTime), findsOneWidget);
+        expect($(Localization.current.I18nStart_replaceAutomaticCorrection), findsOneWidget);
+      });
+
+      patrolWidgetTest('Call replaceAutomaticCorrection popup, and confirm', (PatrolTester $) async {
+        when(() => settingsCubit.state).thenReturn(settings);
+        when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
+        await $('6').longPress();
+        await $(Localization.current.I18nStart_replaceAutomaticCorrection).tap();
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        await $(#okButton).tap();
+        verify(
+          () => databaseBloc.add(
+            const DatabaseEvent.updateStartingInfo(
+              stageId: 1,
+              participantId: 1,
+              startTime: '10:00:00',
+              timestampCorrection: -2000,
+              automaticStartTime: '10:00:02,000',
+              automaticCorrection: -2000,
+            ),
+          ),
+        ).called(1);
+      });
+
       patrolWidgetTest('Call edit racer popup', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
@@ -388,6 +424,10 @@ final participants = <ParticipantAtStart>[
     participantId: 1,
     startTime: '10:00:00',
     statusId: ParticipantStatus.active.index,
+    automaticStartTime: 'automaticStartTime',
+    automaticCorrection: 1234,
+    timestamp: '10:00:02'.toDateTime(),
+    timestampCorrection: -2000,
   ),
 ];
 

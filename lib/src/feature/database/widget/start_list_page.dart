@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
-import 'package:entime/src/feature/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:entime/src/feature/database/logic/validators.dart';
 import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
 import 'package:flutter/cupertino.dart' hide Column;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -446,6 +442,8 @@ class _StartListPage extends State<StartListPage> {
               final bloc = currentContext.read<DatabaseBloc>();
               final ac = item.automaticCorrection;
               final tc = item.timestampCorrection;
+              // automaticCorrection и timestampCorrection в этом месте должны быть всегда не нулевые
+              // но мало ли что
               if (ac != null &&
                   tc != null &&
                   (await warningCancelOkPopup(
