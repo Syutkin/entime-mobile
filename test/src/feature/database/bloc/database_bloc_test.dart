@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, strict_raw_type
+// ignore_for_file: prefer_const_constructors, strict_raw_type, depend_on_referenced_packages
 
 import 'dart:typed_data' show Uint8List;
 
@@ -18,6 +18,8 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:share_plus/share_plus.dart' show ShareParams;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +31,56 @@ class MockFileProvider extends Mock implements StartlistProvider {}
 class MockShareProvider extends Mock implements ShareProvider {}
 
 class MockQueryRow extends Mock implements QueryRow {}
+
+class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
+  @override
+  Future<String?> getTemporaryPath() async {
+    return kTemporaryPath;
+  }
+
+  @override
+  Future<String?> getApplicationSupportPath() async {
+    return kApplicationSupportPath;
+  }
+
+  @override
+  Future<String?> getLibraryPath() async {
+    return kLibraryPath;
+  }
+
+  @override
+  Future<String?> getApplicationDocumentsPath() async {
+    return kApplicationDocumentsPath;
+  }
+
+  @override
+  Future<String?> getExternalStoragePath() async {
+    return kExternalStoragePath;
+  }
+
+  @override
+  Future<List<String>?> getExternalCachePaths() async {
+    return <String>[kExternalCachePath];
+  }
+
+  @override
+  Future<List<String>?> getExternalStoragePaths({StorageDirectory? type}) async {
+    return <String>[kExternalStoragePath];
+  }
+
+  @override
+  Future<String?> getDownloadsPath() async {
+    return kDownloadsPath;
+  }
+}
+
+const String kTemporaryPath = 'tmp/temporaryPath';
+const String kApplicationSupportPath = 'tmp/applicationSupportPath';
+const String kDownloadsPath = 'tmp/downloadsPath';
+const String kLibraryPath = 'tmp/libraryPath';
+const String kApplicationDocumentsPath = 'tmp/applicationDocumentsPath';
+const String kExternalCachePath = 'tmp/externalCachePath';
+const String kExternalStoragePath = 'tmp/externalStoragePath';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -58,6 +110,7 @@ void main() {
 
   setUp(() async {
     db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
+    PathProviderPlatform.instance = FakePathProviderPlatform();
 
     // populate DB
     for (final query in PopDB().queries) {
@@ -67,8 +120,8 @@ void main() {
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     settingsProvider = await SharedPrefsSettingsProvider.load();
 
-    race = const Race(id: 1, name: 'name', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'raceName', isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'stageName', isActive: true, isDeleted: false);
     deltaInSeconds = 10;
 
     when(() => shareProvider.share(any())).thenAnswer((_) => Future.value());
@@ -1204,7 +1257,15 @@ void main() {
           ..add(DatabaseEvent.shareStart(useTimestamp: false));
       },
       verify: (bloc) {
-        verify(() => shareProvider.share(any())).called(1);
+        verify(
+          () => shareProvider.share(
+            any(
+              that: isA<ShareParams>().having((params) => params.fileNameOverrides, 'Check file name', [
+                'raceName-stageName-start.csv',
+              ]),
+            ),
+          ),
+        ).called(1);
       },
     );
 
@@ -1231,7 +1292,45 @@ void main() {
           ..add(DatabaseEvent.shareFinish(useTimestamp: false));
       },
       verify: (bloc) {
-        verify(() => shareProvider.share(any())).called(1);
+        verify(
+          () => shareProvider.share(
+            any(
+              that: isA<ShareParams>().having((params) => params.fileNameOverrides, 'Check file name', [
+                'raceName-stageName-finish.csv',
+              ]),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Share database',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          fileProvider: fileProvider,
+          shareProvider: shareProvider,
+        );
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc.add(DatabaseEvent.shareDatabase());
+      },
+      verify: (bloc) {
+        verify(
+          () => shareProvider.share(
+            any(
+              that: isA<ShareParams>().having(
+                (params) => params.files!.first.path,
+                'Check file name',
+                stringContainsInOrder(['database_backup', 'sqlite']),
+              ),
+            ),
+          ),
+        ).called(1);
       },
     );
 
@@ -1251,7 +1350,8 @@ void main() {
         await db.addTrack(
           TrackFile(
             id: 1,
-            name: 'name',
+            name: 'trackName',
+            extension: 'ext',
             size: 123,
             hashSha1: 'hashSha1',
             data: Uint8List.fromList([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
@@ -1265,7 +1365,15 @@ void main() {
         );
       },
       verify: (bloc) {
-        verify(() => shareProvider.share(any())).called(1);
+        verify(
+          () => shareProvider.share(
+            any(
+              that: isA<ShareParams>().having((params) => params.fileNameOverrides, 'Check file name', [
+                'trackName.ext',
+              ]),
+            ),
+          ),
+        ).called(1);
       },
     );
   });

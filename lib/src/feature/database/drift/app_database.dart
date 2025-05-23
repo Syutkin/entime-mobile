@@ -1161,6 +1161,7 @@ class AppDatabase extends _$AppDatabase {
       }
 
       await customStatement('VACUUM INTO ?', [file.path]);
+      logger.d('Database -> Database exported to $file');
       return true;
     } catch (e) {
       logger.e('Database -> Error when exporting db to file $file: $e');
@@ -1247,12 +1248,3 @@ LazyDatabase _openConnection() {
     return NativeDatabase.createInBackground(file);
   });
 }
-
-// Duration? _getDifference(String startTime, DateTime time) {
-//   final start = startTime.toDateTime();
-//   if (start == null) {
-//     logger.e('Wrong time format: $startTime, can not convert to DateTime');
-//     return null;
-//   }
-//   return start.difference(time);
-// }

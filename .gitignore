@@ -46,4 +46,5 @@ app.*.symbols
 app.*.map.json
 
 # Local tools
+tmp/
 *.bat
