@@ -256,16 +256,19 @@ class _StartListPage extends State<StartListPage> {
                       number,
                       element.automaticStartTime!,
                     );
-                  } else if (element.manualStartTime != null) {
+                  } else
+                  //  if (element.manualStartTime != null)
+                  {
                     text += Localization.current.I18nHome_updateAutomaticStartCorrection(
                       number,
                       element.manualStartTime!,
                     );
-                  } else {
-                    text += Localization.current.I18nHome_errorAddParticipant(
-                      MaterialLocalizations.of(context).cancelButtonLabel,
-                    );
                   }
+                  // else {
+                  //   text += Localization.current.I18nHome_errorAddParticipant(
+                  //     MaterialLocalizations.of(context).cancelButtonLabel,
+                  //   );
+                  // }
                 }
               }
               final update = await warningCancelOkPopup(context: context, text: text);
