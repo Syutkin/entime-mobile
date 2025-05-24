@@ -36,12 +36,12 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "site.syutkin.entime"
 
-    compileSdkVersion 36
+    compileSdkVersion flutter.compileSdkVersion
 
     defaultConfig {
         applicationId "site.syutkin.entime"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 36
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
