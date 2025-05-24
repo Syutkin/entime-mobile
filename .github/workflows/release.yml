@@ -38,11 +38,8 @@ jobs:
         env:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
 
-      - name: Show versions
-        run: |
-          java --version
-          yes | flutter doctor --android-licenses
-          flutter doctor -v
+      - run: java --version
+      - run: flutter doctor -v
 
       - name: Install dependencies from pub
         run: flutter pub get
