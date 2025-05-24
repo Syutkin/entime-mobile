@@ -19,10 +19,10 @@ on:
 jobs:
   build:
     name: Analyze project source and run tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: subosito/flutter-action@v2
         with:
