@@ -642,17 +642,21 @@ class AppDatabase extends _$AppDatabase {
       final timestampCorrection = startTime.difference(timestamp.add(Duration(milliseconds: ntpOffset)));
 
       final result =
-          await (update(
-            starts,
-          )..where((start) => start.stageId.equals(stageId) & start.startTime.isBetweenValues(before, after))).write(
-            StartsCompanion(
-              automaticCorrection: Value(correction),
-              automaticStartTime: Value(time),
-              timestamp: Value(timestamp),
-              timestampCorrection: Value(timestampCorrection.inMilliseconds),
-              ntpOffset: Value(ntpOffset),
-            ),
-          );
+          await (update(starts)..where(
+                (start) =>
+                    start.stageId.equals(stageId) &
+                    start.startTime.isBetweenValues(before, after) &
+                    start.statusId.isValue(ParticipantStatus.active.index),
+              ))
+              .write(
+                StartsCompanion(
+                  automaticCorrection: Value(correction),
+                  automaticStartTime: Value(time),
+                  timestamp: Value(timestamp),
+                  timestampCorrection: Value(timestampCorrection.inMilliseconds),
+                  ntpOffset: Value(ntpOffset),
+                ),
+              );
       logger.i('Database -> updated: $result lines');
     } else {
       logger.i(
