@@ -40,7 +40,7 @@
 // ignore_for_file: prefer_single_quotes
 
 /// Current app version
-const String version = r'0.5.1+487';
+const String version = r'0.5.2-dev+488';
 
 /// The major version number: "1" in "1.2.3".
 const int major = 0;
@@ -49,16 +49,16 @@ const int major = 0;
 const int minor = 5;
 
 /// The patch version number: "3" in "1.2.3".
-const int patch = 1;
+const int patch = 2;
 
 /// The pre-release identifier: "foo" in "1.2.3-foo".
-const List<String> pre = <String>[];
+const List<String> pre = <String>[r'dev'];
 
 /// The build identifier: "foo" in "1.2.3+foo".
-const List<String> build = <String>[r'487'];
+const List<String> build = <String>[r'488'];
 
 /// Build date in Unix Time (in seconds)
-const int timestamp = 1748012479;
+const int timestamp = 1750436805;
 
 /// Name [name]
 const String name = r'entime';

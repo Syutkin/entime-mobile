@@ -18,6 +18,7 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:share_plus/share_plus.dart' show ShareParams;
@@ -74,13 +75,13 @@ class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin impl
   }
 }
 
-const String kTemporaryPath = 'tmp/temporaryPath';
-const String kApplicationSupportPath = 'tmp/applicationSupportPath';
-const String kDownloadsPath = 'tmp/downloadsPath';
-const String kLibraryPath = 'tmp/libraryPath';
-const String kApplicationDocumentsPath = 'tmp/applicationDocumentsPath';
-const String kExternalCachePath = 'tmp/externalCachePath';
-const String kExternalStoragePath = 'tmp/externalStoragePath';
+final String kTemporaryPath = p.join('tmp','temporaryPath');
+final String kApplicationSupportPath = p.join('tmp','applicationSupportPath');
+final String kDownloadsPath = p.join('tmp','downloadsPath');
+final String kLibraryPath = p.join('tmp','libraryPath');
+final String kApplicationDocumentsPath = p.join('tmp','applicationDocumentsPath');
+final String kExternalCachePath = p.join('tmp','externalCachePath');
+final String kExternalStoragePath = p.join('tmp','externalStoragePath');
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
