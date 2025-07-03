@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,154 @@ class $CountdownEventCopyWith<$Res>  {
 $CountdownEventCopyWith(CountdownEvent _, $Res Function(CountdownEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [CountdownEvent].
+extension CountdownEventPatterns on CountdownEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Tick value)?  tick,TResult Function( _Start value)?  start,TResult Function( _Stop value)?  stop,TResult Function( _Beep value)?  beep,TResult Function( _CallParticipant value)?  callParticipant,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Tick() when tick != null:
+return tick(_that);case _Start() when start != null:
+return start(_that);case _Stop() when stop != null:
+return stop(_that);case _Beep() when beep != null:
+return beep(_that);case _CallParticipant() when callParticipant != null:
+return callParticipant(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Tick value)  tick,required TResult Function( _Start value)  start,required TResult Function( _Stop value)  stop,required TResult Function( _Beep value)  beep,required TResult Function( _CallParticipant value)  callParticipant,}){
+final _that = this;
+switch (_that) {
+case _Tick():
+return tick(_that);case _Start():
+return start(_that);case _Stop():
+return stop(_that);case _Beep():
+return beep(_that);case _CallParticipant():
+return callParticipant(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Tick value)?  tick,TResult? Function( _Start value)?  start,TResult? Function( _Stop value)?  stop,TResult? Function( _Beep value)?  beep,TResult? Function( _CallParticipant value)?  callParticipant,}){
+final _that = this;
+switch (_that) {
+case _Tick() when tick != null:
+return tick(_that);case _Start() when start != null:
+return start(_that);case _Stop() when stop != null:
+return stop(_that);case _Beep() when beep != null:
+return beep(_that);case _CallParticipant() when callParticipant != null:
+return callParticipant(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Tick tick)?  tick,TResult Function( int stageId)?  start,TResult Function()?  stop,TResult Function()?  beep,TResult Function( int stageId)?  callParticipant,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Tick() when tick != null:
+return tick(_that.tick);case _Start() when start != null:
+return start(_that.stageId);case _Stop() when stop != null:
+return stop();case _Beep() when beep != null:
+return beep();case _CallParticipant() when callParticipant != null:
+return callParticipant(_that.stageId);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Tick tick)  tick,required TResult Function( int stageId)  start,required TResult Function()  stop,required TResult Function()  beep,required TResult Function( int stageId)  callParticipant,}) {final _that = this;
+switch (_that) {
+case _Tick():
+return tick(_that.tick);case _Start():
+return start(_that.stageId);case _Stop():
+return stop();case _Beep():
+return beep();case _CallParticipant():
+return callParticipant(_that.stageId);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Tick tick)?  tick,TResult? Function( int stageId)?  start,TResult? Function()?  stop,TResult? Function()?  beep,TResult? Function( int stageId)?  callParticipant,}) {final _that = this;
+switch (_that) {
+case _Tick() when tick != null:
+return tick(_that.tick);case _Start() when start != null:
+return start(_that.stageId);case _Stop() when stop != null:
+return stop();case _Beep() when beep != null:
+return beep();case _CallParticipant() when callParticipant != null:
+return callParticipant(_that.stageId);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -333,6 +480,136 @@ class $CountdownStateCopyWith<$Res>  {
 $CountdownStateCopyWith(CountdownState _, $Res Function(CountdownState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [CountdownState].
+extension CountdownStatePatterns on CountdownState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CountdownStateInitial value)?  initial,TResult Function( CountdownStateWorking value)?  working,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case CountdownStateInitial() when initial != null:
+return initial(_that);case CountdownStateWorking() when working != null:
+return working(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CountdownStateInitial value)  initial,required TResult Function( CountdownStateWorking value)  working,}){
+final _that = this;
+switch (_that) {
+case CountdownStateInitial():
+return initial(_that);case CountdownStateWorking():
+return working(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CountdownStateInitial value)?  initial,TResult? Function( CountdownStateWorking value)?  working,}){
+final _that = this;
+switch (_that) {
+case CountdownStateInitial() when initial != null:
+return initial(_that);case CountdownStateWorking() when working != null:
+return working(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( Tick tick)?  working,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case CountdownStateInitial() when initial != null:
+return initial();case CountdownStateWorking() when working != null:
+return working(_that.tick);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( Tick tick)  working,}) {final _that = this;
+switch (_that) {
+case CountdownStateInitial():
+return initial();case CountdownStateWorking():
+return working(_that.tick);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( Tick tick)?  working,}) {final _that = this;
+switch (_that) {
+case CountdownStateInitial() when initial != null:
+return initial();case CountdownStateWorking() when working != null:
+return working(_that.tick);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

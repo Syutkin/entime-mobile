@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,136 @@ class $ModuleSettingsEventCopyWith<$Res>  {
 $ModuleSettingsEventCopyWith(ModuleSettingsEvent _, $Res Function(ModuleSettingsEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [ModuleSettingsEvent].
+extension ModuleSettingsEventPatterns on ModuleSettingsEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Get value)?  get,TResult Function( _Update value)?  update,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Get() when get != null:
+return get(_that);case _Update() when update != null:
+return update(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Get value)  get,required TResult Function( _Update value)  update,}){
+final _that = this;
+switch (_that) {
+case _Get():
+return get(_that);case _Update():
+return update(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Get value)?  get,TResult? Function( _Update value)?  update,}){
+final _that = this;
+switch (_that) {
+case _Get() when get != null:
+return get(_that);case _Update() when update != null:
+return update(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String json)?  get,TResult Function( ModuleSettingsProvider moduleSettings)?  update,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Get() when get != null:
+return get(_that.json);case _Update() when update != null:
+return update(_that.moduleSettings);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String json)  get,required TResult Function( ModuleSettingsProvider moduleSettings)  update,}) {final _that = this;
+switch (_that) {
+case _Get():
+return get(_that.json);case _Update():
+return update(_that.moduleSettings);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String json)?  get,TResult? Function( ModuleSettingsProvider moduleSettings)?  update,}) {final _that = this;
+switch (_that) {
+case _Get() when get != null:
+return get(_that.json);case _Update() when update != null:
+return update(_that.moduleSettings);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -203,6 +332,148 @@ class $ModuleSettingsStateCopyWith<$Res>  {
 $ModuleSettingsStateCopyWith(ModuleSettingsState _, $Res Function(ModuleSettingsState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [ModuleSettingsState].
+extension ModuleSettingsStatePatterns on ModuleSettingsState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ModuleSettingsUninitialized value)?  uninitialized,TResult Function( ModuleSettingsLoading value)?  loading,TResult Function( ModuleSettingsLoaded value)?  loaded,TResult Function( ModuleSettingsError value)?  error,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case ModuleSettingsUninitialized() when uninitialized != null:
+return uninitialized(_that);case ModuleSettingsLoading() when loading != null:
+return loading(_that);case ModuleSettingsLoaded() when loaded != null:
+return loaded(_that);case ModuleSettingsError() when error != null:
+return error(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ModuleSettingsUninitialized value)  uninitialized,required TResult Function( ModuleSettingsLoading value)  loading,required TResult Function( ModuleSettingsLoaded value)  loaded,required TResult Function( ModuleSettingsError value)  error,}){
+final _that = this;
+switch (_that) {
+case ModuleSettingsUninitialized():
+return uninitialized(_that);case ModuleSettingsLoading():
+return loading(_that);case ModuleSettingsLoaded():
+return loaded(_that);case ModuleSettingsError():
+return error(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ModuleSettingsUninitialized value)?  uninitialized,TResult? Function( ModuleSettingsLoading value)?  loading,TResult? Function( ModuleSettingsLoaded value)?  loaded,TResult? Function( ModuleSettingsError value)?  error,}){
+final _that = this;
+switch (_that) {
+case ModuleSettingsUninitialized() when uninitialized != null:
+return uninitialized(_that);case ModuleSettingsLoading() when loading != null:
+return loading(_that);case ModuleSettingsLoaded() when loaded != null:
+return loaded(_that);case ModuleSettingsError() when error != null:
+return error(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  uninitialized,TResult Function()?  loading,TResult Function( ModuleSettingsProvider moduleSettings)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case ModuleSettingsUninitialized() when uninitialized != null:
+return uninitialized();case ModuleSettingsLoading() when loading != null:
+return loading();case ModuleSettingsLoaded() when loaded != null:
+return loaded(_that.moduleSettings);case ModuleSettingsError() when error != null:
+return error();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  uninitialized,required TResult Function()  loading,required TResult Function( ModuleSettingsProvider moduleSettings)  loaded,required TResult Function()  error,}) {final _that = this;
+switch (_that) {
+case ModuleSettingsUninitialized():
+return uninitialized();case ModuleSettingsLoading():
+return loading();case ModuleSettingsLoaded():
+return loaded(_that.moduleSettings);case ModuleSettingsError():
+return error();}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  uninitialized,TResult? Function()?  loading,TResult? Function( ModuleSettingsProvider moduleSettings)?  loaded,TResult? Function()?  error,}) {final _that = this;
+switch (_that) {
+case ModuleSettingsUninitialized() when uninitialized != null:
+return uninitialized();case ModuleSettingsLoading() when loading != null:
+return loading();case ModuleSettingsLoaded() when loaded != null:
+return loaded(_that.moduleSettings);case ModuleSettingsError() when error != null:
+return error();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
