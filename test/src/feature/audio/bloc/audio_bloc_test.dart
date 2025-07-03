@@ -8,8 +8,8 @@ class MockTtsProvider extends Mock implements TtsProvider {}
 
 void main() {
   late TtsProvider ttsProvider;
-  late String engine;
-  late String voice;
+  String? engine;
+  String? voice;
 
   setUp(() {
     ttsProvider = MockTtsProvider();
@@ -17,16 +17,27 @@ void main() {
 
   group('AudioBloc test', () {
     blocTest<AudioBloc, AudioState>(
-      'FlutterBluetoothSerial: bluetooth not available',
+      'TTS engine exists',
       setUp: () {
         engine = 'TTS Engine';
-        voice = 'TTS Engine';
+        voice = 'TTS voice';
         when(() => ttsProvider.getDefaultEngine).thenAnswer((_) => Future.value(engine));
         when(() => ttsProvider.getDefaultVoice).thenAnswer((_) => Future.value({'name': voice}));
       },
       build: () => AudioBloc(ttsProvider: ttsProvider),
       act: (bloc) => bloc.add(const AudioEvent.init()),
       expect: () => [AudioState.initialized(engine: engine, voice: voice)],
+    );
+
+    blocTest<AudioBloc, AudioState>(
+      'TTS engine not found',
+      setUp: () {
+        when(() => ttsProvider.getDefaultEngine).thenAnswer((_) => Future.value());
+        when(() => ttsProvider.getDefaultVoice).thenAnswer((_) => Future.value({'name': null}));
+      },
+      build: () => AudioBloc(ttsProvider: ttsProvider),
+      act: (bloc) => bloc.add(const AudioEvent.init()),
+      expect: () => [const AudioState.initialized()],
     );
   });
 }

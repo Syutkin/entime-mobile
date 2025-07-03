@@ -961,6 +961,94 @@ void main() {
         expect(start.first.timestampCorrection, timestampCorrection);
         expect(start.first.ntpOffset, offset);
       });
+
+      test('Update all active participants with same starttime', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const startTime = '08:15:00';
+        const automaticStartTime = '08:15:03,123';
+        final timestamp = '08:15:03,001'.toDateTime()!;
+        const offset = 3456;
+        const correction = 1234;
+        const delta = 10;
+
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 1);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 2);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 3);
+
+        final result = await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: automaticStartTime,
+          correction: correction,
+          timestamp: timestamp,
+          ntpOffset: offset,
+          deltaInSeconds: delta,
+        );
+        expect(result, null);
+
+        final start = await startsByStartTime(db: db, startTime: startTime, stageId: stage.id);
+
+        expect(start.length, 3);
+      });
+
+      test('Update only participants with active status with same starttime', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const startTime = '08:15:00';
+        const automaticStartTime = '08:15:03,123';
+        final timestamp = '08:15:03,001'.toDateTime()!;
+        const offset = 3456;
+        const correction = 1234;
+        const delta = 10;
+
+        // (1,1,2,"Девушки"),
+        // (1,2,7,"Девушки"),
+        // (1,3,14,"Девушки"),
+        // (1,4,21,"Девушки"),
+        // (1,5,31,"Девушки"),
+
+        // (1,1,"10:00:00"),
+        // (1,2,"10:01:00"),
+        // (1,3,"10:02:00"),
+        // (1,4,"10:03:00"),
+        // (1,5,"10:04:00"),
+
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 1);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 2);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 3);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 4);
+
+        await db.setDNSForStage(stage: stage, number: 7);
+        await db.setDNFForStage(stage: stage, number: 14);
+
+        final result = await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: automaticStartTime,
+          correction: correction,
+          timestamp: timestamp,
+          ntpOffset: offset,
+          deltaInSeconds: delta,
+        );
+        expect(result, null);
+
+        final start = await startsByStartTime(db: db, startTime: startTime, stageId: stage.id);
+
+        expect(start.length, 4);
+        expect(start[0].startTime, startTime);
+        expect(start[0].statusId, ParticipantStatus.active.index);
+        expect(start[0].automaticStartTime, automaticStartTime);       
+        expect(start[0].automaticCorrection, correction);             
+        expect(start[1].startTime, startTime);
+        expect(start[1].statusId, ParticipantStatus.dns.index);
+        expect(start[1].automaticStartTime, null);
+        expect(start[1].automaticCorrection, null);                             
+        expect(start[2].startTime, startTime);
+        expect(start[2].statusId, ParticipantStatus.dnf.index);
+        expect(start[2].automaticStartTime, null);    
+        expect(start[2].automaticCorrection, null);                         
+        expect(start[3].startTime, startTime);
+        expect(start[3].statusId, ParticipantStatus.active.index);
+        expect(start[3].automaticStartTime, automaticStartTime);   
+        expect(start[3].automaticCorrection, correction);                          
+      });
     });
 
     group('Test updateManualStartTime', () {
@@ -1770,13 +1858,12 @@ void main() {
         );
         expect(addNumber3, number2);
 
-        final finishes =
-            await db
-                .getFinishesFromStage(
-                  stageId: stage.id,
-                  // hideMarked: false,
-                )
-                .get();
+        final finishes = await db
+            .getFinishesFromStage(
+              stageId: stage.id,
+              // hideMarked: false,
+            )
+            .get();
         expect(finishes.length, 3);
         expect(finishes[0].stageId, stage.id);
         expect(finishes[0].number, number1);
@@ -2600,6 +2687,7 @@ void main() {
 }
 
 Future<List<Start>> startsByStartTime({required AppDatabase db, required String startTime, required int stageId}) {
-  return (db.select(db.starts)
-    ..where((start) => start.startTime.equals(startTime) & start.stageId.equals(stageId))).get();
+  return (db.select(
+    db.starts,
+  )..where((start) => start.startTime.equals(startTime) & start.stageId.equals(stageId))).get();
 }

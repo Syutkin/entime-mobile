@@ -34,7 +34,12 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: audioBloc, child: BlocProvider.value(value: settingsCubit, child: const SettingsScreen()))),
+      home: Material(
+        child: BlocProvider.value(
+          value: audioBloc,
+          child: BlocProvider.value(value: settingsCubit, child: const SettingsScreen()),
+        ),
+      ),
     );
   }
 
@@ -236,6 +241,18 @@ void main() {
       patrolWidgetTest('Show TTS voice', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(voice).scrollTo(maxScrolls: 100), findsOneWidget);
+      });
+
+      patrolWidgetTest('TTS engine not found', (PatrolTester $) async {
+        when(() => audioBloc.state).thenReturn(const AudioState.initialized());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect(await $(#TTSEngineName).$(Localization.current.I18nSettings_ttsEngineNotFound).scrollTo(maxScrolls: 100), findsOneWidget);
+      });
+
+      patrolWidgetTest('TTS voice not found', (PatrolTester $) async {
+        when(() => audioBloc.state).thenReturn(const AudioState.initialized());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect(await $(#TTSVoiceName).$(Localization.current.I18nSettings_ttsVoiceNotFound).scrollTo(maxScrolls: 100), findsOneWidget);
       });
     });
 
