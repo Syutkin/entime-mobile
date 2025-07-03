@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart' as apps;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -201,6 +202,7 @@ class SettingsScreen extends StatelessWidget {
                       };
                     },
                   ),
+                  onPressed: (_) => apps.AppSettings.openAppSettings(type: apps.AppSettingsType.accessibility),
                 ),
                 SettingsTile(
                   key: const Key('TTSVoiceName'),
@@ -216,6 +218,7 @@ class SettingsScreen extends StatelessWidget {
                       };
                     },
                   ),
+                  onPressed: (_) => apps.AppSettings.openAppSettings(type: apps.AppSettingsType.accessibility),
                 ),
                 SettingsTile(
                   enabled: settingsState.sound && settingsState.voice,
