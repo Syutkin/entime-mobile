@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,166 @@ class $TrailsEventCopyWith<$Res>  {
 $TrailsEventCopyWith(TrailsEvent _, $Res Function(TrailsEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [TrailsEvent].
+extension TrailsEventPatterns on TrailsEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _GetTrails value)?  getTrails,TResult Function( _AddTrail value)?  addTrail,TResult Function( _UpdateTrail value)?  updateTrail,TResult Function( _DeleteTrail value)?  deleteTrail,TResult Function( _LoadTrack value)?  loadTrack,TResult Function( _UnloadTrack value)?  unloadTrack,TResult Function( _EmitTrack value)?  emitTrack,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _GetTrails() when getTrails != null:
+return getTrails(_that);case _AddTrail() when addTrail != null:
+return addTrail(_that);case _UpdateTrail() when updateTrail != null:
+return updateTrail(_that);case _DeleteTrail() when deleteTrail != null:
+return deleteTrail(_that);case _LoadTrack() when loadTrack != null:
+return loadTrack(_that);case _UnloadTrack() when unloadTrack != null:
+return unloadTrack(_that);case _EmitTrack() when emitTrack != null:
+return emitTrack(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _GetTrails value)  getTrails,required TResult Function( _AddTrail value)  addTrail,required TResult Function( _UpdateTrail value)  updateTrail,required TResult Function( _DeleteTrail value)  deleteTrail,required TResult Function( _LoadTrack value)  loadTrack,required TResult Function( _UnloadTrack value)  unloadTrack,required TResult Function( _EmitTrack value)  emitTrack,}){
+final _that = this;
+switch (_that) {
+case _GetTrails():
+return getTrails(_that);case _AddTrail():
+return addTrail(_that);case _UpdateTrail():
+return updateTrail(_that);case _DeleteTrail():
+return deleteTrail(_that);case _LoadTrack():
+return loadTrack(_that);case _UnloadTrack():
+return unloadTrack(_that);case _EmitTrack():
+return emitTrack(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _GetTrails value)?  getTrails,TResult? Function( _AddTrail value)?  addTrail,TResult? Function( _UpdateTrail value)?  updateTrail,TResult? Function( _DeleteTrail value)?  deleteTrail,TResult? Function( _LoadTrack value)?  loadTrack,TResult? Function( _UnloadTrack value)?  unloadTrack,TResult? Function( _EmitTrack value)?  emitTrack,}){
+final _that = this;
+switch (_that) {
+case _GetTrails() when getTrails != null:
+return getTrails(_that);case _AddTrail() when addTrail != null:
+return addTrail(_that);case _UpdateTrail() when updateTrail != null:
+return updateTrail(_that);case _DeleteTrail() when deleteTrail != null:
+return deleteTrail(_that);case _LoadTrack() when loadTrack != null:
+return loadTrack(_that);case _UnloadTrack() when unloadTrack != null:
+return unloadTrack(_that);case _EmitTrack() when emitTrack != null:
+return emitTrack(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  getTrails,TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult Function( int id,  String? name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult Function( int id)?  deleteTrail,TResult Function( String filePath)?  loadTrack,TResult Function()?  unloadTrack,TResult Function( TrackFile track)?  emitTrack,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _GetTrails() when getTrails != null:
+return getTrails();case _AddTrail() when addTrail != null:
+return addTrail(_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath);case _UpdateTrail() when updateTrail != null:
+return updateTrail(_that.id,_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath,_that.fileId,_that.deleteTrack);case _DeleteTrail() when deleteTrail != null:
+return deleteTrail(_that.id);case _LoadTrack() when loadTrack != null:
+return loadTrack(_that.filePath);case _UnloadTrack() when unloadTrack != null:
+return unloadTrack();case _EmitTrack() when emitTrack != null:
+return emitTrack(_that.track);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  getTrails,required TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)  addTrail,required TResult Function( int id,  String? name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)  updateTrail,required TResult Function( int id)  deleteTrail,required TResult Function( String filePath)  loadTrack,required TResult Function()  unloadTrack,required TResult Function( TrackFile track)  emitTrack,}) {final _that = this;
+switch (_that) {
+case _GetTrails():
+return getTrails();case _AddTrail():
+return addTrail(_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath);case _UpdateTrail():
+return updateTrail(_that.id,_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath,_that.fileId,_that.deleteTrack);case _DeleteTrail():
+return deleteTrail(_that.id);case _LoadTrack():
+return loadTrack(_that.filePath);case _UnloadTrack():
+return unloadTrack();case _EmitTrack():
+return emitTrack(_that.track);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  getTrails,TResult? Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult? Function( int id,  String? name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult? Function( int id)?  deleteTrail,TResult? Function( String filePath)?  loadTrack,TResult? Function()?  unloadTrack,TResult? Function( TrackFile track)?  emitTrack,}) {final _that = this;
+switch (_that) {
+case _GetTrails() when getTrails != null:
+return getTrails();case _AddTrail() when addTrail != null:
+return addTrail(_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath);case _UpdateTrail() when updateTrail != null:
+return updateTrail(_that.id,_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath,_that.fileId,_that.deleteTrack);case _DeleteTrail() when deleteTrail != null:
+return deleteTrail(_that.id);case _LoadTrack() when loadTrack != null:
+return loadTrack(_that.filePath);case _UnloadTrack() when unloadTrack != null:
+return unloadTrack();case _EmitTrack() when emitTrack != null:
+return emitTrack(_that.track);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -491,6 +650,142 @@ class $TrailsStateCopyWith<$Res>  {
 $TrailsStateCopyWith(TrailsState _, $Res Function(TrailsState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [TrailsState].
+extension TrailsStatePatterns on TrailsState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( Initialized value)?  initialized,TResult Function( LoadingTrack value)?  loadingTrack,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case Initial() when initial != null:
+return initial(_that);case Initialized() when initialized != null:
+return initialized(_that);case LoadingTrack() when loadingTrack != null:
+return loadingTrack(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( Initialized value)  initialized,required TResult Function( LoadingTrack value)  loadingTrack,}){
+final _that = this;
+switch (_that) {
+case Initial():
+return initial(_that);case Initialized():
+return initialized(_that);case LoadingTrack():
+return loadingTrack(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( Initialized value)?  initialized,TResult? Function( LoadingTrack value)?  loadingTrack,}){
+final _that = this;
+switch (_that) {
+case Initial() when initial != null:
+return initial(_that);case Initialized() when initialized != null:
+return initialized(_that);case LoadingTrack() when loadingTrack != null:
+return loadingTrack(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( List<TrailInfo> trails,  TrackFile? track)?  initialized,TResult Function( List<TrailInfo> trails)?  loadingTrack,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case Initial() when initial != null:
+return initial();case Initialized() when initialized != null:
+return initialized(_that.trails,_that.track);case LoadingTrack() when loadingTrack != null:
+return loadingTrack(_that.trails);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( List<TrailInfo> trails,  TrackFile? track)  initialized,required TResult Function( List<TrailInfo> trails)  loadingTrack,}) {final _that = this;
+switch (_that) {
+case Initial():
+return initial();case Initialized():
+return initialized(_that.trails,_that.track);case LoadingTrack():
+return loadingTrack(_that.trails);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( List<TrailInfo> trails,  TrackFile? track)?  initialized,TResult? Function( List<TrailInfo> trails)?  loadingTrack,}) {final _that = this;
+switch (_that) {
+case Initial() when initial != null:
+return initial();case Initialized() when initialized != null:
+return initialized(_that.trails,_that.track);case LoadingTrack() when loadingTrack != null:
+return loadingTrack(_that.trails);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

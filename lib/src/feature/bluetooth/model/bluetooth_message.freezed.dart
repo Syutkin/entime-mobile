@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,160 @@ class $BluetoothMessageCopyWith<$Res>  {
 $BluetoothMessageCopyWith(BluetoothMessage _, $Res Function(BluetoothMessage) __);
 }
 
+
+/// Adds pattern-matching-related methods to [BluetoothMessage].
+extension BluetoothMessagePatterns on BluetoothMessage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( BluetoothMessageAutomaticStart value)?  automaticStart,TResult Function( BluetoothMessageFinish value)?  finish,TResult Function( BluetoothMessageCountdown value)?  countdown,TResult Function( BluetoothMessageVoice value)?  voice,TResult Function( BluetoothMessageModuleSettings value)?  moduleSettings,TResult Function( BluetoothMessageEmpty value)?  empty,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case BluetoothMessageAutomaticStart() when automaticStart != null:
+return automaticStart(_that);case BluetoothMessageFinish() when finish != null:
+return finish(_that);case BluetoothMessageCountdown() when countdown != null:
+return countdown(_that);case BluetoothMessageVoice() when voice != null:
+return voice(_that);case BluetoothMessageModuleSettings() when moduleSettings != null:
+return moduleSettings(_that);case BluetoothMessageEmpty() when empty != null:
+return empty(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( BluetoothMessageAutomaticStart value)  automaticStart,required TResult Function( BluetoothMessageFinish value)  finish,required TResult Function( BluetoothMessageCountdown value)  countdown,required TResult Function( BluetoothMessageVoice value)  voice,required TResult Function( BluetoothMessageModuleSettings value)  moduleSettings,required TResult Function( BluetoothMessageEmpty value)  empty,}){
+final _that = this;
+switch (_that) {
+case BluetoothMessageAutomaticStart():
+return automaticStart(_that);case BluetoothMessageFinish():
+return finish(_that);case BluetoothMessageCountdown():
+return countdown(_that);case BluetoothMessageVoice():
+return voice(_that);case BluetoothMessageModuleSettings():
+return moduleSettings(_that);case BluetoothMessageEmpty():
+return empty(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( BluetoothMessageAutomaticStart value)?  automaticStart,TResult? Function( BluetoothMessageFinish value)?  finish,TResult? Function( BluetoothMessageCountdown value)?  countdown,TResult? Function( BluetoothMessageVoice value)?  voice,TResult? Function( BluetoothMessageModuleSettings value)?  moduleSettings,TResult? Function( BluetoothMessageEmpty value)?  empty,}){
+final _that = this;
+switch (_that) {
+case BluetoothMessageAutomaticStart() when automaticStart != null:
+return automaticStart(_that);case BluetoothMessageFinish() when finish != null:
+return finish(_that);case BluetoothMessageCountdown() when countdown != null:
+return countdown(_that);case BluetoothMessageVoice() when voice != null:
+return voice(_that);case BluetoothMessageModuleSettings() when moduleSettings != null:
+return moduleSettings(_that);case BluetoothMessageEmpty() when empty != null:
+return empty(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( AutomaticStart automaticStart)?  automaticStart,TResult Function( String time,  DateTime timestamp)?  finish,TResult Function( String time)?  countdown,TResult Function( String time)?  voice,TResult Function( String json)?  moduleSettings,TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case BluetoothMessageAutomaticStart() when automaticStart != null:
+return automaticStart(_that.automaticStart);case BluetoothMessageFinish() when finish != null:
+return finish(_that.time,_that.timestamp);case BluetoothMessageCountdown() when countdown != null:
+return countdown(_that.time);case BluetoothMessageVoice() when voice != null:
+return voice(_that.time);case BluetoothMessageModuleSettings() when moduleSettings != null:
+return moduleSettings(_that.json);case BluetoothMessageEmpty() when empty != null:
+return empty();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( AutomaticStart automaticStart)  automaticStart,required TResult Function( String time,  DateTime timestamp)  finish,required TResult Function( String time)  countdown,required TResult Function( String time)  voice,required TResult Function( String json)  moduleSettings,required TResult Function()  empty,}) {final _that = this;
+switch (_that) {
+case BluetoothMessageAutomaticStart():
+return automaticStart(_that.automaticStart);case BluetoothMessageFinish():
+return finish(_that.time,_that.timestamp);case BluetoothMessageCountdown():
+return countdown(_that.time);case BluetoothMessageVoice():
+return voice(_that.time);case BluetoothMessageModuleSettings():
+return moduleSettings(_that.json);case BluetoothMessageEmpty():
+return empty();}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( AutomaticStart automaticStart)?  automaticStart,TResult? Function( String time,  DateTime timestamp)?  finish,TResult? Function( String time)?  countdown,TResult? Function( String time)?  voice,TResult? Function( String json)?  moduleSettings,TResult? Function()?  empty,}) {final _that = this;
+switch (_that) {
+case BluetoothMessageAutomaticStart() when automaticStart != null:
+return automaticStart(_that.automaticStart);case BluetoothMessageFinish() when finish != null:
+return finish(_that.time,_that.timestamp);case BluetoothMessageCountdown() when countdown != null:
+return countdown(_that.time);case BluetoothMessageVoice() when voice != null:
+return voice(_that.time);case BluetoothMessageModuleSettings() when moduleSettings != null:
+return moduleSettings(_that.json);case BluetoothMessageEmpty() when empty != null:
+return empty();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

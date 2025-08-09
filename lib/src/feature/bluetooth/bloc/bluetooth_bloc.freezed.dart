@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,178 @@ class $BluetoothEventCopyWith<$Res>  {
 $BluetoothEventCopyWith(BluetoothEvent _, $Res Function(BluetoothEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [BluetoothEvent].
+extension BluetoothEventPatterns on BluetoothEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initialize value)?  initialize,TResult Function( _Enable value)?  enable,TResult Function( _SelectDevice value)?  selectDevice,TResult Function( _Connected value)?  connected,TResult Function( _Connect value)?  connect,TResult Function( _Disconnect value)?  disconnect,TResult Function( _Disconnected value)?  disconnected,TResult Function( _MessageReceived value)?  messageReceived,TResult Function( _SendMessage value)?  sendMessage,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Initialize() when initialize != null:
+return initialize(_that);case _Enable() when enable != null:
+return enable(_that);case _SelectDevice() when selectDevice != null:
+return selectDevice(_that);case _Connected() when connected != null:
+return connected(_that);case _Connect() when connect != null:
+return connect(_that);case _Disconnect() when disconnect != null:
+return disconnect(_that);case _Disconnected() when disconnected != null:
+return disconnected(_that);case _MessageReceived() when messageReceived != null:
+return messageReceived(_that);case _SendMessage() when sendMessage != null:
+return sendMessage(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initialize value)  initialize,required TResult Function( _Enable value)  enable,required TResult Function( _SelectDevice value)  selectDevice,required TResult Function( _Connected value)  connected,required TResult Function( _Connect value)  connect,required TResult Function( _Disconnect value)  disconnect,required TResult Function( _Disconnected value)  disconnected,required TResult Function( _MessageReceived value)  messageReceived,required TResult Function( _SendMessage value)  sendMessage,}){
+final _that = this;
+switch (_that) {
+case _Initialize():
+return initialize(_that);case _Enable():
+return enable(_that);case _SelectDevice():
+return selectDevice(_that);case _Connected():
+return connected(_that);case _Connect():
+return connect(_that);case _Disconnect():
+return disconnect(_that);case _Disconnected():
+return disconnected(_that);case _MessageReceived():
+return messageReceived(_that);case _SendMessage():
+return sendMessage(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initialize value)?  initialize,TResult? Function( _Enable value)?  enable,TResult? Function( _SelectDevice value)?  selectDevice,TResult? Function( _Connected value)?  connected,TResult? Function( _Connect value)?  connect,TResult? Function( _Disconnect value)?  disconnect,TResult? Function( _Disconnected value)?  disconnected,TResult? Function( _MessageReceived value)?  messageReceived,TResult? Function( _SendMessage value)?  sendMessage,}){
+final _that = this;
+switch (_that) {
+case _Initialize() when initialize != null:
+return initialize(_that);case _Enable() when enable != null:
+return enable(_that);case _SelectDevice() when selectDevice != null:
+return selectDevice(_that);case _Connected() when connected != null:
+return connected(_that);case _Connect() when connect != null:
+return connect(_that);case _Disconnect() when disconnect != null:
+return disconnect(_that);case _Disconnected() when disconnected != null:
+return disconnected(_that);case _MessageReceived() when messageReceived != null:
+return messageReceived(_that);case _SendMessage() when sendMessage != null:
+return sendMessage(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function()?  enable,TResult Function( BluetoothDeviceWithAvailability? deviceWithAvailability)?  selectDevice,TResult Function()?  connected,TResult Function( BluetoothDevice? selectedDevice)?  connect,TResult Function()?  disconnect,TResult Function()?  disconnected,TResult Function( String message,  int stageId)?  messageReceived,TResult Function( String message)?  sendMessage,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Initialize() when initialize != null:
+return initialize();case _Enable() when enable != null:
+return enable();case _SelectDevice() when selectDevice != null:
+return selectDevice(_that.deviceWithAvailability);case _Connected() when connected != null:
+return connected();case _Connect() when connect != null:
+return connect(_that.selectedDevice);case _Disconnect() when disconnect != null:
+return disconnect();case _Disconnected() when disconnected != null:
+return disconnected();case _MessageReceived() when messageReceived != null:
+return messageReceived(_that.message,_that.stageId);case _SendMessage() when sendMessage != null:
+return sendMessage(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function()  enable,required TResult Function( BluetoothDeviceWithAvailability? deviceWithAvailability)  selectDevice,required TResult Function()  connected,required TResult Function( BluetoothDevice? selectedDevice)  connect,required TResult Function()  disconnect,required TResult Function()  disconnected,required TResult Function( String message,  int stageId)  messageReceived,required TResult Function( String message)  sendMessage,}) {final _that = this;
+switch (_that) {
+case _Initialize():
+return initialize();case _Enable():
+return enable();case _SelectDevice():
+return selectDevice(_that.deviceWithAvailability);case _Connected():
+return connected();case _Connect():
+return connect(_that.selectedDevice);case _Disconnect():
+return disconnect();case _Disconnected():
+return disconnected();case _MessageReceived():
+return messageReceived(_that.message,_that.stageId);case _SendMessage():
+return sendMessage(_that.message);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function()?  enable,TResult? Function( BluetoothDeviceWithAvailability? deviceWithAvailability)?  selectDevice,TResult? Function()?  connected,TResult? Function( BluetoothDevice? selectedDevice)?  connect,TResult? Function()?  disconnect,TResult? Function()?  disconnected,TResult? Function( String message,  int stageId)?  messageReceived,TResult? Function( String message)?  sendMessage,}) {final _that = this;
+switch (_that) {
+case _Initialize() when initialize != null:
+return initialize();case _Enable() when enable != null:
+return enable();case _SelectDevice() when selectDevice != null:
+return selectDevice(_that.deviceWithAvailability);case _Connected() when connected != null:
+return connected();case _Connect() when connect != null:
+return connect(_that.selectedDevice);case _Disconnect() when disconnect != null:
+return disconnect();case _Disconnected() when disconnected != null:
+return disconnected();case _MessageReceived() when messageReceived != null:
+return messageReceived(_that.message,_that.stageId);case _SendMessage() when sendMessage != null:
+return sendMessage(_that.message);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -497,6 +668,166 @@ class $BluetoothBlocStateCopyWith<$Res>  {
 $BluetoothBlocStateCopyWith(BluetoothBlocState _, $Res Function(BluetoothBlocState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [BluetoothBlocState].
+extension BluetoothBlocStatePatterns on BluetoothBlocState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( BluetoothBlocStateNotInitialized value)?  notInitialized,TResult Function( BluetoothBlocStateNotAvailable value)?  notAvailable,TResult Function( BluetoothBlocStateNotEnabled value)?  notEnabled,TResult Function( BluetoothBlocStateConnecting value)?  connecting,TResult Function( BluetoothBlocStateConnected value)?  connected,TResult Function( BluetoothBlocStateDisconnecting value)?  disconnecting,TResult Function( BluetoothBlocStateDisconnected value)?  disconnected,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case BluetoothBlocStateNotInitialized() when notInitialized != null:
+return notInitialized(_that);case BluetoothBlocStateNotAvailable() when notAvailable != null:
+return notAvailable(_that);case BluetoothBlocStateNotEnabled() when notEnabled != null:
+return notEnabled(_that);case BluetoothBlocStateConnecting() when connecting != null:
+return connecting(_that);case BluetoothBlocStateConnected() when connected != null:
+return connected(_that);case BluetoothBlocStateDisconnecting() when disconnecting != null:
+return disconnecting(_that);case BluetoothBlocStateDisconnected() when disconnected != null:
+return disconnected(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( BluetoothBlocStateNotInitialized value)  notInitialized,required TResult Function( BluetoothBlocStateNotAvailable value)  notAvailable,required TResult Function( BluetoothBlocStateNotEnabled value)  notEnabled,required TResult Function( BluetoothBlocStateConnecting value)  connecting,required TResult Function( BluetoothBlocStateConnected value)  connected,required TResult Function( BluetoothBlocStateDisconnecting value)  disconnecting,required TResult Function( BluetoothBlocStateDisconnected value)  disconnected,}){
+final _that = this;
+switch (_that) {
+case BluetoothBlocStateNotInitialized():
+return notInitialized(_that);case BluetoothBlocStateNotAvailable():
+return notAvailable(_that);case BluetoothBlocStateNotEnabled():
+return notEnabled(_that);case BluetoothBlocStateConnecting():
+return connecting(_that);case BluetoothBlocStateConnected():
+return connected(_that);case BluetoothBlocStateDisconnecting():
+return disconnecting(_that);case BluetoothBlocStateDisconnected():
+return disconnected(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( BluetoothBlocStateNotInitialized value)?  notInitialized,TResult? Function( BluetoothBlocStateNotAvailable value)?  notAvailable,TResult? Function( BluetoothBlocStateNotEnabled value)?  notEnabled,TResult? Function( BluetoothBlocStateConnecting value)?  connecting,TResult? Function( BluetoothBlocStateConnected value)?  connected,TResult? Function( BluetoothBlocStateDisconnecting value)?  disconnecting,TResult? Function( BluetoothBlocStateDisconnected value)?  disconnected,}){
+final _that = this;
+switch (_that) {
+case BluetoothBlocStateNotInitialized() when notInitialized != null:
+return notInitialized(_that);case BluetoothBlocStateNotAvailable() when notAvailable != null:
+return notAvailable(_that);case BluetoothBlocStateNotEnabled() when notEnabled != null:
+return notEnabled(_that);case BluetoothBlocStateConnecting() when connecting != null:
+return connecting(_that);case BluetoothBlocStateConnected() when connected != null:
+return connected(_that);case BluetoothBlocStateDisconnecting() when disconnecting != null:
+return disconnecting(_that);case BluetoothBlocStateDisconnected() when disconnected != null:
+return disconnected(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  notInitialized,TResult Function()?  notAvailable,TResult Function()?  notEnabled,TResult Function()?  connecting,TResult Function( BluetoothMessage? message)?  connected,TResult Function()?  disconnecting,TResult Function( BluetoothDevice? bluetoothDevice)?  disconnected,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case BluetoothBlocStateNotInitialized() when notInitialized != null:
+return notInitialized();case BluetoothBlocStateNotAvailable() when notAvailable != null:
+return notAvailable();case BluetoothBlocStateNotEnabled() when notEnabled != null:
+return notEnabled();case BluetoothBlocStateConnecting() when connecting != null:
+return connecting();case BluetoothBlocStateConnected() when connected != null:
+return connected(_that.message);case BluetoothBlocStateDisconnecting() when disconnecting != null:
+return disconnecting();case BluetoothBlocStateDisconnected() when disconnected != null:
+return disconnected(_that.bluetoothDevice);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  notInitialized,required TResult Function()  notAvailable,required TResult Function()  notEnabled,required TResult Function()  connecting,required TResult Function( BluetoothMessage? message)  connected,required TResult Function()  disconnecting,required TResult Function( BluetoothDevice? bluetoothDevice)  disconnected,}) {final _that = this;
+switch (_that) {
+case BluetoothBlocStateNotInitialized():
+return notInitialized();case BluetoothBlocStateNotAvailable():
+return notAvailable();case BluetoothBlocStateNotEnabled():
+return notEnabled();case BluetoothBlocStateConnecting():
+return connecting();case BluetoothBlocStateConnected():
+return connected(_that.message);case BluetoothBlocStateDisconnecting():
+return disconnecting();case BluetoothBlocStateDisconnected():
+return disconnected(_that.bluetoothDevice);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  notInitialized,TResult? Function()?  notAvailable,TResult? Function()?  notEnabled,TResult? Function()?  connecting,TResult? Function( BluetoothMessage? message)?  connected,TResult? Function()?  disconnecting,TResult? Function( BluetoothDevice? bluetoothDevice)?  disconnected,}) {final _that = this;
+switch (_that) {
+case BluetoothBlocStateNotInitialized() when notInitialized != null:
+return notInitialized();case BluetoothBlocStateNotAvailable() when notAvailable != null:
+return notAvailable();case BluetoothBlocStateNotEnabled() when notEnabled != null:
+return notEnabled();case BluetoothBlocStateConnecting() when connecting != null:
+return connecting();case BluetoothBlocStateConnected() when connected != null:
+return connected(_that.message);case BluetoothBlocStateDisconnecting() when disconnecting != null:
+return disconnecting();case BluetoothBlocStateDisconnected() when disconnected != null:
+return disconnected(_that.bluetoothDevice);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

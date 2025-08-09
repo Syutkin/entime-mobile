@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,166 @@ class $UpdateEventCopyWith<$Res>  {
 $UpdateEventCopyWith(UpdateEvent _, $Res Function(UpdateEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [UpdateEvent].
+extension UpdateEventPatterns on UpdateEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _CheckUpdate value)?  checkUpdate,TResult Function( _PopupChangelog value)?  popupChangelog,TResult Function( _DownloadUpdate value)?  downloadUpdate,TResult Function( _Downloading value)?  downloading,TResult Function( _CancelDownload value)?  cancelDownload,TResult Function( _DownloadError value)?  downloadError,TResult Function( _UpdateFromFile value)?  updateFromFile,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _CheckUpdate() when checkUpdate != null:
+return checkUpdate(_that);case _PopupChangelog() when popupChangelog != null:
+return popupChangelog(_that);case _DownloadUpdate() when downloadUpdate != null:
+return downloadUpdate(_that);case _Downloading() when downloading != null:
+return downloading(_that);case _CancelDownload() when cancelDownload != null:
+return cancelDownload(_that);case _DownloadError() when downloadError != null:
+return downloadError(_that);case _UpdateFromFile() when updateFromFile != null:
+return updateFromFile(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _CheckUpdate value)  checkUpdate,required TResult Function( _PopupChangelog value)  popupChangelog,required TResult Function( _DownloadUpdate value)  downloadUpdate,required TResult Function( _Downloading value)  downloading,required TResult Function( _CancelDownload value)  cancelDownload,required TResult Function( _DownloadError value)  downloadError,required TResult Function( _UpdateFromFile value)  updateFromFile,}){
+final _that = this;
+switch (_that) {
+case _CheckUpdate():
+return checkUpdate(_that);case _PopupChangelog():
+return popupChangelog(_that);case _DownloadUpdate():
+return downloadUpdate(_that);case _Downloading():
+return downloading(_that);case _CancelDownload():
+return cancelDownload(_that);case _DownloadError():
+return downloadError(_that);case _UpdateFromFile():
+return updateFromFile(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _CheckUpdate value)?  checkUpdate,TResult? Function( _PopupChangelog value)?  popupChangelog,TResult? Function( _DownloadUpdate value)?  downloadUpdate,TResult? Function( _Downloading value)?  downloading,TResult? Function( _CancelDownload value)?  cancelDownload,TResult? Function( _DownloadError value)?  downloadError,TResult? Function( _UpdateFromFile value)?  updateFromFile,}){
+final _that = this;
+switch (_that) {
+case _CheckUpdate() when checkUpdate != null:
+return checkUpdate(_that);case _PopupChangelog() when popupChangelog != null:
+return popupChangelog(_that);case _DownloadUpdate() when downloadUpdate != null:
+return downloadUpdate(_that);case _Downloading() when downloading != null:
+return downloading(_that);case _CancelDownload() when cancelDownload != null:
+return cancelDownload(_that);case _DownloadError() when downloadError != null:
+return downloadError(_that);case _UpdateFromFile() when updateFromFile != null:
+return updateFromFile(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  checkUpdate,TResult Function()?  popupChangelog,TResult Function()?  downloadUpdate,TResult Function( int bytes,  int total)?  downloading,TResult Function()?  cancelDownload,TResult Function( String error)?  downloadError,TResult Function()?  updateFromFile,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _CheckUpdate() when checkUpdate != null:
+return checkUpdate();case _PopupChangelog() when popupChangelog != null:
+return popupChangelog();case _DownloadUpdate() when downloadUpdate != null:
+return downloadUpdate();case _Downloading() when downloading != null:
+return downloading(_that.bytes,_that.total);case _CancelDownload() when cancelDownload != null:
+return cancelDownload();case _DownloadError() when downloadError != null:
+return downloadError(_that.error);case _UpdateFromFile() when updateFromFile != null:
+return updateFromFile();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  checkUpdate,required TResult Function()  popupChangelog,required TResult Function()  downloadUpdate,required TResult Function( int bytes,  int total)  downloading,required TResult Function()  cancelDownload,required TResult Function( String error)  downloadError,required TResult Function()  updateFromFile,}) {final _that = this;
+switch (_that) {
+case _CheckUpdate():
+return checkUpdate();case _PopupChangelog():
+return popupChangelog();case _DownloadUpdate():
+return downloadUpdate();case _Downloading():
+return downloading(_that.bytes,_that.total);case _CancelDownload():
+return cancelDownload();case _DownloadError():
+return downloadError(_that.error);case _UpdateFromFile():
+return updateFromFile();}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  checkUpdate,TResult? Function()?  popupChangelog,TResult? Function()?  downloadUpdate,TResult? Function( int bytes,  int total)?  downloading,TResult? Function()?  cancelDownload,TResult? Function( String error)?  downloadError,TResult? Function()?  updateFromFile,}) {final _that = this;
+switch (_that) {
+case _CheckUpdate() when checkUpdate != null:
+return checkUpdate();case _PopupChangelog() when popupChangelog != null:
+return popupChangelog();case _DownloadUpdate() when downloadUpdate != null:
+return downloadUpdate();case _Downloading() when downloading != null:
+return downloading(_that.bytes,_that.total);case _CancelDownload() when cancelDownload != null:
+return cancelDownload();case _DownloadError() when downloadError != null:
+return downloadError(_that.error);case _UpdateFromFile() when updateFromFile != null:
+return updateFromFile();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -365,6 +524,154 @@ class $UpdateStateCopyWith<$Res>  {
 $UpdateStateCopyWith(UpdateState _, $Res Function(UpdateState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [UpdateState].
+extension UpdateStatePatterns on UpdateState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( UpdateStateInitial value)?  initial,TResult Function( UpdateStateUpdateAvailable value)?  updateAvailable,TResult Function( UpdateStateConnecting value)?  connecting,TResult Function( UpdateStateDownloading value)?  downloading,TResult Function( UpdateStateDownloadError value)?  downloadError,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case UpdateStateInitial() when initial != null:
+return initial(_that);case UpdateStateUpdateAvailable() when updateAvailable != null:
+return updateAvailable(_that);case UpdateStateConnecting() when connecting != null:
+return connecting(_that);case UpdateStateDownloading() when downloading != null:
+return downloading(_that);case UpdateStateDownloadError() when downloadError != null:
+return downloadError(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( UpdateStateInitial value)  initial,required TResult Function( UpdateStateUpdateAvailable value)  updateAvailable,required TResult Function( UpdateStateConnecting value)  connecting,required TResult Function( UpdateStateDownloading value)  downloading,required TResult Function( UpdateStateDownloadError value)  downloadError,}){
+final _that = this;
+switch (_that) {
+case UpdateStateInitial():
+return initial(_that);case UpdateStateUpdateAvailable():
+return updateAvailable(_that);case UpdateStateConnecting():
+return connecting(_that);case UpdateStateDownloading():
+return downloading(_that);case UpdateStateDownloadError():
+return downloadError(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( UpdateStateInitial value)?  initial,TResult? Function( UpdateStateUpdateAvailable value)?  updateAvailable,TResult? Function( UpdateStateConnecting value)?  connecting,TResult? Function( UpdateStateDownloading value)?  downloading,TResult? Function( UpdateStateDownloadError value)?  downloadError,}){
+final _that = this;
+switch (_that) {
+case UpdateStateInitial() when initial != null:
+return initial(_that);case UpdateStateUpdateAvailable() when updateAvailable != null:
+return updateAvailable(_that);case UpdateStateConnecting() when connecting != null:
+return connecting(_that);case UpdateStateDownloading() when downloading != null:
+return downloading(_that);case UpdateStateDownloadError() when downloadError != null:
+return downloadError(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String? changelog)?  initial,TResult Function( String version)?  updateAvailable,TResult Function()?  connecting,TResult Function( int bytes,  int total)?  downloading,TResult Function( String error)?  downloadError,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case UpdateStateInitial() when initial != null:
+return initial(_that.changelog);case UpdateStateUpdateAvailable() when updateAvailable != null:
+return updateAvailable(_that.version);case UpdateStateConnecting() when connecting != null:
+return connecting();case UpdateStateDownloading() when downloading != null:
+return downloading(_that.bytes,_that.total);case UpdateStateDownloadError() when downloadError != null:
+return downloadError(_that.error);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String? changelog)  initial,required TResult Function( String version)  updateAvailable,required TResult Function()  connecting,required TResult Function( int bytes,  int total)  downloading,required TResult Function( String error)  downloadError,}) {final _that = this;
+switch (_that) {
+case UpdateStateInitial():
+return initial(_that.changelog);case UpdateStateUpdateAvailable():
+return updateAvailable(_that.version);case UpdateStateConnecting():
+return connecting();case UpdateStateDownloading():
+return downloading(_that.bytes,_that.total);case UpdateStateDownloadError():
+return downloadError(_that.error);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String? changelog)?  initial,TResult? Function( String version)?  updateAvailable,TResult? Function()?  connecting,TResult? Function( int bytes,  int total)?  downloading,TResult? Function( String error)?  downloadError,}) {final _that = this;
+switch (_that) {
+case UpdateStateInitial() when initial != null:
+return initial(_that.changelog);case UpdateStateUpdateAvailable() when updateAvailable != null:
+return updateAvailable(_that.version);case UpdateStateConnecting() when connecting != null:
+return connecting();case UpdateStateDownloading() when downloading != null:
+return downloading(_that.bytes,_that.total);case UpdateStateDownloadError() when downloadError != null:
+return downloadError(_that.error);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
