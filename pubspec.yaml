@@ -15,7 +15,7 @@ repository: https://github.com/Syutkin/entime-mobile
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.5.2-dev+493
+version: 0.5.2-dev+494
 
 environment:
   sdk: ^3.8.0
@@ -31,11 +31,11 @@ dependencies:
   crypto: ^3.0.6
   csv: ^6.0.0
   device_info_plus: ^11.5.0
-  drift: ^2.27.0
+  drift: ^2.28.1
 #  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
   dropdown_search: ^6.0.2
   equatable: ^2.0.7
-  file_picker: ^10.2.0
+  file_picker: ^10.2.4
 #  filesize: ^2.0.1
   flutter:
     sdk: flutter
@@ -48,10 +48,10 @@ dependencies:
   flutter_ntp: ^0.0.2
   flutter_tts: ^4.2.3
   freezed_annotation: ^3.1.0
-  http: ^1.4.0
+  http: ^1.5.0
   intl: ^0.20.2
   json_annotation: ^4.9.0
-  logger: ^2.6.0
+  logger: ^2.6.1
   material_design_icons_flutter: ^7.0.7296
   meta: ^1.16.0
   nested: ^1.0.0
@@ -62,13 +62,13 @@ dependencies:
   permission_handler: ^12.0.1
   pub_semver: ^2.2.0
   rxdart: ^0.28.0
-  sentry_flutter: ^9.3.0
+  sentry_flutter: ^9.6.0
   settings_ui: ^2.0.2
   share_plus: ^11.0.0
   shared_preferences: ^2.5.3
-  sqlite3: ^2.7.6
-  sqlite3_flutter_libs: ^0.5.34
-  url_launcher: ^6.3.1
+  sqlite3: ^2.9.0
+  sqlite3_flutter_libs: ^0.5.39
+  url_launcher: ^6.3.2
   wakelock_plus: ^1.3.2
 
 dependency_overrides:
@@ -86,20 +86,19 @@ dependency_overrides:
 
 dev_dependencies:
   bloc_test: ^10.0.0
-  build_runner: ^2.5.4
-  dart_style: ^3.1.0
-  drift_dev: ^2.27.0
+  build_runner: ^2.6.0
+  dart_style: ^3.1.1
+  drift_dev: ^2.28.1
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^3.1.0
+  freezed: ^3.2.0
   integration_test:
     sdk: flutter
-  json_serializable: ^6.9.5
+  json_serializable: ^6.10.0
   mocktail: ^1.0.4
-  patrol: ^3.16.0
-  patrol_finders: ^2.8.2
-  pubspec_generator: ^4.3.0
+  patrol: ^3.19.0
+  patrol_finders: ^2.9.0
   test: ^1.25.15
   very_good_analysis: ^9.0.0
 

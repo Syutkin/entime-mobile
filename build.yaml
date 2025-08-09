@@ -7,9 +7,6 @@ targets:
       - test/**
       - pubspec.yaml
     builders:
-      pubspec_generator:
-        options:
-          output: lib/src/constants/pubspec.yaml.g.dart
       drift_dev:
         options:
           named_parameters: true
