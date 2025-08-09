@@ -46,10 +46,14 @@ jobs:
       - run: flutter doctor -v
 
       - name: Install dependencies from pub
-        run: flutter pub get
+        run: |
+          flutter pub get
+          dart pub global activate pubspec_generator
 
       - name: Generate with build_runner
-        run: flutter pub run build_runner build --delete-conflicting-outputs
+        run: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+          dart pub global run pubspec_generator:generate -o lib/src/constants/pubspec.yaml.g.dart
 
       - name: Analyze project source
         run: flutter analyze --no-fatal-infos
