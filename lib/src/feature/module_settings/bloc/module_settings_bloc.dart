@@ -22,20 +22,31 @@ class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> 
   Future<void> _handleGetModuleSettings(_Get event, Emitter<ModuleSettingsState> emit) async {
     emit(const ModuleSettingsLoading());
     moduleSettings = ModuleSettingsType();
-    var isLoaded = await moduleSettings.update(event.json);
+    final isLoaded = await moduleSettings.update(event.json);
 
     if (isLoaded) {
       if (moduleSettings.type == 'entime') {
         moduleSettings = ModuleSettingsEntime();
-        isLoaded = await moduleSettings.update(event.json);
+        final isUpdated = await moduleSettings.update(event.json);
+        if (isUpdated) {
+          emit(ModuleSettingsLoaded(moduleSettings));
+        } else {
+          logger.e('Ошибка обновления настроек модуля');
+          emit(const ModuleSettingsError());
+        }
       } else if (moduleSettings.type == 'led') {
         moduleSettings = ModuleSettingsLed();
-        isLoaded = await moduleSettings.update(event.json);
+        final isUpdated = await moduleSettings.update(event.json);
+        if (isUpdated) {
+          emit(ModuleSettingsLoaded(moduleSettings));
+        } else {
+          logger.e('Ошибка обновления настроек модуля');
+          emit(const ModuleSettingsError());
+        }
       } else {
         logger.e('Ошибка! Неизвестный тип модуля: ${moduleSettings.type}');
         emit(const ModuleSettingsError());
       }
-      emit(ModuleSettingsLoaded(moduleSettings));
     } else {
       logger.e('Ошибка! Настройки не загружены');
       emit(const ModuleSettingsError());

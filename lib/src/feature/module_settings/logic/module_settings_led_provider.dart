@@ -10,7 +10,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
   //Loading settings on initialization
   @override
   Future<bool> update(String jsonString) async {
-    logger.i('Updating modsettings from json');
+    logger.i('ModuleSettingsLed: Updating modsettings from json');
 
     try {
       _modSettingsModel = ModSettingsModelLed.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);

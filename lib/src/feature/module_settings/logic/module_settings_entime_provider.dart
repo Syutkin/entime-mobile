@@ -12,7 +12,7 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
   //Loading settings on initialization
   @override
   Future<bool> update(String jsonString) async {
-    logger.i('Updating modsettings from json');
+    logger.i('ModuleSettingsEntime: Updating modsettings from json');
 
     try {
       _modSettingsModel = ModSettingsModel.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
