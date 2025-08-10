@@ -1,4 +1,4 @@
-// ignore_for_file: use_setters_to_change_properties, inference_failure_on_untyped_parameter
+
 
 import 'dart:async';
 import 'dart:convert';
@@ -9,6 +9,7 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../../../common/logger/logger.dart';
+import 'bluetooth_connection_interface.dart';
 
 typedef ErrorHandler = void Function(String error);
 
@@ -37,7 +38,11 @@ abstract class IBluetoothBackgroundConnection {
 }
 
 class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
-  BluetoothConnection? _connection;
+  /// Конструктор с возможностью внедрения фабрики соединений
+  BluetoothBackgroundConnection({
+    IBluetoothConnectionFactory? connectionFactory,
+  }) : _connectionFactory = connectionFactory ?? BluetoothConnectionFactory();
+  IBluetoothConnection? _connection;
   StreamSubscription<Uint8List>? _connectionSubscription;
 
   String _messageBuffer = '';
@@ -54,8 +59,12 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   @override
   bool get isConnected => _connection != null && _connection!.isConnected;
 
-  late VoidCallback _onDisconnect;
-  late ErrorHandler _onSendError;
+  VoidCallback? _onDisconnect;
+  ErrorHandler? _onSendError;
+
+  /// Фабрика для создания Bluetooth-соединений
+  /// По умолчанию использует реальную фабрику, но может быть заменена в тестах
+  final IBluetoothConnectionFactory _connectionFactory;
 
   @override
   void onDisconnect(VoidCallback callback) {
@@ -71,13 +80,13 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   Future<void> connect(BluetoothDevice bluetoothDevice) async {
     try {
       await _connection?.close();
-      _connection = await BluetoothConnection.toAddress(bluetoothDevice.address);
+      _connection = await _connectionFactory.connectToAddress(bluetoothDevice.address);
       _connectionSubscription = _connection?.input?.listen(_onDataReceived);
       _connectionSubscription?.onDone(() async {
         // Сообщаем что соединение закрыто
         // Далее на основе того, когда это произошло,
         // определяем кто закрыл соединение (в BluetoothBloc event/state)
-        _onDisconnect();
+        _onDisconnect?.call();
         await _connectionSubscription?.cancel();
       });
     } catch (e) {
@@ -87,7 +96,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> start() async {
-    await _connection?.output.allSent;
+    await _connection?.output?.allSent;
   }
 
   @override
@@ -103,22 +112,26 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   }
 
   @override
-  Future<bool> sendMessage(String text) async {
+  Future<bool> sendMessage(String message) async {
     var result = false;
-    text.trim();
-    //textEditingController.clear();
-    if (text.isNotEmpty) {
-      try {
-        logger.i('Sending message: $text');
-        _connection?.output.add(utf8.encode('$text\r\n'));
-        await _connection?.output.allSent;
-        result = true;
-      } on Exception catch (e) {
-        // Ignore error, but notify state
-        logger.e('Error sending message', error: e);
-        _onSendError('$e');
-        result = false;
+    if (isConnected) {
+      final text = message.trim();
+      if (text.isNotEmpty) {
+        try {
+          logger.i('Sending message: $text');
+          _connection?.output?.add(utf8.encode('$text\r\n'));
+          await _connection?.output?.allSent;
+          result = true;
+        } on Exception catch (e) {
+          // Ignore error, but notify state
+          logger.e('Error sending message', error: e);
+          _onSendError?.call('$e');
+          result = false;
+        }
       }
+    } else {
+      logger.w('Can not sending message: connection is not established');
+      result = false;
     }
     return result;
   }
