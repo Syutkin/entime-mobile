@@ -53,6 +53,6 @@ jobs:
           lcov -r coverage/lcov.info -o coverage/lcov.info "lib/**.freezed.dart" "lib/**.g.dart" "lib/**.steps.dart" "lib/src/common/localization/**.dart" --ignore-errors unused
         
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
