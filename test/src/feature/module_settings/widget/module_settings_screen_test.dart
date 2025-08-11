@@ -1,3 +1,6 @@
+// TODO: Убрать после реализации тестов
+// ignore_for_file: unused_element
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
