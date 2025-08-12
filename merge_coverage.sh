@@ -17,13 +17,29 @@ IGNORE_PATTERNS=(
     "lib/src/common/localization/**.dart"
 )
 
-echo "📦 Запуск тестов в $TEST_PATH с отдельным файлом покрытия..."
+echo "Запуск тестов в $TEST_PATH с отдельным файлом покрытия..."
 flutter test --coverage --coverage-path="$PARTIAL_COVERAGE_FILE" "$TEST_PATH"
 
-echo "🛠 Нормализация путей..."
-# Flutter пишет абсолютные пути, меняем на относительные (от корня проекта)
-PROJECT_ROOT=$(pwd | sed 's_/_\\/_g') # экранируем слеши
-sed -i "s/$PROJECT_ROOT\///g" "$PARTIAL_COVERAGE_FILE"
-sed -i "s/$PROJECT_ROOT\///g" "$MAIN_COVERAGE_FILE"
+echo "Нормализация путей..."
+PROJECT_ROOT=$(pwd)
+sed -i "s|$PROJECT_ROOT/||g" "$PARTIAL_COVERAGE_FILE"
+sed -i "s|$PROJECT_ROOT/||g" "$MAIN_COVERAGE_FILE"
 
-echo "➕ Объединение с существующим покрытием..
+echo "Объединение с существующим покрытием..."
+lcov -a "$MAIN_COVERAGE_FILE" -a "$PARTIAL_COVERAGE_FILE" -o "$MERGED_COVERAGE_FILE"
+
+echo "Удаление мусорных файлов из покрытия..."
+for pattern in "${IGNORE_PATTERNS[@]}"; do
+    lcov -r "$MERGED_COVERAGE_FILE" "$pattern" --ignore-errors unused -o "$MERGED_COVERAGE_FILE"
+done
+
+echo "Обновляем основной файл покрытия..."
+mv "$MERGED_COVERAGE_FILE" "$MAIN_COVERAGE_FILE"
+
+echo "Очистка временного файла..."
+rm -f "$PARTIAL_COVERAGE_FILE"
+
+echo "Готово! Обновлённое покрытие: $MAIN_COVERAGE_FILE"
+
+# Печать сводной статистики
+lcov --summary coverage/lcov.info
