@@ -330,14 +330,15 @@ void main() {
 
       patrolWidgetTest(
         'Set DNS when dismissed',
-        // Dunno why it didn't dismissed
-        skip: true,
         (PatrolTester $) async {
           when(() => settingsCubit.state).thenReturn(settings);
           when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
           await $.pumpWidgetAndSettle(testWidget());
           expect($(StartItemTile), findsNWidgets(3));
-          await $.tester.drag($(StartItemTile).containing('11:00:00'), const Offset(500, 0));
+          await $.tester.drag($(StartItemTile).containing('11:00:00'), const Offset(-500, 0));
+          await $.pumpAndSettle();
+          // Handle the confirmation popup
+          await $(#okButton).tap();
           await $.pumpAndSettle();
           verify(
             () => databaseBloc.add(const DatabaseEvent.setStatusForStartId(startId: 1, status: ParticipantStatus.dns)),
@@ -517,10 +518,13 @@ void main() {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
         await $.pumpWidgetAndSettle(testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
-        expect($(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'automaticStartTime')), findsOneWidget);
+        expect(
+          $(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'automaticStartTime')),
+          findsOneWidget,
+        );
       });
 
-        patrolWidgetTest('Show warning when manual start already exists', (PatrolTester $) async {
+      patrolWidgetTest('Show warning when manual start already exists', (PatrolTester $) async {
         expectedStates = [
           DatabaseState(
             races: [],
