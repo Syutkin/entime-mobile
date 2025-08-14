@@ -225,5 +225,47 @@ void main() {
         ),
       ).called(1);
     });
+
+    patrolWidgetTest('CupertinoTimerPicker onTimerDurationChanged callback works correctly', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+
+      // Получаем CupertinoTimerPicker
+      final cupertinoTimerPicker = $(CupertinoTimerPicker).evaluate().single.widget as CupertinoTimerPicker;
+
+      // Проверяем начальное значение
+      final initialDuration = cupertinoTimerPicker.initialTimerDuration;
+      expect(initialDuration, isA<Duration>());
+      expect(initialDuration.inHours, greaterThanOrEqualTo(0));
+      expect(initialDuration.inMinutes, greaterThanOrEqualTo(0));
+
+      // Симулируем изменение времени через onTimerDurationChanged
+      const newDuration = Duration(hours: 2, minutes: 30);
+
+      // Вызываем callback напрямую
+      cupertinoTimerPicker.onTimerDurationChanged.call(newDuration);
+
+      // Перестраиваем виджет
+      await $.pump();
+
+      // Вводим валидный номер
+      final textField = $(TextFormField);
+      await textField.enterText('20');
+
+      // Нажимаем OK
+      await $(#okButton).tap();
+
+      // Проверяем, что был вызван event с новым временем
+      final expectedStartTime = newDuration.toString().split('.').first.padLeft(8, '0');
+      verify(
+        () => databaseBloc.add(
+          DatabaseEvent.addStartNumber(
+            stage: stage,
+            number: 20,
+            startTime: expectedStartTime,
+          ),
+        ),
+      ).called(1);
+    });
   });
 }
