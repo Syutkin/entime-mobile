@@ -22,13 +22,14 @@ void main() {
 
   Widget testWidget() {
     initializeDateFormatting();
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(
-          value: databaseBloc,
-          child: BlocProvider.value(value: trailsBloc, child: StagesListPage(race: race)),
+    return BlocProvider.value(
+      value: databaseBloc,
+      child: BlocProvider.value(
+        value: trailsBloc,
+        child: MaterialApp(
+          localizationsDelegates: const [Localization.delegate],
+          supportedLocales: Localization.supportedLocales,
+          home: StagesListPage(race: race),
         ),
       ),
     );
@@ -64,13 +65,12 @@ void main() {
       expect($(StageItemTile), findsNothing);
     });
 
-    // ToDo: I can't pass context with TrailsBloc
-    // patrolWidgetTest('Tap FAB, then add stage popup appears',
-    //     (PatrolTester $) async {
-    //   await $.pumpWidgetAndSettle(testWidget());
-    //   await $(FloatingActionButton).tap();
-    //   expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);
-    // });
+    patrolWidgetTest('Tap FAB, then add stage popup appears',
+        (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(FloatingActionButton).tap();
+      expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);
+    });
 
     patrolWidgetTest('Existing races list', (PatrolTester $) async {
       const race = Race(id: 1, name: 'name', isDeleted: false);
