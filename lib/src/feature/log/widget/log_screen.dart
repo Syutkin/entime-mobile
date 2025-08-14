@@ -33,10 +33,10 @@ class LogScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   title: Row(
                     children: <Widget>[
-                      Flexible(flex: 10, child: Align(child: _LogLevelIcon(level: item.level))),
+                      Flexible(flex: 10, child: Align(child: LogLevelIcon(level: item.level))),
                       Flexible(
                         flex: 10,
-                        child: Align(child: _LogSourceIcon(source: item.source, direction: item.direction)),
+                        child: Align(child: LogSourceIcon(source: item.source, direction: item.direction)),
                       ),
                       Flexible(
                         flex: 80,
@@ -72,8 +72,8 @@ class LogScreen extends StatelessWidget {
   ];
 }
 
-class _LogSourceIcon extends StatelessWidget {
-  const _LogSourceIcon({required this.source, required this.direction});
+class LogSourceIcon extends StatelessWidget {
+  const LogSourceIcon({required this.source, required this.direction, super.key});
 
   final LogSource source;
   final LogSourceDirection? direction;
@@ -103,8 +103,8 @@ class _LogSourceIcon extends StatelessWidget {
   }
 }
 
-class _LogLevelIcon extends StatelessWidget {
-  const _LogLevelIcon({required this.level});
+class LogLevelIcon extends StatelessWidget {
+  const LogLevelIcon({required this.level, super.key});
 
   final LogLevel level;
 
