@@ -33,7 +33,12 @@ class LogBloc extends Bloc<LogEvent, LogState> {
         case _EmitState():
           emit(LogState(log: _log));
         case _Add():
-          await _db.addLog(level: event.level, source: event.source, rawData: event.rawData);
+          await _db.addLog(
+            level: event.level,
+            source: event.source,
+            rawData: event.rawData,
+            direction: event.direction,
+          );
       }
     });
   }
