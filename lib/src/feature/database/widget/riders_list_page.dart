@@ -41,7 +41,7 @@ class RidersListPage extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           // ToDo: add rider
-          // addTrailPopup(context);
+          // addRiderPopup(context);
         },
       ),
     );
