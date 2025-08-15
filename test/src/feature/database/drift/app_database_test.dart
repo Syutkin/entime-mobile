@@ -265,6 +265,66 @@ void main() {
         expect(trail.elevation, elevation);
       });
 
+      test('Update trail, check null values', () async {
+        const trailName = 'trailName';
+        const newName = 'newName';
+        const description = 'description';
+        const url = 'url';
+        const distance = 111;
+        const elevation = 222;
+
+        final track = TrackFile(
+          id: -1,
+          name: 'fileName',
+          size: 0,
+          hashSha1: 0.toString(),
+          data: Uint8List(0),
+          timestamp: DateTime.now(),
+        );
+
+        final fileId = await db.addTrack(track);
+
+        final id = await db.addTrail(
+          name: trailName,
+          distance: distance,
+          elevation: elevation,
+          url: url,
+          description: description,
+          fileId: fileId,
+        );
+        var trails = await db.getTrails().get();
+        expect(trails.length, 1);
+
+        var trail = trails.first;
+        expect(trail.id, id);
+        expect(trail.name, trailName);
+        expect(trail.description, description);
+        expect(trail.url, url);
+        expect(trail.distance, distance);
+        expect(trail.elevation, elevation);
+        expect(trail.fileId, fileId);
+
+        await db.updateTrail(
+          id: id,
+          name: newName,
+          distance: null,
+          elevation: null,
+          url: null,
+          description: null,
+          fileId: null,
+        );
+
+        trails = await db.getTrails().get();
+        trail = trails.first;
+        expect(trail.id, id);
+        expect(trail.name, newName);
+        expect(trail.description, null);
+        expect(trail.url, null);
+        expect(trail.distance, null);
+        expect(trail.elevation, null);
+        expect(trail.fileId, null);
+      });
+
       test('Get trail', () async {
         const trailName = 'trailName';
 
@@ -1034,20 +1094,20 @@ void main() {
         expect(start.length, 4);
         expect(start[0].startTime, startTime);
         expect(start[0].statusId, ParticipantStatus.active.index);
-        expect(start[0].automaticStartTime, automaticStartTime);       
-        expect(start[0].automaticCorrection, correction);             
+        expect(start[0].automaticStartTime, automaticStartTime);
+        expect(start[0].automaticCorrection, correction);
         expect(start[1].startTime, startTime);
         expect(start[1].statusId, ParticipantStatus.dns.index);
         expect(start[1].automaticStartTime, null);
-        expect(start[1].automaticCorrection, null);                             
+        expect(start[1].automaticCorrection, null);
         expect(start[2].startTime, startTime);
         expect(start[2].statusId, ParticipantStatus.dnf.index);
-        expect(start[2].automaticStartTime, null);    
-        expect(start[2].automaticCorrection, null);                         
+        expect(start[2].automaticStartTime, null);
+        expect(start[2].automaticCorrection, null);
         expect(start[3].startTime, startTime);
         expect(start[3].statusId, ParticipantStatus.active.index);
-        expect(start[3].automaticStartTime, automaticStartTime);   
-        expect(start[3].automaticCorrection, correction);                          
+        expect(start[3].automaticStartTime, automaticStartTime);
+        expect(start[3].automaticCorrection, correction);
       });
     });
 

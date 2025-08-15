@@ -134,7 +134,7 @@ return emitTrack(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  getTrails,TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult Function( int id,  String? name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult Function( int id)?  deleteTrail,TResult Function( String filePath)?  loadTrack,TResult Function()?  unloadTrack,TResult Function( TrackFile track)?  emitTrack,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  getTrails,TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult Function( int id)?  deleteTrail,TResult Function( String filePath)?  loadTrack,TResult Function()?  unloadTrack,TResult Function( TrackFile track)?  emitTrack,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GetTrails() when getTrails != null:
 return getTrails();case _AddTrail() when addTrail != null:
@@ -161,7 +161,7 @@ return emitTrack(_that.track);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  getTrails,required TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)  addTrail,required TResult Function( int id,  String? name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)  updateTrail,required TResult Function( int id)  deleteTrail,required TResult Function( String filePath)  loadTrack,required TResult Function()  unloadTrack,required TResult Function( TrackFile track)  emitTrack,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  getTrails,required TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)  addTrail,required TResult Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)  updateTrail,required TResult Function( int id)  deleteTrail,required TResult Function( String filePath)  loadTrack,required TResult Function()  unloadTrack,required TResult Function( TrackFile track)  emitTrack,}) {final _that = this;
 switch (_that) {
 case _GetTrails():
 return getTrails();case _AddTrail():
@@ -184,7 +184,7 @@ return emitTrack(_that.track);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  getTrails,TResult? Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult? Function( int id,  String? name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult? Function( int id)?  deleteTrail,TResult? Function( String filePath)?  loadTrack,TResult? Function()?  unloadTrack,TResult? Function( TrackFile track)?  emitTrack,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  getTrails,TResult? Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult? Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult? Function( int id)?  deleteTrail,TResult? Function( String filePath)?  loadTrack,TResult? Function()?  unloadTrack,TResult? Function( TrackFile track)?  emitTrack,}) {final _that = this;
 switch (_that) {
 case _GetTrails() when getTrails != null:
 return getTrails();case _AddTrail() when addTrail != null:
@@ -313,11 +313,11 @@ as String?,
 
 
 class _UpdateTrail implements TrailsEvent {
-  const _UpdateTrail({required this.id, this.name, this.distance, this.elevation, this.url, this.description, this.filePath, this.fileId, this.deleteTrack = false});
+  const _UpdateTrail({required this.id, required this.name, this.distance, this.elevation, this.url, this.description, this.filePath, this.fileId, this.deleteTrack = false});
   
 
  final  int id;
- final  String? name;
+ final  String name;
  final  int? distance;
  final  int? elevation;
  final  String? url;
@@ -356,7 +356,7 @@ abstract mixin class _$UpdateTrailCopyWith<$Res> implements $TrailsEventCopyWith
   factory _$UpdateTrailCopyWith(_UpdateTrail value, $Res Function(_UpdateTrail) _then) = __$UpdateTrailCopyWithImpl;
 @useResult
 $Res call({
- int id, String? name, int? distance, int? elevation, String? url, String? description, String? filePath, int? fileId, bool deleteTrack
+ int id, String name, int? distance, int? elevation, String? url, String? description, String? filePath, int? fileId, bool deleteTrack
 });
 
 
@@ -373,11 +373,11 @@ class __$UpdateTrailCopyWithImpl<$Res>
 
 /// Create a copy of TrailsEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = freezed,Object? distance = freezed,Object? elevation = freezed,Object? url = freezed,Object? description = freezed,Object? filePath = freezed,Object? fileId = freezed,Object? deleteTrack = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? distance = freezed,Object? elevation = freezed,Object? url = freezed,Object? description = freezed,Object? filePath = freezed,Object? fileId = freezed,Object? deleteTrack = null,}) {
   return _then(_UpdateTrail(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,distance: freezed == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,distance: freezed == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
 as int?,elevation: freezed == elevation ? _self.elevation : elevation // ignore: cast_nullable_to_non_nullable
 as int?,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable

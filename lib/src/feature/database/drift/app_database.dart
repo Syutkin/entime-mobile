@@ -248,10 +248,10 @@ class AppDatabase extends _$AppDatabase {
   /// Обновление информации о трейле с [id]
   Future<int> updateTrail({
     required int id,
-    String? name,
+    required String name,
     int? distance,
     int? elevation,
-    Value<int?>? fileId,
+    int? fileId,
     String? url,
     String? description,
   }) async {
@@ -268,23 +268,23 @@ class AppDatabase extends _$AppDatabase {
 
   /// Создание трейла или обновление информации о трейле с [id]
   Future<int> upsertTrail({
+    required String name,
     int? id,
-    String? name,
     int? distance,
     int? elevation,
-    Value<int?>? fileId,
+    int? fileId,
     String? url,
     String? description,
   }) async {
     final trailId = await into(trails).insertOnConflictUpdate(
       TrailsCompanion(
         id: id != null ? Value(id) : const Value.absent(),
-        name: name != null ? Value(name) : const Value.absent(),
-        distance: distance != null ? Value(distance) : const Value.absent(),
-        elevation: elevation != null ? Value(elevation) : const Value.absent(),
-        url: url != null ? Value(url) : const Value.absent(),
-        description: description != null ? Value(description) : const Value.absent(),
-        fileId: fileId ?? const Value.absent(),
+        name: Value(name),
+        distance: Value(distance),
+        elevation: Value(elevation),
+        url: Value(url),
+        description: Value(description),
+        fileId: Value(fileId),
       ),
     );
     return trailId;

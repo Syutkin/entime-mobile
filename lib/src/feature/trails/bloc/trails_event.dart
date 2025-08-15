@@ -15,7 +15,7 @@ sealed class TrailsEvent with _$TrailsEvent {
 
   const factory TrailsEvent.updateTrail({
     required int id,
-    String? name,
+    required String name,
     int? distance,
     int? elevation,
     String? url,

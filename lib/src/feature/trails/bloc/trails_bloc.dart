@@ -57,10 +57,10 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
           );
         case _UpdateTrail():
           final fileId = event.fileId;
-          Value<int?>? trackId;
+          int? trackId;
           // Если надо удалить старый файл, ставим null в trackId
           if (event.deleteTrack && fileId != null) {
-            trackId = const Value(null);
+            trackId = null;
           }
           final filePath = event.filePath;
           // Сохраняем трек если указан путь к файлу
@@ -68,7 +68,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
             switch (state) {
               case Initialized(track: final track):
                 if (track != null) {
-                  trackId = Value(await _db.addTrack(track));
+                  trackId = await _db.addTrack(track);
                 }
               default:
             }

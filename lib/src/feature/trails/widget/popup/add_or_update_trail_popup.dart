@@ -148,7 +148,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                       return null;
                     } else {
                       final number = int.tryParse(value);
-                      if (number != null) {
+                      if (number != null && number > 0) {
                         distance = number;
                         return null;
                       } else {
@@ -185,7 +185,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value.isNullOrEmpty) {
-                      url = '';
+                      url = null;
                       return null;
                     } else {
                       if (value.isValidUrl) {
