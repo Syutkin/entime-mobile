@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.2-dev+513',
+    representation: r'0.5.2-dev+514',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.2-dev+513',
+    canonical: r'0.5.2-dev+514',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,19 +117,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'513'],
+    build: <String>[r'514'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2025,
     8,
-    14,
-    9,
-    0,
-    3,
-    323,
-    616,
+    15,
+    7,
+    8,
+    49,
+    566,
+    881,
   );
 
   /// Name
@@ -347,8 +347,8 @@ sealed class Pubspec {
 
   /// Environment
   static const Map<String, String> environment = <String, String>{
-    'sdk': '^3.8.0',
-    'flutter': '^3.8.0',
+    'sdk': '^3.9.0',
+    'flutter': '^3.9.0',
   };
 
   /// Platforms
@@ -413,14 +413,14 @@ sealed class Pubspec {
     'audioplayers': r'^6.5.0',
     'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
-    'connectivity_plus': r'^6.1.4',
+    'connectivity_plus': r'^6.1.5',
     'crypto': r'^3.0.6',
     'csv': r'^6.0.0',
     'device_info_plus': r'^11.5.0',
     'drift': r'^2.28.1',
     'dropdown_search': r'^6.0.2',
     'equatable': r'^2.0.7',
-    'file_picker': r'^10.2.4',
+    'file_picker': r'^10.3.1',
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
@@ -449,7 +449,7 @@ sealed class Pubspec {
     'rxdart': r'^0.28.0',
     'sentry_flutter': r'^9.6.0',
     'settings_ui': r'^2.0.2',
-    'share_plus': r'^11.0.0',
+    'share_plus': r'^11.1.0',
     'shared_preferences': r'^2.5.3',
     'sqlite3': r'^2.9.0',
     'sqlite3_flutter_libs': r'^0.5.39',
@@ -475,7 +475,7 @@ sealed class Pubspec {
     'mocktail': r'^1.0.4',
     'patrol': r'^3.19.0',
     'patrol_finders': r'^2.9.0',
-    'test': r'^1.25.15',
+    'test': r'^1.26.2',
     'very_good_analysis': r'^9.0.0',
   };
 

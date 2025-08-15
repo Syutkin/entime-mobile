@@ -21,15 +21,23 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          PopupMenuButton(
-            icon: const Icon(Icons.palette),
-            itemBuilder: colorItemBuilder,
-            onSelected: (colorSeed) => bloc.update(settings.copyWith(seedColor: colorSeed)),
+          RadioGroup(
+            groupValue: context.read<SettingsCubit>().state.seedColor,
+            onChanged: (ColorSeed? value) {  },
+            child: PopupMenuButton(
+              icon: const Icon(Icons.palette),
+              itemBuilder: colorItemBuilder,
+              onSelected: (colorSeed) => bloc.update(settings.copyWith(seedColor: colorSeed)),
+            ),
           ),
-          PopupMenuButton(
-            icon: const Icon(Icons.colorize),
-            itemBuilder: dynamicSchemeVariantBuilder,
-            onSelected: (variant) => bloc.update(settings.copyWith(dynamicSchemeVariant: variant)),
+          RadioGroup(
+            groupValue: context.read<SettingsCubit>().state.dynamicSchemeVariant,
+            onChanged: (value) {  },
+            child: PopupMenuButton(
+              icon: const Icon(Icons.colorize),
+              itemBuilder: dynamicSchemeVariantBuilder,
+              onSelected: (variant) => bloc.update(settings.copyWith(dynamicSchemeVariant: variant)),
+            ),
           ),
           IconButton(
             key: const Key('brightnessButton'),
@@ -120,7 +128,6 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
   List<PopupMenuEntry<ColorSeed>> colorItemBuilder(BuildContext context) {
     final listEntry = <PopupMenuEntry<ColorSeed>>[];
     final brightness = context.read<SettingsCubit>().state.brightness;
-    final seedColor = context.read<SettingsCubit>().state.seedColor;
     final dynamicSchemeVariant = context.read<SettingsCubit>().state.dynamicSchemeVariant;
     final contrast = context.read<SettingsCubit>().state.contrastLevel;
 
@@ -152,7 +159,7 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
                     ).colorScheme.primary,
               ),
             ),
-            trailing: Radio(groupValue: seedColor, onChanged: null, value: colorSeed),
+            trailing: Radio(value: colorSeed),
           ),
         ),
       );
@@ -164,7 +171,6 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
     final listEntry = <PopupMenuEntry<DynamicSchemeVariant>>[];
     final brightness = context.read<SettingsCubit>().state.brightness;
     final seedColor = context.read<SettingsCubit>().state.seedColor;
-    final dynamicSchemeVariant = context.read<SettingsCubit>().state.dynamicSchemeVariant;
     final contrast = context.read<SettingsCubit>().state.contrastLevel;
 
     for (final variant in DynamicSchemeVariant.values) {
@@ -195,7 +201,7 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
                     ).colorScheme.primary,
               ),
             ),
-            trailing: Radio(groupValue: dynamicSchemeVariant, onChanged: null, value: variant),
+            trailing: Radio(value: variant),
           ),
         ),
       );
