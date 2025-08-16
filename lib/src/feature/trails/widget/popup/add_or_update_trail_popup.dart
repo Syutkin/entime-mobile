@@ -35,12 +35,14 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
     return IconButton(
       key: const Key('addTrackIconButton'),
       onPressed: () async {
-        file =
-            (await FilePicker.platform.pickFiles(
-              // type: FileType.custom,
-              // allowedExtensions: ['csv'],
-              // withData: true,
-            ))?.files.first;
+        final filePicker = context.read<IFilePickerProvider>();
+        file = await filePicker.pickFile();
+        // file =
+        //     (await FilePicker.platform.pickFiles(
+        //       // type: FileType.custom,
+        //       // allowedExtensions: ['csv'],
+        //       // withData: true,
+        //     ))?.files.first;
         final path = file?.path;
         if (file != null && path != null) {
           bloc.add(TrailsEvent.loadTrack(filePath: path));

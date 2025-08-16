@@ -8,6 +8,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
+import 'package:entime/src/feature/csv/logic/startlist_provider.dart';
 import 'package:entime/src/feature/ntp/bloc/ntp_bloc.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
@@ -23,6 +24,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'src/common/bloc/app_bloc_observer.dart';
 import 'src/common/localization/localization.dart';
 import 'src/common/logger/logger.dart';
+import 'src/common/utils/file_picker_provider.dart';
 import 'src/feature/app_info/app_info.dart';
 import 'src/feature/audio/audio.dart';
 import 'src/feature/audio/bloc/audio_bloc.dart' as audio_bloc;
@@ -76,18 +78,30 @@ Future<void> main() async {
 
   final connectivity = Connectivity();
   final connectivityProvider = ConnectivityProvider.init(connectivity);
+  final filePicker = FilePickerProvider();
+  final startlistProvider = StartlistProvider(filepicker: filePicker);
 
-  final app = EntimeApp(
-    settingsProvider: settings,
-    updateProvider: updateProvider,
-    bluetoothProvider: bluetoothProvider,
-    ttsProvider: ttsProvider,
-    audioController: audioController,
-    appInfo: appInfo,
-    database: database,
-    countdown: countdown,
-    ntpProvider: ntpProvider,
-    connectivityProvider: connectivityProvider,
+  final app = MultiRepositoryProvider(
+    providers: [
+      RepositoryProvider<IFilePickerProvider>(
+        create: (context) => filePicker,
+      ),
+      RepositoryProvider<StartlistProvider>(
+        create: (context) => startlistProvider,
+      ),
+    ],
+    child: EntimeApp(
+      settingsProvider: settings,
+      updateProvider: updateProvider,
+      bluetoothProvider: bluetoothProvider,
+      ttsProvider: ttsProvider,
+      audioController: audioController,
+      appInfo: appInfo,
+      database: database,
+      countdown: countdown,
+      ntpProvider: ntpProvider,
+      connectivityProvider: connectivityProvider,
+    ),
   );
 
   if (kReleaseMode) {
@@ -133,48 +147,50 @@ class EntimeApp extends StatelessWidget {
   final IConnectivityProvider connectivityProvider;
 
   @override
-  Widget build(BuildContext context) => MultiBlocProvider(
-    providers: [
-      BlocProvider<TabCubit>(create: (context) => TabCubit()),
-      BlocProvider<SettingsCubit>(create: (context) => SettingsCubit(settingsProvider)),
-      BlocProvider<ModuleSettingsBloc>(create: (context) => ModuleSettingsBloc()),
-      BlocProvider<LogBloc>(create: (context) => LogBloc(settingsProvider: settingsProvider, database: database)),
-      BlocProvider<DatabaseBloc>(
-        create:
-            (context) =>
-                DatabaseBloc(database: database, settingsProvider: settingsProvider)
-                  ..add(const DatabaseEvent.initialize()),
-      ),
-      BlocProvider<TrailsBloc>(create: (context) => TrailsBloc(database: database)),
-      BlocProvider<audio_bloc.AudioBloc>(
-        create: (context) => audio_bloc.AudioBloc(ttsProvider: ttsProvider)..add(const audio_bloc.AudioEvent.init()),
-      ),
-      BlocProvider<CountdownBloc>(
-        create:
-            (context) => CountdownBloc(
-              audioController: audioController,
-              countdown: countdown,
-              stageId: settingsProvider.settings.stageId,
-            ),
-      ),
-      BlocProvider<BluetoothBloc>(
-        create:
-            (context) => BluetoothBloc(
-              audioController: audioController,
-              bluetoothProvider: bluetoothProvider,
-              settingsProvider: settingsProvider,
-              database: database,
-            )..add(const BluetoothEvent.initialize()),
-      ),
-      BlocProvider<UpdateBloc>(
-        create: (context) => UpdateBloc(updateProvider: updateProvider)..add(const UpdateEvent.popupChangelog()),
-      ),
-      BlocProvider<AppInfoCubit>(create: (context) => AppInfoCubit(appInfo: appInfo)),
-      BlocProvider<NtpBloc>(create: (context) => NtpBloc(ntpProvider)),
-      BlocProvider<ConnectivityBloc>(create: (context) => ConnectivityBloc(connectivityProvider)),
-    ],
-    child: const EntimeAppView(),
-  );
+  Widget build(BuildContext context) {
+    final startlistProvider = context.read<StartlistProvider>();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TabCubit>(create: (context) => TabCubit()),
+        BlocProvider<SettingsCubit>(create: (context) => SettingsCubit(settingsProvider)),
+        BlocProvider<ModuleSettingsBloc>(create: (context) => ModuleSettingsBloc()),
+        BlocProvider<LogBloc>(
+          create: (context) => LogBloc(settingsProvider: settingsProvider, database: database),
+        ),
+        BlocProvider<DatabaseBloc>(
+          create: (context) =>
+              DatabaseBloc(database: database, settingsProvider: settingsProvider, startlistProvider: startlistProvider)
+                ..add(const DatabaseEvent.initialize()),
+        ),
+        BlocProvider<TrailsBloc>(create: (context) => TrailsBloc(database: database)),
+        BlocProvider<audio_bloc.AudioBloc>(
+          create: (context) => audio_bloc.AudioBloc(ttsProvider: ttsProvider)..add(const audio_bloc.AudioEvent.init()),
+        ),
+        BlocProvider<CountdownBloc>(
+          create: (context) => CountdownBloc(
+            audioController: audioController,
+            countdown: countdown,
+            stageId: settingsProvider.settings.stageId,
+          ),
+        ),
+        BlocProvider<BluetoothBloc>(
+          create: (context) => BluetoothBloc(
+            audioController: audioController,
+            bluetoothProvider: bluetoothProvider,
+            settingsProvider: settingsProvider,
+            database: database,
+          )..add(const BluetoothEvent.initialize()),
+        ),
+        BlocProvider<UpdateBloc>(
+          create: (context) => UpdateBloc(updateProvider: updateProvider)..add(const UpdateEvent.popupChangelog()),
+        ),
+        BlocProvider<AppInfoCubit>(create: (context) => AppInfoCubit(appInfo: appInfo)),
+        BlocProvider<NtpBloc>(create: (context) => NtpBloc(ntpProvider)),
+        BlocProvider<ConnectivityBloc>(create: (context) => ConnectivityBloc(connectivityProvider)),
+      ],
+      child: const EntimeAppView(),
+    );
+  }
 }
 
 class EntimeAppView extends StatelessWidget {
@@ -193,37 +209,35 @@ class EntimeAppView extends StatelessWidget {
     final isTest = Platform.environment.containsKey('FLUTTER_TEST');
 
     return BlocBuilder<SettingsCubit, AppSettings>(
-      buildWhen:
-          (previousState, state) =>
-              previousState.seedColor != state.seedColor ||
-              previousState.brightness != state.brightness ||
-              previousState.contrastLevel != state.contrastLevel ||
-              previousState.dynamicSchemeVariant != state.dynamicSchemeVariant ||
-              previousState.language != state.language ||
-              previousState.isOLEDBackground != state.isOLEDBackground,
-      builder:
-          (context, state) => MaterialApp(
-            theme: appThemeData(
-              seedColor: state.seedColor,
-              brightness: state.brightness,
-              contrastLevel: state.contrastLevel,
-              dynamicSchemeVariant: state.dynamicSchemeVariant,
-              isOLEDBackground: state.isOLEDBackground,
-            ),
-            title: Pubspec.name,
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              Localization.delegate,
-            ],
-            supportedLocales: Localization.supportedLocales,
-            //1. call BotToastInit
-            builder: BotToastInit(),
-            //2. registered route observer
-            navigatorObservers: [BotToastNavigatorObserver()],
-            home: isTest ? const SizedBox.shrink() : const HomeScreen(),
-          ),
+      buildWhen: (previousState, state) =>
+          previousState.seedColor != state.seedColor ||
+          previousState.brightness != state.brightness ||
+          previousState.contrastLevel != state.contrastLevel ||
+          previousState.dynamicSchemeVariant != state.dynamicSchemeVariant ||
+          previousState.language != state.language ||
+          previousState.isOLEDBackground != state.isOLEDBackground,
+      builder: (context, state) => MaterialApp(
+        theme: appThemeData(
+          seedColor: state.seedColor,
+          brightness: state.brightness,
+          contrastLevel: state.contrastLevel,
+          dynamicSchemeVariant: state.dynamicSchemeVariant,
+          isOLEDBackground: state.isOLEDBackground,
+        ),
+        title: Pubspec.name,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          Localization.delegate,
+        ],
+        supportedLocales: Localization.supportedLocales,
+        //1. call BotToastInit
+        builder: BotToastInit(),
+        //2. registered route observer
+        navigatorObservers: [BotToastNavigatorObserver()],
+        home: isTest ? const SizedBox.shrink() : const HomeScreen(),
+      ),
     );
   }
 }

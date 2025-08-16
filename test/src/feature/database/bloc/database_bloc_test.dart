@@ -27,7 +27,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../helpers/shared_prefs_defaults.dart';
 import '../drift/app_database_test.dart';
 
-class MockFileProvider extends Mock implements StartlistProvider {}
+class MockStartlistProvider extends Mock implements StartlistProvider {}
 
 class MockShareProvider extends Mock implements ShareProvider {}
 
@@ -88,7 +88,7 @@ void main() {
 
   late DatabaseBloc bloc;
   late AppDatabase db;
-  late StartlistProvider fileProvider;
+  late StartlistProvider startlistProvider;
   late ShareProvider shareProvider;
   late ISettingsProvider settingsProvider;
   late QueryRow row;
@@ -104,7 +104,7 @@ void main() {
       (obj) async => obj,
     );
     registerFallbackValue(ShareParams());
-    fileProvider = MockFileProvider();
+    startlistProvider = MockStartlistProvider();
     shareProvider = MockShareProvider();
     row = MockQueryRow();
   });
@@ -137,7 +137,7 @@ void main() {
       'Initialize',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       verify: (bloc) {
@@ -167,7 +167,7 @@ void main() {
       setUp: () async {
         Bloc.observer = AppBlocObserver();
         await settingsProvider.update(settingsProvider.settings.copyWith(raceId: 1));
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       verify: (bloc) {
@@ -197,7 +197,7 @@ void main() {
       setUp: () async {
         Bloc.observer = AppBlocObserver();
         await settingsProvider.update(settingsProvider.settings.copyWith(raceId: 1, stageId: 1));
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       verify: (bloc) async {
@@ -216,7 +216,7 @@ void main() {
       'Add race',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) => bloc.add(DatabaseEvent.addRace(name: race.name)),
@@ -229,7 +229,7 @@ void main() {
       'Delete race',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) => bloc.add(const DatabaseEvent.deleteRace(1)),
@@ -242,7 +242,7 @@ void main() {
       'Update race',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) => bloc.add(DatabaseEvent.updateRace(id: race.id, name: 'newName')),
@@ -255,7 +255,7 @@ void main() {
       'Upsert race (update)',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) => bloc.add(DatabaseEvent.upsertRace(id: race.id, name: 'newName')),
@@ -268,7 +268,7 @@ void main() {
       'Upsert race (new)',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) => bloc.add(const DatabaseEvent.upsertRace(name: 'newName')),
@@ -281,7 +281,7 @@ void main() {
       'Get races',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) => bloc.add(const DatabaseEvent.getRaces()),
@@ -294,7 +294,7 @@ void main() {
       'Select race',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
@@ -313,7 +313,7 @@ void main() {
       'Deselect race',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
@@ -334,7 +334,7 @@ void main() {
       'Add stage',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
@@ -353,7 +353,7 @@ void main() {
       'Upsert stage (new)',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
@@ -371,7 +371,7 @@ void main() {
       'Upsert stage (update)',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
@@ -389,7 +389,7 @@ void main() {
       'Delete stage',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
@@ -406,7 +406,7 @@ void main() {
       'Get stages',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
@@ -424,7 +424,7 @@ void main() {
       'Select stage',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
         stage = const Stage(id: 2, raceId: 1, name: 'name', isActive: true, isDeleted: false);
       },
       build: () => bloc,
@@ -447,7 +447,7 @@ void main() {
       'Get participants at start',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -465,7 +465,7 @@ void main() {
       'Add start number',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -482,7 +482,7 @@ void main() {
       'Add start number to existing start time',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -502,7 +502,7 @@ void main() {
       'Update rider',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -536,7 +536,7 @@ void main() {
       'Update racer',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -558,7 +558,7 @@ void main() {
       'Update racer when it not exists',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -598,7 +598,7 @@ void main() {
       'Update starting info',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -615,7 +615,7 @@ void main() {
       'Update manual start time',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -641,7 +641,7 @@ void main() {
       setUp: () async {
         Bloc.observer = AppBlocObserver();
         await settingsProvider.update(settingsProvider.settings.copyWith(showDNS: true));
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -658,7 +658,7 @@ void main() {
       'Update automatic correction',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -687,7 +687,7 @@ void main() {
       'Force update automatic correction',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -727,7 +727,7 @@ void main() {
       'Show notification when updating existing automatic correction',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -789,7 +789,7 @@ void main() {
       'Add finish time',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -817,7 +817,7 @@ void main() {
       'Add finish time and deselect automatic number',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -847,7 +847,7 @@ void main() {
       'Add finish time manual',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -867,7 +867,7 @@ void main() {
       'Clear start results debug',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -897,7 +897,7 @@ void main() {
       'Clear finish results debug',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -922,7 +922,7 @@ void main() {
       'Hide finish',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -946,7 +946,7 @@ void main() {
       'Hide all finishes',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -970,7 +970,7 @@ void main() {
       'Clear number at finish',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -994,7 +994,7 @@ void main() {
       'Set DNS for stage',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1012,7 +1012,7 @@ void main() {
       'Set DNF for stage',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1030,7 +1030,7 @@ void main() {
       'Add number to finish',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1048,7 +1048,7 @@ void main() {
       'Show notification when trying to add new number to finish',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1094,7 +1094,7 @@ void main() {
       'Get numbers on trace now',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1112,7 +1112,7 @@ void main() {
       'Shift starts time',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1129,7 +1129,7 @@ void main() {
       'Select awaiting number',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1144,7 +1144,7 @@ void main() {
       'Deselect awaiting number',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) async {
@@ -1161,7 +1161,7 @@ void main() {
       'Create race from file',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
         final startTimes = <String, String>{
           'stage1': '10:10:10',
           'stage2': '10:10:10',
@@ -1175,7 +1175,7 @@ void main() {
           stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
           startItems: [startItem, startItem, startItem, startItem, startItem, startItem, startItem, startItem],
         );
-        when(() => fileProvider.getRaceFromFile()).thenAnswer((_) => Future.value(raceCsv));
+        when(() => startlistProvider.getRaceFromFile()).thenAnswer((_) => Future.value(raceCsv));
       },
       build: () => bloc,
       act: (bloc) {
@@ -1192,7 +1192,7 @@ void main() {
       'Create stages from file',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
         final startTimes = <String, String>{
           'stage1': '10:10:10',
           'stage2': '10:10:10',
@@ -1205,7 +1205,7 @@ void main() {
           stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
           startItems: [startItem, startItem, startItem, startItem, startItem, startItem, startItem, startItem],
         );
-        when(() => fileProvider.getStagesFromFile()).thenAnswer((_) => Future.value(stagesCsv));
+        when(() => startlistProvider.getStagesFromFile()).thenAnswer((_) => Future.value(stagesCsv));
       },
       build: () => bloc,
       act: (bloc) {
@@ -1226,7 +1226,7 @@ void main() {
         bloc = DatabaseBloc(
           database: db,
           settingsProvider: settingsProvider,
-          fileProvider: fileProvider,
+          startlistProvider: startlistProvider,
           shareProvider: shareProvider,
         );
       },
@@ -1277,7 +1277,7 @@ void main() {
         bloc = DatabaseBloc(
           database: db,
           settingsProvider: settingsProvider,
-          fileProvider: fileProvider,
+          startlistProvider: startlistProvider,
           shareProvider: shareProvider,
         );
       },
@@ -1312,7 +1312,7 @@ void main() {
         bloc = DatabaseBloc(
           database: db,
           settingsProvider: settingsProvider,
-          fileProvider: fileProvider,
+          startlistProvider: startlistProvider,
           shareProvider: shareProvider,
         );
       },
@@ -1342,7 +1342,7 @@ void main() {
         bloc = DatabaseBloc(
           database: db,
           settingsProvider: settingsProvider,
-          fileProvider: fileProvider,
+          startlistProvider: startlistProvider,
           shareProvider: shareProvider,
         );
       },

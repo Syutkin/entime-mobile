@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../logger/logger.dart';
@@ -18,16 +17,16 @@ Future<File?> saveToFile(String content, String filename, [String extension = 'c
 }
 
 /// Pick file from filesystem
-Future<PlatformFile?> pickFile([List<String> extensions = const ['csv']]) async {
-  final file =
-      (await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: extensions,
-        withData: true,
-      ))?.files.first;
+// Future<PlatformFile?> pickFile([List<String> extensions = const ['csv']]) async {
+//   final file =
+//       (await FilePicker.platform.pickFiles(
+//         type: FileType.custom,
+//         allowedExtensions: extensions,
+//         withData: true,
+//       ))?.files.first;
 
-  if (file == null || file.bytes == null) {
-    return null;
-  }
-  return file;
-}
+//   if (file == null || file.bytes == null) {
+//     return null;
+//   }
+//   return file;
+// }

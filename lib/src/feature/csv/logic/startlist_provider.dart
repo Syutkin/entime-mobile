@@ -1,20 +1,19 @@
 import 'dart:typed_data';
 
 import 'package:entime/src/common/utils/text_decoder.dart';
-import 'package:file_picker/file_picker.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
-import '../../../common/utils/file_utils.dart';
+import '../../../common/utils/file_picker_provider.dart';
 import '../model/race_csv.dart';
 import '../model/stages_csv.dart';
 import '../model/start_item_csv.dart';
 import '../model/start_number_and_times_csv.dart';
 
 class StartlistProvider {
-  const StartlistProvider({this.filepicker = pickFile, this.decoder = decodeBytes});
+  const StartlistProvider({required this.filepicker, this.decoder = decodeBytes});
 
-  final Future<PlatformFile?> Function() filepicker;
+  final IFilePickerProvider filepicker;
   final Future<String> Function(Uint8List bytes) decoder;
 
   List<Map<String, dynamic>> _convertCsv(String csv) {
@@ -30,7 +29,7 @@ class StartlistProvider {
   }
 
   Future<RaceCsv?> getRaceFromFile() async {
-    final file = await filepicker();
+    final file = await filepicker.pickFile(allowedExtensions: ['csv']);
     if (file != null) {
       final csv = await decoder(file.bytes!);
       try {
@@ -55,7 +54,7 @@ class StartlistProvider {
   }
 
   Future<StagesCsv?> getStagesFromFile() async {
-    final file = await filepicker();
+    final file = await filepicker.pickFile(allowedExtensions: ['csv']);
     if (file != null) {
       final csv = await decoder(file.bytes!);
       try {

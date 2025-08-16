@@ -29,7 +29,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   DatabaseBloc({
     required AppDatabase database,
     required ISettingsProvider settingsProvider,
-    this.fileProvider = const StartlistProvider(),
+    required this.startlistProvider,
     this.shareProvider = const ShareProvider(),
   }) : _db = database,
        _settingsProvider = settingsProvider,
@@ -364,7 +364,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _awaitingNumber = null;
           await _emitState();
         case _CreateRaceFromFile():
-          final raceCsv = await fileProvider.getRaceFromFile();
+          final raceCsv = await startlistProvider.getRaceFromFile();
           if (raceCsv != null) {
             final id = await _db.createRaceFromRaceCsv(raceCsv);
             final race = await _db.getRace(id);
@@ -374,7 +374,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             }
           }
         case _CreateStagesFromFile():
-          final stageCsv = await fileProvider.getStagesFromFile();
+          final stageCsv = await startlistProvider.getStagesFromFile();
           if (stageCsv != null) {
             await _db.createStagesFromStagesCsv(event.raceId, stageCsv);
           }
@@ -485,7 +485,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   StreamSubscription<List<StartingParticipant>>? _numbersOnTraceSubscription;
   StreamSubscription<AppSettings>? _appSettingsSubscription;
 
-  StartlistProvider fileProvider;
+  StartlistProvider startlistProvider;
   ShareProvider shareProvider;
 
   Future<void> _emitState({Notification? notification, int? autoFinishNumber, bool? updateFinishNumber}) async {

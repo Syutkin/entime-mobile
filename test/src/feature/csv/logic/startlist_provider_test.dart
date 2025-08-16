@@ -3,11 +3,15 @@
 import 'dart:convert';
 
 import 'package:drift/drift.dart';
+import 'package:entime/src/common/utils/file_picker_provider.dart';
 import 'package:entime/src/feature/csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import '../../../../helpers/startlist.dart';
+
+class MockFilePicker extends Mock implements IFilePickerProvider {}
 
 Future<PlatformFile?> startlistPicker() async {
   final bytes = Uint8List.fromList(utf8.encode(startlist));
@@ -43,15 +47,20 @@ Future<String> testDecoder(Uint8List bytes) async {
 }
 
 void main() {
-  late Future<PlatformFile?> Function() filepicker;
+  late IFilePickerProvider filepicker;
   late Future<String> Function(Uint8List bytes) decoder;
   late StartlistProvider startlistProvider;
+
+  setUp(() {
+    filepicker = MockFilePicker();
+    decoder = testDecoder;
+    startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+  });
 
   group('StartlistProvider tests', () {
     group('getRaceFromFile tests', () {
       test('Get race successfully', () async {
-        filepicker = startlistPicker;
-        decoder = testDecoder;
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => startlistPicker());
         startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final race = await startlistProvider.getRaceFromFile();
         expect(race != null, true);
@@ -61,25 +70,25 @@ void main() {
       });
 
       test('Race csv with errors loaded', () async {
-        filepicker = startlistPickerWithErrors;
-        decoder = testDecoder;
-        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => startlistPickerWithErrors());
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
 
       test('Incorrect race csv loaded', () async {
-        filepicker = incorrectPicker;
-        decoder = testDecoder;
-        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        // filepicker = incorrectPicker;
+        // decoder = testDecoder;
+        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => incorrectPicker());
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
 
       test('Null race csv file', () async {
-        filepicker = nullPicker;
-        decoder = testDecoder;
-        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        // filepicker = nullPicker;
+        // decoder = testDecoder;
+        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => nullPicker());
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
@@ -87,9 +96,10 @@ void main() {
 
     group('getStagesFromFile tests', () {
       test('Get stages successfully', () async {
-        filepicker = stageslistPicker;
-        decoder = testDecoder;
-        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        // filepicker = stageslistPicker;
+        // decoder = testDecoder;
+        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => stageslistPicker());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages != null, true);
         expect(stages!.stageNames.length, 4);
@@ -100,25 +110,28 @@ void main() {
       });
 
       test('Stages csv with errorsloaded', () async {
-        filepicker = stageslistPickerWithErrors;
-        decoder = testDecoder;
-        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        // filepicker = stageslistPickerWithErrors;
+        // decoder = testDecoder;
+        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => stageslistPickerWithErrors());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });
 
       test('Incorrect stages csv loaded', () async {
-        filepicker = incorrectPicker;
-        decoder = testDecoder;
-        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        // filepicker = incorrectPicker;
+        // decoder = testDecoder;
+        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => incorrectPicker());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });
 
       test('Null stages csv file', () async {
-        filepicker = nullPicker;
-        decoder = testDecoder;
-        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        // filepicker = nullPicker;
+        // decoder = testDecoder;
+        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+        when(() => filepicker.pickFile(allowedExtensions: ['csv'])).thenAnswer((_) => nullPicker());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });

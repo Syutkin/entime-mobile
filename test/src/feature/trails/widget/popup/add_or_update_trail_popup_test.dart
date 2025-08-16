@@ -1,11 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/common/utils/file_picker_provider.dart';
 import 'package:entime/src/common/widget/expanded_alert_dialog.dart';
 import 'package:entime/src/constants/config.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
 import 'package:entime/src/feature/trails/widget/trails_list_page.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,6 +19,8 @@ class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements
 
 class MockTrailsBloc extends MockBloc<TrailsEvent, TrailsState> implements TrailsBloc {}
 
+class MockFilePicker extends Mock implements IFilePickerProvider {}
+
 class MockQueryRow extends Mock implements QueryRow {}
 
 void main() {
@@ -24,6 +28,7 @@ void main() {
   late DatabaseBloc databaseBloc;
   late TrailsBloc trailsBloc;
   late TrailInfo trail;
+  late IFilePickerProvider filePicker;
   late QueryRow row;
 
   const addTrailButton = 'Add Trail';
@@ -49,14 +54,17 @@ void main() {
       value: databaseBloc,
       child: BlocProvider.value(
         value: trailsBloc,
-        child: MaterialApp(
-          localizationsDelegates: const [Localization.delegate],
-          supportedLocales: Localization.supportedLocales,
-          home: Builder(
-            builder: (context) => Scaffold(
-              body: ElevatedButton(
-                onPressed: () => addTrailPopup(context),
-                child: const Text(addTrailButton),
+        child: RepositoryProvider.value(
+          value: filePicker,
+          child: MaterialApp(
+            localizationsDelegates: const [Localization.delegate],
+            supportedLocales: Localization.supportedLocales,
+            home: Builder(
+              builder: (context) => Scaffold(
+                body: ElevatedButton(
+                  onPressed: () => addTrailPopup(context),
+                  child: const Text(addTrailButton),
+                ),
               ),
             ),
           ),
@@ -71,14 +79,17 @@ void main() {
       value: databaseBloc,
       child: BlocProvider.value(
         value: trailsBloc,
-        child: MaterialApp(
-          localizationsDelegates: const [Localization.delegate],
-          supportedLocales: Localization.supportedLocales,
-          home: Builder(
-            builder: (context) => Scaffold(
-              body: ElevatedButton(
-                onPressed: () => updateTrailPopup(context, trail),
-                child: const Text(updateTrailButton),
+        child: RepositoryProvider.value(
+          value: filePicker,
+          child: MaterialApp(
+            localizationsDelegates: const [Localization.delegate],
+            supportedLocales: Localization.supportedLocales,
+            home: Builder(
+              builder: (context) => Scaffold(
+                body: ElevatedButton(
+                  onPressed: () => updateTrailPopup(context, trail),
+                  child: const Text(updateTrailButton),
+                ),
               ),
             ),
           ),
@@ -131,6 +142,7 @@ void main() {
 
     databaseBloc = MockDatabaseBloc();
     trailsBloc = MockTrailsBloc();
+    filePicker = MockFilePicker();
 
     when(() => databaseBloc.state).thenReturn(
       const DatabaseState(
@@ -261,13 +273,100 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Handles file picker', skip: true, (PatrolTester $) async {
+      patrolWidgetTest('Handles correct file picker when adding new trail', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
-
+        when(() => filePicker.pickFile()).thenAnswer(
+          (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
+        );
         await $.pumpWidgetAndSettle(testAddWidget());
         await $(addTrailButton).tap();
 
-        // TODO: Add test implementation
+        await $(#addTrackIconButton).tap();
+
+        verify(
+          () => trailsBloc.add(
+            const TrailsEvent.loadTrack(filePath: '/mnt/sdcard/0/test.gpx'),
+          ),
+        ).called(1);
+
+        // Одно поле для ввода имени трека, было пустое и заменилось на имя файла без расширения
+        expect($(TextFormField).containing('test'), findsOneWidget);
+        // Поле показа имени файла
+        expect($(TextFormField).containing('test.gpx'), findsOneWidget);
+      });
+
+      patrolWidgetTest('Handles file picker when adding two files', (PatrolTester $) async {
+        when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
+        when(() => filePicker.pickFile()).thenAnswer(
+          (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
+        );
+        await $.pumpWidgetAndSettle(testAddWidget());
+        await $(addTrailButton).tap();
+
+        await $(#addTrackIconButton).tap();
+
+        verify(
+          () => trailsBloc.add(
+            const TrailsEvent.loadTrack(filePath: '/mnt/sdcard/0/test.gpx'),
+          ),
+        ).called(1);
+
+        // Одно поле для ввода имени трека, было пустое и заменилось на имя файла без расширения
+        expect($(TextFormField).containing('test'), findsOneWidget);
+        // Поле показа имени файла
+        expect($(TextFormField).containing('test.gpx'), findsOneWidget);
+
+        when(() => filePicker.pickFile()).thenAnswer(
+          (_) async =>
+              PlatformFile(path: '/mnt/sdcard/1/test2.gpx', name: 'test2.gpx', size: 100, bytes: Uint8List(100)),
+        );
+
+        await $(#addTrackIconButton).tap();
+
+        verify(
+          () => trailsBloc.add(
+            const TrailsEvent.loadTrack(filePath: '/mnt/sdcard/1/test2.gpx'),
+          ),
+        ).called(1);
+
+        // Одно поле для ввода имени трека, было не пустое и не заменилось на имя файла без расширения
+        expect($(TextFormField).containing('test'), findsOneWidget);
+        // Поле показа имени файла
+        expect($(TextFormField).containing('test2.gpx'), findsOneWidget);
+      });
+
+      patrolWidgetTest('Handles file picker when adding new trail with null path file', (PatrolTester $) async {
+        when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
+        when(() => filePicker.pickFile()).thenAnswer(
+          (_) async => PlatformFile(name: 'test.gpx', size: 100, bytes: Uint8List(100)),
+        );
+        await $.pumpWidgetAndSettle(testAddWidget());
+        await $(addTrailButton).tap();
+
+        await $(#addTrackIconButton).tap();
+
+        verifyNever(
+          () => trailsBloc.add(
+            any(),
+          ),
+        );
+      });
+
+      patrolWidgetTest('Handles file picker when adding new trail with null file', (PatrolTester $) async {
+        when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
+        when(() => filePicker.pickFile()).thenAnswer(
+          (_) async => null,
+        );
+        await $.pumpWidgetAndSettle(testAddWidget());
+        await $(addTrailButton).tap();
+
+        await $(#addTrackIconButton).tap();
+
+        verifyNever(
+          () => trailsBloc.add(
+            any(),
+          ),
+        );
       });
 
       patrolWidgetTest('Submits form with valid data', (PatrolTester $) async {
@@ -351,6 +450,31 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+
+      patrolWidgetTest('Handles correct file picker when updating trail', (PatrolTester $) async {
+        when(() => trailsBloc.state).thenReturn(
+          TrailsState.initialized(trails: [trail]),
+        );
+        when(() => filePicker.pickFile()).thenAnswer(
+          (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
+        );
+        await $.pumpWidgetAndSettle(testUpdateWidget(trail));
+        await $(updateTrailButton).tap();
+
+        await $(#addTrackIconButton).tap();
+
+        verify(
+          () => trailsBloc.add(
+            const TrailsEvent.loadTrack(filePath: '/mnt/sdcard/0/test.gpx'),
+          ),
+        ).called(1);
+
+        // Одно поле для ввода имени трека, было не пустое и не заменилось на имя файла без расширения
+        expect($(TextFormField).containing('test'), findsNothing);
+        expect($(TextFormField).containing(name), findsOneWidget);
+        // Поле показа имени файла
+        expect($(TextFormField).containing('test.gpx'), findsOneWidget);
       });
 
       patrolWidgetTest('Handles track removal', (PatrolTester $) async {
