@@ -370,10 +370,15 @@ void main() {
       });
 
       patrolWidgetTest('Submits form with valid data', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
+        when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
+
+        when(() => filePicker.pickFile()).thenAnswer(
+          (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
+        );
 
         await $.pumpWidgetAndSettle(testAddWidget());
         await $(addTrailButton).tap();
+        await $(#addTrackIconButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
         await textField.enterText('Trail name');
@@ -402,6 +407,7 @@ void main() {
               elevation: 456,
               url: 'url.url',
               description: 'Trail description',
+              filePath: '/mnt/sdcard/0/test.gpx',
             ),
           ),
         ).called(1);

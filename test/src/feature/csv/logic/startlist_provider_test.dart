@@ -60,7 +60,9 @@ void main() {
   group('StartlistProvider tests', () {
     group('getRaceFromFile tests', () {
       test('Get race successfully', () async {
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => startlistPicker());
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => startlistPicker());
         startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
         final race = await startlistProvider.getRaceFromFile();
         expect(race != null, true);
@@ -70,25 +72,25 @@ void main() {
       });
 
       test('Race csv with errors loaded', () async {
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => startlistPickerWithErrors());
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => startlistPickerWithErrors());
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
 
       test('Incorrect race csv loaded', () async {
-        // filepicker = incorrectPicker;
-        // decoder = testDecoder;
-        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => incorrectPicker());
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => incorrectPicker());
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
 
       test('Null race csv file', () async {
-        // filepicker = nullPicker;
-        // decoder = testDecoder;
-        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => nullPicker());
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => nullPicker());
         final race = await startlistProvider.getRaceFromFile();
         expect(race == null, true);
       });
@@ -96,10 +98,9 @@ void main() {
 
     group('getStagesFromFile tests', () {
       test('Get stages successfully', () async {
-        // filepicker = stageslistPicker;
-        // decoder = testDecoder;
-        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => stageslistPicker());
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => stageslistPicker());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages != null, true);
         expect(stages!.stageNames.length, 4);
@@ -109,29 +110,26 @@ void main() {
         expect(stages.startItems.last.startTimes?[stages.stageNames.last], '13:17:00');
       });
 
-      test('Stages csv with errorsloaded', () async {
-        // filepicker = stageslistPickerWithErrors;
-        // decoder = testDecoder;
-        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => stageslistPickerWithErrors());
+      test('Stages csv with errors loaded', () async {
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => stageslistPickerWithErrors());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });
 
       test('Incorrect stages csv loaded', () async {
-        // filepicker = incorrectPicker;
-        // decoder = testDecoder;
-        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => incorrectPicker());
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => incorrectPicker());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });
 
       test('Null stages csv file', () async {
-        // filepicker = nullPicker;
-        // decoder = testDecoder;
-        // startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
-        when(() => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom)).thenAnswer((_) => nullPicker());
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => nullPicker());
         final stages = await startlistProvider.getStagesFromFile();
         expect(stages == null, true);
       });
