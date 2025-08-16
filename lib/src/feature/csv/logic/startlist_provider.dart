@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:entime/src/common/utils/text_decoder.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
@@ -29,7 +30,7 @@ class StartlistProvider {
   }
 
   Future<RaceCsv?> getRaceFromFile() async {
-    final file = await filepicker.pickFile(allowedExtensions: ['csv']);
+    final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
       final csv = await decoder(file.bytes!);
       try {
@@ -54,7 +55,7 @@ class StartlistProvider {
   }
 
   Future<StagesCsv?> getStagesFromFile() async {
-    final file = await filepicker.pickFile(allowedExtensions: ['csv']);
+    final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
       final csv = await decoder(file.bytes!);
       try {

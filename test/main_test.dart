@@ -7,6 +7,7 @@ import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/countdown/logic/countdown_at_start.dart';
+import 'package:entime/src/feature/csv/logic/startlist_provider.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/settings/settings.dart';
@@ -47,6 +48,8 @@ class MockINtpProvider extends Mock implements INtpProvider {}
 
 class MockIConnectivityProvider extends Mock implements IConnectivityProvider {}
 
+class MockStartlistProvider extends Mock implements StartlistProvider {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -60,6 +63,7 @@ void main() {
   late CountdownAtStart countdown;
   late INtpProvider ntpProvider;
   late IConnectivityProvider connectivityProvider;
+  late StartlistProvider startlistProvider;
 
   setUpAll(() async {
     Bloc.observer = AppBlocObserver();
@@ -81,6 +85,7 @@ void main() {
     countdown = CountdownAtStart(database: database, settingsProvider: settingsProvider);
     ntpProvider = MockINtpProvider();
     connectivityProvider = MockIConnectivityProvider();
+    startlistProvider = MockStartlistProvider();
 
     when(() => updateProvider.showChangelog()).thenAnswer((_) => Future.value(''));
 
@@ -90,17 +95,20 @@ void main() {
   group('EntimeApp', () {
     patrolWidgetTest('Renders home widget', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(
-        EntimeApp(
-          settingsProvider: settingsProvider,
-          updateProvider: updateProvider,
-          bluetoothProvider: bluetoothProvider,
-          ttsProvider: ttsProvider,
-          audioController: audioController,
-          appInfo: appInfo,
-          database: database,
-          countdown: countdown,
-          ntpProvider: ntpProvider,
-          connectivityProvider: connectivityProvider,
+        RepositoryProvider(
+          create: (context) => startlistProvider,
+          child: EntimeApp(
+            settingsProvider: settingsProvider,
+            updateProvider: updateProvider,
+            bluetoothProvider: bluetoothProvider,
+            ttsProvider: ttsProvider,
+            audioController: audioController,
+            appInfo: appInfo,
+            database: database,
+            countdown: countdown,
+            ntpProvider: ntpProvider,
+            connectivityProvider: connectivityProvider,
+          ),
         ),
       ); // Create main app
       expect($(SizedBox), findsOneWidget);

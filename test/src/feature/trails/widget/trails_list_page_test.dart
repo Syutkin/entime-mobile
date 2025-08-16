@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/common/utils/file_picker_provider.dart';
 import 'package:entime/src/common/widget/expanded_alert_dialog.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
@@ -17,12 +18,15 @@ class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements
 
 class MockTrailsBloc extends MockBloc<TrailsEvent, TrailsState> implements TrailsBloc {}
 
+class MockFilePicker extends Mock implements IFilePickerProvider {}
+
 class MockQueryRow extends Mock implements QueryRow {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late DatabaseBloc databaseBloc;
   late TrailsBloc trailsBloc;
+  late IFilePickerProvider filePicker;
   late List<TrailInfo> trails;
   late TrailInfo trail1;
   late TrailInfo trail2;
@@ -33,10 +37,13 @@ void main() {
       value: databaseBloc,
       child: BlocProvider.value(
         value: trailsBloc,
-        child: MaterialApp(
-          localizationsDelegates: const [Localization.delegate],
-          supportedLocales: Localization.supportedLocales,
-          home: TrailsListPage(),
+        child: RepositoryProvider.value(
+          value: filePicker,
+          child: MaterialApp(
+            localizationsDelegates: const [Localization.delegate],
+            supportedLocales: Localization.supportedLocales,
+            home: TrailsListPage(),
+          ),
         ),
       ),
     );
@@ -45,6 +52,7 @@ void main() {
   setUp(() {
     final row1 = MockQueryRow();
     final row2 = MockQueryRow();
+    filePicker = MockFilePicker();
 
     trail1 = TrailInfo(
       row: row1,
