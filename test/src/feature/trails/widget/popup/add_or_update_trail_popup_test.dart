@@ -29,6 +29,20 @@ void main() {
   const addTrailButton = 'Add Trail';
   const updateTrailButton = 'Update Trail';
 
+  late int id;
+  late String name;
+  late int distance;
+  late int elevation;
+  late String url;
+  late String description;
+  late int fileId;
+  late String fileName;
+  late String fileExtension;
+  late int fileSize;
+  late DateTime timestamp;
+
+  late TrackFile dummyTrack;
+
   Widget testAddWidget() {
     initializeDateFormatting();
     return BlocProvider.value(
@@ -78,20 +92,41 @@ void main() {
   });
 
   setUp(() {
+    id = 1;
+    name = 'Test Trail';
+    distance = 1000;
+    elevation = 100;
+    url = 'https://example.com';
+    description = 'Test description';
+    fileId = 1;
+    fileName = 'test.gpx';
+    fileExtension = '.gpx';
+    fileSize = 12345;
+    timestamp = DateTime.now();
+
     row = MockQueryRow();
     trail = TrailInfo(
       row: row,
-      id: 1,
-      name: 'Test Trail',
-      distance: 1000,
-      elevation: 100,
-      url: 'https://example.com',
-      description: 'Test description',
-      fileId: 1,
-      fileName: 'test.gpx',
-      fileExtension: '.gpx',
-      fileSize: 12345,
-      timestamp: DateTime.now(),
+      id: id,
+      name: name,
+      distance: distance,
+      elevation: elevation,
+      url: url,
+      description: description,
+      fileId: fileId,
+      fileName: fileName,
+      fileExtension: fileExtension,
+      fileSize: fileSize,
+      timestamp: timestamp,
+    );
+
+    dummyTrack = TrackFile(
+      id: -1,
+      name: '',
+      size: 0,
+      hashSha1: '',
+      data: Uint8List(0),
+      timestamp: DateTime.parse('2000-01-01'),
     );
 
     databaseBloc = MockDatabaseBloc();
@@ -227,7 +262,7 @@ void main() {
       });
 
       patrolWidgetTest('Handles file picker', skip: true, (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
+        when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
         await $.pumpWidgetAndSettle(testAddWidget());
         await $(addTrailButton).tap();
@@ -287,48 +322,98 @@ void main() {
 
     group('updateTrailPopup tests', () {
       patrolWidgetTest('Shows update trail dialog with existing data', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
+        when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: [trail]));
 
         await $.pumpWidgetAndSettle(testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
-        // TODO: Add test implementation
+        expect($(ExpandedAlertDialog), findsOneWidget);
+        expect($(TextFormField).containing($(name)), findsOneWidget);
+        expect($(TextFormField).containing($(fileName + fileExtension)), findsOneWidget);
+        expect($(TextFormField).containing($(distance.toString())), findsOneWidget);
+        expect($(TextFormField).containing($(elevation.toString())), findsOneWidget);
+        expect($(TextFormField).containing($(url)), findsOneWidget);
+        expect($(TextFormField).containing($(description)), findsOneWidget);
+        expect($(#cancelButton), findsOneWidget);
       });
 
-      patrolWidgetTest('Pre-fills form with trail data', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
-
+      patrolWidgetTest('Emit "dummy" track when trail has track', (PatrolTester $) async {
+        when(() => trailsBloc.state).thenReturn(
+          TrailsState.initialized(trails: [trail]),
+        );
         await $.pumpWidgetAndSettle(testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
-        // TODO: Add test implementation
+        verify(
+          () => trailsBloc.add(
+            TrailsEvent.emitTrack(
+              track: dummyTrack,
+            ),
+          ),
+        ).called(1);
       });
 
       patrolWidgetTest('Handles track removal', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
+        when(() => trailsBloc.state).thenReturn(
+          TrailsState.initialized(
+            trails: [trail],
+            track: dummyTrack,
+          ),
+        );
 
         await $.pumpWidgetAndSettle(testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
-        // TODO: Add test implementation
+        expect($(TextFormField).containing($(fileName + fileExtension)), findsOneWidget);
+
+        await $(#removeTrackIconButton).tap();
+
+        expect($(ExpandedAlertDialog), findsOneWidget);
+        verify(
+          () => trailsBloc.add(const TrailsEvent.unloadTrack()),
+        ).called(1);
+
+        expect($(TextFormField).containing($(fileName + fileExtension)), findsNothing);
       });
 
       patrolWidgetTest('Updates trail with new data', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
+        when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
         await $.pumpWidgetAndSettle(testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
-        // TODO: Add test implementation
-      });
+        var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
+        await textField.enterText('Trail name');
 
-      patrolWidgetTest('Validates form fields in update mode', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
+        textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailDistance));
+        await textField.enterText('123');
 
-        await $.pumpWidgetAndSettle(testUpdateWidget(trail));
-        await $(updateTrailButton).tap();
+        textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailElevation));
+        await textField.enterText('456');
 
-        // TODO: Add test implementation
+        textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailUrl));
+        await textField.enterText('url.url');
+
+        textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailDescription));
+        await textField.enterText('Trail description');
+
+        await $(#okButton).tap();
+
+        expect($(ExpandedAlertDialog), findsNothing);
+
+        verify(
+          () => trailsBloc.add(
+            TrailsEvent.updateTrail(
+              id: id,
+              name: 'Trail name',
+              distance: 123,
+              elevation: 456,
+              url: 'url.url',
+              description: 'Trail description',
+              fileId: fileId,
+            ),
+          ),
+        ).called(1);
       });
     });
 

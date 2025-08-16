@@ -10,7 +10,7 @@ Future<void> updateTrailPopup(BuildContext context, TrailInfo trail) {
   if (trail.fileId != null) {
     context.read<TrailsBloc>().add(
       TrailsEvent.emitTrack(
-        track: TrackFile(id: -1, name: '', size: 0, hashSha1: '', data: Uint8List(0), timestamp: DateTime.now()),
+        track: TrackFile(id: -1, name: '', size: 0, hashSha1: '', data: Uint8List(0), timestamp: DateTime.parse('2000-01-01')),
       ),
     );
   }
@@ -33,6 +33,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
 
   IconButton addTrackIconButton(TrailsBloc bloc) {
     return IconButton(
+      key: const Key('addTrackIconButton'),
       onPressed: () async {
         file =
             (await FilePicker.platform.pickFiles(
@@ -56,6 +57,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
 
   IconButton removeTrackIconButton(TrailsBloc bloc) {
     return IconButton(
+      key: const Key('removeTrackIconButton'),
       onPressed: () async {
         deleteTrack = true;
         bloc.add(const TrailsEvent.unloadTrack());
