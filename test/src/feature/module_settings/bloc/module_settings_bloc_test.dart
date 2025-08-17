@@ -1,6 +1,6 @@
+import 'dart:convert';
+
 import 'package:bloc_test/bloc_test.dart';
-import 'package:entime/src/feature/module_settings/logic/module_settings_entime_provider.dart';
-import 'package:entime/src/feature/module_settings/logic/module_settings_led_provider.dart';
 import 'package:entime/src/feature/module_settings/module_settings.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -45,7 +45,7 @@ void main() {
           ),
         ],
         verify: (bloc) {
-          expect(bloc.moduleSettings, isA<ModuleSettingsEntime>());
+          expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelEntime>());
         },
       );
 
@@ -70,7 +70,7 @@ void main() {
           ),
         ],
         verify: (bloc) {
-          expect(bloc.moduleSettings, isA<ModuleSettingsLed>());
+          expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelLed>());
         },
       );
 
@@ -127,13 +127,7 @@ void main() {
     });
 
     group('Update module settings', () {
-      blocTest<ModuleSettingsBloc, ModuleSettingsState>(
-        'emits loading then loaded state when update event is triggered',
-        build: () => bloc,
-        act: (bloc) async {
-          // Сначала загружаем настройки, чтобы moduleSettings был инициализирован
-          bloc.add(
-            const ModuleSettingsEvent.get('''
+      const jsonEntime = '''
           {
             "Type": "entime",
             "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
@@ -142,31 +136,39 @@ void main() {
             "TFT": {"active": true, "timeout": true, "timeoutDuration": 30, "turnOnAtEvent": true},
             "Buzzer": {"active": true, "shortFrequency": 1000, "longFrequency": 2000},
             "VCC": {"r1": 10000, "r2": 10000}
-          }'''),
+          }''';
+
+      const jsonLed = '''
+          {
+            "Type": "led",
+            "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
+            "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "LedPanel": {"active": true, "brightness": 100, "color": "red"}
+          }''';
+
+      blocTest<ModuleSettingsBloc, ModuleSettingsState>(
+        'emits loading then loaded state when update event is triggered',
+        build: () => bloc,
+        act: (bloc) async {
+          // Сначала загружаем настройки, чтобы moduleSettings был инициализирован
+          bloc.add(
+            const ModuleSettingsEvent.get(jsonEntime),
           );
 
           // Ждем завершения обработки первого события
           await Future<void>.delayed(const Duration(milliseconds: 100));
 
           // Затем обновляем
-          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
+          bloc.add(ModuleSettingsEvent.update((bloc.state as ModuleSettingsLoaded).moduleSettings));
         },
         expect: () => [
           const ModuleSettingsState.loading(),
-          isA<ModuleSettingsState>().having(
-            (state) => state is ModuleSettingsLoaded,
-            'state type',
-            true,
-          ),
-          const ModuleSettingsState.loading(),
-          isA<ModuleSettingsState>().having(
-            (state) => state is ModuleSettingsLoaded,
-            'state type',
-            true,
+          ModuleSettingsState.loaded(
+            ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
           ),
         ],
         verify: (bloc) {
-          expect(bloc.moduleSettings, isNotNull);
+          expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelEntime>());
         },
       );
 
@@ -176,38 +178,23 @@ void main() {
         act: (bloc) async {
           // Сначала загружаем настройки для led модуля
           bloc.add(
-            const ModuleSettingsEvent.get('''
-          {
-            "Type": "led",
-            "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
-            "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
-            "LedPanel": {"active": true, "brightness": 100, "color": "red"}
-          }'''),
+            const ModuleSettingsEvent.get(jsonLed),
           );
 
           // Ждем завершения обработки первого события
           await Future<void>.delayed(const Duration(milliseconds: 100));
 
           // Затем обновляем
-          bloc.add(ModuleSettingsEvent.update(bloc.moduleSettings));
+          bloc.add(ModuleSettingsEvent.update((bloc.state as ModuleSettingsLoaded).moduleSettings));
         },
         expect: () => [
           const ModuleSettingsState.loading(),
-          isA<ModuleSettingsState>().having(
-            (state) => state is ModuleSettingsLoaded,
-            'state type',
-            true,
-          ),
-          const ModuleSettingsState.loading(),
-          isA<ModuleSettingsState>().having(
-            (state) => state is ModuleSettingsLoaded,
-            'state type',
-            true,
+          ModuleSettingsState.loaded(
+            ModSettingsModel.led(ModSettingsLed.fromJson(jsonDecode(jsonLed) as Map<String, dynamic>)),
           ),
         ],
         verify: (bloc) {
-          expect(bloc.moduleSettings, isNotNull);
-          expect(bloc.moduleSettings, isA<ModuleSettingsLed>());
+          expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelLed>());
         },
       );
     });
@@ -272,8 +259,8 @@ void main() {
         // Ждем завершения обработки события
         await Future<void>.delayed(const Duration(milliseconds: 100));
 
-        expect(bloc.moduleSettings, isA<ModuleSettingsEntime>());
         expect(bloc.state, isA<ModuleSettingsLoaded>());
+        expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelEntime>());
       });
 
       test('correctly instantiates ModuleSettingsLed for led type', () async {
@@ -290,8 +277,8 @@ void main() {
         // Ждем завершения обработки события
         await Future<void>.delayed(const Duration(milliseconds: 100));
 
-        expect(bloc.moduleSettings, isA<ModuleSettingsLed>());
         expect(bloc.state, isA<ModuleSettingsLoaded>());
+        expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelLed>());
       });
 
       test('handles unknown module type correctly', () async {

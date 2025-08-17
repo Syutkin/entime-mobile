@@ -119,7 +119,7 @@ return update(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String json)?  get,TResult Function( ModuleSettingsProvider moduleSettings)?  update,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String json)?  get,TResult Function( ModSettingsModel moduleSettings)?  update,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Get() when get != null:
 return get(_that.json);case _Update() when update != null:
@@ -141,7 +141,7 @@ return update(_that.moduleSettings);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String json)  get,required TResult Function( ModuleSettingsProvider moduleSettings)  update,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String json)  get,required TResult Function( ModSettingsModel moduleSettings)  update,}) {final _that = this;
 switch (_that) {
 case _Get():
 return get(_that.json);case _Update():
@@ -159,7 +159,7 @@ return update(_that.moduleSettings);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String json)?  get,TResult? Function( ModuleSettingsProvider moduleSettings)?  update,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String json)?  get,TResult? Function( ModSettingsModel moduleSettings)?  update,}) {final _that = this;
 switch (_that) {
 case _Get() when get != null:
 return get(_that.json);case _Update() when update != null:
@@ -244,7 +244,7 @@ class _Update implements ModuleSettingsEvent {
   const _Update(this.moduleSettings);
   
 
- final  ModuleSettingsProvider moduleSettings;
+ final  ModSettingsModel moduleSettings;
 
 /// Create a copy of ModuleSettingsEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -276,11 +276,11 @@ abstract mixin class _$UpdateCopyWith<$Res> implements $ModuleSettingsEventCopyW
   factory _$UpdateCopyWith(_Update value, $Res Function(_Update) _then) = __$UpdateCopyWithImpl;
 @useResult
 $Res call({
- ModuleSettingsProvider moduleSettings
+ ModSettingsModel moduleSettings
 });
 
 
-
+$ModSettingsModelCopyWith<$Res> get moduleSettings;
 
 }
 /// @nodoc
@@ -296,11 +296,20 @@ class __$UpdateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? moduleSettings = null,}) {
   return _then(_Update(
 null == moduleSettings ? _self.moduleSettings : moduleSettings // ignore: cast_nullable_to_non_nullable
-as ModuleSettingsProvider,
+as ModSettingsModel,
   ));
 }
 
-
+/// Create a copy of ModuleSettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ModSettingsModelCopyWith<$Res> get moduleSettings {
+  
+  return $ModSettingsModelCopyWith<$Res>(_self.moduleSettings, (value) {
+    return _then(_self.copyWith(moduleSettings: value));
+  });
+}
 }
 
 /// @nodoc
@@ -417,7 +426,7 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  uninitialized,TResult Function()?  loading,TResult Function( ModuleSettingsProvider moduleSettings)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  uninitialized,TResult Function()?  loading,TResult Function( ModSettingsModel moduleSettings)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ModuleSettingsUninitialized() when uninitialized != null:
 return uninitialized();case ModuleSettingsLoading() when loading != null:
@@ -441,7 +450,7 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  uninitialized,required TResult Function()  loading,required TResult Function( ModuleSettingsProvider moduleSettings)  loaded,required TResult Function()  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  uninitialized,required TResult Function()  loading,required TResult Function( ModSettingsModel moduleSettings)  loaded,required TResult Function()  error,}) {final _that = this;
 switch (_that) {
 case ModuleSettingsUninitialized():
 return uninitialized();case ModuleSettingsLoading():
@@ -461,7 +470,7 @@ return error();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  uninitialized,TResult? Function()?  loading,TResult? Function( ModuleSettingsProvider moduleSettings)?  loaded,TResult? Function()?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  uninitialized,TResult? Function()?  loading,TResult? Function( ModSettingsModel moduleSettings)?  loaded,TResult? Function()?  error,}) {final _that = this;
 switch (_that) {
 case ModuleSettingsUninitialized() when uninitialized != null:
 return uninitialized();case ModuleSettingsLoading() when loading != null:
@@ -546,7 +555,7 @@ class ModuleSettingsLoaded implements ModuleSettingsState {
   const ModuleSettingsLoaded(this.moduleSettings);
   
 
- final  ModuleSettingsProvider moduleSettings;
+ final  ModSettingsModel moduleSettings;
 
 /// Create a copy of ModuleSettingsState
 /// with the given fields replaced by the non-null parameter values.
@@ -578,11 +587,11 @@ abstract mixin class $ModuleSettingsLoadedCopyWith<$Res> implements $ModuleSetti
   factory $ModuleSettingsLoadedCopyWith(ModuleSettingsLoaded value, $Res Function(ModuleSettingsLoaded) _then) = _$ModuleSettingsLoadedCopyWithImpl;
 @useResult
 $Res call({
- ModuleSettingsProvider moduleSettings
+ ModSettingsModel moduleSettings
 });
 
 
-
+$ModSettingsModelCopyWith<$Res> get moduleSettings;
 
 }
 /// @nodoc
@@ -598,11 +607,20 @@ class _$ModuleSettingsLoadedCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? moduleSettings = null,}) {
   return _then(ModuleSettingsLoaded(
 null == moduleSettings ? _self.moduleSettings : moduleSettings // ignore: cast_nullable_to_non_nullable
-as ModuleSettingsProvider,
+as ModSettingsModel,
   ));
 }
 
-
+/// Create a copy of ModuleSettingsState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ModSettingsModelCopyWith<$Res> get moduleSettings {
+  
+  return $ModSettingsModelCopyWith<$Res>(_self.moduleSettings, (value) {
+    return _then(_self.copyWith(moduleSettings: value));
+  });
+}
 }
 
 /// @nodoc

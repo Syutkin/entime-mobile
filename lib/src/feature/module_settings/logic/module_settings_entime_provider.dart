@@ -5,7 +5,7 @@ import '../model/module_settings.dart';
 import 'module_settings_provider.dart';
 
 class ModuleSettingsEntime extends ModuleSettingsProvider {
-  late ModSettingsModel _modSettingsModel;
+  late ModSettingsEntime _modSettingsModel;
 
   //ToDo: реализация работы с WiFi сетями: поиск, соединение, хранение паролей и п.р.
 
@@ -15,7 +15,7 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
     logger.i('ModuleSettingsEntime: Updating modsettings from json');
 
     try {
-      _modSettingsModel = ModSettingsModel.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
+      _modSettingsModel = ModSettingsEntime.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
 
       // Module type
       type = _modSettingsModel.type;
@@ -68,7 +68,7 @@ class ModuleSettingsEntime extends ModuleSettingsProvider {
 
   @override
   String get write => json.encode(
-    ModSettingsModel(
+    ModSettingsEntime(
       // запись данных
       read: false,
       type: type,

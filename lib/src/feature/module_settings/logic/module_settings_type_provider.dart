@@ -5,7 +5,7 @@ import '../model/module_settings.dart';
 import 'module_settings_provider.dart';
 
 class ModuleSettingsType extends ModuleSettingsProvider {
-  late ModSettingsModelType _modSettingsModel;
+  late ModSettingsType _modSettingsModel;
 
   //Loading settings on initialization
   @override
@@ -13,7 +13,7 @@ class ModuleSettingsType extends ModuleSettingsProvider {
     logger.i('ModuleSettingsType: Updating modsettings from json');
 
     try {
-      _modSettingsModel = ModSettingsModelType.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
+      _modSettingsModel = ModSettingsType.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
 
       // Module type
       type = _modSettingsModel.type;

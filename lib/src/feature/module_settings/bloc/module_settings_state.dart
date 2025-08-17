@@ -5,7 +5,7 @@ sealed class ModuleSettingsState with _$ModuleSettingsState {
   const factory ModuleSettingsState.uninitialized() = ModuleSettingsUninitialized;
   const factory ModuleSettingsState.loading() = ModuleSettingsLoading;
 
-  const factory ModuleSettingsState.loaded(ModuleSettingsProvider moduleSettings) = ModuleSettingsLoaded;
+  const factory ModuleSettingsState.loaded(ModSettingsModel moduleSettings) = ModuleSettingsLoaded;
   const factory ModuleSettingsState.error() = ModuleSettingsError;
 
   // factory ModuleSettingsState.fromJson(Map<String, dynamic> json) =>

@@ -11,72 +11,38 @@ part of 'module_settings.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
-mixin _$ModSettingsModelType {
+mixin _$ModSettingsModel {
 
-@JsonKey(name: 'Type') String get type;
-/// Create a copy of ModSettingsModelType
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ModSettingsModelTypeCopyWith<ModSettingsModelType> get copyWith => _$ModSettingsModelTypeCopyWithImpl<ModSettingsModelType>(this as ModSettingsModelType, _$identity);
 
-  /// Serializes this ModSettingsModelType to a JSON map.
-  Map<String, dynamic> toJson();
+
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsModelType&&(identical(other.type, type) || other.type == type));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsModel);
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,type);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ModSettingsModelType(type: $type)';
+  return 'ModSettingsModel()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ModSettingsModelTypeCopyWith<$Res>  {
-  factory $ModSettingsModelTypeCopyWith(ModSettingsModelType value, $Res Function(ModSettingsModelType) _then) = _$ModSettingsModelTypeCopyWithImpl;
-@useResult
-$Res call({
-@JsonKey(name: 'Type') String type
-});
-
-
-
-
-}
-/// @nodoc
-class _$ModSettingsModelTypeCopyWithImpl<$Res>
-    implements $ModSettingsModelTypeCopyWith<$Res> {
-  _$ModSettingsModelTypeCopyWithImpl(this._self, this._then);
-
-  final ModSettingsModelType _self;
-  final $Res Function(ModSettingsModelType) _then;
-
-/// Create a copy of ModSettingsModelType
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,}) {
-  return _then(_self.copyWith(
-type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
+class $ModSettingsModelCopyWith<$Res>  {
+$ModSettingsModelCopyWith(ModSettingsModel _, $Res Function(ModSettingsModel) __);
 }
 
 
-/// Adds pattern-matching-related methods to [ModSettingsModelType].
-extension ModSettingsModelTypePatterns on ModSettingsModelType {
+/// Adds pattern-matching-related methods to [ModSettingsModel].
+extension ModSettingsModelPatterns on ModSettingsModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -89,10 +55,354 @@ extension ModSettingsModelTypePatterns on ModSettingsModelType {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ModSettingsModelType value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ModSettingsModelEntime value)?  entime,TResult Function( ModSettingsModelLed value)?  led,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _ModSettingsModelType() when $default != null:
+case ModSettingsModelEntime() when entime != null:
+return entime(_that);case ModSettingsModelLed() when led != null:
+return led(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ModSettingsModelEntime value)  entime,required TResult Function( ModSettingsModelLed value)  led,}){
+final _that = this;
+switch (_that) {
+case ModSettingsModelEntime():
+return entime(_that);case ModSettingsModelLed():
+return led(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ModSettingsModelEntime value)?  entime,TResult? Function( ModSettingsModelLed value)?  led,}){
+final _that = this;
+switch (_that) {
+case ModSettingsModelEntime() when entime != null:
+return entime(_that);case ModSettingsModelLed() when led != null:
+return led(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ModSettingsEntime entime)?  entime,TResult Function( ModSettingsLed led)?  led,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case ModSettingsModelEntime() when entime != null:
+return entime(_that.entime);case ModSettingsModelLed() when led != null:
+return led(_that.led);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ModSettingsEntime entime)  entime,required TResult Function( ModSettingsLed led)  led,}) {final _that = this;
+switch (_that) {
+case ModSettingsModelEntime():
+return entime(_that.entime);case ModSettingsModelLed():
+return led(_that.led);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ModSettingsEntime entime)?  entime,TResult? Function( ModSettingsLed led)?  led,}) {final _that = this;
+switch (_that) {
+case ModSettingsModelEntime() when entime != null:
+return entime(_that.entime);case ModSettingsModelLed() when led != null:
+return led(_that.led);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class ModSettingsModelEntime implements ModSettingsModel {
+  const ModSettingsModelEntime(this.entime);
+  
+
+ final  ModSettingsEntime entime;
+
+/// Create a copy of ModSettingsModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ModSettingsModelEntimeCopyWith<ModSettingsModelEntime> get copyWith => _$ModSettingsModelEntimeCopyWithImpl<ModSettingsModelEntime>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsModelEntime&&(identical(other.entime, entime) || other.entime == entime));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,entime);
+
+@override
+String toString() {
+  return 'ModSettingsModel.entime(entime: $entime)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ModSettingsModelEntimeCopyWith<$Res> implements $ModSettingsModelCopyWith<$Res> {
+  factory $ModSettingsModelEntimeCopyWith(ModSettingsModelEntime value, $Res Function(ModSettingsModelEntime) _then) = _$ModSettingsModelEntimeCopyWithImpl;
+@useResult
+$Res call({
+ ModSettingsEntime entime
+});
+
+
+$ModSettingsEntimeCopyWith<$Res> get entime;
+
+}
+/// @nodoc
+class _$ModSettingsModelEntimeCopyWithImpl<$Res>
+    implements $ModSettingsModelEntimeCopyWith<$Res> {
+  _$ModSettingsModelEntimeCopyWithImpl(this._self, this._then);
+
+  final ModSettingsModelEntime _self;
+  final $Res Function(ModSettingsModelEntime) _then;
+
+/// Create a copy of ModSettingsModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? entime = null,}) {
+  return _then(ModSettingsModelEntime(
+null == entime ? _self.entime : entime // ignore: cast_nullable_to_non_nullable
+as ModSettingsEntime,
+  ));
+}
+
+/// Create a copy of ModSettingsModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ModSettingsEntimeCopyWith<$Res> get entime {
+  
+  return $ModSettingsEntimeCopyWith<$Res>(_self.entime, (value) {
+    return _then(_self.copyWith(entime: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class ModSettingsModelLed implements ModSettingsModel {
+  const ModSettingsModelLed(this.led);
+  
+
+ final  ModSettingsLed led;
+
+/// Create a copy of ModSettingsModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ModSettingsModelLedCopyWith<ModSettingsModelLed> get copyWith => _$ModSettingsModelLedCopyWithImpl<ModSettingsModelLed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsModelLed&&(identical(other.led, led) || other.led == led));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,led);
+
+@override
+String toString() {
+  return 'ModSettingsModel.led(led: $led)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ModSettingsModelLedCopyWith<$Res> implements $ModSettingsModelCopyWith<$Res> {
+  factory $ModSettingsModelLedCopyWith(ModSettingsModelLed value, $Res Function(ModSettingsModelLed) _then) = _$ModSettingsModelLedCopyWithImpl;
+@useResult
+$Res call({
+ ModSettingsLed led
+});
+
+
+$ModSettingsLedCopyWith<$Res> get led;
+
+}
+/// @nodoc
+class _$ModSettingsModelLedCopyWithImpl<$Res>
+    implements $ModSettingsModelLedCopyWith<$Res> {
+  _$ModSettingsModelLedCopyWithImpl(this._self, this._then);
+
+  final ModSettingsModelLed _self;
+  final $Res Function(ModSettingsModelLed) _then;
+
+/// Create a copy of ModSettingsModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? led = null,}) {
+  return _then(ModSettingsModelLed(
+null == led ? _self.led : led // ignore: cast_nullable_to_non_nullable
+as ModSettingsLed,
+  ));
+}
+
+/// Create a copy of ModSettingsModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ModSettingsLedCopyWith<$Res> get led {
+  
+  return $ModSettingsLedCopyWith<$Res>(_self.led, (value) {
+    return _then(_self.copyWith(led: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$ModSettingsType {
+
+@JsonKey(name: 'Type') String get type;
+/// Create a copy of ModSettingsType
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ModSettingsTypeCopyWith<ModSettingsType> get copyWith => _$ModSettingsTypeCopyWithImpl<ModSettingsType>(this as ModSettingsType, _$identity);
+
+  /// Serializes this ModSettingsType to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsType&&(identical(other.type, type) || other.type == type));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type);
+
+@override
+String toString() {
+  return 'ModSettingsType(type: $type)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ModSettingsTypeCopyWith<$Res>  {
+  factory $ModSettingsTypeCopyWith(ModSettingsType value, $Res Function(ModSettingsType) _then) = _$ModSettingsTypeCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'Type') String type
+});
+
+
+
+
+}
+/// @nodoc
+class _$ModSettingsTypeCopyWithImpl<$Res>
+    implements $ModSettingsTypeCopyWith<$Res> {
+  _$ModSettingsTypeCopyWithImpl(this._self, this._then);
+
+  final ModSettingsType _self;
+  final $Res Function(ModSettingsType) _then;
+
+/// Create a copy of ModSettingsType
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,}) {
+  return _then(_self.copyWith(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ModSettingsType].
+extension ModSettingsTypePatterns on ModSettingsType {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ModSettingsType value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ModSettingsType() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -111,10 +421,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ModSettingsModelType value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ModSettingsType value)  $default,){
 final _that = this;
 switch (_that) {
-case _ModSettingsModelType():
+case _ModSettingsType():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -132,10 +442,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ModSettingsModelType value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ModSettingsType value)?  $default,){
 final _that = this;
 switch (_that) {
-case _ModSettingsModelType() when $default != null:
+case _ModSettingsType() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -155,7 +465,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'Type')  String type)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _ModSettingsModelType() when $default != null:
+case _ModSettingsType() when $default != null:
 return $default(_that.type);case _:
   return orElse();
 
@@ -176,7 +486,7 @@ return $default(_that.type);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'Type')  String type)  $default,) {final _that = this;
 switch (_that) {
-case _ModSettingsModelType():
+case _ModSettingsType():
 return $default(_that.type);case _:
   throw StateError('Unexpected subclass');
 
@@ -196,7 +506,7 @@ return $default(_that.type);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'Type')  String type)?  $default,) {final _that = this;
 switch (_that) {
-case _ModSettingsModelType() when $default != null:
+case _ModSettingsType() when $default != null:
 return $default(_that.type);case _:
   return null;
 
@@ -208,26 +518,26 @@ return $default(_that.type);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _ModSettingsModelType implements ModSettingsModelType {
-  const _ModSettingsModelType({@JsonKey(name: 'Type') required this.type});
-  factory _ModSettingsModelType.fromJson(Map<String, dynamic> json) => _$ModSettingsModelTypeFromJson(json);
+class _ModSettingsType implements ModSettingsType {
+  const _ModSettingsType({@JsonKey(name: 'Type') required this.type});
+  factory _ModSettingsType.fromJson(Map<String, dynamic> json) => _$ModSettingsTypeFromJson(json);
 
 @override@JsonKey(name: 'Type') final  String type;
 
-/// Create a copy of ModSettingsModelType
+/// Create a copy of ModSettingsType
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ModSettingsModelTypeCopyWith<_ModSettingsModelType> get copyWith => __$ModSettingsModelTypeCopyWithImpl<_ModSettingsModelType>(this, _$identity);
+_$ModSettingsTypeCopyWith<_ModSettingsType> get copyWith => __$ModSettingsTypeCopyWithImpl<_ModSettingsType>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$ModSettingsModelTypeToJson(this, );
+  return _$ModSettingsTypeToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsModelType&&(identical(other.type, type) || other.type == type));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsType&&(identical(other.type, type) || other.type == type));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -236,15 +546,15 @@ int get hashCode => Object.hash(runtimeType,type);
 
 @override
 String toString() {
-  return 'ModSettingsModelType(type: $type)';
+  return 'ModSettingsType(type: $type)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ModSettingsModelTypeCopyWith<$Res> implements $ModSettingsModelTypeCopyWith<$Res> {
-  factory _$ModSettingsModelTypeCopyWith(_ModSettingsModelType value, $Res Function(_ModSettingsModelType) _then) = __$ModSettingsModelTypeCopyWithImpl;
+abstract mixin class _$ModSettingsTypeCopyWith<$Res> implements $ModSettingsTypeCopyWith<$Res> {
+  factory _$ModSettingsTypeCopyWith(_ModSettingsType value, $Res Function(_ModSettingsType) _then) = __$ModSettingsTypeCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'Type') String type
@@ -255,17 +565,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$ModSettingsModelTypeCopyWithImpl<$Res>
-    implements _$ModSettingsModelTypeCopyWith<$Res> {
-  __$ModSettingsModelTypeCopyWithImpl(this._self, this._then);
+class __$ModSettingsTypeCopyWithImpl<$Res>
+    implements _$ModSettingsTypeCopyWith<$Res> {
+  __$ModSettingsTypeCopyWithImpl(this._self, this._then);
 
-  final _ModSettingsModelType _self;
-  final $Res Function(_ModSettingsModelType) _then;
+  final _ModSettingsType _self;
+  final $Res Function(_ModSettingsType) _then;
 
-/// Create a copy of ModSettingsModelType
+/// Create a copy of ModSettingsType
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? type = null,}) {
-  return _then(_ModSettingsModelType(
+  return _then(_ModSettingsType(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -276,351 +586,22 @@ as String,
 
 
 /// @nodoc
-mixin _$ModSettingsModelLed {
-
-@JsonKey(name: 'Read') bool? get read;@JsonKey(name: 'Type') String get type;@JsonKey(name: 'Bluetooth') Bluetooth get bluetooth;@JsonKey(name: 'WiFi') WiFi get wiFi;@JsonKey(name: 'LedPanel') LedPanel get ledPanel;
-/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ModSettingsModelLedCopyWith<ModSettingsModelLed> get copyWith => _$ModSettingsModelLedCopyWithImpl<ModSettingsModelLed>(this as ModSettingsModelLed, _$identity);
-
-  /// Serializes this ModSettingsModelLed to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsModelLed&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.ledPanel, ledPanel) || other.ledPanel == ledPanel));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,read,type,bluetooth,wiFi,ledPanel);
-
-@override
-String toString() {
-  return 'ModSettingsModelLed(read: $read, type: $type, bluetooth: $bluetooth, wiFi: $wiFi, ledPanel: $ledPanel)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $ModSettingsModelLedCopyWith<$Res>  {
-  factory $ModSettingsModelLedCopyWith(ModSettingsModelLed value, $Res Function(ModSettingsModelLed) _then) = _$ModSettingsModelLedCopyWithImpl;
-@useResult
-$Res call({
-@JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'LedPanel') LedPanel ledPanel
-});
-
-
-$BluetoothCopyWith<$Res> get bluetooth;$WiFiCopyWith<$Res> get wiFi;$LedPanelCopyWith<$Res> get ledPanel;
-
-}
-/// @nodoc
-class _$ModSettingsModelLedCopyWithImpl<$Res>
-    implements $ModSettingsModelLedCopyWith<$Res> {
-  _$ModSettingsModelLedCopyWithImpl(this._self, this._then);
-
-  final ModSettingsModelLed _self;
-  final $Res Function(ModSettingsModelLed) _then;
-
-/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? wiFi = null,Object? ledPanel = null,}) {
-  return _then(_self.copyWith(
-read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
-as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
-as Bluetooth,wiFi: null == wiFi ? _self.wiFi : wiFi // ignore: cast_nullable_to_non_nullable
-as WiFi,ledPanel: null == ledPanel ? _self.ledPanel : ledPanel // ignore: cast_nullable_to_non_nullable
-as LedPanel,
-  ));
-}
-/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$BluetoothCopyWith<$Res> get bluetooth {
-  
-  return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
-    return _then(_self.copyWith(bluetooth: value));
-  });
-}/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$WiFiCopyWith<$Res> get wiFi {
-  
-  return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
-    return _then(_self.copyWith(wiFi: value));
-  });
-}/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$LedPanelCopyWith<$Res> get ledPanel {
-  
-  return $LedPanelCopyWith<$Res>(_self.ledPanel, (value) {
-    return _then(_self.copyWith(ledPanel: value));
-  });
-}
-}
-
-
-/// Adds pattern-matching-related methods to [ModSettingsModelLed].
-extension ModSettingsModelLedPatterns on ModSettingsModelLed {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ModSettingsModelLed value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _ModSettingsModelLed() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ModSettingsModelLed value)  $default,){
-final _that = this;
-switch (_that) {
-case _ModSettingsModelLed():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ModSettingsModelLed value)?  $default,){
-final _that = this;
-switch (_that) {
-case _ModSettingsModelLed() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'LedPanel')  LedPanel ledPanel)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _ModSettingsModelLed() when $default != null:
-return $default(_that.read,_that.type,_that.bluetooth,_that.wiFi,_that.ledPanel);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'LedPanel')  LedPanel ledPanel)  $default,) {final _that = this;
-switch (_that) {
-case _ModSettingsModelLed():
-return $default(_that.read,_that.type,_that.bluetooth,_that.wiFi,_that.ledPanel);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'LedPanel')  LedPanel ledPanel)?  $default,) {final _that = this;
-switch (_that) {
-case _ModSettingsModelLed() when $default != null:
-return $default(_that.read,_that.type,_that.bluetooth,_that.wiFi,_that.ledPanel);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-@JsonSerializable()
-
-class _ModSettingsModelLed implements ModSettingsModelLed {
-  const _ModSettingsModelLed({@JsonKey(name: 'Read') this.read, @JsonKey(name: 'Type') required this.type, @JsonKey(name: 'Bluetooth') required this.bluetooth, @JsonKey(name: 'WiFi') required this.wiFi, @JsonKey(name: 'LedPanel') required this.ledPanel});
-  factory _ModSettingsModelLed.fromJson(Map<String, dynamic> json) => _$ModSettingsModelLedFromJson(json);
-
-@override@JsonKey(name: 'Read') final  bool? read;
-@override@JsonKey(name: 'Type') final  String type;
-@override@JsonKey(name: 'Bluetooth') final  Bluetooth bluetooth;
-@override@JsonKey(name: 'WiFi') final  WiFi wiFi;
-@override@JsonKey(name: 'LedPanel') final  LedPanel ledPanel;
-
-/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$ModSettingsModelLedCopyWith<_ModSettingsModelLed> get copyWith => __$ModSettingsModelLedCopyWithImpl<_ModSettingsModelLed>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$ModSettingsModelLedToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsModelLed&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.ledPanel, ledPanel) || other.ledPanel == ledPanel));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,read,type,bluetooth,wiFi,ledPanel);
-
-@override
-String toString() {
-  return 'ModSettingsModelLed(read: $read, type: $type, bluetooth: $bluetooth, wiFi: $wiFi, ledPanel: $ledPanel)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$ModSettingsModelLedCopyWith<$Res> implements $ModSettingsModelLedCopyWith<$Res> {
-  factory _$ModSettingsModelLedCopyWith(_ModSettingsModelLed value, $Res Function(_ModSettingsModelLed) _then) = __$ModSettingsModelLedCopyWithImpl;
-@override @useResult
-$Res call({
-@JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'LedPanel') LedPanel ledPanel
-});
-
-
-@override $BluetoothCopyWith<$Res> get bluetooth;@override $WiFiCopyWith<$Res> get wiFi;@override $LedPanelCopyWith<$Res> get ledPanel;
-
-}
-/// @nodoc
-class __$ModSettingsModelLedCopyWithImpl<$Res>
-    implements _$ModSettingsModelLedCopyWith<$Res> {
-  __$ModSettingsModelLedCopyWithImpl(this._self, this._then);
-
-  final _ModSettingsModelLed _self;
-  final $Res Function(_ModSettingsModelLed) _then;
-
-/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? wiFi = null,Object? ledPanel = null,}) {
-  return _then(_ModSettingsModelLed(
-read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
-as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
-as Bluetooth,wiFi: null == wiFi ? _self.wiFi : wiFi // ignore: cast_nullable_to_non_nullable
-as WiFi,ledPanel: null == ledPanel ? _self.ledPanel : ledPanel // ignore: cast_nullable_to_non_nullable
-as LedPanel,
-  ));
-}
-
-/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$BluetoothCopyWith<$Res> get bluetooth {
-  
-  return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
-    return _then(_self.copyWith(bluetooth: value));
-  });
-}/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$WiFiCopyWith<$Res> get wiFi {
-  
-  return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
-    return _then(_self.copyWith(wiFi: value));
-  });
-}/// Create a copy of ModSettingsModelLed
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$LedPanelCopyWith<$Res> get ledPanel {
-  
-  return $LedPanelCopyWith<$Res>(_self.ledPanel, (value) {
-    return _then(_self.copyWith(ledPanel: value));
-  });
-}
-}
-
-
-/// @nodoc
-mixin _$ModSettingsModel {
+mixin _$ModSettingsEntime {
 
 @JsonKey(name: 'Read') bool? get read;@JsonKey(name: 'Type') String get type;@JsonKey(name: 'Bluetooth') Bluetooth get bluetooth;@JsonKey(name: 'LoRa') LoRa get loRa;@JsonKey(name: 'WiFi') WiFi get wiFi;@JsonKey(name: 'TFT') Tft get tft;@JsonKey(name: 'Buzzer') Buzzer get buzzer;@JsonKey(name: 'VCC') Vcc get vcc;
-/// Create a copy of ModSettingsModel
+/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ModSettingsModelCopyWith<ModSettingsModel> get copyWith => _$ModSettingsModelCopyWithImpl<ModSettingsModel>(this as ModSettingsModel, _$identity);
+$ModSettingsEntimeCopyWith<ModSettingsEntime> get copyWith => _$ModSettingsEntimeCopyWithImpl<ModSettingsEntime>(this as ModSettingsEntime, _$identity);
 
-  /// Serializes this ModSettingsModel to a JSON map.
+  /// Serializes this ModSettingsEntime to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsModel&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.loRa, loRa) || other.loRa == loRa)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.tft, tft) || other.tft == tft)&&(identical(other.buzzer, buzzer) || other.buzzer == buzzer)&&(identical(other.vcc, vcc) || other.vcc == vcc));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsEntime&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.loRa, loRa) || other.loRa == loRa)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.tft, tft) || other.tft == tft)&&(identical(other.buzzer, buzzer) || other.buzzer == buzzer)&&(identical(other.vcc, vcc) || other.vcc == vcc));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -629,15 +610,15 @@ int get hashCode => Object.hash(runtimeType,read,type,bluetooth,loRa,wiFi,tft,bu
 
 @override
 String toString() {
-  return 'ModSettingsModel(read: $read, type: $type, bluetooth: $bluetooth, loRa: $loRa, wiFi: $wiFi, tft: $tft, buzzer: $buzzer, vcc: $vcc)';
+  return 'ModSettingsEntime(read: $read, type: $type, bluetooth: $bluetooth, loRa: $loRa, wiFi: $wiFi, tft: $tft, buzzer: $buzzer, vcc: $vcc)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ModSettingsModelCopyWith<$Res>  {
-  factory $ModSettingsModelCopyWith(ModSettingsModel value, $Res Function(ModSettingsModel) _then) = _$ModSettingsModelCopyWithImpl;
+abstract mixin class $ModSettingsEntimeCopyWith<$Res>  {
+  factory $ModSettingsEntimeCopyWith(ModSettingsEntime value, $Res Function(ModSettingsEntime) _then) = _$ModSettingsEntimeCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'LoRa') LoRa loRa,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'TFT') Tft tft,@JsonKey(name: 'Buzzer') Buzzer buzzer,@JsonKey(name: 'VCC') Vcc vcc
@@ -648,14 +629,14 @@ $BluetoothCopyWith<$Res> get bluetooth;$LoRaCopyWith<$Res> get loRa;$WiFiCopyWit
 
 }
 /// @nodoc
-class _$ModSettingsModelCopyWithImpl<$Res>
-    implements $ModSettingsModelCopyWith<$Res> {
-  _$ModSettingsModelCopyWithImpl(this._self, this._then);
+class _$ModSettingsEntimeCopyWithImpl<$Res>
+    implements $ModSettingsEntimeCopyWith<$Res> {
+  _$ModSettingsEntimeCopyWithImpl(this._self, this._then);
 
-  final ModSettingsModel _self;
-  final $Res Function(ModSettingsModel) _then;
+  final ModSettingsEntime _self;
+  final $Res Function(ModSettingsEntime) _then;
 
-/// Create a copy of ModSettingsModel
+/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? loRa = null,Object? wiFi = null,Object? tft = null,Object? buzzer = null,Object? vcc = null,}) {
   return _then(_self.copyWith(
@@ -670,7 +651,7 @@ as Buzzer,vcc: null == vcc ? _self.vcc : vcc // ignore: cast_nullable_to_non_nul
 as Vcc,
   ));
 }
-/// Create a copy of ModSettingsModel
+/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -679,7 +660,7 @@ $BluetoothCopyWith<$Res> get bluetooth {
   return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
     return _then(_self.copyWith(bluetooth: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -688,7 +669,7 @@ $LoRaCopyWith<$Res> get loRa {
   return $LoRaCopyWith<$Res>(_self.loRa, (value) {
     return _then(_self.copyWith(loRa: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -697,7 +678,7 @@ $WiFiCopyWith<$Res> get wiFi {
   return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
     return _then(_self.copyWith(wiFi: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -706,7 +687,7 @@ $TftCopyWith<$Res> get tft {
   return $TftCopyWith<$Res>(_self.tft, (value) {
     return _then(_self.copyWith(tft: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -715,7 +696,7 @@ $BuzzerCopyWith<$Res> get buzzer {
   return $BuzzerCopyWith<$Res>(_self.buzzer, (value) {
     return _then(_self.copyWith(buzzer: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -728,8 +709,8 @@ $VccCopyWith<$Res> get vcc {
 }
 
 
-/// Adds pattern-matching-related methods to [ModSettingsModel].
-extension ModSettingsModelPatterns on ModSettingsModel {
+/// Adds pattern-matching-related methods to [ModSettingsEntime].
+extension ModSettingsEntimePatterns on ModSettingsEntime {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -742,10 +723,10 @@ extension ModSettingsModelPatterns on ModSettingsModel {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ModSettingsModel value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ModSettingsEntime value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _ModSettingsModel() when $default != null:
+case _ModSettingsEntime() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -764,10 +745,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ModSettingsModel value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ModSettingsEntime value)  $default,){
 final _that = this;
 switch (_that) {
-case _ModSettingsModel():
+case _ModSettingsEntime():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -785,10 +766,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ModSettingsModel value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ModSettingsEntime value)?  $default,){
 final _that = this;
 switch (_that) {
-case _ModSettingsModel() when $default != null:
+case _ModSettingsEntime() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -808,7 +789,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'LoRa')  LoRa loRa, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'TFT')  Tft tft, @JsonKey(name: 'Buzzer')  Buzzer buzzer, @JsonKey(name: 'VCC')  Vcc vcc)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _ModSettingsModel() when $default != null:
+case _ModSettingsEntime() when $default != null:
 return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_that.tft,_that.buzzer,_that.vcc);case _:
   return orElse();
 
@@ -829,7 +810,7 @@ return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_tha
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'LoRa')  LoRa loRa, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'TFT')  Tft tft, @JsonKey(name: 'Buzzer')  Buzzer buzzer, @JsonKey(name: 'VCC')  Vcc vcc)  $default,) {final _that = this;
 switch (_that) {
-case _ModSettingsModel():
+case _ModSettingsEntime():
 return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_that.tft,_that.buzzer,_that.vcc);case _:
   throw StateError('Unexpected subclass');
 
@@ -849,7 +830,7 @@ return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_tha
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'LoRa')  LoRa loRa, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'TFT')  Tft tft, @JsonKey(name: 'Buzzer')  Buzzer buzzer, @JsonKey(name: 'VCC')  Vcc vcc)?  $default,) {final _that = this;
 switch (_that) {
-case _ModSettingsModel() when $default != null:
+case _ModSettingsEntime() when $default != null:
 return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_that.tft,_that.buzzer,_that.vcc);case _:
   return null;
 
@@ -861,9 +842,9 @@ return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_tha
 /// @nodoc
 @JsonSerializable()
 
-class _ModSettingsModel implements ModSettingsModel {
-  const _ModSettingsModel({@JsonKey(name: 'Read') this.read, @JsonKey(name: 'Type') required this.type, @JsonKey(name: 'Bluetooth') required this.bluetooth, @JsonKey(name: 'LoRa') required this.loRa, @JsonKey(name: 'WiFi') required this.wiFi, @JsonKey(name: 'TFT') required this.tft, @JsonKey(name: 'Buzzer') required this.buzzer, @JsonKey(name: 'VCC') required this.vcc});
-  factory _ModSettingsModel.fromJson(Map<String, dynamic> json) => _$ModSettingsModelFromJson(json);
+class _ModSettingsEntime implements ModSettingsEntime {
+  const _ModSettingsEntime({@JsonKey(name: 'Read') this.read, @JsonKey(name: 'Type') required this.type, @JsonKey(name: 'Bluetooth') required this.bluetooth, @JsonKey(name: 'LoRa') required this.loRa, @JsonKey(name: 'WiFi') required this.wiFi, @JsonKey(name: 'TFT') required this.tft, @JsonKey(name: 'Buzzer') required this.buzzer, @JsonKey(name: 'VCC') required this.vcc});
+  factory _ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
 
 @override@JsonKey(name: 'Read') final  bool? read;
 @override@JsonKey(name: 'Type') final  String type;
@@ -874,20 +855,20 @@ class _ModSettingsModel implements ModSettingsModel {
 @override@JsonKey(name: 'Buzzer') final  Buzzer buzzer;
 @override@JsonKey(name: 'VCC') final  Vcc vcc;
 
-/// Create a copy of ModSettingsModel
+/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ModSettingsModelCopyWith<_ModSettingsModel> get copyWith => __$ModSettingsModelCopyWithImpl<_ModSettingsModel>(this, _$identity);
+_$ModSettingsEntimeCopyWith<_ModSettingsEntime> get copyWith => __$ModSettingsEntimeCopyWithImpl<_ModSettingsEntime>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$ModSettingsModelToJson(this, );
+  return _$ModSettingsEntimeToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsModel&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.loRa, loRa) || other.loRa == loRa)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.tft, tft) || other.tft == tft)&&(identical(other.buzzer, buzzer) || other.buzzer == buzzer)&&(identical(other.vcc, vcc) || other.vcc == vcc));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsEntime&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.loRa, loRa) || other.loRa == loRa)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.tft, tft) || other.tft == tft)&&(identical(other.buzzer, buzzer) || other.buzzer == buzzer)&&(identical(other.vcc, vcc) || other.vcc == vcc));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -896,15 +877,15 @@ int get hashCode => Object.hash(runtimeType,read,type,bluetooth,loRa,wiFi,tft,bu
 
 @override
 String toString() {
-  return 'ModSettingsModel(read: $read, type: $type, bluetooth: $bluetooth, loRa: $loRa, wiFi: $wiFi, tft: $tft, buzzer: $buzzer, vcc: $vcc)';
+  return 'ModSettingsEntime(read: $read, type: $type, bluetooth: $bluetooth, loRa: $loRa, wiFi: $wiFi, tft: $tft, buzzer: $buzzer, vcc: $vcc)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ModSettingsModelCopyWith<$Res> implements $ModSettingsModelCopyWith<$Res> {
-  factory _$ModSettingsModelCopyWith(_ModSettingsModel value, $Res Function(_ModSettingsModel) _then) = __$ModSettingsModelCopyWithImpl;
+abstract mixin class _$ModSettingsEntimeCopyWith<$Res> implements $ModSettingsEntimeCopyWith<$Res> {
+  factory _$ModSettingsEntimeCopyWith(_ModSettingsEntime value, $Res Function(_ModSettingsEntime) _then) = __$ModSettingsEntimeCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'LoRa') LoRa loRa,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'TFT') Tft tft,@JsonKey(name: 'Buzzer') Buzzer buzzer,@JsonKey(name: 'VCC') Vcc vcc
@@ -915,17 +896,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$ModSettingsModelCopyWithImpl<$Res>
-    implements _$ModSettingsModelCopyWith<$Res> {
-  __$ModSettingsModelCopyWithImpl(this._self, this._then);
+class __$ModSettingsEntimeCopyWithImpl<$Res>
+    implements _$ModSettingsEntimeCopyWith<$Res> {
+  __$ModSettingsEntimeCopyWithImpl(this._self, this._then);
 
-  final _ModSettingsModel _self;
-  final $Res Function(_ModSettingsModel) _then;
+  final _ModSettingsEntime _self;
+  final $Res Function(_ModSettingsEntime) _then;
 
-/// Create a copy of ModSettingsModel
+/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? loRa = null,Object? wiFi = null,Object? tft = null,Object? buzzer = null,Object? vcc = null,}) {
-  return _then(_ModSettingsModel(
+  return _then(_ModSettingsEntime(
 read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
 as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
@@ -938,7 +919,7 @@ as Vcc,
   ));
 }
 
-/// Create a copy of ModSettingsModel
+/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -947,7 +928,7 @@ $BluetoothCopyWith<$Res> get bluetooth {
   return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
     return _then(_self.copyWith(bluetooth: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -956,7 +937,7 @@ $LoRaCopyWith<$Res> get loRa {
   return $LoRaCopyWith<$Res>(_self.loRa, (value) {
     return _then(_self.copyWith(loRa: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -965,7 +946,7 @@ $WiFiCopyWith<$Res> get wiFi {
   return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
     return _then(_self.copyWith(wiFi: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -974,7 +955,7 @@ $TftCopyWith<$Res> get tft {
   return $TftCopyWith<$Res>(_self.tft, (value) {
     return _then(_self.copyWith(tft: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -983,7 +964,7 @@ $BuzzerCopyWith<$Res> get buzzer {
   return $BuzzerCopyWith<$Res>(_self.buzzer, (value) {
     return _then(_self.copyWith(buzzer: value));
   });
-}/// Create a copy of ModSettingsModel
+}/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -991,6 +972,335 @@ $VccCopyWith<$Res> get vcc {
   
   return $VccCopyWith<$Res>(_self.vcc, (value) {
     return _then(_self.copyWith(vcc: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$ModSettingsLed {
+
+@JsonKey(name: 'Read') bool? get read;@JsonKey(name: 'Type') String get type;@JsonKey(name: 'Bluetooth') Bluetooth get bluetooth;@JsonKey(name: 'WiFi') WiFi get wiFi;@JsonKey(name: 'LedPanel') LedPanel get ledPanel;
+/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ModSettingsLedCopyWith<ModSettingsLed> get copyWith => _$ModSettingsLedCopyWithImpl<ModSettingsLed>(this as ModSettingsLed, _$identity);
+
+  /// Serializes this ModSettingsLed to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsLed&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.ledPanel, ledPanel) || other.ledPanel == ledPanel));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,read,type,bluetooth,wiFi,ledPanel);
+
+@override
+String toString() {
+  return 'ModSettingsLed(read: $read, type: $type, bluetooth: $bluetooth, wiFi: $wiFi, ledPanel: $ledPanel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ModSettingsLedCopyWith<$Res>  {
+  factory $ModSettingsLedCopyWith(ModSettingsLed value, $Res Function(ModSettingsLed) _then) = _$ModSettingsLedCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'LedPanel') LedPanel ledPanel
+});
+
+
+$BluetoothCopyWith<$Res> get bluetooth;$WiFiCopyWith<$Res> get wiFi;$LedPanelCopyWith<$Res> get ledPanel;
+
+}
+/// @nodoc
+class _$ModSettingsLedCopyWithImpl<$Res>
+    implements $ModSettingsLedCopyWith<$Res> {
+  _$ModSettingsLedCopyWithImpl(this._self, this._then);
+
+  final ModSettingsLed _self;
+  final $Res Function(ModSettingsLed) _then;
+
+/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? wiFi = null,Object? ledPanel = null,}) {
+  return _then(_self.copyWith(
+read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
+as Bluetooth,wiFi: null == wiFi ? _self.wiFi : wiFi // ignore: cast_nullable_to_non_nullable
+as WiFi,ledPanel: null == ledPanel ? _self.ledPanel : ledPanel // ignore: cast_nullable_to_non_nullable
+as LedPanel,
+  ));
+}
+/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BluetoothCopyWith<$Res> get bluetooth {
+  
+  return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
+    return _then(_self.copyWith(bluetooth: value));
+  });
+}/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WiFiCopyWith<$Res> get wiFi {
+  
+  return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
+    return _then(_self.copyWith(wiFi: value));
+  });
+}/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LedPanelCopyWith<$Res> get ledPanel {
+  
+  return $LedPanelCopyWith<$Res>(_self.ledPanel, (value) {
+    return _then(_self.copyWith(ledPanel: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [ModSettingsLed].
+extension ModSettingsLedPatterns on ModSettingsLed {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ModSettingsLed value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ModSettingsLed() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ModSettingsLed value)  $default,){
+final _that = this;
+switch (_that) {
+case _ModSettingsLed():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ModSettingsLed value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ModSettingsLed() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'LedPanel')  LedPanel ledPanel)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ModSettingsLed() when $default != null:
+return $default(_that.read,_that.type,_that.bluetooth,_that.wiFi,_that.ledPanel);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'LedPanel')  LedPanel ledPanel)  $default,) {final _that = this;
+switch (_that) {
+case _ModSettingsLed():
+return $default(_that.read,_that.type,_that.bluetooth,_that.wiFi,_that.ledPanel);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'LedPanel')  LedPanel ledPanel)?  $default,) {final _that = this;
+switch (_that) {
+case _ModSettingsLed() when $default != null:
+return $default(_that.read,_that.type,_that.bluetooth,_that.wiFi,_that.ledPanel);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ModSettingsLed implements ModSettingsLed {
+  const _ModSettingsLed({@JsonKey(name: 'Read') this.read, @JsonKey(name: 'Type') required this.type, @JsonKey(name: 'Bluetooth') required this.bluetooth, @JsonKey(name: 'WiFi') required this.wiFi, @JsonKey(name: 'LedPanel') required this.ledPanel});
+  factory _ModSettingsLed.fromJson(Map<String, dynamic> json) => _$ModSettingsLedFromJson(json);
+
+@override@JsonKey(name: 'Read') final  bool? read;
+@override@JsonKey(name: 'Type') final  String type;
+@override@JsonKey(name: 'Bluetooth') final  Bluetooth bluetooth;
+@override@JsonKey(name: 'WiFi') final  WiFi wiFi;
+@override@JsonKey(name: 'LedPanel') final  LedPanel ledPanel;
+
+/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ModSettingsLedCopyWith<_ModSettingsLed> get copyWith => __$ModSettingsLedCopyWithImpl<_ModSettingsLed>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ModSettingsLedToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsLed&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.ledPanel, ledPanel) || other.ledPanel == ledPanel));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,read,type,bluetooth,wiFi,ledPanel);
+
+@override
+String toString() {
+  return 'ModSettingsLed(read: $read, type: $type, bluetooth: $bluetooth, wiFi: $wiFi, ledPanel: $ledPanel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ModSettingsLedCopyWith<$Res> implements $ModSettingsLedCopyWith<$Res> {
+  factory _$ModSettingsLedCopyWith(_ModSettingsLed value, $Res Function(_ModSettingsLed) _then) = __$ModSettingsLedCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'LedPanel') LedPanel ledPanel
+});
+
+
+@override $BluetoothCopyWith<$Res> get bluetooth;@override $WiFiCopyWith<$Res> get wiFi;@override $LedPanelCopyWith<$Res> get ledPanel;
+
+}
+/// @nodoc
+class __$ModSettingsLedCopyWithImpl<$Res>
+    implements _$ModSettingsLedCopyWith<$Res> {
+  __$ModSettingsLedCopyWithImpl(this._self, this._then);
+
+  final _ModSettingsLed _self;
+  final $Res Function(_ModSettingsLed) _then;
+
+/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? wiFi = null,Object? ledPanel = null,}) {
+  return _then(_ModSettingsLed(
+read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
+as Bluetooth,wiFi: null == wiFi ? _self.wiFi : wiFi // ignore: cast_nullable_to_non_nullable
+as WiFi,ledPanel: null == ledPanel ? _self.ledPanel : ledPanel // ignore: cast_nullable_to_non_nullable
+as LedPanel,
+  ));
+}
+
+/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BluetoothCopyWith<$Res> get bluetooth {
+  
+  return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
+    return _then(_self.copyWith(bluetooth: value));
+  });
+}/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WiFiCopyWith<$Res> get wiFi {
+  
+  return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
+    return _then(_self.copyWith(wiFi: value));
+  });
+}/// Create a copy of ModSettingsLed
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LedPanelCopyWith<$Res> get ledPanel {
+  
+  return $LedPanelCopyWith<$Res>(_self.ledPanel, (value) {
+    return _then(_self.copyWith(ledPanel: value));
   });
 }
 }

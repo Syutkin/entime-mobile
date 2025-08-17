@@ -5,7 +5,7 @@ import '../model/module_settings.dart';
 import 'module_settings_provider.dart';
 
 class ModuleSettingsLed extends ModuleSettingsProvider {
-  late ModSettingsModelLed _modSettingsModel;
+  late ModSettingsLed _modSettingsModel;
 
   //Loading settings on initialization
   @override
@@ -13,7 +13,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
     logger.i('ModuleSettingsLed: Updating modsettings from json');
 
     try {
-      _modSettingsModel = ModSettingsModelLed.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
+      _modSettingsModel = ModSettingsLed.fromJson(jsonDecode(jsonString) as Map<String, dynamic>);
 
       // Module type
       type = _modSettingsModel.type;
@@ -43,7 +43,7 @@ class ModuleSettingsLed extends ModuleSettingsProvider {
 
   @override
   String get write => json.encode(
-    ModSettingsModelLed(
+    ModSettingsLed(
       read: false,
       type: type,
       // Bluetooth

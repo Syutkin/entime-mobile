@@ -1,33 +1,28 @@
 // ignore_for_file: always_put_required_named_parameters_first
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'module_settings.freezed.dart';
-
 part 'module_settings.g.dart';
 
 @freezed
-abstract class ModSettingsModelType with _$ModSettingsModelType {
-  const factory ModSettingsModelType({@JsonKey(name: 'Type') required String type}) = _ModSettingsModelType;
-
-  factory ModSettingsModelType.fromJson(Map<String, dynamic> json) => _$ModSettingsModelTypeFromJson(json);
+sealed class ModSettingsModel with _$ModSettingsModel {
+  const factory ModSettingsModel.entime(ModSettingsEntime entime) = ModSettingsModelEntime;
+  const factory ModSettingsModel.led(ModSettingsLed led) = ModSettingsModelLed;
 }
 
 @freezed
-abstract class ModSettingsModelLed with _$ModSettingsModelLed {
-  const factory ModSettingsModelLed({
-    @JsonKey(name: 'Read') bool? read,
-    @JsonKey(name: 'Type') required String type,
-    @JsonKey(name: 'Bluetooth') required Bluetooth bluetooth,
-    @JsonKey(name: 'WiFi') required WiFi wiFi,
-    @JsonKey(name: 'LedPanel') required LedPanel ledPanel,
-  }) = _ModSettingsModelLed;
+@JsonSerializable()
+abstract class ModSettingsType with _$ModSettingsType {
+  const factory ModSettingsType({@JsonKey(name: 'Type') required String type}) = _ModSettingsType;
 
-  factory ModSettingsModelLed.fromJson(Map<String, dynamic> json) => _$ModSettingsModelLedFromJson(json);
+  factory ModSettingsType.fromJson(Map<String, dynamic> json) => _$ModSettingsTypeFromJson(json);
 }
 
 @freezed
-abstract class ModSettingsModel with _$ModSettingsModel {
-  const factory ModSettingsModel({
+@JsonSerializable()
+abstract class ModSettingsEntime with _$ModSettingsEntime {
+  const factory ModSettingsEntime({
     @JsonKey(name: 'Read') bool? read,
     @JsonKey(name: 'Type') required String type,
     @JsonKey(name: 'Bluetooth') required Bluetooth bluetooth,
@@ -36,12 +31,27 @@ abstract class ModSettingsModel with _$ModSettingsModel {
     @JsonKey(name: 'TFT') required Tft tft,
     @JsonKey(name: 'Buzzer') required Buzzer buzzer,
     @JsonKey(name: 'VCC') required Vcc vcc,
-  }) = _ModSettingsModel;
+  }) = _ModSettingsEntime;
 
-  factory ModSettingsModel.fromJson(Map<String, dynamic> json) => _$ModSettingsModelFromJson(json);
+  factory ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
 }
 
 @freezed
+@JsonSerializable()
+abstract class ModSettingsLed with _$ModSettingsLed {
+  const factory ModSettingsLed({
+    @JsonKey(name: 'Read') bool? read,
+    @JsonKey(name: 'Type') required String type,
+    @JsonKey(name: 'Bluetooth') required Bluetooth bluetooth,
+    @JsonKey(name: 'WiFi') required WiFi wiFi,
+    @JsonKey(name: 'LedPanel') required LedPanel ledPanel,
+  }) = _ModSettingsLed;
+
+  factory ModSettingsLed.fromJson(Map<String, dynamic> json) => _$ModSettingsLedFromJson(json);
+}
+
+@freezed
+@JsonSerializable()
 abstract class Bluetooth with _$Bluetooth {
   const factory Bluetooth({required bool active, required String name, required int number}) = _Bluetooth;
 
@@ -49,6 +59,7 @@ abstract class Bluetooth with _$Bluetooth {
 }
 
 @freezed
+@JsonSerializable()
 abstract class Buzzer with _$Buzzer {
   const factory Buzzer({required bool active, required int shortFrequency, required int longFrequency}) = _Buzzer;
 
@@ -56,6 +67,7 @@ abstract class Buzzer with _$Buzzer {
 }
 
 @freezed
+@JsonSerializable()
 abstract class LoRa with _$LoRa {
   const factory LoRa({
     required bool active,
@@ -73,6 +85,7 @@ abstract class LoRa with _$LoRa {
 }
 
 @freezed
+@JsonSerializable()
 abstract class Tft with _$Tft {
   const factory Tft({
     required bool active,
@@ -85,6 +98,7 @@ abstract class Tft with _$Tft {
 }
 
 @freezed
+@JsonSerializable()
 abstract class Vcc with _$Vcc {
   const factory Vcc({required int r1, required int r2, int? vbat}) = _Vcc;
 
@@ -92,6 +106,7 @@ abstract class Vcc with _$Vcc {
 }
 
 @freezed
+@JsonSerializable()
 abstract class WiFi with _$WiFi {
   const factory WiFi({required bool active, required String ssid, required String passwd}) = _WiFi;
 
@@ -99,6 +114,7 @@ abstract class WiFi with _$WiFi {
 }
 
 @freezed
+@JsonSerializable()
 abstract class LedPanel with _$LedPanel {
   const factory LedPanel({required int brightness}) = _LedPanel;
 
