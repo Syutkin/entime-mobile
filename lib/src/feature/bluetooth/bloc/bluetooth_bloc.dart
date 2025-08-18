@@ -187,7 +187,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         case _SendMessage():
           //Отправлено соообщение в Bluetooth serial
           logger.i('Bluetooth -> Sent message: ${event.message}');
-          final isMessageSended = await bluetoothProvider.bluetoothBackgroundConnection.sendMessage(event.message);
+          final isMessageSended = await bluetoothProvider.bluetoothBackgroundConnection.sendMessage('${event.message}\n'); // \n - признак окончания сообщения
           if (isMessageSended) {
             await _database.addLog(
               level: LogLevel.information,

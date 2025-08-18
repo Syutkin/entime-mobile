@@ -1,14 +1,18 @@
 // TODO: Убрать после реализации тестов
-// ignore_for_file: unused_element
+
+import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/common/widget/splash_widget.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/module_settings/module_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 class MockModuleSettingsBloc extends MockBloc<ModuleSettingsEvent, ModuleSettingsState> implements ModuleSettingsBloc {}
 
@@ -17,44 +21,73 @@ class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> imp
 void main() {
   late ModuleSettingsBloc moduleSettingsBloc;
   late BluetoothBloc bluetoothBloc;
+  late String jsonEntime;
+  late String jsonLed;
 
   Widget testWidget() {
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(
-          value: bluetoothBloc,
-          child: BlocProvider.value(
-            value: moduleSettingsBloc,
-            child: const ModuleSettingsInitScreen(),
-          ),
+    return BlocProvider.value(
+      value: bluetoothBloc,
+      child: BlocProvider.value(
+        value: moduleSettingsBloc,
+        child: MaterialApp(
+          localizationsDelegates: const [Localization.delegate],
+          supportedLocales: Localization.supportedLocales,
+          home: const ModuleSettingsInitScreen(),
         ),
       ),
     );
   }
 
   setUpAll(() {
-    // Регистрация fallback значений для mock объектов
-  });
-
-  setUp(() {
     moduleSettingsBloc = MockModuleSettingsBloc();
     bluetoothBloc = MockBluetoothBloc();
+
+    jsonEntime = '''
+          {
+            "Type": "entime",
+            "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
+            "LoRa": {"active": true, "frequency": 868, "txPower": 14, "spreadingFactor": 7, "signalBandwidth": 125, "codingRateDenom": 5, "preambleLength": 8, "syncWord": 12, "crc": true},
+            "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "TFT": {"active": true, "timeout": true, "timeoutDuration": 30, "turnOnAtEvent": true},
+            "Buzzer": {"active": true, "shortFrequency": 1000, "longFrequency": 2000},
+            "VCC": {"r1": 10000, "r2": 10000}
+          }''';
+
+    jsonLed = '''
+          {
+            "Type": "led",
+            "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
+            "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "LedPanel": {"active": true, "brightness": 100, "color": "red"}
+          }''';
+    registerFallbackValue(const ModuleSettingsEvent.unload());
+    registerFallbackValue(
+      ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
+    );
   });
 
   group('ModuleSettingsInitScreen tests', () {
     group('Initial states', () {
       patrolWidgetTest('Shows loading splash when state is loading', (PatrolTester $) async {
-        // TODO: Реализовать тест
+        when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.loading());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(Splash).containing($(Localization.current.I18nModuleSettings_awaitingSettings)), findsOneWidget);
       });
 
       patrolWidgetTest('Shows error splash when state is error', (PatrolTester $) async {
-        // TODO: Реализовать тест
+        when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.error());
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(Splash).containing($(Localization.current.I18nModuleSettings_errorLoadSettings)), findsOneWidget);
       });
 
       patrolWidgetTest('Shows settings screen when state is loaded', (PatrolTester $) async {
-        // TODO: Реализовать тест
+        when(() => moduleSettingsBloc.state).thenReturn(
+          ModuleSettingsState.loaded(
+            ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
+          ),
+        );
+        await $.pumpWidgetAndSettle(testWidget());
+        expect($(ModuleSettingsScreen), findsOneWidget);
       });
     });
 
@@ -79,19 +112,56 @@ void main() {
 
   group('ModuleSettingsScreen tests', () {
     group('Entime module type', () {
+      setUp(() {
+        when(() => moduleSettingsBloc.state).thenReturn(
+          ModuleSettingsState.loaded(
+            ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
+          ),
+        );
+      });
       group('Module section', () {
         patrolWidgetTest('Displays module name and number correctly', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          expect($(ModuleSettingsScreen), findsOneWidget);
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_module)),
+            findsOneWidget,
+          );
+          expect($(SettingsList).$(SettingsSection).containing($('TestBT1')), findsOneWidget);
         });
       });
 
       group('Buzzer section', () {
         patrolWidgetTest('Shows buzzer switch with correct initial value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_buzzer)),
+            findsNWidgets(2),
+          );
+          final settingsTile =
+              $(SettingsTile).containing($(Localization.current.I18nModuleSettings_buzzer)).evaluate().first.widget
+                  as SettingsTile;
+
+          expect(settingsTile.initialValue, isTrue);
         });
 
         patrolWidgetTest('Toggles buzzer switch and triggers update event', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          final settingsTile = $(SettingsTile).containing($(Localization.current.I18nModuleSettings_buzzer));
+
+          await settingsTile.tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.buzzer.active,
+                  'buzzer.active',
+                  isFalse,
+                ),
+              ),
+            ),
+          );
         });
 
         patrolWidgetTest('Shows short frequency tile with current value', (PatrolTester $) async {
@@ -267,6 +337,13 @@ void main() {
     });
 
     group('LED module type', () {
+      setUp(() {
+        when(() => moduleSettingsBloc.state).thenReturn(
+          ModuleSettingsState.loaded(
+            ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonLed) as Map<String, dynamic>)),
+          ),
+        );
+      });
       group('Module section', () {
         patrolWidgetTest('Displays module name and number correctly for LED', (PatrolTester $) async {
           // TODO: Реализовать тест

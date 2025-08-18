@@ -55,12 +55,12 @@ extension ModuleSettingsEventPatterns on ModuleSettingsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Get value)?  get,TResult Function( _Update value)?  update,TResult Function( _Unload value)?  unload,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ModuleSettingsEventGet value)?  get,TResult Function( ModuleSettingsEventUpdate value)?  update,TResult Function( ModuleSettingsEventUnload value)?  unload,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Get() when get != null:
-return get(_that);case _Update() when update != null:
-return update(_that);case _Unload() when unload != null:
+case ModuleSettingsEventGet() when get != null:
+return get(_that);case ModuleSettingsEventUpdate() when update != null:
+return update(_that);case ModuleSettingsEventUnload() when unload != null:
 return unload(_that);case _:
   return orElse();
 
@@ -79,12 +79,12 @@ return unload(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Get value)  get,required TResult Function( _Update value)  update,required TResult Function( _Unload value)  unload,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ModuleSettingsEventGet value)  get,required TResult Function( ModuleSettingsEventUpdate value)  update,required TResult Function( ModuleSettingsEventUnload value)  unload,}){
 final _that = this;
 switch (_that) {
-case _Get():
-return get(_that);case _Update():
-return update(_that);case _Unload():
+case ModuleSettingsEventGet():
+return get(_that);case ModuleSettingsEventUpdate():
+return update(_that);case ModuleSettingsEventUnload():
 return unload(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
@@ -99,12 +99,12 @@ return unload(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Get value)?  get,TResult? Function( _Update value)?  update,TResult? Function( _Unload value)?  unload,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ModuleSettingsEventGet value)?  get,TResult? Function( ModuleSettingsEventUpdate value)?  update,TResult? Function( ModuleSettingsEventUnload value)?  unload,}){
 final _that = this;
 switch (_that) {
-case _Get() when get != null:
-return get(_that);case _Update() when update != null:
-return update(_that);case _Unload() when unload != null:
+case ModuleSettingsEventGet() when get != null:
+return get(_that);case ModuleSettingsEventUpdate() when update != null:
+return update(_that);case ModuleSettingsEventUnload() when unload != null:
 return unload(_that);case _:
   return null;
 
@@ -124,9 +124,9 @@ return unload(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String json)?  get,TResult Function( ModSettingsModel moduleSettings)?  update,TResult Function()?  unload,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Get() when get != null:
-return get(_that.json);case _Update() when update != null:
-return update(_that.moduleSettings);case _Unload() when unload != null:
+case ModuleSettingsEventGet() when get != null:
+return get(_that.json);case ModuleSettingsEventUpdate() when update != null:
+return update(_that.moduleSettings);case ModuleSettingsEventUnload() when unload != null:
 return unload();case _:
   return orElse();
 
@@ -147,9 +147,9 @@ return unload();case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String json)  get,required TResult Function( ModSettingsModel moduleSettings)  update,required TResult Function()  unload,}) {final _that = this;
 switch (_that) {
-case _Get():
-return get(_that.json);case _Update():
-return update(_that.moduleSettings);case _Unload():
+case ModuleSettingsEventGet():
+return get(_that.json);case ModuleSettingsEventUpdate():
+return update(_that.moduleSettings);case ModuleSettingsEventUnload():
 return unload();}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -166,9 +166,9 @@ return unload();}
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String json)?  get,TResult? Function( ModSettingsModel moduleSettings)?  update,TResult? Function()?  unload,}) {final _that = this;
 switch (_that) {
-case _Get() when get != null:
-return get(_that.json);case _Update() when update != null:
-return update(_that.moduleSettings);case _Unload() when unload != null:
+case ModuleSettingsEventGet() when get != null:
+return get(_that.json);case ModuleSettingsEventUpdate() when update != null:
+return update(_that.moduleSettings);case ModuleSettingsEventUnload() when unload != null:
 return unload();case _:
   return null;
 
@@ -180,8 +180,8 @@ return unload();case _:
 /// @nodoc
 
 
-class _Get implements ModuleSettingsEvent {
-  const _Get(this.json);
+class ModuleSettingsEventGet implements ModuleSettingsEvent {
+  const ModuleSettingsEventGet(this.json);
   
 
  final  String json;
@@ -190,13 +190,13 @@ class _Get implements ModuleSettingsEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$GetCopyWith<_Get> get copyWith => __$GetCopyWithImpl<_Get>(this, _$identity);
+$ModuleSettingsEventGetCopyWith<ModuleSettingsEventGet> get copyWith => _$ModuleSettingsEventGetCopyWithImpl<ModuleSettingsEventGet>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Get&&(identical(other.json, json) || other.json == json));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModuleSettingsEventGet&&(identical(other.json, json) || other.json == json));
 }
 
 
@@ -212,8 +212,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$GetCopyWith<$Res> implements $ModuleSettingsEventCopyWith<$Res> {
-  factory _$GetCopyWith(_Get value, $Res Function(_Get) _then) = __$GetCopyWithImpl;
+abstract mixin class $ModuleSettingsEventGetCopyWith<$Res> implements $ModuleSettingsEventCopyWith<$Res> {
+  factory $ModuleSettingsEventGetCopyWith(ModuleSettingsEventGet value, $Res Function(ModuleSettingsEventGet) _then) = _$ModuleSettingsEventGetCopyWithImpl;
 @useResult
 $Res call({
  String json
@@ -224,17 +224,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$GetCopyWithImpl<$Res>
-    implements _$GetCopyWith<$Res> {
-  __$GetCopyWithImpl(this._self, this._then);
+class _$ModuleSettingsEventGetCopyWithImpl<$Res>
+    implements $ModuleSettingsEventGetCopyWith<$Res> {
+  _$ModuleSettingsEventGetCopyWithImpl(this._self, this._then);
 
-  final _Get _self;
-  final $Res Function(_Get) _then;
+  final ModuleSettingsEventGet _self;
+  final $Res Function(ModuleSettingsEventGet) _then;
 
 /// Create a copy of ModuleSettingsEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? json = null,}) {
-  return _then(_Get(
+  return _then(ModuleSettingsEventGet(
 null == json ? _self.json : json // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -246,8 +246,8 @@ as String,
 /// @nodoc
 
 
-class _Update implements ModuleSettingsEvent {
-  const _Update(this.moduleSettings);
+class ModuleSettingsEventUpdate implements ModuleSettingsEvent {
+  const ModuleSettingsEventUpdate(this.moduleSettings);
   
 
  final  ModSettingsModel moduleSettings;
@@ -256,13 +256,13 @@ class _Update implements ModuleSettingsEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$UpdateCopyWith<_Update> get copyWith => __$UpdateCopyWithImpl<_Update>(this, _$identity);
+$ModuleSettingsEventUpdateCopyWith<ModuleSettingsEventUpdate> get copyWith => _$ModuleSettingsEventUpdateCopyWithImpl<ModuleSettingsEventUpdate>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Update&&(identical(other.moduleSettings, moduleSettings) || other.moduleSettings == moduleSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModuleSettingsEventUpdate&&(identical(other.moduleSettings, moduleSettings) || other.moduleSettings == moduleSettings));
 }
 
 
@@ -278,8 +278,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$UpdateCopyWith<$Res> implements $ModuleSettingsEventCopyWith<$Res> {
-  factory _$UpdateCopyWith(_Update value, $Res Function(_Update) _then) = __$UpdateCopyWithImpl;
+abstract mixin class $ModuleSettingsEventUpdateCopyWith<$Res> implements $ModuleSettingsEventCopyWith<$Res> {
+  factory $ModuleSettingsEventUpdateCopyWith(ModuleSettingsEventUpdate value, $Res Function(ModuleSettingsEventUpdate) _then) = _$ModuleSettingsEventUpdateCopyWithImpl;
 @useResult
 $Res call({
  ModSettingsModel moduleSettings
@@ -290,17 +290,17 @@ $ModSettingsModelCopyWith<$Res> get moduleSettings;
 
 }
 /// @nodoc
-class __$UpdateCopyWithImpl<$Res>
-    implements _$UpdateCopyWith<$Res> {
-  __$UpdateCopyWithImpl(this._self, this._then);
+class _$ModuleSettingsEventUpdateCopyWithImpl<$Res>
+    implements $ModuleSettingsEventUpdateCopyWith<$Res> {
+  _$ModuleSettingsEventUpdateCopyWithImpl(this._self, this._then);
 
-  final _Update _self;
-  final $Res Function(_Update) _then;
+  final ModuleSettingsEventUpdate _self;
+  final $Res Function(ModuleSettingsEventUpdate) _then;
 
 /// Create a copy of ModuleSettingsEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? moduleSettings = null,}) {
-  return _then(_Update(
+  return _then(ModuleSettingsEventUpdate(
 null == moduleSettings ? _self.moduleSettings : moduleSettings // ignore: cast_nullable_to_non_nullable
 as ModSettingsModel,
   ));
@@ -321,8 +321,8 @@ $ModSettingsModelCopyWith<$Res> get moduleSettings {
 /// @nodoc
 
 
-class _Unload implements ModuleSettingsEvent {
-  const _Unload();
+class ModuleSettingsEventUnload implements ModuleSettingsEvent {
+  const ModuleSettingsEventUnload();
   
 
 
@@ -332,7 +332,7 @@ class _Unload implements ModuleSettingsEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Unload);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModuleSettingsEventUnload);
 }
 
 

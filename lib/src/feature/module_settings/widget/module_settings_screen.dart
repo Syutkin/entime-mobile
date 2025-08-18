@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:entime/src/feature/module_settings/model/module_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,12 +28,12 @@ class ModuleSettingsInitScreen extends StatelessWidget {
               Navigator.pop(context, true);
             },
             onOkPressed: () {
-              BlocProvider.of<ModuleSettingsBloc>(context).state.maybeWhen(
+              final bloc = BlocProvider.of<ModuleSettingsBloc>(context);
+              bloc.state.maybeWhen(
                 loaded: (moduleSettings) {
                   moduleSettings.map(
                     entime: (entime) {
-                      final message = entime.entime.copyWith(read: false).toJson().toString();
-                      print(message);
+                      final message = jsonEncode(entime.entime.copyWith(read: false).toJson());
                       BlocProvider.of<BluetoothBloc>(context).add(
                         BluetoothEvent.sendMessage(message: message),
                       );
@@ -75,7 +77,6 @@ class ModuleSettingsInitScreen extends StatelessWidget {
           navigator.pop();
         }
       },
-      // onWillPop: () async => _onBackPressed(context, updated),
       child: Scaffold(
         appBar: AppBar(title: Text(Localization.current.I18nModuleSettings_moduleSettings)),
         body: BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(

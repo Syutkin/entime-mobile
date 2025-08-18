@@ -12,13 +12,16 @@ part 'module_settings_state.dart';
 
 class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> {
   ModuleSettingsBloc() : super(const ModuleSettingsUninitialized()) {
-    on<_Get>(_handleGetModuleSettings);
-    on<_Update>((event, emit) {
+    on<ModuleSettingsEventGet>(_handleGetModuleSettings);
+    on<ModuleSettingsEventUpdate>((event, emit) {
       emit(ModuleSettingsLoaded(event.moduleSettings));
+    });
+    on<ModuleSettingsEventUnload>((event, emit) {
+      emit(const ModuleSettingsUninitialized());
     });
   }
 
-  Future<void> _handleGetModuleSettings(_Get event, Emitter<ModuleSettingsState> emit) async {
+  Future<void> _handleGetModuleSettings(ModuleSettingsEventGet event, Emitter<ModuleSettingsState> emit) async {
     emit(const ModuleSettingsLoading());
 
     final jsonMap = jsonDecode(event.json) as Map<String, dynamic>;
