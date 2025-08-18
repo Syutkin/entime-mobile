@@ -23,6 +23,7 @@ void main() {
   late BluetoothBloc bluetoothBloc;
   late String jsonEntime;
   late String jsonLed;
+  late String text;
 
   Widget testWidget() {
     return BlocProvider.value(
@@ -32,7 +33,18 @@ void main() {
         child: MaterialApp(
           localizationsDelegates: const [Localization.delegate],
           supportedLocales: Localization.supportedLocales,
-          home: const ModuleSettingsInitScreen(),
+          home: Builder(
+            builder: (context) {
+              return TextButton(
+                onPressed: () {
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
+                },
+                child: Text(text),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -64,6 +76,9 @@ void main() {
     registerFallbackValue(
       ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
     );
+    registerFallbackValue(const BluetoothEvent.enable());
+
+    text = 'Exited from screen';
   });
 
   group('ModuleSettingsInitScreen tests', () {
@@ -71,12 +86,14 @@ void main() {
       patrolWidgetTest('Shows loading splash when state is loading', (PatrolTester $) async {
         when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.loading());
         await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
         expect($(Splash).containing($(Localization.current.I18nModuleSettings_awaitingSettings)), findsOneWidget);
       });
 
       patrolWidgetTest('Shows error splash when state is error', (PatrolTester $) async {
         when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.error());
         await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
         expect($(Splash).containing($(Localization.current.I18nModuleSettings_errorLoadSettings)), findsOneWidget);
       });
 
@@ -87,25 +104,72 @@ void main() {
           ),
         );
         await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
         expect($(ModuleSettingsScreen), findsOneWidget);
       });
     });
 
     group('Navigation and back handling', () {
+      setUp(() {
+        when(() => moduleSettingsBloc.state).thenReturn(
+          ModuleSettingsState.loaded(
+            ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
+          ),
+        );
+      });
       patrolWidgetTest('Shows save confirmation dialog when back pressed with changes', (PatrolTester $) async {
-        // TODO: Реализовать тест
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
+        await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_buzzer)).tap();
+        await $(BackButton).tap();
+        expect(
+          $(AlertDialog).containing($(Localization.current.I18nModuleSettings_saveSettingsToModule)),
+          findsOneWidget,
+        );
       });
 
       patrolWidgetTest('Does not show save dialog when back pressed without changes', (PatrolTester $) async {
-        // TODO: Реализовать тест
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
+        await $(BackButton).tap();
+        expect(
+          $(AlertDialog).containing($(Localization.current.I18nModuleSettings_saveSettingsToModule)),
+          findsNothing,
+        );
+        expect($(text), findsOneWidget);
       });
 
       patrolWidgetTest('Sends bluetooth message when save confirmed', (PatrolTester $) async {
-        // TODO: Реализовать тест
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
+        await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_buzzer)).tap();
+        await $(BackButton).tap();
+        await $(#okButton).tap();
+        verify(
+          () => bluetoothBloc.add(
+            any(
+              that: isA<BluetoothEvent>().having(
+                (event) => event.whenOrNull(sendMessage: (message) => message),
+                'message',
+                isA<String>().having(
+                  (message) => message.contains('{"Read":false,'),
+                  'message',
+                  isTrue,
+                ),
+              ),
+            ),
+          ),
+        ).called(1);
       });
 
       patrolWidgetTest('Navigates back when save cancelled', (PatrolTester $) async {
-        // TODO: Реализовать тест
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
+        await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_buzzer)).tap();
+        await $(BackButton).tap();
+        await $(#cancelButton).tap();
+        expect($(text), findsOneWidget);
+        verifyNever(() => bluetoothBloc.add(any()));
       });
     });
   });
@@ -122,6 +186,7 @@ void main() {
       group('Module section', () {
         patrolWidgetTest('Displays module name and number correctly', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
           expect($(ModuleSettingsScreen), findsOneWidget);
           expect(
             $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_module)),
@@ -134,6 +199,7 @@ void main() {
       group('Buzzer section', () {
         patrolWidgetTest('Shows buzzer switch with correct initial value', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
           expect(
             $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_buzzer)),
             findsNWidgets(2),
@@ -147,6 +213,7 @@ void main() {
 
         patrolWidgetTest('Toggles buzzer switch and triggers update event', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
           final settingsTile = $(SettingsTile).containing($(Localization.current.I18nModuleSettings_buzzer));
 
           await settingsTile.tap();
@@ -347,6 +414,7 @@ void main() {
       group('Module section', () {
         patrolWidgetTest('Displays module name and number correctly for LED', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
           expect($(ModuleSettingsScreen), findsOneWidget);
           expect(
             $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_module)),
