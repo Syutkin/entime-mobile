@@ -39,7 +39,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
                       );
                     },
                     led: (led) {
-                      final message = led.led.copyWith(read: false).toJson().toString();
+                      final message = jsonEncode(led.led.copyWith(read: false).toJson());
                       BlocProvider.of<BluetoothBloc>(context).add(
                         BluetoothEvent.sendMessage(message: message),
                       );

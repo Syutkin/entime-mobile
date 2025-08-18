@@ -211,7 +211,7 @@ void main() {
           expect(settingsTile.initialValue, isTrue);
         });
 
-        patrolWidgetTest('Toggles buzzer switch and triggers update event', (PatrolTester $) async {
+        patrolWidgetTest('Toggles buzzer switch and triggers update event and asks to update', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           final settingsTile = $(SettingsTile).containing($(Localization.current.I18nModuleSettings_buzzer));
@@ -229,130 +229,231 @@ void main() {
               ),
             ),
           );
+
+          await $(BackButton).tap();
+          expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
         });
 
         patrolWidgetTest('Shows short frequency tile with current value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_shortFrequency)),
+            findsOneWidget,
+          );
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_frequencyHz(1000))),
+            findsOneWidget,
+          );
         });
 
         patrolWidgetTest('Opens frequency popup when short frequency tile tapped', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_shortFrequency)).tap();
+          expect($(Localization.current.I18nModuleSettings_selectShortFrequency), findsOneWidget);
         });
 
-        patrolWidgetTest('Updates short frequency when popup returns value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Updates short frequency when popup returns value and asks to update', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_shortFrequency)).tap();
+          await $(#okButton).tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.buzzer.shortFrequency,
+                  'buzzer.shortFrequency',
+                  659, // 659 это дефолтное значение для входящей частоты, не соответствующей никакой ноте
+                ),
+              ),
+            ),
+          );
+
+          await $(BackButton).tap();
+          expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
         });
 
         patrolWidgetTest('Shows long frequency tile with current value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_longFrequency)),
+            findsOneWidget,
+          );
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_frequencyHz(2000))),
+            findsOneWidget,
+          );
         });
 
         patrolWidgetTest('Opens frequency popup when long frequency tile tapped', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_longFrequency)).tap();
+          expect($(Localization.current.I18nModuleSettings_selectLongFrequency), findsOneWidget);
         });
 
-        patrolWidgetTest('Updates long frequency when popup returns value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Updates long frequency when popup returns value and asks to update', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_longFrequency)).tap();
+          await $(#okButton).tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.buzzer.longFrequency,
+                  'buzzer.longFrequency',
+                  659, // 659 это дефолтное значение для входящей частоты, не соответствующей никакой ноте
+                ),
+              ),
+            ),
+          );
+
+          await $(BackButton).tap();
+          expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
         });
       });
 
       group('LoRa section', () {
-        patrolWidgetTest('Shows LoRa switch disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows LoRa section', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_lora)),
+            findsNWidgets(2),
+          );
         });
 
-        patrolWidgetTest('Shows frequency tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows LoRa switch disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
 
-        patrolWidgetTest('Shows TX power tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows frequency tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
 
-        patrolWidgetTest('Shows spreading factor tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows TX power tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
 
-        patrolWidgetTest('Shows signal bandwidth tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows spreading factor tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
 
-        patrolWidgetTest('Shows coding rate denominator tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows signal bandwidth tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
 
-        patrolWidgetTest('Shows preamble length tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows coding rate denominator tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
 
-        patrolWidgetTest('Shows sync word tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows preamble length tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
 
-        patrolWidgetTest('Shows CRC switch disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows sync word tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
+        });
+
+        patrolWidgetTest('Shows CRC switch disabled', skip: true, (PatrolTester $) async {
+          // TODO: LoRa
         });
       });
 
       group('Screen section', () {
-        patrolWidgetTest('Shows TFT switch disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows Screen section', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            await $(
+              SettingsList,
+            ).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_screen)).scrollTo(),
+            findsOneWidget,
+          );
         });
 
-        patrolWidgetTest('Shows sleep mode switch disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows TFT switch disabled', skip: true, (PatrolTester $) async {
+          // TODO: TFT
         });
 
-        patrolWidgetTest('Shows sleep mode duration tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows sleep mode switch disabled', skip: true, (PatrolTester $) async {
+          // TODO: TFT
         });
 
-        patrolWidgetTest('Shows turn on at event switch disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows sleep mode duration tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: TFT
+        });
+
+        patrolWidgetTest('Shows turn on at event switch disabled', skip: true, (PatrolTester $) async {
+          // TODO: TFT
         });
       });
 
       group('Bluetooth section', () {
-        patrolWidgetTest('Shows bluetooth switch disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows Bluetooth section', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_bluetooth)).scrollTo(),
+            findsOneWidget,
+          );
         });
 
-        patrolWidgetTest('Shows bluetooth module name tile disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows bluetooth switch disabled', skip: true, (PatrolTester $) async {
+          // TODO: Bluetooth
         });
 
-        patrolWidgetTest('Shows bluetooth module number tile enabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows bluetooth module name tile disabled', skip: true, (PatrolTester $) async {
+          // TODO: Bluetooth
         });
 
-        patrolWidgetTest('Opens bluetooth number popup when tile tapped', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows bluetooth module number tile enabled', skip: true, (PatrolTester $) async {
+          // TODO: Bluetooth
         });
 
-        patrolWidgetTest('Updates bluetooth number when popup returns value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Opens bluetooth number popup when tile tapped', skip: true, (PatrolTester $) async {
+          // TODO: Bluetooth
+        });
+
+        patrolWidgetTest('Updates bluetooth number when popup returns value', skip: true, (PatrolTester $) async {
+          // TODO: Bluetooth
         });
       });
 
       group('WiFi section', () {
-        patrolWidgetTest('Shows WiFi switch disabled', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows WiFi section', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_wifi)).scrollTo(),
+            findsOneWidget,
+          );
+        });
+
+        patrolWidgetTest('Shows WiFi switch disabled', skip: true, (PatrolTester $) async {
+          // TODO: WiFi
         });
 
         patrolWidgetTest('Shows WiFi network tile with current SSID', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          // TODO: WiFi
         });
 
         patrolWidgetTest('Opens WiFi settings popup when network tile tapped', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          // TODO: WiFi
         });
 
         patrolWidgetTest('Updates SSID when popup returns value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          // TODO: WiFi
         });
 
         patrolWidgetTest('Shows password tile', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          // TODO: WiFi
         });
 
         patrolWidgetTest('Opens WiFi settings popup when password tile tapped', (PatrolTester $) async {
