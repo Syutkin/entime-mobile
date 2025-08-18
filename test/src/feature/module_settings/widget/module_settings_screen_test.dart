@@ -56,7 +56,7 @@ void main() {
     jsonLed = '''
           {
             "Type": "led",
-            "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
+            "Bluetooth": {"active": true, "name": "TestBTLed", "number": 1},
             "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
             "LedPanel": {"active": true, "brightness": 100, "color": "red"}
           }''';
@@ -340,68 +340,87 @@ void main() {
       setUp(() {
         when(() => moduleSettingsBloc.state).thenReturn(
           ModuleSettingsState.loaded(
-            ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonLed) as Map<String, dynamic>)),
+            ModSettingsModel.led(ModSettingsLed.fromJson(jsonDecode(jsonLed) as Map<String, dynamic>)),
           ),
         );
       });
       group('Module section', () {
         patrolWidgetTest('Displays module name and number correctly for LED', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          await $.pumpWidgetAndSettle(testWidget());
+          expect($(ModuleSettingsScreen), findsOneWidget);
+          expect(
+            $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_module)),
+            findsOneWidget,
+          );
+          expect($(SettingsList).$(SettingsSection).containing($('TestBTLed1')), findsOneWidget);
         });
       });
 
       group('Bluetooth section', () {
         patrolWidgetTest('Shows bluetooth switch disabled for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Shows bluetooth module name tile disabled for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Shows bluetooth module number tile for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Opens bluetooth number popup for LED when tile tapped', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Shows brightness tile for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Opens brightness popup for LED when tile tapped', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Updates brightness when popup returns value for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
       });
 
       group('WiFi section', () {
         patrolWidgetTest('Shows WiFi switch enabled for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Toggles WiFi switch and triggers update event for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Shows WiFi network tile for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Opens WiFi settings popup for LED when network tile tapped', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Shows password tile for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
 
         patrolWidgetTest('Opens WiFi settings popup for LED when password tile tapped', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
         });
       });

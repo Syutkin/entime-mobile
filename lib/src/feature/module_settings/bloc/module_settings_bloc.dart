@@ -24,10 +24,10 @@ class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> 
   Future<void> _handleGetModuleSettings(ModuleSettingsEventGet event, Emitter<ModuleSettingsState> emit) async {
     emit(const ModuleSettingsLoading());
 
-    final jsonMap = jsonDecode(event.json) as Map<String, dynamic>;
+    try {
+      final jsonMap = jsonDecode(event.json) as Map<String, dynamic>;
 
-    if (jsonMap.containsKey('Type')) {
-      try {
+      if (jsonMap.containsKey('Type')) {
         switch (jsonMap['Type']) {
           case 'entime':
             final moduleSettings = ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonMap));
@@ -39,12 +39,12 @@ class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> 
             logger.e('Ошибка! Неизвестный тип модуля: ${jsonMap['Type']}');
             emit(const ModuleSettingsError());
         }
-      } catch (e) {
-        logger.e('Ошибка! Не удалось загрузить настройки модуля', error: e);
+      } else {
+        logger.e('Ошибка! Неизвестный формат настроек. Настройки не загружены');
         emit(const ModuleSettingsError());
       }
-    } else {
-      logger.e('Ошибка! Неизвестный формат настроек. Настройки не загружены');
+    } catch (e) {
+      logger.e('Ошибка! Не удалось загрузить настройки модуля', error: e);
       emit(const ModuleSettingsError());
     }
   }
