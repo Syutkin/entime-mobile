@@ -77,7 +77,7 @@ void main() {
       blocTest<ModuleSettingsBloc, ModuleSettingsState>(
         'emits loading then error state when get event fails to load settings',
         build: () => bloc,
-        act: (bloc) => bloc.add(const ModuleSettingsEvent.get('{"Type": "invalid"}')),
+        act: (bloc) => bloc.add(const ModuleSettingsEvent.get('{"Json": "Json"}')),
         expect: () => [
           const ModuleSettingsState.loading(),
           const ModuleSettingsState.error(),
@@ -122,6 +122,16 @@ void main() {
         expect: () => [
           const ModuleSettingsState.loading(),
           const ModuleSettingsState.error(),
+        ],
+      );
+
+      blocTest<ModuleSettingsBloc, ModuleSettingsState>(
+        'emits uninitialized on unload event',
+        build: () => bloc,
+        seed: () => const ModuleSettingsState.loading(),
+        act: (bloc) => bloc.add(const ModuleSettingsEvent.unload()),
+        expect: () => [
+          const ModuleSettingsState.uninitialized(),
         ],
       );
     });
