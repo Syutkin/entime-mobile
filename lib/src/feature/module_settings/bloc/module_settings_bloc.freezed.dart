@@ -55,12 +55,13 @@ extension ModuleSettingsEventPatterns on ModuleSettingsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Get value)?  get,TResult Function( _Update value)?  update,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Get value)?  get,TResult Function( _Update value)?  update,TResult Function( _Unload value)?  unload,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Get() when get != null:
 return get(_that);case _Update() when update != null:
-return update(_that);case _:
+return update(_that);case _Unload() when unload != null:
+return unload(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return update(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Get value)  get,required TResult Function( _Update value)  update,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Get value)  get,required TResult Function( _Update value)  update,required TResult Function( _Unload value)  unload,}){
 final _that = this;
 switch (_that) {
 case _Get():
 return get(_that);case _Update():
-return update(_that);}
+return update(_that);case _Unload():
+return unload(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -97,12 +99,13 @@ return update(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Get value)?  get,TResult? Function( _Update value)?  update,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Get value)?  get,TResult? Function( _Update value)?  update,TResult? Function( _Unload value)?  unload,}){
 final _that = this;
 switch (_that) {
 case _Get() when get != null:
 return get(_that);case _Update() when update != null:
-return update(_that);case _:
+return update(_that);case _Unload() when unload != null:
+return unload(_that);case _:
   return null;
 
 }
@@ -119,11 +122,12 @@ return update(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String json)?  get,TResult Function( ModSettingsModel moduleSettings)?  update,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String json)?  get,TResult Function( ModSettingsModel moduleSettings)?  update,TResult Function()?  unload,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Get() when get != null:
 return get(_that.json);case _Update() when update != null:
-return update(_that.moduleSettings);case _:
+return update(_that.moduleSettings);case _Unload() when unload != null:
+return unload();case _:
   return orElse();
 
 }
@@ -141,11 +145,12 @@ return update(_that.moduleSettings);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String json)  get,required TResult Function( ModSettingsModel moduleSettings)  update,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String json)  get,required TResult Function( ModSettingsModel moduleSettings)  update,required TResult Function()  unload,}) {final _that = this;
 switch (_that) {
 case _Get():
 return get(_that.json);case _Update():
-return update(_that.moduleSettings);}
+return update(_that.moduleSettings);case _Unload():
+return unload();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +164,12 @@ return update(_that.moduleSettings);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String json)?  get,TResult? Function( ModSettingsModel moduleSettings)?  update,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String json)?  get,TResult? Function( ModSettingsModel moduleSettings)?  update,TResult? Function()?  unload,}) {final _that = this;
 switch (_that) {
 case _Get() when get != null:
 return get(_that.json);case _Update() when update != null:
-return update(_that.moduleSettings);case _:
+return update(_that.moduleSettings);case _Unload() when unload != null:
+return unload();case _:
   return null;
 
 }
@@ -311,6 +317,38 @@ $ModSettingsModelCopyWith<$Res> get moduleSettings {
   });
 }
 }
+
+/// @nodoc
+
+
+class _Unload implements ModuleSettingsEvent {
+  const _Unload();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Unload);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ModuleSettingsEvent.unload()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$ModuleSettingsState {
