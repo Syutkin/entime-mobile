@@ -16,7 +16,7 @@ void main() {
     result = null;
   });
 
-  Widget testWidget() {
+  Widget testWidget({int? value}) {
     initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
@@ -28,7 +28,7 @@ void main() {
               onPressed: () async {
                 result = await brightnessPopup(
                   text: text,
-                  initialValue: initialValue,
+                  initialValue: value ?? initialValue,
                   context: context,
                 );
               },
@@ -56,15 +56,21 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget());
       await $(#button).tap();
 
-      // Проверяем, что отображается правильное начальное значение
-      final textWidgets = $(Text).evaluate();
-      expect(textWidgets, hasLength(5)); // Кнопка, заголовок, яркость, Cancel, OK
+      expect($(Localization.current.I18nModuleSettings_brightnessInt(5)), findsOneWidget);
+    });
 
-      // Находим текст с яркостью (он содержит "Brightness 5")
-      final brightnessText = textWidgets.firstWhere(
-        (element) => (element.widget as Text).data?.contains('Brightness 5') ?? false,
-      );
-      expect(brightnessText, isNotNull);
+    patrolWidgetTest('Slider clamps big brightness values to 15', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget(value: 111));
+      await $(#button).tap();
+
+      expect($(Localization.current.I18nModuleSettings_brightnessInt(15)), findsOneWidget);
+    });
+
+    patrolWidgetTest('Slider clamps small brightness values to 1', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget(value: -111));
+      await $(#button).tap();
+
+      expect($(Localization.current.I18nModuleSettings_brightnessInt(1)), findsOneWidget);
     });
 
     patrolWidgetTest('Slider has correct properties', (PatrolTester $) async {
@@ -73,6 +79,7 @@ void main() {
 
       final slider = $(Slider).evaluate().single.widget as Slider;
       expect(slider.value, initialValue.toDouble());
+      expect(slider.min, 1.0);
       expect(slider.max, 15.0);
       expect(slider.divisions, 14);
     });

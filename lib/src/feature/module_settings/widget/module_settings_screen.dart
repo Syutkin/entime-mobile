@@ -29,7 +29,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
             },
             onOkPressed: () {
               final bloc = BlocProvider.of<ModuleSettingsBloc>(context);
-              bloc.state.maybeWhen(
+              bloc.state.whenOrNull(
                 loaded: (moduleSettings) {
                   moduleSettings.map(
                     entime: (entime) {
@@ -46,7 +46,6 @@ class ModuleSettingsInitScreen extends StatelessWidget {
                     },
                   );
                 },
-                orElse: () {},
               );
               // ToDo: зачем тут contex? и передача одинаковых значений в Navigator.pop
               Navigator.pop(context, true);
@@ -439,6 +438,7 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                               context: context,
                               labelText: Localization.current.I18nModuleSettings_ohm,
                               text: Localization.current.I18nModuleSettings_enterResistor1,
+                              value: moduleSettings.vcc.r1,
                             );
                             if (r1 != null) {
                               widget.onChanged();
@@ -460,10 +460,10 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                               context: context,
                               labelText: Localization.current.I18nModuleSettings_ohm,
                               text: Localization.current.I18nModuleSettings_enterResistor2,
+                              value: moduleSettings.vcc.r2,
                             );
                             if (r2 != null) {
                               widget.onChanged();
-                              // bloc.moduleSettings.r2 = r2;
                               bloc.add(
                                 ModuleSettingsEvent.update(
                                   ModSettingsModel.entime(moduleSettings.copyWith.vcc(r2: r2)),

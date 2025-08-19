@@ -1,7 +1,12 @@
 part of 'popups.dart';
 
-Future<int?> vccPopup({required String text, required String labelText, required BuildContext context}) async {
-  int? number;
+Future<int?> vccPopup({
+  required String text,
+  required String labelText,
+  required BuildContext context,
+  int? value,
+}) async {
+  final controller = TextEditingController()..text = value?.toString() ?? '';
   return showDialog<int>(
     context: context,
     builder: (context) => AlertDialog(
@@ -11,12 +16,10 @@ Future<int?> vccPopup({required String text, required String labelText, required
         children: <Widget>[
           Expanded(
             child: TextField(
+              controller: controller,
               keyboardType: TextInputType.number,
               autofocus: true,
               decoration: InputDecoration(labelText: labelText),
-              onChanged: (value) {
-                number = int.tryParse(value);
-              },
             ),
           ),
         ],
@@ -27,7 +30,7 @@ Future<int?> vccPopup({required String text, required String labelText, required
           Navigator.of(context).pop();
         },
         onOkPressed: () {
-          Navigator.of(context).pop(number);
+          Navigator.of(context).pop(int.tryParse(controller.text));
         },
       ),
     ),

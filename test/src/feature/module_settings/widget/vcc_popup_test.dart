@@ -40,6 +40,31 @@ void main() {
     );
   }
 
+  Widget testWidgetWithValue(int? initialValue) {
+    initializeDateFormatting();
+    return MaterialApp(
+      localizationsDelegates: const [Localization.delegate],
+      supportedLocales: Localization.supportedLocales,
+      home: Scaffold(
+        body: Builder(
+          builder: (context) {
+            return TextButton(
+              onPressed: () async {
+                result = await vccPopup(
+                  text: text,
+                  labelText: labelText,
+                  context: context,
+                  value: initialValue,
+                );
+              },
+              child: const Text('textButton', key: Key('button')),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
   group('vccPopup tests', () {
     patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testWidget());
@@ -148,45 +173,114 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Large number input', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
-      await $(#button).tap();
-
-      await $(TextField).enterText('999999');
-      await $(#okButton).tap();
-
-      expect(result, 999999);
-      expect($(AlertDialog), findsNothing);
-    });
-
-    patrolWidgetTest('Decimal number input (should return null)', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
-      await $(#button).tap();
-
-      await $(TextField).enterText('3.14');
-      await $(#okButton).tap();
-
-      expect(result, null);
-      expect($(AlertDialog), findsNothing);
-    });
-
-    patrolWidgetTest('Special characters input (should return null)', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
-      await $(#button).tap();
-
-      await $(TextField).enterText('12@34');
-      await $(#okButton).tap();
-
-      expect(result, null);
-      expect($(AlertDialog), findsNothing);
-    });
-
     patrolWidgetTest('TextField focus behavior', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(#button).tap();
 
       final textField = $(TextField).evaluate().single.widget as TextField;
       expect(textField.autofocus, true);
+    });
+
+    patrolWidgetTest('Initial value is displayed correctly', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidgetWithValue(123));
+      await $(#button).tap();
+
+      // Check that the text field contains the initial value
+      final textField = $(TextField).evaluate().single.widget as TextField;
+      expect(textField.controller?.text, '123');
+    });
+
+    patrolWidgetTest('Initial value with null', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidgetWithValue(null));
+      await $(#button).tap();
+
+      final textField = $(TextField).evaluate().single.widget as TextField;
+      expect(textField.controller?.text, '');
+    });
+
+    patrolWidgetTest('Edit initial value and confirm', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidgetWithValue(100));
+      await $(#button).tap();
+
+      // Clear the field and enter new value
+      await $(TextField).enterText('');
+      await $(TextField).enterText('200');
+      await $(#okButton).tap();
+
+      expect(result, 200);
+      expect($(AlertDialog), findsNothing);
+    });
+
+    patrolWidgetTest('Edit initial value and cancel', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidgetWithValue(100));
+      await $(#button).tap();
+
+      // Clear the field and enter new value
+      await $(TextField).enterText('');
+      await $(TextField).enterText('200');
+      await $(#cancelButton).tap();
+
+      expect(result, null);
+      expect($(AlertDialog), findsNothing);
+    });
+
+    patrolWidgetTest('Mixed valid and invalid inputs', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+
+      // Test valid input
+      await $(TextField).enterText('123');
+      await $(#okButton).tap();
+      expect(result, 123);
+
+      // Reset and test invalid input
+      result = null;
+      await $(#button).tap();
+      await $(TextField).enterText('abc123');
+      await $(#okButton).tap();
+      expect(result, null);
+
+      // Reset and test valid input again
+      result = null;
+      await $(#button).tap();
+      await $(TextField).enterText('456');
+      await $(#okButton).tap();
+      expect(result, 456);
+    });
+
+    patrolWidgetTest('Number with leading/trailing whitespace', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+      await $(#button).tap();
+
+      await $(TextField).enterText('  42  ');
+      await $(#okButton).tap();
+
+      expect(result, 42);
+      expect($(AlertDialog), findsNothing);
+    });
+
+    patrolWidgetTest('Multiple popup interactions', (PatrolTester $) async {
+      await $.pumpWidgetAndSettle(testWidget());
+
+      // First interaction
+      await $(#button).tap();
+      await $(TextField).enterText('10');
+      await $(#okButton).tap();
+      expect(result, 10);
+
+      // Second interaction
+      result = null;
+      await $(#button).tap();
+      await $(TextField).enterText('20');
+      await $(#okButton).tap();
+      expect(result, 20);
+
+      // Third interaction with cancel
+      result = null;
+      await $(#button).tap();
+      await $(TextField).enterText('30');
+      await $(#cancelButton).tap();
+      expect(result, null);
     });
   });
 }

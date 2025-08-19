@@ -1,7 +1,7 @@
 part of 'popups.dart';
 
 Future<int?> brightnessPopup({required String text, required int initialValue, required BuildContext context}) async {
-  var brightness = initialValue.toDouble();
+  var brightness = initialValue.clamp(1, 15).toDouble();
   return showDialog<int>(
     context: context,
     builder:
@@ -15,6 +15,7 @@ Future<int?> brightnessPopup({required String text, required int initialValue, r
                     Text(Localization.current.I18nModuleSettings_brightnessInt(brightness.toInt())),
                     Slider(
                       value: brightness,
+                      min: 1,
                       max: 15,
                       label: '${brightness.toInt()}',
                       divisions: 14,
