@@ -1,40 +1,38 @@
 part of 'popups.dart';
 
-Future<String?> wifiSettingsPopup({
-  required String text,
-  required String labelText,
+Future<List<String>?> wifiSettingsPopup({
   required BuildContext context,
+  String? ssid,
 }) async {
-  String? wifi;
-  return showDialog<String>(
+  final ssidController = TextEditingController()..text = ssid ?? '';
+  final passwordController = TextEditingController();
+  return showDialog<List<String>?>(
     context: context,
-    builder:
-        (context) => AlertDialog(
-          title: Text(text),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Expanded(
-                child: TextField(
-                  // keyboardType: TextInputType.number,
-                  autofocus: true,
-                  decoration: InputDecoration(labelText: labelText),
-                  onChanged: (value) {
-                    wifi = value;
-                  },
-                ),
-              ),
-            ],
+    builder: (context) => AlertDialog(
+      title: Text(Localization.current.I18nModuleSettings_enterWifiCredentials),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          TextField(
+            controller: ssidController,
+            autofocus: true,
+            decoration: InputDecoration(labelText: Localization.current.I18nModuleSettings_wifiSsid),
           ),
-          actions: cancelOkButtons(
-            context: context,
-            onCancelPressed: () {
-              Navigator.of(context).pop();
-            },
-            onOkPressed: () {
-              Navigator.of(context).pop(wifi);
-            },
+          PasswordTextField(
+            label: Localization.current.I18nModuleSettings_wifiPassword,
+            controller: passwordController,
           ),
-        ),
+        ],
+      ),
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          Navigator.of(context).pop([ssidController.text, passwordController.text]);
+        },
+      ),
+    ),
   );
 }

@@ -713,12 +713,12 @@ class I18nModuleSettings {
 
   static String get wifiNetwork => Intl.message('Сеть', name: 'I18nModuleSettings_wifiNetwork');
 
-  static String get enterWifiSsid => Intl.message('Введите имя WiFi сети', name: 'I18nModuleSettings_enterWifiSsid');
+  static String get wifiSsid => Intl.message('Имя сети', name: 'I18nModuleSettings_wifiSsid');
 
-  static String enterWifiPassword(String ssid) =>
-      Intl.message('Введите пароль WiFi сети $ssid', name: 'I18nModuleSettings_enterWifiPassword', args: [ssid]);
+  static String get wifiPassword => Intl.message('Пароль', name: 'I18nModuleSettings_wifiPassword');
 
-  static String get password => Intl.message('Пароль', name: 'I18nModuleSettings_password');
+  static String get enterWifiCredentials =>
+      Intl.message('Введите данные сети', name: 'I18nModuleSettings_enterWifiCredentials');
 
   static String get vcc => Intl.message('VCC', name: 'I18nModuleSettings_vcc');
 

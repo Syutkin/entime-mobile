@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-07-04T00:38:17.384437",
+  "@@last_modified": "2025-08-19T04:27:35.324197",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1262,20 +1262,18 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_enterWifiSsid": "Введите имя WiFi сети",
-  "@I18nModuleSettings_enterWifiSsid": {
+  "I18nModuleSettings_wifiSsid": "Имя сети",
+  "@I18nModuleSettings_wifiSsid": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_enterWifiPassword": "Введите пароль WiFi сети {ssid}",
-  "@I18nModuleSettings_enterWifiPassword": {
+  "I18nModuleSettings_wifiPassword": "Пароль",
+  "@I18nModuleSettings_wifiPassword": {
     "type": "text",
-    "placeholders": {
-      "ssid": {}
-    }
+    "placeholders": {}
   },
-  "I18nModuleSettings_password": "Пароль",
-  "@I18nModuleSettings_password": {
+  "I18nModuleSettings_enterWifiCredentials": "Введите данные сети",
+  "@I18nModuleSettings_enterWifiCredentials": {
     "type": "text",
     "placeholders": {}
   },

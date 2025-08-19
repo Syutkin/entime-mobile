@@ -410,39 +410,16 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           trailing: Text(moduleSettings.wiFi.ssid),
                           //leading:  Icon(MdiIcons.wifi),
                           onPressed: (context) async {
-                            final ssid = await wifiSettingsPopup(
-                              context: context,
-                              labelText: Localization.current.I18nModuleSettings_wifi,
-                              text: Localization.current.I18nModuleSettings_enterWifiSsid,
-                            );
+                            final credentials = await wifiSettingsPopup(context: context, ssid: moduleSettings.wiFi.ssid);
+                            final ssid = credentials?[0];
+                            final password = credentials?[1];
                             if (ssid != null) {
                               widget.onChanged();
-                              // bloc.moduleSettings.ssid = ssid;
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.wiFi(ssid: ssid)),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_password),
-                          //leading:  Icon(MdiIcons.wifi),
-                          onPressed: (context) async {
-                            final password = await wifiSettingsPopup(
-                              context: context,
-                              labelText: Localization.current.I18nModuleSettings_password,
-                              text: Localization.current.I18nModuleSettings_enterWifiPassword(
-                                moduleSettings.wiFi.ssid,
-                              ),
-                            );
-                            if (password != null) {
-                              widget.onChanged();
-                              // bloc.moduleSettings.password = password;
-                              bloc.add(
-                                ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.wiFi(passwd: password)),
+                                  ModSettingsModel.entime(
+                                    moduleSettings.copyWith.wiFi(ssid: ssid, passwd: password ?? ''),
+                                  ),
                                 ),
                               );
                             }
@@ -610,7 +587,6 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           initialValue: moduleSettings.wiFi.active,
                           onToggle: (value) {
                             widget.onChanged();
-                            // bloc.moduleSettings.wifi = value;
                             bloc.add(
                               ModuleSettingsEvent.update(
                                 ModSettingsModel.led(moduleSettings.copyWith.wiFi(active: value)),
@@ -618,45 +594,21 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                             );
                           },
                         ),
-                        SettingsTile(
+                       SettingsTile(
                           title: Text(Localization.current.I18nModuleSettings_wifiNetwork),
-                          description: Text(moduleSettings.wiFi.ssid),
+                          trailing: Text(moduleSettings.wiFi.ssid),
                           //leading:  Icon(MdiIcons.wifi),
                           onPressed: (context) async {
-                            final ssid = await wifiSettingsPopup(
-                              context: context,
-                              labelText: Localization.current.I18nModuleSettings_wifi,
-                              text: Localization.current.I18nModuleSettings_enterWifiSsid,
-                            );
+                            final credentials = await wifiSettingsPopup(context: context, ssid: moduleSettings.wiFi.ssid);
+                            final ssid = credentials?[0];
+                            final password = credentials?[1];
                             if (ssid != null) {
                               widget.onChanged();
-                              // bloc.moduleSettings.ssid = ssid;
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.led(moduleSettings.copyWith.wiFi(ssid: ssid)),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_password),
-                          //subtitle: Text('${(moduleSettings.password)}'),
-                          //leading:  Icon(MdiIcons.wifi),
-                          onPressed: (context) async {
-                            final password = await wifiSettingsPopup(
-                              context: context,
-                              labelText: Localization.current.I18nModuleSettings_password,
-                              text: Localization.current.I18nModuleSettings_enterWifiPassword(
-                                moduleSettings.wiFi.ssid,
-                              ),
-                            );
-                            if (password != null) {
-                              widget.onChanged();
-                              // bloc.moduleSettings.password = password;
-                              bloc.add(
-                                ModuleSettingsEvent.update(
-                                  ModSettingsModel.led(moduleSettings.copyWith.wiFi(passwd: password)),
+                                  ModSettingsModel.led(
+                                    moduleSettings.copyWith.wiFi(ssid: ssid, passwd: password ?? ''),
+                                  ),
                                 ),
                               );
                             }

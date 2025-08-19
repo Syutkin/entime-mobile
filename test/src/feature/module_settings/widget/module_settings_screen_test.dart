@@ -276,6 +276,16 @@ void main() {
           expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
         });
 
+        patrolWidgetTest('Do nothing when short frequency tile tapped and popup is cancelled', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_shortFrequency)).tap();
+          await $(#cancelButton).tap();
+          verifyNever(() => moduleSettingsBloc.add(any()));
+          await $(BackButton).tap();
+          expect($(text), findsOneWidget);
+        });
+
         patrolWidgetTest('Shows long frequency tile with current value', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
@@ -413,18 +423,62 @@ void main() {
           // TODO: Bluetooth
         });
 
-        patrolWidgetTest('Shows bluetooth module number tile enabled', skip: true, (PatrolTester $) async {
-          // TODO: Bluetooth
+        patrolWidgetTest('Shows bluetooth module number with correct initial value', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_bluetoothModuleNumber)).scrollTo(),
+            findsOneWidget,
+          );
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($('1')).scrollTo(),
+            findsOneWidget,
+          );
         });
 
-        patrolWidgetTest('Opens bluetooth number popup when tile tapped', skip: true, (PatrolTester $) async {
-          // TODO: Bluetooth
+   
+
+        patrolWidgetTest('Opens bluetooth number popup when tile tapped', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_bluetoothModuleNumber)).scrollTo().tap();
+          expect($(Localization.current.I18nModuleSettings_enterBluetoothModuleNumber), findsOneWidget);
         });
 
-        patrolWidgetTest('Updates bluetooth number when popup returns value', skip: true, (PatrolTester $) async {
-          // TODO: Bluetooth
+        patrolWidgetTest('Updates bluetooth number when popup returns value', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_bluetoothModuleNumber)).scrollTo().tap();
+          await $(TextField).enterText('234');
+          await $(#okButton).tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.bluetooth.number,
+                  'bluetooth.number',
+                  234,
+                ),
+              ),
+            ),
+          );
+
+          await $(BackButton).tap();
+          expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
+        });
+
+        patrolWidgetTest('Do nothing when bluetooth number tile tapped and popup is cancelled', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_bluetoothModuleNumber)).scrollTo().tap();
+          await $(#cancelButton).tap();
+          verifyNever(() => moduleSettingsBloc.add(any()));
+          await $(BackButton).tap();
+          expect($(text), findsOneWidget);
         });
       });
+
 
       group('WiFi section', () {
         patrolWidgetTest('Shows WiFi section', (PatrolTester $) async {
@@ -441,27 +495,59 @@ void main() {
         });
 
         patrolWidgetTest('Shows WiFi network tile with current SSID', (PatrolTester $) async {
-          // TODO: WiFi
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo(),
+            findsOneWidget,
+          );
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($('TestWiFi')).scrollTo(),
+            findsOneWidget,
+          );
         });
 
         patrolWidgetTest('Opens WiFi settings popup when network tile tapped', (PatrolTester $) async {
-          // TODO: WiFi
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
+          expect($(Localization.current.I18nModuleSettings_enterWifiCredentials), findsOneWidget);
         });
 
-        patrolWidgetTest('Updates SSID when popup returns value', (PatrolTester $) async {
-          // TODO: WiFi
+        patrolWidgetTest('Updates SSID and password when popup returns value and asks to update', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
+          await $(#okButton).tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.wiFi.ssid,
+                  'wifi.ssid',
+                  'TestWiFi',
+                ).having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.wiFi.passwd,
+                  'wifi.passwd',
+                  '', //  Пароль при заходе всегда пустой
+                ),
+              ),
+            ),
+          );
+
+          await $(BackButton).tap();
+          expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
         });
 
-        patrolWidgetTest('Shows password tile', (PatrolTester $) async {
-          // TODO: WiFi
-        });
-
-        patrolWidgetTest('Opens WiFi settings popup when password tile tapped', (PatrolTester $) async {
-          // TODO: Реализовать тест
-        });
-
-        patrolWidgetTest('Updates password when popup returns value', (PatrolTester $) async {
-          // TODO: Реализовать тест
+        patrolWidgetTest('Do nothing when SSID tile tapped and popup is cancelled', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
+          await $(#cancelButton).tap();
+          verifyNever(() => moduleSettingsBloc.add(any()));
+          await $(BackButton).tap();
+          expect($(text), findsOneWidget);
         });
       });
 
@@ -512,7 +598,7 @@ void main() {
           ),
         );
       });
-      group('Module section', () {
+      group('Module LED section', () {
         patrolWidgetTest('Displays module name and number correctly for LED', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
@@ -525,7 +611,7 @@ void main() {
         });
       });
 
-      group('Bluetooth section', () {
+      group('Bluetooth LED section', () {
         patrolWidgetTest('Shows bluetooth switch disabled for LED', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
           // TODO: Реализовать тест
@@ -562,35 +648,74 @@ void main() {
         });
       });
 
-      group('WiFi section', () {
-        patrolWidgetTest('Shows WiFi switch enabled for LED', (PatrolTester $) async {
+      group('WiFi LED section', () {
+        patrolWidgetTest('Shows WiFi LED section', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
-          // TODO: Реализовать тест
+          await $(text).tap();
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_wifi)).scrollTo(),
+            findsOneWidget,
+          );
         });
 
-        patrolWidgetTest('Toggles WiFi switch and triggers update event for LED', (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          // TODO: Реализовать тест
+        patrolWidgetTest('Shows WiFi switch disabled for LED', skip: true, (PatrolTester $) async {
+          // TODO: WiFi
         });
 
-        patrolWidgetTest('Shows WiFi network tile for LED', (PatrolTester $) async {
+        patrolWidgetTest('Shows WiFi network tile with current SSID for LED', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
-          // TODO: Реализовать тест
+          await $(text).tap();
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo(),
+            findsOneWidget,
+          );
+          expect(
+            await $(SettingsList).$(SettingsSection).containing($('TestWiFi')).scrollTo(),
+            findsOneWidget,
+          );
         });
 
-        patrolWidgetTest('Opens WiFi settings popup for LED when network tile tapped', (PatrolTester $) async {
+        patrolWidgetTest('Opens WiFi settings popup when network tile tapped for LED', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
-          // TODO: Реализовать тест
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
+          expect($(Localization.current.I18nModuleSettings_enterWifiCredentials), findsOneWidget);
         });
 
-        patrolWidgetTest('Shows password tile for LED', (PatrolTester $) async {
+        patrolWidgetTest('Updates SSID and password when popup returns value and asks to update for LED', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
-          // TODO: Реализовать тест
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
+          await $(#okButton).tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelLed).led.wiFi.ssid,
+                  'wifi.ssid',
+                  'TestWiFi',
+                ).having(
+                  (event) => (event.moduleSettings as ModSettingsModelLed).led.wiFi.passwd,
+                  'wifi.passwd',
+                  '', //  Пароль при заходе всегда пустой
+                ),
+              ),
+            ),
+          );
+
+          await $(BackButton).tap();
+          expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
         });
 
-        patrolWidgetTest('Opens WiFi settings popup for LED when password tile tapped', (PatrolTester $) async {
+        patrolWidgetTest('Do nothing when SSID tile tapped and popup is cancelled for LED', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
-          // TODO: Реализовать тест
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
+          await $(#cancelButton).tap();
+          verifyNever(() => moduleSettingsBloc.add(any()));
+          await $(BackButton).tap();
+          expect($(text), findsOneWidget);
         });
       });
     });
