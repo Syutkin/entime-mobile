@@ -30,7 +30,7 @@ dependencies:
   connectivity_plus: ^6.1.5
   crypto: ^3.0.6
   csv: ^6.0.0
-  device_info_plus: ^11.5.0
+  device_info_plus: ^12.1.0
   drift: ^2.28.1
 #  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
   dropdown_search: ^6.0.2
