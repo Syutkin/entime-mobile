@@ -14,8 +14,8 @@ class SettingsCubit extends Cubit<AppSettings> {
     emit(settingsProvider.settings);
   }
 
-  void update(AppSettings settings) {
+  Future<void> update(AppSettings settings) async {
     emit(settings);
-    settingsProvider.update(settings);
+    await settingsProvider.update(settings);
   }
 }

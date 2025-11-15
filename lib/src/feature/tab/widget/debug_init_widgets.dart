@@ -26,8 +26,8 @@ class _DebugLogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    onPressed: () {
-      Navigator.of(context).push(
+    onPressed: () async {
+      await Navigator.of(context).push(
         MaterialPageRoute<void>(
           builder:
               (context) => LogScreen(
@@ -64,8 +64,8 @@ class _DebugTrailsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TextButton(
-    onPressed: () {
-      Navigator.of(context).push(
+    onPressed: () async {
+      await Navigator.of(context).push(
         MaterialPageRoute<void>(
           builder:
               (context) => TrailsListPage(

@@ -127,8 +127,8 @@ class _FinishListPage extends State<FinishListPage> {
           // сейчас перематывает при любом обновлении, например каждую минуту
           // при обновлении участников на трассе
           if (BlocProvider.of<SettingsCubit>(context).state.showHidden) {
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              scrollToEnd(_scrollController);
+            SchedulerBinding.instance.addPostFrameCallback((_) async {
+              await scrollToEnd(_scrollController);
             });
           }
           // return const SizedBox.shrink();

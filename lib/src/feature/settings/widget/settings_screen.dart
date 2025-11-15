@@ -37,8 +37,8 @@ class SettingsScreen extends StatelessWidget {
                   description: Text(Localization.current.I18nSettings_reconnectDescription),
                   //leading:  Icon(Icons.bluetooth),
                   initialValue: settingsState.reconnect,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(reconnect: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(reconnect: value));
                   },
                 ),
                 SettingsTile.switchTile(
@@ -46,16 +46,16 @@ class SettingsScreen extends StatelessWidget {
                   // titleMaxLines: 2,
                   //leading:  Icon(Icons.lightbulb_outline),
                   initialValue: settingsState.wakelock,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(wakelock: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(wakelock: value));
                   },
                 ),
                 SettingsTile.switchTile(
                   title: Text(Localization.current.I18nSettings_sound),
                   //leading:  Icon(Icons.volume_up),
                   initialValue: settingsState.sound,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(sound: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(sound: value));
                   },
                 ),
                 SettingsTile(
@@ -66,10 +66,10 @@ class SettingsScreen extends StatelessWidget {
                     inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
                     dropdownMenuEntries: _dropdownMenuEntries(),
                     initialSelection: Localizations.localeOf(context).languageCode,
-                    onSelected: (locale) {
+                    onSelected: (locale) async {
                       if (locale != null) {
-                        Localization.delegate.load(Locale(locale));
-                        settingsCubit.update(settingsState.copyWith(language: locale));
+                        await Localization.delegate.load(Locale(locale));
+                        await settingsCubit.update(settingsState.copyWith(language: locale));
                       }
                     },
                   ),
@@ -83,16 +83,16 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_ntpOffset),
                   description: Text(Localization.current.I18nSettings_ntpOffsetDescription),
                   initialValue: settingsState.updateNtpOffsetAtStartup,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(updateNtpOffsetAtStartup: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(updateNtpOffsetAtStartup: value));
                   },
                 ),
                 SettingsTile.switchTile(
                   title: Text(Localization.current.I18nSettings_timeForAutomaticStamps),
                   description: Text(Localization.current.I18nSettings_timeForAutomaticStampsDescription),
                   initialValue: settingsState.useTimestampForAutomaticStamps,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(useTimestampForAutomaticStamps: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(useTimestampForAutomaticStamps: value));
                   },
                 ),
               ],
@@ -105,8 +105,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_countdown),
                   //leading:  Icon(Icons.timer),
                   initialValue: settingsState.beep,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(beep: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(beep: value));
                   },
                 ),
                 SettingsTile.switchTile(
@@ -114,8 +114,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_countdownFromApp),
                   description: Text(Localization.current.I18nSettings_countdownFromAppDetails),
                   initialValue: settingsState.beepFromApp,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(beepFromApp: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(beepFromApp: value));
                   },
                 ),
               ],
@@ -128,8 +128,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_voice),
                   //leading:  Icon(MdiIcons.textToSpeech),
                   initialValue: settingsState.voice,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(voice: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(voice: value));
                   },
                 ),
                 SettingsTile.switchTile(
@@ -138,8 +138,8 @@ class SettingsScreen extends StatelessWidget {
                   description: Text(Localization.current.I18nSettings_voiceFromAppDetails),
                   //leading:  Icon(MdiIcons.textToSpeech),
                   initialValue: settingsState.voiceFromApp,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(voiceFromApp: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(voiceFromApp: value));
                   },
                 ),
                 SettingsTile.switchTile(
@@ -148,8 +148,8 @@ class SettingsScreen extends StatelessWidget {
                   // titleMaxLines: 2,
                   //leading:  Icon(MdiIcons.textToSpeech),
                   initialValue: settingsState.voiceName,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(voiceName: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(voiceName: value));
                   },
                 ),
                 SettingsTile(
@@ -160,7 +160,7 @@ class SettingsScreen extends StatelessWidget {
                   onPressed: (context) async {
                     final value = await setVolumePopup(context, settingsState.volume);
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(volume: value));
+                      await settingsCubit.update(settingsState.copyWith(volume: value));
                     }
                   },
                 ),
@@ -172,7 +172,7 @@ class SettingsScreen extends StatelessWidget {
                   onPressed: (context) async {
                     final value = await setPitchPopup(context, settingsState.pitch);
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(pitch: value));
+                      await settingsCubit.update(settingsState.copyWith(pitch: value));
                     }
                   },
                 ),
@@ -184,7 +184,7 @@ class SettingsScreen extends StatelessWidget {
                   onPressed: (context) async {
                     final value = await setRatePopup(context, settingsState.rate);
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(rate: value));
+                      await settingsCubit.update(settingsState.copyWith(rate: value));
                     }
                   },
                 ),
@@ -238,8 +238,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_startButton),
                   //leading:  Icon(MdiIcons.handBackLeft),
                   initialValue: settingsState.startFab,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(startFab: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(startFab: value));
                   },
                 ),
                 SettingsTile(
@@ -253,7 +253,7 @@ class SettingsScreen extends StatelessWidget {
                       title: Localization.current.I18nSettings_startButtonSizeDescription,
                     );
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(startFabSize: value));
+                      await settingsCubit.update(settingsState.copyWith(startFabSize: value));
                     }
                   },
                 ),
@@ -261,8 +261,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_countdownAtStart),
                   //leading:  Icon(MdiIcons.timer),
                   initialValue: settingsState.countdown,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(countdown: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(countdown: value));
                   },
                 ),
                 SettingsTile(
@@ -276,7 +276,7 @@ class SettingsScreen extends StatelessWidget {
                       title: Localization.current.I18nSettings_countdownAtStartSize,
                     );
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(countdownSize: value));
+                      await settingsCubit.update(settingsState.copyWith(countdownSize: value));
                     }
                   },
                 ),
@@ -285,8 +285,8 @@ class SettingsScreen extends StatelessWidget {
                   // titleMaxLines: 2,
                   //leading:  Icon(MdiIcons.timer),
                   initialValue: settingsState.countdownAtStartTime,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(countdownAtStartTime: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(countdownAtStartTime: value));
                   },
                 ),
                 // SettingsTile.switchTile(
@@ -312,8 +312,8 @@ class SettingsScreen extends StatelessWidget {
                   description: Text(Localization.current.I18nSettings_showColorStartDifferenceDescription),
                   enabled: !settingsState.useTimestampForAutomaticStamps,
                   initialValue: settingsState.showColorStartDifference,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(showColorStartDifference: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(showColorStartDifference: value));
                   },
                 ),
                 SettingsTile(
@@ -330,7 +330,7 @@ class SettingsScreen extends StatelessWidget {
                       title: Localization.current.I18nSettings_startFinishDifference,
                     );
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(startDifferenceThreshold: value));
+                      await settingsCubit.update(settingsState.copyWith(startDifferenceThreshold: value));
                     }
                   },
                 ),
@@ -340,7 +340,7 @@ class SettingsScreen extends StatelessWidget {
                   onPressed: (context) async {
                     final value = await setDeltaInSecondsPopup(context, delta: settingsState.deltaInSeconds);
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(deltaInSeconds: value));
+                      await settingsCubit.update(settingsState.copyWith(deltaInSeconds: value));
                     }
                   },
                 ),
@@ -361,7 +361,7 @@ class SettingsScreen extends StatelessWidget {
                       Localization.current.I18nSettings_delayForNewEvents,
                     );
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(finishDelay: value));
+                      await settingsCubit.update(settingsState.copyWith(finishDelay: value));
                     }
                   },
                 ),
@@ -369,8 +369,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_autoSubstitution),
                   //leading:  Icon(MdiIcons.autoFix),
                   initialValue: settingsState.substituteNumbers,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(substituteNumbers: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(substituteNumbers: value));
                   },
                 ),
                 SettingsTile(
@@ -384,7 +384,7 @@ class SettingsScreen extends StatelessWidget {
                       Localization.current.I18nSettings_autoSubstitutionDelay,
                     );
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(substituteNumbersDelay: value));
+                      await settingsCubit.update(settingsState.copyWith(substituteNumbersDelay: value));
                     }
                   },
                 ),
@@ -392,8 +392,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_finishButton),
                   //leading:  Icon(MdiIcons.handBackLeft),
                   initialValue: settingsState.finishFab,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(finishFab: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(finishFab: value));
                   },
                 ),
                 SettingsTile(
@@ -407,7 +407,7 @@ class SettingsScreen extends StatelessWidget {
                       title: Localization.current.I18nSettings_finishButtonSizeDescription,
                     );
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(finishFabSize: value));
+                      await settingsCubit.update(settingsState.copyWith(finishFabSize: value));
                     }
                   },
                 ),
@@ -415,8 +415,8 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(Localization.current.I18nSettings_showFinishDifference),
                   description: Text(Localization.current.I18nSettings_showFinishDifferenceDescription),
                   initialValue: settingsState.showFinishDifference,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(showFinishDifference: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(showFinishDifference: value));
                   },
                 ),
                 SettingsTile.switchTile(
@@ -424,8 +424,8 @@ class SettingsScreen extends StatelessWidget {
                   description: Text(Localization.current.I18nSettings_showColorFinishDifferenceDescription),
                   enabled: !settingsState.useTimestampForAutomaticStamps,
                   initialValue: settingsState.showColorFinishDifference,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(showColorFinishDifference: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(showColorFinishDifference: value));
                   },
                 ),
                 SettingsTile(
@@ -442,7 +442,7 @@ class SettingsScreen extends StatelessWidget {
                       title: Localization.current.I18nSettings_startFinishDifference,
                     );
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(finishDifferenceThreshold: value));
+                      await settingsCubit.update(settingsState.copyWith(finishDifferenceThreshold: value));
                     }
                   },
                 ),
@@ -456,8 +456,8 @@ class SettingsScreen extends StatelessWidget {
                   // titleMaxLines: 2,
                   //leading:  Icon(MdiIcons.update),
                   initialValue: settingsState.checkUpdates,
-                  onToggle: (value) {
-                    settingsCubit.update(settingsState.copyWith(checkUpdates: value));
+                  onToggle: (value) async {
+                    await settingsCubit.update(settingsState.copyWith(checkUpdates: value));
                   },
                 ),
               ],
@@ -478,7 +478,7 @@ class SettingsScreen extends StatelessWidget {
                   onPressed: (context) async {
                     final value = await setLogLimitPopup(context, settingsState.logLimit);
                     if (value != null) {
-                      settingsCubit.update(settingsState.copyWith(logLimit: value));
+                      await settingsCubit.update(settingsState.copyWith(logLimit: value));
                     }
                   },
                 ),
@@ -509,22 +509,22 @@ class SettingsScreen extends StatelessWidget {
       SettingsTile.switchTile(
         title: Text(Localization.current.I18nSettings_brightness),
         initialValue: settings.brightness == Brightness.light,
-        onToggle: (value) {
-          bloc.update(settings.copyWith(brightness: value ? Brightness.light : Brightness.dark));
+        onToggle: (value) async {
+          await bloc.update(settings.copyWith(brightness: value ? Brightness.light : Brightness.dark));
         },
       ),
       SettingsTile.switchTile(
         enabled: settings.brightness == Brightness.dark,
         title: Text(Localization.current.I18nSettings_oLEDBackground),
         initialValue: settings.isOLEDBackground,
-        onToggle: (value) {
-          bloc.update(settings.copyWith(isOLEDBackground: value));
+        onToggle: (value) async {
+          await bloc.update(settings.copyWith(isOLEDBackground: value));
         },
       ),
       SettingsTile.navigation(
         title: Text(Localization.current.I18nSettings_themeSettings),
-        onPressed: (context) {
-          Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const SelectThemeScreen()));
+        onPressed: (context) async {
+          await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const SelectThemeScreen()));
         },
       ),
     ];

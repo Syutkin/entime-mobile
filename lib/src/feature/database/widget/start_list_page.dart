@@ -175,7 +175,7 @@ class _StartListPage extends State<StartListPage> {
     },
   );
 
-  void _placeCountdownWidget(DraggableDetails dragDetails) {
+  Future<void> _placeCountdownWidget(DraggableDetails dragDetails) async {
     final stackRenderBox = _getRenderBox(_stackKey);
     final countdownRenderBox = _getRenderBox(_countdownKey);
     if (stackRenderBox != null && countdownRenderBox != null) {
@@ -200,7 +200,7 @@ class _StartListPage extends State<StartListPage> {
 
       final settingsCubit = context.read<SettingsCubit>();
       final settings = settingsCubit.state;
-      settingsCubit.update(settings.copyWith(countdownLeft: dx, countdownTop: dy));
+      await settingsCubit.update(settings.copyWith(countdownLeft: dx, countdownTop: dy));
     }
   }
 
@@ -306,10 +306,10 @@ class _StartListPage extends State<StartListPage> {
                     width: settingsState.startFabSize,
                     child: FittedBox(
                       child: FloatingActionButton(
-                        onPressed: () {
+                        onPressed: () async {
                           final now = DateTime.now();
                           final offset = context.read<NtpBloc>().state.offset;
-                          _addManualStartTime(databaseBloc, now, offset);
+                          await _addManualStartTime(databaseBloc, now, offset);
                         },
                         child: Icon(MdiIcons.handBackLeft),
                       ),

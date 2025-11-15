@@ -41,8 +41,8 @@ class TrailItemTile extends StatelessWidget {
                   child: ListTile(leading: const Icon(Icons.share), title: Text(Localization.current.I18nCore_share)),
                 ),
               PopupMenuItem<void>(
-                onTap: () {
-                  updateTrailPopup(context, trail);
+                onTap: () async {
+                  await updateTrailPopup(context, trail);
                 },
                 child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
               ),

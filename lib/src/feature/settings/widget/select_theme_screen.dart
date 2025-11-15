@@ -41,8 +41,8 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
           ),
           IconButton(
             key: const Key('brightnessButton'),
-            onPressed: () {
-              bloc.update(
+            onPressed: () async {
+              await bloc.update(
                 settings.copyWith(
                   brightness: settings.brightness == Brightness.light ? Brightness.dark : Brightness.light,
                 ),
@@ -74,8 +74,8 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
                       min: -1,
                       label: '$contrast',
                       divisions: 4,
-                      onChanged: (newValue) {
-                        bloc.update(settings.copyWith(contrastLevel: newValue));
+                      onChanged: (newValue) async {
+                        await bloc.update(settings.copyWith(contrastLevel: newValue));
                         // setState(() => contrast = newValue);
                       },
                     ),

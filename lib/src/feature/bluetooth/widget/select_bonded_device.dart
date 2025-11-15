@@ -40,7 +40,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   // _SelectBondedDeviceScreen();
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
 
     _isDiscovering = widget.checkAvailability;
@@ -50,7 +50,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
     }
 
     // Setup a list of the bonded devices
-    FlutterBluetoothSerial.instance.getBondedDevices().then((bondedDevices) {
+    await FlutterBluetoothSerial.instance.getBondedDevices().then((bondedDevices) {
       setState(() {
         devices =
             bondedDevices
@@ -95,9 +95,9 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   }
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     // Avoid memory leak (`setState` after dispose) and cancel discovery
-    _discoveryStreamSubscription?.cancel();
+    await _discoveryStreamSubscription?.cancel();
     super.dispose();
   }
 

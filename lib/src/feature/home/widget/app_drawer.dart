@@ -27,25 +27,25 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: Text(Localization.current.I18nDrawer_settings),
-            onTap: () {
+            onTap: () async {
               Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const SettingsScreen()));
+              await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const SettingsScreen()));
             },
           ),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: Text(Localization.current.I18nDrawer_help),
-            onTap: () {
+            onTap: () async {
               Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const HelpPage()));
+              await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const HelpPage()));
             },
           ),
           const Updater(),
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 8, 0),
             title: Text(Localization.current.I18nDrawer_about),
-            onTap: () {
-              showDialog<void>(context: context, builder: (context) => const AboutPopup());
+            onTap: () async {
+              await showDialog<void>(context: context, builder: (context) => const AboutPopup());
             },
           ),
           BlocBuilder<AppInfoCubit, AppInfoProvider>(

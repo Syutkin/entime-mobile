@@ -161,8 +161,8 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
   late StreamSubscription<List<TrailInfo>> _trailsSubscription;
 
   @override
-  Future<void> close() {
-    _trailsSubscription.cancel();
+  Future<void> close() async {
+    await _trailsSubscription.cancel();
     return super.close();
   }
 }

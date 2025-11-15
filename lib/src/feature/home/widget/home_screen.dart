@@ -305,14 +305,14 @@ class FilterButton extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterStart.showDNS:
-                  settingsCubit.update(settings.copyWith(showDNS: !settings.showDNS));
+                  await settingsCubit.update(settings.copyWith(showDNS: !settings.showDNS));
                 case FilterStart.showDNF:
-                  settingsCubit.update(settings.copyWith(showDNF: !settings.showDNF));
+                  await settingsCubit.update(settings.copyWith(showDNF: !settings.showDNF));
                 case FilterStart.showDSQ:
-                  settingsCubit.update(settings.copyWith(showDSQ: !settings.showDSQ));
+                  await settingsCubit.update(settings.copyWith(showDSQ: !settings.showDSQ));
                 case FilterStart.setDefaults:
                   const defaults = AppSettings.defaults();
-                  settingsCubit.update(
+                  await settingsCubit.update(
                     settings.copyWith(showDNS: defaults.showDNS, showDNF: defaults.showDNF, showDSQ: defaults.showDSQ),
                   );
               }
@@ -351,14 +351,14 @@ class FilterButton extends StatelessWidget {
             onSelected: (value) async {
               switch (value) {
                 case FilterFinish.showHidden:
-                  settingsCubit.update(settings.copyWith(showHidden: !settings.showHidden));
+                  await settingsCubit.update(settings.copyWith(showHidden: !settings.showHidden));
                 case FilterFinish.showNumbers:
-                  settingsCubit.update(settings.copyWith(showNumbers: !settings.showNumbers));
+                  await settingsCubit.update(settings.copyWith(showNumbers: !settings.showNumbers));
                 case FilterFinish.showManual:
-                  settingsCubit.update(settings.copyWith(showManual: !settings.showManual));
+                  await settingsCubit.update(settings.copyWith(showManual: !settings.showManual));
                 case FilterFinish.setDefaults:
                   const defaults = AppSettings.defaults();
-                  settingsCubit.update(
+                  await settingsCubit.update(
                     settings.copyWith(
                       showHidden: defaults.showHidden,
                       showNumbers: defaults.showNumbers,

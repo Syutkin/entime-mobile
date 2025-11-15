@@ -32,8 +32,8 @@ class RaceItemTile extends StatelessWidget {
   List<PopupMenuEntry<void>> _menuEntryList(BuildContext context) {
     return <PopupMenuEntry<void>>[
       PopupMenuItem<void>(
-        onTap: () {
-          updateRacePopup(context, race);
+        onTap: () async {
+          await updateRacePopup(context, race);
         },
         child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
       ),

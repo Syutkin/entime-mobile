@@ -51,8 +51,8 @@ class TrailsListPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {
-          addTrailPopup(context);
+        onPressed: () async {
+          await addTrailPopup(context);
         },
       ),
     );

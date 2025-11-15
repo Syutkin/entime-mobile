@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,7 +20,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
       _countdown = countdown,
       super(const CountdownState.initial()) {
     if (stageId > 0) {
-      _countdown.start(stageId);
+      unawaited(_countdown.start(stageId));
     }
     _countdown.ticks.listen((value) {
       add(CountdownEvent.tick(value));

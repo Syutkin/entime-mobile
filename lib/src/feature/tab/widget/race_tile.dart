@@ -14,12 +14,12 @@ class RaceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<DatabaseBloc, DatabaseState>(
     builder: (context, databaseState) {
-      void routeToSelectRace() {
+      Future<void> routeToSelectRace() async {
         if (databaseState.race != null && databaseState.stage != null) {
           context.read<DatabaseBloc>().add(const DatabaseEvent.deselectRace());
           context.read<CountdownBloc>().add(const CountdownEvent.stop());
         }
-        Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const RaceAndStageSelector()));
+        await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const RaceAndStageSelector()));
       }
 
       return ListTile(

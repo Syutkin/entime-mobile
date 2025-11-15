@@ -47,21 +47,21 @@ class BluetoothTile extends StatelessWidget {
     children: [
       IconButton(
         icon: Icon(MdiIcons.formatListBulleted),
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => LogScreen()));
+        onPressed: () async {
+          await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => LogScreen()));
         },
       ),
       IconButton(
         icon: const Icon(Icons.settings),
-        onPressed: () {
-          _moduleSettings(context);
+        onPressed: () async {
+          await _moduleSettings(context);
         },
       ),
     ],
   );
 
-  void _moduleSettings(BuildContext context) {
+  Future<void> _moduleSettings(BuildContext context) async {
     BlocProvider.of<BluetoothBloc>(context).add(const BluetoothEvent.sendMessage(message: '{"Read": true}'));
-    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
+    await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
   }
 }

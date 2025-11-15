@@ -31,8 +31,8 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   late StreamSubscription<bool> _onConnectionSubscription;
 
   @override
-  Future<void> close() {
-    _onConnectionSubscription.cancel();
+  Future<void> close() async {
+    await _onConnectionSubscription.cancel();
     return super.close();
   }
 }

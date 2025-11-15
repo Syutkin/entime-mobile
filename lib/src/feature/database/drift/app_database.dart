@@ -850,7 +850,7 @@ class AppDatabase extends _$AppDatabase {
     // если автоматически ставим номер, то ставим номер только в нескрытую отсечку,
     // если разница между предыдущим временем с финишем больше настройки
     // или нет предыдущей нескрытой отсечки
-    if (substituteNumbers && workingNumber == null && isHidden == false) {
+    if (substituteNumbers && workingNumber == null && !isHidden) {
       // если нет нескрытого предыдущего времени - ставим номер
       if (prevFinishTime == null) {
         workingNumber = await _getAwaitingNumber(stageId: stage.id, dateTimeNow: dateTimeNow);

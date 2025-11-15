@@ -25,8 +25,8 @@ class StageItemTile extends StatelessWidget {
         itemBuilder:
             (context) => <PopupMenuEntry<void>>[
               PopupMenuItem<void>(
-                onTap: () {
-                  updateStagePopup(context, stage: stage);
+                onTap: () async {
+                  await updateStagePopup(context, stage: stage);
                 },
                 child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
               ),

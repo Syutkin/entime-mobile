@@ -143,9 +143,9 @@ class MenuButton extends StatelessWidget {
                 }
               case HomeMenuButton.fab:
                 if (activeTab == AppTab.start) {
-                  settingsCubit.update(settings.copyWith(startFab: !settings.startFab));
+                  await settingsCubit.update(settings.copyWith(startFab: !settings.startFab));
                 } else if (activeTab == AppTab.finish) {
-                  settingsCubit.update(settings.copyWith(finishFab: !settings.finishFab));
+                  await settingsCubit.update(settings.copyWith(finishFab: !settings.finishFab));
                 }
               case HomeMenuButton.addRacer:
                 final stage = databaseBloc.state.stage;
@@ -155,13 +155,13 @@ class MenuButton extends StatelessWidget {
               case HomeMenuButton.bluetooth:
                 await selectBluetoothDevice(context);
               case HomeMenuButton.countdown:
-                settingsCubit.update(settings.copyWith(countdown: !settings.countdown));
+                await settingsCubit.update(settings.copyWith(countdown: !settings.countdown));
               case HomeMenuButton.countdownPage:
                 await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const CountdownPage()));
               case HomeMenuButton.showFinishDifference:
-                settingsCubit.update(settings.copyWith(showFinishDifference: !settings.showFinishDifference));
+                await settingsCubit.update(settings.copyWith(showFinishDifference: !settings.showFinishDifference));
               case HomeMenuButton.showColorFinishDifference:
-                settingsCubit.update(settings.copyWith(showColorFinishDifference: !settings.showColorFinishDifference));
+                await settingsCubit.update(settings.copyWith(showColorFinishDifference: !settings.showColorFinishDifference));
             }
           },
         );

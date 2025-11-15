@@ -158,7 +158,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           //Пришло сообщение из Bluetooth serial
           final now = DateTime.now();
           logger.i('Bluetooth -> Received message: ${event.message}, time: $now');
-          final message = _parseBT(event.message, now);
+          final message = await _parseBT(event.message, now);
 
           switch (message) {
             case BluetoothMessageAutomaticStart():
@@ -226,17 +226,17 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   IBluetoothProvider get bluetoothProvider => _bluetoothProvider;
 
   @override
-  Future<void> close() {
-    _messageSubscription?.cancel();
-    _btStateSubscription.cancel();
-    _settingsSubscription.cancel();
-    _bluetoothProvider.dispose();
+  Future<void> close() async {
+    await _messageSubscription?.cancel();
+    await _btStateSubscription.cancel();
+    await _settingsSubscription.cancel();
+    await _bluetoothProvider.dispose();
     return super.close();
   }
 
-  BluetoothMessage _parseBT(String message, DateTime now) {
+  Future<BluetoothMessage> _parseBT(String message, DateTime now) async {
     var parsedMessage = message;
-    _database.addLog(
+    await _database.addLog(
       level: LogLevel.information,
       source: LogSource.bluetooth,
       direction: LogSourceDirection.output,

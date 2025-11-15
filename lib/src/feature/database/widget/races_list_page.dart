@@ -20,8 +20,8 @@ class RacesListPage extends StatelessWidget {
       appBar: AppBar(title: Text(Localization.current.I18nDatabase_races)),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {
-          addRacePopup(context);
+        onPressed: () async {
+          await addRacePopup(context);
         },
       ),
       body: BlocBuilder<DatabaseBloc, DatabaseState>(

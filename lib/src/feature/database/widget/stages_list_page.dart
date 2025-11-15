@@ -20,8 +20,8 @@ class StagesListPage extends StatelessWidget {
     appBar: AppBar(title: Text(race.name)),
     floatingActionButton: FloatingActionButton(
       child: const Icon(Icons.add),
-      onPressed: () {
-        addStagePopup(context, race: race);
+      onPressed: () async {
+        await addStagePopup(context, race: race);
       },
     ),
     body: BlocBuilder<DatabaseBloc, DatabaseState>(

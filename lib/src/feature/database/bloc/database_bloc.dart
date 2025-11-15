@@ -509,14 +509,14 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   }
 
   @override
-  Future<void> close() {
-    _racesSubscription?.cancel();
-    _stagesSubscription?.cancel();
-    _ridersSubscription?.cancel();
-    _startsSubscription?.cancel();
-    _finishesSubscription?.cancel();
-    _numbersOnTraceSubscription?.cancel();
-    _appSettingsSubscription?.cancel();
+  Future<void> close() async {
+    await _racesSubscription?.cancel();
+    await _stagesSubscription?.cancel();
+    await _ridersSubscription?.cancel();
+    await _startsSubscription?.cancel();
+    await _finishesSubscription?.cancel();
+    await _numbersOnTraceSubscription?.cancel();
+    await _appSettingsSubscription?.cancel();
     return super.close();
   }
 }

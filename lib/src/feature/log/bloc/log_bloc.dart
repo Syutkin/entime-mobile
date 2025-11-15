@@ -52,8 +52,8 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   late StreamSubscription<List<Log>> _logsSubscription;
 
   @override
-  Future<void> close() {
-    _logsSubscription.cancel();
+  Future<void> close() async {
+    await _logsSubscription.cancel();
     return super.close();
   }
 }

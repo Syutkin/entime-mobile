@@ -12,15 +12,14 @@ class AudioService implements IAudioService {
   AudioService({required ISettingsProvider settings, required IAudioProvider audio})
     : _settings = settings,
       _audio = audio {
-    _settings.state.listen((settings) {
+    _settings.state.listen((settings) async {
       _sound = settings.sound;
       _voice = settings.voice;
       _beep = settings.beep;
-      _audio
-        ..setLanguage(settings.language)
-        ..setVolume(settings.volume)
-        ..setSpeechRate(settings.rate)
-        ..setPitch(settings.pitch);
+      await _audio.setLanguage(settings.language);
+      await _audio.setVolume(settings.volume);
+      await _audio.setSpeechRate(settings.rate);
+      await _audio.setPitch(settings.pitch);
     });
   }
 

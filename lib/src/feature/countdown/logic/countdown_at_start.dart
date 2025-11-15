@@ -43,9 +43,9 @@ class CountdownAtStart {
     _isFinished = false;
     await _countdown(stageId: stageId);
 
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       customTimeNow = customTimeNow?.add(const Duration(seconds: 1));
-      _countdown(stageId: stageId);
+      await _countdown(stageId: stageId);
     });
   }
 
