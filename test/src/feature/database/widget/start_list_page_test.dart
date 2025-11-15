@@ -37,6 +37,7 @@ void main() {
 
   setUpAll(() async {
     registerFallbackValue(const DatabaseEvent.addRace(name: 'name'));
+    registerFallbackValue(const AppSettings.defaults());
   });
 
   setUp(() {
@@ -99,6 +100,7 @@ void main() {
     });
     group('Countdown floating widget', () {
       setUp(() {
+        when(() => settingsCubit.update(any())).thenAnswer((_) => Future.value());
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(
             races: [],

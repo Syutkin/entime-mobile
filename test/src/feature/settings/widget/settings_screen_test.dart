@@ -58,6 +58,7 @@ void main() {
     when(() => settingsCubit.state).thenReturn(settings);
     when(() => audioBloc.state).thenReturn(const AudioState.initial());
     when(() => settingsCubit.setDefault()).thenAnswer((_) => Future.value());
+    when(() => settingsCubit.update(any())).thenAnswer((_) => Future.value());
   });
 
   group('Settings screen tests', () {

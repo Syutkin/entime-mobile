@@ -53,6 +53,7 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(const DatabaseEvent.getRaces());
+    registerFallbackValue(const AppSettings.defaults());
   });
 
   setUp(() {
@@ -62,6 +63,7 @@ void main() {
     countdownBloc = MockCountdownBloc();
     settings = const AppSettings.defaults();
     when(() => settingsCubit.state).thenReturn(settings);
+    when(() => settingsCubit.update(any())).thenAnswer((_) => Future.value());
     when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
     when(() => databaseBloc.state).thenReturn(
       const DatabaseState(

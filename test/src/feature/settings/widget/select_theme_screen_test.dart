@@ -27,6 +27,7 @@ void main() {
   setUp(() {
     settingsCubit = MockSettingsCubit();
     when(() => settingsCubit.state).thenReturn(const AppSettings.defaults());
+    when(() => settingsCubit.update(any())).thenAnswer((_) => Future.value());
   });
 
   group('SelectThemeScreen tests', () {

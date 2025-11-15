@@ -40,7 +40,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   // _SelectBondedDeviceScreen();
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
 
     _isDiscovering = widget.checkAvailability;
@@ -50,19 +50,20 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
     }
 
     // Setup a list of the bonded devices
-    await FlutterBluetoothSerial.instance.getBondedDevices().then((bondedDevices) {
-      setState(() {
-        devices =
-            bondedDevices
-                .map(
-                  (device) => BluetoothDeviceWithAvailability(
-                    device,
-                    widget.checkAvailability ? BluetoothDeviceAvailability.maybe : BluetoothDeviceAvailability.yes,
-                  ),
-                )
-                .toList();
-      });
-    });
+    unawaited(
+      FlutterBluetoothSerial.instance.getBondedDevices().then((bondedDevices) {
+        setState(() {
+          devices = bondedDevices
+              .map(
+                (device) => BluetoothDeviceWithAvailability(
+                  device,
+                  widget.checkAvailability ? BluetoothDeviceAvailability.maybe : BluetoothDeviceAvailability.yes,
+                ),
+              )
+              .toList();
+        });
+      }),
+    );
   }
 
   void _restartDiscovery() {
@@ -95,27 +96,26 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     // Avoid memory leak (`setState` after dispose) and cancel discovery
-    await _discoveryStreamSubscription?.cancel();
+    unawaited(_discoveryStreamSubscription?.cancel());
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final list =
-        devices
-            .map(
-              (device) => BluetoothDeviceListEntry(
-                device: device.device,
-                rssi: device.rssi,
-                //      enabled: _device.availability == BluetoothDeviceAvailability.yes,
-                onTap: () {
-                  Navigator.of(context).pop(device);
-                },
-              ),
-            )
-            .toList();
+    final list = devices
+        .map(
+          (device) => BluetoothDeviceListEntry(
+            device: device.device,
+            rssi: device.rssi,
+            //      enabled: _device.availability == BluetoothDeviceAvailability.yes,
+            onTap: () {
+              Navigator.of(context).pop(device);
+            },
+          ),
+        )
+        .toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(Localization.current.I18nBluetooth_selectDevice),
