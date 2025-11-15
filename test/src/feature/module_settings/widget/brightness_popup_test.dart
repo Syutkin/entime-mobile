@@ -16,8 +16,8 @@ void main() {
     result = null;
   });
 
-  Widget testWidget({int? value}) {
-    initializeDateFormatting();
+  Future<Widget> testWidget({int? value}) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -42,7 +42,7 @@ void main() {
 
   group('brightnessPopup tests', () {
     patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -53,28 +53,28 @@ void main() {
     });
 
     patrolWidgetTest('Shows correct initial brightness value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(Localization.current.I18nModuleSettings_brightnessInt(5)), findsOneWidget);
     });
 
     patrolWidgetTest('Slider clamps big brightness values to 15', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(value: 111));
+      await $.pumpWidgetAndSettle(await testWidget(value: 111));
       await $(#button).tap();
 
       expect($(Localization.current.I18nModuleSettings_brightnessInt(15)), findsOneWidget);
     });
 
     patrolWidgetTest('Slider clamps small brightness values to 1', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(value: -111));
+      await $.pumpWidgetAndSettle(await testWidget(value: -111));
       await $(#button).tap();
 
       expect($(Localization.current.I18nModuleSettings_brightnessInt(1)), findsOneWidget);
     });
 
     patrolWidgetTest('Slider has correct properties', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final slider = $(Slider).evaluate().single.widget as Slider;
@@ -85,7 +85,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider value changes when dragged', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Перетаскиваем слайдер вправо (увеличиваем значение)
@@ -98,7 +98,7 @@ void main() {
     });
 
     patrolWidgetTest('Press OK button returns current brightness value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Изменяем значение слайдера
@@ -113,7 +113,7 @@ void main() {
     });
 
     patrolWidgetTest('Press Cancel button returns null', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Изменяем значение слайдера
@@ -127,7 +127,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider respects maximum value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Перетаскиваем слайдер в максимальное положение
@@ -139,7 +139,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider respects minimum value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Перетаскиваем слайдер в минимальное положение
@@ -151,7 +151,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog closes after OK button press', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -162,7 +162,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog closes after Cancel button press', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -173,7 +173,7 @@ void main() {
     });
 
     patrolWidgetTest('Brightness text updates when slider changes', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Запоминаем начальный текст яркости
@@ -197,7 +197,7 @@ void main() {
     });
 
     patrolWidgetTest('Returns correct integer value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(#okButton).tap();

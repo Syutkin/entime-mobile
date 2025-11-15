@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:math';
 
 import 'package:entime/src/common/utils/filesize.dart';

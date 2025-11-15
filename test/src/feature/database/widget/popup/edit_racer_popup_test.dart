@@ -20,8 +20,8 @@ void main() {
   late List<Rider> riders;
   late List<String?> categories;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return BlocProvider.value(
       value: databaseBloc,
       child: MaterialApp(
@@ -30,8 +30,8 @@ void main() {
         home: Builder(
           builder: (context) {
             return TextButton(
-              onPressed: () {
-                editRacerPopup(
+              onPressed: () async {
+                await editRacerPopup(
                   context: context,
                   participantAtStart: participantAtStart,
                   riders: riders,
@@ -108,13 +108,13 @@ void main() {
 
   group('editRacerPopup tests', () {
     patrolWidgetTest('Show dialog when button is tapped', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
     });
 
     patrolWidgetTest('Show dialog with correct title', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Text), findsWidgets);
       // Проверяем, что заголовок содержит номер и имя участника
@@ -122,68 +122,68 @@ void main() {
     });
 
     patrolWidgetTest('Show category dropdown', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_category), findsOneWidget);
     });
 
     patrolWidgetTest('Show rider dropdown', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_name), findsOneWidget);
     });
 
     patrolWidgetTest('Show nickname field', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_nickname), findsOneWidget);
     });
 
     patrolWidgetTest('Show birthday field', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_birthday), findsOneWidget);
     });
 
     patrolWidgetTest('Show team dropdown', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_team), findsOneWidget);
     });
 
     patrolWidgetTest('Show city dropdown', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_city), findsOneWidget);
     });
 
     patrolWidgetTest('Show email field', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_email), findsOneWidget);
     });
 
     patrolWidgetTest('Show phone field', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_phone), findsOneWidget);
     });
 
     patrolWidgetTest('Show comment field', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nDatabase_comment), findsOneWidget);
     });
 
     patrolWidgetTest('Show cancel and ok buttons', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(#cancelButton), findsOneWidget);
       expect($(#okButton), findsOneWidget);
     });
 
     patrolWidgetTest('Validate email with correct format', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Находим поле email и вводим правильный email
@@ -199,7 +199,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate email with incorrect format', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Находим поле email и вводим неправильный email
@@ -215,7 +215,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate nickname with correct format', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Находим поле nickname и вводим правильный никнейм
@@ -231,7 +231,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate nickname with incorrect format', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Находим поле nickname и вводим неправильный никнейм с запрещенными символами
@@ -247,7 +247,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate birthday with correct format', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Находим поле birthday и вводим правильную дату рождения
@@ -263,7 +263,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate birthday with incorrect format', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Находим поле birthday и вводим неправильную дату рождения
@@ -279,7 +279,7 @@ void main() {
     });
 
     patrolWidgetTest('Form saves successfully with valid data', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Нажимаем OK для сохранения (все данные уже валидные)
@@ -293,7 +293,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog closes when cancel button is pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Нажимаем кнопку отмены

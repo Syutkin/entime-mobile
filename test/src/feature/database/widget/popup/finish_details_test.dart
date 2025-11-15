@@ -14,8 +14,8 @@ void main() {
   late int number;
   late String finishTime;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -23,8 +23,8 @@ void main() {
         child: Builder(
           builder: (context) {
             return TextButton(
-              onPressed: () {
-                finishDetails(context, finish);
+              onPressed: () async {
+                await finishDetails(context, finish);
               },
               child: const Text('textButton', key: Key('button')),
             );
@@ -55,7 +55,7 @@ void main() {
 
   group('FinishDetailsPopup tests', () {
     patrolWidgetTest('Open dialog then close it when ok button pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(FinishDetailsPopup), findsOneWidget);
       await $(#okButton).tap();
@@ -63,7 +63,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog details', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nProtocol_finishTimeCutoff), findsOneWidget);
       expect($(Localization.current.I18nFinish_finishTime), findsOneWidget);
@@ -76,7 +76,7 @@ void main() {
     });
 
     patrolWidgetTest('Show finish info', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(finish.finishTime), findsOneWidget);
       expect($(DateFormat(longTimeFormat).format(finish.timestamp)), findsOneWidget);
@@ -96,7 +96,7 @@ void main() {
         isHidden: true,
         isManual: true,
       );
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(finish.finishTime), findsOneWidget);
       expect($(DateFormat(longTimeFormat).format(finish.timestamp)), findsOneWidget);

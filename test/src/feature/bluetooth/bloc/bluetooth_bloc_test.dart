@@ -9,7 +9,6 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../helpers/shared_prefs_defaults.dart';
 
@@ -17,17 +16,11 @@ class MockBluetoothProvider extends Mock implements BluetoothProvider {}
 
 class MockAppDatabase extends Mock implements AppDatabase {}
 
-class MockAudioService extends Mock implements AudioService {}
-
 class MockAudioController extends Mock implements AudioController {}
 
 class MockBluetoothBackgroundConnection extends Mock implements BluetoothBackgroundConnection {}
 
 class MockFlutterBluetoothSerial extends Mock implements FlutterBluetoothSerial {}
-
-class MockSettingsProvider extends Mock implements ISettingsProvider {}
-
-class MockWakelockPlus extends Mock implements WakelockPlus {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

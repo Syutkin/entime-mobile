@@ -12,8 +12,8 @@ void main() {
     result = null;
   });
 
-  Widget testWidget({String? ssid}) {
-    initializeDateFormatting();
+  Future<Widget> testWidget({String? ssid}) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -37,7 +37,7 @@ void main() {
 
   group('wifiSettingsPopup tests', () {
     patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -50,7 +50,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter valid wifi credentials and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим SSID в первое поле
@@ -64,7 +64,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter empty credentials and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).at(0).enterText('');
@@ -76,7 +76,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter only SSID without password', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).at(0).enterText('OpenWiFiNetwork');
@@ -88,7 +88,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter only password without SSID', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).at(0).enterText('');
@@ -100,7 +100,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter special characters in credentials', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).at(0).enterText('WiFi_Network-123');
@@ -112,7 +112,7 @@ void main() {
     });
 
     patrolWidgetTest('Press Cancel button', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).at(0).enterText('MyWiFiNetwork');
@@ -124,7 +124,7 @@ void main() {
     });
 
     patrolWidgetTest('SSID field has correct properties', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final ssidField = $(TextField).at(0).evaluate().single.widget as TextField;
@@ -133,7 +133,7 @@ void main() {
     });
 
     patrolWidgetTest('Password field has correct properties', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final passwordField = $(TextField).at(1).evaluate().single.widget as TextField;
@@ -142,7 +142,7 @@ void main() {
     });
 
     patrolWidgetTest('Password field toggle visibility', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final passwordField = $(TextField).at(1).evaluate().single.widget as TextField;
@@ -158,7 +158,7 @@ void main() {
     });
 
     patrolWidgetTest('Fields update result on text change', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим текст по частям и проверяем, что результат обновляется
@@ -172,7 +172,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog closes after OK button press', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -184,7 +184,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog closes after Cancel button press', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -196,7 +196,7 @@ void main() {
     });
 
     patrolWidgetTest('SSID field is focused by default', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final ssidField = $(TextField).at(0).evaluate().single.widget as TextField;
@@ -204,7 +204,7 @@ void main() {
     });
 
     patrolWidgetTest('Multiple popup opens and closes correctly', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       // Открываем первый popup
       await $(#button).tap();
@@ -230,7 +230,7 @@ void main() {
     });
 
     patrolWidgetTest('Long wifi credentials are handled correctly', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       const longSsid = 'VeryLongWiFiNetworkNameThatExceedsNormalLength123456789';
@@ -244,7 +244,7 @@ void main() {
     });
 
     patrolWidgetTest('Unicode characters in credentials', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       const unicodeSsid = 'WiFi_Сеть_网络_네트워크';
@@ -259,7 +259,7 @@ void main() {
 
     patrolWidgetTest('Pre-filled SSID parameter', (PatrolTester $) async {
       const preFilledSsid = 'PreFilledNetwork';
-      await $.pumpWidgetAndSettle(testWidget(ssid: preFilledSsid));
+      await $.pumpWidgetAndSettle(await testWidget(ssid: preFilledSsid));
       await $(#button).tap();
 
       // Проверяем, что SSID поле предзаполнено
@@ -275,7 +275,7 @@ void main() {
     });
 
     patrolWidgetTest('Empty SSID parameter', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(ssid: ''));
+      await $.pumpWidgetAndSettle(await testWidget(ssid: ''));
       await $(#button).tap();
 
       // Проверяем, что SSID поле пустое
@@ -292,7 +292,7 @@ void main() {
     });
 
     patrolWidgetTest('Null SSID parameter', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Проверяем, что SSID поле пустое
@@ -309,7 +309,7 @@ void main() {
     });
 
     patrolWidgetTest('Password field shows/hides password correctly', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим пароль
@@ -337,7 +337,7 @@ void main() {
     });
 
     patrolWidgetTest('Keyboard navigation between fields', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Проверяем, что SSID поле в фокусе по умолчанию
@@ -355,7 +355,7 @@ void main() {
     });
 
     patrolWidgetTest('Special characters in SSID and password', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       const specialSsid = r'WiFi-Network_123@#$%^&*()';
@@ -370,7 +370,7 @@ void main() {
     });
 
     patrolWidgetTest('Very long credentials handling', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final veryLongSsid = 'A' * 1000; // Очень длинный SSID

@@ -13,8 +13,8 @@ void main() {
     rate = 0.3;
   });
 
-  Widget testWidget(double rate) {
-    initializeDateFormatting();
+  Future<Widget> testWidget(double rate) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -35,7 +35,7 @@ void main() {
 
   group('setPitchPopup tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(rate));
+      await $.pumpWidgetAndSettle(await testWidget(rate));
       await $(#button).tap();
       expect($(Localization.current.I18nSettings_voiceRate), findsOneWidget);
       expect($(AlertDialog), findsOneWidget);
@@ -44,7 +44,7 @@ void main() {
     });
 
     patrolWidgetTest('Slide and get new size', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(rate));
+      await $.pumpWidgetAndSettle(await testWidget(rate));
       await $(#button).tap();
       await $.tester.drag($(Slider), const Offset(55, 0));
       await $(#okButton).tap();
@@ -52,7 +52,7 @@ void main() {
     });
 
     patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(rate));
+      await $.pumpWidgetAndSettle(await testWidget(rate));
       await $(#button).tap();
       await $(#cancelButton).tap();
       await expectLater(result, isNull);

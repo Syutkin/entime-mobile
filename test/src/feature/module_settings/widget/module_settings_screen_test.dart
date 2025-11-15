@@ -36,8 +36,8 @@ void main() {
           home: Builder(
             builder: (context) {
               return TextButton(
-                onPressed: () {
-                  Navigator.of(
+                onPressed: () async {
+                  await Navigator.of(
                     context,
                   ).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
                 },

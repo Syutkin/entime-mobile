@@ -15,8 +15,8 @@ void main() {
     title = 'title';
   });
 
-  Widget testWidget(int delay) {
-    initializeDateFormatting();
+  Future<Widget> testWidget(int delay) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -37,7 +37,7 @@ void main() {
 
   group('setDelayPopup tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delay));
+      await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       expect($(title), findsOneWidget);
       expect($(AlertDialog), findsOneWidget);
@@ -46,7 +46,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter wrong delay', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delay));
+      await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
       await $(#okButton).tap();
@@ -54,7 +54,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter correct seconds and return it from ok pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delay));
+      await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText((delay + delay).toString());
       await $(#okButton).tap();
@@ -62,7 +62,7 @@ void main() {
     });
 
     patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delay));
+      await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
       await $(#cancelButton).tap();

@@ -15,8 +15,8 @@ void main() {
   late DatabaseBloc databaseBloc;
   late Stage stage;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return BlocProvider.value(
       value: databaseBloc,
       child: MaterialApp(
@@ -25,8 +25,8 @@ void main() {
         home: Builder(
           builder: (context) {
             return TextButton(
-              onPressed: () {
-                addRacerPopup(context: context, stage: stage);
+              onPressed: () async {
+                await addRacerPopup(context: context, stage: stage);
               },
               child: const Text('textButton', key: Key('button')),
             );
@@ -66,13 +66,13 @@ void main() {
 
   group('addRacerPopup tests', () {
     patrolWidgetTest('Show dialog when button is tapped', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
     });
 
     patrolWidgetTest('Show dialog with correct title', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Text), findsWidgets);
       // Проверяем, что заголовок содержит правильный текст
@@ -80,26 +80,26 @@ void main() {
     });
 
     patrolWidgetTest('Show TextFormField for number input', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(TextFormField), findsOneWidget);
     });
 
     patrolWidgetTest('Show CupertinoTimerPicker', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(CupertinoTimerPicker), findsOneWidget);
     });
 
     patrolWidgetTest('Show cancel and ok buttons', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       // Проверяем наличие кнопок отмены и подтверждения
       expect($(TextButton), findsWidgets);
     });
 
     patrolWidgetTest('Close dialog when cancel button is pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
 
@@ -111,7 +111,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate form when ok button is pressed with empty number', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Нажимаем OK без ввода номера
@@ -122,7 +122,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate form when ok button is pressed with invalid number', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим неверный номер (0)
@@ -137,7 +137,7 @@ void main() {
     });
 
     patrolWidgetTest('Validate form when ok button is pressed with negative number', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим отрицательный номер
@@ -152,7 +152,7 @@ void main() {
     });
 
     patrolWidgetTest('Successfully add racer with valid number', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим валидный номер
@@ -170,7 +170,7 @@ void main() {
     });
 
     patrolWidgetTest('TextFormField has correct properties', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Проверяем наличие TextFormField с правильными свойствами
@@ -179,14 +179,14 @@ void main() {
     });
 
     patrolWidgetTest('CupertinoTimerPicker is present', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(CupertinoTimerPicker), findsOneWidget);
     });
 
     patrolWidgetTest('Dialog closes after successful form submission', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим валидный номер
@@ -201,7 +201,7 @@ void main() {
     });
 
     patrolWidgetTest('DatabaseBloc receives correct event data', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Вводим валидный номер
@@ -227,7 +227,7 @@ void main() {
     });
 
     patrolWidgetTest('CupertinoTimerPicker onTimerDurationChanged callback works correctly', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Получаем CupertinoTimerPicker

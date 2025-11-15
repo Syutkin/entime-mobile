@@ -1,5 +1,4 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
-import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
@@ -11,7 +10,6 @@ import 'package:entime/src/feature/csv/logic/startlist_provider.dart';
 import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/settings/settings.dart';
-import 'package:entime/src/feature/tab/tab.dart';
 import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,17 +28,17 @@ class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
 class MockTtsProvider extends Mock implements TtsProvider {}
 
-class MockAudioService extends Mock implements AudioService {}
+// class MockAudioService extends Mock implements AudioService {}
 
 class MockIAudioController extends Mock implements IAudioController {}
 
-class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
+// class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
-class MockTabCubit extends MockCubit<AppTab> implements TabCubit {}
+// class MockTabCubit extends MockCubit<AppTab> implements TabCubit {}
 
-class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState> implements UpdateBloc {}
+// class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState> implements UpdateBloc {}
 
-class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
+// class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
 class MockAppDatabase extends Mock implements AppDatabase {}
 

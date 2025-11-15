@@ -16,8 +16,8 @@ void main() {
     result = null;
   });
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -40,8 +40,8 @@ void main() {
     );
   }
 
-  Widget testWidgetWithValue(int? initialValue) {
-    initializeDateFormatting();
+  Future<Widget> testWidgetWithValue(int? initialValue) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -67,7 +67,7 @@ void main() {
 
   group('vccPopup tests', () {
     patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -79,7 +79,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter valid number and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('42');
@@ -90,7 +90,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter invalid number and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('abc');
@@ -101,7 +101,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter empty text and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('');
@@ -112,7 +112,7 @@ void main() {
     });
 
     patrolWidgetTest('Press Cancel button', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('42');
@@ -123,7 +123,7 @@ void main() {
     });
 
     patrolWidgetTest('TextField has correct properties', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final textField = $(TextField).evaluate().single.widget as TextField;
@@ -133,7 +133,7 @@ void main() {
     });
 
     patrolWidgetTest('Number parsing works correctly', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Test positive number
@@ -157,7 +157,7 @@ void main() {
     });
 
     patrolWidgetTest('Popup closes after interaction', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -174,7 +174,7 @@ void main() {
     });
 
     patrolWidgetTest('TextField focus behavior', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final textField = $(TextField).evaluate().single.widget as TextField;
@@ -182,7 +182,7 @@ void main() {
     });
 
     patrolWidgetTest('Initial value is displayed correctly', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidgetWithValue(123));
+      await $.pumpWidgetAndSettle(await testWidgetWithValue(123));
       await $(#button).tap();
 
       // Check that the text field contains the initial value
@@ -191,7 +191,7 @@ void main() {
     });
 
     patrolWidgetTest('Initial value with null', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidgetWithValue(null));
+      await $.pumpWidgetAndSettle(await testWidgetWithValue(null));
       await $(#button).tap();
 
       final textField = $(TextField).evaluate().single.widget as TextField;
@@ -199,7 +199,7 @@ void main() {
     });
 
     patrolWidgetTest('Edit initial value and confirm', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidgetWithValue(100));
+      await $.pumpWidgetAndSettle(await testWidgetWithValue(100));
       await $(#button).tap();
 
       // Clear the field and enter new value
@@ -212,7 +212,7 @@ void main() {
     });
 
     patrolWidgetTest('Edit initial value and cancel', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidgetWithValue(100));
+      await $.pumpWidgetAndSettle(await testWidgetWithValue(100));
       await $(#button).tap();
 
       // Clear the field and enter new value
@@ -225,7 +225,7 @@ void main() {
     });
 
     patrolWidgetTest('Mixed valid and invalid inputs', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Test valid input
@@ -249,7 +249,7 @@ void main() {
     });
 
     patrolWidgetTest('Number with leading/trailing whitespace', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('  42  ');
@@ -260,7 +260,7 @@ void main() {
     });
 
     patrolWidgetTest('Multiple popup interactions', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       // First interaction
       await $(#button).tap();

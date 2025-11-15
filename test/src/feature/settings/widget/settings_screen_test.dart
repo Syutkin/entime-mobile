@@ -12,11 +12,8 @@ import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../helpers/shared_prefs_defaults.dart';
-
-class MockWakelockPlus extends Mock implements WakelockPlus {}
 
 class MockAudioBloc extends MockBloc<AudioEvent, AudioState> implements AudioBloc {}
 

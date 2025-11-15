@@ -18,13 +18,13 @@ void main() {
     controller.dispose();
   });
 
-  Widget testWidget({
+  Future<Widget> testWidget({
     String label = 'Password',
     String? hint,
     TextEditingController? controller,
     ValueChanged<String>? onChanged,
-  }) {
-    initializeDateFormatting();
+  }) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -44,7 +44,7 @@ void main() {
 
   group('PasswordTextField tests', () {
     patrolWidgetTest('Initial build with default values', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       // Проверяем, что TextField отображается
       expect($(TextField), findsOneWidget);
@@ -62,7 +62,7 @@ void main() {
 
     patrolWidgetTest('Initial build with custom label and hint', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(
-        testWidget(
+        await testWidget(
           label: 'Custom Label',
           hint: 'Enter your password',
         ),
@@ -76,7 +76,7 @@ void main() {
     });
 
     patrolWidgetTest('Toggle password visibility', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       // Проверяем начальное состояние - пароль скрыт
       expect($(Icons.visibility), findsOneWidget);
@@ -100,7 +100,7 @@ void main() {
     });
 
     patrolWidgetTest('Text input functionality', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(controller: controller));
+      await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       // Вводим текст
       await $(TextField).enterText('testPassword123');
@@ -112,7 +112,7 @@ void main() {
 
     patrolWidgetTest('onChanged callback', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(
-        testWidget(
+        await testWidget(
           controller: controller,
           onChanged: (value) => onChangedResult = value,
         ),
@@ -127,7 +127,7 @@ void main() {
     });
 
     patrolWidgetTest('Controller updates widget', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(controller: controller));
+      await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       // Устанавливаем текст через контроллер
       controller.text = 'controllerText';
@@ -138,7 +138,7 @@ void main() {
     });
 
     patrolWidgetTest('Clear text functionality', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(controller: controller));
+      await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       // Вводим текст
       await $(TextField).enterText('clearTest');
@@ -152,7 +152,7 @@ void main() {
     });
 
     patrolWidgetTest('Long text input', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(controller: controller));
+      await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       const longText = 'veryLongPasswordThatMightOverflowTheTextfield';
       await $(TextField).enterText(longText);
@@ -163,7 +163,7 @@ void main() {
     });
 
     patrolWidgetTest('Special characters input', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(controller: controller));
+      await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       const specialText = r'!@#$%^&*()_+-=[]{}|;:,.<>?';
       await $(TextField).enterText(specialText);

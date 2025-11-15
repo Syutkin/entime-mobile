@@ -32,8 +32,8 @@ void main() {
   late SettingsCubit settingsCubit;
   late AppSettings settings;
 
-  Widget testWithLocale(Widget widget) {
-    initializeDateFormatting();
+  Future<Widget> testWithLocale(Widget widget) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -77,7 +77,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsOneWidget);
@@ -106,7 +106,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item, countdown: countdown)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item, countdown: countdown)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsNothing);
@@ -135,7 +135,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.dns.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsOneWidget);
@@ -164,7 +164,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.dnf.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsOneWidget);
@@ -193,7 +193,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.dns.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsOneWidget);
@@ -222,7 +222,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item, isHighlighted: true)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item, isHighlighted: true)));
 
       final context = $.tester.element(find.byType(StartItemTile));
       final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
@@ -261,7 +261,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
       final context = $.tester.element(find.byType(StartItemTile));
       final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
@@ -302,7 +302,7 @@ void main() {
           timestampCorrection: timestampCorrection,
           statusId: ParticipantStatus.active.index,
         );
-        await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+        await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
         final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
 
@@ -342,7 +342,7 @@ void main() {
         statusId: ParticipantStatus.active.index,
         ntpOffset: settings.startDifferenceThreshold,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
       final color = ($.tester.firstWidget(find.byType(Card)) as Card).color;
 
@@ -375,7 +375,7 @@ void main() {
         timestampCorrection: timestampCorrection,
         statusId: ParticipantStatus.active.index,
       );
-      await $.pumpWidgetAndSettle(testWithLocale(StartItemTile(item: item)));
+      await $.pumpWidgetAndSettle(await testWithLocale(StartItemTile(item: item)));
 
       expect($(number.toString()), findsOneWidget);
       expect($(startTime), findsOneWidget);

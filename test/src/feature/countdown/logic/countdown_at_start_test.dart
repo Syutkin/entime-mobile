@@ -21,9 +21,7 @@ void main() {
     db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory()));
 
     // populate DB
-    for (final query in PopDB().queries) {
-      db.customInsert(query);
-    }
+    PopDB().queries.forEach(db.customInsert);
 
     defaults = const AppSettings.defaults();
 

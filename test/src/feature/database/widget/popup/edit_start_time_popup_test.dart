@@ -36,8 +36,8 @@ void main() {
   late String manualStartTime;
   late int manualCorrection;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -47,8 +47,8 @@ void main() {
           child: Builder(
             builder: (context) {
               return TextButton(
-                onPressed: () {
-                  editStartTime(context, item);
+                onPressed: () async {
+                  await editStartTime(context, item);
                 },
                 child: const Text('textButton', key: Key('button')),
               );
@@ -114,13 +114,13 @@ void main() {
 
   group('editStartTime tests', () {
     patrolWidgetTest('Initial showDialog popup', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
     });
 
     patrolWidgetTest('Correct populate showDialog with existing data', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nStart_participantNumber(item.number)), findsNothing);
       expect($(Localization.current.I18nStart_participantNumberWithName(item.number, item.name)), findsOneWidget);
@@ -159,7 +159,7 @@ void main() {
         manualStartTime: manualStartTime,
         manualCorrection: manualCorrection,
       );
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nStart_participantNumber(item.number)), findsOneWidget);
       expect($(Localization.current.I18nStart_participantNumberWithName(item.number, item.name)), findsNothing);
@@ -194,7 +194,7 @@ void main() {
         manualCorrection: manualCorrection,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nStart_participantCategory(item.category!)), findsNothing);
       expect($(Localization.current.I18nStart_participantNickname(item.nickname!)), findsNothing);
@@ -204,7 +204,7 @@ void main() {
     });
 
     patrolWidgetTest('Correct show TextFormFields', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(TextFormField), findsNWidgets(7));
@@ -214,7 +214,7 @@ void main() {
     });
 
     patrolWidgetTest('Correct populate TextFormFields with existing data', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(startTime), findsOneWidget);
@@ -227,7 +227,7 @@ void main() {
     });
 
     patrolWidgetTest('Validators is set to start times', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextFormField).containing(Localization.current.I18nStart_startTime).at(0).enterText('A');
@@ -237,7 +237,7 @@ void main() {
     });
 
     patrolWidgetTest('Validators is set to corrections', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextFormField).containing(Localization.current.I18nCore_correction).at(1).enterText('A');
@@ -246,7 +246,7 @@ void main() {
     });
 
     patrolWidgetTest('Press cancel', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#cancelButton).tap();
       verifyNever(() => databaseBloc.add(any()));
@@ -254,7 +254,7 @@ void main() {
     });
 
     patrolWidgetTest('Press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#okButton).tap();
       verify(
@@ -275,7 +275,7 @@ void main() {
     });
 
     patrolWidgetTest('Press OK checks validation', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(TextFormField).containing(Localization.current.I18nStart_startTime).at(0).enterText('A');
       await $(#okButton).tap();

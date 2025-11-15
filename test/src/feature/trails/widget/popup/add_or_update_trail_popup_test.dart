@@ -48,8 +48,8 @@ void main() {
 
   late TrackFile dummyTrack;
 
-  Widget testAddWidget() {
-    initializeDateFormatting();
+  Future<Widget> testAddWidget() async {
+    await initializeDateFormatting();
     return BlocProvider.value(
       value: databaseBloc,
       child: BlocProvider.value(
@@ -73,8 +73,8 @@ void main() {
     );
   }
 
-  Widget testUpdateWidget(TrailInfo trail) {
-    initializeDateFormatting();
+  Future<Widget> testUpdateWidget(TrailInfo trail) async {
+    await initializeDateFormatting();
     return BlocProvider.value(
       value: databaseBloc,
       child: BlocProvider.value(
@@ -162,7 +162,7 @@ void main() {
       patrolWidgetTest('Shows add trail dialog', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         expect($(ExpandedAlertDialog), findsOneWidget);
@@ -171,7 +171,7 @@ void main() {
       patrolWidgetTest('Fields are visible', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         expect($(Localization.current.I18nDatabase_trailName), findsOneWidget);
@@ -188,7 +188,7 @@ void main() {
       patrolWidgetTest('When adding trail shows "edit race"', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         expect($(Localization.current.I18nDatabase_editRace), findsOneWidget);
@@ -197,7 +197,7 @@ void main() {
       patrolWidgetTest('Do not show icons when state is initial at GPX track field', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         expect(
@@ -221,7 +221,7 @@ void main() {
       patrolWidgetTest('Show icons when state is initialized at GPX track field', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         expect(
@@ -237,7 +237,7 @@ void main() {
       patrolWidgetTest('Show loading indicator when state is loading track at GPX track field', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.loadingTrack(trails: []));
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         expect(
@@ -253,7 +253,7 @@ void main() {
       patrolWidgetTest('Enter trail description', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -278,7 +278,7 @@ void main() {
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
         );
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         await $(#addTrackIconButton).tap();
@@ -300,7 +300,7 @@ void main() {
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
         );
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         await $(#addTrackIconButton).tap();
@@ -340,7 +340,7 @@ void main() {
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => PlatformFile(name: 'test.gpx', size: 100, bytes: Uint8List(100)),
         );
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         await $(#addTrackIconButton).tap();
@@ -357,7 +357,7 @@ void main() {
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => null,
         );
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         await $(#addTrackIconButton).tap();
@@ -376,7 +376,7 @@ void main() {
           (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
         );
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
         await $(#addTrackIconButton).tap();
 
@@ -416,7 +416,7 @@ void main() {
       patrolWidgetTest('Cancels dialog', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         await $(#cancelButton).tap();
@@ -429,7 +429,7 @@ void main() {
       patrolWidgetTest('Shows update trail dialog with existing data', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: [trail]));
 
-        await $.pumpWidgetAndSettle(testUpdateWidget(trail));
+        await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
         expect($(ExpandedAlertDialog), findsOneWidget);
@@ -446,7 +446,7 @@ void main() {
         when(() => trailsBloc.state).thenReturn(
           TrailsState.initialized(trails: [trail]),
         );
-        await $.pumpWidgetAndSettle(testUpdateWidget(trail));
+        await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
         verify(
@@ -465,7 +465,7 @@ void main() {
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
         );
-        await $.pumpWidgetAndSettle(testUpdateWidget(trail));
+        await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
         await $(#addTrackIconButton).tap();
@@ -491,7 +491,7 @@ void main() {
           ),
         );
 
-        await $.pumpWidgetAndSettle(testUpdateWidget(trail));
+        await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
         expect($(TextFormField).containing($(fileName + fileExtension)), findsOneWidget);
@@ -509,7 +509,7 @@ void main() {
       patrolWidgetTest('Updates trail with new data', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
-        await $.pumpWidgetAndSettle(testUpdateWidget(trail));
+        await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -551,7 +551,7 @@ void main() {
       patrolWidgetTest('Validates when entering empty trail name', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         final textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -565,7 +565,7 @@ void main() {
       patrolWidgetTest('Validates when entering correct trail name', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         final textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -585,7 +585,7 @@ void main() {
       patrolWidgetTest('Validates when entering empty trail distance', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -608,7 +608,7 @@ void main() {
       patrolWidgetTest('Validates when entering correct trail distance', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -631,7 +631,7 @@ void main() {
       patrolWidgetTest('Validates when entering incorrect trail distance', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -653,7 +653,7 @@ void main() {
       patrolWidgetTest('Validates when entering not positive trail distance', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -684,7 +684,7 @@ void main() {
       patrolWidgetTest('Validates when entering empty trail elevation', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -707,7 +707,7 @@ void main() {
       patrolWidgetTest('Validates when entering correct trail elevation', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -730,7 +730,7 @@ void main() {
       patrolWidgetTest('Validates when entering incorrect trail elevation', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -752,7 +752,7 @@ void main() {
       patrolWidgetTest('Validates when entering empty trail url', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -775,7 +775,7 @@ void main() {
       patrolWidgetTest('Validates when entering correct trail url', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -798,7 +798,7 @@ void main() {
       patrolWidgetTest('Validates when entering incorrect trail url', (PatrolTester $) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         var textField = $(TextFormField).containing($(Localization.current.I18nDatabase_trailName));
@@ -832,7 +832,7 @@ void main() {
           ),
         );
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         final iconButton =
@@ -868,7 +868,7 @@ void main() {
           ),
         );
 
-        await $.pumpWidgetAndSettle(testAddWidget());
+        await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
 
         final iconButton =

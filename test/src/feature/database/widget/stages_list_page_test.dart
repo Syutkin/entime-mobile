@@ -20,8 +20,8 @@ void main() {
   late Race race;
   late Stage stage;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return BlocProvider.value(
       value: databaseBloc,
       child: BlocProvider.value(
@@ -59,7 +59,7 @@ void main() {
 
   group('StagesListPage tests', () {
     patrolWidgetTest('Initial page, no stages', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       expect($(AppBar).$(race.name), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
       expect($(StageItemTile), findsNothing);
@@ -67,7 +67,7 @@ void main() {
 
     patrolWidgetTest('Tap FAB, then add stage popup appears',
         (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(FloatingActionButton).tap();
       expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);
     });
@@ -86,7 +86,7 @@ void main() {
           race: race,
         ),
       );
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       expect($(StageItemTile), findsNWidgets(4));
     });
   });

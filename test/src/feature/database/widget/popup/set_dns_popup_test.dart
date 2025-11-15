@@ -9,8 +9,8 @@ void main() {
   late int number;
   late bool? result;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -35,21 +35,21 @@ void main() {
 
   group('setDnsPopup tests', () {
     patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nCore_confirmation), findsOneWidget);
       expect($(Localization.current.I18nStart_setDnsConfirmation(number)), findsOneWidget);
     });
 
     patrolWidgetTest('Tap Ok button', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#okButton).tap();
       expect(result, true);
     });
 
     patrolWidgetTest('Tap Cancel button', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#cancelButton).tap();
       expect(result, false);

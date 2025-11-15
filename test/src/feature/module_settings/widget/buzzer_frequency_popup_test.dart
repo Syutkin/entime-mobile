@@ -16,8 +16,8 @@ void main() {
     result = null;
   });
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -42,7 +42,7 @@ void main() {
 
   group('buzzerFrequencyPopup tests', () {
     patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -53,7 +53,7 @@ void main() {
     });
 
     patrolWidgetTest('Shows correct initial frequency value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Проверяем, что отображается правильная начальная частота
@@ -69,7 +69,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider has correct properties', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final slider = $(Slider).evaluate().single.widget as Slider;
@@ -80,7 +80,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider value changes when dragged', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Перетаскиваем слайдер вправо (увеличиваем значение)
@@ -93,7 +93,7 @@ void main() {
     });
 
     patrolWidgetTest('Press OK button returns current frequency value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Изменяем значение слайдера
@@ -108,7 +108,7 @@ void main() {
     });
 
     patrolWidgetTest('Press Cancel button returns null', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Изменяем значение слайдера
@@ -122,7 +122,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider respects maximum value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Перетаскиваем слайдер в максимальное положение
@@ -134,7 +134,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider respects minimum value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Перетаскиваем слайдер в минимальное положение
@@ -146,7 +146,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog closes after OK button press', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -157,7 +157,7 @@ void main() {
     });
 
     patrolWidgetTest('Dialog closes after Cancel button press', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -168,7 +168,7 @@ void main() {
     });
 
     patrolWidgetTest('Frequency text updates when slider changes', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Запоминаем начальный текст частоты
@@ -194,7 +194,7 @@ void main() {
     });
 
     patrolWidgetTest('Returns correct integer frequency value', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(#okButton).tap();
@@ -207,7 +207,7 @@ void main() {
       // Устанавливаем частоту, которой нет в списке notes
       frequency = 9999;
       
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final slider = $(Slider).evaluate().single.widget as Slider;
@@ -216,7 +216,7 @@ void main() {
     });
 
     patrolWidgetTest('All note frequencies are accessible', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Перетаскиваем слайдер в разные позиции и проверяем, что все ноты доступны
@@ -231,7 +231,7 @@ void main() {
     });
 
     patrolWidgetTest('Slider divisions match notes count', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final slider = $(Slider).evaluate().single.widget as Slider;

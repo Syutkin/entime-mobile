@@ -14,8 +14,6 @@ class MockSettingsProvider extends Mock implements ISettingsProvider {}
 
 class MockAppSettings extends Mock implements AppSettings {}
 
-class MockQueryRow extends Mock implements QueryRow {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late IAudioController ac;
@@ -30,9 +28,7 @@ void main() {
     db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory()));
 
     // populate DB
-    for (final query in PopDB().queries) {
-      db.customInsert(query);
-    }
+    PopDB().queries.forEach(db.customInsert);
     audioService = MockAudioService();
     settingsProvider = MockSettingsProvider();
     appSettings = MockAppSettings();
@@ -55,8 +51,8 @@ void main() {
 
   group('IAudioController tests', () {
     group('Beep tests', () {
-      test('Get beep', () {
-        ac.beep();
+      test('Get beep', () async {
+        await ac.beep();
         verify(() => audioService.countdown()).called(1);
       });
     });

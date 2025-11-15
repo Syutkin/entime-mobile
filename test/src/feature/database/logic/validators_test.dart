@@ -6,9 +6,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
 void main() {
-  setUpAll(() {
-    Localization.delegate.load(const Locale('ru'));
-    initializeDateFormatting();
+  setUpAll(() async {
+    await Localization.delegate.load(const Locale('ru'));
+    await initializeDateFormatting();
   });
 
   group('Validators tests', () {

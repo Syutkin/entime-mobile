@@ -9,8 +9,8 @@ void main() {
   late int delta;
   int? result;
 
-  Widget testWidget(int delta) {
-    initializeDateFormatting();
+  Future<Widget> testWidget(int delta) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -36,7 +36,7 @@ void main() {
 
   group('setDeltaInSecondsPopup tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       expect($(AlertDialog), findsOneWidget);
       expect($(TextFormField), findsOneWidget);
@@ -44,7 +44,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter wrong seconds', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
       await $(#okButton).tap();
@@ -52,7 +52,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter empty seconds', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('');
       await $(#okButton).tap();
@@ -60,7 +60,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter correct seconds and return it from ok pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
       await $(#okButton).tap();
@@ -68,7 +68,7 @@ void main() {
     });
 
     patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(delta));
+      await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
       await $(#cancelButton).tap();

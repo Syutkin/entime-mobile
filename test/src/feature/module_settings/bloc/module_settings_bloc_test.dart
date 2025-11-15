@@ -12,8 +12,8 @@ void main() {
       bloc = ModuleSettingsBloc();
     });
 
-    tearDown(() {
-      bloc.close();
+    tearDown(() async {
+      await bloc.close();
     });
 
     test('initial state is ModuleSettingsUninitialized', () {

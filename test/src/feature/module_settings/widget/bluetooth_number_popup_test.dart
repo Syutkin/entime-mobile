@@ -16,8 +16,8 @@ void main() {
     result = null;
   });
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -42,7 +42,7 @@ void main() {
 
   group('bluetoothNumberPopup tests', () {
     patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);
@@ -54,7 +54,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter valid number and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('42');
@@ -65,7 +65,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter invalid number and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('abc');
@@ -76,7 +76,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter empty text and press OK', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('');
@@ -87,7 +87,7 @@ void main() {
     });
 
     patrolWidgetTest('Press Cancel button', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       await $(TextField).enterText('42');
@@ -98,7 +98,7 @@ void main() {
     });
 
     patrolWidgetTest('TextField has correct properties', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       final textField = $(TextField).evaluate().single.widget as TextField;
@@ -108,7 +108,7 @@ void main() {
     });
 
     patrolWidgetTest('Number parsing works correctly', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       // Test positive number
@@ -132,7 +132,7 @@ void main() {
     });
 
     patrolWidgetTest('Popup closes after interaction', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(AlertDialog), findsOneWidget);

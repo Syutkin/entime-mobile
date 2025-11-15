@@ -18,8 +18,8 @@ void main() {
   late int number;
   late Tick tick;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -42,7 +42,7 @@ void main() {
 
   group('CountdownPage tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(Localization.current.I18nCountdown_countdown), findsOneWidget);
       expect($(Center), findsOneWidget);
@@ -50,7 +50,7 @@ void main() {
 
     patrolWidgetTest('Initial bloc state', (PatrolTester $) async {
       when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(Row), findsNothing);
       expect($(Column), findsNothing);
@@ -59,7 +59,7 @@ void main() {
     });
 
     patrolWidgetTest('Working bloc state, landscape (default for test) orientation', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(Row), findsOneWidget);
       expect($(Column), findsNothing);
@@ -69,7 +69,7 @@ void main() {
 
     patrolWidgetTest('Working bloc state, portrait orientation', (PatrolTester $) async {
       $.tester.view.physicalSize = const Size(1024, 2400);
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(Row), findsNothing);
       expect($(Column), findsOneWidget);

@@ -47,8 +47,8 @@ void main() {
     settings = const AppSettings.defaults();
   });
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -84,13 +84,13 @@ void main() {
         when(() => settingsCubit.state).thenReturn(settings);
       });
       patrolWidgetTest('Show initial widgets', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(StartItemTile), findsNothing);
         expect($(SliverPersistentHeader), findsOneWidget);
         expect($(FloatingActionButton), findsOneWidget);
       });
       patrolWidgetTest('Sliver legend', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nStart_sliverNumber), findsOneWidget);
         expect($(Localization.current.I18nStart_sliverStart), findsOneWidget);
         expect($(Localization.current.I18nStart_sliverManualCorrection), findsOneWidget);
@@ -116,7 +116,7 @@ void main() {
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         settings = settings.copyWith(countdown: true);
         when(() => settingsCubit.state).thenReturn(settings);
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(Positioned), findsOneWidget);
       });
       patrolWidgetTest('Show custom text', (PatrolTester $) async {
@@ -124,7 +124,7 @@ void main() {
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.working(tick: Tick(second: 0, text: text)));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(text), findsOneWidget);
       });
 
@@ -133,7 +133,7 @@ void main() {
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.working(tick: Tick(second: 0, text: text)));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxWidth, 75);
         expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxHeight, 75);
       });
@@ -143,7 +143,7 @@ void main() {
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.working(tick: Tick(second: 0, text: text)));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxWidth, 150);
         expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxHeight, 150);
       });
@@ -153,7 +153,7 @@ void main() {
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.working(tick: Tick(second: 0, text: text)));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $.tester.drag($(Draggable), const Offset(50, 50));
         await $.pumpAndSettle();
         verify(() => settingsCubit.update(settings.copyWith(countdownLeft: 50, countdownTop: 50))).called(1);
@@ -181,12 +181,12 @@ void main() {
       patrolWidgetTest('Hide when disabled at settings', (PatrolTester $) async {
         settings = settings.copyWith(startFab: false);
         when(() => settingsCubit.state).thenReturn(settings);
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(FloatingActionButton), findsNothing);
       });
       patrolWidgetTest('Default 75 size', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(($(SizedBox).containing($(FittedBox)).evaluate().single.widget as SizedBox).height, 75);
         expect(($(SizedBox).containing($(FittedBox)).evaluate().single.widget as SizedBox).width, 75);
       });
@@ -195,7 +195,7 @@ void main() {
         settings = settings.copyWith(startFabSize: 150);
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(($(SizedBox).containing($(FittedBox)).evaluate().single.widget as SizedBox).height, 150);
         expect(($(SizedBox).containing($(FittedBox)).evaluate().single.widget as SizedBox).width, 150);
       });
@@ -204,7 +204,7 @@ void main() {
         const offset = 1111;
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => ntpBloc.state).thenReturn(const NtpState.initial(offset));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FloatingActionButton).tap();
         final captured = verify(() => databaseBloc.add(captureAny())).captured;
 
@@ -229,7 +229,7 @@ void main() {
         const offset = 1111;
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => ntpBloc.state).thenReturn(const NtpState.initial(offset));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FloatingActionButton).tap();
         verifyNever(() => databaseBloc.add(captureAny()));
       });
@@ -251,14 +251,14 @@ void main() {
       patrolWidgetTest('Show default participants', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(StartItemTile), findsNWidgets(3));
       });
 
       patrolWidgetTest('Tap then edit start time', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(TextFormField), findsNothing);
         await $(StartItemTile).tap();
         expect($(TextFormField), findsNWidgets(7));
@@ -267,7 +267,7 @@ void main() {
       patrolWidgetTest('Long press then popup appears', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
         await $(StartItemTile).longPress();
         expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(2));
@@ -278,7 +278,7 @@ void main() {
       patrolWidgetTest('Long press on tile with automaticCorrection, then popup appears', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
         await $('6').longPress();
         expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(3));
@@ -290,7 +290,7 @@ void main() {
       patrolWidgetTest('Call replaceAutomaticCorrection popup, and confirm', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
         await $('6').longPress();
         await $(Localization.current.I18nStart_replaceAutomaticCorrection).tap();
@@ -313,7 +313,7 @@ void main() {
       patrolWidgetTest('Call edit racer popup', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(StartItemTile).longPress();
         await $(Localization.current.I18nCore_edit).tap();
         expect($(EditRacerPopup), findsOneWidget);
@@ -322,7 +322,7 @@ void main() {
       patrolWidgetTest('Call shift popup', (PatrolTester $) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(StartItemTile).longPress();
         await $(Localization.current.I18nStart_shiftStartsTime).tap();
         expect($(ShiftStartsTimePopup), findsOneWidget);
@@ -333,7 +333,7 @@ void main() {
         (PatrolTester $) async {
           when(() => settingsCubit.state).thenReturn(settings);
           when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           expect($(StartItemTile), findsNWidgets(3));
           await $.tester.drag($(StartItemTile).containing('11:00:00'), const Offset(-500, 0));
           await $.pumpAndSettle();
@@ -392,7 +392,7 @@ void main() {
 
       patrolWidgetTest('Show notification when updating starttime', (PatrolTester $) async {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-        await $.pumpWidget(testWidget());
+        await $.pumpWidget(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsNothing);
         await $.pumpAndSettle();
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
@@ -400,7 +400,7 @@ void main() {
 
       patrolWidgetTest('Do nothing when cancel pressed', (PatrolTester $) async {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
         await $(#cancelButton).tap();
         expect($(Localization.current.I18nCore_warning), findsNothing);
@@ -409,7 +409,7 @@ void main() {
 
       patrolWidgetTest('Do not update number when ok pressed, because stage must be selected', (PatrolTester $) async {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
         await $(#okButton).tap();
         expect($(Localization.current.I18nCore_warning), findsNothing);
@@ -459,7 +459,7 @@ void main() {
         ];
 
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
         expect($(Localization.current.I18nHome_equalStartTime('startTime2', 456, 123)), findsOneWidget);
 
@@ -516,7 +516,7 @@ void main() {
         ];
 
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
         expect(
           $(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'automaticStartTime')),
@@ -568,7 +568,7 @@ void main() {
         ];
 
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
         expect($(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'manualStartTime')), findsOneWidget);
       });

@@ -24,8 +24,8 @@ void main() {
   late SettingsCubit settingsCubit;
   late AppSettings settings;
 
-  Widget testWidget(Finish item) {
-    initializeDateFormatting();
+  Future<Widget> testWidget(Finish item) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -58,7 +58,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
 
       expect($(number.toString()), findsOneWidget);
       expect($(finishTime), findsOneWidget);
@@ -81,7 +81,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
 
       expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.handBackLeft);
     });
@@ -102,7 +102,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
 
       expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.cellphone);
     });
@@ -123,7 +123,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
       expect($(timestampStr), findsOneWidget);
       expect($(finishTime), findsNothing);
     });
@@ -150,7 +150,7 @@ void main() {
 
       final result = timestampStr.toDateTime()?.add(const Duration(milliseconds: ntpOffset)).format(longTimeFormat);
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
       expect($(result), findsOneWidget);
       expect($(finishTime), findsNothing);
     });
@@ -170,7 +170,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
 
       expect($(difference), findsOneWidget);
     });
@@ -194,7 +194,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
 
       final context = $.tester.element($(FinishItemTile));
       final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
@@ -227,7 +227,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
 
       final context = $.tester.element($(FinishItemTile));
       final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
@@ -263,7 +263,7 @@ void main() {
           number: number,
         );
 
-        await $.pumpWidgetAndSettle(testWidget(item));
+        await $.pumpWidgetAndSettle(await testWidget(item));
 
         final context = $.tester.element($(FinishItemTile));
         final cardColor = ($.tester.firstWidget($(Card)) as Card).color;
@@ -300,7 +300,7 @@ void main() {
         number: number,
       );
 
-      await $.pumpWidgetAndSettle(testWidget(item));
+      await $.pumpWidgetAndSettle(await testWidget(item));
 
       expect($(curDifference.toString()), findsOneWidget);
     });

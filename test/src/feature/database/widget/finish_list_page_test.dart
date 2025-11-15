@@ -31,8 +31,8 @@ void main() {
   late AppSettings settings;
   late Stage stage;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
@@ -79,7 +79,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNothing);
       });
@@ -100,7 +100,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNWidgets(count));
       });
@@ -121,7 +121,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(Localization.current.I18nProtocol_difference), findsNothing);
       });
@@ -142,7 +142,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(Localization.current.I18nProtocol_difference), findsOneWidget);
       });
@@ -164,7 +164,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
@@ -187,7 +187,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
@@ -210,7 +210,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
@@ -233,7 +233,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
@@ -256,7 +256,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
@@ -279,7 +279,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(FinishItemTile), findsNWidgets(expected));
       });
@@ -302,7 +302,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
@@ -322,7 +322,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FinishItemTile).tap();
         expect($(AlertDialog), findsOneWidget);
       });
@@ -343,7 +343,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FinishItemTile).longPress();
         expect($(Localization.current.I18nProtocol_clearNumber), findsNothing);
         expect($(Localization.current.I18nProtocol_hideAll), findsOneWidget);
@@ -366,7 +366,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FinishItemTile).at(1).longPress();
         expect($(Localization.current.I18nProtocol_clearNumber), findsOneWidget);
         expect($(Localization.current.I18nProtocol_hideAll), findsOneWidget);
@@ -389,7 +389,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FinishItemTile).at(1).longPress();
         await $(Localization.current.I18nProtocol_clearNumber).tap();
         verify(() => databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: 1))).called(1);
@@ -411,7 +411,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FinishItemTile).at(1).longPress();
         await $(Localization.current.I18nProtocol_hideAll).tap();
         verify(() => databaseBloc.add(DatabaseEvent.hideAllFinishes(stage.id))).called(1);
@@ -433,7 +433,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(FinishItemTile).at(1).longPress();
         await $(Localization.current.I18nCore_details).tap();
         expect($(FinishDetailsPopup), findsOneWidget);
@@ -455,7 +455,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(NumberOnTraceTile), findsNothing);
       });
@@ -475,7 +475,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($(NumberOnTraceTile), findsNWidgets(n));
       });
@@ -495,7 +495,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
 
         expect($('1'), findsOneWidget);
         expect($('2'), findsOneWidget);
@@ -518,7 +518,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(NumberOnTraceTile).longPress();
 
         expect($(PopupMenuItem<ParticipantStatus>), findsNWidgets(2));
@@ -542,7 +542,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(NumberOnTraceTile).longPress();
         await $(Localization.current.I18nProtocol_didNotStart).tap();
         verify(() => databaseBloc.add(DatabaseEvent.setDNSForStage(stage: stage, number: 1))).called(1);
@@ -564,7 +564,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(NumberOnTraceTile).longPress();
         await $(Localization.current.I18nProtocol_didNotFinish).tap();
         verify(() => databaseBloc.add(DatabaseEvent.setDNFForStage(stage: stage, number: 1))).called(1);
@@ -586,7 +586,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(NumberOnTraceTile).tap();
         verify(() => databaseBloc.add(const DatabaseEvent.selectAwaitingNumber(number: n))).called(1);
       });
@@ -621,7 +621,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(NumberOnTraceTile).tap();
         verify(() => databaseBloc.add(const DatabaseEvent.deselectAwaitingNumber())).called(1);
       });
@@ -667,7 +667,7 @@ void main() {
 
           whenListen(databaseBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(ListTile), findsNothing);
           await $.pumpAndSettle();
           expect($(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')), findsOneWidget);
@@ -691,7 +691,7 @@ void main() {
 
           whenListen(databaseBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(#cancelToast), findsNothing);
           await $.pumpAndSettle();
           expect($(#cancelToast), findsOneWidget);
@@ -732,7 +732,7 @@ void main() {
 
           whenListen(databaseBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(UpdateFinishTimePopup), findsNothing);
           await $.pump();
           expect($(UpdateFinishTimePopup), findsOneWidget);
@@ -786,7 +786,7 @@ void main() {
 
           whenListen(databaseBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(UpdateFinishTimePopup), findsNothing);
           await $.pump();
           expect($(UpdateFinishTimePopup), findsOneWidget);
@@ -817,7 +817,7 @@ void main() {
         );
         when(() => ntpBloc.state).thenReturn(const NtpState.success(ntpOffset));
         when(() => settingsCubit.state).thenReturn(settings);
-        await $.pumpWidget(testWidget());
+        await $.pumpWidget(await testWidget());
         await $(FloatingActionButton).tap();
         verify(() => databaseBloc.add(any())).called(1);
       });

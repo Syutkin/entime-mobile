@@ -25,9 +25,7 @@ void main() {
     db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
 
     // populate DB
-    for (final query in PopDB().queries) {
-      db.customInsert(query);
-    }
+    PopDB().queries.forEach(db.customInsert);
   });
 
   tearDown(() async {

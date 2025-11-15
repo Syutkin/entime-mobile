@@ -107,8 +107,8 @@ void main() {
     when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.uninitialized());
   });
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -145,14 +145,14 @@ void main() {
   group('HomeScreen tests', () {
     group('Main screen', () {
       patrolWidgetTest('Initial screen', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(#InitTab), findsOneWidget);
         expect($(#StartTab), findsOneWidget);
         expect($(#FinishTab), findsOneWidget);
       });
 
       patrolWidgetTest('Switch screens when tap on tabs', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(InitPage), findsOneWidget);
         expect($(StartPage), findsNothing);
         expect($(FinishPage), findsNothing);
@@ -173,18 +173,18 @@ void main() {
 
     group('FilterButton widget tests', () {
       patrolWidgetTest("Didn't visible at initial screen", (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(FilterButton).$(PopupMenuButton), findsNothing);
       });
       patrolWidgetTest('Filter button at start screen', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(#StartTab).tap();
         await $(FilterButton).tap();
         expect($(CheckedPopupMenuItem<FilterStart>), findsNWidgets(3));
         expect($(PopupMenuItem<FilterStart>), findsOneWidget);
       });
       patrolWidgetTest('Press show DNS', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showDNS, false);
         await $(#StartTab).tap();
         await $(FilterButton).tap();
@@ -192,7 +192,7 @@ void main() {
         expect(settingsCubit.state.showDNS, true);
       });
       patrolWidgetTest('Press show DNF', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showDNF, false);
         await $(#StartTab).tap();
         await $(FilterButton).tap();
@@ -200,7 +200,7 @@ void main() {
         expect(settingsCubit.state.showDNF, true);
       });
       patrolWidgetTest('Press show DSQ', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showDSQ, false);
         await $(#StartTab).tap();
         await $(FilterButton).tap();
@@ -208,7 +208,7 @@ void main() {
         expect(settingsCubit.state.showDSQ, true);
       });
       patrolWidgetTest('Press start defaults', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showDNS, false);
         expect(settingsCubit.state.showDNF, false);
         expect(settingsCubit.state.showDSQ, false);
@@ -230,14 +230,14 @@ void main() {
       });
 
       patrolWidgetTest('Filter button at finish screen', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         await $(#FinishTab).tap();
         await $(FilterButton).tap();
         expect($(CheckedPopupMenuItem<FilterFinish>), findsNWidgets(3));
         expect($(PopupMenuItem<FilterFinish>), findsOneWidget);
       });
       patrolWidgetTest('Press show hidden', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showHidden, false);
         await $(#FinishTab).tap();
         await $(FilterButton).tap();
@@ -245,7 +245,7 @@ void main() {
         expect(settingsCubit.state.showHidden, true);
       });
       patrolWidgetTest('Press show numbers', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showNumbers, true);
         await $(#FinishTab).tap();
         await $(FilterButton).tap();
@@ -253,7 +253,7 @@ void main() {
         expect(settingsCubit.state.showNumbers, false);
       });
       patrolWidgetTest('Press show manual', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showManual, true);
         await $(#FinishTab).tap();
         await $(FilterButton).tap();
@@ -261,7 +261,7 @@ void main() {
         expect(settingsCubit.state.showManual, false);
       });
       patrolWidgetTest('Press finish defaults', (PatrolTester $) async {
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect(settingsCubit.state.showHidden, false);
         expect(settingsCubit.state.showNumbers, true);
         expect(settingsCubit.state.showManual, true);
@@ -306,7 +306,7 @@ void main() {
             BluetoothBlocState.connected(message: BluetoothMessage.automaticStart(automaticStart: automaticStart)),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verify(
             () => databaseBloc.add(
               DatabaseEvent.updateAutomaticCorrection(
@@ -328,7 +328,7 @@ void main() {
             BluetoothBlocState.connected(message: BluetoothMessage.finish(time: 'time', timestamp: DateTime.now())),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verifyNever(() => databaseBloc.add(any()));
         });
 
@@ -353,7 +353,7 @@ void main() {
             BluetoothBlocState.connected(message: BluetoothMessage.finish(time: time, timestamp: timestamp)),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verify(
             () => databaseBloc.add(
               DatabaseEvent.addFinishTime(stage: stage, finishTime: time, timestamp: timestamp, ntpOffset: offset),
@@ -371,7 +371,7 @@ void main() {
             ),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verifyNever(() => databaseBloc.add(any()));
         });
 
@@ -382,7 +382,7 @@ void main() {
             const BluetoothBlocState.connected(message: BluetoothMessage.moduleSettings(json: json)),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verify(() => moduleSettingsBloc.add(const ModuleSettingsEvent.get(json))).called(1);
         });
       });
@@ -445,7 +445,7 @@ void main() {
             ),
           ];
           whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(AlertDialog), findsNothing);
           await $.pump();
           await $(#okButton).tap();
@@ -521,7 +521,7 @@ void main() {
             ),
           ];
           whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(AlertDialog), findsNothing);
           await $.pump();
           await $(#cancelButton).tap();
@@ -584,7 +584,7 @@ void main() {
             ),
           ];
           whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           expect($(AlertDialog), findsNothing);
           verifyNever(() => databaseBloc.add(any()));
         });
@@ -596,7 +596,7 @@ void main() {
           final expectedStates = [const UpdateState.initial(), const UpdateState.updateAvailable(version: version)];
           whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(SnackBar), findsNothing);
           await $.pump();
           expect($(Localization.current.I18nHome_updateAvailable(version)), findsOneWidget);
@@ -606,7 +606,7 @@ void main() {
           final expectedStates = [const UpdateState.initial(), const UpdateState.initial(changelog: 'changelog')];
           whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
           await $.pump();
           expect($(Localization.current.I18nUpdate_whatsNew), findsOneWidget);
@@ -618,7 +618,7 @@ void main() {
           final expectedStates = [const UpdateState.connecting(), const UpdateState.initial(changelog: 'changelog')];
           whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
           expect($(SnackBar), findsNothing);
         });
@@ -636,7 +636,7 @@ void main() {
           ];
           whenListen(updateBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidget(testWidget());
+          await $.pumpWidget(await testWidget());
           await $.pump();
           expect($(Localization.current.I18nUpdate_whatsNew), findsNothing);
           expect($(SnackBar), findsNothing);
@@ -669,7 +669,7 @@ void main() {
 
       group('Countdown listener', () {
         patrolWidgetTest('Call beep from app if enable at settings', (PatrolTester $) async {
-          settingsCubit.update(settingsCubit.state.copyWith(beepFromApp: true));
+          await settingsCubit.update(settingsCubit.state.copyWith(beepFromApp: true));
 
           final expectedStates = [
             const CountdownState.initial(),
@@ -682,7 +682,7 @@ void main() {
           ];
           whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verify(() => countdownBloc.add(const CountdownEvent.beep())).called(1);
         });
 
@@ -695,12 +695,12 @@ void main() {
           ];
           whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verifyNever(() => countdownBloc.add(any()));
         });
 
         patrolWidgetTest('Call participant from app if enable at settings', (PatrolTester $) async {
-          settingsCubit.update(settingsCubit.state.copyWith(voiceFromApp: true));
+          await settingsCubit.update(settingsCubit.state.copyWith(voiceFromApp: true));
 
           const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
 
@@ -726,7 +726,7 @@ void main() {
           ];
           whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verify(() => countdownBloc.add(CountdownEvent.callParticipant(stageId: stage.id))).called(1);
         });
 
@@ -740,12 +740,12 @@ void main() {
           ];
           whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verifyNever(() => countdownBloc.add(any()));
         });
 
         patrolWidgetTest("Don't call participant from app if stage not selected", (PatrolTester $) async {
-          settingsCubit.update(settingsCubit.state.copyWith(voiceFromApp: true));
+          await settingsCubit.update(settingsCubit.state.copyWith(voiceFromApp: true));
 
           final expectedStates = [
             const CountdownState.working(tick: Tick(second: 13, text: '')),
@@ -756,7 +756,7 @@ void main() {
           ];
           whenListen(countdownBloc, Stream.fromIterable(expectedStates));
 
-          await $.pumpWidgetAndSettle(testWidget());
+          await $.pumpWidgetAndSettle(await testWidget());
           verifyNever(() => countdownBloc.add(any()));
         });
       });
@@ -779,7 +779,7 @@ void main() {
             numbersOnTrace: [],
           ),
         );
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(TextTitle).$(Pubspec.name), findsOneWidget);
       });
 
@@ -796,7 +796,7 @@ void main() {
             race: race,
           ),
         );
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(TextTitle).$(race.name), findsOneWidget);
       });
 
@@ -814,7 +814,7 @@ void main() {
             stage: stage,
           ),
         );
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(TextTitle).$(stageName), findsOneWidget);
       });
 
@@ -831,7 +831,7 @@ void main() {
             stage: stage,
           ),
         );
-        await $.pumpWidgetAndSettle(testWidget());
+        await $.pumpWidgetAndSettle(await testWidget());
         expect($(TextTitle).$(stageName), findsOneWidget);
       });
     });

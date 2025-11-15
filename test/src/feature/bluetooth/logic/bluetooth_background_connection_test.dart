@@ -59,8 +59,8 @@ void main() {
     // mockFactory = MockBluetoothConnectionFactory();
   });
 
-  tearDown(() {
-    bbc.dispose();
+  tearDown(() async {
+    await bbc.dispose();
   });
 
   group('BluetoothBackgroundConnection', () {

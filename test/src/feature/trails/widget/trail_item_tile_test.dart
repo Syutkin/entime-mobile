@@ -30,8 +30,8 @@ void main() {
   late DatabaseBloc databaseBloc;
   late TrailsBloc trailsBloc;
 
-  Widget testWidget(TrailInfo trail) {
-    initializeDateFormatting();
+  Future<Widget> testWidget(TrailInfo trail) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -73,7 +73,7 @@ void main() {
 
   group('TrailItemTile tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(trail));
+      await $.pumpWidgetAndSettle(await testWidget(trail));
       expect($(trail.name), findsOneWidget);
       expect(($(ListTile).evaluate().single.widget as ListTile).subtitle, null);
       expect(($(Icon).at(0).evaluate().single.widget as Icon).icon, MdiIcons.mapMarkerOffOutline);
@@ -81,7 +81,7 @@ void main() {
 
     patrolWidgetTest('Trail with additional info', (PatrolTester $) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: 1);
-      await $.pumpWidgetAndSettle(testWidget(trail));
+      await $.pumpWidgetAndSettle(await testWidget(trail));
       expect($(trail.name), findsOneWidget);
       expect(($(ListTile).evaluate().single.widget as ListTile).subtitle, isA<Text>());
       expect($('${DateFormat.yMMMd().format(now)}, ${filesize(size)}'), findsOneWidget);
@@ -89,7 +89,7 @@ void main() {
     });
 
     patrolWidgetTest('Tap PopupMenuButton', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(trail));
+      await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       expect($(PopupMenuItem<void>), findsNWidgets(2));
       expect($(Localization.current.I18nCore_edit), findsOneWidget);
@@ -97,7 +97,7 @@ void main() {
     });
 
     patrolWidgetTest('Tap delete then ok', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(trail));
+      await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#okButton).tap();
@@ -105,7 +105,7 @@ void main() {
     });
 
     patrolWidgetTest('Tap delete then cancel', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(trail));
+      await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#cancelButton).tap();
@@ -114,7 +114,7 @@ void main() {
 
     patrolWidgetTest('Tap PopupMenuButton on trail with track', (PatrolTester $) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: id, fileExtension: 'gpx');
-      await $.pumpWidgetAndSettle(testWidget(trail));
+      await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       expect($(PopupMenuItem<void>), findsNWidgets(3));
       expect($(Localization.current.I18nCore_share), findsOneWidget);
@@ -126,7 +126,7 @@ void main() {
 
     patrolWidgetTest('Tap share', (PatrolTester $) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: id, fileExtension: 'gpx');
-      await $.pumpWidgetAndSettle(testWidget(trail));
+      await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_share).tap();
       verify(() => databaseBloc.add(DatabaseEvent.shareTrack(trail: trail))).called(1);

@@ -15,8 +15,8 @@ void main() {
     title = 'title';
   });
 
-  Widget testWidget(double size) {
-    initializeDateFormatting();
+  Future<Widget> testWidget(double size) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -37,7 +37,7 @@ void main() {
 
   group('setFloatingButtonSizePopup tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(size));
+      await $.pumpWidgetAndSettle(await testWidget(size));
       await $(#button).tap();
       expect($(title), findsOneWidget);
       expect($(AlertDialog), findsOneWidget);
@@ -46,7 +46,7 @@ void main() {
     });
 
     patrolWidgetTest('Slide and get new size', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(size));
+      await $.pumpWidgetAndSettle(await testWidget(size));
       await $(#button).tap();
       await $.tester.drag($(Slider), const Offset(50, 0));
       await $(#okButton).tap();
@@ -54,7 +54,7 @@ void main() {
     });
 
     patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(size));
+      await $.pumpWidgetAndSettle(await testWidget(size));
       await $(#button).tap();
       await $(#cancelButton).tap();
       await expectLater(result, isNull);

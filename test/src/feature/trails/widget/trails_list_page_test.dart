@@ -31,8 +31,8 @@ void main() {
   late TrailInfo trail1;
   late TrailInfo trail2;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return BlocProvider.value(
       value: databaseBloc,
       child: BlocProvider.value(
@@ -97,7 +97,7 @@ void main() {
     patrolWidgetTest('Initial page with loading state', (PatrolTester $) async {
       when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
-      await $.pumpWidget(testWidget());
+      await $.pumpWidget(await testWidget());
 
       expect($(AppBar).$(Localization.current.I18nDatabase_trails), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
@@ -108,7 +108,7 @@ void main() {
     patrolWidgetTest('Page with trails list', (PatrolTester $) async {
       when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: trails));
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(AppBar).$(Localization.current.I18nDatabase_trails), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
@@ -121,7 +121,7 @@ void main() {
     patrolWidgetTest('Empty trails list', (PatrolTester $) async {
       when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(AppBar).$(Localization.current.I18nDatabase_trails), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
@@ -132,7 +132,7 @@ void main() {
     patrolWidgetTest('Loading track state', (PatrolTester $) async {
       when(() => trailsBloc.state).thenReturn(TrailsState.loadingTrack(trails: trails));
 
-      await $.pumpWidget(testWidget());
+      await $.pumpWidget(await testWidget());
 
       expect($(AppBar).$(Localization.current.I18nDatabase_trails), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
@@ -143,7 +143,7 @@ void main() {
     patrolWidgetTest('Tap floating action button', (PatrolTester $) async {
       when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: trails));
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(FloatingActionButton).tap();
 
       expect($(ExpandedAlertDialog), findsOneWidget);
@@ -164,7 +164,7 @@ void main() {
 
       when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: manyTrails));
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($('Trail 1'), findsOneWidget);
       expect(await $('Trail 20').scrollTo(), findsOneWidget);
@@ -194,7 +194,7 @@ void main() {
       final mixedTrails = [trailWithFile, trailWithoutFile];
       when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: mixedTrails));
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(TrailItemTile), findsNWidgets(2));
       expect($('Trail with file'), findsOneWidget);

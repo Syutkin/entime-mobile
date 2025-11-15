@@ -13,8 +13,8 @@ void main() {
     pitch = 1.0;
   });
 
-  Widget testWidget(double pitch) {
-    initializeDateFormatting();
+  Future<Widget> testWidget(double pitch) async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -35,7 +35,7 @@ void main() {
 
   group('setPitchPopup tests', () {
     patrolWidgetTest('Initial build', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(pitch));
+      await $.pumpWidgetAndSettle(await testWidget(pitch));
       await $(#button).tap();
       expect($(Localization.current.I18nSettings_voicePitch), findsOneWidget);
       expect($(AlertDialog), findsOneWidget);
@@ -44,7 +44,7 @@ void main() {
     });
 
     patrolWidgetTest('Slide and get new size', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(pitch));
+      await $.pumpWidgetAndSettle(await testWidget(pitch));
       await $(#button).tap();
       await $.tester.drag($(Slider), const Offset(55, 0));
       await $(#okButton).tap();
@@ -52,7 +52,7 @@ void main() {
     });
 
     patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget(pitch));
+      await $.pumpWidgetAndSettle(await testWidget(pitch));
       await $(#button).tap();
       await $(#cancelButton).tap();
       await expectLater(result, isNull);

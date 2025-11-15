@@ -24,7 +24,7 @@ part 'app_database.g.dart';
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());
 
-  AppDatabase.customConnection(DatabaseConnection super.connection);
+  AppDatabase.customConnection(DatabaseConnection super.e);
 
   @override
   MigrationStrategy get migration {

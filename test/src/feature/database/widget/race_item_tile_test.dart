@@ -15,8 +15,8 @@ void main() {
   late Race race;
   late DatabaseBloc databaseBloc;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -41,7 +41,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(race.name), findsOneWidget);
       expect($(ListTile), findsOneWidget);
@@ -61,7 +61,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(race.name), findsOneWidget);
       expect($(ListTile), findsOneWidget);
@@ -82,7 +82,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(ListTile).tap();
 
       verify(() => databaseBloc.add(DatabaseEvent.selectRace(race))).called(1);
@@ -95,7 +95,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(PopupMenuButton<void>).tap();
 
       expect($(Localization.current.I18nCore_edit), findsOneWidget);
@@ -112,7 +112,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_edit).tap();
 
@@ -127,7 +127,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nHome_importStagesCsv).tap();
 
@@ -141,7 +141,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
 
@@ -159,7 +159,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#cancelButton).tap();
@@ -174,7 +174,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#okButton).tap();
@@ -191,7 +191,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(race.name), findsOneWidget);
 
@@ -209,7 +209,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(race.name), findsOneWidget);
 
@@ -225,7 +225,7 @@ void main() {
         isDeleted: false,
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
 
       final popupMenuButton = $.tester.widget<PopupMenuButton<void>>(find.byType(PopupMenuButton<void>));
       final icon = popupMenuButton.icon! as Icon;

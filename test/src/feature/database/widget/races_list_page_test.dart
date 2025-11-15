@@ -14,8 +14,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late DatabaseBloc databaseBloc;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -43,14 +43,14 @@ void main() {
     });
 
     patrolWidgetTest('Initial page, no races', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       expect($(Localization.current.I18nDatabase_races), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
       expect($(RaceItemTile), findsNothing);
     });
 
     patrolWidgetTest('Tap FAB, then add race popup appears', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(FloatingActionButton).tap();
       expect($(Localization.current.I18nDatabase_editRace), findsOneWidget);
     });
@@ -68,7 +68,7 @@ void main() {
           numbersOnTrace: [],
         ),
       );
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       expect($(RaceItemTile), findsNWidgets(5));
     });
   });

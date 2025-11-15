@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, strict_raw_type, depend_on_referenced_packages
+// ignore_for_file: prefer_const_constructors, depend_on_referenced_packages
 
 import 'dart:typed_data' show Uint8List;
 
@@ -6,7 +6,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart' show DatabaseConnection, QueryRow;
 import 'package:drift/native.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
-import 'package:entime/src/common/logger/logger.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/common/utils/share_provider.dart';
 import 'package:entime/src/feature/csv/csv.dart';
@@ -1380,23 +1379,23 @@ void main() {
   });
 }
 
-class DebugBlocObserver extends BlocObserver {
-  @override
-  void onEvent(Bloc bloc, Object? event) {
-    super.onEvent(bloc, event);
-
-    logger.d('Event: $event');
-  }
-
-  @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    super.onError(bloc, error, stackTrace);
-    logger.e('Bloc unknown error', error: error, stackTrace: stackTrace);
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    logger.d('Transition: $transition');
-  }
-}
+// class DebugBlocObserver extends BlocObserver {
+//   @override
+//   void onEvent(Bloc bloc, Object? event) {
+//     super.onEvent(bloc, event);
+//
+//     logger.d('Event: $event');
+//   }
+//
+//   @override
+//   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+//     super.onError(bloc, error, stackTrace);
+//     logger.e('Bloc unknown error', error: error, stackTrace: stackTrace);
+//   }
+//
+//   @override
+//   void onTransition(Bloc bloc, Transition transition) {
+//     super.onTransition(bloc, transition);
+//     logger.d('Transition: $transition');
+//   }
+// }

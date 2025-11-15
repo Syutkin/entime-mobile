@@ -17,8 +17,8 @@ void main() {
   late int number;
   late String finishTime;
 
-  Widget testWidget() {
-    initializeDateFormatting();
+  Future<Widget> testWidget() async {
+    await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -28,8 +28,8 @@ void main() {
           child: Builder(
             builder: (context) {
               return TextButton(
-                onPressed: () {
-                  addFinishNumberPopup(context, finish);
+                onPressed: () async {
+                  await addFinishNumberPopup(context, finish);
                 },
                 child: const Text('textButton', key: Key('button')),
               );
@@ -87,19 +87,19 @@ void main() {
         ),
       );
 
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsNothing);
     });
 
     patrolWidgetTest('Show dialog if stage not null', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
     });
 
     patrolWidgetTest('Enter new number and add it to finish then close dialog', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(TextFormField).enterText('$number');
       await $(#okButton).tap();
@@ -112,7 +112,7 @@ void main() {
     });
 
     patrolWidgetTest('Enter new number then press cancel button', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(TextFormField).enterText('$number');
       await $(#cancelButton).tap();
@@ -121,7 +121,7 @@ void main() {
     });
 
     patrolWidgetTest('Check number validator', (PatrolTester $) async {
-      await $.pumpWidgetAndSettle(testWidget());
+      await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       // Negative
       await $(TextFormField).enterText('-1');
