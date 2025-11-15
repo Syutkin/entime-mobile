@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.2-dev+529',
+    representation: r'0.5.2-dev+530',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.2-dev+529',
+    canonical: r'0.5.2-dev+530',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,19 +117,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'529'],
+    build: <String>[r'530'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
     2025,
-    8,
-    19,
-    20,
-    13,
-    14,
-    759,
-    284,
+    11,
+    15,
+    12,
+    15,
+    26,
+    418,
+    709,
   );
 
   /// Name
@@ -347,8 +347,8 @@ sealed class Pubspec {
 
   /// Environment
   static const Map<String, String> environment = <String, String>{
-    'sdk': '^3.9.0',
-    'flutter': '^3.9.0',
+    'sdk': '^3.10.0',
+    'flutter': '^3.10.0',
   };
 
   /// Platforms
@@ -408,19 +408,19 @@ sealed class Pubspec {
   /// For more information,
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
-    'any_date': r'^1.1.2',
+    'any_date': r'^1.2.1',
     'app_settings': r'^6.1.1',
-    'audioplayers': r'^6.5.0',
+    'audioplayers': r'^6.5.1',
     'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
-    'connectivity_plus': r'^6.1.5',
-    'crypto': r'^3.0.6',
+    'connectivity_plus': r'^7.0.0',
+    'crypto': r'^3.0.7',
     'csv': r'^6.0.0',
-    'device_info_plus': r'^11.5.0',
-    'drift': r'^2.28.1',
+    'device_info_plus': r'^12.2.0',
+    'drift': r'^2.29.0',
     'dropdown_search': r'^6.0.2',
     'equatable': r'^2.0.7',
-    'file_picker': r'^10.3.1',
+    'file_picker': r'^10.3.6',
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
@@ -434,12 +434,12 @@ sealed class Pubspec {
     'flutter_ntp': r'^0.0.2',
     'flutter_tts': r'^4.2.3',
     'freezed_annotation': r'^3.1.0',
-    'http': r'^1.5.0',
+    'http': r'^1.6.0',
     'intl': r'^0.20.2',
     'json_annotation': r'^4.9.0',
-    'logger': r'^2.6.1',
+    'logger': r'^2.6.2',
     'material_design_icons_flutter': r'^7.0.7296',
-    'meta': r'^1.16.0',
+    'meta': r'^1.17.0',
     'nested': r'^1.0.0',
     'open_file': r'^3.5.10',
     'path': r'^1.9.1',
@@ -447,36 +447,36 @@ sealed class Pubspec {
     'permission_handler': r'^12.0.1',
     'pub_semver': r'^2.2.0',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^9.6.0',
+    'sentry_flutter': r'^9.8.0',
     'settings_ui': r'^2.0.2',
-    'share_plus': r'^11.1.0',
+    'share_plus': r'^12.0.1',
     'shared_preferences': r'^2.5.3',
-    'sqlite3': r'^2.9.0',
-    'sqlite3_flutter_libs': r'^0.5.39',
+    'sqlite3': r'^2.9.4',
+    'sqlite3_flutter_libs': r'^0.5.40',
     'url_launcher': r'^6.3.2',
-    'wakelock_plus': r'^1.3.2',
+    'wakelock_plus': r'^1.4.0',
   };
 
   /// Developer dependencies
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^10.0.0',
-    'build_runner': r'^2.7.0',
-    'dart_style': r'^3.1.1',
-    'drift_dev': r'^2.28.1',
+    'build_runner': r'^2.10.3',
+    'dart_style': r'^3.1.3',
+    'drift_dev': r'^2.29.0',
     'flutter_lints': r'^6.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
     },
-    'freezed': r'^3.2.0',
+    'freezed': r'^3.2.3',
     'integration_test': <String, Object>{
       'sdk': r'flutter',
     },
-    'json_serializable': r'^6.10.0',
+    'json_serializable': r'^6.11.1',
     'mocktail': r'^1.0.4',
-    'patrol': r'^3.19.0',
+    'patrol': r'^3.20.0',
     'patrol_finders': r'^2.9.0',
-    'test': r'^1.26.2',
-    'very_good_analysis': r'^9.0.0',
+    'test': r'^1.26.3',
+    'very_good_analysis': r'^10.0.0',
   };
 
   /// Dependency overrides
