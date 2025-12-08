@@ -23,7 +23,7 @@ environment:
 
 dependencies:
   any_date: ^1.2.1
-  app_settings: ^6.1.1
+  app_settings: ^7.0.0
   audioplayers: ^6.5.1
   bloc_concurrency: ^0.3.0
   bot_toast: ^4.1.3
