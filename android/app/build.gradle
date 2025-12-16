@@ -37,6 +37,7 @@ android {
     namespace "site.syutkin.entime"
 
     compileSdkVersion flutter.compileSdkVersion
+    ndkVersion = "28.2.13676358"
 
     defaultConfig {
         applicationId "site.syutkin.entime"
