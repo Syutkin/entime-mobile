@@ -72,7 +72,7 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(Icon).evaluate().single.widget as Icon).icon, Icons.settings_bluetooth);
       await $(Icon).tap();
-      // Opens SelectBondedDeviceScreen
+      // Opens SelectDeviceScreen
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
     });
 

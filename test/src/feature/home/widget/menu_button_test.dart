@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bloc/bluetooth_bloc.dart';
-import 'package:entime/src/feature/bluetooth/widget/select_bonded_device.dart';
+import 'package:entime/src/feature/bluetooth/widget/select_device.dart';
 import 'package:entime/src/feature/countdown/bloc/countdown_bloc.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/home/model/home_menu_button.dart';
@@ -93,7 +93,7 @@ void main() {
         await $.pumpWidgetAndSettle(testWidget(AppTab.init));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_bluetooth).tap();
-        expect($(SelectBondedDeviceScreen), findsOneWidget);
+        expect($(SelectDeviceScreen), findsOneWidget);
       });
     });
 

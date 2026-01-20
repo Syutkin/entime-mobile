@@ -15,22 +15,22 @@ Future<void> selectBluetoothDevice(BuildContext context) async {
     BluetoothEvent.selectDevice(
       deviceWithAvailability: await Navigator.of(
         context,
-      ).push(MaterialPageRoute(builder: (context) => const SelectBondedDeviceScreen())),
+      ).push(MaterialPageRoute(builder: (context) => const SelectDeviceScreen())),
     ),
   );
 }
 
-class SelectBondedDeviceScreen extends StatefulWidget {
-  const SelectBondedDeviceScreen({this.checkAvailability = true, super.key});
+class SelectDeviceScreen extends StatefulWidget {
+  const SelectDeviceScreen({this.checkAvailability = true, super.key});
 
   /// If true, on page start there is performed BLE scan.
   final bool checkAvailability;
 
   @override
-  State<SelectBondedDeviceScreen> createState() => _SelectBondedDeviceScreen();
+  State<SelectDeviceScreen> createState() => _SelectDeviceScreen();
 }
 
-class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
+class _SelectDeviceScreen extends State<SelectDeviceScreen> {
   List<BluetoothDeviceWithAvailability> devices = <BluetoothDeviceWithAvailability>[];
 
   // Availability
@@ -38,7 +38,7 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   StreamSubscription<bool>? _isScanningSubscription;
   bool _isDiscovering = false;
 
-  // _SelectBondedDeviceScreen();
+  // _SelectDeviceScreen();
 
   @override
   void initState() {
