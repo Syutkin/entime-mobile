@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import '../../../common/localization/localization.dart';
 import 'utils/dbm_text_style.dart';
@@ -15,8 +15,10 @@ class BluetoothDeviceListEntry extends ListTile {
   }) : super(
          leading: const Icon(Icons.devices),
          // @TODO . !BluetoothClass! class aware icon
-         title: Text(device.name ?? Localization.current.I18nBluetooth_unknownDevice),
-         subtitle: Text(device.address),
+         title: Text(
+           device.name.isNotEmpty ? device.name : Localization.current.I18nBluetooth_unknownDevice,
+         ),
+         subtitle: Text(device.remoteId.str),
          trailing: Row(
            mainAxisSize: MainAxisSize.min,
            children: <Widget>[
@@ -34,9 +36,6 @@ class BluetoothDeviceListEntry extends ListTile {
              //  else
              //  const SizedBox.shrink(),
              if (device.isConnected) const Icon(Icons.import_export),
-             //  else
-             //  const SizedBox.shrink(),
-             if (device.isBonded) const Icon(Icons.link),
              //  else
              //  const SizedBox.shrink(),
            ],

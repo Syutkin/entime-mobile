@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../../../common/logger/logger.dart';
@@ -22,9 +22,9 @@ abstract class IBluetoothBackgroundConnection {
 
   Future<void> stop();
 
-  /// Отсылает [text] в Bluetooth Serial
+  /// Отсылает [text] в BLE (Nordic UART Service)
   ///
-  /// Обрезает [text] с помощью trim() и добавляет в конец \r\n.
+  /// Обрезает [text] с помощью trim() и добавляет в конец \n.
   /// Вызывает [onSendError] при ошибке
   Future<bool> sendMessage(String text);
 
@@ -78,7 +78,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   Future<void> connect(BluetoothDevice bluetoothDevice) async {
     try {
       await _connection?.close();
-      _connection = await _connectionFactory.connectToAddress(bluetoothDevice.address);
+      _connection = await _connectionFactory.connectToDevice(bluetoothDevice);
       _connectionSubscription = _connection?.input?.listen(_onDataReceived);
       _connectionSubscription?.onDone(() async {
         // Сообщаем что соединение закрыто
@@ -94,7 +94,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> start() async {
-    await _connection?.output?.allSent;
+    // BLE notify is configured in the connection factory.
   }
 
   @override
@@ -117,8 +117,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
       if (text.isNotEmpty) {
         try {
           logger.i('Sending message: $text');
-          _connection?.output?.add(utf8.encode('$text\r\n'));
-          await _connection?.output?.allSent;
+          await _connection?.write(Uint8List.fromList(utf8.encode('$text\n')));
           result = true;
         } on Exception catch (e) {
           // Ignore error, but notify state
@@ -135,13 +134,14 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   }
 
   void _onDataReceived(Uint8List data) {
-    // Create message if there is '\r\n' sequence
+    logger.d('Bluetooth -> Raw data chunk (${data.length}): ${String.fromCharCodes(data)}');
+    // Create message if there is '\n' sequence
     _messageBuffer += String.fromCharCodes(data);
-    while (_messageBuffer.contains('\r\n')) {
-      final index = _messageBuffer.indexOf('\r\n');
+    while (_messageBuffer.contains('\n')) {
+      final index = _messageBuffer.indexOf('\n');
       _messagePacket = _messageBuffer.substring(0, index).trim();
       _messageController.add(_messagePacket);
-      _messageBuffer = _messageBuffer.substring(index + 2);
+      _messageBuffer = _messageBuffer.substring(index + 1);
     }
   }
 }

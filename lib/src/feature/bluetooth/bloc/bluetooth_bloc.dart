@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart' hide LogLevel;
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../common/logger/logger.dart';
@@ -33,8 +33,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
       _stageId = state.stageId;
     });
 
-    _btStateSubscription = bluetoothProvider.flutterBluetoothSerial.onStateChanged().listen((btState) {
-      if (btState == BluetoothState.STATE_OFF || btState == BluetoothState.STATE_ON) {
+    _btStateSubscription = bluetoothProvider.adapterState.listen((btState) {
+      if (btState == BluetoothAdapterState.off || btState == BluetoothAdapterState.on) {
         add(const BluetoothEvent.initialize());
       }
     });
@@ -42,9 +42,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {
       switch (event) {
         case _Initialize():
-          final isAvailable = await bluetoothProvider.flutterBluetoothSerial.isAvailable ?? false;
+          final isAvailable = await bluetoothProvider.isAvailable;
           if (isAvailable) {
-            final isEnabled = await bluetoothProvider.flutterBluetoothSerial.isEnabled ?? false;
+            final isEnabled = await bluetoothProvider.isOn;
             if (isEnabled) {
               emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
             } else {
@@ -54,14 +54,14 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             emit(const BluetoothBlocState.notAvailable());
           }
         case _Enable():
-          await bluetoothProvider.flutterBluetoothSerial.requestEnable();
+          await bluetoothProvider.requestEnable();
           add(const BluetoothEvent.initialize());
         case _SelectDevice():
           _reconnectActive = false;
           final device = event.deviceWithAvailability;
           if (device != null) {
             // Если выбран новый блютусдевайс
-            if (device.device != _bluetoothDevice) {
+            if (_bluetoothDevice == null || device.device.remoteId != _bluetoothDevice!.remoteId) {
               // Отменяем подписки и останавливаем соединение (если было)
               await _messageSubscription?.cancel();
               await bluetoothProvider.bluetoothBackgroundConnection.stop();
@@ -219,7 +219,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   late StreamSubscription<AppSettings> _settingsSubscription;
 
-  late StreamSubscription<BluetoothState> _btStateSubscription;
+  late StreamSubscription<BluetoothAdapterState> _btStateSubscription;
 
   BluetoothDevice? get bluetoothDevice => _bluetoothDevice;
 

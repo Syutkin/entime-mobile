@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common/localization/localization.dart';
 import '../bloc/bluetooth_bloc.dart';
@@ -22,8 +23,7 @@ Future<void> selectBluetoothDevice(BuildContext context) async {
 class SelectBondedDeviceScreen extends StatefulWidget {
   const SelectBondedDeviceScreen({this.checkAvailability = true, super.key});
 
-  /// If true, on page start there is performed discovery upon the bonded devices.
-  /// Then, if they are not available, they would be disabled from the selection.
+  /// If true, on page start there is performed BLE scan.
   final bool checkAvailability;
 
   @override
@@ -34,7 +34,8 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   List<BluetoothDeviceWithAvailability> devices = <BluetoothDeviceWithAvailability>[];
 
   // Availability
-  StreamSubscription<BluetoothDiscoveryResult>? _discoveryStreamSubscription;
+  StreamSubscription<List<ScanResult>>? _scanResultsSubscription;
+  StreamSubscription<bool>? _isScanningSubscription;
   bool _isDiscovering = false;
 
   // _SelectBondedDeviceScreen();
@@ -43,62 +44,66 @@ class _SelectBondedDeviceScreen extends State<SelectBondedDeviceScreen> {
   void initState() {
     super.initState();
 
-    _isDiscovering = widget.checkAvailability;
+    _isDiscovering = true;
 
-    if (_isDiscovering) {
-      _startDiscovery();
-    }
-
-    // Setup a list of the bonded devices
-    unawaited(
-      FlutterBluetoothSerial.instance.getBondedDevices().then((bondedDevices) {
+    _isScanningSubscription = FlutterBluePlus.isScanning.listen((isScanning) {
+      if (mounted) {
         setState(() {
-          devices = bondedDevices
-              .map(
-                (device) => BluetoothDeviceWithAvailability(
-                  device,
-                  widget.checkAvailability ? BluetoothDeviceAvailability.maybe : BluetoothDeviceAvailability.yes,
-                ),
-              )
-              .toList();
+          _isDiscovering = isScanning;
         });
-      }),
-    );
+      }
+    });
+
+    unawaited(_startDiscovery());
   }
 
   void _restartDiscovery() {
     setState(() {
       _isDiscovering = true;
     });
-    _startDiscovery();
+    unawaited(_startDiscovery());
   }
 
-  void _startDiscovery() {
-    _discoveryStreamSubscription = FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
+  Future<void> _startDiscovery() async {
+    await [
+      Permission.bluetoothScan,
+      Permission.bluetoothConnect,
+      Permission.locationWhenInUse,
+    ].request();
+
+    _scanResultsSubscription?.cancel();
+    devices = <BluetoothDeviceWithAvailability>[];
+
+    _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) {
       setState(() {
-        final i = devices.iterator;
-        while (i.moveNext()) {
-          final device = i.current;
-          if (device.device == r.device) {
-            device
+        for (final result in results) {
+          final existingIndex = devices.indexWhere((d) => d.device.remoteId == result.device.remoteId);
+          if (existingIndex == -1) {
+            devices.add(
+              BluetoothDeviceWithAvailability(
+                result.device,
+                widget.checkAvailability ? BluetoothDeviceAvailability.maybe : BluetoothDeviceAvailability.yes,
+                result.rssi,
+              ),
+            );
+          } else {
+            devices[existingIndex]
               ..availability = BluetoothDeviceAvailability.yes
-              ..rssi = r.rssi;
+              ..rssi = result.rssi;
           }
         }
       });
     });
 
-    _discoveryStreamSubscription?.onDone(() {
-      setState(() {
-        _isDiscovering = false;
-      });
-    });
+    await FlutterBluePlus.startScan(timeout: const Duration(seconds: 4));
   }
 
   @override
   void dispose() {
     // Avoid memory leak (`setState` after dispose) and cancel discovery
-    unawaited(_discoveryStreamSubscription?.cancel());
+    unawaited(_scanResultsSubscription?.cancel());
+    unawaited(_isScanningSubscription?.cancel());
+    unawaited(FlutterBluePlus.stopScan());
     super.dispose();
   }
 

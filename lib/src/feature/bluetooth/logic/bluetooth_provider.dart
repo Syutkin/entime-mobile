@@ -1,9 +1,15 @@
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import '../bluetooth.dart';
 
 abstract class IBluetoothProvider {
-  FlutterBluetoothSerial get flutterBluetoothSerial;
+  Stream<BluetoothAdapterState> get adapterState;
+
+  Future<bool> get isAvailable;
+
+  Future<bool> get isOn;
+
+  Future<void> requestEnable();
 
   IBluetoothBackgroundConnection get bluetoothBackgroundConnection;
 
@@ -12,15 +18,21 @@ abstract class IBluetoothProvider {
 
 class BluetoothProvider implements IBluetoothProvider {
   BluetoothProvider({
-    required FlutterBluetoothSerial flutterBluetoothSerial,
     required IBluetoothBackgroundConnection bluetoothBackgroundConnection,
-  }) : _flutterBluetoothSerial = flutterBluetoothSerial,
-       _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
-  final FlutterBluetoothSerial _flutterBluetoothSerial;
+  }) : _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
   final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
 
   @override
-  FlutterBluetoothSerial get flutterBluetoothSerial => _flutterBluetoothSerial;
+  Stream<BluetoothAdapterState> get adapterState => FlutterBluePlus.adapterState;
+
+  @override
+  Future<bool> get isAvailable => FlutterBluePlus.isAvailable;
+
+  @override
+  Future<bool> get isOn => FlutterBluePlus.isOn;
+
+  @override
+  Future<void> requestEnable() => FlutterBluePlus.turnOn();
 
   @override
   IBluetoothBackgroundConnection get bluetoothBackgroundConnection => _bluetoothBackgroundConnection;

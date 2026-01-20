@@ -15,7 +15,6 @@ import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
@@ -56,10 +55,8 @@ Future<void> main() async {
     appInfoProvider: appInfo,
     settingsProvider: settings,
   );
-  final flutterBluetoothSerial = FlutterBluetoothSerial.instance;
   final bluetoothBackgroundConnection = BluetoothBackgroundConnection();
   final bluetoothProvider = BluetoothProvider(
-    flutterBluetoothSerial: flutterBluetoothSerial,
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 

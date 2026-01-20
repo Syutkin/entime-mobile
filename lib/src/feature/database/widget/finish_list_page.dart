@@ -391,7 +391,7 @@ class _FinishListPage extends State<FinishListPage> {
                     // source: [LogSource.Bluetooth]);
                     BlocProvider.of<BluetoothBloc>(context).add(
                       BluetoothEvent.messageReceived(
-                        message: 'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#',
+                        message: 'F12:12:12,121#\nF13:13:13,131#\nF14:14:14,141#\nF15:16:17,181#',
                         stageId: stage!.id,
                       ),
                     );
