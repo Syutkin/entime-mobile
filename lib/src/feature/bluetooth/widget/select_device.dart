@@ -7,13 +7,13 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common/localization/localization.dart';
 import '../bloc/bluetooth_bloc.dart';
-import '../model/bluetooth_device_with_availability.dart';
+import '../model/bluetooth_device_with_rssi.dart';
 import 'bluetooth_device_list_entry.dart';
 
 Future<void> selectBluetoothDevice(BuildContext context) async {
   BlocProvider.of<BluetoothBloc>(context).add(
     BluetoothEvent.selectDevice(
-      deviceWithAvailability: await Navigator.of(
+      deviceWithRssi: await Navigator.of(
         context,
       ).push(MaterialPageRoute(builder: (context) => const SelectDeviceScreen())),
     ),
@@ -31,7 +31,7 @@ class SelectDeviceScreen extends StatefulWidget {
 }
 
 class _SelectDeviceScreen extends State<SelectDeviceScreen> {
-  List<BluetoothDeviceWithAvailability> devices = <BluetoothDeviceWithAvailability>[];
+  List<BluetoothDeviceWithRSSI> devices = <BluetoothDeviceWithRSSI>[];
 
   // Availability
   StreamSubscription<List<ScanResult>>? _scanResultsSubscription;
@@ -72,24 +72,16 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
     ].request();
 
     _scanResultsSubscription?.cancel();
-    devices = <BluetoothDeviceWithAvailability>[];
+    devices = <BluetoothDeviceWithRSSI>[];
 
     _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) {
       setState(() {
         for (final result in results) {
           final existingIndex = devices.indexWhere((d) => d.device.remoteId == result.device.remoteId);
           if (existingIndex == -1) {
-            devices.add(
-              BluetoothDeviceWithAvailability(
-                result.device,
-                widget.checkAvailability ? BluetoothDeviceAvailability.maybe : BluetoothDeviceAvailability.yes,
-                result.rssi,
-              ),
-            );
+            devices.add(BluetoothDeviceWithRSSI(result.device, result.rssi));
           } else {
-            devices[existingIndex]
-              ..availability = BluetoothDeviceAvailability.yes
-              ..rssi = result.rssi;
+            devices[existingIndex].rssi = result.rssi;
           }
         }
       });
@@ -114,7 +106,6 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
           (device) => BluetoothDeviceListEntry(
             device: device.device,
             rssi: device.rssi,
-            //      enabled: _device.availability == BluetoothDeviceAvailability.yes,
             onTap: () {
               Navigator.of(context).pop(device);
             },

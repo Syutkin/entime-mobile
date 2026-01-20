@@ -140,12 +140,12 @@ return sendMessage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function()?  enable,TResult Function( BluetoothDeviceWithAvailability? deviceWithAvailability)?  selectDevice,TResult Function()?  connected,TResult Function( BluetoothDevice? selectedDevice)?  connect,TResult Function()?  disconnect,TResult Function()?  disconnected,TResult Function( String message,  int stageId)?  messageReceived,TResult Function( String message)?  sendMessage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function()?  enable,TResult Function( BluetoothDeviceWithRSSI? deviceWithRssi)?  selectDevice,TResult Function()?  connected,TResult Function( BluetoothDevice? selectedDevice)?  connect,TResult Function()?  disconnect,TResult Function()?  disconnected,TResult Function( String message,  int stageId)?  messageReceived,TResult Function( String message)?  sendMessage,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
 return initialize();case _Enable() when enable != null:
 return enable();case _SelectDevice() when selectDevice != null:
-return selectDevice(_that.deviceWithAvailability);case _Connected() when connected != null:
+return selectDevice(_that.deviceWithRssi);case _Connected() when connected != null:
 return connected();case _Connect() when connect != null:
 return connect(_that.selectedDevice);case _Disconnect() when disconnect != null:
 return disconnect();case _Disconnected() when disconnected != null:
@@ -169,12 +169,12 @@ return sendMessage(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function()  enable,required TResult Function( BluetoothDeviceWithAvailability? deviceWithAvailability)  selectDevice,required TResult Function()  connected,required TResult Function( BluetoothDevice? selectedDevice)  connect,required TResult Function()  disconnect,required TResult Function()  disconnected,required TResult Function( String message,  int stageId)  messageReceived,required TResult Function( String message)  sendMessage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function()  enable,required TResult Function( BluetoothDeviceWithRSSI? deviceWithRssi)  selectDevice,required TResult Function()  connected,required TResult Function( BluetoothDevice? selectedDevice)  connect,required TResult Function()  disconnect,required TResult Function()  disconnected,required TResult Function( String message,  int stageId)  messageReceived,required TResult Function( String message)  sendMessage,}) {final _that = this;
 switch (_that) {
 case _Initialize():
 return initialize();case _Enable():
 return enable();case _SelectDevice():
-return selectDevice(_that.deviceWithAvailability);case _Connected():
+return selectDevice(_that.deviceWithRssi);case _Connected():
 return connected();case _Connect():
 return connect(_that.selectedDevice);case _Disconnect():
 return disconnect();case _Disconnected():
@@ -194,12 +194,12 @@ return sendMessage(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function()?  enable,TResult? Function( BluetoothDeviceWithAvailability? deviceWithAvailability)?  selectDevice,TResult? Function()?  connected,TResult? Function( BluetoothDevice? selectedDevice)?  connect,TResult? Function()?  disconnect,TResult? Function()?  disconnected,TResult? Function( String message,  int stageId)?  messageReceived,TResult? Function( String message)?  sendMessage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function()?  enable,TResult? Function( BluetoothDeviceWithRSSI? deviceWithRssi)?  selectDevice,TResult? Function()?  connected,TResult? Function( BluetoothDevice? selectedDevice)?  connect,TResult? Function()?  disconnect,TResult? Function()?  disconnected,TResult? Function( String message,  int stageId)?  messageReceived,TResult? Function( String message)?  sendMessage,}) {final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
 return initialize();case _Enable() when enable != null:
 return enable();case _SelectDevice() when selectDevice != null:
-return selectDevice(_that.deviceWithAvailability);case _Connected() when connected != null:
+return selectDevice(_that.deviceWithRssi);case _Connected() when connected != null:
 return connected();case _Connect() when connect != null:
 return connect(_that.selectedDevice);case _Disconnect() when disconnect != null:
 return disconnect();case _Disconnected() when disconnected != null:
@@ -281,10 +281,10 @@ String toString() {
 
 
 class _SelectDevice implements BluetoothEvent {
-  const _SelectDevice({this.deviceWithAvailability});
+  const _SelectDevice({this.deviceWithRssi});
   
 
- final  BluetoothDeviceWithAvailability? deviceWithAvailability;
+ final  BluetoothDeviceWithRSSI? deviceWithRssi;
 
 /// Create a copy of BluetoothEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -296,16 +296,16 @@ _$SelectDeviceCopyWith<_SelectDevice> get copyWith => __$SelectDeviceCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectDevice&&(identical(other.deviceWithAvailability, deviceWithAvailability) || other.deviceWithAvailability == deviceWithAvailability));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectDevice&&(identical(other.deviceWithRssi, deviceWithRssi) || other.deviceWithRssi == deviceWithRssi));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,deviceWithAvailability);
+int get hashCode => Object.hash(runtimeType,deviceWithRssi);
 
 @override
 String toString() {
-  return 'BluetoothEvent.selectDevice(deviceWithAvailability: $deviceWithAvailability)';
+  return 'BluetoothEvent.selectDevice(deviceWithRssi: $deviceWithRssi)';
 }
 
 
@@ -316,7 +316,7 @@ abstract mixin class _$SelectDeviceCopyWith<$Res> implements $BluetoothEventCopy
   factory _$SelectDeviceCopyWith(_SelectDevice value, $Res Function(_SelectDevice) _then) = __$SelectDeviceCopyWithImpl;
 @useResult
 $Res call({
- BluetoothDeviceWithAvailability? deviceWithAvailability
+ BluetoothDeviceWithRSSI? deviceWithRssi
 });
 
 
@@ -333,10 +333,10 @@ class __$SelectDeviceCopyWithImpl<$Res>
 
 /// Create a copy of BluetoothEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? deviceWithAvailability = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? deviceWithRssi = freezed,}) {
   return _then(_SelectDevice(
-deviceWithAvailability: freezed == deviceWithAvailability ? _self.deviceWithAvailability : deviceWithAvailability // ignore: cast_nullable_to_non_nullable
-as BluetoothDeviceWithAvailability?,
+deviceWithRssi: freezed == deviceWithRssi ? _self.deviceWithRssi : deviceWithRssi // ignore: cast_nullable_to_non_nullable
+as BluetoothDeviceWithRSSI?,
   ));
 }
 

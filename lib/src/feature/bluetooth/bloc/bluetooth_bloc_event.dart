@@ -6,7 +6,7 @@ sealed class BluetoothEvent with _$BluetoothEvent {
 
   const factory BluetoothEvent.enable() = _Enable;
 
-  const factory BluetoothEvent.selectDevice({BluetoothDeviceWithAvailability? deviceWithAvailability}) = _SelectDevice;
+  const factory BluetoothEvent.selectDevice({BluetoothDeviceWithRSSI? deviceWithRssi}) = _SelectDevice;
 
   const factory BluetoothEvent.connected() = _Connected;
 
