@@ -3,7 +3,7 @@ import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart' hide LogLevel;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
@@ -79,7 +79,9 @@ void main() {
     patrolWidgetTest('disconnected state with device', (PatrolTester $) async {
       when(
         () => btBloc.state,
-      ).thenReturn(const BluetoothBlocState.disconnected(bluetoothDevice: BluetoothDevice(address: '')));
+      ).thenReturn(
+        BluetoothBlocState.disconnected(bluetoothDevice: BluetoothDevice.fromId('00:00:00:00:00')),
+      );
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(Icon).evaluate().single.widget as Icon).icon, Icons.bluetooth);
       await $(Icon).tap();

@@ -2,20 +2,16 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Мок-классы для тестирования
 class MockBluetoothConnection extends Mock implements IBluetoothConnection {}
 
-class MockBluetoothDevice extends Mock implements BluetoothDevice {}
-
 class MockStreamSubscription extends Mock implements StreamSubscription<Uint8List> {}
 
 class MockStream extends Mock implements Stream<Uint8List> {}
-
-class MockBluetoothStreamSink extends Mock implements BluetoothStreamSink<Uint8List> {}
 
 // Мок-фабрика для тестирования
 class MockBluetoothConnectionFactory implements IBluetoothConnectionFactory {
@@ -23,7 +19,7 @@ class MockBluetoothConnectionFactory implements IBluetoothConnectionFactory {
   final IBluetoothConnection? mockConnection;
 
   @override
-  Future<IBluetoothConnection> connectToAddress(String address) async {
+  Future<IBluetoothConnection> connectToDevice(BluetoothDevice device) async {
     if (mockConnection != null) {
       return mockConnection!;
     }
@@ -37,10 +33,8 @@ void main() {
 
   late BluetoothBackgroundConnection bbc;
   late MockBluetoothConnection mockConnection;
-  late MockBluetoothDevice mockDevice;
   late MockStreamSubscription mockSubscription;
   late MockStream mockInputStream;
-  late MockBluetoothStreamSink mockOutputStream;
   // late MockBluetoothConnectionFactory mockFactory;
 
   setUpAll(() {
@@ -52,10 +46,8 @@ void main() {
   setUp(() {
     bbc = BluetoothBackgroundConnection();
     mockConnection = MockBluetoothConnection();
-    mockDevice = MockBluetoothDevice();
     mockSubscription = MockStreamSubscription();
     mockInputStream = MockStream();
-    mockOutputStream = MockBluetoothStreamSink();
     // mockFactory = MockBluetoothConnectionFactory();
   });
 
@@ -283,22 +275,19 @@ void main() {
         ..onDisconnect(() {})
         ..onSendError((_) {});
 
-      // Настраиваем мок-устройство
-      when(() => mockDevice.address).thenReturn('00:11:22:33:44:55');
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
       // Настраиваем мок-соединение
       when(() => mockConnection.isConnected).thenReturn(true);
-      when(() => mockConnection.output).thenReturn(mockOutputStream);
       when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
       when(() => mockConnection.finish()).thenAnswer((_) async {});
-      when(() => mockOutputStream.add(any())).thenReturn(null);
-      when(() => mockOutputStream.allSent).thenAnswer((_) async {});
+      when(() => mockConnection.write(any())).thenAnswer((_) async {});
       when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
       when(() => mockSubscription.onDone(any())).thenReturn(null);
       when(() => mockSubscription.cancel()).thenAnswer((_) async {});
 
       // Подключаемся (это вызовет мок-фабрику)
-      await bbcWithMock.connect(mockDevice);
+      await bbcWithMock.connect(device);
 
       // Отправляем сообщение
       final result = await bbcWithMock.sendMessage('test message');
@@ -306,8 +295,8 @@ void main() {
       // Проверяем результат
       expect(result, true);
 
-      // Проверяем, что метод add был вызван
-      verify(() => mockOutputStream.add(any())).called(1);
+      // Проверяем, что запись была вызвана
+      verify(() => mockConnection.write(any())).called(1);
 
       await bbcWithMock.dispose();
     });
@@ -318,19 +307,17 @@ void main() {
         ..onDisconnect(() {})
         ..onSendError((_) {});
 
-      // Настраиваем мок-устройство
-      when(() => mockDevice.address).thenReturn('00:11:22:33:44:55');
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
       // Настраиваем мок-соединение
       when(() => mockConnection.isConnected).thenReturn(true);
-      when(() => mockConnection.output).thenReturn(mockOutputStream);
       when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
       when(() => mockConnection.finish()).thenAnswer((_) async {});
       when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
       when(() => mockSubscription.onDone(any())).thenReturn(null);
       when(() => mockSubscription.cancel()).thenAnswer((_) async {});
 
-      await bbcWithMock.connect(mockDevice);
+      await bbcWithMock.connect(device);
 
       final result = await bbcWithMock.sendMessage('');
 

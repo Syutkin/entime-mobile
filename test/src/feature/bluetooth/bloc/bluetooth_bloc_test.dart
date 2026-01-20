@@ -5,7 +5,7 @@ import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/database/model/automatic_start.dart';
 import 'package:entime/src/feature/log/log.dart';
 import 'package:entime/src/feature/settings/settings.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart' hide LogLevel;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,8 +20,6 @@ class MockAudioController extends Mock implements AudioController {}
 
 class MockBluetoothBackgroundConnection extends Mock implements BluetoothBackgroundConnection {}
 
-class MockFlutterBluetoothSerial extends Mock implements FlutterBluetoothSerial {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -32,7 +30,6 @@ void main() {
   late MockAudioController audioController;
   late SharedPrefsSettingsProvider settingsProvider;
   late AppSettings settings;
-  late MockFlutterBluetoothSerial flutterBluetoothSerial;
   late MockBluetoothBackgroundConnection bluetoothBackgroundConnection;
 
   setUpAll(() {
@@ -47,14 +44,12 @@ void main() {
       SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
       settingsProvider = await SharedPrefsSettingsProvider.load();
       bluetoothProvider = MockBluetoothProvider();
-      flutterBluetoothSerial = MockFlutterBluetoothSerial();
       bluetoothBackgroundConnection = MockBluetoothBackgroundConnection();
       database = MockAppDatabase();
       audioController = MockAudioController();
       settings = const AppSettings.defaults();
 
-      when(() => bluetoothProvider.flutterBluetoothSerial).thenReturn(flutterBluetoothSerial);
-      when(() => flutterBluetoothSerial.onStateChanged()).thenAnswer((_) => Stream.fromIterable([]));
+      when(() => bluetoothProvider.adapterState).thenAnswer((_) => const Stream<BluetoothAdapterState>.empty());
       when(() => bluetoothProvider.bluetoothBackgroundConnection).thenReturn(bluetoothBackgroundConnection);
       when(() => bluetoothBackgroundConnection.stop()).thenAnswer((_) => Future.value());
       when(() => bluetoothBackgroundConnection.start()).thenAnswer((_) => Future.value());
@@ -64,12 +59,8 @@ void main() {
       //   (_) => BehaviorSubject<DBState>(),
       // );
       when(() => bluetoothProvider.dispose()).thenAnswer((invocation) => Future.value());
-      devicePrimary = BluetoothDeviceWithRSSI(
-        const BluetoothDevice(address: '00:00:00:00:00', name: 'Bluetooth device primary'),
-      );
-      deviceSecondary = BluetoothDeviceWithRSSI(
-        const BluetoothDevice(address: '00:00:00:00:01', name: 'Bluetooth device secondary'),
-      );
+      devicePrimary = BluetoothDeviceWithRSSI(BluetoothDevice.fromId('00:00:00:00:00'));
+      deviceSecondary = BluetoothDeviceWithRSSI(BluetoothDevice.fromId('00:00:00:00:01'));
       when(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).thenAnswer((_) => Future.value());
       when(() => bluetoothBackgroundConnection.connect(deviceSecondary.device)).thenAnswer((_) => Future.value());
       when(() => bluetoothBackgroundConnection.isConnected).thenReturn(false);
@@ -106,8 +97,8 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial: bluetooth not available',
         setUp: () {
-          when(() => flutterBluetoothSerial.isAvailable).thenAnswer((_) => Future.value(false));
-          when(() => flutterBluetoothSerial.isEnabled).thenAnswer((_) => Future.value(false));
+          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(false));
+          when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(false));
         },
         build: () => BluetoothBloc(
           audioController: audioController,
@@ -122,8 +113,8 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial not enabled',
         setUp: () {
-          when(() => flutterBluetoothSerial.isAvailable).thenAnswer((_) => Future.value(true));
-          when(() => flutterBluetoothSerial.isEnabled).thenAnswer((_) => Future.value(false));
+          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(false));
         },
         build: () => BluetoothBloc(
           audioController: audioController,
@@ -138,8 +129,8 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial enabled',
         setUp: () {
-          when(() => flutterBluetoothSerial.isAvailable).thenAnswer((_) => Future.value(true));
-          when(() => flutterBluetoothSerial.isEnabled).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(true));
         },
         build: () => BluetoothBloc(
           audioController: audioController,
@@ -154,8 +145,8 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial null',
         setUp: () {
-          when(() => flutterBluetoothSerial.isAvailable).thenAnswer((_) => Future.value(true));
-          when(() => flutterBluetoothSerial.isEnabled).thenAnswer((_) => Future.value());
+          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(false));
         },
         build: () => BluetoothBloc(
           audioController: audioController,
@@ -172,9 +163,9 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'successfully enabled',
         setUp: () {
-          when(() => flutterBluetoothSerial.isAvailable).thenAnswer((_) => Future.value(true));
-          when(() => flutterBluetoothSerial.isEnabled).thenAnswer((_) => Future.value(true));
-          when(() => flutterBluetoothSerial.requestEnable()).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.requestEnable()).thenAnswer((_) => Future.value());
         },
         build: () => BluetoothBloc(
           audioController: audioController,

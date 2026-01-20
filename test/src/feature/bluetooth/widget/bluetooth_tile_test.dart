@@ -4,15 +4,17 @@ import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/bluetooth/widget/bluetooth_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
+class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
 void main() {
   late BluetoothBloc btBloc;
+  late BluetoothDevice bluetoothDevice;
 
   Widget testWidget() {
     return MaterialApp(
@@ -24,6 +26,8 @@ void main() {
 
   setUp(() {
     btBloc = MockBluetoothBloc();
+    bluetoothDevice = MockBluetoothDevice();
+    when(() => bluetoothDevice.name).thenReturn('BluetoothDeviceName');
   });
 
   group('BluetoothTile tests', () {
@@ -74,7 +78,7 @@ void main() {
 
     patrolWidgetTest('connecting state with bluetoothDevice at bloc', (PatrolTester $) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connecting());
-      when(() => btBloc.bluetoothDevice).thenReturn(const BluetoothDevice(address: '', name: 'BluetoothDeviceName'));
+      when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, true);
       expect(($(ListTile).evaluate().single.widget as ListTile).trailing, null);
@@ -86,7 +90,7 @@ void main() {
 
     patrolWidgetTest('connected state', (PatrolTester $) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected());
-      when(() => btBloc.bluetoothDevice).thenReturn(const BluetoothDevice(address: '', name: 'BluetoothDeviceName'));
+      when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, true);
       expect($(Icon), findsNWidgets(3));
@@ -98,7 +102,7 @@ void main() {
 
     patrolWidgetTest('Press log button at connected state', (PatrolTester $) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected());
-      when(() => btBloc.bluetoothDevice).thenReturn(const BluetoothDevice(address: '', name: 'BluetoothDeviceName'));
+      when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
 
       await $.pumpWidgetAndSettle(testWidget());
       await $.tester.tap($(Icon).at(1));
@@ -106,7 +110,7 @@ void main() {
 
     patrolWidgetTest('Press module settings button at connected state', (PatrolTester $) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected());
-      when(() => btBloc.bluetoothDevice).thenReturn(const BluetoothDevice(address: '', name: 'BluetoothDeviceName'));
+      when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
 
       await $.pumpWidgetAndSettle(testWidget());
       await $.tester.tap($(Icon).at(2));
@@ -114,7 +118,7 @@ void main() {
 
     patrolWidgetTest('disconnecting state', (PatrolTester $) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.disconnecting());
-      when(() => btBloc.bluetoothDevice).thenReturn(const BluetoothDevice(address: '', name: 'BluetoothDeviceName'));
+      when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, true);
       expect(($(ListTile).evaluate().single.widget as ListTile).trailing, null);
@@ -137,7 +141,7 @@ void main() {
 
     patrolWidgetTest('disconnected state with device', (PatrolTester $) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.disconnecting());
-      when(() => btBloc.bluetoothDevice).thenReturn(const BluetoothDevice(address: '', name: 'BluetoothDeviceName'));
+      when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, true);
       expect(($(ListTile).evaluate().single.widget as ListTile).trailing, null);
