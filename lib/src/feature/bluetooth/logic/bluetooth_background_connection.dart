@@ -134,7 +134,6 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   }
 
   void _onDataReceived(Uint8List data) {
-    logger.d('Bluetooth -> Raw data chunk (${data.length}): ${String.fromCharCodes(data)}');
     // Create message if there is '\n' sequence
     _messageBuffer += String.fromCharCodes(data);
     while (_messageBuffer.contains('\n')) {
