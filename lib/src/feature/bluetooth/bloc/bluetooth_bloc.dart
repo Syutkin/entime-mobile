@@ -42,8 +42,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     on<BluetoothEvent>(transformer: sequential(), (event, emit) async {
       switch (event) {
         case _Initialize():
-          final isAvailable = await bluetoothProvider.isAvailable;
-          if (isAvailable) {
+          final isSupported = await bluetoothProvider.isSupported;
+          if (isSupported) {
             final isEnabled = await bluetoothProvider.isOn;
             if (isEnabled) {
               emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
@@ -68,7 +68,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
               // Если девайс выбран - обновляем
               _bluetoothDevice = device.device;
               emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
-              logger.i('Bluetooth -> Device selected ${_bluetoothDevice?.name}');
+              logger.i('Bluetooth -> Device selected ${_bluetoothDevice?.platformName}');
               add(BluetoothEvent.connect(selectedDevice: device.device));
               // Если девайс равен предыдущему:
               // Если девайс отключён и доступен - соединяемся

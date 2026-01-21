@@ -71,7 +71,7 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
       Permission.locationWhenInUse,
     ].request();
 
-    _scanResultsSubscription?.cancel();
+    await _scanResultsSubscription?.cancel();
     devices = <BluetoothDeviceWithRSSI>[];
 
     _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) {

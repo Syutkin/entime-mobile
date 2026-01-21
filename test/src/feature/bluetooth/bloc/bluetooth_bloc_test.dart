@@ -97,7 +97,7 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial: bluetooth not available',
         setUp: () {
-          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(false));
+          when(() => bluetoothProvider.isSupported).thenAnswer((_) => Future.value(false));
           when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(false));
         },
         build: () => BluetoothBloc(
@@ -113,7 +113,7 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial not enabled',
         setUp: () {
-          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isSupported).thenAnswer((_) => Future.value(true));
           when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(false));
         },
         build: () => BluetoothBloc(
@@ -129,7 +129,7 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial enabled',
         setUp: () {
-          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isSupported).thenAnswer((_) => Future.value(true));
           when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(true));
         },
         build: () => BluetoothBloc(
@@ -145,7 +145,7 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'FlutterBluetoothSerial null',
         setUp: () {
-          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isSupported).thenAnswer((_) => Future.value(true));
           when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(false));
         },
         build: () => BluetoothBloc(
@@ -163,7 +163,7 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'successfully enabled',
         setUp: () {
-          when(() => bluetoothProvider.isAvailable).thenAnswer((_) => Future.value(true));
+          when(() => bluetoothProvider.isSupported).thenAnswer((_) => Future.value(true));
           when(() => bluetoothProvider.isOn).thenAnswer((_) => Future.value(true));
           when(() => bluetoothProvider.requestEnable()).thenAnswer((_) => Future.value());
         },

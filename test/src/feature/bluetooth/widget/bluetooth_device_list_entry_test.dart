@@ -4,8 +4,8 @@ import 'package:entime/src/feature/bluetooth/widget/bluetooth_device_list_entry.
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patrol_finders/patrol_finders.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol_finders/patrol_finders.dart';
 
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
@@ -32,7 +32,7 @@ void main() {
   }
 
   setUp(() {
-    remoteId = DeviceIdentifier('address');
+    remoteId = const DeviceIdentifier('address');
     name = 'name';
     rssi = -100;
     device = MockBluetoothDevice();
@@ -41,7 +41,7 @@ void main() {
 
   group('BluetoothDeviceListEntry tests', () {
     patrolWidgetTest('Bonded and connected device with name and rssi', (PatrolTester $) async {
-      when(() => device.name).thenReturn(name);
+      when(() => device.platformName).thenReturn(name);
       when(() => device.isConnected).thenReturn(true);
 
       await $.pumpWidgetAndSettle(testWidget(device, rssi));
@@ -55,7 +55,7 @@ void main() {
     });
 
     patrolWidgetTest('Device with address only', (PatrolTester $) async {
-      when(() => device.name).thenReturn('');
+      when(() => device.platformName).thenReturn('');
       when(() => device.isConnected).thenReturn(false);
 
       await $.pumpWidgetAndSettle(testWidget(device));

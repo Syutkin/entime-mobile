@@ -16,7 +16,7 @@ class BluetoothDeviceListEntry extends ListTile {
          leading: const Icon(Icons.devices),
          // @TODO . !BluetoothClass! class aware icon
          title: Text(
-           device.name.isNotEmpty ? device.name : Localization.current.I18nBluetooth_unknownDevice,
+           device.platformName.isNotEmpty ? device.platformName : Localization.current.I18nBluetooth_unknownDevice,
          ),
          subtitle: Text(device.remoteId.str),
          trailing: Row(

@@ -67,7 +67,6 @@ class BleConnectionWrapper implements IBluetoothConnection {
   @override
   Future<void> write(Uint8List data) => _txCharacteristic.write(
         data,
-        withoutResponse: false,
       );
 
   @override
@@ -83,7 +82,7 @@ class BleConnectionWrapper implements IBluetoothConnection {
 
   void _closeInput() {
     if (!_inputController.isClosed) {
-      _inputController.close();
+      unawaited(_inputController.close());
     }
   }
 }
@@ -97,7 +96,7 @@ class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
 
   @override
   Future<IBluetoothConnection> connectToDevice(BluetoothDevice device) async {
-    await device.connect(license: License.free, autoConnect: false);
+    await device.connect(license: License.free);
     try {
       await device.requestMtu(247);
     } on Exception {

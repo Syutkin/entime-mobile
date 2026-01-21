@@ -27,7 +27,7 @@ void main() {
   setUp(() {
     btBloc = MockBluetoothBloc();
     bluetoothDevice = MockBluetoothDevice();
-    when(() => bluetoothDevice.name).thenReturn('BluetoothDeviceName');
+    when(() => bluetoothDevice.platformName).thenReturn('BluetoothDeviceName');
   });
 
   group('BluetoothTile tests', () {

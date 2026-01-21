@@ -30,7 +30,7 @@ class BluetoothTile extends StatelessWidget {
             subtitle: switch (state) {
               BluetoothBlocStateNotAvailable() => null,
               BluetoothBlocState() => Text(
-                BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.name ??
+                BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.platformName ??
                     Localization.current.I18nInit_pressToSelect,
               ),
             },
