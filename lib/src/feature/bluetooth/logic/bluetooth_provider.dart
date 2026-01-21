@@ -5,7 +5,7 @@ import '../bluetooth.dart';
 abstract class IBluetoothProvider {
   Stream<BluetoothAdapterState> get adapterState;
 
-  Future<bool> get isAvailable;
+  Future<bool> get isSupported;
 
   Future<bool> get isOn;
 
@@ -26,7 +26,7 @@ class BluetoothProvider implements IBluetoothProvider {
   Stream<BluetoothAdapterState> get adapterState => FlutterBluePlus.adapterState;
 
   @override
-  Future<bool> get isAvailable => FlutterBluePlus.isAvailable;
+  Future<bool> get isSupported => FlutterBluePlus.isSupported;
 
   @override
   Future<bool> get isOn async =>
