@@ -15,7 +15,6 @@ import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/settings/logic/shared_prefs_settings_provider.dart';
 import 'package:entime/src/feature/update/logic/update_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
@@ -36,10 +35,8 @@ void main() {
       appInfoProvider: appInfo,
       settingsProvider: settings,
     );
-    final flutterBluetoothSerial = FlutterBluetoothSerial.instance;
     final bluetoothBackgroundConnection = BluetoothBackgroundConnection();
     final bluetoothProvider = BluetoothProvider(
-      flutterBluetoothSerial: flutterBluetoothSerial,
       bluetoothBackgroundConnection: bluetoothBackgroundConnection,
     );
 
