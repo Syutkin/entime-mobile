@@ -220,6 +220,7 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                               context: context,
                               text: i18n.I18nModuleSettings_deviceNumber,
                               labelText: i18n.I18nModuleSettings_deviceNumber,
+                              initialValue: moduleSettings.device.number,
                             );
                             if (value != null) {
                               widget.onChanged();

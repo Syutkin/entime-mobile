@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2025-08-19T04:27:35.324197",
+  "@@last_modified": "2026-01-22T21:46:23.353839",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1257,11 +1257,6 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_wifiActive": "Активно",
-  "@I18nModuleSettings_wifiActive": {
-    "type": "text",
-    "placeholders": {}
-  },
   "I18nModuleSettings_wifiNetwork": "Сеть",
   "@I18nModuleSettings_wifiNetwork": {
     "type": "text",
@@ -1309,6 +1304,21 @@
   },
   "I18nModuleSettings_deviceNumber": "Номер",
   "@I18nModuleSettings_deviceNumber": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceNumberEmpty": "Введите номер устройства",
+  "@I18nModuleSettings_deviceNumberEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceNumberInvalid": "Номер должен быть целым",
+  "@I18nModuleSettings_deviceNumberInvalid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceNumberRange": "Диапазон 1..255",
+  "@I18nModuleSettings_deviceNumberRange": {
     "type": "text",
     "placeholders": {}
   },
@@ -1364,6 +1374,11 @@
   },
   "I18nModuleSettings_ntp3": "NTP 3",
   "@I18nModuleSettings_ntp3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_wifiActive": "Активно",
+  "@I18nModuleSettings_wifiActive": {
     "type": "text",
     "placeholders": {}
   },

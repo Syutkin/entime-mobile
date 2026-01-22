@@ -383,6 +383,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
       "Номер",
     ),
+    "I18nModuleSettings_deviceNumberEmpty":
+        MessageLookupByLibrary.simpleMessage("Введите номер устройства"),
+    "I18nModuleSettings_deviceNumberInvalid":
+        MessageLookupByLibrary.simpleMessage("Номер должен быть целым"),
+    "I18nModuleSettings_deviceNumberRange":
+        MessageLookupByLibrary.simpleMessage("Диапазон 1..255"),
     "I18nModuleSettings_deviceTimezone": MessageLookupByLibrary.simpleMessage(
       "Часовой пояс",
     ),

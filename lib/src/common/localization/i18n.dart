@@ -732,6 +732,15 @@ class I18nModuleSettings {
 
   static String get deviceNumber => Intl.message('Номер', name: 'I18nModuleSettings_deviceNumber');
 
+  static String get deviceNumberEmpty =>
+      Intl.message('Введите номер устройства', name: 'I18nModuleSettings_deviceNumberEmpty');
+
+  static String get deviceNumberInvalid =>
+      Intl.message('Номер должен быть целым', name: 'I18nModuleSettings_deviceNumberInvalid');
+
+  static String get deviceNumberRange =>
+      Intl.message('Диапазон 1..255', name: 'I18nModuleSettings_deviceNumberRange');
+
   static String get deviceType => Intl.message('Тип', name: 'I18nModuleSettings_deviceType');
 
   static String get deviceTimezone => Intl.message('Часовой пояс', name: 'I18nModuleSettings_deviceTimezone');

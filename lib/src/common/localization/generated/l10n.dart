@@ -2342,16 +2342,6 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Активно`
-  String get I18nModuleSettings_wifiActive {
-    return Intl.message(
-      'Активно',
-      name: 'I18nModuleSettings_wifiActive',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Сеть`
   String get I18nModuleSettings_wifiNetwork {
     return Intl.message(
@@ -2447,6 +2437,36 @@ class GeneratedLocalization {
     return Intl.message(
       'Номер',
       name: 'I18nModuleSettings_deviceNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите номер устройства`
+  String get I18nModuleSettings_deviceNumberEmpty {
+    return Intl.message(
+      'Введите номер устройства',
+      name: 'I18nModuleSettings_deviceNumberEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Номер должен быть целым`
+  String get I18nModuleSettings_deviceNumberInvalid {
+    return Intl.message(
+      'Номер должен быть целым',
+      name: 'I18nModuleSettings_deviceNumberInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Диапазон 1..255`
+  String get I18nModuleSettings_deviceNumberRange {
+    return Intl.message(
+      'Диапазон 1..255',
+      name: 'I18nModuleSettings_deviceNumberRange',
       desc: '',
       args: [],
     );
@@ -2557,6 +2577,16 @@ class GeneratedLocalization {
     return Intl.message(
       'NTP 3',
       name: 'I18nModuleSettings_ntp3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Активно`
+  String get I18nModuleSettings_wifiActive {
+    return Intl.message(
+      'Активно',
+      name: 'I18nModuleSettings_wifiActive',
       desc: '',
       args: [],
     );
