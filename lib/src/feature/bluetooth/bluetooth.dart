@@ -4,6 +4,8 @@ export 'logic/bluetooth_connection_interface.dart';
 export 'logic/bluetooth_provider.dart';
 export 'model/bluetooth_device_with_rssi.dart';
 export 'model/bluetooth_message.dart';
+export 'model/bluetooth_protocol_models.dart';
+export 'model/bluetooth_protocol_types.dart';
 export 'widget/bluetooth_button.dart';
 export 'widget/bluetooth_device_list_entry.dart';
 export 'widget/select_device.dart';
