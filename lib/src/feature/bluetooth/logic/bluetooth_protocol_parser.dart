@@ -59,20 +59,21 @@ class BluetoothProtocolParser {
   const BluetoothProtocolParser();
 
   BluetoothProtocolMessage parse(String rawMessage) {
-    if (rawMessage.isEmpty) {
+    final normalized = rawMessage.trim();
+    if (normalized.isEmpty) {
       return BluetoothProtocolUnknownMessage(raw: rawMessage);
     }
 
-    if (rawMessage.endsWith('#')) {
+    if (normalized.endsWith('#')) {
       for (final entry in bluetoothProtocolPacketByPrefix.entries) {
-        if (rawMessage.startsWith(entry.key)) {
-          return BluetoothProtocolPacketMessage(type: entry.value, raw: rawMessage);
+        if (normalized.startsWith(entry.key)) {
+          return BluetoothProtocolPacketMessage(type: entry.value, raw: normalized);
         }
       }
     }
 
-    if (rawMessage.startsWith('{') && rawMessage.endsWith('}')) {
-      final decoded = _decodeJson(rawMessage);
+    if (normalized.startsWith('{') && normalized.endsWith('}')) {
+      final decoded = _decodeJson(normalized);
       if (decoded != null) {
         final eventName = _asString(decoded['event']);
         if (eventName != null) {
