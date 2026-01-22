@@ -33,7 +33,10 @@ class ModuleSettingsInitScreen extends StatelessWidget {
                 loaded: (moduleSettings) {
                   moduleSettings.map(
                     entime: (entime) {
-                      final message = jsonEncode(entime.entime.copyWith(read: false).toJson());
+                      final message = jsonEncode({
+                        'cmd': 'save_config',
+                        'data': entime.entime.toJson(),
+                      });
                       BlocProvider.of<BluetoothBloc>(context).add(
                         BluetoothEvent.sendMessage(message: message),
                       );
@@ -104,8 +107,77 @@ class ModuleSettingsScreen extends StatefulWidget {
 }
 
 class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
+  Future<String?> _editText({
+    required BuildContext context,
+    required String title,
+    String? initialValue,
+  }) async {
+    final controller = TextEditingController(text: initialValue ?? '');
+    return showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+        ),
+        actions: cancelOkButtons(
+          context: context,
+          onCancelPressed: () => Navigator.of(context).pop(),
+          onOkPressed: () => Navigator.of(context).pop(controller.text.trim()),
+        ),
+      ),
+    );
+  }
+
+  Future<int?> _editInt({
+    required BuildContext context,
+    required String title,
+    int? initialValue,
+  }) async {
+    final controller = TextEditingController(text: initialValue?.toString() ?? '');
+    return showDialog<int>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          autofocus: true,
+        ),
+        actions: cancelOkButtons(
+          context: context,
+          onCancelPressed: () => Navigator.of(context).pop(),
+          onOkPressed: () => Navigator.of(context).pop(int.tryParse(controller.text)),
+        ),
+      ),
+    );
+  }
+
+  Future<int?> _selectInt({
+    required BuildContext context,
+    required String title,
+    required Map<int, String> options,
+  }) async {
+    return showDialog<int>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(title),
+        children: options.entries
+            .map(
+              (entry) => SimpleDialogOption(
+                onPressed: () => Navigator.of(context).pop(entry.key),
+                child: Text(entry.value),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final i18n = Localization.current;
     final bloc = BlocProvider.of<ModuleSettingsBloc>(context);
     return BlocBuilder<ModuleSettingsBloc, ModuleSettingsState>(
       builder: (context, state) {
@@ -118,270 +190,187 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                 return SettingsList(
                   sections: [
                     SettingsSection(
-                      title: Text(Localization.current.I18nModuleSettings_module),
+                      title: Text(i18n.I18nModuleSettings_device),
                       tiles: [
                         SettingsTile(
-                          title: Text('${moduleSettings.bluetooth.name}${moduleSettings.bluetooth.number}'),
+                          title: Text(i18n.I18nModuleSettings_deviceName),
+                          trailing: Text(moduleSettings.device.name),
+                          onPressed: (context) async {
+                            final value = await _editText(
+                              context: context,
+                              title: i18n.I18nModuleSettings_deviceName,
+                              initialValue: moduleSettings.device.name,
+                            );
+                            if (value != null && value.isNotEmpty) {
+                              widget.onChanged();
+                              bloc.add(
+                                ModuleSettingsEvent.update(
+                                  ModSettingsModel.entime(moduleSettings.copyWith.device(name: value)),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        SettingsTile(
+                          title: Text(i18n.I18nModuleSettings_deviceNumber),
+                          trailing: Text('${moduleSettings.device.number}'),
+                          onPressed: (context) async {
+                            final value = await _editInt(
+                              context: context,
+                              title: i18n.I18nModuleSettings_deviceNumber,
+                              initialValue: moduleSettings.device.number,
+                            );
+                            if (value != null) {
+                              widget.onChanged();
+                              bloc.add(
+                                ModuleSettingsEvent.update(
+                                  ModSettingsModel.entime(moduleSettings.copyWith.device(number: value)),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        SettingsTile(
+                          title: Text(i18n.I18nModuleSettings_deviceType),
+                          trailing: Text(
+                            moduleSettings.device.type == 1 ? i18n.I18nHome_start : i18n.I18nHome_finish,
+                          ),
+                          onPressed: (context) async {
+                            final value = await _selectInt(
+                              context: context,
+                              title: i18n.I18nModuleSettings_deviceType,
+                              options: {
+                                1: i18n.I18nHome_start,
+                                2: i18n.I18nHome_finish,
+                              },
+                            );
+                            if (value != null) {
+                              widget.onChanged();
+                              bloc.add(
+                                ModuleSettingsEvent.update(
+                                  ModSettingsModel.entime(moduleSettings.copyWith.device(type: value)),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        SettingsTile(
+                          title: Text(i18n.I18nModuleSettings_deviceTimezone),
+                          trailing: Text('${moduleSettings.device.timezone}'),
+                          onPressed: (context) async {
+                            final value = await _editInt(
+                              context: context,
+                              title: i18n.I18nModuleSettings_deviceTimezone,
+                              initialValue: moduleSettings.device.timezone,
+                            );
+                            if (value != null) {
+                              widget.onChanged();
+                              bloc.add(
+                                ModuleSettingsEvent.update(
+                                  ModSettingsModel.entime(moduleSettings.copyWith.device(timezone: value)),
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ],
                     ),
                     SettingsSection(
-                      title: Text(Localization.current.I18nModuleSettings_buzzer),
+                      title: Text(i18n.I18nModuleSettings_sync),
                       tiles: [
                         SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_buzzer),
-                          //leading:  Icon(MdiIcons.bell),
-                          initialValue: moduleSettings.buzzer.active,
+                          title: Text(i18n.I18nModuleSettings_syncAuto),
+                          initialValue: moduleSettings.sync.auto,
                           onToggle: (value) {
                             widget.onChanged();
-                            // bloc.moduleSettings.buzzer = value;
                             bloc.add(
                               ModuleSettingsEvent.update(
-                                ModSettingsModel.entime(moduleSettings.copyWith.buzzer(active: value)),
+                                ModSettingsModel.entime(moduleSettings.copyWith.sync(auto: value)),
                               ),
                             );
                           },
                         ),
                         SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_shortFrequency),
+                          title: Text(i18n.I18nModuleSettings_syncSource),
                           trailing: Text(
-                            Localization.current.I18nModuleSettings_frequencyHz(moduleSettings.buzzer.shortFrequency),
+                            switch (moduleSettings.sync.source) {
+                              0 => i18n.I18nModuleSettings_syncSourceAuto,
+                              1 => i18n.I18nModuleSettings_syncSourceGps,
+                              _ => i18n.I18nModuleSettings_syncSourceRtc,
+                            },
                           ),
-                          //leading:  Icon(MdiIcons.wave),
                           onPressed: (context) async {
-                            final hz = await buzzerFrequencyPopup(
-                              frequency: moduleSettings.buzzer.shortFrequency,
+                            final value = await _selectInt(
                               context: context,
-                              text: Localization.current.I18nModuleSettings_selectShortFrequency,
+                              title: i18n.I18nModuleSettings_syncSource,
+                              options: {
+                                0: i18n.I18nModuleSettings_syncSourceAuto,
+                                1: i18n.I18nModuleSettings_syncSourceGps,
+                                2: i18n.I18nModuleSettings_syncSourceRtc,
+                              },
                             );
-                            if (hz != null) {
+                            if (value != null) {
                               widget.onChanged();
-                              // bloc.moduleSettings.shortFrequency = hz;
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.buzzer(shortFrequency: hz)),
+                                  ModSettingsModel.entime(moduleSettings.copyWith.sync(source: value)),
                                 ),
                               );
                             }
                           },
                         ),
                         SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_longFrequency),
-                          trailing: Text(
-                            Localization.current.I18nModuleSettings_frequencyHz(moduleSettings.buzzer.longFrequency),
-                          ),
-                          //leading:  Icon(MdiIcons.wave),
+                          title: Text(i18n.I18nModuleSettings_ntp1),
+                          trailing: Text(moduleSettings.sync.ntp1),
                           onPressed: (context) async {
-                            final hz = await buzzerFrequencyPopup(
-                              frequency: moduleSettings.buzzer.longFrequency,
+                            final value = await _editText(
                               context: context,
-                              text: Localization.current.I18nModuleSettings_selectLongFrequency,
+                              title: i18n.I18nModuleSettings_ntp1,
+                              initialValue: moduleSettings.sync.ntp1,
                             );
-                            if (hz != null) {
+                            if (value != null) {
                               widget.onChanged();
-                              // bloc.moduleSettings.longFrequency = hz;
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.buzzer(longFrequency: hz)),
+                                  ModSettingsModel.entime(moduleSettings.copyWith.sync(ntp1: value)),
                                 ),
                               );
                             }
                           },
                         ),
-                      ],
-                    ),
-                    SettingsSection(
-                      title: Text(Localization.current.I18nModuleSettings_lora),
-                      tiles: [
-                        SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_lora),
-                          //leading:  Icon(MdiIcons.radio),
-                          initialValue: moduleSettings.loRa.active,
-                          enabled: false,
-                          onToggle: (value) {
-                            widget.onChanged();
-                            //moduleSettings.lora = value;
-                            //ToDo LoRa;
-                          },
-                        ),
                         SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_frequency),
-                          trailing: Text(
-                            Localization.current.I18nModuleSettings_frequencyHz(moduleSettings.loRa.frequency),
-                          ),
-                          //leading:  Icon(MdiIcons.wave),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo LoRa;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_txPower),
-                          trailing: Text('${moduleSettings.loRa.txPower}'),
-                          //leading:  Icon(MdiIcons.wave),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo LoRa;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_spreadingFactor),
-                          trailing: Text('${moduleSettings.loRa.spreadingFactor}'),
-                          //leading:  Icon(MdiIcons.wave),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo LoRa;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_signalBandwidth),
-                          trailing: Text('${moduleSettings.loRa.signalBandwidth}'),
-                          //leading:  Icon(MdiIcons.wave),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo LoRa;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_codingRateDenominator),
-                          trailing: Text('${moduleSettings.loRa.codingRateDenom}'),
-                          //leading:  Icon(MdiIcons.wave),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo LoRa;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_preambleLength),
-                          trailing: Text('${moduleSettings.loRa.preambleLength}'),
-                          //leading:  Icon(MdiIcons.wave),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo LoRa;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_syncWord),
-                          trailing: Text('${moduleSettings.loRa.syncWord}'),
-                          //leading:  Icon(MdiIcons.wave),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo LoRa;
-                          },
-                        ),
-                        SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_crc),
-                          //leading:  Icon(MdiIcons.wave),
-                          initialValue: moduleSettings.loRa.crc,
-                          enabled: false,
-                          onToggle: (value) {
-                            widget.onChanged();
-                            //moduleSettings.crc = value;
-                            //ToDo LoRa;
-                          },
-                        ),
-                      ],
-                    ),
-                    SettingsSection(
-                      title: Text(Localization.current.I18nModuleSettings_screen),
-                      tiles: [
-                        SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_tft),
-                          //leading:  Icon(MdiIcons.monitor),
-                          initialValue: moduleSettings.tft.active,
-                          enabled: false,
-                          onToggle: (value) {
-                            widget.onChanged();
-                            //moduleSettings.tft = value;
-                            //ToDo TFT;
-                          },
-                        ),
-                        SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_sleepMode),
-                          //leading:  Icon(MdiIcons.monitor),
-                          initialValue: moduleSettings.tft.timeout,
-                          enabled: false,
-                          onToggle: (value) {
-                            widget.onChanged();
-                            //moduleSettings.timeout = value;
-                            //ToDo TFT;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_sleepMode),
-                          trailing: Text(
-                            Localization.current.I18nModuleSettings_sleepModeSeconds(
-                              moduleSettings.tft.timeoutDuration,
-                            ),
-                          ),
-                          //leading:  Icon(MdiIcons.monitor),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo TFT;
-                          },
-                        ),
-                        SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_turnOnAtEvent),
-                          //leading:  Icon(MdiIcons.monitor),
-                          initialValue: moduleSettings.tft.turnOnAtEvent,
-                          enabled: false,
-                          onToggle: (value) {
-                            widget.onChanged();
-                            //moduleSettings.turnOnAtEvent = value;
-                            //ToDo TFT;
-                          },
-                        ),
-                      ],
-                    ),
-                    SettingsSection(
-                      title: Text(Localization.current.I18nModuleSettings_bluetooth),
-                      tiles: [
-                        SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_bluetooth),
-                          //leading:  Icon(Icons.bluetooth),
-                          // initialValue: bloc.moduleSettings.bluetooth,
-                          initialValue: true,
-                          enabled: false,
-                          onToggle: (value) {
-                            widget.onChanged();
-                            //moduleSettings.bluetooth = value;
-                            //ToDo bluetooth on/off;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_bluetoothModuleName),
-                          trailing: Text(moduleSettings.bluetooth.name),
-                          //leading:  Icon(MdiIcons.bluetooth),
-                          enabled: false,
-                          onPressed: (context) {
-                            widget.onChanged();
-                            //ToDo bluetooth module name;
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_bluetoothModuleNumber),
-                          trailing: Text('${moduleSettings.bluetooth.number}'),
-                          //leading:  Icon(MdiIcons.bluetooth),
+                          title: Text(i18n.I18nModuleSettings_ntp2),
+                          trailing: Text(moduleSettings.sync.ntp2),
                           onPressed: (context) async {
-                            final number = await bluetoothNumberPopup(
+                            final value = await _editText(
                               context: context,
-                              labelText: Localization.current.I18nModuleSettings_bluetoothNumber,
-                              text: Localization.current.I18nModuleSettings_enterBluetoothModuleNumber,
+                              title: i18n.I18nModuleSettings_ntp2,
+                              initialValue: moduleSettings.sync.ntp2,
                             );
-                            if (number != null) {
+                            if (value != null) {
                               widget.onChanged();
-                              // bloc.moduleSettings.bluetoothNumber = number;
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.bluetooth(number: number)),
+                                  ModSettingsModel.entime(moduleSettings.copyWith.sync(ntp2: value)),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        SettingsTile(
+                          title: Text(i18n.I18nModuleSettings_ntp3),
+                          trailing: Text(moduleSettings.sync.ntp3),
+                          onPressed: (context) async {
+                            final value = await _editText(
+                              context: context,
+                              title: i18n.I18nModuleSettings_ntp3,
+                              initialValue: moduleSettings.sync.ntp3,
+                            );
+                            if (value != null) {
+                              widget.onChanged();
+                              bloc.add(
+                                ModuleSettingsEvent.update(
+                                  ModSettingsModel.entime(moduleSettings.copyWith.sync(ntp3: value)),
                                 ),
                               );
                             }
@@ -390,104 +379,39 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                       ],
                     ),
                     SettingsSection(
-                      title: Text(Localization.current.I18nModuleSettings_wifi),
+                      title: Text(i18n.I18nModuleSettings_wifi),
                       tiles: [
                         SettingsTile.switchTile(
-                          title: Text(Localization.current.I18nModuleSettings_wifi),
-                          //leading:  Icon(MdiIcons.wifi),
-                          //ToDo WiFi;
-                          initialValue: true,
-                          // initialValue: bloc.moduleSettings.wifi,
-                          enabled: false,
+                          title: Text(i18n.I18nModuleSettings_wifiActive),
+                          initialValue: moduleSettings.wifi.active,
                           onToggle: (value) {
                             widget.onChanged();
-                            //moduleSettings.wifi = value;
+                            bloc.add(
+                              ModuleSettingsEvent.update(
+                                ModSettingsModel.entime(moduleSettings.copyWith.wifi(active: value)),
+                              ),
+                            );
                           },
                         ),
                         SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_wifiNetwork),
-                          trailing: Text(moduleSettings.wiFi.ssid),
-                          //leading:  Icon(MdiIcons.wifi),
+                          title: Text(i18n.I18nModuleSettings_wifiNetwork),
+                          trailing: Text(moduleSettings.wifi.ssid),
+                          enabled: moduleSettings.wifi.active,
                           onPressed: (context) async {
-                            final credentials = await wifiSettingsPopup(context: context, ssid: moduleSettings.wiFi.ssid);
+                            final credentials = await wifiSettingsPopup(
+                              context: context,
+                              ssid: moduleSettings.wifi.ssid,
+                            );
                             final ssid = credentials?[0];
                             final password = credentials?[1];
                             if (ssid != null) {
                               widget.onChanged();
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(
-                                    moduleSettings.copyWith.wiFi(ssid: ssid, passwd: password ?? ''),
-                                  ),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                    SettingsSection(
-                      title: Text(Localization.current.I18nModuleSettings_vcc),
-                      tiles: [
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_resistor1),
-                          trailing: Text(Localization.current.I18nModuleSettings_resistorOhm(moduleSettings.vcc.r1)),
-                          //leading:  Icon(MdiIcons.resistor),
-                          onPressed: (context) async {
-                            final r1 = await vccPopup(
-                              context: context,
-                              labelText: Localization.current.I18nModuleSettings_ohm,
-                              text: Localization.current.I18nModuleSettings_enterResistor1,
-                              value: moduleSettings.vcc.r1,
-                            );
-                            if (r1 != null) {
-                              widget.onChanged();
-                              // bloc.moduleSettings.r1 = r1;
-                              bloc.add(
-                                ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.vcc(r1: r1)),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_resistor2),
-                          trailing: Text(Localization.current.I18nModuleSettings_resistorOhm(moduleSettings.vcc.r2)),
-                          //leading:  Icon(MdiIcons.resistor),
-                          onPressed: (context) async {
-                            final r2 = await vccPopup(
-                              context: context,
-                              labelText: Localization.current.I18nModuleSettings_ohm,
-                              text: Localization.current.I18nModuleSettings_enterResistor2,
-                              value: moduleSettings.vcc.r2,
-                            );
-                            if (r2 != null) {
-                              widget.onChanged();
-                              bloc.add(
-                                ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.vcc(r2: r2)),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        SettingsTile(
-                          title: Text(Localization.current.I18nModuleSettings_enterMeasuredVoltage),
-                          // subtitle: Text('${_bloc.moduleSettings.vBat} мВ'),
-                          //leading:  Icon(MdiIcons.batteryCharging),
-                          onPressed: (context) async {
-                            final mv = await vccPopup(
-                              context: context,
-                              labelText: Localization.current.I18nModuleSettings_mv,
-                              text: Localization.current.I18nModuleSettings_enterCurrentVoltage,
-                            );
-                            if (mv != null) {
-                              widget.onChanged();
-                              // bloc.moduleSettings.vBat = mv;
-                              bloc.add(
-                                ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.vcc(vbat: mv)),
+                                  ModSettingsModel.entime(moduleSettings.copyWith.wifi(
+                                    ssid: ssid,
+                                    passwd: password ?? '',
+                                  )),
                                 ),
                               );
                             }

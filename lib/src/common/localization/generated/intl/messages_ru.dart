@@ -365,6 +365,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_codingRateDenominator":
         MessageLookupByLibrary.simpleMessage("Coding Rate Denominator"),
     "I18nModuleSettings_crc": MessageLookupByLibrary.simpleMessage("CRC"),
+    "I18nModuleSettings_device": MessageLookupByLibrary.simpleMessage(
+      "Устройство",
+    ),
+    "I18nModuleSettings_deviceName": MessageLookupByLibrary.simpleMessage(
+      "Имя",
+    ),
+    "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
+      "Номер",
+    ),
+    "I18nModuleSettings_deviceTimezone": MessageLookupByLibrary.simpleMessage(
+      "Часовой пояс",
+    ),
+    "I18nModuleSettings_deviceType": MessageLookupByLibrary.simpleMessage(
+      "Тип",
+    ),
     "I18nModuleSettings_enterBluetoothModuleNumber":
         MessageLookupByLibrary.simpleMessage("Введите номер модуля"),
     "I18nModuleSettings_enterCurrentVoltage":
@@ -397,6 +412,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "I18nModuleSettings_mv": MessageLookupByLibrary.simpleMessage("мВ"),
     "I18nModuleSettings_noteFrequency": m9,
+    "I18nModuleSettings_ntp1": MessageLookupByLibrary.simpleMessage("NTP 1"),
+    "I18nModuleSettings_ntp2": MessageLookupByLibrary.simpleMessage("NTP 2"),
+    "I18nModuleSettings_ntp3": MessageLookupByLibrary.simpleMessage("NTP 3"),
     "I18nModuleSettings_ohm": MessageLookupByLibrary.simpleMessage("Ом"),
     "I18nModuleSettings_preambleLength": MessageLookupByLibrary.simpleMessage(
       "Preamble Length",
@@ -431,6 +449,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_spreadingFactor": MessageLookupByLibrary.simpleMessage(
       "Spreading Factor",
     ),
+    "I18nModuleSettings_sync": MessageLookupByLibrary.simpleMessage(
+      "Синхронизация",
+    ),
+    "I18nModuleSettings_syncAuto": MessageLookupByLibrary.simpleMessage("Авто"),
+    "I18nModuleSettings_syncSource": MessageLookupByLibrary.simpleMessage(
+      "Источник",
+    ),
+    "I18nModuleSettings_syncSourceAuto": MessageLookupByLibrary.simpleMessage(
+      "Авто",
+    ),
+    "I18nModuleSettings_syncSourceGps": MessageLookupByLibrary.simpleMessage(
+      "GPS",
+    ),
+    "I18nModuleSettings_syncSourceRtc": MessageLookupByLibrary.simpleMessage(
+      "RTC",
+    ),
     "I18nModuleSettings_syncWord": MessageLookupByLibrary.simpleMessage(
       "Sync Word",
     ),
@@ -444,6 +478,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_unknownModuleType": m12,
     "I18nModuleSettings_vcc": MessageLookupByLibrary.simpleMessage("VCC"),
     "I18nModuleSettings_wifi": MessageLookupByLibrary.simpleMessage("WiFi"),
+    "I18nModuleSettings_wifiActive": MessageLookupByLibrary.simpleMessage(
+      "Активно",
+    ),
     "I18nModuleSettings_wifiNetwork": MessageLookupByLibrary.simpleMessage(
       "Сеть",
     ),

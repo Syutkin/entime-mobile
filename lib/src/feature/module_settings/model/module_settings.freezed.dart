@@ -588,7 +588,7 @@ as String,
 /// @nodoc
 mixin _$ModSettingsEntime {
 
-@JsonKey(name: 'Read') bool? get read;@JsonKey(name: 'Type') String get type;@JsonKey(name: 'Bluetooth') Bluetooth get bluetooth;@JsonKey(name: 'LoRa') LoRa get loRa;@JsonKey(name: 'WiFi') WiFi get wiFi;@JsonKey(name: 'TFT') Tft get tft;@JsonKey(name: 'Buzzer') Buzzer get buzzer;@JsonKey(name: 'VCC') Vcc get vcc;
+@JsonKey(name: 'device') DeviceSettings get device;@JsonKey(name: 'sync') SyncSettings get sync;@JsonKey(name: 'wifi') WiFi get wifi;
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -601,16 +601,16 @@ $ModSettingsEntimeCopyWith<ModSettingsEntime> get copyWith => _$ModSettingsEntim
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsEntime&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.loRa, loRa) || other.loRa == loRa)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.tft, tft) || other.tft == tft)&&(identical(other.buzzer, buzzer) || other.buzzer == buzzer)&&(identical(other.vcc, vcc) || other.vcc == vcc));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsEntime&&(identical(other.device, device) || other.device == device)&&(identical(other.sync, sync) || other.sync == sync)&&(identical(other.wifi, wifi) || other.wifi == wifi));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,read,type,bluetooth,loRa,wiFi,tft,buzzer,vcc);
+int get hashCode => Object.hash(runtimeType,device,sync,wifi);
 
 @override
 String toString() {
-  return 'ModSettingsEntime(read: $read, type: $type, bluetooth: $bluetooth, loRa: $loRa, wiFi: $wiFi, tft: $tft, buzzer: $buzzer, vcc: $vcc)';
+  return 'ModSettingsEntime(device: $device, sync: $sync, wifi: $wifi)';
 }
 
 
@@ -621,11 +621,11 @@ abstract mixin class $ModSettingsEntimeCopyWith<$Res>  {
   factory $ModSettingsEntimeCopyWith(ModSettingsEntime value, $Res Function(ModSettingsEntime) _then) = _$ModSettingsEntimeCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'LoRa') LoRa loRa,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'TFT') Tft tft,@JsonKey(name: 'Buzzer') Buzzer buzzer,@JsonKey(name: 'VCC') Vcc vcc
+@JsonKey(name: 'device') DeviceSettings device,@JsonKey(name: 'sync') SyncSettings sync,@JsonKey(name: 'wifi') WiFi wifi
 });
 
 
-$BluetoothCopyWith<$Res> get bluetooth;$LoRaCopyWith<$Res> get loRa;$WiFiCopyWith<$Res> get wiFi;$TftCopyWith<$Res> get tft;$BuzzerCopyWith<$Res> get buzzer;$VccCopyWith<$Res> get vcc;
+$DeviceSettingsCopyWith<$Res> get device;$SyncSettingsCopyWith<$Res> get sync;$WiFiCopyWith<$Res> get wifi;
 
 }
 /// @nodoc
@@ -638,72 +638,40 @@ class _$ModSettingsEntimeCopyWithImpl<$Res>
 
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? loRa = null,Object? wiFi = null,Object? tft = null,Object? buzzer = null,Object? vcc = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? device = null,Object? sync = null,Object? wifi = null,}) {
   return _then(_self.copyWith(
-read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
-as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
-as Bluetooth,loRa: null == loRa ? _self.loRa : loRa // ignore: cast_nullable_to_non_nullable
-as LoRa,wiFi: null == wiFi ? _self.wiFi : wiFi // ignore: cast_nullable_to_non_nullable
-as WiFi,tft: null == tft ? _self.tft : tft // ignore: cast_nullable_to_non_nullable
-as Tft,buzzer: null == buzzer ? _self.buzzer : buzzer // ignore: cast_nullable_to_non_nullable
-as Buzzer,vcc: null == vcc ? _self.vcc : vcc // ignore: cast_nullable_to_non_nullable
-as Vcc,
+device: null == device ? _self.device : device // ignore: cast_nullable_to_non_nullable
+as DeviceSettings,sync: null == sync ? _self.sync : sync // ignore: cast_nullable_to_non_nullable
+as SyncSettings,wifi: null == wifi ? _self.wifi : wifi // ignore: cast_nullable_to_non_nullable
+as WiFi,
   ));
 }
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$BluetoothCopyWith<$Res> get bluetooth {
+$DeviceSettingsCopyWith<$Res> get device {
   
-  return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
-    return _then(_self.copyWith(bluetooth: value));
+  return $DeviceSettingsCopyWith<$Res>(_self.device, (value) {
+    return _then(_self.copyWith(device: value));
   });
 }/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LoRaCopyWith<$Res> get loRa {
+$SyncSettingsCopyWith<$Res> get sync {
   
-  return $LoRaCopyWith<$Res>(_self.loRa, (value) {
-    return _then(_self.copyWith(loRa: value));
+  return $SyncSettingsCopyWith<$Res>(_self.sync, (value) {
+    return _then(_self.copyWith(sync: value));
   });
 }/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$WiFiCopyWith<$Res> get wiFi {
+$WiFiCopyWith<$Res> get wifi {
   
-  return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
-    return _then(_self.copyWith(wiFi: value));
-  });
-}/// Create a copy of ModSettingsEntime
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$TftCopyWith<$Res> get tft {
-  
-  return $TftCopyWith<$Res>(_self.tft, (value) {
-    return _then(_self.copyWith(tft: value));
-  });
-}/// Create a copy of ModSettingsEntime
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$BuzzerCopyWith<$Res> get buzzer {
-  
-  return $BuzzerCopyWith<$Res>(_self.buzzer, (value) {
-    return _then(_self.copyWith(buzzer: value));
-  });
-}/// Create a copy of ModSettingsEntime
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$VccCopyWith<$Res> get vcc {
-  
-  return $VccCopyWith<$Res>(_self.vcc, (value) {
-    return _then(_self.copyWith(vcc: value));
+  return $WiFiCopyWith<$Res>(_self.wifi, (value) {
+    return _then(_self.copyWith(wifi: value));
   });
 }
 }
@@ -787,10 +755,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'LoRa')  LoRa loRa, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'TFT')  Tft tft, @JsonKey(name: 'Buzzer')  Buzzer buzzer, @JsonKey(name: 'VCC')  Vcc vcc)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ModSettingsEntime() when $default != null:
-return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_that.tft,_that.buzzer,_that.vcc);case _:
+return $default(_that.device,_that.sync,_that.wifi);case _:
   return orElse();
 
 }
@@ -808,10 +776,10 @@ return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'LoRa')  LoRa loRa, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'TFT')  Tft tft, @JsonKey(name: 'Buzzer')  Buzzer buzzer, @JsonKey(name: 'VCC')  Vcc vcc)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi)  $default,) {final _that = this;
 switch (_that) {
 case _ModSettingsEntime():
-return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_that.tft,_that.buzzer,_that.vcc);case _:
+return $default(_that.device,_that.sync,_that.wifi);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -828,10 +796,10 @@ return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'Read')  bool? read, @JsonKey(name: 'Type')  String type, @JsonKey(name: 'Bluetooth')  Bluetooth bluetooth, @JsonKey(name: 'LoRa')  LoRa loRa, @JsonKey(name: 'WiFi')  WiFi wiFi, @JsonKey(name: 'TFT')  Tft tft, @JsonKey(name: 'Buzzer')  Buzzer buzzer, @JsonKey(name: 'VCC')  Vcc vcc)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi)?  $default,) {final _that = this;
 switch (_that) {
 case _ModSettingsEntime() when $default != null:
-return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_that.tft,_that.buzzer,_that.vcc);case _:
+return $default(_that.device,_that.sync,_that.wifi);case _:
   return null;
 
 }
@@ -843,17 +811,12 @@ return $default(_that.read,_that.type,_that.bluetooth,_that.loRa,_that.wiFi,_tha
 @JsonSerializable()
 
 class _ModSettingsEntime implements ModSettingsEntime {
-  const _ModSettingsEntime({@JsonKey(name: 'Read') this.read, @JsonKey(name: 'Type') required this.type, @JsonKey(name: 'Bluetooth') required this.bluetooth, @JsonKey(name: 'LoRa') required this.loRa, @JsonKey(name: 'WiFi') required this.wiFi, @JsonKey(name: 'TFT') required this.tft, @JsonKey(name: 'Buzzer') required this.buzzer, @JsonKey(name: 'VCC') required this.vcc});
+  const _ModSettingsEntime({@JsonKey(name: 'device') required this.device, @JsonKey(name: 'sync') required this.sync, @JsonKey(name: 'wifi') required this.wifi});
   factory _ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
 
-@override@JsonKey(name: 'Read') final  bool? read;
-@override@JsonKey(name: 'Type') final  String type;
-@override@JsonKey(name: 'Bluetooth') final  Bluetooth bluetooth;
-@override@JsonKey(name: 'LoRa') final  LoRa loRa;
-@override@JsonKey(name: 'WiFi') final  WiFi wiFi;
-@override@JsonKey(name: 'TFT') final  Tft tft;
-@override@JsonKey(name: 'Buzzer') final  Buzzer buzzer;
-@override@JsonKey(name: 'VCC') final  Vcc vcc;
+@override@JsonKey(name: 'device') final  DeviceSettings device;
+@override@JsonKey(name: 'sync') final  SyncSettings sync;
+@override@JsonKey(name: 'wifi') final  WiFi wifi;
 
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
@@ -868,16 +831,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsEntime&&(identical(other.read, read) || other.read == read)&&(identical(other.type, type) || other.type == type)&&(identical(other.bluetooth, bluetooth) || other.bluetooth == bluetooth)&&(identical(other.loRa, loRa) || other.loRa == loRa)&&(identical(other.wiFi, wiFi) || other.wiFi == wiFi)&&(identical(other.tft, tft) || other.tft == tft)&&(identical(other.buzzer, buzzer) || other.buzzer == buzzer)&&(identical(other.vcc, vcc) || other.vcc == vcc));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsEntime&&(identical(other.device, device) || other.device == device)&&(identical(other.sync, sync) || other.sync == sync)&&(identical(other.wifi, wifi) || other.wifi == wifi));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,read,type,bluetooth,loRa,wiFi,tft,buzzer,vcc);
+int get hashCode => Object.hash(runtimeType,device,sync,wifi);
 
 @override
 String toString() {
-  return 'ModSettingsEntime(read: $read, type: $type, bluetooth: $bluetooth, loRa: $loRa, wiFi: $wiFi, tft: $tft, buzzer: $buzzer, vcc: $vcc)';
+  return 'ModSettingsEntime(device: $device, sync: $sync, wifi: $wifi)';
 }
 
 
@@ -888,11 +851,11 @@ abstract mixin class _$ModSettingsEntimeCopyWith<$Res> implements $ModSettingsEn
   factory _$ModSettingsEntimeCopyWith(_ModSettingsEntime value, $Res Function(_ModSettingsEntime) _then) = __$ModSettingsEntimeCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'Read') bool? read,@JsonKey(name: 'Type') String type,@JsonKey(name: 'Bluetooth') Bluetooth bluetooth,@JsonKey(name: 'LoRa') LoRa loRa,@JsonKey(name: 'WiFi') WiFi wiFi,@JsonKey(name: 'TFT') Tft tft,@JsonKey(name: 'Buzzer') Buzzer buzzer,@JsonKey(name: 'VCC') Vcc vcc
+@JsonKey(name: 'device') DeviceSettings device,@JsonKey(name: 'sync') SyncSettings sync,@JsonKey(name: 'wifi') WiFi wifi
 });
 
 
-@override $BluetoothCopyWith<$Res> get bluetooth;@override $LoRaCopyWith<$Res> get loRa;@override $WiFiCopyWith<$Res> get wiFi;@override $TftCopyWith<$Res> get tft;@override $BuzzerCopyWith<$Res> get buzzer;@override $VccCopyWith<$Res> get vcc;
+@override $DeviceSettingsCopyWith<$Res> get device;@override $SyncSettingsCopyWith<$Res> get sync;@override $WiFiCopyWith<$Res> get wifi;
 
 }
 /// @nodoc
@@ -905,17 +868,12 @@ class __$ModSettingsEntimeCopyWithImpl<$Res>
 
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? loRa = null,Object? wiFi = null,Object? tft = null,Object? buzzer = null,Object? vcc = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? device = null,Object? sync = null,Object? wifi = null,}) {
   return _then(_ModSettingsEntime(
-read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
-as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
-as Bluetooth,loRa: null == loRa ? _self.loRa : loRa // ignore: cast_nullable_to_non_nullable
-as LoRa,wiFi: null == wiFi ? _self.wiFi : wiFi // ignore: cast_nullable_to_non_nullable
-as WiFi,tft: null == tft ? _self.tft : tft // ignore: cast_nullable_to_non_nullable
-as Tft,buzzer: null == buzzer ? _self.buzzer : buzzer // ignore: cast_nullable_to_non_nullable
-as Buzzer,vcc: null == vcc ? _self.vcc : vcc // ignore: cast_nullable_to_non_nullable
-as Vcc,
+device: null == device ? _self.device : device // ignore: cast_nullable_to_non_nullable
+as DeviceSettings,sync: null == sync ? _self.sync : sync // ignore: cast_nullable_to_non_nullable
+as SyncSettings,wifi: null == wifi ? _self.wifi : wifi // ignore: cast_nullable_to_non_nullable
+as WiFi,
   ));
 }
 
@@ -923,57 +881,577 @@ as Vcc,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$BluetoothCopyWith<$Res> get bluetooth {
+$DeviceSettingsCopyWith<$Res> get device {
   
-  return $BluetoothCopyWith<$Res>(_self.bluetooth, (value) {
-    return _then(_self.copyWith(bluetooth: value));
+  return $DeviceSettingsCopyWith<$Res>(_self.device, (value) {
+    return _then(_self.copyWith(device: value));
   });
 }/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LoRaCopyWith<$Res> get loRa {
+$SyncSettingsCopyWith<$Res> get sync {
   
-  return $LoRaCopyWith<$Res>(_self.loRa, (value) {
-    return _then(_self.copyWith(loRa: value));
+  return $SyncSettingsCopyWith<$Res>(_self.sync, (value) {
+    return _then(_self.copyWith(sync: value));
   });
 }/// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$WiFiCopyWith<$Res> get wiFi {
+$WiFiCopyWith<$Res> get wifi {
   
-  return $WiFiCopyWith<$Res>(_self.wiFi, (value) {
-    return _then(_self.copyWith(wiFi: value));
-  });
-}/// Create a copy of ModSettingsEntime
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$TftCopyWith<$Res> get tft {
-  
-  return $TftCopyWith<$Res>(_self.tft, (value) {
-    return _then(_self.copyWith(tft: value));
-  });
-}/// Create a copy of ModSettingsEntime
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$BuzzerCopyWith<$Res> get buzzer {
-  
-  return $BuzzerCopyWith<$Res>(_self.buzzer, (value) {
-    return _then(_self.copyWith(buzzer: value));
-  });
-}/// Create a copy of ModSettingsEntime
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$VccCopyWith<$Res> get vcc {
-  
-  return $VccCopyWith<$Res>(_self.vcc, (value) {
-    return _then(_self.copyWith(vcc: value));
+  return $WiFiCopyWith<$Res>(_self.wifi, (value) {
+    return _then(_self.copyWith(wifi: value));
   });
 }
+}
+
+
+/// @nodoc
+mixin _$DeviceSettings {
+
+ String get name; int get number; int get type; int get timezone;
+/// Create a copy of DeviceSettings
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DeviceSettingsCopyWith<DeviceSettings> get copyWith => _$DeviceSettingsCopyWithImpl<DeviceSettings>(this as DeviceSettings, _$identity);
+
+  /// Serializes this DeviceSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceSettings&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.type, type) || other.type == type)&&(identical(other.timezone, timezone) || other.timezone == timezone));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,number,type,timezone);
+
+@override
+String toString() {
+  return 'DeviceSettings(name: $name, number: $number, type: $type, timezone: $timezone)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DeviceSettingsCopyWith<$Res>  {
+  factory $DeviceSettingsCopyWith(DeviceSettings value, $Res Function(DeviceSettings) _then) = _$DeviceSettingsCopyWithImpl;
+@useResult
+$Res call({
+ String name, int number, int type, int timezone
+});
+
+
+
+
+}
+/// @nodoc
+class _$DeviceSettingsCopyWithImpl<$Res>
+    implements $DeviceSettingsCopyWith<$Res> {
+  _$DeviceSettingsCopyWithImpl(this._self, this._then);
+
+  final DeviceSettings _self;
+  final $Res Function(DeviceSettings) _then;
+
+/// Create a copy of DeviceSettings
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? number = null,Object? type = null,Object? timezone = null,}) {
+  return _then(_self.copyWith(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
+as int,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as int,timezone: null == timezone ? _self.timezone : timezone // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [DeviceSettings].
+extension DeviceSettingsPatterns on DeviceSettings {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DeviceSettings value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DeviceSettings() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DeviceSettings value)  $default,){
+final _that = this;
+switch (_that) {
+case _DeviceSettings():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DeviceSettings value)?  $default,){
+final _that = this;
+switch (_that) {
+case _DeviceSettings() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  int number,  int type,  int timezone)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DeviceSettings() when $default != null:
+return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  int number,  int type,  int timezone)  $default,) {final _that = this;
+switch (_that) {
+case _DeviceSettings():
+return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  int number,  int type,  int timezone)?  $default,) {final _that = this;
+switch (_that) {
+case _DeviceSettings() when $default != null:
+return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _DeviceSettings implements DeviceSettings {
+  const _DeviceSettings({required this.name, required this.number, required this.type, required this.timezone});
+  factory _DeviceSettings.fromJson(Map<String, dynamic> json) => _$DeviceSettingsFromJson(json);
+
+@override final  String name;
+@override final  int number;
+@override final  int type;
+@override final  int timezone;
+
+/// Create a copy of DeviceSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DeviceSettingsCopyWith<_DeviceSettings> get copyWith => __$DeviceSettingsCopyWithImpl<_DeviceSettings>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$DeviceSettingsToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceSettings&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.type, type) || other.type == type)&&(identical(other.timezone, timezone) || other.timezone == timezone));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,number,type,timezone);
+
+@override
+String toString() {
+  return 'DeviceSettings(name: $name, number: $number, type: $type, timezone: $timezone)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DeviceSettingsCopyWith<$Res> implements $DeviceSettingsCopyWith<$Res> {
+  factory _$DeviceSettingsCopyWith(_DeviceSettings value, $Res Function(_DeviceSettings) _then) = __$DeviceSettingsCopyWithImpl;
+@override @useResult
+$Res call({
+ String name, int number, int type, int timezone
+});
+
+
+
+
+}
+/// @nodoc
+class __$DeviceSettingsCopyWithImpl<$Res>
+    implements _$DeviceSettingsCopyWith<$Res> {
+  __$DeviceSettingsCopyWithImpl(this._self, this._then);
+
+  final _DeviceSettings _self;
+  final $Res Function(_DeviceSettings) _then;
+
+/// Create a copy of DeviceSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? number = null,Object? type = null,Object? timezone = null,}) {
+  return _then(_DeviceSettings(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
+as int,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as int,timezone: null == timezone ? _self.timezone : timezone // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$SyncSettings {
+
+ bool get auto; int get source; String get ntp1; String get ntp2; String get ntp3;
+/// Create a copy of SyncSettings
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SyncSettingsCopyWith<SyncSettings> get copyWith => _$SyncSettingsCopyWithImpl<SyncSettings>(this as SyncSettings, _$identity);
+
+  /// Serializes this SyncSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SyncSettings&&(identical(other.auto, auto) || other.auto == auto)&&(identical(other.source, source) || other.source == source)&&(identical(other.ntp1, ntp1) || other.ntp1 == ntp1)&&(identical(other.ntp2, ntp2) || other.ntp2 == ntp2)&&(identical(other.ntp3, ntp3) || other.ntp3 == ntp3));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,auto,source,ntp1,ntp2,ntp3);
+
+@override
+String toString() {
+  return 'SyncSettings(auto: $auto, source: $source, ntp1: $ntp1, ntp2: $ntp2, ntp3: $ntp3)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SyncSettingsCopyWith<$Res>  {
+  factory $SyncSettingsCopyWith(SyncSettings value, $Res Function(SyncSettings) _then) = _$SyncSettingsCopyWithImpl;
+@useResult
+$Res call({
+ bool auto, int source, String ntp1, String ntp2, String ntp3
+});
+
+
+
+
+}
+/// @nodoc
+class _$SyncSettingsCopyWithImpl<$Res>
+    implements $SyncSettingsCopyWith<$Res> {
+  _$SyncSettingsCopyWithImpl(this._self, this._then);
+
+  final SyncSettings _self;
+  final $Res Function(SyncSettings) _then;
+
+/// Create a copy of SyncSettings
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? auto = null,Object? source = null,Object? ntp1 = null,Object? ntp2 = null,Object? ntp3 = null,}) {
+  return _then(_self.copyWith(
+auto: null == auto ? _self.auto : auto // ignore: cast_nullable_to_non_nullable
+as bool,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as int,ntp1: null == ntp1 ? _self.ntp1 : ntp1 // ignore: cast_nullable_to_non_nullable
+as String,ntp2: null == ntp2 ? _self.ntp2 : ntp2 // ignore: cast_nullable_to_non_nullable
+as String,ntp3: null == ntp3 ? _self.ntp3 : ntp3 // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SyncSettings].
+extension SyncSettingsPatterns on SyncSettings {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SyncSettings value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SyncSettings() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SyncSettings value)  $default,){
+final _that = this;
+switch (_that) {
+case _SyncSettings():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SyncSettings value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SyncSettings() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool auto,  int source,  String ntp1,  String ntp2,  String ntp3)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SyncSettings() when $default != null:
+return $default(_that.auto,_that.source,_that.ntp1,_that.ntp2,_that.ntp3);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool auto,  int source,  String ntp1,  String ntp2,  String ntp3)  $default,) {final _that = this;
+switch (_that) {
+case _SyncSettings():
+return $default(_that.auto,_that.source,_that.ntp1,_that.ntp2,_that.ntp3);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool auto,  int source,  String ntp1,  String ntp2,  String ntp3)?  $default,) {final _that = this;
+switch (_that) {
+case _SyncSettings() when $default != null:
+return $default(_that.auto,_that.source,_that.ntp1,_that.ntp2,_that.ntp3);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SyncSettings implements SyncSettings {
+  const _SyncSettings({required this.auto, required this.source, required this.ntp1, required this.ntp2, required this.ntp3});
+  factory _SyncSettings.fromJson(Map<String, dynamic> json) => _$SyncSettingsFromJson(json);
+
+@override final  bool auto;
+@override final  int source;
+@override final  String ntp1;
+@override final  String ntp2;
+@override final  String ntp3;
+
+/// Create a copy of SyncSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SyncSettingsCopyWith<_SyncSettings> get copyWith => __$SyncSettingsCopyWithImpl<_SyncSettings>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SyncSettingsToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SyncSettings&&(identical(other.auto, auto) || other.auto == auto)&&(identical(other.source, source) || other.source == source)&&(identical(other.ntp1, ntp1) || other.ntp1 == ntp1)&&(identical(other.ntp2, ntp2) || other.ntp2 == ntp2)&&(identical(other.ntp3, ntp3) || other.ntp3 == ntp3));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,auto,source,ntp1,ntp2,ntp3);
+
+@override
+String toString() {
+  return 'SyncSettings(auto: $auto, source: $source, ntp1: $ntp1, ntp2: $ntp2, ntp3: $ntp3)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SyncSettingsCopyWith<$Res> implements $SyncSettingsCopyWith<$Res> {
+  factory _$SyncSettingsCopyWith(_SyncSettings value, $Res Function(_SyncSettings) _then) = __$SyncSettingsCopyWithImpl;
+@override @useResult
+$Res call({
+ bool auto, int source, String ntp1, String ntp2, String ntp3
+});
+
+
+
+
+}
+/// @nodoc
+class __$SyncSettingsCopyWithImpl<$Res>
+    implements _$SyncSettingsCopyWith<$Res> {
+  __$SyncSettingsCopyWithImpl(this._self, this._then);
+
+  final _SyncSettings _self;
+  final $Res Function(_SyncSettings) _then;
+
+/// Create a copy of SyncSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? auto = null,Object? source = null,Object? ntp1 = null,Object? ntp2 = null,Object? ntp3 = null,}) {
+  return _then(_SyncSettings(
+auto: null == auto ? _self.auto : auto // ignore: cast_nullable_to_non_nullable
+as bool,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as int,ntp1: null == ntp1 ? _self.ntp1 : ntp1 // ignore: cast_nullable_to_non_nullable
+as String,ntp2: null == ntp2 ? _self.ntp2 : ntp2 // ignore: cast_nullable_to_non_nullable
+as String,ntp3: null == ntp3 ? _self.ntp3 : ntp3 // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 

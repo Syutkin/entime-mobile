@@ -909,8 +909,98 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
+	"I18nModuleSettings_wifiActive": "Active",
+	"@I18nModuleSettings_wifiActive": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
 	"I18nModuleSettings_wifiNetwork": "Network",
 	"@I18nModuleSettings_wifiNetwork": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_device": "Device",
+	"@I18nModuleSettings_device": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_deviceName": "Name",
+	"@I18nModuleSettings_deviceName": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_deviceNumber": "Number",
+	"@I18nModuleSettings_deviceNumber": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_deviceType": "Type",
+	"@I18nModuleSettings_deviceType": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_deviceTimezone": "Timezone",
+	"@I18nModuleSettings_deviceTimezone": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_sync": "Sync",
+	"@I18nModuleSettings_sync": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_syncAuto": "Auto",
+	"@I18nModuleSettings_syncAuto": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_syncSource": "Source",
+	"@I18nModuleSettings_syncSource": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_syncSourceAuto": "Auto",
+	"@I18nModuleSettings_syncSourceAuto": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_syncSourceGps": "GPS",
+	"@I18nModuleSettings_syncSourceGps": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_syncSourceRtc": "RTC",
+	"@I18nModuleSettings_syncSourceRtc": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_ntp1": "NTP 1",
+	"@I18nModuleSettings_ntp1": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_ntp2": "NTP 2",
+	"@I18nModuleSettings_ntp2": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_ntp3": "NTP 3",
+	"@I18nModuleSettings_ntp3": {
 		"type": "text",
 		"placeholders_order": [],
 		"placeholders": {}

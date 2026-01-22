@@ -2342,6 +2342,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Активно`
+  String get I18nModuleSettings_wifiActive {
+    return Intl.message(
+      'Активно',
+      name: 'I18nModuleSettings_wifiActive',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Сеть`
   String get I18nModuleSettings_wifiNetwork {
     return Intl.message(
@@ -2377,6 +2387,146 @@ class GeneratedLocalization {
     return Intl.message(
       'Введите данные сети',
       name: 'I18nModuleSettings_enterWifiCredentials',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Устройство`
+  String get I18nModuleSettings_device {
+    return Intl.message(
+      'Устройство',
+      name: 'I18nModuleSettings_device',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя`
+  String get I18nModuleSettings_deviceName {
+    return Intl.message(
+      'Имя',
+      name: 'I18nModuleSettings_deviceName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Номер`
+  String get I18nModuleSettings_deviceNumber {
+    return Intl.message(
+      'Номер',
+      name: 'I18nModuleSettings_deviceNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Тип`
+  String get I18nModuleSettings_deviceType {
+    return Intl.message(
+      'Тип',
+      name: 'I18nModuleSettings_deviceType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Часовой пояс`
+  String get I18nModuleSettings_deviceTimezone {
+    return Intl.message(
+      'Часовой пояс',
+      name: 'I18nModuleSettings_deviceTimezone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Синхронизация`
+  String get I18nModuleSettings_sync {
+    return Intl.message(
+      'Синхронизация',
+      name: 'I18nModuleSettings_sync',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Авто`
+  String get I18nModuleSettings_syncAuto {
+    return Intl.message(
+      'Авто',
+      name: 'I18nModuleSettings_syncAuto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Источник`
+  String get I18nModuleSettings_syncSource {
+    return Intl.message(
+      'Источник',
+      name: 'I18nModuleSettings_syncSource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Авто`
+  String get I18nModuleSettings_syncSourceAuto {
+    return Intl.message(
+      'Авто',
+      name: 'I18nModuleSettings_syncSourceAuto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GPS`
+  String get I18nModuleSettings_syncSourceGps {
+    return Intl.message(
+      'GPS',
+      name: 'I18nModuleSettings_syncSourceGps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RTC`
+  String get I18nModuleSettings_syncSourceRtc {
+    return Intl.message(
+      'RTC',
+      name: 'I18nModuleSettings_syncSourceRtc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NTP 1`
+  String get I18nModuleSettings_ntp1 {
+    return Intl.message(
+      'NTP 1',
+      name: 'I18nModuleSettings_ntp1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NTP 2`
+  String get I18nModuleSettings_ntp2 {
+    return Intl.message(
+      'NTP 2',
+      name: 'I18nModuleSettings_ntp2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NTP 3`
+  String get I18nModuleSettings_ntp3 {
+    return Intl.message(
+      'NTP 3',
+      name: 'I18nModuleSettings_ntp3',
       desc: '',
       args: [],
     );

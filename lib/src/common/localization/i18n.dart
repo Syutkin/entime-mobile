@@ -718,6 +718,36 @@ class I18nModuleSettings {
   static String get enterWifiCredentials =>
       Intl.message('Введите данные сети', name: 'I18nModuleSettings_enterWifiCredentials');
 
+  static String get device => Intl.message('Устройство', name: 'I18nModuleSettings_device');
+
+  static String get deviceName => Intl.message('Имя', name: 'I18nModuleSettings_deviceName');
+
+  static String get deviceNumber => Intl.message('Номер', name: 'I18nModuleSettings_deviceNumber');
+
+  static String get deviceType => Intl.message('Тип', name: 'I18nModuleSettings_deviceType');
+
+  static String get deviceTimezone => Intl.message('Часовой пояс', name: 'I18nModuleSettings_deviceTimezone');
+
+  static String get sync => Intl.message('Синхронизация', name: 'I18nModuleSettings_sync');
+
+  static String get syncAuto => Intl.message('Авто', name: 'I18nModuleSettings_syncAuto');
+
+  static String get syncSource => Intl.message('Источник', name: 'I18nModuleSettings_syncSource');
+
+  static String get syncSourceAuto => Intl.message('Авто', name: 'I18nModuleSettings_syncSourceAuto');
+
+  static String get syncSourceGps => Intl.message('GPS', name: 'I18nModuleSettings_syncSourceGps');
+
+  static String get syncSourceRtc => Intl.message('RTC', name: 'I18nModuleSettings_syncSourceRtc');
+
+  static String get ntp1 => Intl.message('NTP 1', name: 'I18nModuleSettings_ntp1');
+
+  static String get ntp2 => Intl.message('NTP 2', name: 'I18nModuleSettings_ntp2');
+
+  static String get ntp3 => Intl.message('NTP 3', name: 'I18nModuleSettings_ntp3');
+
+  static String get wifiActive => Intl.message('Активно', name: 'I18nModuleSettings_wifiActive');
+
   static String get vcc => Intl.message('VCC', name: 'I18nModuleSettings_vcc');
 
   static String get resistor1 => Intl.message('R1', name: 'I18nModuleSettings_resistor1');

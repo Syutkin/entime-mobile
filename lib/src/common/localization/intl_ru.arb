@@ -1257,6 +1257,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nModuleSettings_wifiActive": "Активно",
+  "@I18nModuleSettings_wifiActive": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nModuleSettings_wifiNetwork": "Сеть",
   "@I18nModuleSettings_wifiNetwork": {
     "type": "text",
@@ -1274,6 +1279,76 @@
   },
   "I18nModuleSettings_enterWifiCredentials": "Введите данные сети",
   "@I18nModuleSettings_enterWifiCredentials": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_device": "Устройство",
+  "@I18nModuleSettings_device": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceName": "Имя",
+  "@I18nModuleSettings_deviceName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceNumber": "Номер",
+  "@I18nModuleSettings_deviceNumber": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceType": "Тип",
+  "@I18nModuleSettings_deviceType": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceTimezone": "Часовой пояс",
+  "@I18nModuleSettings_deviceTimezone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_sync": "Синхронизация",
+  "@I18nModuleSettings_sync": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_syncAuto": "Авто",
+  "@I18nModuleSettings_syncAuto": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_syncSource": "Источник",
+  "@I18nModuleSettings_syncSource": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_syncSourceAuto": "Авто",
+  "@I18nModuleSettings_syncSourceAuto": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_syncSourceGps": "GPS",
+  "@I18nModuleSettings_syncSourceGps": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_syncSourceRtc": "RTC",
+  "@I18nModuleSettings_syncSourceRtc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_ntp1": "NTP 1",
+  "@I18nModuleSettings_ntp1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_ntp2": "NTP 2",
+  "@I18nModuleSettings_ntp2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_ntp3": "NTP 3",
+  "@I18nModuleSettings_ntp3": {
     "type": "text",
     "placeholders": {}
   },

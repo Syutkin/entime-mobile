@@ -20,17 +20,37 @@ abstract class ModSettingsType with _$ModSettingsType {
 @freezed
 abstract class ModSettingsEntime with _$ModSettingsEntime {
   const factory ModSettingsEntime({
-    @JsonKey(name: 'Read') bool? read,
-    @JsonKey(name: 'Type') required String type,
-    @JsonKey(name: 'Bluetooth') required Bluetooth bluetooth,
-    @JsonKey(name: 'LoRa') required LoRa loRa,
-    @JsonKey(name: 'WiFi') required WiFi wiFi,
-    @JsonKey(name: 'TFT') required Tft tft,
-    @JsonKey(name: 'Buzzer') required Buzzer buzzer,
-    @JsonKey(name: 'VCC') required Vcc vcc,
+    @JsonKey(name: 'device') required DeviceSettings device,
+    @JsonKey(name: 'sync') required SyncSettings sync,
+    @JsonKey(name: 'wifi') required WiFi wifi,
   }) = _ModSettingsEntime;
 
   factory ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
+}
+
+@freezed
+abstract class DeviceSettings with _$DeviceSettings {
+  const factory DeviceSettings({
+    required String name,
+    required int number,
+    required int type,
+    required int timezone,
+  }) = _DeviceSettings;
+
+  factory DeviceSettings.fromJson(Map<String, dynamic> json) => _$DeviceSettingsFromJson(json);
+}
+
+@freezed
+abstract class SyncSettings with _$SyncSettings {
+  const factory SyncSettings({
+    required bool auto,
+    required int source,
+    required String ntp1,
+    required String ntp2,
+    required String ntp3,
+  }) = _SyncSettings;
+
+  factory SyncSettings.fromJson(Map<String, dynamic> json) => _$SyncSettingsFromJson(json);
 }
 
 @freezed
