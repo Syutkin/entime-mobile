@@ -107,74 +107,6 @@ class ModuleSettingsScreen extends StatefulWidget {
 }
 
 class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
-  Future<String?> _editText({
-    required BuildContext context,
-    required String title,
-    String? initialValue,
-  }) async {
-    final controller = TextEditingController(text: initialValue ?? '');
-    return showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-        ),
-        actions: cancelOkButtons(
-          context: context,
-          onCancelPressed: () => Navigator.of(context).pop(),
-          onOkPressed: () => Navigator.of(context).pop(controller.text.trim()),
-        ),
-      ),
-    );
-  }
-
-  Future<int?> _editInt({
-    required BuildContext context,
-    required String title,
-    int? initialValue,
-  }) async {
-    final controller = TextEditingController(text: initialValue?.toString() ?? '');
-    return showDialog<int>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: TextField(
-          controller: controller,
-          keyboardType: TextInputType.number,
-          autofocus: true,
-        ),
-        actions: cancelOkButtons(
-          context: context,
-          onCancelPressed: () => Navigator.of(context).pop(),
-          onOkPressed: () => Navigator.of(context).pop(int.tryParse(controller.text)),
-        ),
-      ),
-    );
-  }
-
-  Future<int?> _selectInt({
-    required BuildContext context,
-    required String title,
-    required Map<int, String> options,
-  }) async {
-    return showDialog<int>(
-      context: context,
-      builder: (context) => SimpleDialog(
-        title: Text(title),
-        children: options.entries
-            .map(
-              (entry) => SimpleDialogOption(
-                onPressed: () => Navigator.of(context).pop(entry.key),
-                child: Text(entry.value),
-              ),
-            )
-            .toList(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final i18n = Localization.current;
@@ -414,10 +346,12 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                               widget.onChanged();
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.wifi(
-                                    ssid: ssid,
-                                    passwd: password ?? '',
-                                  )),
+                                  ModSettingsModel.entime(
+                                    moduleSettings.copyWith.wifi(
+                                      ssid: ssid,
+                                      passwd: password ?? '',
+                                    ),
+                                  ),
                                 ),
                               );
                             }
@@ -524,12 +458,15 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                             );
                           },
                         ),
-                       SettingsTile(
+                        SettingsTile(
                           title: Text(Localization.current.I18nModuleSettings_wifiNetwork),
                           trailing: Text(moduleSettings.wiFi.ssid),
                           //leading:  Icon(MdiIcons.wifi),
                           onPressed: (context) async {
-                            final credentials = await wifiSettingsPopup(context: context, ssid: moduleSettings.wiFi.ssid);
+                            final credentials = await wifiSettingsPopup(
+                              context: context,
+                              ssid: moduleSettings.wiFi.ssid,
+                            );
                             final ssid = credentials?[0];
                             final password = credentials?[1];
                             if (ssid != null) {
