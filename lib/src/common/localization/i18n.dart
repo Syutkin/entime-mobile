@@ -722,6 +722,14 @@ class I18nModuleSettings {
 
   static String get deviceName => Intl.message('Имя', name: 'I18nModuleSettings_deviceName');
 
+  static String get deviceNameEmpty => Intl.message('Введите имя модуля', name: 'I18nModuleSettings_deviceNameEmpty');
+
+  static String get deviceNameInvalid =>
+      Intl.message('Только ASCII символы (A-Z, a-z, 0-9, -, _)', name: 'I18nModuleSettings_deviceNameInvalid');
+
+  static String get deviceNameTooLong =>
+      Intl.message('Максимум 16 символов', name: 'I18nModuleSettings_deviceNameTooLong');
+
   static String get deviceNumber => Intl.message('Номер', name: 'I18nModuleSettings_deviceNumber');
 
   static String get deviceType => Intl.message('Тип', name: 'I18nModuleSettings_deviceType');

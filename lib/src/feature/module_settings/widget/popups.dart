@@ -4,8 +4,9 @@ import '../../../common/localization/localization.dart';
 import '../../../common/widget/cancel_ok_buttons.dart';
 import '../../../common/widget/password_text_field.dart';
 
-part 'vcc_popup.dart';
-part 'buzzer_frequency_popup.dart';
-part 'bluetooth_number_popup.dart';
-part 'wifi_settings_popup.dart';
-part 'brightness_popup.dart';
+part 'popups/vcc_popup.dart';
+part 'popups/buzzer_frequency_popup.dart';
+part 'popups/bluetooth_number_popup.dart';
+part 'popups/wifi_settings_popup.dart';
+part 'popups/brightness_popup.dart';
+part 'popups/module_name_popup.dart';

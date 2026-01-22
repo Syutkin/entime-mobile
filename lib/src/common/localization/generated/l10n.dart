@@ -2412,6 +2412,36 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Введите имя модуля`
+  String get I18nModuleSettings_deviceNameEmpty {
+    return Intl.message(
+      'Введите имя модуля',
+      name: 'I18nModuleSettings_deviceNameEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Только ASCII символы (A-Z, a-z, 0-9, -, _)`
+  String get I18nModuleSettings_deviceNameInvalid {
+    return Intl.message(
+      'Только ASCII символы (A-Z, a-z, 0-9, -, _)',
+      name: 'I18nModuleSettings_deviceNameInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Максимум 16 символов`
+  String get I18nModuleSettings_deviceNameTooLong {
+    return Intl.message(
+      'Максимум 16 символов',
+      name: 'I18nModuleSettings_deviceNameTooLong',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Номер`
   String get I18nModuleSettings_deviceNumber {
     return Intl.message(

@@ -1,4 +1,4 @@
-part of 'popups.dart';
+part of '../popups.dart';
 
 Future<int?> vccPopup({
   required String text,

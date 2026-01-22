@@ -1292,6 +1292,21 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nModuleSettings_deviceNameEmpty": "Введите имя модуля",
+  "@I18nModuleSettings_deviceNameEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceNameInvalid": "Только ASCII символы (A-Z, a-z, 0-9, -, _)",
+  "@I18nModuleSettings_deviceNameInvalid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_deviceNameTooLong": "Максимум 16 символов",
+  "@I18nModuleSettings_deviceNameTooLong": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nModuleSettings_deviceNumber": "Номер",
   "@I18nModuleSettings_deviceNumber": {
     "type": "text",

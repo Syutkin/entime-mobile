@@ -206,6 +206,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceName": MessageLookupByLibrary.simpleMessage(
       "Name",
     ),
+    "I18nModuleSettings_deviceNameEmpty": MessageLookupByLibrary.simpleMessage(
+      "Enter module name",
+    ),
+    "I18nModuleSettings_deviceNameInvalid":
+        MessageLookupByLibrary.simpleMessage(
+          "ASCII only (A-Z, a-z, 0-9, -, _)",
+        ),
+    "I18nModuleSettings_deviceNameTooLong":
+        MessageLookupByLibrary.simpleMessage("Max 16 characters"),
     "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
       "Number",
     ),

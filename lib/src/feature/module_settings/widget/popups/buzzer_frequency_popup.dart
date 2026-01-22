@@ -1,4 +1,4 @@
-part of 'popups.dart';
+part of '../popups.dart';
 
 class Note {
   Note(this.name, this.frequency);

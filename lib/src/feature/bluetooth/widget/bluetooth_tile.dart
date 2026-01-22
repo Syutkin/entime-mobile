@@ -61,7 +61,7 @@ class BluetoothTile extends StatelessWidget {
   );
 
   Future<void> _moduleSettings(BuildContext context) async {
-    BlocProvider.of<BluetoothBloc>(context).add(const BluetoothEvent.sendMessage(message: '{"Read": true}'));
+    BlocProvider.of<BluetoothBloc>(context).add(const BluetoothEvent.sendMessage(message: '{"cmd":"load_config"}'));
     await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
   }
 }

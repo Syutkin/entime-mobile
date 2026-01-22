@@ -1,4 +1,4 @@
-part of 'popups.dart';
+part of '../popups.dart';
 
 Future<int?> brightnessPopup({required String text, required int initialValue, required BuildContext context}) async {
   var brightness = initialValue.clamp(1, 15).toDouble();

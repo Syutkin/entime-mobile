@@ -196,9 +196,10 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           title: Text(i18n.I18nModuleSettings_deviceName),
                           trailing: Text(moduleSettings.device.name),
                           onPressed: (context) async {
-                            final value = await _editText(
+                            final value = await moduleNamePopup(
                               context: context,
-                              title: i18n.I18nModuleSettings_deviceName,
+                              text: i18n.I18nModuleSettings_deviceName,
+                              labelText: i18n.I18nModuleSettings_deviceName,
                               initialValue: moduleSettings.device.name,
                             );
                             if (value != null && value.isNotEmpty) {
@@ -215,10 +216,10 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           title: Text(i18n.I18nModuleSettings_deviceNumber),
                           trailing: Text('${moduleSettings.device.number}'),
                           onPressed: (context) async {
-                            final value = await _editInt(
+                            final value = await bluetoothNumberPopup(
                               context: context,
-                              title: i18n.I18nModuleSettings_deviceNumber,
-                              initialValue: moduleSettings.device.number,
+                              text: i18n.I18nModuleSettings_deviceNumber,
+                              labelText: i18n.I18nModuleSettings_deviceNumber,
                             );
                             if (value != null) {
                               widget.onChanged();

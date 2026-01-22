@@ -933,6 +933,24 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
+	"I18nModuleSettings_deviceNameEmpty": "Enter module name",
+	"@I18nModuleSettings_deviceNameEmpty": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_deviceNameInvalid": "ASCII only (A-Z, a-z, 0-9, -, _)",
+	"@I18nModuleSettings_deviceNameInvalid": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_deviceNameTooLong": "Max 16 characters",
+	"@I18nModuleSettings_deviceNameTooLong": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
 	"I18nModuleSettings_deviceNumber": "Number",
 	"@I18nModuleSettings_deviceNumber": {
 		"type": "text",

@@ -1,4 +1,4 @@
-part of 'popups.dart';
+part of '../popups.dart';
 
 Future<List<String>?> wifiSettingsPopup({
   required BuildContext context,

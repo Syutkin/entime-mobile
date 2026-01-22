@@ -371,6 +371,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceName": MessageLookupByLibrary.simpleMessage(
       "Имя",
     ),
+    "I18nModuleSettings_deviceNameEmpty": MessageLookupByLibrary.simpleMessage(
+      "Введите имя модуля",
+    ),
+    "I18nModuleSettings_deviceNameInvalid":
+        MessageLookupByLibrary.simpleMessage(
+          "Только ASCII символы (A-Z, a-z, 0-9, -, _)",
+        ),
+    "I18nModuleSettings_deviceNameTooLong":
+        MessageLookupByLibrary.simpleMessage("Максимум 16 символов"),
     "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
       "Номер",
     ),
