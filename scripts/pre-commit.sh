@@ -29,6 +29,7 @@ new_text = re.sub(
     f"version: {prefix}+{build}",
     text,
     flags=re.M,
+    count=1,
 )
 
 path.write_text(new_text)
