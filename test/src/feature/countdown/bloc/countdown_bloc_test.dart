@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/countdown/bloc/countdown_bloc.dart';
@@ -69,7 +71,11 @@ void main() {
         }
         when(
           () => countdownAtStart.ticks,
-        ).thenAnswer((_) => BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)));
+        ).thenAnswer((_) {
+          final subject = BehaviorSubject<Tick>();
+          unawaited(subject.addStream(Stream.fromIterable(ticks)));
+          return subject;
+        });
       },
       build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
       expect: () => ticks.map((element) {
@@ -85,7 +91,11 @@ void main() {
         }
         when(
           () => countdownAtStart.ticks,
-        ).thenAnswer((_) => BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)));
+        ).thenAnswer((_) {
+          final subject = BehaviorSubject<Tick>();
+          unawaited(subject.addStream(Stream.fromIterable(ticks)));
+          return subject;
+        });
       },
       build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
       expect: () => ticks.map((element) {
