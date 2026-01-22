@@ -18,7 +18,7 @@ class MockStream extends Mock implements Stream<Uint8List> {}
 class MockBluetoothConnectionFactory implements IBluetoothConnectionFactory {
   MockBluetoothConnectionFactory({this.mockConnection});
   final IBluetoothConnection? mockConnection;
-  Object? throwOnConnect;
+  Exception? throwOnConnect;
 
   @override
   Future<IBluetoothConnection> connectToDevice(BluetoothDevice device) async {
