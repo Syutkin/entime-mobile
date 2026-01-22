@@ -118,6 +118,55 @@ void main() {
       });
     });
 
+    group('isValidIp tests', () {
+      test('Null string', () {
+        String? str;
+        expect(str.isValidIp, false);
+      });
+      test('Empty string', () {
+        const str = '';
+        expect(str.isValidIp, false);
+      });
+      test('Not ip string', () {
+        const str = 'not.ip';
+        expect(str.isValidIp, false);
+      });
+      test('Missing octet', () {
+        const str = '1.1.1';
+        expect(str.isValidIp, false);
+      });
+      test('Extra octet', () {
+        const str = '1.1.1.1.1';
+        expect(str.isValidIp, false);
+      });
+      test('Non-numeric octet', () {
+        const str = '1.1.a.1';
+        expect(str.isValidIp, false);
+      });
+      test('Out of range octet', () {
+        const str = '256.1.1.1';
+        expect(str.isValidIp, false);
+      });
+      test('Negative octet', () {
+        const str = '-1.1.1.1';
+        expect(str.isValidIp, false);
+      });
+      test('Valid ip', () {
+        const str = '192.168.1.10';
+        expect(str.isValidIp, true);
+      });
+      test('Boundary values', () {
+        const minIp = '0.0.0.0';
+        const maxIp = '255.255.255.255';
+        expect(minIp.isValidIp, true);
+        expect(maxIp.isValidIp, true);
+      });
+      test('Leading zeros', () {
+        const str = '01.002.003.004';
+        expect(str.isValidIp, true);
+      });
+    });
+
     group('toDateTime() tests', () {
       test('String is null', () {
         String? str;
