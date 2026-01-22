@@ -234,27 +234,26 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                         ),
                         SettingsTile(
                           title: Text(i18n.I18nModuleSettings_deviceType),
-                          trailing: Text(
-                            moduleSettings.device.type == 1 ? i18n.I18nHome_start : i18n.I18nHome_finish,
-                          ),
-                          onPressed: (context) async {
-                            final value = await _selectInt(
-                              context: context,
-                              title: i18n.I18nModuleSettings_deviceType,
-                              options: {
-                                1: i18n.I18nHome_start,
-                                2: i18n.I18nHome_finish,
+                          trailing: DropdownButtonHideUnderline(
+                            child: DropdownButton<int>(
+                              value: moduleSettings.device.type == 2 ? 2 : 1,
+                              items: [
+                                DropdownMenuItem(value: 1, child: Text(i18n.I18nHome_start)),
+                                DropdownMenuItem(value: 2, child: Text(i18n.I18nHome_finish)),
+                              ],
+                              onChanged: (value) {
+                                if (value == null) {
+                                  return;
+                                }
+                                widget.onChanged();
+                                bloc.add(
+                                  ModuleSettingsEvent.update(
+                                    ModSettingsModel.entime(moduleSettings.copyWith.device(type: value)),
+                                  ),
+                                );
                               },
-                            );
-                            if (value != null) {
-                              widget.onChanged();
-                              bloc.add(
-                                ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.device(type: value)),
-                                ),
-                              );
-                            }
-                          },
+                            ),
+                          ),
                         ),
                         SettingsTile(
                           title: Text(i18n.I18nModuleSettings_deviceTimezone),
@@ -295,32 +294,31 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                         ),
                         SettingsTile(
                           title: Text(i18n.I18nModuleSettings_syncSource),
-                          trailing: Text(
-                            switch (moduleSettings.sync.source) {
-                              0 => i18n.I18nModuleSettings_syncSourceAuto,
-                              1 => i18n.I18nModuleSettings_syncSourceGps,
-                              _ => i18n.I18nModuleSettings_syncSourceRtc,
-                            },
-                          ),
-                          onPressed: (context) async {
-                            final value = await _selectInt(
-                              context: context,
-                              title: i18n.I18nModuleSettings_syncSource,
-                              options: {
-                                0: i18n.I18nModuleSettings_syncSourceAuto,
-                                1: i18n.I18nModuleSettings_syncSourceGps,
-                                2: i18n.I18nModuleSettings_syncSourceRtc,
+                          trailing: DropdownButtonHideUnderline(
+                            child: DropdownButton<int>(
+                              value: switch (moduleSettings.sync.source) {
+                                1 => 1,
+                                2 => 2,
+                                _ => 0,
                               },
-                            );
-                            if (value != null) {
-                              widget.onChanged();
-                              bloc.add(
-                                ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.sync(source: value)),
-                                ),
-                              );
-                            }
-                          },
+                              items: [
+                                DropdownMenuItem(value: 0, child: Text(i18n.I18nModuleSettings_syncSourceAuto)),
+                                DropdownMenuItem(value: 1, child: Text(i18n.I18nModuleSettings_syncSourceGps)),
+                                DropdownMenuItem(value: 2, child: Text(i18n.I18nModuleSettings_syncSourceRtc)),
+                              ],
+                              onChanged: (value) {
+                                if (value == null) {
+                                  return;
+                                }
+                                widget.onChanged();
+                                bloc.add(
+                                  ModuleSettingsEvent.update(
+                                    ModSettingsModel.entime(moduleSettings.copyWith.sync(source: value)),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
                         SettingsTile(
                           title: Text(i18n.I18nModuleSettings_ntp1),
@@ -390,7 +388,7 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                       title: Text(i18n.I18nModuleSettings_wifi),
                       tiles: [
                         SettingsTile.switchTile(
-                          title: Text(i18n.I18nModuleSettings_wifiActive),
+                          title: Text(i18n.I18nModuleSettings_wifi),
                           initialValue: moduleSettings.wifi.active,
                           onToggle: (value) {
                             widget.onChanged();
