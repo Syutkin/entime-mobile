@@ -54,6 +54,49 @@ void main() {
         expect(packet.type, BluetoothProtocolPacketType.voice);
         expect(packet.time, '10:10:15');
       });
+
+      test('returns unknown for start packet with non-numeric correction', () {
+        final message = parser.parse(r'$10:10:10,123;abc#');
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
+
+      test('returns unknown for start packet with extra sections', () {
+        final message = parser.parse(r'$10:10:10,123;100;200#');
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
+
+      test('parses start packet with empty correction as null', () {
+        final message = parser.parse(r'$10:10:10,123;#');
+
+        expect(message, isA<BluetoothProtocolPacketMessage>());
+        final packet = message as BluetoothProtocolPacketMessage;
+        expect(packet.type, BluetoothProtocolPacketType.start);
+        expect(packet.time, '10:10:10,123');
+        expect(packet.correction, null);
+      });
+
+      test('returns unknown for packet with invalid time', () {
+        final message = parser.parse(r'$10:10:10,1234#');
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
+
+      test('returns unknown for empty packet', () {
+        final message = parser.parse(r'$#');
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
+
+      test('parses time without milliseconds', () {
+        final message = parser.parse('F10:10:10#');
+
+        expect(message, isA<BluetoothProtocolPacketMessage>());
+        final packet = message as BluetoothProtocolPacketMessage;
+        expect(packet.type, BluetoothProtocolPacketType.finish);
+        expect(packet.time, '10:10:10');
+      });
     });
 
     group('commands', () {
@@ -189,6 +232,38 @@ void main() {
         expect(command, isA<BluetoothJsonCommandFactoryReset>());
         expect((command as BluetoothJsonCommandFactoryReset).id, 11);
       });
+
+      test('returns unknown for sync_source command without source', () {
+        const raw = '{"cmd": "sync_source", "id": 7}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
+
+      test('returns unknown for calibrate command without offset', () {
+        const raw = '{"cmd": "calibrate", "id": 6}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
+
+      test('returns unknown for save_config command without data', () {
+        const raw = '{"cmd": "save_config", "id": 9}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
+
+      test('returns unknown for command with unknown cmd', () {
+        const raw = '{"cmd": "unknown_cmd", "id": 1}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
     });
 
     group('events', () {
@@ -242,9 +317,23 @@ void main() {
         expect(event.newSource, 'rtc');
         expect(event.reason, 'gps_timeout');
       });
+
+      test('returns unknown for event with unknown name', () {
+        const raw = '{"event": "unknown_event", "timestamp": 1703169600123456}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
+      });
     });
 
     group('responses', () {
+      BluetoothJsonResponseStatus _parseStatusResponse(String raw) {
+        final message = parser.parse(raw);
+        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
+        return responseMessage.response as BluetoothJsonResponseStatus;
+      }
+
       test('parses pong response', () {
         const raw = '{"cmd": "pong", "id": 1, "status": "ok"}';
 
@@ -256,6 +345,28 @@ void main() {
         final response = responseMessage.response as BluetoothJsonResponsePong;
         expect(response.id, 1);
         expect(response.status, BluetoothProtocolStatus.ok);
+      });
+
+      test('parses warning status', () {
+        const raw = '{"cmd": "pong", "id": 1, "status": "warning"}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolJsonResponseMessage>());
+        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
+        final response = responseMessage.response as BluetoothJsonResponsePong;
+        expect(response.status, BluetoothProtocolStatus.warning);
+      });
+
+      test('parses error status', () {
+        const raw = '{"cmd": "pong", "id": 1, "status": "error"}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolJsonResponseMessage>());
+        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
+        final response = responseMessage.response as BluetoothJsonResponsePong;
+        expect(response.status, BluetoothProtocolStatus.error);
       });
 
       test('parses time response fields', () {
@@ -271,16 +382,23 @@ void main() {
         expect(response.accuracyUs, 50);
       });
 
-      test('parses status response fields', () {
-        const raw = '''
-{"cmd":"status","id":3,"status":"ok","device":{"name":"ENTIME","number":1,"type":"start"},"system":{"uptime_s":12,"free_heap_bytes":1024,"reset_reason":"power_on"},"wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"},"ble":{"state":"advertising","clients":0},"rtc":{"ready":true,"lost_power":false,"last_sync_ms":600000,"temperature_c":24.5},"gps":{"state":"searching","fix_age_ms":120000,"fix":true,"satellites":12,"pps_signal":true},"sync":{"last_ms":5000,"state":"gps_ok","accuracy_us":50,"source":"gps"},"storage":{"used_pct":42,"ok":true},"power":{"battery_voltage":5.0}}
-''';
+      test('parses time response with rtc source', () {
+        const raw = '{"cmd":"time","id":2,"time":1703169600123456,"source":"rtc","accuracy_us":50,"status":"ok"}';
 
         final message = parser.parse(raw);
 
         expect(message, isA<BluetoothProtocolJsonResponseMessage>());
         final responseMessage = message as BluetoothProtocolJsonResponseMessage;
-        final response = responseMessage.response as BluetoothJsonResponseStatus;
+        final response = responseMessage.response as BluetoothJsonResponseTime;
+        expect(response.source, BluetoothProtocolTimeSource.rtc);
+      });
+
+      test('parses status response fields', () {
+        const raw = '''
+{"cmd":"status","id":3,"status":"ok","device":{"name":"ENTIME","number":1,"type":"start"},"system":{"uptime_s":12,"free_heap_bytes":1024,"reset_reason":"power_on"},"wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"},"ble":{"state":"advertising","clients":0},"rtc":{"ready":true,"lost_power":false,"last_sync_ms":600000,"temperature_c":24.5},"gps":{"state":"searching","fix_age_ms":120000,"fix":true,"satellites":12,"pps_signal":true},"sync":{"last_ms":5000,"state":"gps_ok","accuracy_us":50,"source":"gps"},"storage":{"used_pct":42,"ok":true},"power":{"battery_voltage":5.0}}
+''';
+
+        final response = _parseStatusResponse(raw);
         expect(response.device?.name, 'ENTIME');
         expect(response.device?.type, BluetoothProtocolDeviceType.start);
         expect(response.wifi?.state, BluetoothProtocolWifiState.connected);
@@ -290,6 +408,161 @@ void main() {
         expect(response.sync?.state, BluetoothProtocolSyncState.gpsOk);
         expect(response.storage?.usedPct, 42);
         expect(response.power?.batteryVoltage, 5.0);
+      });
+
+      test('parses status response without device info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.device, null);
+      });
+
+      test('parses status response with firmware info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","firmware":{"version":"0.1.0","build_date":"2024-01-01"}}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.firmware?.version, '0.1.0');
+        expect(response.firmware?.buildDate, '2024-01-01');
+      });
+
+      test('parses status response without system info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.system, null);
+      });
+
+      test('parses status response with system info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","system":{"uptime_s":12345,"free_heap_bytes":142336,"reset_reason":"power_on"}}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.system?.uptimeS, 12345);
+        expect(response.system?.freeHeapBytes, 142336);
+        expect(response.system?.resetReason, BluetoothProtocolResetReason.powerOn);
+      });
+
+      test('parses status response without wifi info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.wifi, null);
+      });
+
+      test('parses status response with wifi info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"}}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.wifi?.state, BluetoothProtocolWifiState.connected);
+        expect(response.wifi?.rssi, -62);
+        expect(response.wifi?.ip, '192.168.1.10');
+        expect(response.wifi?.ssid, 'MyWiFi');
+      });
+
+      test('parses status response without ble info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.ble, null);
+      });
+
+      test('parses status response with ble info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","ble":{"state":"advertising","clients":2}}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.ble?.state, BluetoothProtocolBleState.advertising);
+        expect(response.ble?.clients, 2);
+      });
+
+      test('parses status response without rtc info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.rtc, null);
+      });
+
+      test('parses status response without gps info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.gps, null);
+      });
+
+      test('parses status response without sync info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.sync, null);
+      });
+
+      test('parses status response without storage info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.storage, null);
+      });
+
+      test('parses status response without power info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.power, null);
+      });
+
+      test('parses device type finish', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","device":{"type":"finish"}}';
+
+        final response = _parseStatusResponse(raw);
+        expect(response.device?.type, BluetoothProtocolDeviceType.finish);
+      });
+
+      test('parses wifi state variants', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"off"}}';
+        const rawConnecting = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"connecting"}}';
+        const rawError = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"error"}}';
+
+        expect(_parseStatusResponse(raw).wifi?.state, BluetoothProtocolWifiState.off);
+        expect(_parseStatusResponse(rawConnecting).wifi?.state, BluetoothProtocolWifiState.connecting);
+        expect(_parseStatusResponse(rawError).wifi?.state, BluetoothProtocolWifiState.error);
+      });
+
+      test('parses ble state variants', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","ble":{"state":"off"}}';
+        const rawConnected = '{"cmd":"status","id":3,"status":"ok","ble":{"state":"connected"}}';
+
+        expect(_parseStatusResponse(raw).ble?.state, BluetoothProtocolBleState.off);
+        expect(_parseStatusResponse(rawConnected).ble?.state, BluetoothProtocolBleState.connected);
+      });
+
+      test('parses gps state variants', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","gps":{"state":"off"}}';
+        const rawActive = '{"cmd":"status","id":3,"status":"ok","gps":{"state":"active"}}';
+
+        expect(_parseStatusResponse(raw).gps?.state, BluetoothProtocolGpsState.off);
+        expect(_parseStatusResponse(rawActive).gps?.state, BluetoothProtocolGpsState.active);
+      });
+
+      test('parses sync state variants', () {
+        const rawGpsDegraded = '{"cmd":"status","id":3,"status":"ok","sync":{"state":"gps_degraded"}}';
+        const rawRtcOk = '{"cmd":"status","id":3,"status":"ok","sync":{"state":"rtc_ok"}}';
+        const rawRtcDegraded = '{"cmd":"status","id":3,"status":"ok","sync":{"state":"rtc_degraded"}}';
+        const rawNoSync = '{"cmd":"status","id":3,"status":"ok","sync":{"state":"nosync"}}';
+
+        expect(_parseStatusResponse(rawGpsDegraded).sync?.state, BluetoothProtocolSyncState.gpsDegraded);
+        expect(_parseStatusResponse(rawRtcOk).sync?.state, BluetoothProtocolSyncState.rtcOk);
+        expect(_parseStatusResponse(rawRtcDegraded).sync?.state, BluetoothProtocolSyncState.rtcDegraded);
+        expect(_parseStatusResponse(rawNoSync).sync?.state, BluetoothProtocolSyncState.noSync);
+      });
+
+      test('parses reset reason variants', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"panic"}}';
+        const rawBrownout = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"brownout"}}';
+        const rawSdio = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"sdio"}}';
+        const rawUnknown = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"unknown"}}';
+
+        expect(_parseStatusResponse(raw).system?.resetReason, BluetoothProtocolResetReason.panic);
+        expect(_parseStatusResponse(rawBrownout).system?.resetReason, BluetoothProtocolResetReason.brownout);
+        expect(_parseStatusResponse(rawSdio).system?.resetReason, BluetoothProtocolResetReason.sdio);
+        expect(_parseStatusResponse(rawUnknown).system?.resetReason, BluetoothProtocolResetReason.unknown);
       });
 
       test('parses gps response', () {
@@ -340,6 +613,28 @@ void main() {
         expect(response.currentTimestamp, 1703169600123456);
       });
 
+      test('parses sync_source response with gps', () {
+        const raw = '{"cmd":"sync_source","active_source":"gps","status":"ok"}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolJsonResponseMessage>());
+        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
+        final response = responseMessage.response as BluetoothJsonResponseSyncSource;
+        expect(response.activeSource, BluetoothProtocolSyncSource.gps);
+      });
+
+      test('parses sync_source response with none', () {
+        const raw = '{"cmd":"sync_source","active_source":"none","status":"ok"}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolJsonResponseMessage>());
+        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
+        final response = responseMessage.response as BluetoothJsonResponseSyncSource;
+        expect(response.activeSource, BluetoothProtocolSyncSource.none);
+      });
+
       test('parses sync_ntp response', () {
         const raw = '{"cmd":"sync_ntp","id":8,"status":"ok","rtc_time":1703169600,"ntp_servers":["ru.pool.ntp.org","time.google.com"],"sync_duration_ms":2500}';
 
@@ -386,6 +681,14 @@ void main() {
         final responseMessage = message as BluetoothProtocolJsonResponseMessage;
         final response = responseMessage.response as BluetoothJsonResponseFactoryReset;
         expect(response.message, 'Device will reset');
+      });
+
+      test('returns unknown for response with unknown cmd', () {
+        const raw = '{"cmd":"unknown_cmd","status":"ok"}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolUnknownMessage>());
       });
     });
 
