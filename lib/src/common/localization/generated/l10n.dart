@@ -2492,6 +2492,36 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Введите часовой пояс`
+  String get I18nModuleSettings_timezoneEmpty {
+    return Intl.message(
+      'Введите часовой пояс',
+      name: 'I18nModuleSettings_timezoneEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Часовой пояс должен быть целым`
+  String get I18nModuleSettings_timezoneInvalid {
+    return Intl.message(
+      'Часовой пояс должен быть целым',
+      name: 'I18nModuleSettings_timezoneInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Диапазон -12..12`
+  String get I18nModuleSettings_timezoneRange {
+    return Intl.message(
+      'Диапазон -12..12',
+      name: 'I18nModuleSettings_timezoneRange',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Синхронизация`
   String get I18nModuleSettings_sync {
     return Intl.message(
@@ -2577,6 +2607,36 @@ class GeneratedLocalization {
     return Intl.message(
       'NTP 3',
       name: 'I18nModuleSettings_ntp3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите NTP сервер`
+  String get I18nModuleSettings_ntpEmpty {
+    return Intl.message(
+      'Введите NTP сервер',
+      name: 'I18nModuleSettings_ntpEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный адрес сервера`
+  String get I18nModuleSettings_ntpInvalid {
+    return Intl.message(
+      'Неверный адрес сервера',
+      name: 'I18nModuleSettings_ntpInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Максимум 64 символа`
+  String get I18nModuleSettings_ntpTooLong {
+    return Intl.message(
+      'Максимум 64 символа',
+      name: 'I18nModuleSettings_ntpTooLong',
       desc: '',
       args: [],
     );

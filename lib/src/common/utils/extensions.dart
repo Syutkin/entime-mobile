@@ -34,6 +34,25 @@ extension StringExtensions on String? {
         RegExp(r'^[a-z0-9а-яё]+([\-\.]{1}[a-z0-9а-яё]+)*\.[a-zа-яё]{2,6}$', caseSensitive: false).hasMatch(this!);
   }
 
+  /// Return true if given [String] is valid IPv4 address and not empty or null
+  bool get isValidIp {
+    if (isNullOrEmpty) {
+      return false;
+    }
+    final match = RegExp(r'^(\d{1,3}\.){3}\d{1,3}$').firstMatch(this!);
+    if (match == null) {
+      return false;
+    }
+    final parts = this!.split('.');
+    for (final part in parts) {
+      final value = int.tryParse(part);
+      if (value == null || value < 0 || value > 255) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /// Return [DateTime] from [String] with time only.
   ///
   /// Return null if fails

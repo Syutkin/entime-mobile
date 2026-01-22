@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2026-01-22T21:46:23.353839",
+  "@@last_modified": "2026-01-22T21:57:03.662770",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1332,6 +1332,21 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nModuleSettings_timezoneEmpty": "Введите часовой пояс",
+  "@I18nModuleSettings_timezoneEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_timezoneInvalid": "Часовой пояс должен быть целым",
+  "@I18nModuleSettings_timezoneInvalid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_timezoneRange": "Диапазон -12..12",
+  "@I18nModuleSettings_timezoneRange": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nModuleSettings_sync": "Синхронизация",
   "@I18nModuleSettings_sync": {
     "type": "text",
@@ -1374,6 +1389,21 @@
   },
   "I18nModuleSettings_ntp3": "NTP 3",
   "@I18nModuleSettings_ntp3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_ntpEmpty": "Введите NTP сервер",
+  "@I18nModuleSettings_ntpEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_ntpInvalid": "Неверный адрес сервера",
+  "@I18nModuleSettings_ntpInvalid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_ntpTooLong": "Максимум 64 символа",
+  "@I18nModuleSettings_ntpTooLong": {
     "type": "text",
     "placeholders": {}
   },

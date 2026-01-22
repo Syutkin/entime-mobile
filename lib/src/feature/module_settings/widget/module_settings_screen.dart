@@ -260,9 +260,10 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           title: Text(i18n.I18nModuleSettings_deviceTimezone),
                           trailing: Text('${moduleSettings.device.timezone}'),
                           onPressed: (context) async {
-                            final value = await _editInt(
+                            final value = await timezonePopup(
                               context: context,
-                              title: i18n.I18nModuleSettings_deviceTimezone,
+                              text: i18n.I18nModuleSettings_deviceTimezone,
+                              labelText: i18n.I18nModuleSettings_deviceTimezone,
                               initialValue: moduleSettings.device.timezone,
                             );
                             if (value != null) {
@@ -325,9 +326,10 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           title: Text(i18n.I18nModuleSettings_ntp1),
                           trailing: Text(moduleSettings.sync.ntp1),
                           onPressed: (context) async {
-                            final value = await _editText(
+                            final value = await ntpServerPopup(
                               context: context,
-                              title: i18n.I18nModuleSettings_ntp1,
+                              text: i18n.I18nModuleSettings_ntp1,
+                              labelText: i18n.I18nModuleSettings_ntp1,
                               initialValue: moduleSettings.sync.ntp1,
                             );
                             if (value != null) {
@@ -344,10 +346,12 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           title: Text(i18n.I18nModuleSettings_ntp2),
                           trailing: Text(moduleSettings.sync.ntp2),
                           onPressed: (context) async {
-                            final value = await _editText(
+                            final value = await ntpServerPopup(
                               context: context,
-                              title: i18n.I18nModuleSettings_ntp2,
+                              text: i18n.I18nModuleSettings_ntp2,
+                              labelText: i18n.I18nModuleSettings_ntp2,
                               initialValue: moduleSettings.sync.ntp2,
+                              allowEmpty: true,
                             );
                             if (value != null) {
                               widget.onChanged();
@@ -363,10 +367,12 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                           title: Text(i18n.I18nModuleSettings_ntp3),
                           trailing: Text(moduleSettings.sync.ntp3),
                           onPressed: (context) async {
-                            final value = await _editText(
+                            final value = await ntpServerPopup(
                               context: context,
-                              title: i18n.I18nModuleSettings_ntp3,
+                              text: i18n.I18nModuleSettings_ntp3,
+                              labelText: i18n.I18nModuleSettings_ntp3,
                               initialValue: moduleSettings.sync.ntp3,
+                              allowEmpty: true,
                             );
                             if (value != null) {
                               widget.onChanged();

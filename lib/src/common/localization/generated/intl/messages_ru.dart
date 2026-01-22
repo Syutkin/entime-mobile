@@ -430,6 +430,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_ntp1": MessageLookupByLibrary.simpleMessage("NTP 1"),
     "I18nModuleSettings_ntp2": MessageLookupByLibrary.simpleMessage("NTP 2"),
     "I18nModuleSettings_ntp3": MessageLookupByLibrary.simpleMessage("NTP 3"),
+    "I18nModuleSettings_ntpEmpty": MessageLookupByLibrary.simpleMessage(
+      "Введите NTP сервер",
+    ),
+    "I18nModuleSettings_ntpInvalid": MessageLookupByLibrary.simpleMessage(
+      "Неверный адрес сервера",
+    ),
+    "I18nModuleSettings_ntpTooLong": MessageLookupByLibrary.simpleMessage(
+      "Максимум 64 символа",
+    ),
     "I18nModuleSettings_ohm": MessageLookupByLibrary.simpleMessage("Ом"),
     "I18nModuleSettings_preambleLength": MessageLookupByLibrary.simpleMessage(
       "Preamble Length",
@@ -484,6 +493,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sync Word",
     ),
     "I18nModuleSettings_tft": MessageLookupByLibrary.simpleMessage("TFT"),
+    "I18nModuleSettings_timezoneEmpty": MessageLookupByLibrary.simpleMessage(
+      "Введите часовой пояс",
+    ),
+    "I18nModuleSettings_timezoneInvalid": MessageLookupByLibrary.simpleMessage(
+      "Часовой пояс должен быть целым",
+    ),
+    "I18nModuleSettings_timezoneRange": MessageLookupByLibrary.simpleMessage(
+      "Диапазон -12..12",
+    ),
     "I18nModuleSettings_turnOnAtEvent": MessageLookupByLibrary.simpleMessage(
       "Включать после события",
     ),

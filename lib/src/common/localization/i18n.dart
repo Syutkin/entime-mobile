@@ -745,6 +745,15 @@ class I18nModuleSettings {
 
   static String get deviceTimezone => Intl.message('Часовой пояс', name: 'I18nModuleSettings_deviceTimezone');
 
+  static String get timezoneEmpty =>
+      Intl.message('Введите часовой пояс', name: 'I18nModuleSettings_timezoneEmpty');
+
+  static String get timezoneInvalid =>
+      Intl.message('Часовой пояс должен быть целым', name: 'I18nModuleSettings_timezoneInvalid');
+
+  static String get timezoneRange =>
+      Intl.message('Диапазон -12..12', name: 'I18nModuleSettings_timezoneRange');
+
   static String get sync => Intl.message('Синхронизация', name: 'I18nModuleSettings_sync');
 
   static String get syncAuto => Intl.message('Авто', name: 'I18nModuleSettings_syncAuto');
@@ -762,6 +771,12 @@ class I18nModuleSettings {
   static String get ntp2 => Intl.message('NTP 2', name: 'I18nModuleSettings_ntp2');
 
   static String get ntp3 => Intl.message('NTP 3', name: 'I18nModuleSettings_ntp3');
+
+  static String get ntpEmpty => Intl.message('Введите NTP сервер', name: 'I18nModuleSettings_ntpEmpty');
+
+  static String get ntpInvalid => Intl.message('Неверный адрес сервера', name: 'I18nModuleSettings_ntpInvalid');
+
+  static String get ntpTooLong => Intl.message('Максимум 64 символа', name: 'I18nModuleSettings_ntpTooLong');
 
   static String get wifiActive => Intl.message('Активно', name: 'I18nModuleSettings_wifiActive');
 
