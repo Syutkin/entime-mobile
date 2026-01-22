@@ -312,7 +312,7 @@ void main() {
               DatabaseEvent.updateAutomaticCorrection(
                 stageId: stage.id,
                 startTime: automaticStart.time,
-                correction: automaticStart.correction,
+                correction: automaticStart.correction!,
                 timestamp: automaticStart.timestamp,
                 ntpOffset: offset,
                 deltaInSeconds: deltaInSeconds,
@@ -376,10 +376,15 @@ void main() {
         });
 
         patrolWidgetTest('Get ModuleSettings message', (PatrolTester $) async {
-          const json = '{}';
+          const json = '{"cmd":"load_config","id":10,"data":{},"status":"ok"}';
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            const BluetoothBlocState.connected(message: BluetoothMessage.moduleSettings(json: json)),
+            const BluetoothBlocState.connected(
+              message: BluetoothMessage.jsonResponse(
+                response: BluetoothJsonResponseLoadConfig(),
+                rawJson: json,
+              ),
+            ),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(await testWidget());

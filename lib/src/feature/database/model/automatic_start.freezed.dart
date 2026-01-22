@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AutomaticStart {
 
- String get time; set time(String value); int get correction; set correction(int value); DateTime get timestamp; set timestamp(DateTime value); bool get updating; set updating(bool value);
+ String get time; set time(String value); int? get correction; set correction(int? value); DateTime get timestamp; set timestamp(DateTime value); bool get updating; set updating(bool value);
 /// Create a copy of AutomaticStart
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,7 +38,7 @@ abstract mixin class $AutomaticStartCopyWith<$Res>  {
   factory $AutomaticStartCopyWith(AutomaticStart value, $Res Function(AutomaticStart) _then) = _$AutomaticStartCopyWithImpl;
 @useResult
 $Res call({
- String time, int correction, DateTime timestamp, bool updating
+ String time, int? correction, DateTime timestamp, bool updating
 });
 
 
@@ -55,11 +55,11 @@ class _$AutomaticStartCopyWithImpl<$Res>
 
 /// Create a copy of AutomaticStart
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? time = null,Object? correction = null,Object? timestamp = null,Object? updating = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? time = null,Object? correction = freezed,Object? timestamp = null,Object? updating = null,}) {
   return _then(_self.copyWith(
 time: null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
-as String,correction: null == correction ? _self.correction : correction // ignore: cast_nullable_to_non_nullable
-as int,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as String,correction: freezed == correction ? _self.correction : correction // ignore: cast_nullable_to_non_nullable
+as int?,timestamp: null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,updating: null == updating ? _self.updating : updating // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -146,7 +146,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String time,  int correction,  DateTime timestamp,  bool updating)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String time,  int? correction,  DateTime timestamp,  bool updating)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AutomaticStart() when $default != null:
 return $default(_that.time,_that.correction,_that.timestamp,_that.updating);case _:
@@ -167,7 +167,7 @@ return $default(_that.time,_that.correction,_that.timestamp,_that.updating);case
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String time,  int correction,  DateTime timestamp,  bool updating)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String time,  int? correction,  DateTime timestamp,  bool updating)  $default,) {final _that = this;
 switch (_that) {
 case _AutomaticStart():
 return $default(_that.time,_that.correction,_that.timestamp,_that.updating);case _:
@@ -187,7 +187,7 @@ return $default(_that.time,_that.correction,_that.timestamp,_that.updating);case
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String time,  int correction,  DateTime timestamp,  bool updating)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String time,  int? correction,  DateTime timestamp,  bool updating)?  $default,) {final _that = this;
 switch (_that) {
 case _AutomaticStart() when $default != null:
 return $default(_that.time,_that.correction,_that.timestamp,_that.updating);case _:
@@ -206,7 +206,7 @@ class _AutomaticStart implements AutomaticStart {
   
 
 @override  String time;
-@override  int correction;
+@override  int? correction;
 @override  DateTime timestamp;
 @override@JsonKey()  bool updating;
 
@@ -233,7 +233,7 @@ abstract mixin class _$AutomaticStartCopyWith<$Res> implements $AutomaticStartCo
   factory _$AutomaticStartCopyWith(_AutomaticStart value, $Res Function(_AutomaticStart) _then) = __$AutomaticStartCopyWithImpl;
 @override @useResult
 $Res call({
- String time, int correction, DateTime timestamp, bool updating
+ String time, int? correction, DateTime timestamp, bool updating
 });
 
 
@@ -250,11 +250,11 @@ class __$AutomaticStartCopyWithImpl<$Res>
 
 /// Create a copy of AutomaticStart
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? time = null,Object? correction = null,Object? timestamp = null,Object? updating = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? time = null,Object? correction = freezed,Object? timestamp = null,Object? updating = null,}) {
   return _then(_AutomaticStart(
 null == time ? _self.time : time // ignore: cast_nullable_to_non_nullable
-as String,null == correction ? _self.correction : correction // ignore: cast_nullable_to_non_nullable
-as int,null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
+as String,freezed == correction ? _self.correction : correction // ignore: cast_nullable_to_non_nullable
+as int?,null == timestamp ? _self.timestamp : timestamp // ignore: cast_nullable_to_non_nullable
 as DateTime,updating: null == updating ? _self.updating : updating // ignore: cast_nullable_to_non_nullable
 as bool,
   ));

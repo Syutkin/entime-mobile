@@ -496,6 +496,46 @@ void main() {
       );
 
       blocTest<BluetoothBloc, BluetoothBlocState>(
+        'received automaticStart without correction',
+        setUp: () {
+          message = r'$10:00:01,123#';
+          stageId = 1;
+          when(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: message,
+            ),
+          ).thenAnswer((_) => Future.value(1));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) => bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        expect: () => <Matcher>[
+          isA<BluetoothBlocState>().having(
+            (state) => switch (state) {
+              BluetoothBlocStateConnected() => state.message,
+              BluetoothBlocState() => null,
+            },
+            'BluetoothMessageAutomaticStart',
+            isA<BluetoothMessageAutomaticStart>().having(
+              (bluetoothMessage) => bluetoothMessage.automaticStart,
+              'automaticStart',
+              isA<AutomaticStart>()
+                  .having((automaticStart) => automaticStart.time, 'time', '10:00:01,123')
+                  .having((automaticStart) => automaticStart.correction, 'correction', null)
+                  .having((automaticStart) => automaticStart.updating, 'updating', false),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
         'received incorrect automaticStart',
         setUp: () {
           message = r'$10:00:01,123.1234#';
@@ -610,9 +650,9 @@ void main() {
       );
 
       blocTest<BluetoothBloc, BluetoothBlocState>(
-        'received moduleSettings json',
+        'received load_config response',
         setUp: () {
-          message = '{ settings: { key, value } }';
+          message = '{"cmd":"load_config","id":10,"data":{"device":{"name":"ENTime"}},"status":"ok"}';
           stageId = 1;
           when(
             () => database.addLog(
@@ -636,12 +676,14 @@ void main() {
               BluetoothBlocStateConnected() => state.message,
               BluetoothBlocState() => null,
             },
-            'BluetoothMessageModuleSettings',
-            isA<BluetoothMessageModuleSettings>().having(
-              (settings) => settings.json,
-              'json',
-              '{ settings: { key, value } }',
-            ),
+            'BluetoothMessageJsonResponse',
+            isA<BluetoothMessageJsonResponse>()
+                .having((response) => response.rawJson, 'rawJson', message)
+                .having(
+                  (response) => response.response,
+                  'response',
+                  isA<BluetoothJsonResponseLoadConfig>(),
+                ),
           ),
         ],
       );

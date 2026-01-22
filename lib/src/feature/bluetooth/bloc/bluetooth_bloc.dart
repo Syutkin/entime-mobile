@@ -12,6 +12,7 @@ import '../../database/model/automatic_start.dart';
 import '../../log/log.dart';
 import '../../settings/settings.dart';
 import '../bluetooth.dart';
+import '../logic/bluetooth_protocol_parser.dart';
 
 part 'bluetooth_bloc.freezed.dart';
 part 'bluetooth_bloc_event.dart';
@@ -174,7 +175,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
                 final stageId = event.stageId;
                 await _audioController.callParticipant(time: time, stageId: stageId);
               }
-            case BluetoothMessageModuleSettings():
+            case BluetoothMessageJsonEvent():
+              emit(BluetoothBlocState.connected(message: message));
+            case BluetoothMessageJsonResponse():
               emit(BluetoothBlocState.connected(message: message));
             case BluetoothMessageEmpty():
           }
@@ -201,6 +204,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final AppDatabase _database;
   final IAudioController _audioController;
   final ISettingsProvider _settingsProvider;
+  final BluetoothProtocolParser _protocolParser = const BluetoothProtocolParser();
 
   BluetoothDevice? _bluetoothDevice;
 
@@ -237,16 +241,22 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
       direction: LogSourceDirection.output,
       rawData: parsedMessage,
     );
-    if (parsedMessage.startsWith(r'$') && parsedMessage.endsWith('#')) {
-      try {
-        parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-        final messageList = parsedMessage.split(';');
-        final correction = int.parse(messageList[1]);
-        logger
-          ..d('Bluetooth -> correction: $correction')
-          ..d('Bluetooth -> gotime: ${messageList.first}');
+    final protocolMessage = _protocolParser.parse(parsedMessage);
+    switch (protocolMessage) {
+      case BluetoothProtocolPacketMessage(
+        type: BluetoothProtocolPacketType.start,
+        raw: final raw,
+        time: final time,
+        correction: final correction,
+      ):
+        if (correction == null) {
+          logger.i('Bluetooth -> Start packet without correction: $raw');
+        } else {
+          logger.d('Bluetooth -> correction: $correction');
+        }
+        logger.d('Bluetooth -> gotime: $time');
         final automaticStart = AutomaticStart(
-          messageList.first,
+          time,
           correction,
           now,
           // Проверяем обновлять или нет в HomeScreen BlocListener
@@ -254,31 +264,36 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           updating: false,
         );
         return BluetoothMessage.automaticStart(automaticStart: automaticStart);
-      } on Exception catch (e) {
-        logger.e('Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage', error: e);
+      case BluetoothProtocolPacketMessage(
+        type: BluetoothProtocolPacketType.beep,
+        time: final time,
+      ):
+        logger.t('Bluetooth -> Message parsed: beep: $time');
+        return BluetoothMessage.countdown(time: time);
+      case BluetoothProtocolPacketMessage(
+        type: BluetoothProtocolPacketType.voice,
+        time: final time,
+      ):
+        logger.t('Bluetooth -> Message parsed: speak: $time');
+        return BluetoothMessage.voice(time: time);
+      case BluetoothProtocolPacketMessage(
+        type: BluetoothProtocolPacketType.finish,
+        time: final time,
+      ):
+        logger.t('Bluetooth -> Message parsed: finish: $time');
+        return BluetoothMessage.finish(time: time, timestamp: now);
+      case BluetoothProtocolJsonCommandMessage():
+        logger.i('Bluetooth -> Received JSON command from module: $parsedMessage');
         return const BluetoothMessage.empty();
-      } catch (e) {
-        logger.e('Bluetooth -> Something wrong with parsing Bluetooth packet $parsedMessage', error: e);
+      case BluetoothProtocolJsonEventMessage(event: final event):
+        logger.i('Bluetooth -> Parsing JSON event...');
+        return BluetoothMessage.jsonEvent(event: event, rawJson: parsedMessage);
+      case BluetoothProtocolJsonResponseMessage(response: final response):
+        logger.i('Bluetooth -> Parsing JSON response...');
+        return BluetoothMessage.jsonResponse(response: response, rawJson: parsedMessage);
+      case BluetoothProtocolUnknownMessage():
+        logger.e('Bluetooth -> Cannot parse data: $parsedMessage');
         return const BluetoothMessage.empty();
-      }
-    } else if (parsedMessage.startsWith('B') && parsedMessage.endsWith('#')) {
-      parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-      logger.t('Bluetooth -> Message parsed: beep: $parsedMessage');
-      return BluetoothMessage.countdown(time: parsedMessage);
-    } else if (parsedMessage.startsWith('V') && parsedMessage.endsWith('#')) {
-      parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-      logger.t('Bluetooth -> Message parsed: speak: $parsedMessage');
-      return BluetoothMessage.voice(time: parsedMessage);
-    } else if (parsedMessage.startsWith('F') && parsedMessage.endsWith('#')) {
-      parsedMessage = parsedMessage.substring(1, parsedMessage.length - 1);
-      logger.t('Bluetooth -> Message parsed: finish: $parsedMessage');
-      return BluetoothMessage.finish(time: parsedMessage, timestamp: now);
-    } else if (parsedMessage.startsWith('{') && parsedMessage.endsWith('}')) {
-      logger.i('Bluetooth -> Parsing JSON...');
-      return BluetoothMessage.moduleSettings(json: parsedMessage);
-    } else {
-      logger.e('Bluetooth -> Cannot parse data: $parsedMessage');
-      return const BluetoothMessage.empty();
     }
   }
 }

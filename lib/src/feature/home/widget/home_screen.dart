@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 
+import '../../../common/logger/logger.dart';
 import '../../../common/localization/localization.dart';
 import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
@@ -86,6 +87,10 @@ class HomeScreen extends StatelessWidget {
         case BluetoothBlocStateConnected(message: final message):
           switch (message) {
             case BluetoothMessageAutomaticStart(automaticStart: final automaticStart):
+              if (automaticStart.correction == null) {
+                logger.i('Bluetooth -> Start packet without correction; skipping DB update.');
+                return;
+              }
               final databaseBloc = context.read<DatabaseBloc>();
               final offset = context.read<NtpBloc>().state.offset;
               final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
@@ -96,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                   DatabaseEvent.updateAutomaticCorrection(
                     stageId: stageId,
                     startTime: automaticStart.time,
-                    correction: automaticStart.correction,
+                    correction: automaticStart.correction!,
                     timestamp: automaticStart.timestamp,
                     ntpOffset: offset,
                     deltaInSeconds: deltaInSeconds,
@@ -114,8 +119,10 @@ class HomeScreen extends StatelessWidget {
                   DatabaseEvent.addFinishTime(stage: stage, finishTime: time, timestamp: timestamp, ntpOffset: offset),
                 );
               }
-            case BluetoothMessageModuleSettings(json: final json):
-              context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(json));
+            case BluetoothMessageJsonResponse(response: final response, rawJson: final rawJson):
+              if (response is BluetoothJsonResponseLoadConfig) {
+                context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(rawJson));
+              }
             default:
           }
         default:

@@ -11,10 +11,14 @@ final class BluetoothProtocolPacketMessage extends BluetoothProtocolMessage {
   const BluetoothProtocolPacketMessage({
     required this.type,
     required this.raw,
+    required this.time,
+    this.correction,
   });
 
   final BluetoothProtocolPacketType type;
   final String raw;
+  final String time;
+  final int? correction;
 }
 
 final class BluetoothProtocolJsonCommandMessage extends BluetoothProtocolMessage {
@@ -67,7 +71,11 @@ class BluetoothProtocolParser {
     if (normalized.endsWith('#')) {
       for (final entry in bluetoothProtocolPacketByPrefix.entries) {
         if (normalized.startsWith(entry.key)) {
-          return BluetoothProtocolPacketMessage(type: entry.value, raw: normalized);
+          final packet = _parsePacket(entry.value, normalized);
+          if (packet != null) {
+            return packet;
+          }
+          return BluetoothProtocolUnknownMessage(raw: normalized);
         }
       }
     }
@@ -118,6 +126,52 @@ class BluetoothJsonResponseBase {
   final int? errorCode;
   final String? errorMessage;
   final int? timestamp;
+}
+
+BluetoothProtocolPacketMessage? _parsePacket(BluetoothProtocolPacketType type, String raw) {
+  final content = raw.substring(1, raw.length - 1);
+  if (content.isEmpty) {
+    return null;
+  }
+
+  switch (type) {
+    case BluetoothProtocolPacketType.start:
+      return _parseStartPacket(content, raw);
+    case BluetoothProtocolPacketType.finish:
+    case BluetoothProtocolPacketType.beep:
+    case BluetoothProtocolPacketType.voice:
+      if (!_isValidPacketTime(content)) {
+        return null;
+      }
+      return BluetoothProtocolPacketMessage(type: type, raw: raw, time: content);
+  }
+}
+
+BluetoothProtocolPacketMessage? _parseStartPacket(String content, String raw) {
+  final parts = content.split(';');
+  if (parts.isEmpty || parts.length > 2) {
+    return null;
+  }
+
+  final time = parts.first;
+  if (!_isValidPacketTime(time)) {
+    return null;
+  }
+
+  int? correction;
+  if (parts.length == 2 && parts[1].isNotEmpty) {
+    correction = int.tryParse(parts[1]);
+    if (correction == null) {
+      return null;
+    }
+  }
+
+  return BluetoothProtocolPacketMessage(type: BluetoothProtocolPacketType.start, raw: raw, time: time, correction: correction);
+}
+
+bool _isValidPacketTime(String value) {
+  final pattern = RegExp(r'^\d{2}:\d{2}:\d{2}(,\d{3})?$');
+  return pattern.hasMatch(value);
 }
 
 Map<String, Object?>? _decodeJson(String rawMessage) {

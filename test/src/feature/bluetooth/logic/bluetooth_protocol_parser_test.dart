@@ -14,6 +14,18 @@ void main() {
         expect(message, isA<BluetoothProtocolPacketMessage>());
         final packet = message as BluetoothProtocolPacketMessage;
         expect(packet.type, BluetoothProtocolPacketType.start);
+        expect(packet.time, '10:10:10,123');
+        expect(packet.correction, -3345);
+      });
+
+      test('parses start packet without correction', () {
+        final message = parser.parse(r'$10:10:10,123#');
+
+        expect(message, isA<BluetoothProtocolPacketMessage>());
+        final packet = message as BluetoothProtocolPacketMessage;
+        expect(packet.type, BluetoothProtocolPacketType.start);
+        expect(packet.time, '10:10:10,123');
+        expect(packet.correction, null);
       });
 
       test('parses finish packet', () {
@@ -22,6 +34,7 @@ void main() {
         expect(message, isA<BluetoothProtocolPacketMessage>());
         final packet = message as BluetoothProtocolPacketMessage;
         expect(packet.type, BluetoothProtocolPacketType.finish);
+        expect(packet.time, '10:10:10,123');
       });
 
       test('parses beep packet', () {
@@ -30,6 +43,7 @@ void main() {
         expect(message, isA<BluetoothProtocolPacketMessage>());
         final packet = message as BluetoothProtocolPacketMessage;
         expect(packet.type, BluetoothProtocolPacketType.beep);
+        expect(packet.time, '10:10:56');
       });
 
       test('parses voice packet', () {
@@ -38,6 +52,7 @@ void main() {
         expect(message, isA<BluetoothProtocolPacketMessage>());
         final packet = message as BluetoothProtocolPacketMessage;
         expect(packet.type, BluetoothProtocolPacketType.voice);
+        expect(packet.time, '10:10:15');
       });
     });
 

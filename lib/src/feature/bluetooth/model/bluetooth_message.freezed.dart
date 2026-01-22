@@ -55,15 +55,16 @@ extension BluetoothMessagePatterns on BluetoothMessage {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( BluetoothMessageAutomaticStart value)?  automaticStart,TResult Function( BluetoothMessageFinish value)?  finish,TResult Function( BluetoothMessageCountdown value)?  countdown,TResult Function( BluetoothMessageVoice value)?  voice,TResult Function( BluetoothMessageModuleSettings value)?  moduleSettings,TResult Function( BluetoothMessageEmpty value)?  empty,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( BluetoothMessageAutomaticStart value)?  automaticStart,TResult Function( BluetoothMessageFinish value)?  finish,TResult Function( BluetoothMessageCountdown value)?  countdown,TResult Function( BluetoothMessageVoice value)?  voice,TResult Function( BluetoothMessageJsonEvent value)?  jsonEvent,TResult Function( BluetoothMessageJsonResponse value)?  jsonResponse,TResult Function( BluetoothMessageEmpty value)?  empty,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case BluetoothMessageAutomaticStart() when automaticStart != null:
 return automaticStart(_that);case BluetoothMessageFinish() when finish != null:
 return finish(_that);case BluetoothMessageCountdown() when countdown != null:
 return countdown(_that);case BluetoothMessageVoice() when voice != null:
-return voice(_that);case BluetoothMessageModuleSettings() when moduleSettings != null:
-return moduleSettings(_that);case BluetoothMessageEmpty() when empty != null:
+return voice(_that);case BluetoothMessageJsonEvent() when jsonEvent != null:
+return jsonEvent(_that);case BluetoothMessageJsonResponse() when jsonResponse != null:
+return jsonResponse(_that);case BluetoothMessageEmpty() when empty != null:
 return empty(_that);case _:
   return orElse();
 
@@ -82,15 +83,16 @@ return empty(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( BluetoothMessageAutomaticStart value)  automaticStart,required TResult Function( BluetoothMessageFinish value)  finish,required TResult Function( BluetoothMessageCountdown value)  countdown,required TResult Function( BluetoothMessageVoice value)  voice,required TResult Function( BluetoothMessageModuleSettings value)  moduleSettings,required TResult Function( BluetoothMessageEmpty value)  empty,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( BluetoothMessageAutomaticStart value)  automaticStart,required TResult Function( BluetoothMessageFinish value)  finish,required TResult Function( BluetoothMessageCountdown value)  countdown,required TResult Function( BluetoothMessageVoice value)  voice,required TResult Function( BluetoothMessageJsonEvent value)  jsonEvent,required TResult Function( BluetoothMessageJsonResponse value)  jsonResponse,required TResult Function( BluetoothMessageEmpty value)  empty,}){
 final _that = this;
 switch (_that) {
 case BluetoothMessageAutomaticStart():
 return automaticStart(_that);case BluetoothMessageFinish():
 return finish(_that);case BluetoothMessageCountdown():
 return countdown(_that);case BluetoothMessageVoice():
-return voice(_that);case BluetoothMessageModuleSettings():
-return moduleSettings(_that);case BluetoothMessageEmpty():
+return voice(_that);case BluetoothMessageJsonEvent():
+return jsonEvent(_that);case BluetoothMessageJsonResponse():
+return jsonResponse(_that);case BluetoothMessageEmpty():
 return empty(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
@@ -105,15 +107,16 @@ return empty(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( BluetoothMessageAutomaticStart value)?  automaticStart,TResult? Function( BluetoothMessageFinish value)?  finish,TResult? Function( BluetoothMessageCountdown value)?  countdown,TResult? Function( BluetoothMessageVoice value)?  voice,TResult? Function( BluetoothMessageModuleSettings value)?  moduleSettings,TResult? Function( BluetoothMessageEmpty value)?  empty,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( BluetoothMessageAutomaticStart value)?  automaticStart,TResult? Function( BluetoothMessageFinish value)?  finish,TResult? Function( BluetoothMessageCountdown value)?  countdown,TResult? Function( BluetoothMessageVoice value)?  voice,TResult? Function( BluetoothMessageJsonEvent value)?  jsonEvent,TResult? Function( BluetoothMessageJsonResponse value)?  jsonResponse,TResult? Function( BluetoothMessageEmpty value)?  empty,}){
 final _that = this;
 switch (_that) {
 case BluetoothMessageAutomaticStart() when automaticStart != null:
 return automaticStart(_that);case BluetoothMessageFinish() when finish != null:
 return finish(_that);case BluetoothMessageCountdown() when countdown != null:
 return countdown(_that);case BluetoothMessageVoice() when voice != null:
-return voice(_that);case BluetoothMessageModuleSettings() when moduleSettings != null:
-return moduleSettings(_that);case BluetoothMessageEmpty() when empty != null:
+return voice(_that);case BluetoothMessageJsonEvent() when jsonEvent != null:
+return jsonEvent(_that);case BluetoothMessageJsonResponse() when jsonResponse != null:
+return jsonResponse(_that);case BluetoothMessageEmpty() when empty != null:
 return empty(_that);case _:
   return null;
 
@@ -131,14 +134,15 @@ return empty(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( AutomaticStart automaticStart)?  automaticStart,TResult Function( String time,  DateTime timestamp)?  finish,TResult Function( String time)?  countdown,TResult Function( String time)?  voice,TResult Function( String json)?  moduleSettings,TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( AutomaticStart automaticStart)?  automaticStart,TResult Function( String time,  DateTime timestamp)?  finish,TResult Function( String time)?  countdown,TResult Function( String time)?  voice,TResult Function( BluetoothJsonEvent event,  String rawJson)?  jsonEvent,TResult Function( BluetoothJsonResponse response,  String rawJson)?  jsonResponse,TResult Function()?  empty,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case BluetoothMessageAutomaticStart() when automaticStart != null:
 return automaticStart(_that.automaticStart);case BluetoothMessageFinish() when finish != null:
 return finish(_that.time,_that.timestamp);case BluetoothMessageCountdown() when countdown != null:
 return countdown(_that.time);case BluetoothMessageVoice() when voice != null:
-return voice(_that.time);case BluetoothMessageModuleSettings() when moduleSettings != null:
-return moduleSettings(_that.json);case BluetoothMessageEmpty() when empty != null:
+return voice(_that.time);case BluetoothMessageJsonEvent() when jsonEvent != null:
+return jsonEvent(_that.event,_that.rawJson);case BluetoothMessageJsonResponse() when jsonResponse != null:
+return jsonResponse(_that.response,_that.rawJson);case BluetoothMessageEmpty() when empty != null:
 return empty();case _:
   return orElse();
 
@@ -157,14 +161,15 @@ return empty();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( AutomaticStart automaticStart)  automaticStart,required TResult Function( String time,  DateTime timestamp)  finish,required TResult Function( String time)  countdown,required TResult Function( String time)  voice,required TResult Function( String json)  moduleSettings,required TResult Function()  empty,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( AutomaticStart automaticStart)  automaticStart,required TResult Function( String time,  DateTime timestamp)  finish,required TResult Function( String time)  countdown,required TResult Function( String time)  voice,required TResult Function( BluetoothJsonEvent event,  String rawJson)  jsonEvent,required TResult Function( BluetoothJsonResponse response,  String rawJson)  jsonResponse,required TResult Function()  empty,}) {final _that = this;
 switch (_that) {
 case BluetoothMessageAutomaticStart():
 return automaticStart(_that.automaticStart);case BluetoothMessageFinish():
 return finish(_that.time,_that.timestamp);case BluetoothMessageCountdown():
 return countdown(_that.time);case BluetoothMessageVoice():
-return voice(_that.time);case BluetoothMessageModuleSettings():
-return moduleSettings(_that.json);case BluetoothMessageEmpty():
+return voice(_that.time);case BluetoothMessageJsonEvent():
+return jsonEvent(_that.event,_that.rawJson);case BluetoothMessageJsonResponse():
+return jsonResponse(_that.response,_that.rawJson);case BluetoothMessageEmpty():
 return empty();}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -179,14 +184,15 @@ return empty();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( AutomaticStart automaticStart)?  automaticStart,TResult? Function( String time,  DateTime timestamp)?  finish,TResult? Function( String time)?  countdown,TResult? Function( String time)?  voice,TResult? Function( String json)?  moduleSettings,TResult? Function()?  empty,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( AutomaticStart automaticStart)?  automaticStart,TResult? Function( String time,  DateTime timestamp)?  finish,TResult? Function( String time)?  countdown,TResult? Function( String time)?  voice,TResult? Function( BluetoothJsonEvent event,  String rawJson)?  jsonEvent,TResult? Function( BluetoothJsonResponse response,  String rawJson)?  jsonResponse,TResult? Function()?  empty,}) {final _that = this;
 switch (_that) {
 case BluetoothMessageAutomaticStart() when automaticStart != null:
 return automaticStart(_that.automaticStart);case BluetoothMessageFinish() when finish != null:
 return finish(_that.time,_that.timestamp);case BluetoothMessageCountdown() when countdown != null:
 return countdown(_that.time);case BluetoothMessageVoice() when voice != null:
-return voice(_that.time);case BluetoothMessageModuleSettings() when moduleSettings != null:
-return moduleSettings(_that.json);case BluetoothMessageEmpty() when empty != null:
+return voice(_that.time);case BluetoothMessageJsonEvent() when jsonEvent != null:
+return jsonEvent(_that.event,_that.rawJson);case BluetoothMessageJsonResponse() when jsonResponse != null:
+return jsonResponse(_that.response,_that.rawJson);case BluetoothMessageEmpty() when empty != null:
 return empty();case _:
   return null;
 
@@ -473,43 +479,44 @@ as String,
 /// @nodoc
 
 
-class BluetoothMessageModuleSettings implements BluetoothMessage {
-  const BluetoothMessageModuleSettings({required this.json});
+class BluetoothMessageJsonEvent implements BluetoothMessage {
+  const BluetoothMessageJsonEvent({required this.event, required this.rawJson});
   
 
- final  String json;
+ final  BluetoothJsonEvent event;
+ final  String rawJson;
 
 /// Create a copy of BluetoothMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$BluetoothMessageModuleSettingsCopyWith<BluetoothMessageModuleSettings> get copyWith => _$BluetoothMessageModuleSettingsCopyWithImpl<BluetoothMessageModuleSettings>(this, _$identity);
+$BluetoothMessageJsonEventCopyWith<BluetoothMessageJsonEvent> get copyWith => _$BluetoothMessageJsonEventCopyWithImpl<BluetoothMessageJsonEvent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BluetoothMessageModuleSettings&&(identical(other.json, json) || other.json == json));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BluetoothMessageJsonEvent&&(identical(other.event, event) || other.event == event)&&(identical(other.rawJson, rawJson) || other.rawJson == rawJson));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,json);
+int get hashCode => Object.hash(runtimeType,event,rawJson);
 
 @override
 String toString() {
-  return 'BluetoothMessage.moduleSettings(json: $json)';
+  return 'BluetoothMessage.jsonEvent(event: $event, rawJson: $rawJson)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $BluetoothMessageModuleSettingsCopyWith<$Res> implements $BluetoothMessageCopyWith<$Res> {
-  factory $BluetoothMessageModuleSettingsCopyWith(BluetoothMessageModuleSettings value, $Res Function(BluetoothMessageModuleSettings) _then) = _$BluetoothMessageModuleSettingsCopyWithImpl;
+abstract mixin class $BluetoothMessageJsonEventCopyWith<$Res> implements $BluetoothMessageCopyWith<$Res> {
+  factory $BluetoothMessageJsonEventCopyWith(BluetoothMessageJsonEvent value, $Res Function(BluetoothMessageJsonEvent) _then) = _$BluetoothMessageJsonEventCopyWithImpl;
 @useResult
 $Res call({
- String json
+ BluetoothJsonEvent event, String rawJson
 });
 
 
@@ -517,18 +524,87 @@ $Res call({
 
 }
 /// @nodoc
-class _$BluetoothMessageModuleSettingsCopyWithImpl<$Res>
-    implements $BluetoothMessageModuleSettingsCopyWith<$Res> {
-  _$BluetoothMessageModuleSettingsCopyWithImpl(this._self, this._then);
+class _$BluetoothMessageJsonEventCopyWithImpl<$Res>
+    implements $BluetoothMessageJsonEventCopyWith<$Res> {
+  _$BluetoothMessageJsonEventCopyWithImpl(this._self, this._then);
 
-  final BluetoothMessageModuleSettings _self;
-  final $Res Function(BluetoothMessageModuleSettings) _then;
+  final BluetoothMessageJsonEvent _self;
+  final $Res Function(BluetoothMessageJsonEvent) _then;
 
 /// Create a copy of BluetoothMessage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? json = null,}) {
-  return _then(BluetoothMessageModuleSettings(
-json: null == json ? _self.json : json // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') $Res call({Object? event = null,Object? rawJson = null,}) {
+  return _then(BluetoothMessageJsonEvent(
+event: null == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
+as BluetoothJsonEvent,rawJson: null == rawJson ? _self.rawJson : rawJson // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class BluetoothMessageJsonResponse implements BluetoothMessage {
+  const BluetoothMessageJsonResponse({required this.response, required this.rawJson});
+  
+
+ final  BluetoothJsonResponse response;
+ final  String rawJson;
+
+/// Create a copy of BluetoothMessage
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BluetoothMessageJsonResponseCopyWith<BluetoothMessageJsonResponse> get copyWith => _$BluetoothMessageJsonResponseCopyWithImpl<BluetoothMessageJsonResponse>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BluetoothMessageJsonResponse&&(identical(other.response, response) || other.response == response)&&(identical(other.rawJson, rawJson) || other.rawJson == rawJson));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,response,rawJson);
+
+@override
+String toString() {
+  return 'BluetoothMessage.jsonResponse(response: $response, rawJson: $rawJson)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $BluetoothMessageJsonResponseCopyWith<$Res> implements $BluetoothMessageCopyWith<$Res> {
+  factory $BluetoothMessageJsonResponseCopyWith(BluetoothMessageJsonResponse value, $Res Function(BluetoothMessageJsonResponse) _then) = _$BluetoothMessageJsonResponseCopyWithImpl;
+@useResult
+$Res call({
+ BluetoothJsonResponse response, String rawJson
+});
+
+
+
+
+}
+/// @nodoc
+class _$BluetoothMessageJsonResponseCopyWithImpl<$Res>
+    implements $BluetoothMessageJsonResponseCopyWith<$Res> {
+  _$BluetoothMessageJsonResponseCopyWithImpl(this._self, this._then);
+
+  final BluetoothMessageJsonResponse _self;
+  final $Res Function(BluetoothMessageJsonResponse) _then;
+
+/// Create a copy of BluetoothMessage
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? response = null,Object? rawJson = null,}) {
+  return _then(BluetoothMessageJsonResponse(
+response: null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
+as BluetoothJsonResponse,rawJson: null == rawJson ? _self.rawJson : rawJson // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
