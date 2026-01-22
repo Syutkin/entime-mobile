@@ -9,32 +9,7 @@ if ! git diff --name-only --quiet; then
   unstaged_before=1
 fi
 
-python3 - <<'PY'
-import pathlib
-import re
-import sys
-
-path = pathlib.Path("pubspec.yaml")
-text = path.read_text()
-
-match = re.search(r"^(version:\s*[^\s+]+\+)(\d+)[ \t]*$", text, flags=re.M)
-if not match:
-    print("pre-commit: could not find version line like 'version: x.y.z+N' in pubspec.yaml", file=sys.stderr)
-    sys.exit(1)
-
-prefix = match.group(1)
-build = int(match.group(2)) + 1
-new_text = re.sub(
-    r"^(version:\s*[^\s+]+\+)(\d+)[ \t]*$",
-    f"{prefix}{build}",
-    text,
-    flags=re.M,
-    count=1,
-)
-
-path.write_text(new_text)
-print(f"pre-commit: bumped pubspec.yaml to {prefix}+{build}")
-PY
+cider bump build
 
 dart run build_runner build --delete-conflicting-outputs
 
