@@ -17,7 +17,7 @@ import sys
 path = pathlib.Path("pubspec.yaml")
 text = path.read_text()
 
-match = re.search(r"^version:\s*([^\s+]+)\+(\d+)\s*$", text, flags=re.M)
+match = re.search(r"^(version:\s*[^\s+]+\+)(\d+)[ \t]*$", text, flags=re.M)
 if not match:
     print("pre-commit: could not find version line like 'version: x.y.z+N' in pubspec.yaml", file=sys.stderr)
     sys.exit(1)
@@ -25,8 +25,8 @@ if not match:
 prefix = match.group(1)
 build = int(match.group(2)) + 1
 new_text = re.sub(
-    r"^version:\s*([^\s+]+)\+(\d+)\s*$",
-    f"version: {prefix}+{build}",
+    r"^(version:\s*[^\s+]+\+)(\d+)[ \t]*$",
+    f"{prefix}{build}",
     text,
     flags=re.M,
     count=1,
