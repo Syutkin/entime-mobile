@@ -717,7 +717,6 @@ void main() {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         "send message didn't emit new state",
         setUp: () {
-          // TODO: Добавить признак окончания сообщения (например: 'myMessage\n') после изменения прошивки модулей
           when(() => bluetoothBackgroundConnection.sendMessage('myMessage')).thenAnswer((_) => Future.value(true));
           when(
             () => database.addLog(

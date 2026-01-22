@@ -1,5 +1,3 @@
-// TODO: Убрать после реализации тестов
-
 import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
@@ -602,7 +600,10 @@ void main() {
 
       group('Unknown module type', () {
         patrolWidgetTest('Shows unknown module type splash', (PatrolTester $) async {
-          // TODO: Реализовать тест
+          when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.error());
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect($(Splash).containing($(Localization.current.I18nModuleSettings_errorLoadSettings)), findsOneWidget);
         });
       });
     });

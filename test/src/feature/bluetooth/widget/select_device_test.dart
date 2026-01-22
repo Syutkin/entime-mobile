@@ -167,5 +167,65 @@ void main() {
       expect(result!.device.remoteId.str, remoteId.str);
       expect(result.rssi, rssi);
     });
+
+    patrolWidgetTest('Updates RSSI when device is scanned again', (PatrolTester $) async {
+      await $.pumpWidget(testApp(const SelectDeviceScreen()));
+      // Let initState async work (scan start + subscriptions) flush a frame.
+      await $.pump();
+
+      const remoteId = DeviceIdentifier('11:22:33:44:55:66');
+      const deviceName = 'Test Device';
+
+      fakePlatform.emitScanResponse(
+        BmScanResponse(
+          advertisements: [
+            BmScanAdvertisement(
+              remoteId: remoteId,
+              platformName: deviceName,
+              advName: deviceName,
+              connectable: true,
+              txPowerLevel: null,
+              appearance: null,
+              manufacturerData: <int, List<int>>{},
+              serviceData: <Guid, List<int>>{},
+              serviceUuids: <Guid>[],
+              rssi: -40,
+            ),
+          ],
+          success: true,
+          errorCode: 0,
+          errorString: '',
+        ),
+      );
+
+      await $.pump();
+
+      fakePlatform.emitScanResponse(
+        BmScanResponse(
+          advertisements: [
+            BmScanAdvertisement(
+              remoteId: remoteId,
+              platformName: deviceName,
+              advName: deviceName,
+              connectable: true,
+              txPowerLevel: null,
+              appearance: null,
+              manufacturerData: <int, List<int>>{},
+              serviceData: <Guid, List<int>>{},
+              serviceUuids: <Guid>[],
+              rssi: -10,
+            ),
+          ],
+          success: true,
+          errorCode: 0,
+          errorString: '',
+        ),
+      );
+
+      await $.pump();
+
+      expect($('-40'), findsNothing);
+      expect($('-10'), findsOneWidget);
+    });
   });
 }

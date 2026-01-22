@@ -328,7 +328,7 @@ void main() {
     });
 
     group('responses', () {
-      BluetoothJsonResponseStatus _parseStatusResponse(String raw) {
+      BluetoothJsonResponseStatus parseStatusResponse(String raw) {
         final message = parser.parse(raw);
         final responseMessage = message as BluetoothProtocolJsonResponseMessage;
         return responseMessage.response as BluetoothJsonResponseStatus;
@@ -398,7 +398,7 @@ void main() {
 {"cmd":"status","id":3,"status":"ok","device":{"name":"ENTIME","number":1,"type":"start"},"system":{"uptime_s":12,"free_heap_bytes":1024,"reset_reason":"power_on"},"wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"},"ble":{"state":"advertising","clients":0},"rtc":{"ready":true,"lost_power":false,"last_sync_ms":600000,"temperature_c":24.5},"gps":{"state":"searching","fix_age_ms":120000,"fix":true,"satellites":12,"pps_signal":true},"sync":{"last_ms":5000,"state":"gps_ok","accuracy_us":50,"source":"gps"},"storage":{"used_pct":42,"ok":true},"power":{"battery_voltage":5.0}}
 ''';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.device?.name, 'ENTIME');
         expect(response.device?.type, BluetoothProtocolDeviceType.start);
         expect(response.wifi?.state, BluetoothProtocolWifiState.connected);
@@ -413,14 +413,14 @@ void main() {
       test('parses status response without device info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.device, null);
       });
 
       test('parses status response with firmware info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","firmware":{"version":"0.1.0","build_date":"2024-01-01"}}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.firmware?.version, '0.1.0');
         expect(response.firmware?.buildDate, '2024-01-01');
       });
@@ -428,14 +428,14 @@ void main() {
       test('parses status response without system info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.system, null);
       });
 
       test('parses status response with system info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","system":{"uptime_s":12345,"free_heap_bytes":142336,"reset_reason":"power_on"}}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.system?.uptimeS, 12345);
         expect(response.system?.freeHeapBytes, 142336);
         expect(response.system?.resetReason, BluetoothProtocolResetReason.powerOn);
@@ -444,14 +444,14 @@ void main() {
       test('parses status response without wifi info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.wifi, null);
       });
 
       test('parses status response with wifi info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"}}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.wifi?.state, BluetoothProtocolWifiState.connected);
         expect(response.wifi?.rssi, -62);
         expect(response.wifi?.ip, '192.168.1.10');
@@ -461,14 +461,14 @@ void main() {
       test('parses status response without ble info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.ble, null);
       });
 
       test('parses status response with ble info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","ble":{"state":"advertising","clients":2}}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.ble?.state, BluetoothProtocolBleState.advertising);
         expect(response.ble?.clients, 2);
       });
@@ -476,42 +476,42 @@ void main() {
       test('parses status response without rtc info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.rtc, null);
       });
 
       test('parses status response without gps info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.gps, null);
       });
 
       test('parses status response without sync info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.sync, null);
       });
 
       test('parses status response without storage info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.storage, null);
       });
 
       test('parses status response without power info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.power, null);
       });
 
       test('parses device type finish', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","device":{"type":"finish"}}';
 
-        final response = _parseStatusResponse(raw);
+        final response = parseStatusResponse(raw);
         expect(response.device?.type, BluetoothProtocolDeviceType.finish);
       });
 
@@ -520,25 +520,25 @@ void main() {
         const rawConnecting = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"connecting"}}';
         const rawError = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"error"}}';
 
-        expect(_parseStatusResponse(raw).wifi?.state, BluetoothProtocolWifiState.off);
-        expect(_parseStatusResponse(rawConnecting).wifi?.state, BluetoothProtocolWifiState.connecting);
-        expect(_parseStatusResponse(rawError).wifi?.state, BluetoothProtocolWifiState.error);
+        expect(parseStatusResponse(raw).wifi?.state, BluetoothProtocolWifiState.off);
+        expect(parseStatusResponse(rawConnecting).wifi?.state, BluetoothProtocolWifiState.connecting);
+        expect(parseStatusResponse(rawError).wifi?.state, BluetoothProtocolWifiState.error);
       });
 
       test('parses ble state variants', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","ble":{"state":"off"}}';
         const rawConnected = '{"cmd":"status","id":3,"status":"ok","ble":{"state":"connected"}}';
 
-        expect(_parseStatusResponse(raw).ble?.state, BluetoothProtocolBleState.off);
-        expect(_parseStatusResponse(rawConnected).ble?.state, BluetoothProtocolBleState.connected);
+        expect(parseStatusResponse(raw).ble?.state, BluetoothProtocolBleState.off);
+        expect(parseStatusResponse(rawConnected).ble?.state, BluetoothProtocolBleState.connected);
       });
 
       test('parses gps state variants', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","gps":{"state":"off"}}';
         const rawActive = '{"cmd":"status","id":3,"status":"ok","gps":{"state":"active"}}';
 
-        expect(_parseStatusResponse(raw).gps?.state, BluetoothProtocolGpsState.off);
-        expect(_parseStatusResponse(rawActive).gps?.state, BluetoothProtocolGpsState.active);
+        expect(parseStatusResponse(raw).gps?.state, BluetoothProtocolGpsState.off);
+        expect(parseStatusResponse(rawActive).gps?.state, BluetoothProtocolGpsState.active);
       });
 
       test('parses sync state variants', () {
@@ -547,10 +547,10 @@ void main() {
         const rawRtcDegraded = '{"cmd":"status","id":3,"status":"ok","sync":{"state":"rtc_degraded"}}';
         const rawNoSync = '{"cmd":"status","id":3,"status":"ok","sync":{"state":"nosync"}}';
 
-        expect(_parseStatusResponse(rawGpsDegraded).sync?.state, BluetoothProtocolSyncState.gpsDegraded);
-        expect(_parseStatusResponse(rawRtcOk).sync?.state, BluetoothProtocolSyncState.rtcOk);
-        expect(_parseStatusResponse(rawRtcDegraded).sync?.state, BluetoothProtocolSyncState.rtcDegraded);
-        expect(_parseStatusResponse(rawNoSync).sync?.state, BluetoothProtocolSyncState.noSync);
+        expect(parseStatusResponse(rawGpsDegraded).sync?.state, BluetoothProtocolSyncState.gpsDegraded);
+        expect(parseStatusResponse(rawRtcOk).sync?.state, BluetoothProtocolSyncState.rtcOk);
+        expect(parseStatusResponse(rawRtcDegraded).sync?.state, BluetoothProtocolSyncState.rtcDegraded);
+        expect(parseStatusResponse(rawNoSync).sync?.state, BluetoothProtocolSyncState.noSync);
       });
 
       test('parses reset reason variants', () {
@@ -559,10 +559,10 @@ void main() {
         const rawSdio = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"sdio"}}';
         const rawUnknown = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"unknown"}}';
 
-        expect(_parseStatusResponse(raw).system?.resetReason, BluetoothProtocolResetReason.panic);
-        expect(_parseStatusResponse(rawBrownout).system?.resetReason, BluetoothProtocolResetReason.brownout);
-        expect(_parseStatusResponse(rawSdio).system?.resetReason, BluetoothProtocolResetReason.sdio);
-        expect(_parseStatusResponse(rawUnknown).system?.resetReason, BluetoothProtocolResetReason.unknown);
+        expect(parseStatusResponse(raw).system?.resetReason, BluetoothProtocolResetReason.panic);
+        expect(parseStatusResponse(rawBrownout).system?.resetReason, BluetoothProtocolResetReason.brownout);
+        expect(parseStatusResponse(rawSdio).system?.resetReason, BluetoothProtocolResetReason.sdio);
+        expect(parseStatusResponse(rawUnknown).system?.resetReason, BluetoothProtocolResetReason.unknown);
       });
 
       test('parses gps response', () {

@@ -2,6 +2,36 @@ import 'package:entime/src/feature/module_settings/bloc/module_settings_bloc.dar
 import 'package:entime/src/feature/module_settings/model/module_settings.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+const _deviceBase = DeviceSettings(name: 'BT', number: 100, type: 1, timezone: 0);
+const _deviceAlt = DeviceSettings(name: 'BT', number: 101, type: 1, timezone: 0);
+const _syncBase = SyncSettings(auto: false, source: 0, ntp1: 'ntp', ntp2: '', ntp3: '');
+const _wifiBase = WiFi(active: false, ssid: 'none', passwd: '');
+
+const _entimeModel = ModSettingsModel.entime(
+  ModSettingsEntime(
+    device: _deviceBase,
+    sync: _syncBase,
+    wifi: _wifiBase,
+  ),
+);
+
+const _entimeModelAlt = ModSettingsModel.entime(
+  ModSettingsEntime(
+    device: _deviceAlt,
+    sync: _syncBase,
+    wifi: _wifiBase,
+  ),
+);
+
+const _ledModel = ModSettingsModel.led(
+  ModSettingsLed(
+    type: 'led',
+    bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
+    wiFi: _wifiBase,
+    ledPanel: LedPanel(brightness: 15),
+  ),
+);
+
 void main() {
   group('ModuleSettingsState', () {
     group('uninitialized', () {
@@ -46,225 +76,47 @@ void main() {
 
     group('loaded', () {
       test('supports value equality', () {
-        const provider1 = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const provider2 = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 101), // Different number
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-
         expect(
-          const ModuleSettingsState.loaded(provider1),
-          equals(const ModuleSettingsState.loaded(provider1)),
+          const ModuleSettingsState.loaded(_entimeModel),
+          equals(const ModuleSettingsState.loaded(_entimeModel)),
         );
         expect(
-          const ModuleSettingsState.loaded(provider1),
-          isNot(equals(const ModuleSettingsState.loaded(provider2))),
+          const ModuleSettingsState.loaded(_entimeModel),
+          isNot(equals(const ModuleSettingsState.loaded(_entimeModelAlt))),
         );
       });
 
       test('supports value equality for different provider types', () {
-        const entimeProvider = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const ledProvider = ModSettingsModel.led(
-          ModSettingsLed(
-            type: 'led',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            ledPanel: LedPanel(brightness: 15),
-          ),
-        );
-
         expect(
-          const ModuleSettingsState.loaded(entimeProvider),
-          isNot(equals(const ModuleSettingsState.loaded(ledProvider))),
+          const ModuleSettingsState.loaded(_entimeModel),
+          isNot(equals(const ModuleSettingsState.loaded(_ledModel))),
         );
       });
 
       test('toString returns correct representation', () {
-        const provider = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const state = ModuleSettingsState.loaded(provider);
+        const state = ModuleSettingsState.loaded(_entimeModel);
         expect(state.toString(), contains('ModuleSettingsState.loaded'));
       });
 
       test('contains moduleSettings provider', () {
-        const provider = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const state = ModuleSettingsState.loaded(provider);
+        const state = ModuleSettingsState.loaded(_entimeModel);
 
         if (state is ModuleSettingsLoaded) {
-          expect(state.moduleSettings, equals(provider));
+          expect(state.moduleSettings, equals(_entimeModel));
         } else {
           fail('State should be ModuleSettingsLoaded type');
         }
       });
 
       test('hashCode is consistent for same provider instance', () {
-        const provider = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const state1 = ModuleSettingsState.loaded(provider);
-        const state2 = ModuleSettingsState.loaded(provider);
+        const state1 = ModuleSettingsState.loaded(_entimeModel);
+        const state2 = ModuleSettingsState.loaded(_entimeModel);
         expect(state1.hashCode, equals(state2.hashCode));
       });
 
       test('hashCode differs for different provider instances', () {
-        const provider1 = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const provider2 = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 101), // Different number
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const state1 = ModuleSettingsState.loaded(provider1);
-        const state2 = ModuleSettingsState.loaded(provider2);
+        const state1 = ModuleSettingsState.loaded(_entimeModel);
+        const state2 = ModuleSettingsState.loaded(_entimeModelAlt);
         expect(state1.hashCode, isNot(equals(state2.hashCode)));
       });
     });
@@ -291,31 +143,10 @@ void main() {
 
     group('state transitions', () {
       test('uninitialized to loading to loaded', () {
-        const provider = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
         final states = [
           const ModuleSettingsState.uninitialized(),
           const ModuleSettingsState.loading(),
-          const ModuleSettingsState.loaded(provider),
+          const ModuleSettingsState.loaded(_entimeModel),
         ];
 
         expect(states.length, equals(3));
@@ -338,18 +169,10 @@ void main() {
       });
 
       test('uninitialized to loading to loaded for led module', () {
-        const provider = ModSettingsModel.led(
-          ModSettingsLed(
-            type: 'led',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            ledPanel: LedPanel(brightness: 15),
-          ),
-        );
         final states = [
           const ModuleSettingsState.uninitialized(),
           const ModuleSettingsState.loading(),
-          const ModuleSettingsState.loaded(provider),
+          const ModuleSettingsState.loaded(_ledModel),
         ];
 
         expect(states.length, equals(3));
@@ -364,29 +187,7 @@ void main() {
         const uninitialized = ModuleSettingsState.uninitialized();
         const loading = ModuleSettingsState.loading();
         const error = ModuleSettingsState.error();
-        const loaded = ModuleSettingsState.loaded(
-          ModSettingsModel.entime(
-            ModSettingsEntime(
-              type: 'entime',
-              bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-              loRa: LoRa(
-                active: false,
-                frequency: 9557,
-                txPower: 0,
-                spreadingFactor: 0,
-                signalBandwidth: 0,
-                codingRateDenom: 0,
-                preambleLength: 0,
-                syncWord: 0,
-                crc: false,
-              ),
-              wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-              tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-              buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-              vcc: Vcc(r1: 0, r2: 0),
-            ),
-          ),
-        );
+        const loaded = ModuleSettingsState.loaded(_entimeModel);
 
         expect(uninitialized, isNot(equals(loading)));
         expect(uninitialized, isNot(equals(error)));
@@ -397,37 +198,8 @@ void main() {
       });
 
       test('same state types with different data are not equal', () {
-        const provider1 = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const provider2 = ModSettingsModel.led(
-          ModSettingsLed(
-            type: 'led',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            ledPanel: LedPanel(brightness: 15),
-          ),
-        );
-        const loaded1 = ModuleSettingsState.loaded(provider1);
-        const loaded2 = ModuleSettingsState.loaded(provider2);
+        const loaded1 = ModuleSettingsState.loaded(_entimeModel);
+        const loaded2 = ModuleSettingsState.loaded(_ledModel);
 
         expect(loaded1, isNot(equals(loaded2)));
       });
@@ -444,28 +216,7 @@ void main() {
 
     group('edge cases', () {
       test('handles empty provider gracefully', () {
-        const provider = ModSettingsModel.entime(
-          ModSettingsEntime(
-            type: 'entime',
-            bluetooth: Bluetooth(active: true, name: 'BT', number: 100),
-            loRa: LoRa(
-              active: false,
-              frequency: 9557,
-              txPower: 0,
-              spreadingFactor: 0,
-              signalBandwidth: 0,
-              codingRateDenom: 0,
-              preambleLength: 0,
-              syncWord: 0,
-              crc: false,
-            ),
-            wiFi: WiFi(active: false, ssid: 'none', passwd: ''),
-            tft: Tft(active: true, timeout: false, timeoutDuration: 0, turnOnAtEvent: false),
-            buzzer: Buzzer(active: true, shortFrequency: 0, longFrequency: 0),
-            vcc: Vcc(r1: 0, r2: 0),
-          ),
-        );
-        const state = ModuleSettingsState.loaded(provider);
+        const state = ModuleSettingsState.loaded(_entimeModel);
 
         expect(state, isA<ModuleSettingsLoaded>());
         if (state is ModuleSettingsLoaded) {

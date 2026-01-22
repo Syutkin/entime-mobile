@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 
-import '../../../common/logger/logger.dart';
 import '../../../common/localization/localization.dart';
+import '../../../common/logger/logger.dart';
 import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
