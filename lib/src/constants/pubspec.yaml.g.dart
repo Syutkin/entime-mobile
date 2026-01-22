@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.2-dev+533',
+    representation: r'0.5.2-dev+534',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.2-dev+533',
+    canonical: r'0.5.2-dev+534',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,19 +117,19 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'533'],
+    build: <String>[r'534'],
   );
 
   /// Build date and time (UTC)
   static final DateTime timestamp = DateTime.utc(
-    2025,
-    11,
-    15,
-    13,
-    47,
-    41,
-    430,
-    950,
+    2026,
+    1,
+    22,
+    12,
+    51,
+    57,
+    504,
+    922,
   );
 
   /// Name
@@ -348,7 +348,7 @@ sealed class Pubspec {
   /// Environment
   static const Map<String, String> environment = <String, String>{
     'sdk': '^3.10.0',
-    'flutter': '^3.10.0',
+    'flutter': '^3.38.0',
   };
 
   /// Platforms
@@ -409,23 +409,23 @@ sealed class Pubspec {
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
     'any_date': r'^1.2.1',
-    'app_settings': r'^6.1.1',
+    'app_settings': r'^7.0.0',
     'audioplayers': r'^6.5.1',
     'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
     'connectivity_plus': r'^7.0.0',
     'crypto': r'^3.0.7',
     'csv': r'^6.0.0',
-    'device_info_plus': r'^12.2.0',
-    'drift': r'^2.29.0',
+    'device_info_plus': r'^12.3.0',
+    'drift': r'^2.30.0',
     'dropdown_search': r'^6.0.2',
     'equatable': r'^2.0.7',
-    'file_picker': r'^10.3.6',
+    'file_picker': r'^10.3.8',
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
     'flutter_bloc': r'^9.1.1',
-    'flutter_bluetooth_serial': r'^0.4.0',
+    'flutter_blue_plus': r'^2.1.0',
     'flutter_charset_detector': r'^5.0.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
@@ -447,12 +447,12 @@ sealed class Pubspec {
     'permission_handler': r'^12.0.1',
     'pub_semver': r'^2.2.0',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^9.8.0',
+    'sentry_flutter': r'^9.9.1',
     'settings_ui': r'^2.0.2',
     'share_plus': r'^12.0.1',
-    'shared_preferences': r'^2.5.3',
+    'shared_preferences': r'^2.5.4',
     'sqlite3': r'^2.9.4',
-    'sqlite3_flutter_libs': r'^0.5.40',
+    'sqlite3_flutter_libs': r'^0.5.41',
     'url_launcher': r'^6.3.2',
     'wakelock_plus': r'^1.4.0',
   };
@@ -460,9 +460,9 @@ sealed class Pubspec {
   /// Developer dependencies
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^10.0.0',
-    'build_runner': r'^2.10.3',
+    'build_runner': r'^2.10.5',
     'dart_style': r'^3.1.3',
-    'drift_dev': r'^2.29.0',
+    'drift_dev': r'^2.30.0',
     'flutter_lints': r'^6.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
@@ -473,17 +473,15 @@ sealed class Pubspec {
     },
     'json_serializable': r'^6.11.1',
     'mocktail': r'^1.0.4',
-    'patrol': r'^3.20.0',
-    'patrol_finders': r'^2.9.0',
+    'patrol': r'^4.0.1',
+    'patrol_finders': r'^3.0.0',
+    'pubspec_generator': r'^5.0.1',
     'test': r'^1.26.3',
     'very_good_analysis': r'^10.0.0',
   };
 
   /// Dependency overrides
   static const Map<String, Object> dependencyOverrides = <String, Object>{
-    'flutter_bluetooth_serial': <String, Object>{
-      'git': r'https://github.com/Syutkin/flutter_bluetooth_serial.git',
-    },
     'flutter_ntp': <String, Object>{
       'git': r'https://github.com/Syutkin/flutter_ntp',
     },
