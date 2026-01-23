@@ -4,11 +4,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
+import 'package:entime/src/common/utils/file_picker_provider.dart';
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
 import 'package:entime/src/feature/countdown/logic/countdown_at_start.dart';
+import 'package:entime/src/feature/csv/logic/startlist_provider.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/home/home.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
@@ -55,77 +57,34 @@ void main() {
 
     final connectivity = Connectivity();
     final IConnectivityProvider connectivityProvider = ConnectivityProvider.init(connectivity);
+    final filePicker = FilePickerProvider();
+    final startlistProvider = StartlistProvider(filepicker: filePicker);
 
     await $.pumpWidgetAndSettle(
-      EntimeApp(
-        settingsProvider: settings,
-        updateProvider: updateProvider,
-        bluetoothProvider: bluetoothProvider,
-        ttsProvider: ttsProvider,
-        audioController: audioController,
-        appInfo: appInfo,
-        database: database,
-        countdown: countdown,
-        ntpProvider: ntpProvider,
-        connectivityProvider: connectivityProvider,
+      MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<IFilePickerProvider>(
+            create: (context) => filePicker,
+          ),
+          RepositoryProvider<StartlistProvider>(
+            create: (context) => startlistProvider,
+          ),
+        ],
+        child: EntimeApp(
+          settingsProvider: settings,
+          updateProvider: updateProvider,
+          bluetoothProvider: bluetoothProvider,
+          ttsProvider: ttsProvider,
+          audioController: audioController,
+          appInfo: appInfo,
+          database: database,
+          countdown: countdown,
+          ntpProvider: ntpProvider,
+          connectivityProvider: connectivityProvider,
+        ),
       ),
     );
 
     expect($(HomeScreen), findsOneWidget);
-
-    // await $('Go to the quiz').tap();
-    //
-    // await $('Start').tap();
-    //
-    // await $(TextField).enterText('text');
-    //
-    // final colors = [PTColors.lcYellow, PTColors.lcBlack, PTColors.lcWhite];
-    //
-    // for (final color in colors) {
-    //   await $(SelectableBox)
-    //       .which<SelectableBox>((box) => box.color == color)
-    //       .scrollTo()
-    //       .tap();
-    // }
-    //
-    // await $('Ready!').tap();
-    //
-    // // Why doesn't it work?
-    // // await $(ElevatedButton).$(Center).$('Fluttercon').tap();
-    //
-    // await $(PTElevatedButton)
-    //     .which<PTElevatedButton>((widget) => widget.caption == 'Fluttercon')
-    //     .tap();
-    //
-    // await $(ListTile).containing($(Icons.flutter_dash)).$('click').tap();
-    //
-    // // For macOS we don't want to continue the test as we don't have support for native interactions
-    // if (!Platform.isMacOS) {
-    //   await $(ElevatedButton)
-    //       .which<ElevatedButton>(
-    //         (widget) => widget.enabled,
-    //       )
-    //       .at(2)
-    //       .scrollTo()
-    //       .tap();
-    //
-    //   if (await $.native.isPermissionDialogVisible()) {
-    //     await $.native.grantPermissionWhenInUse();
-    //   }
-    //
-    //   await $.native.pressHome();
-    //   await $.native.openNotifications();
-    //
-    //   // wait for notification to show up
-    //   await Future<void>.delayed(const Duration(seconds: 5));
-    //
-    //   await $.native.openNotifications();
-    //
-    //   await $.native.tapOnNotificationByIndex(0);
-    //
-    //   await $.pumpAndSettle();
-    //
-    //   expect($('Congratulations!'), findsOneWidget);
-    // }
   });
 }
