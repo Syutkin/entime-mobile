@@ -296,8 +296,28 @@ void main() {
           );
         });
 
-        patrolWidgetTest('Shows WiFi switch disabled', skip: true, (PatrolTester $) async {
-          // TODO: WiFi
+        patrolWidgetTest('Shows WiFi switch disabled', (PatrolTester $) async {
+          when(() => moduleSettingsBloc.state).thenReturn(
+            ModuleSettingsState.loaded(
+              ModSettingsModel.entime(
+                ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>).copyWith.wifi(
+                  active: false,
+                ),
+              ),
+            ),
+          );
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(
+            SettingsList,
+          ).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_wifi)).scrollTo();
+
+          final wifiSwitchTile = find.widgetWithText(SettingsTile, Localization.current.I18nModuleSettings_wifi);
+          expect(wifiSwitchTile, findsOneWidget);
+
+          final wifiSwitchFinder = find.descendant(of: wifiSwitchTile, matching: find.byType(Switch));
+          final wifiSwitch = $.tester.widget<Switch>(wifiSwitchFinder);
+          expect(wifiSwitch.value, isFalse);
         });
 
         patrolWidgetTest('Shows WiFi network tile with current SSID', (PatrolTester $) async {
