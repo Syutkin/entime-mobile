@@ -1,7 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/common/utils/file_picker_provider.dart';
@@ -29,9 +28,8 @@ void main() {
 
     final database = AppDatabase();
 
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
     final settings = await SharedPrefsSettingsProvider.load();
-    final appInfo = await AppInfoProvider.load(deviceInfo: androidInfo);
+    final appInfo = await AppInfoProvider.load();
     final updateProvider = await UpdateProvider.init(
       client: http.Client(),
       appInfoProvider: appInfo,

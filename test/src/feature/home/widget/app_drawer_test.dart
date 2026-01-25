@@ -19,7 +19,7 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
-class MockAppInfoCubit extends MockCubit<AppInfoProvider> implements AppInfoCubit {}
+class MockAppInfoCubit extends MockCubit<IAppInfoProvider> implements AppInfoCubit {}
 
 class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
@@ -27,7 +27,7 @@ class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState> implements Updat
 
 class MockAudioBloc extends MockBloc<AudioEvent, AudioState> implements AudioBloc {}
 
-class FakeAppInfoProvider extends Fake implements AppInfoProvider {
+class FakeAppInfoProvider extends IAppInfoProvider {
   @override
   String get appName => 'appName';
 

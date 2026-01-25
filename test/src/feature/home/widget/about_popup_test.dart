@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockAppInfoCubit extends MockCubit<AppInfoProvider> implements AppInfoCubit {}
+class MockAppInfoCubit extends MockCubit<IAppInfoProvider> implements AppInfoCubit {}
 
 void main() {
   late AppInfoCubit appInfoCubit;

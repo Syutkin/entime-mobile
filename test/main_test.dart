@@ -20,7 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'helpers/shared_prefs_defaults.dart';
 
-class MockAppInfoProvider extends Mock implements AppInfoProvider {}
+class MockAppInfoProvider extends Mock implements IAppInfoProvider {}
 
 class MockUpdateProvider extends Mock implements UpdateProvider {}
 

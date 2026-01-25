@@ -48,7 +48,7 @@ class AppDrawer extends StatelessWidget {
               await showDialog<void>(context: context, builder: (context) => const AboutPopup());
             },
           ),
-          BlocBuilder<AppInfoCubit, AppInfoProvider>(
+          BlocBuilder<AppInfoCubit, IAppInfoProvider>(
             builder:
                 (context, appInfo) => Padding(
                   padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),

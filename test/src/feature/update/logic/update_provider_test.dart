@@ -10,7 +10,7 @@ import '../../../../helpers/shared_prefs_defaults.dart';
 
 class MockClient extends Mock implements http.Client {}
 
-class MockAppInfoProvider extends Mock implements AppInfoProvider {}
+class MockAppInfoProvider extends Mock implements IAppInfoProvider {}
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +47,6 @@ void main() async {
       when(() => appInfoProvider.appName).thenReturn('Entime');
       when(() => appInfoProvider.version).thenReturn('0.0.1');
       when(() => appInfoProvider.buildNumber).thenReturn('1');
-      when(() => appInfoProvider.abi).thenReturn('arm64-v8a');
       when(
         () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
       ).thenAnswer((_) async => http.Response(_githubResponse, 200));
@@ -65,7 +64,6 @@ void main() async {
       when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'entime');
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '0.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
-      when(() => appInfoProvider.abi).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
         () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
       ).thenAnswer((_) async => http.Response(_githubResponse, 200));
@@ -87,7 +85,6 @@ void main() async {
       when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'Entime');
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
-      when(() => appInfoProvider.abi).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
         () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
       ).thenAnswer((_) async => http.Response(_githubResponse, 200));
@@ -105,7 +102,6 @@ void main() async {
       when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'Entime');
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
-      when(() => appInfoProvider.abi).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
         () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
       ).thenAnswer((_) async => http.Response('Some incorrect response', 200));
@@ -115,7 +111,6 @@ void main() async {
       when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'Entime');
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
-      when(() => appInfoProvider.abi).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
         () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
       ).thenAnswer((_) async => http.Response('', 404));
@@ -136,7 +131,6 @@ void main() async {
       when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'Entime');
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
-      when(() => appInfoProvider.abi).thenAnswer((realInvocation) => 'arm64-v8a');
       when(
         () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
       ).thenAnswer(

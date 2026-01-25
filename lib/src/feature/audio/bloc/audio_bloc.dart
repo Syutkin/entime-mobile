@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_null_aware_operators
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,9 +13,10 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
       switch (event) {
         case _Init():
           final defaultEngine = await ttsProvider.getDefaultEngine;
-          final engine = defaultEngine == null ? null: defaultEngine.toString();
-          final voice = (await ttsProvider.getDefaultVoice) as Map<Object?, Object?>?;
-          final voiceName = voice?['name'] == null ? null : voice?['name'].toString();
+          final engine = defaultEngine?.toString();
+          final voice = await ttsProvider.getDefaultVoice;
+          final voiceMap = voice is Map<Object?, Object?> ? voice : null;
+          final voiceName = voiceMap?['name']?.toString();
           emit(AudioState.initialized(engine: engine, voice: voiceName));
       }
     });

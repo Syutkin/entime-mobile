@@ -13,6 +13,7 @@ import 'package:pub_semver/pub_semver.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../app_info/logic/app_info_provider.dart';
+import '../../app_info/logic/app_info_provider_io.dart';
 import '../../settings/settings.dart';
 import '../model/updater.dart';
 
@@ -36,7 +37,7 @@ abstract interface class IUpdateProvider {
 
 /// Тут. Всё. Очень. Плохо.
 class UpdateProvider implements IUpdateProvider {
-  UpdateProvider._(http.Client client, AppInfoProvider appInfo, ISettingsProvider settingsProvider)
+  UpdateProvider._(http.Client client, IAppInfoProvider appInfo, ISettingsProvider settingsProvider)
     : _client = client,
       _appInfo = appInfo,
       _settingsProvider = settingsProvider;
@@ -48,7 +49,7 @@ class UpdateProvider implements IUpdateProvider {
 
   File? _isDownloadedFile;
 
-  final AppInfoProvider _appInfo;
+  final IAppInfoProvider _appInfo;
   final ISettingsProvider _settingsProvider;
   DownloadingHandler? _downloadingHandler;
   VoidCallback? _onDownloadComplete;
@@ -57,11 +58,18 @@ class UpdateProvider implements IUpdateProvider {
   @override
   String get latestVersion => _latestRelease?.tagName ?? '';
 
+  String? get _abi {
+    if (_appInfo is AndroidAppInfoProvider) {
+      return _appInfo.abi;
+    }
+    return null;
+  }
+
   int? _updateFileSize = -1;
 
   static Future<UpdateProvider> init({
     required http.Client client,
-    required AppInfoProvider appInfoProvider,
+    required IAppInfoProvider appInfoProvider,
     required ISettingsProvider settingsProvider,
   }) async => UpdateProvider._(client, appInfoProvider, settingsProvider);
 
@@ -119,11 +127,11 @@ class UpdateProvider implements IUpdateProvider {
 
   @override
   Future<void> downloadUpdate() async {
-    if (_canUpdate && _latestRelease != null && _appInfo.abi != null) {
+    if (_canUpdate && _latestRelease != null && _abi != null) {
       try {
         var dir = (await getDownloadsDirectory())?.path;
         dir ??= (await getApplicationDocumentsDirectory()).path;
-        final fileName = '${_appInfo.appName}-${_latestRelease!.tagName}-${_appInfo.abi}.apk';
+        final fileName = '${_appInfo.appName}-${_latestRelease!.tagName}-$_abi.apk';
         final hashFileName = '$fileName.sha1';
 
         _isDownloadedFile = File('$dir/$fileName');

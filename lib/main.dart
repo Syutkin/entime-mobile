@@ -4,7 +4,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
@@ -47,9 +46,8 @@ Future<void> main() async {
 
   final database = AppDatabase();
 
-  final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
-  final appInfo = await AppInfoProvider.load(deviceInfo: androidInfo);
+  final appInfo = await AppInfoProvider.load();
   final updateProvider = await UpdateProvider.init(
     client: http.Client(),
     appInfoProvider: appInfo,
@@ -131,7 +129,7 @@ class EntimeApp extends StatelessWidget {
   });
 
   final ISettingsProvider settingsProvider;
-  final AppInfoProvider appInfo;
+  final IAppInfoProvider appInfo;
   final IUpdateProvider updateProvider;
   final IBluetoothProvider bluetoothProvider;
   final IAudioController audioController;
