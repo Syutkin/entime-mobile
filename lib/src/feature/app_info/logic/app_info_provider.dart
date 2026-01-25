@@ -6,10 +6,9 @@ abstract class IAppInfoProvider {
 
   String get buildNumber => Pubspec.version.build.first;
 
-  String get version =>
-      Pubspec.version.preRelease.isEmpty
-          ? '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}'
-          : Pubspec.version.canonical;
+  String get version => Pubspec.version.preRelease.isEmpty
+      ? '${Pubspec.version.major}.${Pubspec.version.minor}.${Pubspec.version.patch}'
+      : Pubspec.version.canonical;
 }
 
 class DefaultAppInfoProvider extends IAppInfoProvider {}

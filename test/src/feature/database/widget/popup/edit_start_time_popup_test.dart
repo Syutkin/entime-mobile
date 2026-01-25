@@ -132,7 +132,7 @@ void main() {
     });
 
     patrolWidgetTest('Show only number if name is absent', (PatrolTester $) async {
-       item = ParticipantAtStart(
+      item = ParticipantAtStart(
         row: MockQueryRow(),
         stageId: id,
         riderId: id,

@@ -206,7 +206,7 @@ void main() {
     patrolWidgetTest('Default frequency when input frequency not found', (PatrolTester $) async {
       // Устанавливаем частоту, которой нет в списке notes
       frequency = 9999;
-      
+
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -223,7 +223,7 @@ void main() {
       for (var i = 0; i < 10; i++) {
         await $.tester.drag($(Slider), const Offset(50, 0));
         await $.pumpAndSettle();
-        
+
         final slider = $(Slider).evaluate().single.widget as Slider;
         expect(slider.value, greaterThanOrEqualTo(0.0));
         expect(slider.value, lessThanOrEqualTo(87.0));

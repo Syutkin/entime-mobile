@@ -433,7 +433,8 @@ void main() {
       });
 
       test('parses status response with system info', () {
-        const raw = '{"cmd":"status","id":3,"status":"ok","system":{"uptime_s":12345,"free_heap_bytes":142336,"reset_reason":"power_on"}}';
+        const raw =
+            '{"cmd":"status","id":3,"status":"ok","system":{"uptime_s":12345,"free_heap_bytes":142336,"reset_reason":"power_on"}}';
 
         final response = parseStatusResponse(raw);
         expect(response.system?.uptimeS, 12345);
@@ -449,7 +450,8 @@ void main() {
       });
 
       test('parses status response with wifi info', () {
-        const raw = '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"}}';
+        const raw =
+            '{"cmd":"status","id":3,"status":"ok","wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"}}';
 
         final response = parseStatusResponse(raw);
         expect(response.wifi?.state, BluetoothProtocolWifiState.connected);
@@ -588,7 +590,8 @@ void main() {
       });
 
       test('parses calibrate response', () {
-        const raw = '{"cmd":"calibrate","id":6,"previous_offset":0.2,"new_offset":0.5,"estimated_error_us":10,"status":"ok"}';
+        const raw =
+            '{"cmd":"calibrate","id":6,"previous_offset":0.2,"new_offset":0.5,"estimated_error_us":10,"status":"ok"}';
 
         final message = parser.parse(raw);
 
@@ -601,7 +604,8 @@ void main() {
       });
 
       test('parses sync_source response', () {
-        const raw = '{"cmd":"sync_source","active_source":"rtc","reason":"no_gps_signal","timestamp":1703169600123456,"status":"ok"}';
+        const raw =
+            '{"cmd":"sync_source","active_source":"rtc","reason":"no_gps_signal","timestamp":1703169600123456,"status":"ok"}';
 
         final message = parser.parse(raw);
 
@@ -636,7 +640,8 @@ void main() {
       });
 
       test('parses sync_ntp response', () {
-        const raw = '{"cmd":"sync_ntp","id":8,"status":"ok","rtc_time":1703169600,"ntp_servers":["ru.pool.ntp.org","time.google.com"],"sync_duration_ms":2500}';
+        const raw =
+            '{"cmd":"sync_ntp","id":8,"status":"ok","rtc_time":1703169600,"ntp_servers":["ru.pool.ntp.org","time.google.com"],"sync_duration_ms":2500}';
 
         final message = parser.parse(raw);
 
@@ -649,7 +654,8 @@ void main() {
       });
 
       test('parses save_config response', () {
-        const raw = '{"cmd":"save_config","id":9,"saved_keys":4,"reboot_needed":true,"storage_usage_percent":15,"status":"ok"}';
+        const raw =
+            '{"cmd":"save_config","id":9,"saved_keys":4,"reboot_needed":true,"storage_usage_percent":15,"status":"ok"}';
 
         final message = parser.parse(raw);
 

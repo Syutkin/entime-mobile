@@ -1,96 +1,64 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'dart:async';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
-import 'package:entime/src/feature/bluetooth/model/bluetooth_device_with_rssi.dart';
-import 'package:entime/src/feature/bluetooth/widget/select_device.dart';
+import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:flutter_blue_plus_platform_interface/flutter_blue_plus_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
-import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 
-class FakePermissionHandlerPlatform extends PermissionHandlerPlatform {
-  @override
-  Future<PermissionStatus> checkPermissionStatus(Permission permission) async {
-    return PermissionStatus.granted;
-  }
+class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
-  @override
-  Future<ServiceStatus> checkServiceStatus(Permission permission) async {
-    return ServiceStatus.enabled;
-  }
+class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
-  @override
-  Future<bool> openAppSettings() async => true;
-
-  @override
-  Future<Map<Permission, PermissionStatus>> requestPermissions(List<Permission> permissions) async {
-    return {for (final permission in permissions) permission: PermissionStatus.granted};
-  }
-
-  @override
-  Future<bool> shouldShowRequestPermissionRationale(Permission permission) async => false;
-}
-
-final class FakeFlutterBluePlusPlatform extends FlutterBluePlusPlatform {
-  final StreamController<BmScanResponse> _scanController = StreamController.broadcast();
-  bool startScanCalled = false;
-  bool stopScanCalled = false;
-
-  @override
-  Stream<BmScanResponse> get onScanResponse => _scanController.stream;
-
-  @override
-  Future<bool> startScan(BmScanSettings request) async {
-    startScanCalled = true;
-    return true;
-  }
-
-  @override
-  Future<bool> stopScan(BmStopScanRequest request) async {
-    stopScanCalled = true;
-    return true;
-  }
-
-  void emitScanResponse(BmScanResponse response) {
-    _scanController.add(response);
-  }
-
-  Future<void> close() async {
-    await _scanController.close();
-  }
-}
+class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late FakeFlutterBluePlusPlatform fakePlatform;
+  late MockBluetoothProvider bluetoothProvider;
+  late MockBluetoothBloc bluetoothBloc;
+  late StreamController<bool> scanningController;
+  late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
 
   Widget testApp(Widget child) {
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: child,
+    return BlocProvider<BluetoothBloc>.value(
+      value: bluetoothBloc,
+      child: MaterialApp(
+        localizationsDelegates: const [Localization.delegate],
+        supportedLocales: Localization.supportedLocales,
+        home: child,
+      ),
     );
   }
 
   setUp(() {
-    fakePlatform = FakeFlutterBluePlusPlatform();
-    FlutterBluePlusPlatform.instance = fakePlatform;
-    PermissionHandlerPlatform.instance = FakePermissionHandlerPlatform();
+    bluetoothProvider = MockBluetoothProvider();
+    bluetoothBloc = MockBluetoothBloc();
+    scanningController = StreamController<bool>.broadcast();
+    resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+
+    when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
+    when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+    when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
+    when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
+    when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
+    when(() => bluetoothBloc.bluetoothProvider).thenReturn(bluetoothProvider);
+    when(() => bluetoothBloc.state).thenReturn(const BluetoothBlocState.notInitialized());
   });
 
   tearDown(() async {
-    await FlutterBluePlus.stopScan();
-    await fakePlatform.close();
+    await scanningController.close();
+    await resultsController.close();
   });
 
   group('SelectDeviceScreen tests', () {
     patrolWidgetTest('Initial build shows scan indicator and title', (PatrolTester $) async {
       await $.pumpWidget(testApp(const SelectDeviceScreen()));
+      await $.pump();
 
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
       expect($(CircularProgressIndicator), findsOneWidget);
@@ -98,9 +66,8 @@ void main() {
 
     patrolWidgetTest('Shows replay icon after scan stops', (PatrolTester $) async {
       await $.pumpWidget(testApp(const SelectDeviceScreen()));
-      // Let initState async work (scan start + subscriptions) flush a frame.
       await $.pump();
-      await FlutterBluePlus.stopScan();
+      scanningController.add(false);
       await $.pump();
 
       final iconButton = $(IconButton).evaluate().single.widget as IconButton;
@@ -112,14 +79,17 @@ void main() {
       late BuildContext rootContext;
 
       await $.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [Localization.delegate],
-          supportedLocales: Localization.supportedLocales,
-          home: Builder(
-            builder: (context) {
-              rootContext = context;
-              return const SizedBox();
-            },
+        BlocProvider<BluetoothBloc>.value(
+          value: bluetoothBloc,
+          child: MaterialApp(
+            localizationsDelegates: const [Localization.delegate],
+            supportedLocales: Localization.supportedLocales,
+            home: Builder(
+              builder: (context) {
+                rootContext = context;
+                return const SizedBox();
+              },
+            ),
           ),
         ),
       );
@@ -131,31 +101,16 @@ void main() {
       // Let initState async work (scan start + subscriptions) flush a frame.
       await $.pump();
 
+      const rssi = -40;
       const remoteId = DeviceIdentifier('11:22:33:44:55:66');
       const deviceName = 'Test Device';
-      const rssi = -40;
 
-      fakePlatform.emitScanResponse(
-        BmScanResponse(
-          advertisements: [
-            BmScanAdvertisement(
-              remoteId: remoteId,
-              platformName: deviceName,
-              advName: deviceName,
-              connectable: true,
-              txPowerLevel: null,
-              appearance: null,
-              manufacturerData: <int, List<int>>{},
-              serviceData: <Guid, List<int>>{},
-              serviceUuids: <Guid>[],
-              rssi: rssi,
-            ),
-          ],
-          success: true,
-          errorCode: 0,
-          errorString: '',
-        ),
-      );
+      final device = MockBluetoothDevice();
+      when(() => device.remoteId).thenReturn(remoteId);
+      when(() => device.platformName).thenReturn(deviceName);
+      when(() => device.isConnected).thenReturn(false);
+
+      resultsController.add([BluetoothDeviceWithRSSI(device, rssi)]);
 
       await $.pump();
       expect($(deviceName), findsOneWidget);
@@ -176,51 +131,16 @@ void main() {
       const remoteId = DeviceIdentifier('11:22:33:44:55:66');
       const deviceName = 'Test Device';
 
-      fakePlatform.emitScanResponse(
-        BmScanResponse(
-          advertisements: [
-            BmScanAdvertisement(
-              remoteId: remoteId,
-              platformName: deviceName,
-              advName: deviceName,
-              connectable: true,
-              txPowerLevel: null,
-              appearance: null,
-              manufacturerData: <int, List<int>>{},
-              serviceData: <Guid, List<int>>{},
-              serviceUuids: <Guid>[],
-              rssi: -40,
-            ),
-          ],
-          success: true,
-          errorCode: 0,
-          errorString: '',
-        ),
-      );
+      final device = MockBluetoothDevice();
+      when(() => device.remoteId).thenReturn(remoteId);
+      when(() => device.platformName).thenReturn(deviceName);
+      when(() => device.isConnected).thenReturn(false);
+
+      resultsController.add([BluetoothDeviceWithRSSI(device, -40)]);
 
       await $.pump();
 
-      fakePlatform.emitScanResponse(
-        BmScanResponse(
-          advertisements: [
-            BmScanAdvertisement(
-              remoteId: remoteId,
-              platformName: deviceName,
-              advName: deviceName,
-              connectable: true,
-              txPowerLevel: null,
-              appearance: null,
-              manufacturerData: <int, List<int>>{},
-              serviceData: <Guid, List<int>>{},
-              serviceUuids: <Guid>[],
-              rssi: -10,
-            ),
-          ],
-          success: true,
-          errorCode: 0,
-          errorString: '',
-        ),
-      );
+      resultsController.add([BluetoothDeviceWithRSSI(device, -10)]);
 
       await $.pump();
 

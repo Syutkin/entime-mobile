@@ -15,13 +15,12 @@ class RaceItemTile extends StatelessWidget {
     final formatter = DateFormat.yMd(Localizations.localeOf(context).languageCode);
     return ListTile(
       title: Text(race.name),
-      subtitle:
-          (race.startDate != null && race.finishDate != null)
-              ? Text(
-                '${formatter.format(DateTime.parse(race.startDate!))} - '
-                '${formatter.format(DateTime.parse(race.finishDate!))}',
-              )
-              : const SizedBox.shrink(),
+      subtitle: (race.startDate != null && race.finishDate != null)
+          ? Text(
+              '${formatter.format(DateTime.parse(race.startDate!))} - '
+              '${formatter.format(DateTime.parse(race.finishDate!))}',
+            )
+          : const SizedBox.shrink(),
       onTap: () {
         context.read<DatabaseBloc>().add(DatabaseEvent.selectRace(race));
       },

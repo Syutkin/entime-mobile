@@ -172,7 +172,6 @@ void main() {
       expect($(AboutPopup), findsOneWidget);
     });
 
-
     patrolWidgetTest('AppDrawer version button counter increments', (PatrolTester $) async {
       await $.pumpWidget(testWidget());
 
@@ -197,7 +196,7 @@ void main() {
       verify(() => databaseBloc.add(const DatabaseEvent.shareDatabase())).called(1);
     });
 
-     patrolWidgetTest('AppDrawer version button styling is correct', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version button styling is correct', (PatrolTester $) async {
       await $.pumpWidget(testWidget());
 
       // Проверяем что кнопка версии имеет правильный стиль

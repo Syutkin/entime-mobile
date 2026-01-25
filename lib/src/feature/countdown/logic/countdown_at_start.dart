@@ -113,10 +113,9 @@ class CountdownAtStart {
   }
 
   Future<NextStartingParticipant?> _getNextStartingParticipant({required DateTime time, required int stageId}) async {
-    final nextStart =
-        await database
-            .getNextStartingParticipants(stageId: stageId, time: DateFormat(shortTimeFormat).format(time))
-            .get();
+    final nextStart = await database
+        .getNextStartingParticipants(stageId: stageId, time: DateFormat(shortTimeFormat).format(time))
+        .get();
     return nextStart.isNotEmpty ? nextStart.first : null;
   }
 

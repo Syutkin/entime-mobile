@@ -85,14 +85,13 @@ void main() {
             ..add(const UpdateEvent.downloading(bytes: 103, total: 1000))
             ..add(const UpdateEvent.downloading(bytes: 104, total: 1000));
         },
-        expect:
-            () => [
-              const UpdateState.downloading(bytes: 100, total: 1000),
-              const UpdateState.downloading(bytes: 101, total: 1000),
-              const UpdateState.downloading(bytes: 102, total: 1000),
-              const UpdateState.downloading(bytes: 103, total: 1000),
-              const UpdateState.downloading(bytes: 104, total: 1000),
-            ],
+        expect: () => [
+          const UpdateState.downloading(bytes: 100, total: 1000),
+          const UpdateState.downloading(bytes: 101, total: 1000),
+          const UpdateState.downloading(bytes: 102, total: 1000),
+          const UpdateState.downloading(bytes: 103, total: 1000),
+          const UpdateState.downloading(bytes: 104, total: 1000),
+        ],
       );
     });
 

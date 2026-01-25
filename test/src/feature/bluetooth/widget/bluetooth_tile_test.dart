@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
@@ -10,24 +12,49 @@ import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
+
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
+
+class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
 void main() {
   late BluetoothBloc btBloc;
   late BluetoothDevice bluetoothDevice;
+  late MockBluetoothProvider bluetoothProvider;
+  late StreamController<bool> scanningController;
+  late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
 
   Widget testWidget() {
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: btBloc, child: const BluetoothTile())),
+    return BlocProvider.value(
+      value: btBloc,
+      child: MaterialApp(
+        localizationsDelegates: const [Localization.delegate],
+        supportedLocales: Localization.supportedLocales,
+        home: const Material(child: BluetoothTile()),
+      ),
     );
   }
 
   setUp(() {
     btBloc = MockBluetoothBloc();
     bluetoothDevice = MockBluetoothDevice();
+    bluetoothProvider = MockBluetoothProvider();
+    scanningController = StreamController<bool>.broadcast();
+    resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+
+    when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
+    when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+    when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
+    when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
+    when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
+    when(() => btBloc.bluetoothProvider).thenReturn(bluetoothProvider);
+    when(() => btBloc.stream).thenAnswer((_) => const Stream<BluetoothBlocState>.empty());
     when(() => bluetoothDevice.platformName).thenReturn('BluetoothDeviceName');
+  });
+
+  tearDown(() async {
+    await scanningController.close();
+    await resultsController.close();
   });
 
   group('BluetoothTile tests', () {

@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bloc/bluetooth_bloc.dart';
+import 'package:entime/src/feature/bluetooth/logic/bluetooth_provider.dart';
+import 'package:entime/src/feature/bluetooth/model/bluetooth_device_with_rssi.dart';
 import 'package:entime/src/feature/bluetooth/widget/select_device.dart';
 import 'package:entime/src/feature/countdown/bloc/countdown_bloc.dart';
 import 'package:entime/src/feature/database/database.dart';
@@ -22,28 +26,31 @@ class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> imp
 
 class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState> implements CountdownBloc {}
 
+class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
+
 void main() {
   late DatabaseBloc databaseBloc;
   late SettingsCubit settingsCubit;
   late AppSettings settings;
   late BluetoothBloc btBloc;
   late CountdownBloc countdownBloc;
+  late MockBluetoothProvider bluetoothProvider;
+  late StreamController<bool> scanningController;
+  late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
 
   Widget testWidget(AppTab activeTab) {
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: MaterialApp(
-        home: BlocProvider.value(
-          value: databaseBloc,
+    return BlocProvider.value(
+      value: databaseBloc,
+      child: BlocProvider.value(
+        value: settingsCubit,
+        child: BlocProvider.value(
+          value: btBloc,
           child: BlocProvider.value(
-            value: settingsCubit,
-            child: BlocProvider.value(
-              value: btBloc,
-              child: BlocProvider.value(
-                value: countdownBloc,
-                child: MenuButton(activeTab: activeTab),
-              ),
+            value: countdownBloc,
+            child: MaterialApp(
+              localizationsDelegates: const [Localization.delegate],
+              supportedLocales: Localization.supportedLocales,
+              home: MenuButton(activeTab: activeTab),
             ),
           ),
         ),
@@ -61,6 +68,17 @@ void main() {
     settingsCubit = MockSettingsCubit();
     btBloc = MockBluetoothBloc();
     countdownBloc = MockCountdownBloc();
+    bluetoothProvider = MockBluetoothProvider();
+    scanningController = StreamController<bool>.broadcast();
+    resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+
+    when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
+    when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+    when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
+    when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
+    when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
+    when(() => btBloc.bluetoothProvider).thenReturn(bluetoothProvider);
+    when(() => btBloc.stream).thenAnswer((_) => const Stream<BluetoothBlocState>.empty());
     settings = const AppSettings.defaults();
     when(() => settingsCubit.state).thenReturn(settings);
     when(() => settingsCubit.update(any())).thenAnswer((_) => Future.value());
@@ -78,6 +96,11 @@ void main() {
         stage: Stage(id: 1, raceId: 1, name: 'stage', isActive: true, isDeleted: false),
       ),
     );
+  });
+
+  tearDown(() async {
+    await scanningController.close();
+    await resultsController.close();
   });
 
   group('MenuButton tests', () {

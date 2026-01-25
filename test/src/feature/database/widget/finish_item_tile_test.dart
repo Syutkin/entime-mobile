@@ -29,7 +29,12 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: settingsCubit, child: FinishItemTile(item: item))),
+      home: Material(
+        child: BlocProvider.value(
+          value: settingsCubit,
+          child: FinishItemTile(item: item),
+        ),
+      ),
     );
   }
 

@@ -425,8 +425,9 @@ void main() {
       final messages = <String>[];
       final sub = bbcWithMock.message.listen(messages.add);
 
-      controller..add(Uint8List.fromList(utf8.encode('foo')))
-      ..add(Uint8List.fromList(utf8.encode('bar\nbaz\n')));
+      controller
+        ..add(Uint8List.fromList(utf8.encode('foo')))
+        ..add(Uint8List.fromList(utf8.encode('bar\nbaz\n')));
       await Future<void>.delayed(Duration.zero);
 
       expect(messages, ['foobar', 'baz']);

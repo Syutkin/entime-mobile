@@ -40,7 +40,10 @@ void main() {
           return Material(
             child: BlocProvider.value(
               value: databaseBloc,
-              child: BlocProvider.value(value: trailsBloc, child: TrailItemTile(trail: trail)),
+              child: BlocProvider.value(
+                value: trailsBloc,
+                child: TrailItemTile(trail: trail),
+              ),
             ),
           );
         },

@@ -66,8 +66,8 @@ class BleConnectionWrapper implements IBluetoothConnection {
 
   @override
   Future<void> write(Uint8List data) => _txCharacteristic.write(
-        data,
-      );
+    data,
+  );
 
   @override
   Future<void> close() async {

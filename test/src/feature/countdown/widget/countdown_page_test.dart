@@ -23,7 +23,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: countdownBloc, child: const CountdownPage())),
+      home: Material(
+        child: BlocProvider.value(value: countdownBloc, child: const CountdownPage()),
+      ),
     );
   }
 

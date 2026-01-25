@@ -1,7 +1,10 @@
 part of '../start_list_page.dart';
 
 Future<void> shiftStartsTime({required BuildContext context, required ParticipantAtStart item}) async =>
-    showDialog<void>(context: context, builder: (context) => ShiftStartsTimePopup(item: item));
+    showDialog<void>(
+      context: context,
+      builder: (context) => ShiftStartsTimePopup(item: item),
+    );
 
 class ShiftStartsTimePopup extends StatefulWidget {
   const ShiftStartsTimePopup({required this.item, super.key});

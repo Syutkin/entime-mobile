@@ -70,23 +70,22 @@ class _FinishListPage extends State<FinishListPage> {
       if (autoFinishNumber != null) {
         BotToast.showAttachedWidget(
           verticalOffset: 36.0,
-          attachedBuilder:
-              (cancel) => Card(
-                child: ListTile(
-                  title: Text(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')),
-                  trailing: TextButton(
-                    key: const Key('cancelToast'),
-                    onPressed: () {
-                      final stage = state.stage;
-                      if (stage != null) {
-                        databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: autoFinishNumber));
-                      }
-                      cancel();
-                    },
-                    child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-                  ),
-                ),
+          attachedBuilder: (cancel) => Card(
+            child: ListTile(
+              title: Text(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')),
+              trailing: TextButton(
+                key: const Key('cancelToast'),
+                onPressed: () {
+                  final stage = state.stage;
+                  if (stage != null) {
+                    databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: autoFinishNumber));
+                  }
+                  cancel();
+                },
+                child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               ),
+            ),
+          ),
           // enableSafeArea: false,
           animationDuration: Durations.medium3,
           duration: const Duration(seconds: 5),
@@ -163,11 +162,10 @@ class _FinishListPage extends State<FinishListPage> {
         delegate: SliverSubHeaderDelegate(minHeight: 40, maxHeight: 40, child: _SliverFinishSubHeader()),
       ),
       BlocBuilder<SettingsCubit, AppSettings>(
-        buildWhen:
-            (previous, current) =>
-                previous.showHidden != current.showHidden ||
-                previous.showManual != current.showManual ||
-                previous.showNumbers != current.showNumbers,
+        buildWhen: (previous, current) =>
+            previous.showHidden != current.showHidden ||
+            previous.showManual != current.showManual ||
+            previous.showNumbers != current.showNumbers,
         builder: (context, state) {
           final filteredList = filterFinishList(
             finishProtocol,

@@ -738,21 +738,18 @@ class I18nModuleSettings {
   static String get deviceNumberInvalid =>
       Intl.message('Номер должен быть целым', name: 'I18nModuleSettings_deviceNumberInvalid');
 
-  static String get deviceNumberRange =>
-      Intl.message('Диапазон 1..255', name: 'I18nModuleSettings_deviceNumberRange');
+  static String get deviceNumberRange => Intl.message('Диапазон 1..255', name: 'I18nModuleSettings_deviceNumberRange');
 
   static String get deviceType => Intl.message('Тип', name: 'I18nModuleSettings_deviceType');
 
   static String get deviceTimezone => Intl.message('Часовой пояс', name: 'I18nModuleSettings_deviceTimezone');
 
-  static String get timezoneEmpty =>
-      Intl.message('Введите часовой пояс', name: 'I18nModuleSettings_timezoneEmpty');
+  static String get timezoneEmpty => Intl.message('Введите часовой пояс', name: 'I18nModuleSettings_timezoneEmpty');
 
   static String get timezoneInvalid =>
       Intl.message('Часовой пояс должен быть целым', name: 'I18nModuleSettings_timezoneInvalid');
 
-  static String get timezoneRange =>
-      Intl.message('Диапазон -12..12', name: 'I18nModuleSettings_timezoneRange');
+  static String get timezoneRange => Intl.message('Диапазон -12..12', name: 'I18nModuleSettings_timezoneRange');
 
   static String get sync => Intl.message('Синхронизация', name: 'I18nModuleSettings_sync');
 

@@ -37,7 +37,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: settingsCubit, child: widget)),
+      home: Material(
+        child: BlocProvider.value(value: settingsCubit, child: widget),
+      ),
     );
   }
 

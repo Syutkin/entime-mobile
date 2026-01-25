@@ -22,7 +22,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [GlobalWidgetsLocalizations.delegate, Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Scaffold(body: BlocProvider.value(value: appInfoCubit, child: const AboutPopup())),
+      home: Scaffold(
+        body: BlocProvider.value(value: appInfoCubit, child: const AboutPopup()),
+      ),
     );
   }
 

@@ -65,8 +65,7 @@ void main() {
       expect($(StageItemTile), findsNothing);
     });
 
-    patrolWidgetTest('Tap FAB, then add stage popup appears',
-        (PatrolTester $) async {
+    patrolWidgetTest('Tap FAB, then add stage popup appears', (PatrolTester $) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(FloatingActionButton).tap();
       expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);

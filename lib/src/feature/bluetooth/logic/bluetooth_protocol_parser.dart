@@ -166,7 +166,12 @@ BluetoothProtocolPacketMessage? _parseStartPacket(String content, String raw) {
     }
   }
 
-  return BluetoothProtocolPacketMessage(type: BluetoothProtocolPacketType.start, raw: raw, time: time, correction: correction);
+  return BluetoothProtocolPacketMessage(
+    type: BluetoothProtocolPacketType.start,
+    raw: raw,
+    time: time,
+    correction: correction,
+  );
 }
 
 bool _isValidPacketTime(String value) {

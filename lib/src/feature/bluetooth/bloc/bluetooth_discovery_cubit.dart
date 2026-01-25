@@ -11,9 +11,7 @@ class BluetoothDiscoveryState {
     required this.isDiscovering,
   });
 
-  const BluetoothDiscoveryState.initial()
-    : devices = const [],
-      isDiscovering = false;
+  const BluetoothDiscoveryState.initial() : devices = const [], isDiscovering = false;
 
   final List<BluetoothDeviceWithRSSI> devices;
   final bool isDiscovering;

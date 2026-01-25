@@ -74,13 +74,13 @@ class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin impl
   }
 }
 
-final String kTemporaryPath = p.join('tmp','temporaryPath');
-final String kApplicationSupportPath = p.join('tmp','applicationSupportPath');
-final String kDownloadsPath = p.join('tmp','downloadsPath');
-final String kLibraryPath = p.join('tmp','libraryPath');
-final String kApplicationDocumentsPath = p.join('tmp','applicationDocumentsPath');
-final String kExternalCachePath = p.join('tmp','externalCachePath');
-final String kExternalStoragePath = p.join('tmp','externalStoragePath');
+final String kTemporaryPath = p.join('tmp', 'temporaryPath');
+final String kApplicationSupportPath = p.join('tmp', 'applicationSupportPath');
+final String kDownloadsPath = p.join('tmp', 'downloadsPath');
+final String kLibraryPath = p.join('tmp', 'libraryPath');
+final String kApplicationDocumentsPath = p.join('tmp', 'applicationDocumentsPath');
+final String kExternalCachePath = p.join('tmp', 'externalCachePath');
+final String kExternalStoragePath = p.join('tmp', 'externalStoragePath');
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

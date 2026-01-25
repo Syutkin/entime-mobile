@@ -16,7 +16,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: settingsCubit, child: const SelectThemeScreen())),
+      home: Material(
+        child: BlocProvider.value(value: settingsCubit, child: const SelectThemeScreen()),
+      ),
     );
   }
 

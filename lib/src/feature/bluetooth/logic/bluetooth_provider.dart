@@ -68,8 +68,7 @@ class BluetoothProvider implements IBluetoothProvider {
   Future<bool> get isSupported => FlutterBluePlus.isSupported;
 
   @override
-  Future<bool> get isOn async =>
-      await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on;
+  Future<bool> get isOn async => await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on;
 
   @override
   Future<void> requestEnable() => FlutterBluePlus.turnOn();

@@ -49,28 +49,27 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           BlocBuilder<AppInfoCubit, IAppInfoProvider>(
-            builder:
-                (context, appInfo) => Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: TextButton(
-                      style: ButtonStyle(overlayColor: WidgetStateProperty.all(Colors.transparent)),
-                      onPressed: () {
-                        shareDBCounter++;
-                        if (shareDBCounter > 7) {
-                          shareDBCounter = 0;
-                          context.read<DatabaseBloc>().add(const DatabaseEvent.shareDatabase());
-                        }
-                      },
-                      child: Text(
-                        Localization.current.I18nDrawer_version(appInfo.version),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                        textAlign: TextAlign.right,
-                      ),
-                    ),
+            builder: (context, appInfo) => Padding(
+              padding: const EdgeInsets.fromLTRB(0, 24, 24, 8),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                  style: ButtonStyle(overlayColor: WidgetStateProperty.all(Colors.transparent)),
+                  onPressed: () {
+                    shareDBCounter++;
+                    if (shareDBCounter > 7) {
+                      shareDBCounter = 0;
+                      context.read<DatabaseBloc>().add(const DatabaseEvent.shareDatabase());
+                    }
+                  },
+                  child: Text(
+                    Localization.current.I18nDrawer_version(appInfo.version),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.right,
                   ),
                 ),
+              ),
+            ),
           ),
         ],
       ),

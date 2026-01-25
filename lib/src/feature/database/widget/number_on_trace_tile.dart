@@ -46,18 +46,18 @@ class NumberOnTraceTile extends StatelessWidget {
           child: Ink(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              color:
-                  isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.primaryContainer,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.primaryContainer,
             ),
             child: Center(
               child: Text(
                 number.toString(),
                 style: DefaultTextStyle.of(context).style.apply(
                   fontSizeFactor: 2,
-                  color:
-                      isSelected
-                          ? Theme.of(context).colorScheme.onPrimary
-                          : Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: isSelected
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
               ),
             ),
@@ -80,10 +80,9 @@ class NumberOnTraceTile extends StatelessWidget {
             number.toString(),
             style: DefaultTextStyle.of(context).style.apply(
               fontSizeFactor: 2,
-              color:
-                  isSelected
-                      ? Theme.of(context).colorScheme.onPrimary
-                      : Theme.of(context).colorScheme.onPrimaryContainer,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).colorScheme.onPrimaryContainer,
             ),
           ),
         ),

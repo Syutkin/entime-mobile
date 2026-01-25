@@ -46,25 +46,24 @@ class AboutPopup extends StatelessWidget {
                             TextSpan(
                               style: bodyTextStyle.copyWith(color: colorScheme.primary),
                               text: 'syutkin@fraction.team',
-                              recognizer:
-                                  TapGestureRecognizer()
-                                    ..onTap = () async {
-                                      final emailLaunchUri = Uri(
-                                        scheme: 'mailto',
-                                        path: 'syutkin@fraction.team',
-                                        queryParameters: <String, String>{
-                                          'subject': Localization.current.I18nAbout_emailSubject,
-                                        },
-                                      );
-                                      if (await canLaunchUrl(emailLaunchUri)) {
-                                        await launchUrl(emailLaunchUri);
-                                      } else {
-                                        final Error error = ArgumentError(
-                                          Localization.current.I18nAbout_emailSendError(emailLaunchUri),
-                                        );
-                                        throw error;
-                                      }
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  final emailLaunchUri = Uri(
+                                    scheme: 'mailto',
+                                    path: 'syutkin@fraction.team',
+                                    queryParameters: <String, String>{
+                                      'subject': Localization.current.I18nAbout_emailSubject,
                                     },
+                                  );
+                                  if (await canLaunchUrl(emailLaunchUri)) {
+                                    await launchUrl(emailLaunchUri);
+                                  } else {
+                                    final Error error = ArgumentError(
+                                      Localization.current.I18nAbout_emailSendError(emailLaunchUri),
+                                    );
+                                    throw error;
+                                  }
+                                },
                             ),
                           ],
                         ),

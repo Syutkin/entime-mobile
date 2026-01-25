@@ -24,11 +24,10 @@ void main() {
       supportedLocales: Localization.supportedLocales,
       home: Material(
         child: Builder(
-          builder:
-              (context) => TextButton(
-                onPressed: () => shiftStartsTime(context: context, item: item),
-                child: const Text('TextButton'),
-              ),
+          builder: (context) => TextButton(
+            onPressed: () => shiftStartsTime(context: context, item: item),
+            child: const Text('TextButton'),
+          ),
         ),
       ),
     );
@@ -38,7 +37,10 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: BlocProvider.value(value: databaseBloc, child: Material(child: ShiftStartsTimePopup(item: item))),
+      home: BlocProvider.value(
+        value: databaseBloc,
+        child: Material(child: ShiftStartsTimePopup(item: item)),
+      ),
     );
   }
 

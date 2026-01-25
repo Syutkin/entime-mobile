@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
@@ -10,20 +12,44 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
+class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
+
 void main() {
   late BluetoothBloc btBloc;
+  late MockBluetoothProvider bluetoothProvider;
+  late StreamController<bool> scanningController;
+  late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
 
   Widget testWidget() {
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: btBloc, child: const BluetoothButton())),
+    return BlocProvider.value(
+      value: btBloc,
+      child: MaterialApp(
+        localizationsDelegates: const [Localization.delegate],
+        supportedLocales: Localization.supportedLocales,
+        home: const Material(child: BluetoothButton()),
+      ),
     );
   }
 
   group('BluetoothButton tests', () {
     setUp(() {
       btBloc = MockBluetoothBloc();
+      bluetoothProvider = MockBluetoothProvider();
+      scanningController = StreamController<bool>.broadcast();
+      resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+
+      when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
+      when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+      when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
+      when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
+      when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
+      when(() => btBloc.bluetoothProvider).thenReturn(bluetoothProvider);
+      when(() => btBloc.stream).thenAnswer((_) => const Stream<BluetoothBlocState>.empty());
+    });
+
+    tearDown(() async {
+      await scanningController.close();
+      await resultsController.close();
     });
     patrolWidgetTest('notInitialized state', (PatrolTester $) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.notInitialized());

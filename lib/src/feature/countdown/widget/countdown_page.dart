@@ -23,19 +23,20 @@ class CountdownPage extends StatelessWidget {
         };
 
         return Center(
-          child:
-              number == null
-                  ? ConstrainedBox(
-                    constraints: const BoxConstraints.tightFor(width: double.infinity, height: double.infinity),
-                    child: FittedBox(child: Padding(padding: const EdgeInsets.all(8), child: Text(text))),
-                  )
-                  : OrientationBuilder(
-                    builder: (context, orientation) {
-                      return orientation == Orientation.portrait
-                          ? Column(children: _items(number, text))
-                          : Row(children: _items(number, text));
-                    },
+          child: number == null
+              ? ConstrainedBox(
+                  constraints: const BoxConstraints.tightFor(width: double.infinity, height: double.infinity),
+                  child: FittedBox(
+                    child: Padding(padding: const EdgeInsets.all(8), child: Text(text)),
                   ),
+                )
+              : OrientationBuilder(
+                  builder: (context, orientation) {
+                    return orientation == Orientation.portrait
+                        ? Column(children: _items(number, text))
+                        : Row(children: _items(number, text));
+                  },
+                ),
         );
       },
     ),
@@ -46,12 +47,16 @@ class CountdownPage extends StatelessWidget {
       Flexible(
         fit: FlexFit.tight,
         flex: 50,
-        child: FittedBox(child: Padding(padding: const EdgeInsets.all(8), child: Text('${number ?? ""}'))),
+        child: FittedBox(
+          child: Padding(padding: const EdgeInsets.all(8), child: Text('${number ?? ""}')),
+        ),
       ),
       Flexible(
         fit: FlexFit.tight,
         flex: 50,
-        child: FittedBox(child: Padding(padding: const EdgeInsets.all(8), child: Text(text))),
+        child: FittedBox(
+          child: Padding(padding: const EdgeInsets.all(8), child: Text(text)),
+        ),
       ),
     ];
   }

@@ -161,7 +161,9 @@ class MenuButton extends StatelessWidget {
               case HomeMenuButton.showFinishDifference:
                 await settingsCubit.update(settings.copyWith(showFinishDifference: !settings.showFinishDifference));
               case HomeMenuButton.showColorFinishDifference:
-                await settingsCubit.update(settings.copyWith(showColorFinishDifference: !settings.showColorFinishDifference));
+                await settingsCubit.update(
+                  settings.copyWith(showColorFinishDifference: !settings.showColorFinishDifference),
+                );
             }
           },
         );

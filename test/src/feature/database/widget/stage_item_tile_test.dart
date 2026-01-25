@@ -30,7 +30,10 @@ void main() {
           value: databaseBloc,
           child: BlocProvider.value(
             value: trailsBloc,
-            child: BlocProvider.value(value: countdownBloc, child: StageItemTile(stage: stage)),
+            child: BlocProvider.value(
+              value: countdownBloc,
+              child: StageItemTile(stage: stage),
+            ),
           ),
         ),
       ),

@@ -13,32 +13,31 @@ class BluetoothTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BluetoothBloc, BluetoothBlocState>(
-      builder:
-          (context, state) => ListTile(
-            enabled: switch (state) {
-              BluetoothBlocStateNotInitialized() => false,
-              BluetoothBlocStateNotAvailable() => false,
-              BluetoothBlocStateNotEnabled() => false,
-              BluetoothBlocState() => true,
-            },
-            onTap: () => selectBluetoothDevice(context),
-            leading: const BluetoothButton(),
-            title: switch (state) {
-              BluetoothBlocStateNotAvailable() => Text(Localization.current.I18nBluetooth_bluetoothNotAvailable),
-              BluetoothBlocState() => Text(Localization.current.I18nInit_bluetoothModule),
-            },
-            subtitle: switch (state) {
-              BluetoothBlocStateNotAvailable() => null,
-              BluetoothBlocState() => Text(
-                BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.platformName ??
-                    Localization.current.I18nInit_pressToSelect,
-              ),
-            },
-            trailing: switch (state) {
-              BluetoothBlocStateConnected() => _bluetoothButtons(context),
-              BluetoothBlocState() => null,
-            },
+      builder: (context, state) => ListTile(
+        enabled: switch (state) {
+          BluetoothBlocStateNotInitialized() => false,
+          BluetoothBlocStateNotAvailable() => false,
+          BluetoothBlocStateNotEnabled() => false,
+          BluetoothBlocState() => true,
+        },
+        onTap: () => selectBluetoothDevice(context),
+        leading: const BluetoothButton(),
+        title: switch (state) {
+          BluetoothBlocStateNotAvailable() => Text(Localization.current.I18nBluetooth_bluetoothNotAvailable),
+          BluetoothBlocState() => Text(Localization.current.I18nInit_bluetoothModule),
+        },
+        subtitle: switch (state) {
+          BluetoothBlocStateNotAvailable() => null,
+          BluetoothBlocState() => Text(
+            BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.platformName ??
+                Localization.current.I18nInit_pressToSelect,
           ),
+        },
+        trailing: switch (state) {
+          BluetoothBlocStateConnected() => _bluetoothButtons(context),
+          BluetoothBlocState() => null,
+        },
+      ),
     );
   }
 

@@ -325,7 +325,9 @@ void main() {
         patrolWidgetTest('Get AutomaticStart message and do nothing if stage not selected', (PatrolTester $) async {
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            BluetoothBlocState.connected(message: BluetoothMessage.finish(time: 'time', timestamp: DateTime.now())),
+            BluetoothBlocState.connected(
+              message: BluetoothMessage.finish(time: 'time', timestamp: DateTime.now()),
+            ),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(await testWidget());
@@ -350,7 +352,9 @@ void main() {
           );
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            BluetoothBlocState.connected(message: BluetoothMessage.finish(time: time, timestamp: timestamp)),
+            BluetoothBlocState.connected(
+              message: BluetoothMessage.finish(time: time, timestamp: timestamp),
+            ),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(await testWidget());

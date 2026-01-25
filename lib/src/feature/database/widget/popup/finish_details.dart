@@ -45,10 +45,9 @@ class FinishDetailsPopup extends StatelessWidget {
           ),
           InputDecorator(
             decoration: InputDecoration(labelText: Localization.current.I18nProtocol_type, border: InputBorder.none),
-            child:
-                item.isManual
-                    ? Text(Localization.current.I18nFinish_manualTime)
-                    : Text(Localization.current.I18nFinish_automaticTime),
+            child: item.isManual
+                ? Text(Localization.current.I18nFinish_manualTime)
+                : Text(Localization.current.I18nFinish_automaticTime),
           ),
           InputDecorator(
             decoration: InputDecoration(

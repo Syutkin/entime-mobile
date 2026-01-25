@@ -33,10 +33,15 @@ class LogScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   title: Row(
                     children: <Widget>[
-                      Flexible(flex: 10, child: Align(child: LogLevelIcon(level: item.level))),
                       Flexible(
                         flex: 10,
-                        child: Align(child: LogSourceIcon(source: item.source, direction: item.direction)),
+                        child: Align(child: LogLevelIcon(level: item.level)),
+                      ),
+                      Flexible(
+                        flex: 10,
+                        child: Align(
+                          child: LogSourceIcon(source: item.source, direction: item.direction),
+                        ),
                       ),
                       Flexible(
                         flex: 80,

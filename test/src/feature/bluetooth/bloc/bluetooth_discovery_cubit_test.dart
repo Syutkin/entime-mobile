@@ -64,6 +64,24 @@ void main() {
       expect(cubit!.state.devices, devices);
     });
 
+    test('handles multiple scan result emissions', () async {
+      cubit = BluetoothDiscoveryCubit(bluetoothProvider: bluetoothProvider);
+      await cubit!.startDiscovery();
+
+      final device1 = MockBluetoothDevice();
+      final device2 = MockBluetoothDevice();
+      final first = [BluetoothDeviceWithRSSI(device1, -42)];
+      final second = [BluetoothDeviceWithRSSI(device1, -30), BluetoothDeviceWithRSSI(device2, -10)];
+
+      resultsController.add(first);
+      await Future<void>.delayed(Duration.zero);
+      expect(cubit!.state.devices, first);
+
+      resultsController.add(second);
+      await Future<void>.delayed(Duration.zero);
+      expect(cubit!.state.devices, second);
+    });
+
     test('updates discovery state from isScanning stream', () async {
       cubit = BluetoothDiscoveryCubit(bluetoothProvider: bluetoothProvider);
       scanningController.add(false);

@@ -119,14 +119,14 @@ void main() {
           ),
         );
       });
-        patrolWidgetTest('Shows save confirmation dialog when back pressed with changes', (PatrolTester $) async {
-          await $.pumpWidgetAndSettle(testWidget());
-          await $(text).tap();
-          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_syncAuto)).tap();
-          await $(BackButton).tap();
-          expect(
-            $(AlertDialog).containing($(Localization.current.I18nModuleSettings_saveSettingsToModule)),
-            findsOneWidget,
+      patrolWidgetTest('Shows save confirmation dialog when back pressed with changes', (PatrolTester $) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
+        await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_syncAuto)).tap();
+        await $(BackButton).tap();
+        expect(
+          $(AlertDialog).containing($(Localization.current.I18nModuleSettings_saveSettingsToModule)),
+          findsOneWidget,
         );
       });
 
@@ -351,20 +351,20 @@ void main() {
           await $(#okButton).tap();
 
           verify(
-                    () => moduleSettingsBloc.add(
-                      any(
-                        that: isA<ModuleSettingsEventUpdate>()
-                            .having(
-                              (event) => (event.moduleSettings as ModSettingsModelEntime).entime.wifi.ssid,
-                              'wifi.ssid',
-                              'TestWiFi',
-                            )
-                            .having(
-                              (event) => (event.moduleSettings as ModSettingsModelEntime).entime.wifi.passwd,
-                              'wifi.passwd',
-                              '', //  Пароль при заходе всегда пустой
-                            ),
-                      ),
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>()
+                    .having(
+                      (event) => (event.moduleSettings as ModSettingsModelEntime).entime.wifi.ssid,
+                      'wifi.ssid',
+                      'TestWiFi',
+                    )
+                    .having(
+                      (event) => (event.moduleSettings as ModSettingsModelEntime).entime.wifi.passwd,
+                      'wifi.passwd',
+                      '', //  Пароль при заходе всегда пустой
+                    ),
+              ),
             ),
           ).called(1);
 
@@ -382,7 +382,6 @@ void main() {
           expect($(text), findsOneWidget);
         });
       });
-
     });
 
     group('LED module type', () {
