@@ -55,6 +55,7 @@ class BleConnectionWrapper implements IBluetoothConnection {
           _batteryController.add(value.first);
         }
       });
+      unawaited(_readInitialBatteryLevel());
     }
     _connectionStateSubscription = _device.connectionState.listen((state) {
       if (state == BluetoothConnectionState.disconnected) {
@@ -110,6 +111,17 @@ class BleConnectionWrapper implements IBluetoothConnection {
   void _closeBattery() {
     if (!_batteryController.isClosed) {
       unawaited(_batteryController.close());
+    }
+  }
+
+  Future<void> _readInitialBatteryLevel() async {
+    try {
+      final value = await _batteryCharacteristic?.read();
+      if (value != null && value.isNotEmpty && !_batteryController.isClosed) {
+        _batteryController.add(value.first);
+      }
+    } on Exception {
+      // Ignore initial read failures.
     }
   }
 }

@@ -5,4 +5,7 @@ class BluetoothDeviceWithRSSI {
 
   final BluetoothDevice device;
   int? rssi;
+
+  @override
+  String toString() => 'BluetoothDeviceWithRSSI(name: ${device.platformName}, rssi: $rssi)';
 }
