@@ -65,6 +65,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             if (_bluetoothDevice == null || device.device.remoteId != _bluetoothDevice!.remoteId) {
               // Отменяем подписки и останавливаем соединение (если было)
               await _messageSubscription?.cancel();
+              await _batterySubscription?.cancel();
               await bluetoothProvider.bluetoothBackgroundConnection.stop();
               // Если девайс выбран - обновляем
               _bluetoothDevice = device.device;
@@ -83,7 +84,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           }
         case _Connected():
           //Успешное соединение
-          emit(const BluetoothBlocState.connected());
+          emit(BluetoothBlocState.connected(batteryLevel: _batteryLevel));
           logger.i('Bluetooth -> Connected');
           _reconnectActive = false;
         case _Connect():
@@ -106,6 +107,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             case BluetoothBlocStateConnecting():
               _connectAttempt++;
               await _messageSubscription?.cancel();
+              await _batterySubscription?.cancel();
               await bluetoothProvider.bluetoothBackgroundConnection.stop();
               emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
             default:
@@ -113,7 +115,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
         case _Disconnected():
           await _messageSubscription?.cancel();
+          await _batterySubscription?.cancel();
           await bluetoothProvider.bluetoothBackgroundConnection.stop();
+          _batteryLevel = null;
           // Если перед разъединением было состояние DisconnectingState,
           // то соединение было закрыто локально.
           // Если же состояние было другим, то соединение было закрыто удалённо.
@@ -141,9 +145,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
           switch (message) {
             case BluetoothMessageAutomaticStart():
-              emit(BluetoothBlocState.connected(message: message));
+              emit(BluetoothBlocState.connected(message: message, batteryLevel: _batteryLevel));
             case BluetoothMessageFinish():
-              emit(BluetoothBlocState.connected(message: message));
+              emit(BluetoothBlocState.connected(message: message, batteryLevel: _batteryLevel));
             case BluetoothMessageCountdown(time: final countdown):
               // Запускаем звуковой обратный отсчёт только если не используем
               // время из приложения
@@ -159,10 +163,21 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
                 await _audioController.callParticipant(time: time, stageId: stageId);
               }
             case BluetoothMessageJsonEvent():
-              emit(BluetoothBlocState.connected(message: message));
+              emit(BluetoothBlocState.connected(message: message, batteryLevel: _batteryLevel));
             case BluetoothMessageJsonResponse():
-              emit(BluetoothBlocState.connected(message: message));
+              emit(BluetoothBlocState.connected(message: message, batteryLevel: _batteryLevel));
             case BluetoothMessageEmpty():
+          }
+
+        case _BatteryLevelUpdated():
+          if (_batteryLevel == event.level) {
+            return;
+          }
+          _batteryLevel = event.level;
+          switch (state) {
+            case BluetoothBlocStateConnected(message: final message):
+              emit(BluetoothBlocState.connected(message: message, batteryLevel: _batteryLevel));
+            default:
           }
 
         case _SendMessage():
@@ -198,6 +213,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   int _stageId = -1;
 
   StreamSubscription<String>? _messageSubscription;
+  StreamSubscription<int>? _batterySubscription;
+  int? _batteryLevel;
 
   late StreamSubscription<AppSettings> _settingsSubscription;
 
@@ -210,6 +227,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   @override
   Future<void> close() async {
     await _messageSubscription?.cancel();
+    await _batterySubscription?.cancel();
     await _btStateSubscription.cancel();
     await _settingsSubscription.cancel();
     await _bluetoothProvider.dispose();
@@ -295,6 +313,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
       // Если соединение успешно, запускаем сборщик поступающих сообщений
       await bluetoothProvider.bluetoothBackgroundConnection.start();
       // и подписываемся на его события (поступающие сообщения)
+      await _batterySubscription?.cancel();
+      _batterySubscription = bluetoothProvider.bluetoothBackgroundConnection.batteryLevel.listen(
+        (level) => add(BluetoothEvent.batteryLevelUpdated(level: level)),
+      );
       _messageSubscription = bluetoothProvider.bluetoothBackgroundConnection.message.listen(
         (message) => add(BluetoothEvent.messageReceived(message: message, stageId: _stageId)),
       );

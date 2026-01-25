@@ -28,10 +28,7 @@ class BluetoothTile extends StatelessWidget {
         },
         subtitle: switch (state) {
           BluetoothBlocStateNotAvailable() => null,
-          BluetoothBlocState() => Text(
-            BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.platformName ??
-                Localization.current.I18nInit_pressToSelect,
-          ),
+          BluetoothBlocState() => Text(_subtitleText(context, state)),
         },
         trailing: switch (state) {
           BluetoothBlocStateConnected() => _bluetoothButtons(context),
@@ -58,6 +55,18 @@ class BluetoothTile extends StatelessWidget {
       ),
     ],
   );
+
+  String _subtitleText(BuildContext context, BluetoothBlocState state) {
+    final deviceName =
+        BlocProvider.of<BluetoothBloc>(context).bluetoothDevice?.platformName ??
+        Localization.current.I18nInit_pressToSelect;
+    final batteryLevel = switch (state) {
+      BluetoothBlocStateConnected(batteryLevel: final level) => level,
+      _ => null,
+    };
+    final batterySuffix = batteryLevel == null ? '' : ' | $batteryLevel%';
+    return '$deviceName$batterySuffix';
+  }
 
   Future<void> _moduleSettings(BuildContext context) async {
     BlocProvider.of<BluetoothBloc>(context).add(const BluetoothEvent.sendMessage(message: '{"cmd":"load_config"}'));

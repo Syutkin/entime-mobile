@@ -72,13 +72,17 @@ void main() {
     });
 
     group('sendMessage', () {
-      Future<BluetoothBackgroundConnection> connectWithMock({bool connected = true}) async {
+      Future<BluetoothBackgroundConnection> connectWithMock({
+        bool connected = true,
+        Stream<int>? batteryStream,
+      }) async {
         final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
         final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
         final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
         when(() => mockConnection.isConnected).thenReturn(connected);
         when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => batteryStream ?? const Stream<int>.empty());
         when(() => mockConnection.finish()).thenAnswer((_) async {});
         when(() => mockConnection.write(any())).thenAnswer((_) async {});
         when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
@@ -132,6 +136,113 @@ void main() {
         expect(result, false);
         verifyNever(() => mockConnection.write(any()));
 
+        await bbcWithMock.dispose();
+      });
+    });
+
+    group('battery level', () {
+      test('should emit battery level updates from connection', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final batteryController = StreamController<int>.broadcast();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => batteryController.stream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+
+        final levels = <int>[];
+        final sub = bbcWithMock.batteryLevel.listen(levels.add);
+        batteryController.add(42);
+        await Future<void>.delayed(Duration.zero);
+
+        expect(levels, [42]);
+
+        await sub.cancel();
+        await batteryController.close();
+        await bbcWithMock.dispose();
+      });
+
+      test('should cancel battery subscription on dispose', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        var cancelled = false;
+        final batteryController = StreamController<int>(
+          onCancel: () {
+            cancelled = true;
+          },
+        );
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => batteryController.stream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+        await bbcWithMock.dispose();
+
+        expect(cancelled, isTrue);
+
+        await batteryController.close();
+      });
+
+      test('should cancel previous battery subscription on reconnect', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        var firstCancelled = false;
+        final firstBatteryController = StreamController<int>(
+          onCancel: () {
+            firstCancelled = true;
+          },
+        );
+        final secondBatteryController = StreamController<int>.broadcast();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.close()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => firstBatteryController.stream);
+        await bbcWithMock.connect(device);
+
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => secondBatteryController.stream);
+        await bbcWithMock.connect(device);
+
+        expect(firstCancelled, isTrue);
+
+        await secondBatteryController.close();
+        await firstBatteryController.close();
+        await bbcWithMock.dispose();
+      });
+
+      test('should not fail when connection has no battery stream', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => null);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
         await bbcWithMock.dispose();
       });
     });

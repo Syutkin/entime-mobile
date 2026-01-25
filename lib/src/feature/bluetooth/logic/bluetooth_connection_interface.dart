@@ -12,6 +12,9 @@ abstract class IBluetoothConnection {
   /// Входящий поток данных
   Stream<Uint8List>? get input;
 
+  /// Поток уровня батареи (0..100), если поддерживается
+  Stream<int>? get batteryLevel;
+
   /// Отправка данных в характеристику TX (NUS)
   Future<void> write(Uint8List data);
 
@@ -36,17 +39,27 @@ class BleConnectionWrapper implements IBluetoothConnection {
     required BluetoothDevice device,
     required BluetoothCharacteristic txCharacteristic,
     required BluetoothCharacteristic rxCharacteristic,
+    BluetoothCharacteristic? batteryCharacteristic,
   }) : _device = device,
        _txCharacteristic = txCharacteristic,
-       _rxCharacteristic = rxCharacteristic {
+       _rxCharacteristic = rxCharacteristic,
+       _batteryCharacteristic = batteryCharacteristic {
     _rxSubscription = _rxCharacteristic.onValueReceived.listen((value) {
       if (!_inputController.isClosed) {
         _inputController.add(Uint8List.fromList(value));
       }
     });
+    if (_batteryCharacteristic != null) {
+      _batterySubscription = _batteryCharacteristic.onValueReceived.listen((value) {
+        if (value.isNotEmpty && !_batteryController.isClosed) {
+          _batteryController.add(value.first);
+        }
+      });
+    }
     _connectionStateSubscription = _device.connectionState.listen((state) {
       if (state == BluetoothConnectionState.disconnected) {
         _closeInput();
+        _closeBattery();
       }
     });
   }
@@ -54,8 +67,11 @@ class BleConnectionWrapper implements IBluetoothConnection {
   final BluetoothDevice _device;
   final BluetoothCharacteristic _txCharacteristic;
   final BluetoothCharacteristic _rxCharacteristic;
+  final BluetoothCharacteristic? _batteryCharacteristic;
   final StreamController<Uint8List> _inputController = StreamController.broadcast();
+  final StreamController<int> _batteryController = StreamController.broadcast();
   late final StreamSubscription<List<int>> _rxSubscription;
+  StreamSubscription<List<int>>? _batterySubscription;
   late final StreamSubscription<BluetoothConnectionState> _connectionStateSubscription;
 
   @override
@@ -65,6 +81,9 @@ class BleConnectionWrapper implements IBluetoothConnection {
   Stream<Uint8List>? get input => _inputController.stream;
 
   @override
+  Stream<int>? get batteryLevel => _batteryCharacteristic == null ? null : _batteryController.stream;
+
+  @override
   Future<void> write(Uint8List data) => _txCharacteristic.write(
     data,
   );
@@ -72,9 +91,11 @@ class BleConnectionWrapper implements IBluetoothConnection {
   @override
   Future<void> close() async {
     await _rxSubscription.cancel();
+    await _batterySubscription?.cancel();
     await _connectionStateSubscription.cancel();
     await _device.disconnect();
     _closeInput();
+    _closeBattery();
   }
 
   @override
@@ -85,6 +106,12 @@ class BleConnectionWrapper implements IBluetoothConnection {
       unawaited(_inputController.close());
     }
   }
+
+  void _closeBattery() {
+    if (!_batteryController.isClosed) {
+      unawaited(_batteryController.close());
+    }
+  }
 }
 
 /// Реальная фабрика для создания BLE-соединений (Nordic UART Service)
@@ -93,6 +120,8 @@ class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
   static final Guid _nusServiceUuid = Guid('6E400001-B5A3-F393-E0A9-E50E24DCCA9E');
   static final Guid _nusTxUuid = Guid('6E400002-B5A3-F393-E0A9-E50E24DCCA9E');
   static final Guid _nusRxUuid = Guid('6E400003-B5A3-F393-E0A9-E50E24DCCA9E');
+  static final Guid _batteryServiceUuid = Guid('0000180F-0000-1000-8000-00805F9B34FB');
+  static final Guid _batteryLevelUuid = Guid('00002A19-0000-1000-8000-00805F9B34FB');
 
   @override
   Future<IBluetoothConnection> connectToDevice(BluetoothDevice device) async {
@@ -105,6 +134,7 @@ class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
     final services = await device.discoverServices();
     BluetoothCharacteristic? tx;
     BluetoothCharacteristic? rx;
+    BluetoothCharacteristic? battery;
 
     for (final service in services) {
       if (service.uuid == _nusServiceUuid) {
@@ -113,6 +143,12 @@ class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
             tx = characteristic;
           } else if (characteristic.uuid == _nusRxUuid) {
             rx = characteristic;
+          }
+        }
+      } else if (service.uuid == _batteryServiceUuid) {
+        for (final characteristic in service.characteristics) {
+          if (characteristic.uuid == _batteryLevelUuid) {
+            battery = characteristic;
           }
         }
       }
@@ -124,11 +160,19 @@ class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
     }
 
     await rx.setNotifyValue(true);
+    if (battery != null) {
+      try {
+        await battery.setNotifyValue(true);
+      } on Exception {
+        // Some devices don't allow BAS notifications; ignore.
+      }
+    }
 
     return BleConnectionWrapper(
       device: device,
       txCharacteristic: tx,
       rxCharacteristic: rx,
+      batteryCharacteristic: battery,
     );
   }
 }

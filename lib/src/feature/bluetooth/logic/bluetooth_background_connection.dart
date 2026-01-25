@@ -16,6 +16,8 @@ abstract class IBluetoothBackgroundConnection {
 
   Stream<String> get message;
 
+  Stream<int> get batteryLevel;
+
   bool get isConnected;
 
   Future<void> start();
@@ -42,15 +44,20 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   }) : _connectionFactory = connectionFactory ?? BluetoothConnectionFactory();
   IBluetoothConnection? _connection;
   StreamSubscription<Uint8List>? _connectionSubscription;
+  StreamSubscription<int>? _batterySubscription;
 
   String _messageBuffer = '';
   String _messagePacket = '';
 
   // Стрим с поступающей информацией от модуля
   final StreamController<String> _messageController = BehaviorSubject();
+  final StreamController<int> _batteryController = BehaviorSubject();
 
   @override
   Stream<String> get message => _messageController.stream;
+
+  @override
+  Stream<int> get batteryLevel => _batteryController.stream;
 
   // bool isDisconnecting = false;
 
@@ -80,12 +87,15 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
       await _connection?.close();
       _connection = await _connectionFactory.connectToDevice(bluetoothDevice);
       _connectionSubscription = _connection?.input?.listen(_onDataReceived);
+      await _batterySubscription?.cancel();
+      _batterySubscription = _connection?.batteryLevel?.listen(_batteryController.add);
       _connectionSubscription?.onDone(() async {
         // Сообщаем что соединение закрыто
         // Далее на основе того, когда это произошло,
         // определяем кто закрыл соединение (в BluetoothBloc event/state)
         _onDisconnect?.call();
         await _connectionSubscription?.cancel();
+        await _batterySubscription?.cancel();
       });
     } catch (e) {
       logger.e('BluetoothConnection -> Cannot connect', error: e);
@@ -105,7 +115,9 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   @override
   Future<void> dispose() async {
     await _messageController.close();
+    await _batteryController.close();
     await _connectionSubscription?.cancel();
+    await _batterySubscription?.cancel();
     await _connection?.finish();
   }
 

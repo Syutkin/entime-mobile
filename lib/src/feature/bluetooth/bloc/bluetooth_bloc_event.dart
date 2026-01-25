@@ -19,4 +19,6 @@ sealed class BluetoothEvent with _$BluetoothEvent {
   const factory BluetoothEvent.messageReceived({required String message, required int stageId}) = _MessageReceived;
 
   const factory BluetoothEvent.sendMessage({required String message}) = _SendMessage;
+
+  const factory BluetoothEvent.batteryLevelUpdated({required int level}) = _BatteryLevelUpdated;
 }

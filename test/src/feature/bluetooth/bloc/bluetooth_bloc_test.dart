@@ -65,6 +65,7 @@ void main() {
       when(() => bluetoothBackgroundConnection.connect(deviceSecondary.device)).thenAnswer((_) => Future.value());
       when(() => bluetoothBackgroundConnection.isConnected).thenReturn(false);
       when(() => bluetoothBackgroundConnection.message).thenAnswer((_) => Stream.fromIterable([]));
+      when(() => bluetoothBackgroundConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
       when(
         () => audioController.playCountdown(
           time: any(named: 'time'),
