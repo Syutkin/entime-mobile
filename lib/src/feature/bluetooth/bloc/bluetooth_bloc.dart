@@ -91,32 +91,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           _bluetoothDevice = event.selectedDevice;
           final device = event.selectedDevice;
           if (device != null) {
+            final attempt = ++_connectAttempt;
             // Состояние соединения
             emit(const BluetoothBlocState.connecting());
-            await bluetoothProvider.bluetoothBackgroundConnection.connect(device);
-            if (bluetoothProvider.bluetoothBackgroundConnection.isConnected) {
-              // Запускаем событие 'соединён'
-              add(const BluetoothEvent.connected());
-              logger.i('Bluetooth -> Connecting...');
-              // Если соединение успешно, запускаем сборщик поступающих сообщений
-              await bluetoothProvider.bluetoothBackgroundConnection.start();
-              // и подписываемся на его события (поступающие сообщения)
-              _messageSubscription = bluetoothProvider.bluetoothBackgroundConnection.message.listen(
-                (message) => add(BluetoothEvent.messageReceived(message: message, stageId: _stageId)),
-              );
-              bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
-                add(const BluetoothEvent.disconnected());
-              });
-            } else {
-              logger.i("Bluetooth -> Can't connect");
-              emit(BluetoothBlocState.disconnected(bluetoothDevice: event.selectedDevice));
-              if (_reconnectActive) {
-                Timer(
-                  Duration(seconds: _reconnectDelay),
-                  () => add(BluetoothEvent.connect(selectedDevice: _bluetoothDevice)),
-                );
-              }
-            }
+            unawaited(_handleConnect(device, attempt));
           }
         case _Disconnect():
           _reconnectActive = false;
@@ -125,6 +103,11 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             case BluetoothBlocStateConnected():
               emit(const BluetoothBlocState.disconnecting());
               add(const BluetoothEvent.disconnected());
+            case BluetoothBlocStateConnecting():
+              _connectAttempt++;
+              await _messageSubscription?.cancel();
+              await bluetoothProvider.bluetoothBackgroundConnection.stop();
+              emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
             default:
           }
 
@@ -206,6 +189,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   final BluetoothProtocolParser _protocolParser = const BluetoothProtocolParser();
 
   BluetoothDevice? _bluetoothDevice;
+  int _connectAttempt = 0;
 
   bool _reconnect = true;
   bool _reconnectActive = false;
@@ -293,6 +277,41 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
       case BluetoothProtocolUnknownMessage():
         logger.e('Bluetooth -> Cannot parse data: $parsedMessage');
         return const BluetoothMessage.empty();
+    }
+  }
+
+  Future<void> _handleConnect(BluetoothDevice device, int attempt) async {
+    await bluetoothProvider.bluetoothBackgroundConnection.connect(device);
+    if (attempt != _connectAttempt) {
+      await bluetoothProvider.bluetoothBackgroundConnection.stop();
+      if (state is! BluetoothBlocStateDisconnected) {
+        add(const BluetoothEvent.disconnected());
+      }
+      return;
+    }
+    if (bluetoothProvider.bluetoothBackgroundConnection.isConnected) {
+      add(const BluetoothEvent.connected());
+      logger.i('Bluetooth -> Connecting...');
+      // Если соединение успешно, запускаем сборщик поступающих сообщений
+      await bluetoothProvider.bluetoothBackgroundConnection.start();
+      // и подписываемся на его события (поступающие сообщения)
+      _messageSubscription = bluetoothProvider.bluetoothBackgroundConnection.message.listen(
+        (message) => add(BluetoothEvent.messageReceived(message: message, stageId: _stageId)),
+      );
+      bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
+        add(const BluetoothEvent.disconnected());
+      });
+    } else {
+      logger.i("Bluetooth -> Can't connect");
+      if (state is! BluetoothBlocStateDisconnected) {
+        add(const BluetoothEvent.disconnected());
+      }
+      if (_reconnectActive) {
+        Timer(
+          Duration(seconds: _reconnectDelay),
+          () => add(BluetoothEvent.connect(selectedDevice: _bluetoothDevice)),
+        );
+      }
     }
   }
 }

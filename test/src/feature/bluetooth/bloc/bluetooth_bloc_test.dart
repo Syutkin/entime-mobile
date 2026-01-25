@@ -252,8 +252,6 @@ void main() {
           BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
           const BluetoothBlocState.connecting(),
           BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
-          const BluetoothBlocState.connecting(),
-          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
         ],
         verify: (bloc) {
           expect(bloc.bluetoothDevice, devicePrimary.device);
@@ -330,7 +328,7 @@ void main() {
     });
     group('on disconnect:', () {
       blocTest<BluetoothBloc, BluetoothBlocState>(
-        'do nothing when connecting',
+        'disconnect when connecting',
         build: () => BluetoothBloc(
           audioController: audioController,
           bluetoothProvider: bluetoothProvider,
@@ -339,7 +337,7 @@ void main() {
         ),
         seed: () => const BluetoothBlocState.connecting(),
         act: (bloc) => bloc.add(const BluetoothEvent.disconnect()),
-        expect: () => <BluetoothBlocState>[],
+        expect: () => <BluetoothBlocState>[const BluetoothBlocState.disconnected()],
       );
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'do nothing when disconnecting',
