@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -59,7 +61,7 @@ void main() {
       );
 
       final savedFile = File(targetPath);
-      expect(await savedFile.exists(), isTrue);
+      expect(savedFile.existsSync(), isTrue);
       expect(await savedFile.readAsBytes(), orderedEquals(bytes));
       expect(fakePlatform.lastOptions?.suggestedName, 'export.csv');
       expect(fakePlatform.lastAcceptedTypeGroups, hasLength(2));
