@@ -25,11 +25,11 @@ void main() {
 
       when(() => device.isConnected).thenReturn(true);
       when(() => device.connectionState).thenAnswer((_) => connectionStateController.stream);
-      when(() => device.disconnect()).thenAnswer((_) async {});
+      when(device.disconnect).thenAnswer((_) async {});
 
       when(() => rxCharacteristic.onValueReceived).thenAnswer((_) => rxController.stream);
       when(() => batteryCharacteristic.onValueReceived).thenAnswer((_) => batteryController.stream);
-      when(() => batteryCharacteristic.read()).thenAnswer((_) async => [55]);
+      when(batteryCharacteristic.read).thenAnswer((_) async => [55]);
 
       final wrapper = BleConnectionWrapper(
         device: device,
@@ -44,7 +44,7 @@ void main() {
       await Future<void>.delayed(Duration.zero);
 
       expect(levels, [55]);
-      verify(() => batteryCharacteristic.read()).called(1);
+      verify(batteryCharacteristic.read).called(1);
 
       await sub?.cancel();
       await wrapper.finish();
