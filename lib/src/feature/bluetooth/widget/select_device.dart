@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common/localization/localization.dart';
 import '../bloc/bluetooth_bloc.dart';
+import '../logic/bluetooth_provider.dart';
 import '../model/bluetooth_device_with_rssi.dart';
 import 'bluetooth_device_list_entry.dart';
 
@@ -34,9 +33,11 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
   List<BluetoothDeviceWithRSSI> devices = <BluetoothDeviceWithRSSI>[];
 
   // Availability
-  StreamSubscription<List<ScanResult>>? _scanResultsSubscription;
+  StreamSubscription<List<BluetoothDeviceWithRSSI>>? _scanResultsSubscription;
   StreamSubscription<bool>? _isScanningSubscription;
   bool _isDiscovering = false;
+
+  IBluetoothProvider get _bluetoothProvider => context.read<BluetoothBloc>().bluetoothProvider;
 
   // _SelectDeviceScreen();
 
@@ -46,7 +47,7 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
 
     _isDiscovering = true;
 
-    _isScanningSubscription = FlutterBluePlus.isScanning.listen((isScanning) {
+    _isScanningSubscription = _bluetoothProvider.isScanning.listen((bool isScanning) {
       if (mounted) {
         setState(() {
           _isDiscovering = isScanning;
@@ -65,29 +66,18 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
   }
 
   Future<void> _startDiscovery() async {
-    await [
-      Permission.bluetoothScan,
-      Permission.bluetoothConnect,
-      Permission.locationWhenInUse,
-    ].request();
+    await _bluetoothProvider.requestPermissions();
 
     await _scanResultsSubscription?.cancel();
     devices = <BluetoothDeviceWithRSSI>[];
 
-    _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) {
+    _scanResultsSubscription = _bluetoothProvider.scanResultsWithRssi().listen((List<BluetoothDeviceWithRSSI> results) {
       setState(() {
-        for (final result in results) {
-          final existingIndex = devices.indexWhere((d) => d.device.remoteId == result.device.remoteId);
-          if (existingIndex == -1) {
-            devices.add(BluetoothDeviceWithRSSI(result.device, result.rssi));
-          } else {
-            devices[existingIndex].rssi = result.rssi;
-          }
-        }
+        devices = results.toList();
       });
     });
 
-    await FlutterBluePlus.startScan(timeout: const Duration(seconds: 4));
+    await _bluetoothProvider.startScan();
   }
 
   @override
@@ -95,7 +85,7 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
     // Avoid memory leak (`setState` after dispose) and cancel discovery
     unawaited(_scanResultsSubscription?.cancel());
     unawaited(_isScanningSubscription?.cancel());
-    unawaited(FlutterBluePlus.stopScan());
+    unawaited(_bluetoothProvider.stopScan());
     super.dispose();
   }
 
