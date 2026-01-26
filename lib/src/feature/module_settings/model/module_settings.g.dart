@@ -91,68 +91,6 @@ Map<String, dynamic> _$BluetoothToJson(_Bluetooth instance) =>
       'number': instance.number,
     };
 
-_Buzzer _$BuzzerFromJson(Map<String, dynamic> json) => _Buzzer(
-  active: json['active'] as bool,
-  shortFrequency: (json['shortFrequency'] as num).toInt(),
-  longFrequency: (json['longFrequency'] as num).toInt(),
-);
-
-Map<String, dynamic> _$BuzzerToJson(_Buzzer instance) => <String, dynamic>{
-  'active': instance.active,
-  'shortFrequency': instance.shortFrequency,
-  'longFrequency': instance.longFrequency,
-};
-
-_LoRa _$LoRaFromJson(Map<String, dynamic> json) => _LoRa(
-  active: json['active'] as bool,
-  frequency: (json['frequency'] as num).toInt(),
-  txPower: (json['txPower'] as num).toInt(),
-  spreadingFactor: (json['spreadingFactor'] as num).toInt(),
-  signalBandwidth: (json['signalBandwidth'] as num).toInt(),
-  codingRateDenom: (json['codingRateDenom'] as num).toInt(),
-  preambleLength: (json['preambleLength'] as num).toInt(),
-  syncWord: (json['syncWord'] as num).toInt(),
-  crc: json['crc'] as bool,
-);
-
-Map<String, dynamic> _$LoRaToJson(_LoRa instance) => <String, dynamic>{
-  'active': instance.active,
-  'frequency': instance.frequency,
-  'txPower': instance.txPower,
-  'spreadingFactor': instance.spreadingFactor,
-  'signalBandwidth': instance.signalBandwidth,
-  'codingRateDenom': instance.codingRateDenom,
-  'preambleLength': instance.preambleLength,
-  'syncWord': instance.syncWord,
-  'crc': instance.crc,
-};
-
-_Tft _$TftFromJson(Map<String, dynamic> json) => _Tft(
-  active: json['active'] as bool,
-  timeout: json['timeout'] as bool,
-  timeoutDuration: (json['timeoutDuration'] as num).toInt(),
-  turnOnAtEvent: json['turnOnAtEvent'] as bool,
-);
-
-Map<String, dynamic> _$TftToJson(_Tft instance) => <String, dynamic>{
-  'active': instance.active,
-  'timeout': instance.timeout,
-  'timeoutDuration': instance.timeoutDuration,
-  'turnOnAtEvent': instance.turnOnAtEvent,
-};
-
-_Vcc _$VccFromJson(Map<String, dynamic> json) => _Vcc(
-  r1: (json['r1'] as num).toInt(),
-  r2: (json['r2'] as num).toInt(),
-  vbat: (json['vbat'] as num?)?.toInt(),
-);
-
-Map<String, dynamic> _$VccToJson(_Vcc instance) => <String, dynamic>{
-  'r1': instance.r1,
-  'r2': instance.r2,
-  'vbat': instance.vbat,
-};
-
 _WiFi _$WiFiFromJson(Map<String, dynamic> json) => _WiFi(
   active: json['active'] as bool,
   ssid: json['ssid'] as String,

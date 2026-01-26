@@ -74,49 +74,6 @@ abstract class Bluetooth with _$Bluetooth {
 }
 
 @freezed
-abstract class Buzzer with _$Buzzer {
-  const factory Buzzer({required bool active, required int shortFrequency, required int longFrequency}) = _Buzzer;
-
-  factory Buzzer.fromJson(Map<String, dynamic> json) => _$BuzzerFromJson(json);
-}
-
-@freezed
-abstract class LoRa with _$LoRa {
-  const factory LoRa({
-    required bool active,
-    required int frequency,
-    required int txPower,
-    required int spreadingFactor,
-    required int signalBandwidth,
-    required int codingRateDenom,
-    required int preambleLength,
-    required int syncWord,
-    required bool crc,
-  }) = _LoRa;
-
-  factory LoRa.fromJson(Map<String, dynamic> json) => _$LoRaFromJson(json);
-}
-
-@freezed
-abstract class Tft with _$Tft {
-  const factory Tft({
-    required bool active,
-    required bool timeout,
-    required int timeoutDuration,
-    required bool turnOnAtEvent,
-  }) = _Tft;
-
-  factory Tft.fromJson(Map<String, dynamic> json) => _$TftFromJson(json);
-}
-
-@freezed
-abstract class Vcc with _$Vcc {
-  const factory Vcc({required int r1, required int r2, int? vbat}) = _Vcc;
-
-  factory Vcc.fromJson(Map<String, dynamic> json) => _$VccFromJson(json);
-}
-
-@freezed
 abstract class WiFi with _$WiFi {
   const factory WiFi({required bool active, required String ssid, required String passwd}) = _WiFi;
 
