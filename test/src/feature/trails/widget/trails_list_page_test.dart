@@ -130,7 +130,7 @@ void main() {
     });
 
     patrolWidgetTest('Loading track state', (PatrolTester $) async {
-      when(() => trailsBloc.state).thenReturn(TrailsState.loadingTrack(trails: trails));
+      when(() => trailsBloc.state).thenReturn(TrailsState.loadingTrack(trails: trails, progress: 0));
 
       await $.pumpWidget(await testWidget());
 

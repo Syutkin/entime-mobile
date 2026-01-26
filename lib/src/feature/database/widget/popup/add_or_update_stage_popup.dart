@@ -65,6 +65,8 @@ Future<void> _upsertStagePopup(BuildContext context, {Stage? stage, Race? race})
                     return const SizedBox.shrink();
                   case LoadingTrack():
                     return const SizedBox.shrink();
+                  case SavingTrack():
+                    return const SizedBox.shrink();
                   case Initialized():
                     if (trailId != null) {
                       switch (context.read<TrailsBloc>().state) {

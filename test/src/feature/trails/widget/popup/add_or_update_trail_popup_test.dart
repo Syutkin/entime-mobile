@@ -235,7 +235,7 @@ void main() {
       });
 
       patrolWidgetTest('Show loading indicator when state is loading track at GPX track field', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.loadingTrack(trails: []));
+        when(() => trailsBloc.state).thenReturn(const TrailsState.loadingTrack(trails: [], progress: 0.4));
 
         await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
@@ -245,7 +245,7 @@ void main() {
           findsOneWidget,
         );
         expect(
-          $(Row).containing($(Localization.current.I18nDatabase_trailGpxTrack)).$(CircularProgressIndicator),
+          $(Row).containing($(Localization.current.I18nDatabase_trailGpxTrack)).$(CustomPaint),
           findsOneWidget,
         );
       });
@@ -264,7 +264,7 @@ void main() {
 
         await $(#okButton).tap();
 
-        expect($(ExpandedAlertDialog), findsNothing);
+        expect($(ExpandedAlertDialog), findsOneWidget);
 
         verify(
           () => trailsBloc.add(

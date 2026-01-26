@@ -55,7 +55,7 @@ extension TrailsEventPatterns on TrailsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _GetTrails value)?  getTrails,TResult Function( _AddTrail value)?  addTrail,TResult Function( _UpdateTrail value)?  updateTrail,TResult Function( _DeleteTrail value)?  deleteTrail,TResult Function( _LoadTrack value)?  loadTrack,TResult Function( _UnloadTrack value)?  unloadTrack,TResult Function( _EmitTrack value)?  emitTrack,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _GetTrails value)?  getTrails,TResult Function( _AddTrail value)?  addTrail,TResult Function( _UpdateTrail value)?  updateTrail,TResult Function( _DeleteTrail value)?  deleteTrail,TResult Function( _LoadTrack value)?  loadTrack,TResult Function( _TrackLoadProgress value)?  trackLoadProgress,TResult Function( _TrackSaveProgress value)?  trackSaveProgress,TResult Function( _TrackSaveCompleted value)?  trackSaveCompleted,TResult Function( _TrackSaveFailed value)?  trackSaveFailed,TResult Function( _UnloadTrack value)?  unloadTrack,TResult Function( _EmitTrack value)?  emitTrack,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _GetTrails() when getTrails != null:
@@ -63,7 +63,11 @@ return getTrails(_that);case _AddTrail() when addTrail != null:
 return addTrail(_that);case _UpdateTrail() when updateTrail != null:
 return updateTrail(_that);case _DeleteTrail() when deleteTrail != null:
 return deleteTrail(_that);case _LoadTrack() when loadTrack != null:
-return loadTrack(_that);case _UnloadTrack() when unloadTrack != null:
+return loadTrack(_that);case _TrackLoadProgress() when trackLoadProgress != null:
+return trackLoadProgress(_that);case _TrackSaveProgress() when trackSaveProgress != null:
+return trackSaveProgress(_that);case _TrackSaveCompleted() when trackSaveCompleted != null:
+return trackSaveCompleted(_that);case _TrackSaveFailed() when trackSaveFailed != null:
+return trackSaveFailed(_that);case _UnloadTrack() when unloadTrack != null:
 return unloadTrack(_that);case _EmitTrack() when emitTrack != null:
 return emitTrack(_that);case _:
   return orElse();
@@ -83,7 +87,7 @@ return emitTrack(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _GetTrails value)  getTrails,required TResult Function( _AddTrail value)  addTrail,required TResult Function( _UpdateTrail value)  updateTrail,required TResult Function( _DeleteTrail value)  deleteTrail,required TResult Function( _LoadTrack value)  loadTrack,required TResult Function( _UnloadTrack value)  unloadTrack,required TResult Function( _EmitTrack value)  emitTrack,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _GetTrails value)  getTrails,required TResult Function( _AddTrail value)  addTrail,required TResult Function( _UpdateTrail value)  updateTrail,required TResult Function( _DeleteTrail value)  deleteTrail,required TResult Function( _LoadTrack value)  loadTrack,required TResult Function( _TrackLoadProgress value)  trackLoadProgress,required TResult Function( _TrackSaveProgress value)  trackSaveProgress,required TResult Function( _TrackSaveCompleted value)  trackSaveCompleted,required TResult Function( _TrackSaveFailed value)  trackSaveFailed,required TResult Function( _UnloadTrack value)  unloadTrack,required TResult Function( _EmitTrack value)  emitTrack,}){
 final _that = this;
 switch (_that) {
 case _GetTrails():
@@ -91,7 +95,11 @@ return getTrails(_that);case _AddTrail():
 return addTrail(_that);case _UpdateTrail():
 return updateTrail(_that);case _DeleteTrail():
 return deleteTrail(_that);case _LoadTrack():
-return loadTrack(_that);case _UnloadTrack():
+return loadTrack(_that);case _TrackLoadProgress():
+return trackLoadProgress(_that);case _TrackSaveProgress():
+return trackSaveProgress(_that);case _TrackSaveCompleted():
+return trackSaveCompleted(_that);case _TrackSaveFailed():
+return trackSaveFailed(_that);case _UnloadTrack():
 return unloadTrack(_that);case _EmitTrack():
 return emitTrack(_that);}
 }
@@ -107,7 +115,7 @@ return emitTrack(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _GetTrails value)?  getTrails,TResult? Function( _AddTrail value)?  addTrail,TResult? Function( _UpdateTrail value)?  updateTrail,TResult? Function( _DeleteTrail value)?  deleteTrail,TResult? Function( _LoadTrack value)?  loadTrack,TResult? Function( _UnloadTrack value)?  unloadTrack,TResult? Function( _EmitTrack value)?  emitTrack,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _GetTrails value)?  getTrails,TResult? Function( _AddTrail value)?  addTrail,TResult? Function( _UpdateTrail value)?  updateTrail,TResult? Function( _DeleteTrail value)?  deleteTrail,TResult? Function( _LoadTrack value)?  loadTrack,TResult? Function( _TrackLoadProgress value)?  trackLoadProgress,TResult? Function( _TrackSaveProgress value)?  trackSaveProgress,TResult? Function( _TrackSaveCompleted value)?  trackSaveCompleted,TResult? Function( _TrackSaveFailed value)?  trackSaveFailed,TResult? Function( _UnloadTrack value)?  unloadTrack,TResult? Function( _EmitTrack value)?  emitTrack,}){
 final _that = this;
 switch (_that) {
 case _GetTrails() when getTrails != null:
@@ -115,7 +123,11 @@ return getTrails(_that);case _AddTrail() when addTrail != null:
 return addTrail(_that);case _UpdateTrail() when updateTrail != null:
 return updateTrail(_that);case _DeleteTrail() when deleteTrail != null:
 return deleteTrail(_that);case _LoadTrack() when loadTrack != null:
-return loadTrack(_that);case _UnloadTrack() when unloadTrack != null:
+return loadTrack(_that);case _TrackLoadProgress() when trackLoadProgress != null:
+return trackLoadProgress(_that);case _TrackSaveProgress() when trackSaveProgress != null:
+return trackSaveProgress(_that);case _TrackSaveCompleted() when trackSaveCompleted != null:
+return trackSaveCompleted(_that);case _TrackSaveFailed() when trackSaveFailed != null:
+return trackSaveFailed(_that);case _UnloadTrack() when unloadTrack != null:
 return unloadTrack(_that);case _EmitTrack() when emitTrack != null:
 return emitTrack(_that);case _:
   return null;
@@ -134,14 +146,18 @@ return emitTrack(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  getTrails,TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult Function( int id)?  deleteTrail,TResult Function( String filePath)?  loadTrack,TResult Function()?  unloadTrack,TResult Function( TrackFile track)?  emitTrack,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  getTrails,TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult Function( int id)?  deleteTrail,TResult Function( String filePath)?  loadTrack,TResult Function( double progress)?  trackLoadProgress,TResult Function( double progress)?  trackSaveProgress,TResult Function( int trackId)?  trackSaveCompleted,TResult Function( String message)?  trackSaveFailed,TResult Function()?  unloadTrack,TResult Function( TrackFile track)?  emitTrack,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GetTrails() when getTrails != null:
 return getTrails();case _AddTrail() when addTrail != null:
 return addTrail(_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath);case _UpdateTrail() when updateTrail != null:
 return updateTrail(_that.id,_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath,_that.fileId,_that.deleteTrack);case _DeleteTrail() when deleteTrail != null:
 return deleteTrail(_that.id);case _LoadTrack() when loadTrack != null:
-return loadTrack(_that.filePath);case _UnloadTrack() when unloadTrack != null:
+return loadTrack(_that.filePath);case _TrackLoadProgress() when trackLoadProgress != null:
+return trackLoadProgress(_that.progress);case _TrackSaveProgress() when trackSaveProgress != null:
+return trackSaveProgress(_that.progress);case _TrackSaveCompleted() when trackSaveCompleted != null:
+return trackSaveCompleted(_that.trackId);case _TrackSaveFailed() when trackSaveFailed != null:
+return trackSaveFailed(_that.message);case _UnloadTrack() when unloadTrack != null:
 return unloadTrack();case _EmitTrack() when emitTrack != null:
 return emitTrack(_that.track);case _:
   return orElse();
@@ -161,14 +177,18 @@ return emitTrack(_that.track);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  getTrails,required TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)  addTrail,required TResult Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)  updateTrail,required TResult Function( int id)  deleteTrail,required TResult Function( String filePath)  loadTrack,required TResult Function()  unloadTrack,required TResult Function( TrackFile track)  emitTrack,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  getTrails,required TResult Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)  addTrail,required TResult Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)  updateTrail,required TResult Function( int id)  deleteTrail,required TResult Function( String filePath)  loadTrack,required TResult Function( double progress)  trackLoadProgress,required TResult Function( double progress)  trackSaveProgress,required TResult Function( int trackId)  trackSaveCompleted,required TResult Function( String message)  trackSaveFailed,required TResult Function()  unloadTrack,required TResult Function( TrackFile track)  emitTrack,}) {final _that = this;
 switch (_that) {
 case _GetTrails():
 return getTrails();case _AddTrail():
 return addTrail(_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath);case _UpdateTrail():
 return updateTrail(_that.id,_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath,_that.fileId,_that.deleteTrack);case _DeleteTrail():
 return deleteTrail(_that.id);case _LoadTrack():
-return loadTrack(_that.filePath);case _UnloadTrack():
+return loadTrack(_that.filePath);case _TrackLoadProgress():
+return trackLoadProgress(_that.progress);case _TrackSaveProgress():
+return trackSaveProgress(_that.progress);case _TrackSaveCompleted():
+return trackSaveCompleted(_that.trackId);case _TrackSaveFailed():
+return trackSaveFailed(_that.message);case _UnloadTrack():
 return unloadTrack();case _EmitTrack():
 return emitTrack(_that.track);}
 }
@@ -184,14 +204,18 @@ return emitTrack(_that.track);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  getTrails,TResult? Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult? Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult? Function( int id)?  deleteTrail,TResult? Function( String filePath)?  loadTrack,TResult? Function()?  unloadTrack,TResult? Function( TrackFile track)?  emitTrack,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  getTrails,TResult? Function( String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath)?  addTrail,TResult? Function( int id,  String name,  int? distance,  int? elevation,  String? url,  String? description,  String? filePath,  int? fileId,  bool deleteTrack)?  updateTrail,TResult? Function( int id)?  deleteTrail,TResult? Function( String filePath)?  loadTrack,TResult? Function( double progress)?  trackLoadProgress,TResult? Function( double progress)?  trackSaveProgress,TResult? Function( int trackId)?  trackSaveCompleted,TResult? Function( String message)?  trackSaveFailed,TResult? Function()?  unloadTrack,TResult? Function( TrackFile track)?  emitTrack,}) {final _that = this;
 switch (_that) {
 case _GetTrails() when getTrails != null:
 return getTrails();case _AddTrail() when addTrail != null:
 return addTrail(_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath);case _UpdateTrail() when updateTrail != null:
 return updateTrail(_that.id,_that.name,_that.distance,_that.elevation,_that.url,_that.description,_that.filePath,_that.fileId,_that.deleteTrack);case _DeleteTrail() when deleteTrail != null:
 return deleteTrail(_that.id);case _LoadTrack() when loadTrack != null:
-return loadTrack(_that.filePath);case _UnloadTrack() when unloadTrack != null:
+return loadTrack(_that.filePath);case _TrackLoadProgress() when trackLoadProgress != null:
+return trackLoadProgress(_that.progress);case _TrackSaveProgress() when trackSaveProgress != null:
+return trackSaveProgress(_that.progress);case _TrackSaveCompleted() when trackSaveCompleted != null:
+return trackSaveCompleted(_that.trackId);case _TrackSaveFailed() when trackSaveFailed != null:
+return trackSaveFailed(_that.message);case _UnloadTrack() when unloadTrack != null:
 return unloadTrack();case _EmitTrack() when emitTrack != null:
 return emitTrack(_that.track);case _:
   return null;
@@ -526,6 +550,270 @@ as String,
 /// @nodoc
 
 
+class _TrackLoadProgress implements TrailsEvent {
+  const _TrackLoadProgress({required this.progress});
+  
+
+ final  double progress;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TrackLoadProgressCopyWith<_TrackLoadProgress> get copyWith => __$TrackLoadProgressCopyWithImpl<_TrackLoadProgress>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrackLoadProgress&&(identical(other.progress, progress) || other.progress == progress));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,progress);
+
+@override
+String toString() {
+  return 'TrailsEvent.trackLoadProgress(progress: $progress)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TrackLoadProgressCopyWith<$Res> implements $TrailsEventCopyWith<$Res> {
+  factory _$TrackLoadProgressCopyWith(_TrackLoadProgress value, $Res Function(_TrackLoadProgress) _then) = __$TrackLoadProgressCopyWithImpl;
+@useResult
+$Res call({
+ double progress
+});
+
+
+
+
+}
+/// @nodoc
+class __$TrackLoadProgressCopyWithImpl<$Res>
+    implements _$TrackLoadProgressCopyWith<$Res> {
+  __$TrackLoadProgressCopyWithImpl(this._self, this._then);
+
+  final _TrackLoadProgress _self;
+  final $Res Function(_TrackLoadProgress) _then;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? progress = null,}) {
+  return _then(_TrackLoadProgress(
+progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _TrackSaveProgress implements TrailsEvent {
+  const _TrackSaveProgress({required this.progress});
+  
+
+ final  double progress;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TrackSaveProgressCopyWith<_TrackSaveProgress> get copyWith => __$TrackSaveProgressCopyWithImpl<_TrackSaveProgress>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrackSaveProgress&&(identical(other.progress, progress) || other.progress == progress));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,progress);
+
+@override
+String toString() {
+  return 'TrailsEvent.trackSaveProgress(progress: $progress)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TrackSaveProgressCopyWith<$Res> implements $TrailsEventCopyWith<$Res> {
+  factory _$TrackSaveProgressCopyWith(_TrackSaveProgress value, $Res Function(_TrackSaveProgress) _then) = __$TrackSaveProgressCopyWithImpl;
+@useResult
+$Res call({
+ double progress
+});
+
+
+
+
+}
+/// @nodoc
+class __$TrackSaveProgressCopyWithImpl<$Res>
+    implements _$TrackSaveProgressCopyWith<$Res> {
+  __$TrackSaveProgressCopyWithImpl(this._self, this._then);
+
+  final _TrackSaveProgress _self;
+  final $Res Function(_TrackSaveProgress) _then;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? progress = null,}) {
+  return _then(_TrackSaveProgress(
+progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _TrackSaveCompleted implements TrailsEvent {
+  const _TrackSaveCompleted({required this.trackId});
+  
+
+ final  int trackId;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TrackSaveCompletedCopyWith<_TrackSaveCompleted> get copyWith => __$TrackSaveCompletedCopyWithImpl<_TrackSaveCompleted>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrackSaveCompleted&&(identical(other.trackId, trackId) || other.trackId == trackId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,trackId);
+
+@override
+String toString() {
+  return 'TrailsEvent.trackSaveCompleted(trackId: $trackId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TrackSaveCompletedCopyWith<$Res> implements $TrailsEventCopyWith<$Res> {
+  factory _$TrackSaveCompletedCopyWith(_TrackSaveCompleted value, $Res Function(_TrackSaveCompleted) _then) = __$TrackSaveCompletedCopyWithImpl;
+@useResult
+$Res call({
+ int trackId
+});
+
+
+
+
+}
+/// @nodoc
+class __$TrackSaveCompletedCopyWithImpl<$Res>
+    implements _$TrackSaveCompletedCopyWith<$Res> {
+  __$TrackSaveCompletedCopyWithImpl(this._self, this._then);
+
+  final _TrackSaveCompleted _self;
+  final $Res Function(_TrackSaveCompleted) _then;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? trackId = null,}) {
+  return _then(_TrackSaveCompleted(
+trackId: null == trackId ? _self.trackId : trackId // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _TrackSaveFailed implements TrailsEvent {
+  const _TrackSaveFailed({required this.message});
+  
+
+ final  String message;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TrackSaveFailedCopyWith<_TrackSaveFailed> get copyWith => __$TrackSaveFailedCopyWithImpl<_TrackSaveFailed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrackSaveFailed&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'TrailsEvent.trackSaveFailed(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TrackSaveFailedCopyWith<$Res> implements $TrailsEventCopyWith<$Res> {
+  factory _$TrackSaveFailedCopyWith(_TrackSaveFailed value, $Res Function(_TrackSaveFailed) _then) = __$TrackSaveFailedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$TrackSaveFailedCopyWithImpl<$Res>
+    implements _$TrackSaveFailedCopyWith<$Res> {
+  __$TrackSaveFailedCopyWithImpl(this._self, this._then);
+
+  final _TrackSaveFailed _self;
+  final $Res Function(_TrackSaveFailed) _then;
+
+/// Create a copy of TrailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_TrackSaveFailed(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
 class _UnloadTrack implements TrailsEvent {
   const _UnloadTrack();
   
@@ -665,13 +953,14 @@ extension TrailsStatePatterns on TrailsState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( Initialized value)?  initialized,TResult Function( LoadingTrack value)?  loadingTrack,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( Initialized value)?  initialized,TResult Function( LoadingTrack value)?  loadingTrack,TResult Function( SavingTrack value)?  savingTrack,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial(_that);case Initialized() when initialized != null:
 return initialized(_that);case LoadingTrack() when loadingTrack != null:
-return loadingTrack(_that);case _:
+return loadingTrack(_that);case SavingTrack() when savingTrack != null:
+return savingTrack(_that);case _:
   return orElse();
 
 }
@@ -689,13 +978,14 @@ return loadingTrack(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( Initialized value)  initialized,required TResult Function( LoadingTrack value)  loadingTrack,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( Initialized value)  initialized,required TResult Function( LoadingTrack value)  loadingTrack,required TResult Function( SavingTrack value)  savingTrack,}){
 final _that = this;
 switch (_that) {
 case Initial():
 return initial(_that);case Initialized():
 return initialized(_that);case LoadingTrack():
-return loadingTrack(_that);}
+return loadingTrack(_that);case SavingTrack():
+return savingTrack(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -709,13 +999,14 @@ return loadingTrack(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( Initialized value)?  initialized,TResult? Function( LoadingTrack value)?  loadingTrack,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( Initialized value)?  initialized,TResult? Function( LoadingTrack value)?  loadingTrack,TResult? Function( SavingTrack value)?  savingTrack,}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial(_that);case Initialized() when initialized != null:
 return initialized(_that);case LoadingTrack() when loadingTrack != null:
-return loadingTrack(_that);case _:
+return loadingTrack(_that);case SavingTrack() when savingTrack != null:
+return savingTrack(_that);case _:
   return null;
 
 }
@@ -732,12 +1023,13 @@ return loadingTrack(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( List<TrailInfo> trails,  TrackFile? track)?  initialized,TResult Function( List<TrailInfo> trails)?  loadingTrack,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( List<TrailInfo> trails,  TrackFile? track)?  initialized,TResult Function( List<TrailInfo> trails,  double progress)?  loadingTrack,TResult Function( List<TrailInfo> trails,  double progress)?  savingTrack,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial();case Initialized() when initialized != null:
 return initialized(_that.trails,_that.track);case LoadingTrack() when loadingTrack != null:
-return loadingTrack(_that.trails);case _:
+return loadingTrack(_that.trails,_that.progress);case SavingTrack() when savingTrack != null:
+return savingTrack(_that.trails,_that.progress);case _:
   return orElse();
 
 }
@@ -755,12 +1047,13 @@ return loadingTrack(_that.trails);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( List<TrailInfo> trails,  TrackFile? track)  initialized,required TResult Function( List<TrailInfo> trails)  loadingTrack,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( List<TrailInfo> trails,  TrackFile? track)  initialized,required TResult Function( List<TrailInfo> trails,  double progress)  loadingTrack,required TResult Function( List<TrailInfo> trails,  double progress)  savingTrack,}) {final _that = this;
 switch (_that) {
 case Initial():
 return initial();case Initialized():
 return initialized(_that.trails,_that.track);case LoadingTrack():
-return loadingTrack(_that.trails);}
+return loadingTrack(_that.trails,_that.progress);case SavingTrack():
+return savingTrack(_that.trails,_that.progress);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -774,12 +1067,13 @@ return loadingTrack(_that.trails);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( List<TrailInfo> trails,  TrackFile? track)?  initialized,TResult? Function( List<TrailInfo> trails)?  loadingTrack,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( List<TrailInfo> trails,  TrackFile? track)?  initialized,TResult? Function( List<TrailInfo> trails,  double progress)?  loadingTrack,TResult? Function( List<TrailInfo> trails,  double progress)?  savingTrack,}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial();case Initialized() when initialized != null:
 return initialized(_that.trails,_that.track);case LoadingTrack() when loadingTrack != null:
-return loadingTrack(_that.trails);case _:
+return loadingTrack(_that.trails,_that.progress);case SavingTrack() when savingTrack != null:
+return savingTrack(_that.trails,_that.progress);case _:
   return null;
 
 }
@@ -897,7 +1191,7 @@ as TrackFile?,
 
 
 class LoadingTrack implements TrailsState {
-  const LoadingTrack({required final  List<TrailInfo> trails}): _trails = trails;
+  const LoadingTrack({required final  List<TrailInfo> trails, required this.progress}): _trails = trails;
   
 
  final  List<TrailInfo> _trails;
@@ -907,6 +1201,7 @@ class LoadingTrack implements TrailsState {
   return EqualUnmodifiableListView(_trails);
 }
 
+ final  double progress;
 
 /// Create a copy of TrailsState
 /// with the given fields replaced by the non-null parameter values.
@@ -918,16 +1213,16 @@ $LoadingTrackCopyWith<LoadingTrack> get copyWith => _$LoadingTrackCopyWithImpl<L
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingTrack&&const DeepCollectionEquality().equals(other._trails, _trails));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingTrack&&const DeepCollectionEquality().equals(other._trails, _trails)&&(identical(other.progress, progress) || other.progress == progress));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_trails));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_trails),progress);
 
 @override
 String toString() {
-  return 'TrailsState.loadingTrack(trails: $trails)';
+  return 'TrailsState.loadingTrack(trails: $trails, progress: $progress)';
 }
 
 
@@ -938,7 +1233,7 @@ abstract mixin class $LoadingTrackCopyWith<$Res> implements $TrailsStateCopyWith
   factory $LoadingTrackCopyWith(LoadingTrack value, $Res Function(LoadingTrack) _then) = _$LoadingTrackCopyWithImpl;
 @useResult
 $Res call({
- List<TrailInfo> trails
+ List<TrailInfo> trails, double progress
 });
 
 
@@ -955,10 +1250,85 @@ class _$LoadingTrackCopyWithImpl<$Res>
 
 /// Create a copy of TrailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? trails = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? trails = null,Object? progress = null,}) {
   return _then(LoadingTrack(
 trails: null == trails ? _self._trails : trails // ignore: cast_nullable_to_non_nullable
-as List<TrailInfo>,
+as List<TrailInfo>,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SavingTrack implements TrailsState {
+  const SavingTrack({required final  List<TrailInfo> trails, required this.progress}): _trails = trails;
+  
+
+ final  List<TrailInfo> _trails;
+ List<TrailInfo> get trails {
+  if (_trails is EqualUnmodifiableListView) return _trails;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_trails);
+}
+
+ final  double progress;
+
+/// Create a copy of TrailsState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SavingTrackCopyWith<SavingTrack> get copyWith => _$SavingTrackCopyWithImpl<SavingTrack>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SavingTrack&&const DeepCollectionEquality().equals(other._trails, _trails)&&(identical(other.progress, progress) || other.progress == progress));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_trails),progress);
+
+@override
+String toString() {
+  return 'TrailsState.savingTrack(trails: $trails, progress: $progress)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SavingTrackCopyWith<$Res> implements $TrailsStateCopyWith<$Res> {
+  factory $SavingTrackCopyWith(SavingTrack value, $Res Function(SavingTrack) _then) = _$SavingTrackCopyWithImpl;
+@useResult
+$Res call({
+ List<TrailInfo> trails, double progress
+});
+
+
+
+
+}
+/// @nodoc
+class _$SavingTrackCopyWithImpl<$Res>
+    implements $SavingTrackCopyWith<$Res> {
+  _$SavingTrackCopyWithImpl(this._self, this._then);
+
+  final SavingTrack _self;
+  final $Res Function(SavingTrack) _then;
+
+/// Create a copy of TrailsState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? trails = null,Object? progress = null,}) {
+  return _then(SavingTrack(
+trails: null == trails ? _self._trails : trails // ignore: cast_nullable_to_non_nullable
+as List<TrailInfo>,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 
