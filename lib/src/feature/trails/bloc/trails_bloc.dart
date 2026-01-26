@@ -390,7 +390,8 @@ Future<void> _loadTrackIsolateEntry(Map<String, Object?> message) async {
     try {
       final file = File(filePath);
       final name = path.basenameWithoutExtension(filePath);
-      final extension = path.extension(filePath);
+      final extensionWithDot = path.extension(filePath);
+      final extension = extensionWithDot.startsWith('.') ? extensionWithDot.substring(1) : extensionWithDot;
       final size = await file.length();
       final timestampMs = DateTime.now().millisecondsSinceEpoch;
 
@@ -463,7 +464,8 @@ Future<void> _saveTrackIsolateEntry(Map<String, Object?> message) async {
     try {
       final file = File(filePath);
       final name = path.basenameWithoutExtension(filePath);
-      final extension = path.extension(filePath);
+      final extensionWithDot = path.extension(filePath);
+      final extension = extensionWithDot.startsWith('.') ? extensionWithDot.substring(1) : extensionWithDot;
       final size = await file.length();
       final timestampMs = DateTime.now().millisecondsSinceEpoch;
 

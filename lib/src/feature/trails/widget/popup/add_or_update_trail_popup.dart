@@ -36,7 +36,12 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
   final formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController()..text = name;
-  final filePickerController = TextEditingController()..text = (trail?.fileName ?? '') + (trail?.fileExtension ?? '');
+  var fileName = trail?.fileName ?? '';
+  final fileExtension = trail?.fileExtension ?? '';
+  if (fileExtension.isNotEmpty) {
+    fileName += '.$fileExtension';
+  }
+  final filePickerController = TextEditingController()..text = fileName;
 
   IconButton addTrackIconButton(TrailsBloc bloc, IFilePickerProvider filePicker) {
     return IconButton(
