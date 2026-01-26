@@ -1,3 +1,9 @@
+// ignore_for_file: avoid_redundant_argument_values
+
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/update/update.dart';
@@ -12,8 +18,24 @@ class MockClient extends Mock implements http.Client {}
 
 class MockAppInfoProvider extends Mock implements IAppInfoProvider {}
 
+class MockUpdateApiService extends Mock implements IUpdateApiService {}
+
+class MockUpdateAssetResolver extends Mock implements IUpdateAssetResolver {}
+
+class MockUpdateDownloadService extends Mock implements IUpdateDownloadService {}
+
+class MockUpdateInstaller extends Mock implements IUpdateInstaller {}
+
+class MockUpdateChangelogService extends Mock implements IUpdateChangelogService {}
+
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUpAll(() {
+    registerFallbackValue(<String, String>{});
+    registerFallbackValue((int _, int _) {} as DownloadingHandler);
+    registerFallbackValue(File('/tmp/entime.apk'));
+  });
 
   late MockClient client;
   late MockAppInfoProvider appInfoProvider;
@@ -33,25 +55,28 @@ void main() async {
     await settings.setDefaults();
   });
 
-  group('UpdateProvider.init', () {
+  group('UpdateController.init', () {
     test('Initialize', () async {
       expect(
-        await UpdateProvider.init(client: client, appInfoProvider: appInfoProvider, settingsProvider: settings),
-        isA<UpdateProvider>(),
+        await UpdateController.init(client: client, appInfoProvider: appInfoProvider, settingsProvider: settings),
+        isA<UpdateController>(),
       );
     });
   });
 
-  group('UpdateProvider.isUpdateAvailable', () {
+  group('UpdateController.isUpdateAvailable', () {
     test('Update available', () async {
       when(() => appInfoProvider.appName).thenReturn('Entime');
       when(() => appInfoProvider.version).thenReturn('0.0.1');
       when(() => appInfoProvider.buildNumber).thenReturn('1');
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
-      final updater = await UpdateProvider.init(
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
@@ -60,17 +85,61 @@ void main() async {
       expect(await updater.isUpdateAvailable, true);
     });
 
+    test('Update available with non-standard tag', () async {
+      when(() => appInfoProvider.appName).thenReturn('Entime');
+      when(() => appInfoProvider.version).thenReturn('0.0.1');
+      when(() => appInfoProvider.buildNumber).thenReturn('1');
+      when(
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
+      ).thenAnswer((_) async => http.Response(_githubResponseWithTag('v0.4.4'), 200));
+
+      final updater = await UpdateController.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      expect(await updater.isUpdateAvailable, true);
+      expect(updater.latestVersion, '0.4.4');
+    });
+
+    test('Update unavailable with non-semver tag', () async {
+      when(() => appInfoProvider.appName).thenReturn('Entime');
+      when(() => appInfoProvider.version).thenReturn('0.0.1');
+      when(() => appInfoProvider.buildNumber).thenReturn('1');
+      when(
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
+      ).thenAnswer((_) async => http.Response(_githubResponseWithTag('tag123'), 200));
+
+      final updater = await UpdateController.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      expect(await updater.isUpdateAvailable, false);
+    });
+
     test('Update available but check disabled at settings', skip: 'Remove this setting from provider', () async {
       when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'entime');
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '0.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
       await settings.update(settings.settings.copyWith(checkUpdates: false));
 
-      final updater = await UpdateProvider.init(
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
@@ -86,10 +155,13 @@ void main() async {
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
-      final updater = await UpdateProvider.init(
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
@@ -103,8 +175,19 @@ void main() async {
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer((_) async => http.Response('Some incorrect response', 200));
+
+      final updater = await UpdateController.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
+
+      expect(await updater.isUpdateAvailable, false);
     });
 
     test('404 not found', () async {
@@ -112,10 +195,13 @@ void main() async {
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer((_) async => http.Response('', 404));
 
-      final updater = await UpdateProvider.init(
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
@@ -132,13 +218,16 @@ void main() async {
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
       when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer(
         (_) async =>
             http.Response('{ "url": "https://api.github.com/repos/Syutkin/entime-mobile/releases/56643443" }', 200),
       );
 
-      final updater = await UpdateProvider.init(
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
@@ -148,15 +237,735 @@ void main() async {
     });
   });
 
-  group('UpdateProvider.latestVersion', () {
+  group('UpdateController.downloadUpdate', () {
+    test('Emits progress and completion on success', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenAnswer((invocation) async {
+        final onProgress = invocation.namedArguments[#onProgress] as DownloadingHandler;
+        onProgress(5, 10);
+        return UpdateDownloadResult(file: File('/tmp/entime.apk'), sha1: '');
+      });
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      expect(events.any((event) => event is UpdateControllerDownloading), true);
+      expect(events.any((event) => event is UpdateControllerDownloaded), true);
+    });
+
+    test('Does nothing when already downloading', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+
+      final completer = Completer<UpdateDownloadResult>();
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenAnswer((_) => completer.future);
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      await controller.isUpdateAvailable;
+
+      final first = controller.downloadUpdate();
+      await Future<void>.delayed(Duration.zero);
+      await controller.downloadUpdate();
+
+      completer.complete(UpdateDownloadResult(file: File('/tmp/entime.apk'), sha1: ''));
+      await first;
+
+      verify(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).called(1);
+      controller.dispose();
+    });
+
+    test('Emits error when asset is missing', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+      when(() => assetResolver.resolve(release)).thenReturn(null);
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      final errorEvent = events.whereType<UpdateControllerError>().toList();
+      expect(errorEvent.length, 1);
+      expect(errorEvent.first.message, 'Cannot find update asset for this platform');
+      verifyNever(
+        () => downloadService.download(
+          url: any(named: 'url'),
+          fileName: any(named: 'fileName'),
+          expectedSha1: any(named: 'expectedSha1'),
+          onProgress: any(named: 'onProgress'),
+        ),
+      );
+    });
+
+    test('Emits error when hash mismatch', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+        hashUrl: 'https://example.com/entime.apk.sha1',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+      when(() => apiService.fetchHash(selection.hashUrl!)).thenAnswer((_) async => 'expected-hash');
+
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: 'expected-hash',
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenThrow(UpdateDownloadException('File hash mismatch'));
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      final errorEvent = events.whereType<UpdateControllerError>().toList();
+      expect(errorEvent.length, 1);
+      expect(errorEvent.first.message, 'File hash mismatch');
+    });
+
+    test('Does not emit error when download is canceled', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenThrow(UpdateDownloadCanceled());
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      expect(events.whereType<UpdateControllerError>(), isEmpty);
+      expect(events.whereType<UpdateControllerDownloaded>(), isEmpty);
+      expect(events.whereType<UpdateControllerDownloading>(), isEmpty);
+    });
+
+    test('Does nothing when latest release is unavailable', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => null);
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      expect(events, isEmpty);
+      verifyNever(
+        () => downloadService.download(
+          url: any(named: 'url'),
+          fileName: any(named: 'fileName'),
+          expectedSha1: any(named: 'expectedSha1'),
+          onProgress: any(named: 'onProgress'),
+        ),
+      );
+    });
+
+    test('Emits error on unexpected download exception', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenThrow(Exception('boom'));
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      final errorEvents = events.whereType<UpdateControllerError>().toList();
+      expect(errorEvents.length, 1);
+      expect(errorEvents.first.message, 'Error occurred while downloading file: Exception: boom');
+    });
+
+    test('Emits error on unknown download error', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenThrow(Error());
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      final errorEvents = events.whereType<UpdateControllerError>().toList();
+      expect(errorEvents.length, 1);
+      expect(errorEvents.first.message, startsWith('Unknown error:'));
+    });
+
+    test('Downloads even when hash is missing', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+        hashUrl: 'https://example.com/entime.apk.sha1',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+      when(() => apiService.fetchHash(selection.hashUrl!)).thenAnswer((_) async => null);
+
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenAnswer((_) async => UpdateDownloadResult(file: File('/tmp/entime.apk'), sha1: ''));
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      expect(events.any((event) => event is UpdateControllerDownloaded), true);
+    });
+  });
+
+  group('UpdateController.installUpdate', () {
+    test('Calls installer after successful download', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+
+      final downloadedFile = File('/tmp/entime.apk');
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenAnswer((_) async => UpdateDownloadResult(file: downloadedFile, sha1: ''));
+      when(() => installer.install(downloadedFile)).thenAnswer((_) async {});
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      await controller.downloadUpdate();
+      await controller.installUpdate();
+
+      verify(() => installer.install(downloadedFile)).called(1);
+      controller.dispose();
+    });
+
+    test('Emits error when installer throws UpdateInstallException', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+
+      final downloadedFile = File('/tmp/entime.apk');
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenAnswer((_) async => UpdateDownloadResult(file: downloadedFile, sha1: ''));
+      when(() => installer.install(downloadedFile)).thenThrow(UpdateInstallException('install denied'));
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await controller.installUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      final errorEvents = events.whereType<UpdateControllerError>().toList();
+      expect(errorEvents.length, 1);
+      expect(errorEvents.first.message, 'install denied');
+    });
+
+    test('Emits error when installer throws unexpected exception', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+
+      final downloadedFile = File('/tmp/entime.apk');
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenAnswer((_) async => UpdateDownloadResult(file: downloadedFile, sha1: ''));
+      when(() => installer.install(downloadedFile)).thenThrow(Exception('boom'));
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await controller.installUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      final errorEvents = events.whereType<UpdateControllerError>().toList();
+      expect(errorEvents.length, 1);
+      expect(errorEvents.first.message, 'Install error: Exception: boom');
+    });
+
+    test('Emits error when installer throws unknown error', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+
+      final release = _releaseFromResponse(_githubResponse);
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => release);
+
+      const selection = UpdateAssetSelection(
+        fileName: 'entime-0.4.4-arm64-v8a.apk',
+        downloadUrl: 'https://example.com/entime.apk',
+      );
+      when(() => assetResolver.resolve(release)).thenReturn(selection);
+
+      final downloadedFile = File('/tmp/entime.apk');
+      when(
+        () => downloadService.download(
+          url: selection.downloadUrl,
+          fileName: selection.fileName,
+          expectedSha1: null,
+          onProgress: any(named: 'onProgress'),
+        ),
+      ).thenAnswer((_) async => UpdateDownloadResult(file: downloadedFile, sha1: ''));
+      when(() => installer.install(downloadedFile)).thenThrow(Error());
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      final events = <UpdateControllerEvent>[];
+      final subscription = controller.events.listen(events.add);
+
+      await controller.downloadUpdate();
+      await controller.installUpdate();
+      await _flushEvents();
+
+      await subscription.cancel();
+      controller.dispose();
+
+      final errorEvents = events.whereType<UpdateControllerError>().toList();
+      expect(errorEvents.length, 1);
+      expect(errorEvents.first.message, startsWith('Unknown install error:'));
+    });
+
+    test('Does nothing when update is not downloaded', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => appInfo.version).thenReturn('0.0.1');
+      when(() => apiService.fetchLatestRelease()).thenAnswer((_) async => null);
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      await controller.installUpdate();
+
+      verifyNever(() => installer.install(any()));
+      controller.dispose();
+    });
+  });
+
+  group('UpdateController.cancelDownload', () {
+    test('Delegates to download service', () async {
+      final apiService = MockUpdateApiService();
+      final assetResolver = MockUpdateAssetResolver();
+      final downloadService = MockUpdateDownloadService();
+      final installer = MockUpdateInstaller();
+      final changelogService = MockUpdateChangelogService();
+      final appInfo = MockAppInfoProvider();
+
+      when(() => downloadService.cancel()).thenAnswer((_) async {});
+
+      final controller = UpdateController(
+        apiService: apiService,
+        assetResolver: assetResolver,
+        downloadService: downloadService,
+        installer: installer,
+        changelogService: changelogService,
+        appInfo: appInfo,
+      );
+
+      await controller.cancelDownload();
+
+      verify(() => downloadService.cancel()).called(1);
+      controller.dispose();
+    });
+  });
+
+  group('UpdateController.latestVersion', () {
     test('latestVersion exists', () async {
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '0.0.1');
 
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer((_) async => http.Response(_githubResponse, 200));
 
-      final updater = await UpdateProvider.init(
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
@@ -169,10 +978,13 @@ void main() async {
 
     test('latestVersion did not exists', () async {
       when(
-        () => client.get(Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest')),
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
       ).thenAnswer((_) async => http.Response(_githubResponse, 404));
 
-      final updater = await UpdateProvider.init(
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
@@ -180,19 +992,38 @@ void main() async {
 
       expect(updater.latestVersion, '');
     });
-  });
 
-  group('UpdateProvider.showChangelog', () {
-    test('First start', () async {
-      final updater = await UpdateProvider.init(
+    test('latestVersion keeps non-semver tag', () async {
+      when(
+        () => client.get(
+          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
+          headers: any(named: 'headers'),
+        ),
+      ).thenAnswer((_) async => http.Response(_githubResponseWithTag('tag123'), 200));
+
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
       );
 
+      await updater.isUpdateAvailable;
+
+      expect(updater.latestVersion, 'tag123');
+    });
+  });
+
+  group('UpdateController.showChangelog', () {
+    test('First start', () async {
       await settings.setDefaults();
 
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
+
+      final updater = await UpdateController.init(
+        client: client,
+        appInfoProvider: appInfoProvider,
+        settingsProvider: settings,
+      );
 
       expect(await updater.showChangelog(), null);
 
@@ -203,13 +1034,13 @@ void main() async {
     test('Second start, do not show changelog', () async {
       await settings.update(const AppSettings.defaults().copyWith(previousVersion: '1.0.1'));
 
-      final updater = await UpdateProvider.init(
+      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
+
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
       );
-
-      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
 
       expect(await updater.showChangelog(), null);
     });
@@ -217,28 +1048,28 @@ void main() async {
     test('Program updated', () async {
       await settings.update(const AppSettings.defaults().copyWith(previousVersion: '1.0.1'));
 
-      final updater = await UpdateProvider.init(
+      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '999.0.1');
+
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
       );
 
-      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '999.0.1');
-
       // empty changelog 'cos version 999.0.1 didn't exists
-      expect(await updater.showChangelog(), '');
+      expect(await updater.showChangelog(), null);
     });
 
     test('Updated to dev version', () async {
       await settings.update(const AppSettings.defaults().copyWith(previousVersion: '1.0.1'));
 
-      final updater = await UpdateProvider.init(
+      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '3.0.5-dev');
+
+      final updater = await UpdateController.init(
         client: client,
         appInfoProvider: appInfoProvider,
         settingsProvider: settings,
       );
-
-      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '3.0.5-dev');
 
       // на dev версиях не показываем ченджлог и не сохраняем версию в настройки
       expect(await updater.showChangelog(), null);
@@ -246,6 +1077,10 @@ void main() async {
     });
   });
 }
+
+Future<void> _flushEvents() => Future<void>.delayed(Duration.zero);
+
+Release _releaseFromResponse(String response) => Release.fromJson(jsonDecode(response) as Map<String, dynamic>);
 
 String _githubResponse = '''
 {
@@ -391,3 +1226,5 @@ String _githubResponse = '''
   "body": ""
 }
 ''';
+
+String _githubResponseWithTag(String tag) => _githubResponse.replaceFirst('"tag_name": "0.4.4"', '"tag_name": "$tag"');

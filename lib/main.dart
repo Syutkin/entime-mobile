@@ -48,7 +48,7 @@ Future<void> main() async {
 
   final settings = await SharedPrefsSettingsProvider.load();
   final appInfo = await AppInfoProvider.load();
-  final updateProvider = await UpdateProvider.init(
+  final updateController = await UpdateController.init(
     client: http.Client(),
     appInfoProvider: appInfo,
     settingsProvider: settings,
@@ -87,7 +87,7 @@ Future<void> main() async {
     ],
     child: EntimeApp(
       settingsProvider: settings,
-      updateProvider: updateProvider,
+      updateController: updateController,
       bluetoothProvider: bluetoothProvider,
       ttsProvider: ttsProvider,
       audioController: audioController,
@@ -116,7 +116,7 @@ Future<void> main() async {
 class EntimeApp extends StatelessWidget {
   const EntimeApp({
     required this.settingsProvider,
-    required this.updateProvider,
+    required this.updateController,
     required this.bluetoothProvider,
     required this.ttsProvider,
     required this.audioController,
@@ -130,7 +130,7 @@ class EntimeApp extends StatelessWidget {
 
   final ISettingsProvider settingsProvider;
   final IAppInfoProvider appInfo;
-  final IUpdateProvider updateProvider;
+  final IUpdateController updateController;
   final IBluetoothProvider bluetoothProvider;
   final IAudioController audioController;
   final TtsProvider ttsProvider;
@@ -177,7 +177,7 @@ class EntimeApp extends StatelessWidget {
           )..add(const BluetoothEvent.initialize()),
         ),
         BlocProvider<UpdateBloc>(
-          create: (context) => UpdateBloc(updateProvider: updateProvider)..add(const UpdateEvent.popupChangelog()),
+          create: (context) => UpdateBloc(updateController: updateController)..add(const UpdateEvent.popupChangelog()),
         ),
         BlocProvider<AppInfoCubit>(create: (context) => AppInfoCubit(appInfo: appInfo)),
         BlocProvider<NtpBloc>(create: (context) => NtpBloc(ntpProvider)),

@@ -14,7 +14,7 @@ import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/home/home.dart';
 import 'package:entime/src/feature/ntp/logic/ntp_provider.dart';
 import 'package:entime/src/feature/settings/logic/shared_prefs_settings_provider.dart';
-import 'package:entime/src/feature/update/logic/update_provider.dart';
+import 'package:entime/src/feature/update/update.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -30,7 +30,7 @@ void main() {
 
     final settings = await SharedPrefsSettingsProvider.load();
     final appInfo = await AppInfoProvider.load();
-    final updateProvider = await UpdateProvider.init(
+    final updateController = await UpdateController.init(
       client: http.Client(),
       appInfoProvider: appInfo,
       settingsProvider: settings,
@@ -70,7 +70,7 @@ void main() {
         ],
         child: EntimeApp(
           settingsProvider: settings,
-          updateProvider: updateProvider,
+          updateController: updateController,
           bluetoothProvider: bluetoothProvider,
           ttsProvider: ttsProvider,
           audioController: audioController,
