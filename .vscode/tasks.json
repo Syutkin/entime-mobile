@@ -2,6 +2,15 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"type": "shell",
+			"command": "./scripts/generate_intl.sh",
+			"problemMatcher": [],
+			"label": "flutter: generate intl",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		},
+		{
 			"type": "flutter",
 			"command": "flutter",
 			"args": [
