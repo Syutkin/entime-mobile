@@ -55,6 +55,7 @@ Future<void> main() async {
   );
   final bluetoothBackgroundConnection = BluetoothBackgroundConnection();
   final bluetoothProvider = BluetoothProvider(
+    appInfo: appInfo,
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
@@ -167,6 +168,9 @@ class EntimeApp extends StatelessWidget {
             countdown: countdown,
             stageId: settingsProvider.settings.stageId,
           ),
+        ),
+        BlocProvider<BluetoothDiscoveryCubit>(
+          create: (context) => BluetoothDiscoveryCubit(bluetoothProvider: bluetoothProvider),
         ),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(

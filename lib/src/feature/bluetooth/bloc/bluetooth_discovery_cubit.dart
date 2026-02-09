@@ -41,9 +41,12 @@ class BluetoothDiscoveryCubit extends Cubit<BluetoothDiscoveryState> {
   StreamSubscription<bool>? _isScanningSubscription;
 
   Future<void> startDiscovery() async {
-    emit(state.copyWith(isDiscovering: true, devices: const []));
+    if (state.isDiscovering) {
+      return Future.value();
+    }
+    emit(state.copyWith(devices: const []));
     await _bluetoothProvider.requestPermissions();
-    await _scanResultsSubscription?.cancel();
+    unawaited(_scanResultsSubscription?.cancel());
     _scanResultsSubscription = _bluetoothProvider.scanResultsWithRssi().listen(
       (devices) => emit(state.copyWith(devices: devices)),
     );

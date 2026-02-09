@@ -9,4 +9,4 @@ export 'model/bluetooth_protocol_models.dart';
 export 'model/bluetooth_protocol_types.dart';
 export 'widget/bluetooth_button.dart';
 export 'widget/bluetooth_device_list_entry.dart';
-export 'widget/select_device.dart';
+export 'widget/select_device_screen.dart';

@@ -37,6 +37,7 @@ void main() {
     );
     final bluetoothBackgroundConnection = BluetoothBackgroundConnection();
     final bluetoothProvider = BluetoothProvider(
+      appInfo: appInfo,
       bluetoothBackgroundConnection: bluetoothBackgroundConnection,
     );
 

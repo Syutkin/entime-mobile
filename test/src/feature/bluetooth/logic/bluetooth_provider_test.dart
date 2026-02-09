@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
+import 'package:entime/src/feature/app_info/logic/app_info_provider.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_blue_plus_platform_interface/flutter_blue_plus_platform_interface.dart';
@@ -100,6 +101,7 @@ void main() {
   group('BluetoothProvider:', () {
     late FakeFlutterBluePlusPlatform fakePlatform;
     late MockBluetoothBackgroundConnection backgroundConnection;
+    late IAppInfoProvider appInfo;
 
     setUp(() {
       fakePlatform = FakeFlutterBluePlusPlatform(
@@ -108,6 +110,7 @@ void main() {
       );
       FlutterBluePlusPlatform.instance = fakePlatform;
       backgroundConnection = MockBluetoothBackgroundConnection();
+      appInfo = DefaultAppInfoProvider();
     });
 
     tearDown(() async {
@@ -115,28 +118,28 @@ void main() {
     });
 
     test('initializes and exposes background connection', () {
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       expect(provider, isA<IBluetoothProvider>());
       expect(provider.bluetoothBackgroundConnection, same(backgroundConnection));
     });
 
     test('isSupported reflects platform isSupported', () async {
       fakePlatform.isSupportedValue = true;
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       final supported = await provider.isSupported;
       expect(supported, isTrue);
     });
 
     test('isOn returns true when adapter state is on', () async {
       fakePlatform.adapterState = BmAdapterStateEnum.on;
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       final isOn = await provider.isOn;
       expect(isOn, isTrue);
     });
 
     test('adapterState emits initial and updated states', () async {
       fakePlatform.adapterState = BmAdapterStateEnum.off;
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
 
       final states = <BluetoothAdapterState>[];
       final subscription = provider.adapterState.listen(states.add);
@@ -157,25 +160,25 @@ void main() {
 
     test('requestEnable delegates to platform turnOn', () async {
       fakePlatform.turnOnChanged = true;
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.requestEnable();
       expect(fakePlatform.turnOnCalled, isTrue);
     });
 
     test('startScan delegates to platform startScan', () async {
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.startScan();
       expect(fakePlatform.startScanCalled, isTrue);
     });
 
     test('stopScan delegates to platform stopScan', () async {
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.stopScan();
       expect(fakePlatform.stopScanCalled, isTrue);
     });
 
     test('isScanning emits values during start/stop scan', () async {
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       final events = <bool>[];
       final subscription = provider.isScanning.listen(events.add);
 
@@ -191,7 +194,7 @@ void main() {
     });
 
     test('scanResults emits when platform scan response arrives', () async {
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.startScan();
 
       const remoteId = DeviceIdentifier('11:22:33:44:55:66');
@@ -225,7 +228,7 @@ void main() {
     });
 
     test('scanResultsWithRssi aggregates results', () async {
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.startScan();
 
       const remoteId = DeviceIdentifier('11:22:33:44:55:66');
@@ -285,13 +288,13 @@ void main() {
     });
 
     test('requestPermissions completes', () async {
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.requestPermissions();
     });
 
     test('dispose delegates to background connection', () async {
       when(() => backgroundConnection.dispose()).thenAnswer((_) async {});
-      final provider = BluetoothProvider(bluetoothBackgroundConnection: backgroundConnection);
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.dispose();
       verify(() => backgroundConnection.dispose()).called(1);
     });

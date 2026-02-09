@@ -5,6 +5,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common/logger/logger.dart';
+import '../../app_info/logic/app_info_provider.dart';
+import '../../app_info/logic/app_info_provider_io.dart';
 import '../bluetooth.dart';
 
 abstract class IBluetoothProvider {
@@ -35,9 +37,12 @@ abstract class IBluetoothProvider {
 
 class BluetoothProvider implements IBluetoothProvider {
   BluetoothProvider({
+    required IAppInfoProvider appInfo,
     required IBluetoothBackgroundConnection bluetoothBackgroundConnection,
-  }) : _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
+  })  : _appInfo = appInfo,
+        _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
   final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
+  final IAppInfoProvider _appInfo;
 
   @override
   Stream<BluetoothAdapterState> get adapterState => FlutterBluePlus.adapterState;
@@ -79,6 +84,22 @@ class BluetoothProvider implements IBluetoothProvider {
       return;
     }
     try {
+      if (Platform.isAndroid) {
+        final sdkInt = _appInfo is AndroidAppInfoProvider
+            ? _appInfo.androidSdkInt
+            : null;
+        if (sdkInt != null && sdkInt >= 31) {
+          await [
+            Permission.bluetoothScan,
+            Permission.bluetoothConnect,
+          ].request();
+        } else {
+          await [
+            Permission.locationWhenInUse,
+          ].request();
+        }
+        return;
+      }
       await [
         Permission.bluetoothScan,
         Permission.bluetoothConnect,
@@ -92,7 +113,7 @@ class BluetoothProvider implements IBluetoothProvider {
   }
 
   @override
-  Future<void> startScan({Duration timeout = const Duration(seconds: 4)}) {
+  Future<void> startScan({Duration timeout = const Duration(seconds: 5)}) {
     return FlutterBluePlus.startScan(timeout: timeout);
   }
 

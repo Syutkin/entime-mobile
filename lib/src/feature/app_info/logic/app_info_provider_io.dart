@@ -10,6 +10,8 @@ class AndroidAppInfoProvider extends IAppInfoProvider {
   final AndroidDeviceInfo _deviceInfo;
   final List<String> _supportedAbis = ['armeabi-v7a', 'arm64-v8a'];
 
+  int get androidSdkInt => _deviceInfo.version.sdkInt;
+
   String? get abi {
     for (final deviceSupportedAbi in _deviceInfo.supportedAbis) {
       for (final abi in _supportedAbis) {
