@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
+import 'bluetooth_uuids.dart';
 /// Интерфейс для Bluetooth-соединения
 /// Позволяет легко тестировать BluetoothBackgroundConnection
 abstract class IBluetoothConnection {
@@ -129,12 +130,6 @@ class BleConnectionWrapper implements IBluetoothConnection {
 /// Реальная фабрика для создания BLE-соединений (Nordic UART Service)
 /// Используется в продакшене
 class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
-  static final Guid _nusServiceUuid = Guid('6E400001-B5A3-F393-E0A9-E50E24DCCA9E');
-  static final Guid _nusTxUuid = Guid('6E400002-B5A3-F393-E0A9-E50E24DCCA9E');
-  static final Guid _nusRxUuid = Guid('6E400003-B5A3-F393-E0A9-E50E24DCCA9E');
-  static final Guid _batteryServiceUuid = Guid('0000180F-0000-1000-8000-00805F9B34FB');
-  static final Guid _batteryLevelUuid = Guid('00002A19-0000-1000-8000-00805F9B34FB');
-
   @override
   Future<IBluetoothConnection> connectToDevice(BluetoothDevice device) async {
     await device.connect(license: License.free);
@@ -149,17 +144,17 @@ class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
     BluetoothCharacteristic? battery;
 
     for (final service in services) {
-      if (service.uuid == _nusServiceUuid) {
+      if (service.uuid == BluetoothUuids.nusService) {
         for (final characteristic in service.characteristics) {
-          if (characteristic.uuid == _nusTxUuid) {
+          if (characteristic.uuid == BluetoothUuids.nusTx) {
             tx = characteristic;
-          } else if (characteristic.uuid == _nusRxUuid) {
+          } else if (characteristic.uuid == BluetoothUuids.nusRx) {
             rx = characteristic;
           }
         }
-      } else if (service.uuid == _batteryServiceUuid) {
+      } else if (service.uuid == BluetoothUuids.batteryService) {
         for (final characteristic in service.characteristics) {
-          if (characteristic.uuid == _batteryLevelUuid) {
+          if (characteristic.uuid == BluetoothUuids.batteryLevel) {
             battery = characteristic;
           }
         }
