@@ -17,10 +17,7 @@ Future<void> selectBluetoothDevice(BuildContext context) async {
 }
 
 class SelectDeviceScreen extends StatefulWidget {
-  const SelectDeviceScreen({this.checkAvailability = true, super.key});
-
-  /// If true, on page start there is performed BLE scan.
-  final bool checkAvailability;
+  const SelectDeviceScreen({super.key});
 
   @override
   State<SelectDeviceScreen> createState() => _SelectDeviceScreen();
@@ -30,9 +27,7 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.checkAvailability) {
-      unawaited(context.read<BluetoothDiscoveryCubit>().startDiscovery());
-    }
+    unawaited(context.read<BluetoothDiscoveryCubit>().startDiscovery());
   }
 
   @override
@@ -55,11 +50,14 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
             title: Text(Localization.current.I18nBluetooth_selectDevice),
             actions: <Widget>[
               if (state.isDiscovering)
-                FittedBox(
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimaryContainer),
+                SizedBox.square(
+                  dimension: kMinInteractiveDimension,
+                  child: Center(
+                    child: SizedBox.square(
+                      dimension: IconTheme.of(context).size ?? 24,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onSurface),
+                      ),
                     ),
                   ),
                 )

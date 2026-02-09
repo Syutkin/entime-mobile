@@ -5,7 +5,7 @@ import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:entime/src/feature/bluetooth/logic/bluetooth_provider.dart';
 import 'package:entime/src/feature/bluetooth/model/bluetooth_device_with_rssi.dart';
-import 'package:entime/src/feature/bluetooth/widget/select_device.dart';
+import 'package:entime/src/feature/bluetooth/widget/select_device_screen.dart';
 import 'package:entime/src/feature/countdown/bloc/countdown_bloc.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/home/model/home_menu_button.dart';
