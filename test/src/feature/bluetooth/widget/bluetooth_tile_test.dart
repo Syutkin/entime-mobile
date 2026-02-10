@@ -13,12 +13,15 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
+class MockBluetoothDiscoveryCubit extends MockCubit<BluetoothDiscoveryState> implements BluetoothDiscoveryCubit {}
+
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
 void main() {
   late BluetoothBloc btBloc;
+  late BluetoothDiscoveryCubit bdCubit;
   late BluetoothDevice bluetoothDevice;
   late MockBluetoothProvider bluetoothProvider;
   late StreamController<bool> scanningController;
@@ -27,16 +30,20 @@ void main() {
   Widget testWidget() {
     return BlocProvider.value(
       value: btBloc,
-      child: MaterialApp(
-        localizationsDelegates: const [Localization.delegate],
-        supportedLocales: Localization.supportedLocales,
-        home: const Material(child: BluetoothTile()),
+      child: BlocProvider.value(
+        value: bdCubit,
+        child: MaterialApp(
+          localizationsDelegates: const [Localization.delegate],
+          supportedLocales: Localization.supportedLocales,
+          home: const Material(child: BluetoothTile()),
+        ),
       ),
     );
   }
 
   setUp(() {
     btBloc = MockBluetoothBloc();
+    bdCubit = MockBluetoothDiscoveryCubit();
     bluetoothDevice = MockBluetoothDevice();
     bluetoothProvider = MockBluetoothProvider();
     scanningController = StreamController<bool>.broadcast();
@@ -50,6 +57,8 @@ void main() {
     when(() => btBloc.bluetoothProvider).thenReturn(bluetoothProvider);
     when(() => btBloc.stream).thenAnswer((_) => const Stream<BluetoothBlocState>.empty());
     when(() => bluetoothDevice.platformName).thenReturn('BluetoothDeviceName');
+    when(() => bdCubit.startDiscovery()).thenAnswer((_) async {});
+    when(() => bdCubit.state).thenReturn(const BluetoothDiscoveryState.initial());
   });
 
   tearDown(() async {

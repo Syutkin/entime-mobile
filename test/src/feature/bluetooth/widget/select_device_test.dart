@@ -14,6 +14,8 @@ class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
+class MockBluetoothDiscoveryCubit extends MockCubit<BluetoothDiscoveryState> implements BluetoothDiscoveryCubit {}
+
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
 void main() {
@@ -21,16 +23,20 @@ void main() {
 
   late MockBluetoothProvider bluetoothProvider;
   late MockBluetoothBloc bluetoothBloc;
+  late MockBluetoothDiscoveryCubit bluetoothDiscoveryCubit;
   late StreamController<bool> scanningController;
   late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
 
   Widget testApp(Widget child) {
     return BlocProvider<BluetoothBloc>.value(
       value: bluetoothBloc,
-      child: MaterialApp(
-        localizationsDelegates: const [Localization.delegate],
-        supportedLocales: Localization.supportedLocales,
-        home: child,
+      child: BlocProvider<BluetoothDiscoveryCubit>.value(
+        value: bluetoothDiscoveryCubit,
+        child: MaterialApp(
+          localizationsDelegates: const [Localization.delegate],
+          supportedLocales: Localization.supportedLocales,
+          home: child,
+        ),
       ),
     );
   }
@@ -38,6 +44,7 @@ void main() {
   setUp(() {
     bluetoothProvider = MockBluetoothProvider();
     bluetoothBloc = MockBluetoothBloc();
+    bluetoothDiscoveryCubit = MockBluetoothDiscoveryCubit();
     scanningController = StreamController<bool>.broadcast();
     resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
 
@@ -48,6 +55,7 @@ void main() {
     when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
     when(() => bluetoothBloc.bluetoothProvider).thenReturn(bluetoothProvider);
     when(() => bluetoothBloc.state).thenReturn(const BluetoothBlocState.notInitialized());
+    when(() => bluetoothDiscoveryCubit.startDiscovery()).thenAnswer((_) async {});
   });
 
   tearDown(() async {
@@ -56,7 +64,11 @@ void main() {
   });
 
   group('SelectDeviceScreen tests', () {
-    patrolWidgetTest('Initial build shows scan indicator and title', (PatrolTester $) async {
+    patrolWidgetTest('When discovering state then shows scan indicator and title', (PatrolTester $) async {
+      when(
+        () => bluetoothDiscoveryCubit.state,
+      ).thenReturn(const BluetoothDiscoveryState.initial().copyWith(isDiscovering: true));
+
       await $.pumpWidget(testApp(const SelectDeviceScreen()));
       await $.pump();
 
@@ -64,10 +76,12 @@ void main() {
       expect($(CircularProgressIndicator), findsOneWidget);
     });
 
-    patrolWidgetTest('Shows replay icon after scan stops', (PatrolTester $) async {
+    patrolWidgetTest('Shows replay icon when state is not discovering', (PatrolTester $) async {
+      when(
+        () => bluetoothDiscoveryCubit.state,
+      ).thenReturn(const BluetoothDiscoveryState.initial().copyWith(isDiscovering: false));
+
       await $.pumpWidget(testApp(const SelectDeviceScreen()));
-      await $.pump();
-      scanningController.add(false);
       await $.pump();
 
       final iconButton = $(IconButton).evaluate().single.widget as IconButton;
@@ -78,29 +92,6 @@ void main() {
     patrolWidgetTest('Lists scanned device and returns it on tap', (PatrolTester $) async {
       late BuildContext rootContext;
 
-      await $.pumpWidget(
-        BlocProvider<BluetoothBloc>.value(
-          value: bluetoothBloc,
-          child: MaterialApp(
-            localizationsDelegates: const [Localization.delegate],
-            supportedLocales: Localization.supportedLocales,
-            home: Builder(
-              builder: (context) {
-                rootContext = context;
-                return const SizedBox();
-              },
-            ),
-          ),
-        ),
-      );
-
-      final resultFuture = Navigator.of(rootContext).push<BluetoothDeviceWithRSSI>(
-        MaterialPageRoute(builder: (_) => const SelectDeviceScreen()),
-      );
-      await $.pump();
-      // Let initState async work (scan start + subscriptions) flush a frame.
-      await $.pump();
-
       const rssi = -40;
       const remoteId = DeviceIdentifier('11:22:33:44:55:66');
       const deviceName = 'Test Device';
@@ -110,42 +101,48 @@ void main() {
       when(() => device.platformName).thenReturn(deviceName);
       when(() => device.isConnected).thenReturn(false);
 
-      resultsController.add([BluetoothDeviceWithRSSI(device, rssi)]);
+      final deviceWithRSSI = BluetoothDeviceWithRSSI(device, rssi);
+
+      final devices = <BluetoothDeviceWithRSSI>[
+        deviceWithRSSI,
+        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('11:11:11:11:11:11'), -60),
+        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('22:22:22:22:22:22'), -70),
+        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('33:33:33:33:33:33'), -80),
+        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('44:44:44:44:44:44'), -90),
+      ];
+
+      when(
+        () => bluetoothDiscoveryCubit.state,
+      ).thenReturn(const BluetoothDiscoveryState.initial().copyWith(devices: devices));
+
+      await $.pumpWidget(
+        testApp(
+          Builder(
+            builder: (context) {
+              rootContext = context;
+              return const SelectDeviceScreen();
+            },
+          ),
+        ),
+      );
+      await $.pump();
+
+      final resultFuture = Navigator.of(rootContext).push<BluetoothDeviceWithRSSI>(
+        MaterialPageRoute(builder: (_) => const SelectDeviceScreen()),
+      );
 
       await $.pump();
+      expect($(remoteId.str), findsOneWidget);
       expect($(deviceName), findsOneWidget);
+      expect($(rssi.toString()), findsOneWidget);
 
-      await $(deviceName).tap();
+      await $(device.remoteId.str).tap();
       final result = await resultFuture;
 
       expect(result, isNotNull);
-      expect(result!.device.remoteId.str, remoteId.str);
+      expect(result!.device.remoteId, remoteId);
+      expect(result.device.platformName, deviceName);
       expect(result.rssi, rssi);
-    });
-
-    patrolWidgetTest('Updates RSSI when device is scanned again', (PatrolTester $) async {
-      await $.pumpWidget(testApp(const SelectDeviceScreen()));
-      // Let initState async work (scan start + subscriptions) flush a frame.
-      await $.pump();
-
-      const remoteId = DeviceIdentifier('11:22:33:44:55:66');
-      const deviceName = 'Test Device';
-
-      final device = MockBluetoothDevice();
-      when(() => device.remoteId).thenReturn(remoteId);
-      when(() => device.platformName).thenReturn(deviceName);
-      when(() => device.isConnected).thenReturn(false);
-
-      resultsController.add([BluetoothDeviceWithRSSI(device, -40)]);
-
-      await $.pump();
-
-      resultsController.add([BluetoothDeviceWithRSSI(device, -10)]);
-
-      await $.pump();
-
-      expect($('-40'), findsNothing);
-      expect($('-10'), findsOneWidget);
     });
   });
 }

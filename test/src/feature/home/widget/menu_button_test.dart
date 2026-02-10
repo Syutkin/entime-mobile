@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bloc/bluetooth_bloc.dart';
+import 'package:entime/src/feature/bluetooth/bloc/bluetooth_discovery_cubit.dart';
 import 'package:entime/src/feature/bluetooth/logic/bluetooth_provider.dart';
 import 'package:entime/src/feature/bluetooth/model/bluetooth_device_with_rssi.dart';
 import 'package:entime/src/feature/bluetooth/widget/select_device_screen.dart';
@@ -24,6 +25,8 @@ class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit 
 
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
+class MockBluetoothDiscoveryCubit extends MockCubit<BluetoothDiscoveryState> implements BluetoothDiscoveryCubit {}
+
 class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState> implements CountdownBloc {}
 
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
@@ -33,6 +36,7 @@ void main() {
   late SettingsCubit settingsCubit;
   late AppSettings settings;
   late BluetoothBloc btBloc;
+  late BluetoothDiscoveryCubit bdCubit;
   late CountdownBloc countdownBloc;
   late MockBluetoothProvider bluetoothProvider;
   late StreamController<bool> scanningController;
@@ -46,11 +50,14 @@ void main() {
         child: BlocProvider.value(
           value: btBloc,
           child: BlocProvider.value(
-            value: countdownBloc,
-            child: MaterialApp(
-              localizationsDelegates: const [Localization.delegate],
-              supportedLocales: Localization.supportedLocales,
-              home: MenuButton(activeTab: activeTab),
+            value: bdCubit,
+            child: BlocProvider.value(
+              value: countdownBloc,
+              child: MaterialApp(
+                localizationsDelegates: const [Localization.delegate],
+                supportedLocales: Localization.supportedLocales,
+                home: MenuButton(activeTab: activeTab),
+              ),
             ),
           ),
         ),
@@ -67,6 +74,7 @@ void main() {
     databaseBloc = MockDatabaseBloc();
     settingsCubit = MockSettingsCubit();
     btBloc = MockBluetoothBloc();
+    bdCubit = MockBluetoothDiscoveryCubit();
     countdownBloc = MockCountdownBloc();
     bluetoothProvider = MockBluetoothProvider();
     scanningController = StreamController<bool>.broadcast();
@@ -79,6 +87,8 @@ void main() {
     when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
     when(() => btBloc.bluetoothProvider).thenReturn(bluetoothProvider);
     when(() => btBloc.stream).thenAnswer((_) => const Stream<BluetoothBlocState>.empty());
+    when(() => bdCubit.startDiscovery()).thenAnswer((_) async {});
+    when(() => bdCubit.state).thenReturn(const BluetoothDiscoveryState.initial());
     settings = const AppSettings.defaults();
     when(() => settingsCubit.state).thenReturn(settings);
     when(() => settingsCubit.update(any())).thenAnswer((_) => Future.value());

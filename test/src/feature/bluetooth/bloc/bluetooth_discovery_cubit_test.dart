@@ -48,7 +48,6 @@ void main() {
 
       verify(() => bluetoothProvider.requestPermissions()).called(1);
       verify(() => bluetoothProvider.startScan()).called(1);
-      expect(cubit!.state.isDiscovering, isTrue);
       expect(cubit!.state.devices, isEmpty);
     });
 

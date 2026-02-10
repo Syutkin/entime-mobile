@@ -12,10 +12,13 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> implements BluetoothBloc {}
 
+class MockBluetoothDiscoveryCubit extends MockCubit<BluetoothDiscoveryState> implements BluetoothDiscoveryCubit {}
+
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
 void main() {
   late BluetoothBloc btBloc;
+  late BluetoothDiscoveryCubit bdCubit;
   late MockBluetoothProvider bluetoothProvider;
   late StreamController<bool> scanningController;
   late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
@@ -23,10 +26,13 @@ void main() {
   Widget testWidget() {
     return BlocProvider.value(
       value: btBloc,
-      child: MaterialApp(
-        localizationsDelegates: const [Localization.delegate],
-        supportedLocales: Localization.supportedLocales,
-        home: const Material(child: BluetoothButton()),
+      child: BlocProvider.value(
+        value: bdCubit,
+        child: MaterialApp(
+          localizationsDelegates: const [Localization.delegate],
+          supportedLocales: Localization.supportedLocales,
+          home: const Material(child: BluetoothButton()),
+        ),
       ),
     );
   }
@@ -34,6 +40,7 @@ void main() {
   group('BluetoothButton tests', () {
     setUp(() {
       btBloc = MockBluetoothBloc();
+      bdCubit = MockBluetoothDiscoveryCubit();
       bluetoothProvider = MockBluetoothProvider();
       scanningController = StreamController<bool>.broadcast();
       resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
@@ -45,6 +52,8 @@ void main() {
       when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
       when(() => btBloc.bluetoothProvider).thenReturn(bluetoothProvider);
       when(() => btBloc.stream).thenAnswer((_) => const Stream<BluetoothBlocState>.empty());
+      when(() => bdCubit.startDiscovery()).thenAnswer((_) async {});
+      when(() => bdCubit.state).thenReturn(const BluetoothDiscoveryState.initial());
     });
 
     tearDown(() async {
