@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
@@ -43,6 +45,7 @@ void main() {
   late int fileId;
   late String fileName;
   late String fileExtension;
+  late String fileFullName;
   late int fileSize;
   late DateTime timestamp;
 
@@ -110,8 +113,9 @@ void main() {
     url = 'https://example.com';
     description = 'Test description';
     fileId = 1;
-    fileName = 'test.gpx';
-    fileExtension = '.gpx';
+    fileName = 'test';
+    fileExtension = 'gpx';
+    fileFullName = '$fileName.$fileExtension';
     fileSize = 12345;
     timestamp = DateTime.now();
 
@@ -244,10 +248,12 @@ void main() {
           $(Row).$(Flexible).$(TextFormField).containing($(Localization.current.I18nDatabase_trailGpxTrack)),
           findsOneWidget,
         );
-        expect(
-          $(Row).containing($(Localization.current.I18nDatabase_trailGpxTrack)).$(CustomPaint),
-          findsOneWidget,
-        );
+        final progressIndicator =
+            $(Row).containing($(Localization.current.I18nDatabase_trailGpxTrack)).$(CustomPaint).which<CustomPaint>(
+                  (widget) =>
+                      widget.painter?.runtimeType.toString() == '_FilledCircularProgressPainter',
+                );
+        expect(progressIndicator, findsOneWidget);
       });
 
       patrolWidgetTest('Enter trail description', (PatrolTester $) async {
@@ -264,7 +270,7 @@ void main() {
 
         await $(#okButton).tap();
 
-        expect($(ExpandedAlertDialog), findsOneWidget);
+        expect($(ExpandedAlertDialog), findsNothing);
 
         verify(
           () => trailsBloc.add(
@@ -370,6 +376,13 @@ void main() {
       });
 
       patrolWidgetTest('Submits form with valid data', (PatrolTester $) async {
+        final stateController = StreamController<TrailsState>.broadcast();
+        addTearDown(stateController.close);
+        whenListen(
+          trailsBloc,
+          stateController.stream,
+          initialState: const TrailsState.initialized(trails: []),
+        );
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
         when(() => filePicker.pickFile()).thenAnswer(
@@ -397,7 +410,7 @@ void main() {
 
         await $(#okButton).tap();
 
-        expect($(ExpandedAlertDialog), findsNothing);
+        expect($(ExpandedAlertDialog), findsOneWidget);
 
         verify(
           () => trailsBloc.add(
@@ -411,6 +424,13 @@ void main() {
             ),
           ),
         ).called(1);
+
+        stateController.add(const TrailsState.savingTrack(trails: [], progress: 1.0));
+        stateController.add(const TrailsState.initialized(trails: []));
+
+        await $.pumpAndSettle();
+
+        expect($(ExpandedAlertDialog), findsNothing);
       });
 
       patrolWidgetTest('Cancels dialog', (PatrolTester $) async {
@@ -434,7 +454,7 @@ void main() {
 
         expect($(ExpandedAlertDialog), findsOneWidget);
         expect($(TextFormField).containing($(name)), findsOneWidget);
-        expect($(TextFormField).containing($(fileName + fileExtension)), findsOneWidget);
+        expect($(TextFormField).containing($(fileFullName)), findsOneWidget);
         expect($(TextFormField).containing($(distance.toString())), findsOneWidget);
         expect($(TextFormField).containing($(elevation.toString())), findsOneWidget);
         expect($(TextFormField).containing($(url)), findsOneWidget);
@@ -494,7 +514,7 @@ void main() {
         await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
-        expect($(TextFormField).containing($(fileName + fileExtension)), findsOneWidget);
+        expect($(TextFormField).containing($(fileFullName)), findsOneWidget);
 
         await $(#removeTrackIconButton).tap();
 
@@ -503,7 +523,7 @@ void main() {
           () => trailsBloc.add(const TrailsEvent.unloadTrack()),
         ).called(1);
 
-        expect($(TextFormField).containing($(fileName + fileExtension)), findsNothing);
+        expect($(TextFormField).containing($(fileFullName)), findsNothing);
       });
 
       patrolWidgetTest('Updates trail with new data', (PatrolTester $) async {
