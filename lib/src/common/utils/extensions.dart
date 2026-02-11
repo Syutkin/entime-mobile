@@ -155,13 +155,18 @@ extension ObjectParsingExtensions on Object? {
   /// Return [Map<String, Object?>] if value can be safely cast, otherwise null.
   Map<String, Object?>? asMap() {
     final self = this;
-    if (self is Map<String, Object?>) {
-      return self;
+    if (self is! Map) {
+      return null;
     }
-    if (self is Map<String, dynamic>) {
-      return self.map((key, value) => MapEntry(key, value as Object?));
+    final result = <String, Object?>{};
+    for (final entry in self.entries) {
+      final key = entry.key;
+      if (key is! String) {
+        return null;
+      }
+      result[key] = entry.value as Object?;
     }
-    return null;
+    return result;
   }
 
   /// Return [List<String>] if value is a list, keeping only [String] entries.

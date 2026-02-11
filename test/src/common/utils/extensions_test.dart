@@ -354,6 +354,11 @@ void main() {
         expect(value.asMap(), {'a': 1, 'b': 'c'});
       });
 
+      test('Return map for dynamic map with string keys', () {
+        final Object? value = <dynamic, dynamic>{'a': 1, 'b': 'c'};
+        expect(value.asMap(), {'a': 1, 'b': 'c'});
+      });
+
       test('Preserve nulls for Map<String, dynamic> input', () {
         final Object? value = <String, dynamic>{'a': null, 'b': 2};
         expect(value.asMap(), {'a': null, 'b': 2});
