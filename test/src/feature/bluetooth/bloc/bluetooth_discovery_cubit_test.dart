@@ -9,22 +9,43 @@ class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
+ScanResult _scanResult({
+  required BluetoothDevice device,
+  required int rssi,
+  DateTime? timeStamp,
+}) {
+  return ScanResult(
+    device: device,
+    rssi: rssi,
+    timeStamp: timeStamp ?? DateTime(2020),
+    advertisementData: AdvertisementData(
+      advName: '',
+      txPowerLevel: null,
+      appearance: null,
+      connectable: true,
+      manufacturerData: const {},
+      serviceData: const {},
+      serviceUuids: const [],
+    ),
+  );
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('BluetoothDiscoveryCubit', () {
     late MockBluetoothProvider bluetoothProvider;
     late StreamController<bool> scanningController;
-    late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
+    late StreamController<List<ScanResult>> resultsController;
     BluetoothDiscoveryCubit? cubit;
 
     setUp(() {
       bluetoothProvider = MockBluetoothProvider();
       scanningController = StreamController<bool>.broadcast();
-      resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+      resultsController = StreamController<List<ScanResult>>.broadcast();
 
       when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
-      when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+      when(() => bluetoothProvider.scanResultsAggregated()).thenAnswer((_) => resultsController.stream);
       when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
       when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
       when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
@@ -62,7 +83,7 @@ void main() {
 
       verify(() => bluetoothProvider.requestPermissions()).called(1);
       verify(() => bluetoothProvider.startScan()).called(1);
-      verify(() => bluetoothProvider.scanResultsWithRssi()).called(1);
+      verify(() => bluetoothProvider.scanResultsAggregated()).called(1);
     });
 
     test('updates devices when scan results arrive', () async {
@@ -70,7 +91,7 @@ void main() {
       await cubit!.startDiscovery();
 
       final device = MockBluetoothDevice();
-      final devices = [BluetoothDeviceWithRSSI(device, -42)];
+      final devices = [_scanResult(device: device, rssi: -42)];
       resultsController.add(devices);
       await Future<void>.delayed(Duration.zero);
 
@@ -83,8 +104,11 @@ void main() {
 
       final device1 = MockBluetoothDevice();
       final device2 = MockBluetoothDevice();
-      final first = [BluetoothDeviceWithRSSI(device1, -42)];
-      final second = [BluetoothDeviceWithRSSI(device1, -30), BluetoothDeviceWithRSSI(device2, -10)];
+      final first = [_scanResult(device: device1, rssi: -42)];
+      final second = [
+        _scanResult(device: device1, rssi: -30),
+        _scanResult(device: device2, rssi: -10),
+      ];
 
       resultsController.add(first);
       await Future<void>.delayed(Duration.zero);

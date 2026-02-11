@@ -18,6 +18,27 @@ class MockBluetoothDiscoveryCubit extends MockCubit<BluetoothDiscoveryState> imp
 
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
+ScanResult _scanResult({
+  required BluetoothDevice device,
+  required int rssi,
+  DateTime? timeStamp,
+}) {
+  return ScanResult(
+    device: device,
+    rssi: rssi,
+    timeStamp: timeStamp ?? DateTime(2020),
+    advertisementData: AdvertisementData(
+      advName: device.platformName,
+      txPowerLevel: null,
+      appearance: null,
+      connectable: true,
+      manufacturerData: const {},
+      serviceData: const {},
+      serviceUuids: const [],
+    ),
+  );
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -25,7 +46,7 @@ void main() {
   late MockBluetoothBloc bluetoothBloc;
   late MockBluetoothDiscoveryCubit bluetoothDiscoveryCubit;
   late StreamController<bool> scanningController;
-  late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
+  late StreamController<List<ScanResult>> resultsController;
 
   Widget testApp(Widget child) {
     return BlocProvider<BluetoothBloc>.value(
@@ -46,10 +67,10 @@ void main() {
     bluetoothBloc = MockBluetoothBloc();
     bluetoothDiscoveryCubit = MockBluetoothDiscoveryCubit();
     scanningController = StreamController<bool>.broadcast();
-    resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+    resultsController = StreamController<List<ScanResult>>.broadcast();
 
     when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
-    when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+    when(() => bluetoothProvider.scanResultsAggregated()).thenAnswer((_) => resultsController.stream);
     when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
     when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
     when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
@@ -101,14 +122,14 @@ void main() {
       when(() => device.platformName).thenReturn(deviceName);
       when(() => device.isConnected).thenReturn(false);
 
-      final deviceWithRSSI = BluetoothDeviceWithRSSI(device, rssi);
+      final deviceWithRSSI = _scanResult(device: device, rssi: rssi);
 
-      final devices = <BluetoothDeviceWithRSSI>[
+      final devices = <ScanResult>[
         deviceWithRSSI,
-        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('11:11:11:11:11:11'), -60),
-        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('22:22:22:22:22:22'), -70),
-        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('33:33:33:33:33:33'), -80),
-        BluetoothDeviceWithRSSI(BluetoothDevice.fromId('44:44:44:44:44:44'), -90),
+        _scanResult(device: BluetoothDevice.fromId('11:11:11:11:11:11'), rssi: -60),
+        _scanResult(device: BluetoothDevice.fromId('22:22:22:22:22:22'), rssi: -70),
+        _scanResult(device: BluetoothDevice.fromId('33:33:33:33:33:33'), rssi: -80),
+        _scanResult(device: BluetoothDevice.fromId('44:44:44:44:44:44'), rssi: -90),
       ];
 
       when(
@@ -127,7 +148,7 @@ void main() {
       );
       await $.pump();
 
-      final resultFuture = Navigator.of(rootContext).push<BluetoothDeviceWithRSSI>(
+      final resultFuture = Navigator.of(rootContext).push<BluetoothDevice>(
         MaterialPageRoute(builder: (_) => const SelectDeviceScreen()),
       );
 
@@ -140,9 +161,8 @@ void main() {
       final result = await resultFuture;
 
       expect(result, isNotNull);
-      expect(result!.device.remoteId, remoteId);
-      expect(result.device.platformName, deviceName);
-      expect(result.rssi, rssi);
+      expect(result!.remoteId, remoteId);
+      expect(result.platformName, deviceName);
     });
   });
 }

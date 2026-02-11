@@ -27,8 +27,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late MockBluetoothProvider bluetoothProvider;
-  late BluetoothDeviceWithRSSI devicePrimary;
-  late BluetoothDeviceWithRSSI deviceSecondary;
+  late BluetoothDevice devicePrimary;
+  late BluetoothDevice deviceSecondary;
   late MockAppDatabase database;
   late MockAudioController audioController;
   late SharedPrefsSettingsProvider settingsProvider;
@@ -63,10 +63,10 @@ void main() {
       //   (_) => BehaviorSubject<DBState>(),
       // );
       when(() => bluetoothProvider.dispose()).thenAnswer((invocation) => Future.value());
-      devicePrimary = BluetoothDeviceWithRSSI(BluetoothDevice.fromId('00:00:00:00:00'));
-      deviceSecondary = BluetoothDeviceWithRSSI(BluetoothDevice.fromId('00:00:00:00:01'));
-      when(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).thenAnswer((_) => Future.value());
-      when(() => bluetoothBackgroundConnection.connect(deviceSecondary.device)).thenAnswer((_) => Future.value());
+      devicePrimary = BluetoothDevice.fromId('00:00:00:00:00');
+      deviceSecondary = BluetoothDevice.fromId('00:00:00:00:01');
+      when(() => bluetoothBackgroundConnection.connect(devicePrimary)).thenAnswer((_) => Future.value());
+      when(() => bluetoothBackgroundConnection.connect(deviceSecondary)).thenAnswer((_) => Future.value());
       when(() => bluetoothBackgroundConnection.isConnected).thenReturn(false);
       when(() => bluetoothBackgroundConnection.message).thenAnswer((_) => Stream.fromIterable([]));
       when(() => bluetoothBackgroundConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
@@ -247,14 +247,14 @@ void main() {
           settingsProvider: settingsProvider,
           database: database,
         ),
-        act: (bloc) => bloc.add(BluetoothEvent.selectDevice(deviceWithRssi: devicePrimary)),
+        act: (bloc) => bloc.add(BluetoothEvent.selectDevice(device: devicePrimary)),
         expect: () => <BluetoothBlocState>[
-          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
+          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary),
           const BluetoothBlocState.connecting(),
           const BluetoothBlocState.connected(),
         ],
         verify: (bloc) {
-          expect(bloc.bluetoothDevice, devicePrimary.device);
+          expect(bloc.bluetoothDevice, devicePrimary);
         },
       );
 
@@ -270,14 +270,14 @@ void main() {
           database: database,
         ),
         act: (bloc) async {
-          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
           await Future<void>.delayed(const Duration(milliseconds: 1));
-          bloc.add(BluetoothEvent.selectDevice(deviceWithRssi: devicePrimary));
+          bloc.add(BluetoothEvent.selectDevice(device: devicePrimary));
         },
         skip: 2,
         expect: () => <BluetoothBlocState>[],
         verify: (bloc) {
-          verify(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).called(1);
+          verify(() => bluetoothBackgroundConnection.connect(devicePrimary)).called(1);
         },
       );
 
@@ -289,14 +289,14 @@ void main() {
           settingsProvider: settingsProvider,
           database: database,
         ),
-        act: (bloc) => bloc.add(BluetoothEvent.selectDevice(deviceWithRssi: deviceSecondary)),
+        act: (bloc) => bloc.add(BluetoothEvent.selectDevice(device: deviceSecondary)),
         expect: () => <BluetoothBlocState>[
-          BluetoothBlocState.disconnected(bluetoothDevice: deviceSecondary.device),
+          BluetoothBlocState.disconnected(bluetoothDevice: deviceSecondary),
           const BluetoothBlocState.connecting(),
-          BluetoothBlocState.disconnected(bluetoothDevice: deviceSecondary.device),
+          BluetoothBlocState.disconnected(bluetoothDevice: deviceSecondary),
         ],
         verify: (bloc) {
-          expect(bloc.bluetoothDevice, deviceSecondary.device);
+          expect(bloc.bluetoothDevice, deviceSecondary);
         },
       );
 
@@ -313,16 +313,16 @@ void main() {
         ),
         act: (bloc) {
           bloc
-            ..add(BluetoothEvent.selectDevice(deviceWithRssi: devicePrimary))
-            ..add(BluetoothEvent.selectDevice(deviceWithRssi: devicePrimary));
+            ..add(BluetoothEvent.selectDevice(device: devicePrimary))
+            ..add(BluetoothEvent.selectDevice(device: devicePrimary));
         },
         expect: () => <BluetoothBlocState>[
-          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
+          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary),
           const BluetoothBlocState.connecting(),
-          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
+          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary),
         ],
         verify: (bloc) {
-          expect(bloc.bluetoothDevice, devicePrimary.device);
+          expect(bloc.bluetoothDevice, devicePrimary);
         },
       );
     });
@@ -351,7 +351,7 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) => bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device)),
+        act: (bloc) => bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary)),
         expect: () => [const BluetoothBlocState.connecting(), const BluetoothBlocState.connected()],
       );
 
@@ -378,7 +378,7 @@ void main() {
           database: database,
           settingsProvider: settingsProvider,
         ),
-        act: (bloc) => bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device)),
+        act: (bloc) => bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary)),
         skip: 2,
         expect: () => <Matcher>[
           isA<BluetoothBlocState>().having(
@@ -431,7 +431,7 @@ void main() {
           });
 
           // Kick off connection and then push stream events in order.
-          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
           await Future<void>.delayed(Duration.zero);
           batteryController.add(55);
           await Future<void>.delayed(Duration.zero);
@@ -482,7 +482,7 @@ void main() {
           firstConnect = Completer<void>();
           final secondConnect = Completer<void>();
           var call = 0;
-          when(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).thenAnswer((_) {
+          when(() => bluetoothBackgroundConnection.connect(devicePrimary)).thenAnswer((_) {
             call++;
             return call == 1 ? firstConnect.future : secondConnect.future;
           });
@@ -496,8 +496,8 @@ void main() {
         act: (bloc) async {
           // Two back-to-back connects create a stale first attempt.
           bloc
-            ..add(BluetoothEvent.connect(selectedDevice: devicePrimary.device))
-            ..add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+            ..add(BluetoothEvent.connect(selectedDevice: devicePrimary))
+            ..add(BluetoothEvent.connect(selectedDevice: devicePrimary));
           await Future<void>.delayed(Duration.zero);
           // Completing the first attempt should trigger stop + disconnected.
           firstConnect.complete();
@@ -509,7 +509,7 @@ void main() {
         ],
         verify: (bloc) {
           // Two connect events -> two underlying connect calls.
-          verify(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).called(2);
+          verify(() => bluetoothBackgroundConnection.connect(devicePrimary)).called(2);
           // stop() is called once for attempt mismatch and once during BluetoothEvent.disconnected handling.
           verify(() => bluetoothBackgroundConnection.stop()).called(2);
           verifyNever(() => bluetoothBackgroundConnection.start());
@@ -518,7 +518,7 @@ void main() {
 
       test('reconnect timer triggers connect after failure', () async {
         var connectCall = 0;
-        when(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).thenAnswer((_) async {
+        when(() => bluetoothBackgroundConnection.connect(devicePrimary)).thenAnswer((_) async {
           connectCall++;
         });
         // 1st connect succeeds, 2nd fails (schedules timer), 3rd succeeds after timer.
@@ -558,7 +558,7 @@ void main() {
           }
         });
 
-        bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+        bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
         await firstConnected.future.timeout(const Duration(seconds: 1));
 
         bloc.add(const BluetoothEvent.disconnected());
@@ -681,14 +681,14 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         act: (bloc) async {
-          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
           await Future<void>.delayed(const Duration(seconds: 1));
           bloc.add(const BluetoothEvent.disconnected());
         },
         expect: () => [
           const BluetoothBlocState.connecting(),
           const BluetoothBlocState.connected(),
-          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
+          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary),
           const BluetoothBlocState.connecting(),
           const BluetoothBlocState.connected(),
         ],
@@ -707,14 +707,14 @@ void main() {
           await settingsProvider.update(settings);
           expect(settingsProvider.settings.reconnect, false);
 
-          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
           await Future<void>.delayed(const Duration(seconds: 1));
           bloc.add(const BluetoothEvent.disconnected());
         },
         expect: () => [
           const BluetoothBlocState.connecting(),
           const BluetoothBlocState.connected(),
-          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary.device),
+          BluetoothBlocState.disconnected(bluetoothDevice: devicePrimary),
         ],
       );
     });

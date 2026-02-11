@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import '../../../common/localization/localization.dart';
 import '../bluetooth.dart';
@@ -9,9 +10,9 @@ import '../bluetooth.dart';
 Future<void> selectBluetoothDevice(BuildContext context) async {
   BlocProvider.of<BluetoothBloc>(context).add(
     BluetoothEvent.selectDevice(
-      deviceWithRssi: await Navigator.of(
+      device: await Navigator.of(
         context,
-      ).push(MaterialPageRoute(builder: (context) => const SelectDeviceScreen())),
+      ).push<BluetoothDevice>(MaterialPageRoute(builder: (context) => const SelectDeviceScreen())),
     ),
   );
 }
@@ -36,11 +37,11 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
       builder: (context, state) {
         final list = state.devices
             .map(
-              (device) => BluetoothDeviceListEntry(
-                device: device.device,
-                rssi: device.rssi,
+              (result) => BluetoothDeviceListEntry(
+                device: result.device,
+                rssi: result.rssi,
                 onTap: () {
-                  Navigator.of(context).pop(device);
+                  Navigator.of(context).pop(result.device);
                 },
               ),
             )

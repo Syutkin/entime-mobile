@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import '../logic/bluetooth_provider.dart';
-import '../model/bluetooth_device_with_rssi.dart';
 
 class BluetoothDiscoveryState {
   const BluetoothDiscoveryState({
@@ -13,11 +13,11 @@ class BluetoothDiscoveryState {
 
   const BluetoothDiscoveryState.initial() : devices = const [], isDiscovering = false;
 
-  final List<BluetoothDeviceWithRSSI> devices;
+  final List<ScanResult> devices;
   final bool isDiscovering;
 
   BluetoothDiscoveryState copyWith({
-    List<BluetoothDeviceWithRSSI>? devices,
+    List<ScanResult>? devices,
     bool? isDiscovering,
   }) {
     return BluetoothDiscoveryState(
@@ -37,7 +37,7 @@ class BluetoothDiscoveryCubit extends Cubit<BluetoothDiscoveryState> {
   }
 
   final IBluetoothProvider _bluetoothProvider;
-  StreamSubscription<List<BluetoothDeviceWithRSSI>>? _scanResultsSubscription;
+  StreamSubscription<List<ScanResult>>? _scanResultsSubscription;
   StreamSubscription<bool>? _isScanningSubscription;
 
   Future<void> startDiscovery() async {
@@ -47,7 +47,7 @@ class BluetoothDiscoveryCubit extends Cubit<BluetoothDiscoveryState> {
     emit(state.copyWith(devices: const []));
     await _bluetoothProvider.requestPermissions();
     unawaited(_scanResultsSubscription?.cancel());
-    _scanResultsSubscription = _bluetoothProvider.scanResultsWithRssi().listen(
+    _scanResultsSubscription = _bluetoothProvider.scanResultsAggregated().listen(
       (devices) => emit(state.copyWith(devices: devices)),
     );
     await _bluetoothProvider.startScan();

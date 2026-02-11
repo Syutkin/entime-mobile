@@ -164,8 +164,8 @@ AndroidDeviceInfo _androidInfoWithSdkInt(int sdkInt) {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  Future<List<BluetoothDeviceWithRSSI>> nextNonEmptyDeviceList(
-    StreamQueue<List<BluetoothDeviceWithRSSI>> queue,
+  Future<List<ScanResult>> nextNonEmptyDeviceList(
+    StreamQueue<List<ScanResult>> queue,
   ) async {
     while (true) {
       final next = await queue.next;
@@ -310,12 +310,12 @@ void main() {
       expect(results.single.device.remoteId, remoteId);
     });
 
-    test('scanResultsWithRssi aggregates results', () async {
+    test('scanResultsAggregated aggregates results', () async {
       final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.startScan();
 
       const remoteId = DeviceIdentifier('11:22:33:44:55:66');
-      final queue = StreamQueue(provider.scanResultsWithRssi());
+      final queue = StreamQueue(provider.scanResultsAggregated());
 
       fakePlatform.emitScanResponse(
         BmScanResponse(
@@ -366,6 +366,8 @@ void main() {
 
       final updated = await nextNonEmptyDeviceList(queue);
       expect(updated.single.rssi, -10);
+      expect(updated.single.device.remoteId, remoteId);
+      expect(updated.single, isNot(same(first.single)));
 
       await queue.cancel();
     });

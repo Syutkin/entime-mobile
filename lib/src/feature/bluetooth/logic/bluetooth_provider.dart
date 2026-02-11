@@ -15,7 +15,7 @@ abstract class IBluetoothProvider {
 
   Stream<List<ScanResult>> get scanResults;
 
-  Stream<List<BluetoothDeviceWithRSSI>> scanResultsWithRssi();
+  Stream<List<ScanResult>> scanResultsAggregated();
 
   Future<bool> get isSupported;
 
@@ -56,18 +56,18 @@ class BluetoothProvider implements IBluetoothProvider {
   Stream<List<ScanResult>> get scanResults => FlutterBluePlus.scanResults;
 
   @override
-  Stream<List<BluetoothDeviceWithRSSI>> scanResultsWithRssi() async* {
-    final devices = <BluetoothDeviceWithRSSI>[];
+  Stream<List<ScanResult>> scanResultsAggregated() async* {
+    final devices = <ScanResult>[];
     await for (final results in scanResults) {
       for (final result in results) {
         final existingIndex = devices.indexWhere((d) => d.device.remoteId == result.device.remoteId);
         if (existingIndex == -1) {
-          devices.add(BluetoothDeviceWithRSSI(result.device, result.rssi));
+          devices.add(result);
         } else {
-          devices[existingIndex].rssi = result.rssi;
+          devices[existingIndex] = result;
         }
       }
-      yield List<BluetoothDeviceWithRSSI>.unmodifiable(devices);
+      yield List<ScanResult>.unmodifiable(devices);
     }
   }
 
@@ -115,7 +115,7 @@ class BluetoothProvider implements IBluetoothProvider {
   }
 
   @override
-  Future<void> startScan({Duration timeout = const Duration(seconds: 5)}) {
+  Future<void> startScan({Duration timeout = const Duration(seconds: 15)}) {
     return FlutterBluePlus.startScan(timeout: timeout);
   }
 

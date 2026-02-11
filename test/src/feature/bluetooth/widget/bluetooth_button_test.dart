@@ -21,7 +21,7 @@ void main() {
   late BluetoothDiscoveryCubit bdCubit;
   late MockBluetoothProvider bluetoothProvider;
   late StreamController<bool> scanningController;
-  late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
+  late StreamController<List<ScanResult>> resultsController;
 
   Widget testWidget() {
     return BlocProvider.value(
@@ -43,10 +43,10 @@ void main() {
       bdCubit = MockBluetoothDiscoveryCubit();
       bluetoothProvider = MockBluetoothProvider();
       scanningController = StreamController<bool>.broadcast();
-      resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+      resultsController = StreamController<List<ScanResult>>.broadcast();
 
       when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
-      when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+      when(() => bluetoothProvider.scanResultsAggregated()).thenAnswer((_) => resultsController.stream);
       when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
       when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
       when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});

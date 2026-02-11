@@ -59,25 +59,25 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           add(const BluetoothEvent.initialize());
         case _SelectDevice():
           _reconnectActive = false;
-          final device = event.deviceWithRssi;
+          final device = event.device;
           if (device != null) {
             // Если выбран новый блютусдевайс
-            if (_bluetoothDevice == null || device.device.remoteId != _bluetoothDevice!.remoteId) {
+            if (_bluetoothDevice == null || device.remoteId != _bluetoothDevice!.remoteId) {
               // Отменяем подписки и останавливаем соединение (если было)
               await _messageSubscription?.cancel();
               await _batterySubscription?.cancel();
               await bluetoothProvider.bluetoothBackgroundConnection.stop();
               // Если девайс выбран - обновляем
-              _bluetoothDevice = device.device;
+              _bluetoothDevice = device;
               emit(BluetoothBlocState.disconnected(bluetoothDevice: _bluetoothDevice));
               logger.i('Bluetooth -> Device selected ${_bluetoothDevice?.platformName}');
-              add(BluetoothEvent.connect(selectedDevice: device.device));
+              add(BluetoothEvent.connect(selectedDevice: device));
               // Если девайс равен предыдущему:
               // Если девайс отключён и доступен - соединяемся
             } else {
               switch (state) {
                 case BluetoothBlocStateDisconnected():
-                  add(BluetoothEvent.connect(selectedDevice: device.device));
+                  add(BluetoothEvent.connect(selectedDevice: device));
                 default:
               }
             }

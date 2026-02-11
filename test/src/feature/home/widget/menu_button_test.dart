@@ -5,7 +5,6 @@ import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:entime/src/feature/bluetooth/bloc/bluetooth_discovery_cubit.dart';
 import 'package:entime/src/feature/bluetooth/logic/bluetooth_provider.dart';
-import 'package:entime/src/feature/bluetooth/model/bluetooth_device_with_rssi.dart';
 import 'package:entime/src/feature/bluetooth/widget/select_device_screen.dart';
 import 'package:entime/src/feature/countdown/bloc/countdown_bloc.dart';
 import 'package:entime/src/feature/database/database.dart';
@@ -15,6 +14,7 @@ import 'package:entime/src/feature/settings/settings.dart';
 import 'package:entime/src/feature/tab/tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
@@ -40,7 +40,7 @@ void main() {
   late CountdownBloc countdownBloc;
   late MockBluetoothProvider bluetoothProvider;
   late StreamController<bool> scanningController;
-  late StreamController<List<BluetoothDeviceWithRSSI>> resultsController;
+  late StreamController<List<ScanResult>> resultsController;
 
   Widget testWidget(AppTab activeTab) {
     return BlocProvider.value(
@@ -78,10 +78,10 @@ void main() {
     countdownBloc = MockCountdownBloc();
     bluetoothProvider = MockBluetoothProvider();
     scanningController = StreamController<bool>.broadcast();
-    resultsController = StreamController<List<BluetoothDeviceWithRSSI>>.broadcast();
+    resultsController = StreamController<List<ScanResult>>.broadcast();
 
     when(() => bluetoothProvider.isScanning).thenAnswer((_) => scanningController.stream);
-    when(() => bluetoothProvider.scanResultsWithRssi()).thenAnswer((_) => resultsController.stream);
+    when(() => bluetoothProvider.scanResultsAggregated()).thenAnswer((_) => resultsController.stream);
     when(() => bluetoothProvider.requestPermissions()).thenAnswer((_) async {});
     when(() => bluetoothProvider.startScan()).thenAnswer((_) async {});
     when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
