@@ -239,7 +239,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     await _database.addLog(
       level: LogLevel.information,
       source: LogSource.bluetooth,
-      direction: LogSourceDirection.output,
+      direction: LogSourceDirection.input,
       rawData: parsedMessage,
     );
     final protocolMessage = _protocolParser.parse(parsedMessage);

@@ -86,6 +86,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
     try {
       await _connection?.close();
       _connection = await _connectionFactory.connectToDevice(bluetoothDevice);
+      await _connectionSubscription?.cancel();
       _connectionSubscription = _connection?.input?.listen(_onDataReceived);
       await _batterySubscription?.cancel();
       _batterySubscription = _connection?.batteryLevel?.listen(_batteryController.add);
@@ -114,11 +115,11 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> dispose() async {
-    await _messageController.close();
-    await _batteryController.close();
     await _connectionSubscription?.cancel();
     await _batterySubscription?.cancel();
     await _connection?.finish();
+    await _messageController.close();
+    await _batteryController.close();
   }
 
   @override
