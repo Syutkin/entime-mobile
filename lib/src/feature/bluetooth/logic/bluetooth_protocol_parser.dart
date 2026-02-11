@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../common/utils/extensions.dart';
 import '../model/bluetooth_protocol_models.dart';
 import '../model/bluetooth_protocol_types.dart';
 
@@ -83,7 +84,7 @@ class BluetoothProtocolParser {
     if (normalized.startsWith('{') && normalized.endsWith('}')) {
       final decoded = _decodeJson(normalized);
       if (decoded != null) {
-        final eventName = _asString(decoded['event']);
+        final eventName = decoded['event'].asString();
         if (eventName != null) {
           final event = _parseEvent(eventName, decoded);
           if (event != null) {
@@ -91,7 +92,7 @@ class BluetoothProtocolParser {
           }
         }
 
-        final commandName = _asString(decoded['cmd']);
+        final commandName = decoded['cmd'].asString();
         if (commandName != null) {
           if (_looksLikeResponse(decoded)) {
             final response = _parseResponse(commandName, decoded);
@@ -215,24 +216,24 @@ BluetoothJsonCommand? _parseCommand(String commandName, Map<String, Object?> jso
     case BluetoothProtocolCommandType.gps:
       return BluetoothJsonCommandGps(
         id: id,
-        enable: _asBool(json['enable']),
-        disable: _asBool(json['disable']),
+        enable: json['enable'].asBool(),
+        disable: json['disable'].asBool(),
       );
     case BluetoothProtocolCommandType.wifi:
       return BluetoothJsonCommandWifi(
         id: id,
-        enable: _asBool(json['enable']),
-        ssid: _asString(json['ssid']),
-        passwd: _asString(json['passwd']),
+        enable: json['enable'].asBool(),
+        ssid: json['ssid'].asString(),
+        passwd: json['passwd'].asString(),
       );
     case BluetoothProtocolCommandType.calibrate:
-      final offset = _asDouble(json['offset']);
+      final offset = json['offset'].asDouble();
       if (offset == null) {
         return null;
       }
       return BluetoothJsonCommandCalibrate(id: id, offset: offset);
     case BluetoothProtocolCommandType.syncSource:
-      final source = _asString(json['source']);
+      final source = json['source'].asString();
       if (source == null) {
         return null;
       }
@@ -240,7 +241,7 @@ BluetoothJsonCommand? _parseCommand(String commandName, Map<String, Object?> jso
     case BluetoothProtocolCommandType.syncNtp:
       return BluetoothJsonCommandSyncNtp(id: id);
     case BluetoothProtocolCommandType.saveConfig:
-      final data = _asMap(json['data']);
+      final data = json['data'].asMap();
       if (data == null) {
         return null;
       }
@@ -258,25 +259,25 @@ BluetoothJsonEvent? _parseEvent(String eventName, Map<String, Object?> json) {
     return null;
   }
 
-  final timestamp = _asInt(json['timestamp']);
+  final timestamp = json['timestamp'].asInt();
   switch (eventType) {
     case BluetoothProtocolEventType.gpsLost:
       return BluetoothJsonEventGpsLost(timestamp: timestamp);
     case BluetoothProtocolEventType.gpsAcquired:
       return BluetoothJsonEventGpsAcquired(
         timestamp: timestamp,
-        satellites: _asInt(json['satellites']),
+        satellites: json['satellites'].asInt(),
       );
     case BluetoothProtocolEventType.rtcError:
       return BluetoothJsonEventRtcError(
         timestamp: timestamp,
-        errorCode: _asInt(json['error_code']),
+        errorCode: json['error_code'].asInt(),
       );
     case BluetoothProtocolEventType.syncSourceChanged:
       return BluetoothJsonEventSyncSourceChanged(
         timestamp: timestamp,
-        newSource: _asString(json['new_source']),
-        reason: _asString(json['reason']),
+        newSource: json['new_source'].asString(),
+        reason: json['reason'].asString(),
       );
   }
 }
@@ -304,9 +305,9 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        time: _asInt(json['time']),
+        time: json['time'].asInt(),
         source: _parseTimeSource(json['source']),
-        accuracyUs: _asInt(json['accuracy_us']),
+        accuracyUs: json['accuracy_us'].asInt(),
       );
     case BluetoothProtocolCommandType.status:
       return BluetoothJsonResponseStatus(
@@ -315,16 +316,16 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        device: _parseDeviceInfo(_asMap(json['device'])),
-        firmware: _parseFirmwareInfo(_asMap(json['firmware'])),
-        system: _parseSystemInfo(_asMap(json['system'])),
-        wifi: _parseWifiInfo(_asMap(json['wifi'])),
-        ble: _parseBleInfo(_asMap(json['ble'])),
-        rtc: _parseRtcInfo(_asMap(json['rtc'])),
-        gps: _parseGpsInfo(_asMap(json['gps'])),
-        sync: _parseSyncInfo(_asMap(json['sync'])),
-        storage: _parseStorageInfo(_asMap(json['storage'])),
-        power: _parsePowerInfo(_asMap(json['power'])),
+        device: _parseDeviceInfo(json['device'].asMap()),
+        firmware: _parseFirmwareInfo(json['firmware'].asMap()),
+        system: _parseSystemInfo(json['system'].asMap()),
+        wifi: _parseWifiInfo(json['wifi'].asMap()),
+        ble: _parseBleInfo(json['ble'].asMap()),
+        rtc: _parseRtcInfo(json['rtc'].asMap()),
+        gps: _parseGpsInfo(json['gps'].asMap()),
+        sync: _parseSyncInfo(json['sync'].asMap()),
+        storage: _parseStorageInfo(json['storage'].asMap()),
+        power: _parsePowerInfo(json['power'].asMap()),
       );
     case BluetoothProtocolCommandType.gps:
       return BluetoothJsonResponseGps(
@@ -333,7 +334,7 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        state: _asString(json['state']),
+        state: json['state'].asString(),
       );
     case BluetoothProtocolCommandType.wifi:
       return BluetoothJsonResponseWifi(
@@ -342,7 +343,7 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        state: _asString(json['state']),
+        state: json['state'].asString(),
       );
     case BluetoothProtocolCommandType.calibrate:
       return BluetoothJsonResponseCalibrate(
@@ -351,9 +352,9 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        previousOffset: _asDouble(json['previous_offset']),
-        newOffset: _asDouble(json['new_offset']),
-        estimatedErrorUs: _asInt(json['estimated_error_us']),
+        previousOffset: json['previous_offset'].asDouble(),
+        newOffset: json['new_offset'].asDouble(),
+        estimatedErrorUs: json['estimated_error_us'].asInt(),
       );
     case BluetoothProtocolCommandType.syncSource:
       return BluetoothJsonResponseSyncSource(
@@ -363,8 +364,8 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
         activeSource: _parseSyncSource(json['active_source']),
-        reason: _asString(json['reason']),
-        currentTimestamp: _asInt(json['timestamp']),
+        reason: json['reason'].asString(),
+        currentTimestamp: json['timestamp'].asInt(),
       );
     case BluetoothProtocolCommandType.syncNtp:
       return BluetoothJsonResponseSyncNtp(
@@ -373,9 +374,9 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        rtcTime: _asInt(json['rtc_time']),
-        ntpServers: _asStringList(json['ntp_servers']),
-        syncDurationMs: _asInt(json['sync_duration_ms']),
+        rtcTime: json['rtc_time'].asInt(),
+        ntpServers: json['ntp_servers'].asStringList(),
+        syncDurationMs: json['sync_duration_ms'].asInt(),
       );
     case BluetoothProtocolCommandType.saveConfig:
       return BluetoothJsonResponseSaveConfig(
@@ -384,9 +385,9 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        savedKeys: _asInt(json['saved_keys']),
-        rebootNeeded: _asBool(json['reboot_needed']),
-        storageUsagePercent: _asInt(json['storage_usage_percent']),
+        savedKeys: json['saved_keys'].asInt(),
+        rebootNeeded: json['reboot_needed'].asBool(),
+        storageUsagePercent: json['storage_usage_percent'].asInt(),
       );
     case BluetoothProtocolCommandType.loadConfig:
       return BluetoothJsonResponseLoadConfig(
@@ -395,7 +396,7 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        data: _asMap(json['data']),
+        data: json['data'].asMap(),
       );
     case BluetoothProtocolCommandType.factoryReset:
       return BluetoothJsonResponseFactoryReset(
@@ -404,7 +405,7 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         errorCode: base.errorCode,
         errorMessage: base.errorMessage,
         timestamp: base.timestamp,
-        message: _asString(json['message']),
+        message: json['message'].asString(),
       );
   }
 }
@@ -413,9 +414,9 @@ BluetoothJsonResponseBase _parseResponseBase(Map<String, Object?> json) {
   return BluetoothJsonResponseBase(
     id: json['id'],
     status: _parseStatus(json['status']),
-    errorCode: _asInt(json['error_code']),
-    errorMessage: _asString(json['error_message']),
-    timestamp: _asInt(json['timestamp']),
+    errorCode: json['error_code'].asInt(),
+    errorMessage: json['error_message'].asString(),
+    timestamp: json['timestamp'].asInt(),
   );
 }
 
@@ -425,8 +426,8 @@ BluetoothJsonDeviceInfo? _parseDeviceInfo(Map<String, Object?>? json) {
   }
 
   return BluetoothJsonDeviceInfo(
-    name: _asString(json['name']),
-    number: _asInt(json['number']),
+    name: json['name'].asString(),
+    number: json['number'].asInt(),
     type: _parseDeviceType(json['type']),
   );
 }
@@ -437,8 +438,8 @@ BluetoothJsonFirmwareInfo? _parseFirmwareInfo(Map<String, Object?>? json) {
   }
 
   return BluetoothJsonFirmwareInfo(
-    version: _asString(json['version']),
-    buildDate: _asString(json['build_date']),
+    version: json['version'].asString(),
+    buildDate: json['build_date'].asString(),
   );
 }
 
@@ -448,8 +449,8 @@ BluetoothJsonSystemInfo? _parseSystemInfo(Map<String, Object?>? json) {
   }
 
   return BluetoothJsonSystemInfo(
-    uptimeS: _asInt(json['uptime_s']),
-    freeHeapBytes: _asInt(json['free_heap_bytes']),
+    uptimeS: json['uptime_s'].asInt(),
+    freeHeapBytes: json['free_heap_bytes'].asInt(),
     resetReason: _parseResetReason(json['reset_reason']),
   );
 }
@@ -461,9 +462,9 @@ BluetoothJsonWifiInfo? _parseWifiInfo(Map<String, Object?>? json) {
 
   return BluetoothJsonWifiInfo(
     state: _parseWifiState(json['state']),
-    rssi: _asInt(json['rssi']),
-    ip: _asString(json['ip']),
-    ssid: _asString(json['ssid']),
+    rssi: json['rssi'].asInt(),
+    ip: json['ip'].asString(),
+    ssid: json['ssid'].asString(),
   );
 }
 
@@ -474,7 +475,7 @@ BluetoothJsonBleInfo? _parseBleInfo(Map<String, Object?>? json) {
 
   return BluetoothJsonBleInfo(
     state: _parseBleState(json['state']),
-    clients: _asInt(json['clients']),
+    clients: json['clients'].asInt(),
   );
 }
 
@@ -484,10 +485,10 @@ BluetoothJsonRtcInfo? _parseRtcInfo(Map<String, Object?>? json) {
   }
 
   return BluetoothJsonRtcInfo(
-    ready: _asBool(json['ready']),
-    lostPower: _asBool(json['lost_power']),
-    lastSyncMs: _asInt(json['last_sync_ms']),
-    temperatureC: _asDouble(json['temperature_c']),
+    ready: json['ready'].asBool(),
+    lostPower: json['lost_power'].asBool(),
+    lastSyncMs: json['last_sync_ms'].asInt(),
+    temperatureC: json['temperature_c'].asDouble(),
   );
 }
 
@@ -498,10 +499,10 @@ BluetoothJsonGpsInfo? _parseGpsInfo(Map<String, Object?>? json) {
 
   return BluetoothJsonGpsInfo(
     state: _parseGpsState(json['state']),
-    fixAgeMs: _asInt(json['fix_age_ms']),
-    fix: _asBool(json['fix']),
-    satellites: _asInt(json['satellites']),
-    ppsSignal: _asBool(json['pps_signal']),
+    fixAgeMs: json['fix_age_ms'].asInt(),
+    fix: json['fix'].asBool(),
+    satellites: json['satellites'].asInt(),
+    ppsSignal: json['pps_signal'].asBool(),
   );
 }
 
@@ -511,9 +512,9 @@ BluetoothJsonSyncInfo? _parseSyncInfo(Map<String, Object?>? json) {
   }
 
   return BluetoothJsonSyncInfo(
-    lastMs: _asInt(json['last_ms']),
+    lastMs: json['last_ms'].asInt(),
     state: _parseSyncState(json['state']),
-    accuracyUs: _asInt(json['accuracy_us']),
+    accuracyUs: json['accuracy_us'].asInt(),
     source: _parseTimeSource(json['source']),
   );
 }
@@ -524,8 +525,8 @@ BluetoothJsonStorageInfo? _parseStorageInfo(Map<String, Object?>? json) {
   }
 
   return BluetoothJsonStorageInfo(
-    usedPct: _asInt(json['used_pct']),
-    ok: _asBool(json['ok']),
+    usedPct: json['used_pct'].asInt(),
+    ok: json['ok'].asBool(),
   );
 }
 
@@ -535,12 +536,12 @@ BluetoothJsonPowerInfo? _parsePowerInfo(Map<String, Object?>? json) {
   }
 
   return BluetoothJsonPowerInfo(
-    batteryVoltage: _asDouble(json['battery_voltage']),
+    batteryVoltage: json['battery_voltage'].asDouble(),
   );
 }
 
 BluetoothProtocolStatus? _parseStatus(Object? value) {
-  final status = _asString(value);
+  final status = value.asString();
   switch (status) {
     case 'ok':
       return BluetoothProtocolStatus.ok;
@@ -553,7 +554,7 @@ BluetoothProtocolStatus? _parseStatus(Object? value) {
 }
 
 BluetoothProtocolTimeSource? _parseTimeSource(Object? value) {
-  final source = _asString(value);
+  final source = value.asString();
   switch (source) {
     case 'gps':
       return BluetoothProtocolTimeSource.gps;
@@ -564,7 +565,7 @@ BluetoothProtocolTimeSource? _parseTimeSource(Object? value) {
 }
 
 BluetoothProtocolDeviceType? _parseDeviceType(Object? value) {
-  final type = _asString(value);
+  final type = value.asString();
   switch (type) {
     case 'start':
       return BluetoothProtocolDeviceType.start;
@@ -575,7 +576,7 @@ BluetoothProtocolDeviceType? _parseDeviceType(Object? value) {
 }
 
 BluetoothProtocolWifiState? _parseWifiState(Object? value) {
-  final state = _asString(value);
+  final state = value.asString();
   switch (state) {
     case 'off':
       return BluetoothProtocolWifiState.off;
@@ -590,7 +591,7 @@ BluetoothProtocolWifiState? _parseWifiState(Object? value) {
 }
 
 BluetoothProtocolBleState? _parseBleState(Object? value) {
-  final state = _asString(value);
+  final state = value.asString();
   switch (state) {
     case 'off':
       return BluetoothProtocolBleState.off;
@@ -603,7 +604,7 @@ BluetoothProtocolBleState? _parseBleState(Object? value) {
 }
 
 BluetoothProtocolGpsState? _parseGpsState(Object? value) {
-  final state = _asString(value);
+  final state = value.asString();
   switch (state) {
     case 'off':
       return BluetoothProtocolGpsState.off;
@@ -616,7 +617,7 @@ BluetoothProtocolGpsState? _parseGpsState(Object? value) {
 }
 
 BluetoothProtocolSyncState? _parseSyncState(Object? value) {
-  final state = _asString(value);
+  final state = value.asString();
   switch (state) {
     case 'gps_ok':
       return BluetoothProtocolSyncState.gpsOk;
@@ -633,7 +634,7 @@ BluetoothProtocolSyncState? _parseSyncState(Object? value) {
 }
 
 BluetoothProtocolSyncSource? _parseSyncSource(Object? value) {
-  final source = _asString(value);
+  final source = value.asString();
   switch (source) {
     case 'gps':
       return BluetoothProtocolSyncSource.gps;
@@ -646,7 +647,7 @@ BluetoothProtocolSyncSource? _parseSyncSource(Object? value) {
 }
 
 BluetoothProtocolResetReason? _parseResetReason(Object? value) {
-  final reason = _asString(value);
+  final reason = value.asString();
   switch (reason) {
     case 'power_on':
       return BluetoothProtocolResetReason.powerOn;
@@ -668,68 +669,6 @@ BluetoothProtocolResetReason? _parseResetReason(Object? value) {
       return BluetoothProtocolResetReason.sdio;
     case 'unknown':
       return BluetoothProtocolResetReason.unknown;
-  }
-  return null;
-}
-
-String? _asString(Object? value) {
-  return value is String ? value : null;
-}
-
-int? _asInt(Object? value) {
-  if (value is int) {
-    return value;
-  }
-  if (value is num) {
-    return value.toInt();
-  }
-  if (value is String) {
-    return int.tryParse(value);
-  }
-  return null;
-}
-
-double? _asDouble(Object? value) {
-  if (value is double) {
-    return value;
-  }
-  if (value is num) {
-    return value.toDouble();
-  }
-  if (value is String) {
-    return double.tryParse(value);
-  }
-  return null;
-}
-
-bool? _asBool(Object? value) {
-  if (value is bool) {
-    return value;
-  }
-  if (value is String) {
-    if (value.toLowerCase() == 'true') {
-      return true;
-    }
-    if (value.toLowerCase() == 'false') {
-      return false;
-    }
-  }
-  return null;
-}
-
-Map<String, Object?>? _asMap(Object? value) {
-  if (value is Map<String, Object?>) {
-    return value;
-  }
-  if (value is Map<String, dynamic>) {
-    return value.map((key, v) => MapEntry(key, v as Object?));
-  }
-  return null;
-}
-
-List<String>? _asStringList(Object? value) {
-  if (value is List) {
-    return value.whereType<String>().toList();
   }
   return null;
 }

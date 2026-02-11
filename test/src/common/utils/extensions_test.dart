@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_nullable_for_final_variable_declarations
+
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:test/test.dart';
 
@@ -248,6 +250,156 @@ void main() {
 
         duration = const Duration(milliseconds: -1).format();
         expect(duration, '-00:00:00');
+      });
+    });
+  });
+
+  group('Object? extensions tests', () {
+    group('asString() tests', () {
+      test('Return string for string input', () {
+        const Object? value = 'input';
+        expect(value.asString(), 'input');
+      });
+
+      test('Return null for non-string input', () {
+        const Object? value = 12;
+        expect(value.asString(), null);
+      });
+    });
+
+    group('asInt() tests', () {
+      test('Return int for int input', () {
+        const Object? value = 12;
+        expect(value.asInt(), 12);
+      });
+
+      test('Return int from num input', () {
+        const Object? value = 12.9;
+        expect(value.asInt(), 12);
+      });
+
+      test('Return int from string input', () {
+        const Object? value = '42';
+        expect(value.asInt(), 42);
+      });
+
+      test('Return null for invalid string', () {
+        const Object? value = '42a';
+        expect(value.asInt(), null);
+      });
+
+      test('Return null for non-numeric type', () {
+        const Object? value = true;
+        expect(value.asInt(), null);
+      });
+    });
+
+    group('asDouble() tests', () {
+      test('Return double for double input', () {
+        const Object? value = 12.5;
+        expect(value.asDouble(), 12.5);
+      });
+
+      test('Return double from num input', () {
+        const Object? value = 12;
+        expect(value.asDouble(), 12.0);
+      });
+
+      test('Return double from string input', () {
+        const Object? value = '12.75';
+        expect(value.asDouble(), 12.75);
+      });
+
+      test('Return null for invalid string', () {
+        const Object? value = '12.7a';
+        expect(value.asDouble(), null);
+      });
+    });
+
+    group('asBool() tests', () {
+      test('Return bool for bool input', () {
+        const Object? value = false;
+        expect(value.asBool(), false);
+      });
+
+      test('Return true for "true" string', () {
+        const Object? value = 'true';
+        expect(value.asBool(), true);
+      });
+
+      test('Return false for "false" string', () {
+        const Object? value = 'false';
+        expect(value.asBool(), false);
+      });
+
+      test('Return bool for mixed case strings', () {
+        const Object? value = 'TrUe';
+        expect(value.asBool(), true);
+      });
+
+      test('Return null for non-bool string', () {
+        const Object? value = 'yes';
+        expect(value.asBool(), null);
+      });
+    });
+
+    group('asMap() tests', () {
+      test('Return map for Map<String, Object?> input', () {
+        final Object? value = <String, Object?>{'a': 1, 'b': 'c'};
+        expect(value.asMap(), {'a': 1, 'b': 'c'});
+      });
+
+      test('Return map for Map<String, dynamic> input', () {
+        final Object? value = <String, dynamic>{'a': 1, 'b': 'c'};
+        expect(value.asMap(), {'a': 1, 'b': 'c'});
+      });
+
+      test('Preserve nulls for Map<String, dynamic> input', () {
+        final Object? value = <String, dynamic>{'a': null, 'b': 2};
+        expect(value.asMap(), {'a': null, 'b': 2});
+      });
+
+      test('Return null for non-string keys', () {
+        final Object? value = <int, dynamic>{1: 'a', 2: 'b'};
+        expect(value.asMap(), null);
+      });
+
+      test('Allow nested values without conversion', () {
+        final Object? value = <String, dynamic>{
+          'a': <String, dynamic>{'b': 1},
+          'c': [1, 2, 3],
+        };
+        expect(value.asMap(), {
+          'a': {'b': 1},
+          'c': [1, 2, 3],
+        });
+      });
+
+      test('Return null for non-map input', () {
+        final Object? value = ['a', 'b'];
+        expect(value.asMap(), null);
+      });
+    });
+
+    group('asStringList() tests', () {
+      test('Return list of strings from list input', () {
+        final Object? value = ['a', 'b'];
+        expect(value.asStringList(), ['a', 'b']);
+      });
+
+      test('Return only strings from mixed list', () {
+        final Object? value = ['a', 2, 'b', true];
+        expect(value.asStringList(), ['a', 'b']);
+      });
+
+      test('Skip nested lists and nulls', () {
+        final Object? value = ['a', null, ['b'], 'c'];
+        expect(value.asStringList(), ['a', 'c']);
+      });
+
+      test('Return null for non-list input', () {
+        final Object? value = {'a': 'b'};
+        expect(value.asStringList(), null);
       });
     });
   });
