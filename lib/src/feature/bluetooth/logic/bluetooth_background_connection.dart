@@ -38,13 +38,16 @@ abstract class IBluetoothBackgroundConnection {
 }
 
 class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
+
   /// Конструктор с возможностью внедрения фабрики соединений
   BluetoothBackgroundConnection({
     IBluetoothConnectionFactory? connectionFactory,
   }) : _connectionFactory = connectionFactory ?? BluetoothConnectionFactory();
+  static const int maxMessageBufferLength = 64 * 1024;
   IBluetoothConnection? _connection;
   StreamSubscription<Uint8List>? _connectionSubscription;
   StreamSubscription<int>? _batterySubscription;
+  int _connectionToken = 0;
 
   String _messageBuffer = '';
   String _messagePacket = '';
@@ -83,20 +86,28 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> connect(BluetoothDevice bluetoothDevice) async {
+    final token = ++_connectionToken;
+    _resetMessageBuffer();
     try {
       await _connection?.close();
-      _connection = await _connectionFactory.connectToDevice(bluetoothDevice);
-      await _connectionSubscription?.cancel();
-      _connectionSubscription = _connection?.input?.listen(_onDataReceived);
       await _batterySubscription?.cancel();
-      _batterySubscription = _connection?.batteryLevel?.listen(_batteryController.add);
-      _connectionSubscription?.onDone(() async {
+      await _connectionSubscription?.cancel();
+      _connection = await _connectionFactory.connectToDevice(bluetoothDevice);
+      final connectionSubscription = _connection?.input?.listen(_onDataReceived);
+      final batterySubscription = _connection?.batteryLevel?.listen(_batteryController.add);
+      _connectionSubscription = connectionSubscription;
+      _batterySubscription = batterySubscription;
+      connectionSubscription?.onDone(() async {
+        if (token != _connectionToken) {
+          return;
+        }
         // Сообщаем что соединение закрыто
         // Далее на основе того, когда это произошло,
         // определяем кто закрыл соединение (в BluetoothBloc event/state)
         _onDisconnect?.call();
-        await _connectionSubscription?.cancel();
-        await _batterySubscription?.cancel();
+        _resetMessageBuffer();
+        await connectionSubscription.cancel();
+        await batterySubscription?.cancel();
       });
     } catch (e) {
       logger.e('BluetoothConnection -> Cannot connect', error: e);
@@ -110,11 +121,13 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> stop() async {
+    _resetMessageBuffer();
     await _connection?.finish();
   }
 
   @override
   Future<void> dispose() async {
+    _resetMessageBuffer();
     await _connectionSubscription?.cancel();
     await _batterySubscription?.cancel();
     await _connection?.finish();
@@ -155,5 +168,15 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
       _messageController.add(_messagePacket);
       _messageBuffer = _messageBuffer.substring(index + 1);
     }
+    if (_messageBuffer.length > maxMessageBufferLength) {
+      logger.w('Bluetooth -> Message buffer overflow, clearing buffer');
+      _resetMessageBuffer();
+      return;
+    }
+  }
+
+  void _resetMessageBuffer() {
+    _messageBuffer = '';
+    _messagePacket = '';
   }
 }

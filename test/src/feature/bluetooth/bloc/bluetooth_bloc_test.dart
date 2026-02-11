@@ -36,7 +36,8 @@ void main() {
   late MockBluetoothBackgroundConnection bluetoothBackgroundConnection;
 
   setUpAll(() {
-    registerFallbackValue(() {});
+    registerFallbackValue(LogLevel.debug);
+    registerFallbackValue(LogSource.other);
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
       (obj) async => obj,
@@ -367,7 +368,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -404,7 +405,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: 'F10:00:01,123#',
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -730,7 +731,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -770,7 +771,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -810,7 +811,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -834,7 +835,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -876,7 +877,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -915,7 +916,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -939,7 +940,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -968,7 +969,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -1000,7 +1001,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -1029,7 +1030,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -1061,7 +1062,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -1100,7 +1101,7 @@ void main() {
             () => database.addLog(
               level: LogLevel.information,
               source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
+              direction: LogSourceDirection.input,
               rawData: message,
             ),
           ).thenAnswer((_) => Future.value(1));
@@ -1235,10 +1236,10 @@ void main() {
         verify: (bloc) {
           verifyNever(
             () => database.addLog(
-              level: LogLevel.information,
-              source: LogSource.bluetooth,
-              direction: LogSourceDirection.output,
-              rawData: 'myMessage',
+              level: any(named: 'level'),
+              source: any(named: 'source'),
+              direction: any(named: 'direction'),
+              rawData: any(named: 'rawData'),
             ),
           );
         },

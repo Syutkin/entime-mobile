@@ -342,6 +342,107 @@ void main() {
       });
     });
 
+    group('message buffer', () {
+      test('should keep new stream active when old input closes after reconnect', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final input1 = StreamController<Uint8List>();
+        final input2 = StreamController<Uint8List>();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.close()).thenAnswer((_) async {});
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
+
+        when(() => mockConnection.input).thenAnswer((_) => input1.stream);
+        await bbcWithMock.connect(device);
+
+        when(() => mockConnection.input).thenAnswer((_) => input2.stream);
+        await bbcWithMock.connect(device);
+
+        final messages = <String>[];
+        final sub = bbcWithMock.message.listen(messages.add);
+
+        await input1.close();
+        await Future<void>.delayed(Duration.zero);
+
+        input2.add(Uint8List.fromList(utf8.encode('ping\n')));
+        await Future<void>.delayed(Duration.zero);
+
+        expect(messages, ['ping']);
+
+        await sub.cancel();
+        await input2.close();
+        await bbcWithMock.dispose();
+      });
+
+      test('should reset buffer on reconnect', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final input1 = StreamController<Uint8List>();
+        final input2 = StreamController<Uint8List>();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.close()).thenAnswer((_) async {});
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
+
+        when(() => mockConnection.input).thenAnswer((_) => input1.stream);
+        await bbcWithMock.connect(device);
+
+        final messages = <String>[];
+        final sub = bbcWithMock.message.listen(messages.add);
+
+        input1.add(Uint8List.fromList(utf8.encode('foo')));
+        await Future<void>.delayed(Duration.zero);
+
+        when(() => mockConnection.input).thenAnswer((_) => input2.stream);
+        await bbcWithMock.connect(device);
+
+        input2.add(Uint8List.fromList(utf8.encode('bar\n')));
+        await Future<void>.delayed(Duration.zero);
+
+        expect(messages, ['bar']);
+
+        await sub.cancel();
+        await input1.close();
+        await input2.close();
+        await bbcWithMock.dispose();
+      });
+
+      test('should clear buffer on overflow and keep parsing next message', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final input = StreamController<Uint8List>();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
+        when(() => mockConnection.input).thenAnswer((_) => input.stream);
+
+        await bbcWithMock.connect(device);
+
+        final messages = <String>[];
+        final sub = bbcWithMock.message.listen(messages.add);
+
+        final overflow = List.filled(BluetoothBackgroundConnection.maxMessageBufferLength + 1, 'a').join();
+        input.add(Uint8List.fromList(utf8.encode(overflow)));
+        await Future<void>.delayed(Duration.zero);
+
+        input.add(Uint8List.fromList(utf8.encode('ok\n')));
+        await Future<void>.delayed(Duration.zero);
+
+        expect(messages, ['ok']);
+
+        await sub.cancel();
+        await input.close();
+        await bbcWithMock.dispose();
+      });
+    });
+
     group('error handling', () {
       test('should handle operations gracefully when not connected', () async {
         // Тестируем, что операции не падают с ошибками когда нет соединения
