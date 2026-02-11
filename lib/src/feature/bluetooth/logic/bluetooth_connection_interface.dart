@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
+import '../../../common/logger/logger.dart';
 import 'bluetooth_uuids.dart';
 /// Интерфейс для Bluetooth-соединения
 /// Позволяет легко тестировать BluetoothBackgroundConnection
@@ -60,6 +61,7 @@ class BleConnectionWrapper implements IBluetoothConnection {
     }
     _connectionStateSubscription = _device.connectionState.listen((state) {
       if (state == BluetoothConnectionState.disconnected) {
+        _seenDisconnected = true;
         _closeInput();
         _closeBattery();
       }
@@ -75,6 +77,8 @@ class BleConnectionWrapper implements IBluetoothConnection {
   late final StreamSubscription<List<int>> _rxSubscription;
   StreamSubscription<List<int>>? _batterySubscription;
   late final StreamSubscription<BluetoothConnectionState> _connectionStateSubscription;
+  bool _seenDisconnected = false;
+  Completer<void>? _closeCompleter;
 
   @override
   bool get isConnected => _device.isConnected;
@@ -92,12 +96,35 @@ class BleConnectionWrapper implements IBluetoothConnection {
 
   @override
   Future<void> close() async {
-    await _rxSubscription.cancel();
-    await _batterySubscription?.cancel();
-    await _connectionStateSubscription.cancel();
-    await _device.disconnect();
-    _closeInput();
-    _closeBattery();
+    if (_closeCompleter != null) {
+      return _closeCompleter!.future;
+    }
+    _closeCompleter = Completer<void>();
+    try {
+      await _rxSubscription.cancel();
+      await _batterySubscription?.cancel();
+      await _connectionStateSubscription.cancel();
+      if (!_seenDisconnected && _device.isConnected) {
+        try {
+          await _device.disconnect();
+        } on FlutterBluePlusException catch (e) {
+          if (e.function == 'disconnect' && e.code == FbpErrorCode.timeout.index) {
+            logger.w('Bluetooth -> disconnect timed out', error: e);
+          } else {
+            logger.w('Bluetooth -> disconnect failed', error: e);
+          }
+        } on Exception catch (e) {
+          logger.w('Bluetooth -> disconnect failed', error: e);
+        }
+      }
+    } finally {
+      _closeInput();
+      _closeBattery();
+      if (!(_closeCompleter?.isCompleted ?? true)) {
+        _closeCompleter?.complete();
+      }
+    }
+    return _closeCompleter!.future;
   }
 
   @override

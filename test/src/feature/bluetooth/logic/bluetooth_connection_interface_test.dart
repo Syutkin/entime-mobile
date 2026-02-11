@@ -13,6 +13,41 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('BleConnectionWrapper', () {
+    test('close ignores disconnect timeout', () async {
+      final device = MockBluetoothDevice();
+      final txCharacteristic = MockBluetoothCharacteristic();
+      final rxCharacteristic = MockBluetoothCharacteristic();
+
+      final rxController = StreamController<List<int>>.broadcast();
+      final connectionStateController = StreamController<BluetoothConnectionState>.broadcast();
+
+      when(() => device.isConnected).thenReturn(true);
+      when(() => device.connectionState).thenAnswer((_) => connectionStateController.stream);
+      when(device.disconnect).thenThrow(
+        FlutterBluePlusException(
+          ErrorPlatform.fbp,
+          'disconnect',
+          FbpErrorCode.timeout.index,
+          'Timed out after 35s',
+        ),
+      );
+
+      when(() => rxCharacteristic.onValueReceived).thenAnswer((_) => rxController.stream);
+
+      final wrapper = BleConnectionWrapper(
+        device: device,
+        txCharacteristic: txCharacteristic,
+        rxCharacteristic: rxCharacteristic,
+      );
+
+      await wrapper.close();
+
+      verify(device.disconnect).called(1);
+
+      await rxController.close();
+      await connectionStateController.close();
+    });
+
     test('reads initial battery level and emits it', () async {
       final device = MockBluetoothDevice();
       final txCharacteristic = MockBluetoothCharacteristic();
