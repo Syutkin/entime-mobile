@@ -248,11 +248,12 @@ void main() {
           $(Row).$(Flexible).$(TextFormField).containing($(Localization.current.I18nDatabase_trailGpxTrack)),
           findsOneWidget,
         );
-        final progressIndicator =
-            $(Row).containing($(Localization.current.I18nDatabase_trailGpxTrack)).$(CustomPaint).which<CustomPaint>(
-                  (widget) =>
-                      widget.painter?.runtimeType.toString() == '_FilledCircularProgressPainter',
-                );
+        final progressIndicator = $(Row)
+            .containing($(Localization.current.I18nDatabase_trailGpxTrack))
+            .$(CustomPaint)
+            .which<CustomPaint>(
+              (widget) => widget.painter?.runtimeType.toString() == '_FilledCircularProgressPainter',
+            );
         expect(progressIndicator, findsOneWidget);
       });
 
@@ -425,8 +426,9 @@ void main() {
           ),
         ).called(1);
 
-        stateController.add(const TrailsState.savingTrack(trails: [], progress: 1.0));
-        stateController.add(const TrailsState.initialized(trails: []));
+        stateController
+          ..add(const TrailsState.savingTrack(trails: [], progress: 1))
+          ..add(const TrailsState.initialized(trails: []));
 
         await $.pumpAndSettle();
 

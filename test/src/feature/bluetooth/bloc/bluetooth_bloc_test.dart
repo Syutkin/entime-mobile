@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
@@ -33,6 +36,7 @@ void main() {
   late MockBluetoothBackgroundConnection bluetoothBackgroundConnection;
 
   setUpAll(() {
+    registerFallbackValue(() {});
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
       'dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle',
       (obj) async => obj,
@@ -160,6 +164,43 @@ void main() {
       );
     });
 
+    group('on adapterState listener:', () {
+      late StreamController<BluetoothAdapterState> adapterController;
+
+      setUp(() {
+        adapterController = StreamController<BluetoothAdapterState>();
+        when(() => bluetoothProvider.adapterState).thenAnswer((_) => adapterController.stream);
+        when(() => bluetoothProvider.isSupported).thenAnswer((_) => Future.value(true));
+        var call = 0;
+        when(() => bluetoothProvider.isOn).thenAnswer((_) async {
+          call++;
+          return call == 1 ? false : true;
+        });
+        addTearDown(() async {
+          await adapterController.close();
+        });
+      });
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'emits initialize when adapter turns off then on',
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          settingsProvider: settingsProvider,
+          database: database,
+        ),
+        act: (bloc) async {
+          adapterController.add(BluetoothAdapterState.off);
+          await Future<void>.delayed(Duration.zero);
+          adapterController.add(BluetoothAdapterState.on);
+        },
+        expect: () => <BluetoothBlocState>[
+          const BluetoothBlocState.notEnabled(),
+          const BluetoothBlocState.disconnected(),
+        ],
+      );
+    });
+
     group('on enable:', () {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         'successfully enabled',
@@ -176,6 +217,9 @@ void main() {
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.enable()),
         expect: () => [const BluetoothBlocState.disconnected()],
+        verify: (bloc) {
+          verify(() => bluetoothProvider.requestEnable()).called(1);
+        },
       );
     });
 
@@ -211,6 +255,29 @@ void main() {
         ],
         verify: (bloc) {
           expect(bloc.bluetoothDevice, devicePrimary.device);
+        },
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'select same device while connected does nothing',
+        setUp: () {
+          when(() => bluetoothBackgroundConnection.isConnected).thenReturn(true);
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          settingsProvider: settingsProvider,
+          database: database,
+        ),
+        act: (bloc) async {
+          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+          await Future<void>.delayed(const Duration(milliseconds: 1));
+          bloc.add(BluetoothEvent.selectDevice(deviceWithRssi: devicePrimary));
+        },
+        skip: 2,
+        expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verify(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).called(1);
         },
       );
 
@@ -262,6 +329,18 @@ void main() {
 
     group('on connect:', () {
       blocTest<BluetoothBloc, BluetoothBlocState>(
+        'connect with null device emits nothing',
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) => bloc.add(const BluetoothEvent.connect()),
+        expect: () => <BluetoothBlocState>[],
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
         'successfully connected',
         setUp: () {
           when(() => bluetoothBackgroundConnection.isConnected).thenReturn(true);
@@ -312,6 +391,194 @@ void main() {
           ),
         ],
       );
+    });
+
+    group('on handleConnect:', () {
+      late Completer<void> firstConnect;
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'successfully connects, subscribes, and handles onDisconnect',
+        setUp: () {
+          when(() => bluetoothBackgroundConnection.isConnected).thenReturn(true);
+          when(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: 'F10:00:01,123#',
+            ),
+          ).thenAnswer((_) => Future.value(1));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) async {
+          // Disable auto-reconnect so we can trigger onDisconnect without a second subscribe.
+          settings = settings.copyWith(reconnect: false);
+          await settingsProvider.update(settings);
+          // Use controllers to simulate background battery and message streams.
+          final batteryController = StreamController<int>();
+          final messageController = StreamController<String>();
+          late VoidCallback onDisconnect;
+
+          when(() => bluetoothBackgroundConnection.batteryLevel).thenAnswer((_) => batteryController.stream);
+          when(() => bluetoothBackgroundConnection.message).thenAnswer((_) => messageController.stream);
+          when(() => bluetoothBackgroundConnection.onDisconnect(any())).thenAnswer((invocation) {
+            onDisconnect = invocation.positionalArguments.first as VoidCallback;
+          });
+
+          // Kick off connection and then push stream events in order.
+          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+          await Future<void>.delayed(Duration.zero);
+          batteryController.add(55);
+          await Future<void>.delayed(Duration.zero);
+          messageController.add('F10:00:01,123#');
+          await Future<void>.delayed(Duration.zero);
+          // Simulate remote disconnect callback.
+          onDisconnect();
+          await Future<void>.delayed(Duration.zero);
+
+          await batteryController.close();
+          await messageController.close();
+        },
+        expect: () => <Matcher>[
+          equals(const BluetoothBlocState.connecting()),
+          equals(const BluetoothBlocState.connected()),
+          equals(const BluetoothBlocState.connected(batteryLevel: 55)),
+          isA<BluetoothBlocState>()
+              .having(
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.message,
+                  BluetoothBlocState() => null,
+                },
+                'BluetoothMessageFinish',
+                isA<BluetoothMessageFinish>()
+                    .having((message) => message.time, 'finish', '10:00:01,123')
+                    .having((message) => message.timestamp, 'timestamp', isA<DateTime>()),
+              )
+              .having(
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.batteryLevel,
+                  BluetoothBlocState() => null,
+                },
+                'batteryLevel',
+                55,
+              ),
+          isA<BluetoothBlocStateDisconnected>(),
+        ],
+        verify: (bloc) {
+          verify(() => bluetoothBackgroundConnection.start()).called(1);
+          verify(() => bluetoothBackgroundConnection.onDisconnect(any())).called(1);
+        },
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'attempt mismatch stops and emits disconnected',
+        setUp: () {
+          // First connect is delayed; second connect bumps attempt counter.
+          firstConnect = Completer<void>();
+          final secondConnect = Completer<void>();
+          var call = 0;
+          when(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).thenAnswer((_) {
+            call++;
+            return call == 1 ? firstConnect.future : secondConnect.future;
+          });
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) async {
+          // Two back-to-back connects create a stale first attempt.
+          bloc
+            ..add(BluetoothEvent.connect(selectedDevice: devicePrimary.device))
+            ..add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+          await Future<void>.delayed(Duration.zero);
+          // Completing the first attempt should trigger stop + disconnected.
+          firstConnect.complete();
+          await Future<void>.delayed(Duration.zero);
+        },
+        expect: () => <Matcher>[
+          equals(const BluetoothBlocState.connecting()),
+          isA<BluetoothBlocStateDisconnected>(),
+        ],
+        verify: (bloc) {
+          // Two connect events -> two underlying connect calls.
+          verify(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).called(2);
+          // stop() is called once for attempt mismatch and once during BluetoothEvent.disconnected handling.
+          verify(() => bluetoothBackgroundConnection.stop()).called(2);
+          verifyNever(() => bluetoothBackgroundConnection.start());
+        },
+      );
+
+      test('reconnect timer triggers connect after failure', () async {
+        var connectCall = 0;
+        when(() => bluetoothBackgroundConnection.connect(devicePrimary.device)).thenAnswer((_) async {
+          connectCall++;
+        });
+        // 1st connect succeeds, 2nd fails (schedules timer), 3rd succeeds after timer.
+        when(() => bluetoothBackgroundConnection.isConnected).thenAnswer((_) {
+          if (connectCall == 1) {
+            return true;
+          }
+          if (connectCall == 2) {
+            return false;
+          }
+          return true;
+        });
+
+        final bloc = BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        );
+        final states = <BluetoothBlocState>[];
+        final firstConnected = Completer<void>();
+        final disconnected = Completer<void>();
+        final secondConnected = Completer<void>();
+        var connectedCount = 0;
+        final subscription = bloc.stream.listen((state) {
+          states.add(state);
+          if (state is BluetoothBlocStateConnected) {
+            connectedCount++;
+            if (connectedCount == 1 && !firstConnected.isCompleted) {
+              firstConnected.complete();
+            } else if (connectedCount == 2 && !secondConnected.isCompleted) {
+              secondConnected.complete();
+            }
+          }
+          if (state is BluetoothBlocStateDisconnected && !disconnected.isCompleted) {
+            disconnected.complete();
+          }
+        });
+
+        bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary.device));
+        await firstConnected.future.timeout(const Duration(seconds: 1));
+
+        bloc.add(const BluetoothEvent.disconnected());
+        await disconnected.future.timeout(const Duration(seconds: 1));
+
+        await secondConnected.future.timeout(const Duration(seconds: 2));
+        await Future<void>.delayed(const Duration(milliseconds: 10));
+
+        expect(states.length, 7);
+        expect(states[0], const BluetoothBlocState.connecting());
+        expect(states[1], const BluetoothBlocState.connected());
+        expect(states[2], isA<BluetoothBlocStateDisconnected>());
+        expect(states[3], const BluetoothBlocState.connecting());
+        expect(states[4], isA<BluetoothBlocStateDisconnected>());
+        expect(states[5], const BluetoothBlocState.connecting());
+        expect(states[6], const BluetoothBlocState.connected());
+
+        await subscription.cancel();
+        await bloc.close();
+      });
     });
 
     group('on connected:', () {
@@ -601,9 +868,48 @@ void main() {
       );
 
       blocTest<BluetoothBloc, BluetoothBlocState>(
-        'received countdown',
+        'received json event',
         setUp: () {
-          message = 'B10:00:01,123#';
+          message = '{"event":"gps_lost","timestamp":1703169600123456}';
+          stageId = 1;
+          when(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: message,
+            ),
+          ).thenAnswer((_) => Future.value(1));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) => bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        expect: () => <Matcher>[
+          isA<BluetoothBlocState>().having(
+            (state) => switch (state) {
+              BluetoothBlocStateConnected() => state.message,
+              BluetoothBlocState() => null,
+            },
+            'BluetoothMessageJsonEvent',
+            isA<BluetoothMessageJsonEvent>()
+                .having((event) => event.rawJson, 'rawJson', message)
+                .having(
+                  (event) => event.event,
+                  'event',
+                  isA<BluetoothJsonEventGpsLost>().having((event) => event.timestamp, 'timestamp', 1703169600123456),
+                ),
+          ),
+        ],
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'received json command does nothing',
+        setUp: () {
+          message = '{"cmd":"ping","id":1}';
           stageId = 1;
           when(
             () => database.addLog(
@@ -625,10 +931,10 @@ void main() {
       );
 
       blocTest<BluetoothBloc, BluetoothBlocState>(
-        'received voice',
+        'countdown triggers playCountdown when beepFromApp=false',
         setUp: () {
-          message = 'V10:00:01,123#';
-          stageId = 1;
+          message = 'B10:00:01,123#';
+          stageId = 42;
           when(
             () => database.addLog(
               level: LogLevel.information,
@@ -646,6 +952,104 @@ void main() {
         ),
         act: (bloc) => bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verify(() => audioController.playCountdown(time: '10:00:01,123', stageId: 42)).called(1);
+        },
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'countdown does NOT trigger playCountdown when beepFromApp=true',
+        setUp: () async {
+          settings = settings.copyWith(beepFromApp: true);
+          await settingsProvider.update(settings);
+          message = 'B10:00:01,123#';
+          stageId = 42;
+          when(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: message,
+            ),
+          ).thenAnswer((_) => Future.value(1));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) => bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verifyNever(
+            () => audioController.playCountdown(
+              time: any(named: 'time'),
+              stageId: any(named: 'stageId'),
+            ),
+          );
+        },
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'voice triggers callParticipant when voiceFromApp=false',
+        setUp: () {
+          message = 'V10:00:01,123#';
+          stageId = 24;
+          when(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: message,
+            ),
+          ).thenAnswer((_) => Future.value(1));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) => bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verify(() => audioController.callParticipant(time: '10:00:01,123', stageId: 24)).called(1);
+        },
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'voice does NOT trigger callParticipant when voiceFromApp=true',
+        setUp: () async {
+          settings = settings.copyWith(voiceFromApp: true);
+          await settingsProvider.update(settings);
+          message = 'V10:00:01,123#';
+          stageId = 24;
+          when(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: message,
+            ),
+          ).thenAnswer((_) => Future.value(1));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) => bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
+        expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verifyNever(
+            () => audioController.callParticipant(
+              time: any(named: 'time'),
+              stageId: any(named: 'stageId'),
+            ),
+          );
+        },
       );
 
       blocTest<BluetoothBloc, BluetoothBlocState>(
@@ -712,6 +1116,73 @@ void main() {
       );
     });
 
+    group('on batteryLevelUpdated:', () {
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'updates battery level when connected and preserves message',
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        seed: () => BluetoothBlocState.connected(
+          message: BluetoothMessage.finish(time: '10:00:01,123', timestamp: DateTime(2024, 1, 1)),
+        ),
+        act: (bloc) => bloc.add(const BluetoothEvent.batteryLevelUpdated(level: 55)),
+        expect: () => <Matcher>[
+          isA<BluetoothBlocState>()
+              .having(
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.message,
+                  BluetoothBlocState() => null,
+                },
+                'BluetoothMessageFinish',
+                isA<BluetoothMessageFinish>().having((message) => message.time, 'finish', '10:00:01,123'),
+              )
+              .having(
+                (state) => switch (state) {
+                  BluetoothBlocStateConnected() => state.batteryLevel,
+                  BluetoothBlocState() => null,
+                },
+                'batteryLevel',
+                55,
+              ),
+        ],
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'does not emit when battery level is unchanged',
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        seed: () => const BluetoothBlocState.connected(),
+        act: (bloc) {
+          bloc
+            ..add(const BluetoothEvent.batteryLevelUpdated(level: 80))
+            ..add(const BluetoothEvent.batteryLevelUpdated(level: 80));
+        },
+        expect: () => <BluetoothBlocState>[
+          const BluetoothBlocState.connected(batteryLevel: 80),
+        ],
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'does nothing when not connected',
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        seed: () => const BluetoothBlocState.disconnected(),
+        act: (bloc) => bloc.add(const BluetoothEvent.batteryLevelUpdated(level: 20)),
+        expect: () => <BluetoothBlocState>[],
+      );
+    });
+
     group('on sendMessage:', () {
       blocTest<BluetoothBloc, BluetoothBlocState>(
         "send message didn't emit new state",
@@ -735,6 +1206,42 @@ void main() {
         seed: () => const BluetoothBlocState.connected(),
         act: (bloc) => bloc.add(const BluetoothEvent.sendMessage(message: 'myMessage')),
         expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verify(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: 'myMessage',
+            ),
+          ).called(1);
+        },
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
+        'send message failure does not log',
+        setUp: () {
+          when(() => bluetoothBackgroundConnection.sendMessage('myMessage')).thenAnswer((_) => Future.value(false));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        seed: () => const BluetoothBlocState.connected(),
+        act: (bloc) => bloc.add(const BluetoothEvent.sendMessage(message: 'myMessage')),
+        expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verifyNever(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.output,
+              rawData: 'myMessage',
+            ),
+          );
+        },
       );
     });
   });
