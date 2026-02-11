@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common/logger/logger.dart';
+import '../../../common/model/platform_info.dart';
 import '../../app_info/logic/app_info_provider.dart';
 import '../../app_info/logic/app_info_provider_io.dart';
 import '../bluetooth.dart';
@@ -39,10 +38,13 @@ class BluetoothProvider implements IBluetoothProvider {
   BluetoothProvider({
     required IAppInfoProvider appInfo,
     required IBluetoothBackgroundConnection bluetoothBackgroundConnection,
+    PlatformInfo? platformInfo,
   })  : _appInfo = appInfo,
+        _platformInfo = platformInfo ?? DefaultPlatformInfo(),
         _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
   final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
   final IAppInfoProvider _appInfo;
+  final PlatformInfo _platformInfo;
 
   @override
   Stream<BluetoothAdapterState> get adapterState => FlutterBluePlus.adapterState;
@@ -80,11 +82,11 @@ class BluetoothProvider implements IBluetoothProvider {
 
   @override
   Future<void> requestPermissions() async {
-    if (!(Platform.isAndroid || Platform.isIOS)) {
+    if (!(_platformInfo.isAndroid || _platformInfo.isIOS)) {
       return;
     }
     try {
-      if (Platform.isAndroid) {
+      if (_platformInfo.isAndroid) {
         final sdkInt = _appInfo is AndroidAppInfoProvider
             ? _appInfo.androidSdkInt
             : null;

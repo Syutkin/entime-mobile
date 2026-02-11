@@ -3,12 +3,20 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/feature/app_info/logic/app_info_provider.dart';
+import 'package:entime/src/feature/app_info/logic/app_info_provider_io.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_blue_plus_platform_interface/flutter_blue_plus_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+import '../../../../helpers/fake_platform_info.dart';
 
 class MockBluetoothBackgroundConnection extends Mock implements IBluetoothBackgroundConnection {}
 
@@ -84,6 +92,75 @@ final class FakeFlutterBluePlusPlatform extends FlutterBluePlusPlatform {
   }
 }
 
+class FakePermissionHandlerPlatform extends PermissionHandlerPlatform with MockPlatformInterfaceMixin {
+  FakePermissionHandlerPlatform({this.exception});
+
+  Exception? exception;
+  List<Permission> requestedPermissions = <Permission>[];
+
+  @override
+  Future<Map<Permission, PermissionStatus>> requestPermissions(List<Permission> permissions) async {
+    requestedPermissions = List<Permission>.from(permissions);
+    if (exception != null) {
+      throw exception!;
+    }
+    return <Permission, PermissionStatus>{
+      for (final permission in permissions) permission: PermissionStatus.granted,
+    };
+  }
+}
+
+const _fakeAndroidBuildVersion = <String, dynamic>{
+  'sdkInt': 16,
+  'baseOS': 'baseOS',
+  'previewSdkInt': 30,
+  'release': 'release',
+  'codename': 'codename',
+  'incremental': 'incremental',
+  'securityPatch': 'securityPatch',
+};
+
+const _fakeSupportedAbis = <String>['arm64-v8a', 'x86', 'x86_64'];
+const _fakeSupported32BitAbis = <String?>['x86 (IA-32)', 'MMX'];
+const _fakeSupported64BitAbis = <String?>['x86-64', 'MMX', 'SSSE3'];
+const _fakeSystemFeatures = ['FEATURE_AUDIO_PRO', 'FEATURE_AUDIO_OUTPUT'];
+
+const _fakeAndroidDeviceInfo = <String, dynamic>{
+  'id': 'id',
+  'host': 'host',
+  'tags': 'tags',
+  'type': 'type',
+  'model': 'model',
+  'board': 'board',
+  'brand': 'Google',
+  'device': 'device',
+  'product': 'product',
+  'name': 'Custom Device Name',
+  'display': 'display',
+  'hardware': 'hardware',
+  'isPhysicalDevice': true,
+  'freeDiskSize': 70729949184,
+  'totalDiskSize': 113281839104,
+  'bootloader': 'bootloader',
+  'fingerprint': 'fingerprint',
+  'manufacturer': 'manufacturer',
+  'supportedAbis': _fakeSupportedAbis,
+  'systemFeatures': _fakeSystemFeatures,
+  'version': _fakeAndroidBuildVersion,
+  'supported64BitAbis': _fakeSupported64BitAbis,
+  'supported32BitAbis': _fakeSupported32BitAbis,
+  'isLowRamDevice': false,
+  'physicalRamSize': 8192,
+  'availableRamSize': 4096,
+};
+
+AndroidDeviceInfo _androidInfoWithSdkInt(int sdkInt) {
+  return AndroidDeviceInfo.fromMap(<String, dynamic>{
+    ..._fakeAndroidDeviceInfo,
+    'version': <String, dynamic>{..._fakeAndroidBuildVersion, 'sdkInt': sdkInt},
+  });
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -102,6 +179,8 @@ void main() {
     late FakeFlutterBluePlusPlatform fakePlatform;
     late MockBluetoothBackgroundConnection backgroundConnection;
     late IAppInfoProvider appInfo;
+    late PermissionHandlerPlatform originalPermissionPlatform;
+    late FakePermissionHandlerPlatform permissionPlatform;
 
     setUp(() {
       fakePlatform = FakeFlutterBluePlusPlatform(
@@ -109,11 +188,15 @@ void main() {
         isSupportedValue: true,
       );
       FlutterBluePlusPlatform.instance = fakePlatform;
+      originalPermissionPlatform = PermissionHandlerPlatform.instance;
+      permissionPlatform = FakePermissionHandlerPlatform();
+      PermissionHandlerPlatform.instance = permissionPlatform;
       backgroundConnection = MockBluetoothBackgroundConnection();
       appInfo = DefaultAppInfoProvider();
     });
 
     tearDown(() async {
+      PermissionHandlerPlatform.instance = originalPermissionPlatform;
       await fakePlatform.close();
     });
 
@@ -291,6 +374,127 @@ void main() {
       final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
       await provider.requestPermissions();
     });
+
+    test(
+      'requestPermissions does nothing on unsupported platforms',
+      () async {
+        final provider = BluetoothProvider(
+          appInfo: appInfo,
+          bluetoothBackgroundConnection: backgroundConnection,
+          platformInfo: FakePlatformInfo(),
+        );
+
+        await provider.requestPermissions();
+
+        expect(permissionPlatform.requestedPermissions, isEmpty);
+      },
+    );
+
+    test(
+      'requestPermissions requests bluetooth permissions on Android 31+',
+      () async {
+        final provider = BluetoothProvider(
+          appInfo: AndroidAppInfoProvider(_androidInfoWithSdkInt(31)),
+          bluetoothBackgroundConnection: backgroundConnection,
+          platformInfo: FakePlatformInfo(isAndroid: true),
+        );
+
+        await provider.requestPermissions();
+
+        expect(
+          permissionPlatform.requestedPermissions,
+          <Permission>[
+            Permission.bluetoothScan,
+            Permission.bluetoothConnect,
+          ],
+        );
+      },
+    );
+
+    test(
+      'requestPermissions requests location on Android below 31',
+      () async {
+        final provider = BluetoothProvider(
+          appInfo: AndroidAppInfoProvider(_androidInfoWithSdkInt(30)),
+          bluetoothBackgroundConnection: backgroundConnection,
+          platformInfo: FakePlatformInfo(isAndroid: true),
+        );
+
+        await provider.requestPermissions();
+
+        expect(
+          permissionPlatform.requestedPermissions,
+          <Permission>[Permission.locationWhenInUse],
+        );
+      },
+    );
+
+    test(
+      'requestPermissions requests bluetooth and location on iOS',
+      () async {
+        final provider = BluetoothProvider(
+          appInfo: appInfo,
+          bluetoothBackgroundConnection: backgroundConnection,
+          platformInfo: FakePlatformInfo(isIOS: true),
+        );
+
+        await provider.requestPermissions();
+
+        expect(
+          permissionPlatform.requestedPermissions,
+          <Permission>[
+            Permission.bluetoothScan,
+            Permission.bluetoothConnect,
+            Permission.locationWhenInUse,
+          ],
+        );
+      },
+    );
+
+    test(
+      'requestPermissions ignores MissingPluginException',
+      () async {
+        permissionPlatform.exception = MissingPluginException();
+        final provider = BluetoothProvider(
+          appInfo: appInfo,
+          bluetoothBackgroundConnection: backgroundConnection,
+          platformInfo: FakePlatformInfo(isAndroid: true),
+        );
+
+        await provider.requestPermissions();
+
+        expect(permissionPlatform.requestedPermissions, isNotEmpty);
+      },
+    );
+
+    test(
+      'requestPermissions logs error when permission request fails',
+      () async {
+        final logEvents = <LogEvent>[];
+        void logListener(LogEvent event) {
+          logEvents.add(event);
+        }
+
+        Logger.addLogListener(logListener);
+        addTearDown(() => Logger.removeLogListener(logListener));
+
+        permissionPlatform.exception = Exception('boom');
+        final provider = BluetoothProvider(
+          appInfo: appInfo,
+          bluetoothBackgroundConnection: backgroundConnection,
+          platformInfo: FakePlatformInfo(isAndroid: true),
+        );
+
+        await provider.requestPermissions();
+
+        final matching = logEvents
+            .where((event) => event.message == 'Bluetooth -> Can not request permissions')
+            .toList();
+        expect(matching, hasLength(1));
+        expect(matching.single.level, Level.error);
+        expect(matching.single.error, isA<Exception>());
+      },
+    );
 
     test('dispose delegates to background connection', () async {
       when(() => backgroundConnection.dispose()).thenAnswer((_) async {});
