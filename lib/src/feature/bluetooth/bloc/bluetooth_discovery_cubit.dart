@@ -53,8 +53,6 @@ class BluetoothDiscoveryCubit extends Cubit<BluetoothDiscoveryState> {
     await _bluetoothProvider.startScan();
   }
 
-  Future<void> restartDiscovery() => startDiscovery();
-
   @override
   Future<void> close() async {
     await _scanResultsSubscription?.cancel();

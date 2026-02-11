@@ -64,7 +64,7 @@ class _SelectDeviceScreen extends State<SelectDeviceScreen> {
               else
                 IconButton(
                   icon: const Icon(Icons.replay),
-                  onPressed: () => context.read<BluetoothDiscoveryCubit>().restartDiscovery(),
+                  onPressed: () => context.read<BluetoothDiscoveryCubit>().startDiscovery(),
                 ),
             ],
           ),

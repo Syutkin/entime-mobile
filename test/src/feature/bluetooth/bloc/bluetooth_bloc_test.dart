@@ -174,7 +174,7 @@ void main() {
         var call = 0;
         when(() => bluetoothProvider.isOn).thenAnswer((_) async {
           call++;
-          return call == 1 ? false : true;
+          return !(call == 1);
         });
         addTearDown(() async {
           await adapterController.close();
@@ -1126,7 +1126,7 @@ void main() {
           settingsProvider: settingsProvider,
         ),
         seed: () => BluetoothBlocState.connected(
-          message: BluetoothMessage.finish(time: '10:00:01,123', timestamp: DateTime(2024, 1, 1)),
+          message: BluetoothMessage.finish(time: '10:00:01,123', timestamp: DateTime(2024)),
         ),
         act: (bloc) => bloc.add(const BluetoothEvent.batteryLevelUpdated(level: 55)),
         expect: () => <Matcher>[

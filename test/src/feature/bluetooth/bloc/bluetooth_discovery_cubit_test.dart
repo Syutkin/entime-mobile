@@ -51,6 +51,20 @@ void main() {
       expect(cubit!.state.devices, isEmpty);
     });
 
+    test('startDiscovery does nothing when already discovering', () async {
+      cubit = BluetoothDiscoveryCubit(bluetoothProvider: bluetoothProvider);
+
+      await cubit!.startDiscovery();
+      scanningController.add(true);
+      await Future<void>.delayed(Duration.zero);
+
+      await cubit!.startDiscovery();
+
+      verify(() => bluetoothProvider.requestPermissions()).called(1);
+      verify(() => bluetoothProvider.startScan()).called(1);
+      verify(() => bluetoothProvider.scanResultsWithRssi()).called(1);
+    });
+
     test('updates devices when scan results arrive', () async {
       cubit = BluetoothDiscoveryCubit(bluetoothProvider: bluetoothProvider);
       await cubit!.startDiscovery();
