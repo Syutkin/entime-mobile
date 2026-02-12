@@ -35,7 +35,7 @@
 				"'lib/**.freezed.dart'",
 				"'lib/**.g.dart'",
 				"'lib/**.steps.dart'",
-				"'lib/debug**.dart'",
+				"'lib/**debug*.dart'",
 				"'lib/src/common/localization/**.dart'",
 				"'lib/src/common/bloc/app_bloc_observer.dart'",
 				"'lib/src/common/model/platform_info.dart'",
