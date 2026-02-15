@@ -11,43 +11,10 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+import '../../../../helpers/fake_path_provider_platform.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
-
-class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
-  FakePathProviderPlatform({
-    required this.downloadsPath,
-    required this.documentsPath,
-  });
-
-  final String? downloadsPath;
-  final String documentsPath;
-
-  @override
-  Future<String?> getDownloadsPath() async => downloadsPath;
-
-  @override
-  Future<String?> getApplicationDocumentsPath() async => documentsPath;
-
-  @override
-  Future<String?> getTemporaryPath() async => documentsPath;
-
-  @override
-  Future<String?> getApplicationSupportPath() async => documentsPath;
-
-  @override
-  Future<String?> getLibraryPath() async => documentsPath;
-
-  @override
-  Future<String?> getExternalStoragePath() async => documentsPath;
-
-  @override
-  Future<List<String>?> getExternalCachePaths() async => <String>[documentsPath];
-
-  @override
-  Future<List<String>?> getExternalStoragePaths({StorageDirectory? type}) async => <String>[documentsPath];
-}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

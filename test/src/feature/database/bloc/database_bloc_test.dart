@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, depend_on_referenced_packages
 
+import 'dart:io';
 import 'dart:typed_data' show Uint8List;
 
 import 'package:bloc_test/bloc_test.dart';
@@ -17,12 +18,12 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart' as path;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:share_plus/share_plus.dart' show ShareParams;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/shared_prefs_defaults.dart';
 import '../drift/app_database_test.dart';
 
@@ -31,56 +32,6 @@ class MockStartlistProvider extends Mock implements StartlistProvider {}
 class MockShareProvider extends Mock implements ShareProvider {}
 
 class MockQueryRow extends Mock implements QueryRow {}
-
-class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
-  @override
-  Future<String?> getTemporaryPath() async {
-    return kTemporaryPath;
-  }
-
-  @override
-  Future<String?> getApplicationSupportPath() async {
-    return kApplicationSupportPath;
-  }
-
-  @override
-  Future<String?> getLibraryPath() async {
-    return kLibraryPath;
-  }
-
-  @override
-  Future<String?> getApplicationDocumentsPath() async {
-    return kApplicationDocumentsPath;
-  }
-
-  @override
-  Future<String?> getExternalStoragePath() async {
-    return kExternalStoragePath;
-  }
-
-  @override
-  Future<List<String>?> getExternalCachePaths() async {
-    return <String>[kExternalCachePath];
-  }
-
-  @override
-  Future<List<String>?> getExternalStoragePaths({StorageDirectory? type}) async {
-    return <String>[kExternalStoragePath];
-  }
-
-  @override
-  Future<String?> getDownloadsPath() async {
-    return kDownloadsPath;
-  }
-}
-
-final String kTemporaryPath = p.join('tmp', 'temporaryPath');
-final String kApplicationSupportPath = p.join('tmp', 'applicationSupportPath');
-final String kDownloadsPath = p.join('tmp', 'downloadsPath');
-final String kLibraryPath = p.join('tmp', 'libraryPath');
-final String kApplicationDocumentsPath = p.join('tmp', 'applicationDocumentsPath');
-final String kExternalCachePath = p.join('tmp', 'externalCachePath');
-final String kExternalStoragePath = p.join('tmp', 'externalStoragePath');
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -96,6 +47,10 @@ void main() {
   late RaceCsv raceCsv;
   late StagesCsv stagesCsv;
   late int deltaInSeconds;
+  late Directory tempDir;
+  late String documentsPath;
+  late String tempPath;
+  late PathProviderPlatform previousPathProvider;
 
   setUpAll(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
@@ -109,8 +64,21 @@ void main() {
   });
 
   setUp(() async {
+    previousPathProvider = PathProviderPlatform.instance;
+    tempDir = await Directory.systemTemp.createTemp('database_bloc_test_');
+    documentsPath = path.join(tempDir.path, 'documents');
+    tempPath = path.join(tempDir.path, 'temp');
+    await Directory(documentsPath).create(recursive: true);
+    await Directory(tempPath).create(recursive: true);
+
+    await Directory(documentsPath).create(recursive: true);
+    await Directory(tempPath).create(recursive: true);
+
     db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
-    PathProviderPlatform.instance = FakePathProviderPlatform();
+    PathProviderPlatform.instance = FakePathProviderPlatform(
+      documentsPath: documentsPath,
+      temporaryPath: tempPath,
+    );
 
     // populate DB
     for (final query in PopDB().queries) {
@@ -128,7 +96,9 @@ void main() {
   });
 
   tearDown(() async {
+    PathProviderPlatform.instance = previousPathProvider;
     await db.close();
+    await tempDir.delete(recursive: true);
   });
 
   group('DatabaseBloc tests', () {

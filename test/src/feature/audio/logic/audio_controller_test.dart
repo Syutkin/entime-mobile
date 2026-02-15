@@ -25,7 +25,7 @@ void main() {
   late int stageId;
 
   setUp(() {
-    db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory()));
+    db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
 
     // populate DB
     PopDB().queries.forEach(db.customInsert);
