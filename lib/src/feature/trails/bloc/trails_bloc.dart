@@ -24,8 +24,27 @@ part 'trails_event.dart';
 
 part 'trails_state.dart';
 
+typedef TrackIsolateSpawner = Future<Isolate> Function(
+  void Function(Map<String, Object?>) entryPoint,
+  Map<String, Object?> message,
+);
+
+Future<Isolate> _defaultIsolateSpawner(
+  void Function(Map<String, Object?>) entryPoint,
+  Map<String, Object?> message,
+) {
+  return Isolate.spawn<Map<String, Object?>>(entryPoint, message);
+}
+
 class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
-  TrailsBloc({required AppDatabase database}) : _db = database, super(const TrailsState.initial()) {
+  TrailsBloc({
+    required AppDatabase database,
+    TrackIsolateSpawner? loadIsolateSpawner,
+    TrackIsolateSpawner? saveIsolateSpawner,
+  })  : _db = database,
+        _loadIsolateSpawner = loadIsolateSpawner ?? _defaultIsolateSpawner,
+        _saveIsolateSpawner = saveIsolateSpawner ?? _defaultIsolateSpawner,
+        super(const TrailsState.initial()) {
     _trailsSubscription = _db.getTrails().watch().listen((event) async {
       _trails = event;
       logger.t('TrailsBloc -> getTrails().watch()');
@@ -171,6 +190,8 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
   }
 
   final AppDatabase _db;
+  final TrackIsolateSpawner _loadIsolateSpawner;
+  final TrackIsolateSpawner _saveIsolateSpawner;
 
   List<TrailInfo> _trails = [];
   TrackFile? _loadedTrack;
@@ -205,7 +226,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
     );
 
     try {
-      _trackLoadIsolate = await Isolate.spawn(
+      _trackLoadIsolate = await _loadIsolateSpawner(
         _loadTrackIsolateEntry,
         <String, Object?>{
           'sendPort': receivePort.sendPort,
@@ -307,7 +328,7 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
       final tempFolder = await getTemporaryDirectory();
       final dbPath = path.join(dbFolder.path, 'database.sqlite');
 
-      _trackSaveIsolate = await Isolate.spawn(
+      _trackSaveIsolate = await _saveIsolateSpawner(
         _saveTrackIsolateEntry,
         <String, Object?>{
           'sendPort': receivePort.sendPort,
