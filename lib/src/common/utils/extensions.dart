@@ -4,6 +4,12 @@ import 'package:intl/intl.dart';
 
 import '../../constants/date_time_formats.dart';
 
+const minUtcOffsetMinutes = -720;
+const maxUtcOffsetMinutes = 840;
+
+/// Matches UTC offset [String] input as whole hours (`3`, `-8`) or hours and minutes (`5:45`, `-3:30`).
+final _utcOffsetPattern = RegExp(r'^([+-])?(\d+)(?::([0-5]\d))?$');
+
 extension StringExtensions on String? {
   String strip() {
     if (this == null || this == 'null') {
@@ -53,6 +59,26 @@ extension StringExtensions on String? {
     return true;
   }
 
+  /// Return UTC offset minutes from [String] with whole hours or `hours:minutes`.
+  ///
+  /// Examples: `3` -> `180`, `5:45` -> `345`, `-3:30` -> `-210`.
+  /// Return null if [String] does not match the expected format.
+  int? toUtcOffsetMinutes() {
+    final input = this;
+    if (input == null) {
+      return null;
+    }
+    final match = _utcOffsetPattern.firstMatch(input.trim());
+    if (match == null) {
+      return null;
+    }
+
+    final sign = match.group(1) == '-' ? -1 : 1;
+    final hours = int.parse(match.group(2)!);
+    final minutes = int.parse(match.group(3) ?? '0');
+    return sign * (hours * 60 + minutes);
+  }
+
   /// Return [DateTime] from [String] with time only.
   ///
   /// Return null if fails
@@ -61,6 +87,24 @@ extension StringExtensions on String? {
     final now = DateTime.now();
     final dateFormatted = DateFormat(shortDateFormat).format(now);
     return DateTime.tryParse('$dateFormatted $this');
+  }
+}
+
+extension UtcOffsetMinutesExtensions on int {
+  /// Format UTC offset [int] minutes to [String] for editing.
+  ///
+  /// Examples: `180` -> `3`, `345` -> `5:45`, `-210` -> `-3:30`.
+  String formatUtcOffset() {
+    final sign = this < 0 ? '-' : '';
+    final absoluteMinutes = abs();
+    final hours = absoluteMinutes ~/ 60;
+    final minutes = absoluteMinutes % 60;
+
+    if (minutes == 0) {
+      return '$sign$hours';
+    }
+
+    return '$sign$hours:${minutes.toString().padLeft(2, '0')}';
   }
 }
 

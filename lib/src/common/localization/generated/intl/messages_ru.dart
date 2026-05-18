@@ -390,7 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceNumberRange":
         MessageLookupByLibrary.simpleMessage("Диапазон 1..255"),
     "I18nModuleSettings_deviceTimezone": MessageLookupByLibrary.simpleMessage(
-      "Часовой пояс",
+      "Смещение UTC",
     ),
     "I18nModuleSettings_deviceType": MessageLookupByLibrary.simpleMessage(
       "Тип",
@@ -417,6 +417,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Частота",
     ),
     "I18nModuleSettings_frequencyHz": m8,
+    "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
+    "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
+      "Активно",
+    ),
     "I18nModuleSettings_longFrequency": MessageLookupByLibrary.simpleMessage(
       "Частота длинных гудков",
     ),
@@ -494,13 +498,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "I18nModuleSettings_tft": MessageLookupByLibrary.simpleMessage("TFT"),
     "I18nModuleSettings_timezoneEmpty": MessageLookupByLibrary.simpleMessage(
-      "Введите часовой пояс",
+      "Введите смещение UTC, например 3 или 5:45",
     ),
     "I18nModuleSettings_timezoneInvalid": MessageLookupByLibrary.simpleMessage(
-      "Часовой пояс должен быть целым",
+      "Введите целые часы или часы:минуты",
     ),
     "I18nModuleSettings_timezoneRange": MessageLookupByLibrary.simpleMessage(
-      "Диапазон -12..12",
+      "Диапазон UTC-12:00..UTC+14:00",
     ),
     "I18nModuleSettings_turnOnAtEvent": MessageLookupByLibrary.simpleMessage(
       "Включать после события",

@@ -219,7 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Number",
     ),
     "I18nModuleSettings_deviceTimezone": MessageLookupByLibrary.simpleMessage(
-      "Timezone",
+      "UTC offset",
     ),
     "I18nModuleSettings_deviceType": MessageLookupByLibrary.simpleMessage(
       "Type",
@@ -244,6 +244,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Frequency",
     ),
     "I18nModuleSettings_frequencyHz": m8,
+    "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
+    "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
+      "Active",
+    ),
     "I18nModuleSettings_longFrequency": MessageLookupByLibrary.simpleMessage(
       "Long beep frequency",
     ),
@@ -305,6 +309,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sync Word",
     ),
     "I18nModuleSettings_tft": MessageLookupByLibrary.simpleMessage("TFT"),
+    "I18nModuleSettings_timezoneEmpty": MessageLookupByLibrary.simpleMessage(
+      "Enter UTC offset, for example 3 or 5:45",
+    ),
+    "I18nModuleSettings_timezoneInvalid": MessageLookupByLibrary.simpleMessage(
+      "Enter whole hours or hours:minutes",
+    ),
+    "I18nModuleSettings_timezoneRange": MessageLookupByLibrary.simpleMessage(
+      "Range UTC-12:00..UTC+14:00",
+    ),
     "I18nModuleSettings_turnOnAtEvent": MessageLookupByLibrary.simpleMessage(
       "Turn on after event",
     ),

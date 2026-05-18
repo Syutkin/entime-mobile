@@ -963,8 +963,26 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
-	"I18nModuleSettings_deviceTimezone": "Timezone",
+	"I18nModuleSettings_deviceTimezone": "UTC offset",
 	"@I18nModuleSettings_deviceTimezone": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_timezoneEmpty": "Enter UTC offset, for example 3 or 5:45",
+	"@I18nModuleSettings_timezoneEmpty": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_timezoneInvalid": "Enter whole hours or hours:minutes",
+	"@I18nModuleSettings_timezoneInvalid": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_timezoneRange": "Range UTC-12:00..UTC+14:00",
+	"@I18nModuleSettings_timezoneRange": {
 		"type": "text",
 		"placeholders_order": [],
 		"placeholders": {}
@@ -1001,6 +1019,18 @@
 	},
 	"I18nModuleSettings_syncSourceRtc": "RTC",
 	"@I18nModuleSettings_syncSourceRtc": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_gps": "GPS",
+	"@I18nModuleSettings_gps": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_gpsEnabled": "Active",
+	"@I18nModuleSettings_gpsEnabled": {
 		"type": "text",
 		"placeholders_order": [],
 		"placeholders": {}

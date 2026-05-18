@@ -721,14 +721,16 @@ class I18nModuleSettings {
 
   static String get deviceType => Intl.message('Тип', name: 'I18nModuleSettings_deviceType');
 
-  static String get deviceTimezone => Intl.message('Часовой пояс', name: 'I18nModuleSettings_deviceTimezone');
+  static String get deviceTimezone => Intl.message('Смещение UTC', name: 'I18nModuleSettings_deviceTimezone');
 
-  static String get timezoneEmpty => Intl.message('Введите часовой пояс', name: 'I18nModuleSettings_timezoneEmpty');
+  static String get timezoneEmpty =>
+      Intl.message('Введите смещение UTC, например 3 или 5:45', name: 'I18nModuleSettings_timezoneEmpty');
 
   static String get timezoneInvalid =>
-      Intl.message('Часовой пояс должен быть целым', name: 'I18nModuleSettings_timezoneInvalid');
+      Intl.message('Введите целые часы или часы:минуты', name: 'I18nModuleSettings_timezoneInvalid');
 
-  static String get timezoneRange => Intl.message('Диапазон -12..12', name: 'I18nModuleSettings_timezoneRange');
+  static String get timezoneRange =>
+      Intl.message('Диапазон UTC-12:00..UTC+14:00', name: 'I18nModuleSettings_timezoneRange');
 
   static String get sync => Intl.message('Синхронизация', name: 'I18nModuleSettings_sync');
 
@@ -741,6 +743,10 @@ class I18nModuleSettings {
   static String get syncSourceGps => Intl.message('GPS', name: 'I18nModuleSettings_syncSourceGps');
 
   static String get syncSourceRtc => Intl.message('RTC', name: 'I18nModuleSettings_syncSourceRtc');
+
+  static String get gps => Intl.message('GPS', name: 'I18nModuleSettings_gps');
+
+  static String get gpsEnabled => Intl.message('Активно', name: 'I18nModuleSettings_gpsEnabled');
 
   static String get ntp1 => Intl.message('NTP 1', name: 'I18nModuleSettings_ntp1');
 

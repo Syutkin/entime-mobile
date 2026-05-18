@@ -28,9 +28,7 @@ class GeneratedLocalization {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<GeneratedLocalization> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -2482,40 +2480,40 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Часовой пояс`
+  /// `Смещение UTC`
   String get I18nModuleSettings_deviceTimezone {
     return Intl.message(
-      'Часовой пояс',
+      'Смещение UTC',
       name: 'I18nModuleSettings_deviceTimezone',
       desc: '',
       args: [],
     );
   }
 
-  /// `Введите часовой пояс`
+  /// `Введите смещение UTC, например 3 или 5:45`
   String get I18nModuleSettings_timezoneEmpty {
     return Intl.message(
-      'Введите часовой пояс',
+      'Введите смещение UTC, например 3 или 5:45',
       name: 'I18nModuleSettings_timezoneEmpty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Часовой пояс должен быть целым`
+  /// `Введите целые часы или часы:минуты`
   String get I18nModuleSettings_timezoneInvalid {
     return Intl.message(
-      'Часовой пояс должен быть целым',
+      'Введите целые часы или часы:минуты',
       name: 'I18nModuleSettings_timezoneInvalid',
       desc: '',
       args: [],
     );
   }
 
-  /// `Диапазон -12..12`
+  /// `Диапазон UTC-12:00..UTC+14:00`
   String get I18nModuleSettings_timezoneRange {
     return Intl.message(
-      'Диапазон -12..12',
+      'Диапазон UTC-12:00..UTC+14:00',
       name: 'I18nModuleSettings_timezoneRange',
       desc: '',
       args: [],
@@ -2577,6 +2575,26 @@ class GeneratedLocalization {
     return Intl.message(
       'RTC',
       name: 'I18nModuleSettings_syncSourceRtc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GPS`
+  String get I18nModuleSettings_gps {
+    return Intl.message(
+      'GPS',
+      name: 'I18nModuleSettings_gps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Активно`
+  String get I18nModuleSettings_gpsEnabled {
+    return Intl.message(
+      'Активно',
+      name: 'I18nModuleSettings_gpsEnabled',
       desc: '',
       args: [],
     );
@@ -3346,8 +3364,7 @@ class GeneratedLocalization {
   }
 }
 
-class AppLocalizationDelegate
-    extends LocalizationsDelegate<GeneratedLocalization> {
+class AppLocalizationDelegate extends LocalizationsDelegate<GeneratedLocalization> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
@@ -3360,8 +3377,7 @@ class AppLocalizationDelegate
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-  Future<GeneratedLocalization> load(Locale locale) =>
-      GeneratedLocalization.load(locale);
+  Future<GeneratedLocalization> load(Locale locale) => GeneratedLocalization.load(locale);
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

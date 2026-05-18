@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2026-02-08T01:00:11.169165",
+  "@@last_modified": "2026-05-18T21:25:42.927243",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1327,22 +1327,22 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_deviceTimezone": "Часовой пояс",
+  "I18nModuleSettings_deviceTimezone": "Смещение UTC",
   "@I18nModuleSettings_deviceTimezone": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_timezoneEmpty": "Введите часовой пояс",
+  "I18nModuleSettings_timezoneEmpty": "Введите смещение UTC, например 3 или 5:45",
   "@I18nModuleSettings_timezoneEmpty": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_timezoneInvalid": "Часовой пояс должен быть целым",
+  "I18nModuleSettings_timezoneInvalid": "Введите целые часы или часы:минуты",
   "@I18nModuleSettings_timezoneInvalid": {
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_timezoneRange": "Диапазон -12..12",
+  "I18nModuleSettings_timezoneRange": "Диапазон UTC-12:00..UTC+14:00",
   "@I18nModuleSettings_timezoneRange": {
     "type": "text",
     "placeholders": {}
@@ -1374,6 +1374,16 @@
   },
   "I18nModuleSettings_syncSourceRtc": "RTC",
   "@I18nModuleSettings_syncSourceRtc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_gps": "GPS",
+  "@I18nModuleSettings_gps": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_gpsEnabled": "Активно",
+  "@I18nModuleSettings_gpsEnabled": {
     "type": "text",
     "placeholders": {}
   },

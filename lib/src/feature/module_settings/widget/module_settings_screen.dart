@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/utils/extensions.dart';
 import '../../../common/widget/cancel_ok_buttons.dart';
 import '../../../common/widget/splash_widget.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
@@ -189,7 +190,7 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                         ),
                         SettingsTile(
                           title: Text(i18n.I18nModuleSettings_deviceTimezone),
-                          trailing: Text('${moduleSettings.device.timezoneOffsetMin}'),
+                          trailing: Text(moduleSettings.device.timezoneOffsetMin.formatUtcOffset()),
                           onPressed: (context) async {
                             final value = await timezonePopup(
                               context: context,
@@ -314,6 +315,23 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                                 ),
                               );
                             }
+                          },
+                        ),
+                      ],
+                    ),
+                    SettingsSection(
+                      title: Text(i18n.I18nModuleSettings_gps),
+                      tiles: [
+                        SettingsTile.switchTile(
+                          title: Text(i18n.I18nModuleSettings_gpsEnabled),
+                          initialValue: moduleSettings.gps.enabled,
+                          onToggle: (value) {
+                            widget.onChanged();
+                            bloc.add(
+                              ModuleSettingsEvent.update(
+                                ModSettingsModel.entime(moduleSettings.copyWith.gps(enabled: value)),
+                              ),
+                            );
                           },
                         ),
                       ],

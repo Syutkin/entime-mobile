@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
+import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/common/widget/splash_widget.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/module_settings/module_settings.dart';
@@ -83,6 +84,31 @@ void main() {
   setUp(() {
     moduleSettingsBloc = MockModuleSettingsBloc();
     bluetoothBloc = MockBluetoothBloc();
+  });
+
+  group('Timezone offset helpers', () {
+    test('Parses whole hours and hours:minutes to minutes', () {
+      expect('-8'.toUtcOffsetMinutes(), -480);
+      expect('5'.toUtcOffsetMinutes(), 300);
+      expect('+3'.toUtcOffsetMinutes(), 180);
+      expect('5:45'.toUtcOffsetMinutes(), 345);
+      expect('-3:30'.toUtcOffsetMinutes(), -210);
+      expect('-0:30'.toUtcOffsetMinutes(), -30);
+    });
+
+    test('Rejects invalid hours:minutes format', () {
+      expect('5:70'.toUtcOffsetMinutes(), isNull);
+      expect('5:'.toUtcOffsetMinutes(), isNull);
+      expect('abc'.toUtcOffsetMinutes(), isNull);
+    });
+
+    test('Formats minute offsets for editing', () {
+      expect((-480).formatUtcOffset(), '-8');
+      expect(180.formatUtcOffset(), '3');
+      expect(345.formatUtcOffset(), '5:45');
+      expect((-210).formatUtcOffset(), '-3:30');
+      expect((-30).formatUtcOffset(), '-0:30');
+    });
   });
 
   group('ModuleSettingsInitScreen tests', () {
@@ -263,6 +289,57 @@ void main() {
             ),
           ).called(1);
         });
+
+        patrolWidgetTest('Updates timezone offset in minutes from hours:minutes input', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceTimezone)).tap();
+          await $(TextField).enterText('5:30');
+          await $(#okButton).tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.device.timezoneOffsetMin,
+                  'device.timezoneOffsetMin',
+                  330,
+                ),
+              ),
+            ),
+          ).called(1);
+        });
+
+        patrolWidgetTest('Updates timezone offset in minutes from whole hours input', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceTimezone)).tap();
+          await $(TextField).enterText('5');
+          await $(#okButton).tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.device.timezoneOffsetMin,
+                  'device.timezoneOffsetMin',
+                  300,
+                ),
+              ),
+            ),
+          ).called(1);
+        });
+
+        patrolWidgetTest('Rejects timezone offset outside firmware range', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceTimezone)).tap();
+          await $(TextField).enterText('14:30');
+          await $(#okButton).tap();
+
+          expect($(Localization.current.I18nModuleSettings_timezoneRange), findsOneWidget);
+          verifyNever(() => moduleSettingsBloc.add(any()));
+        });
       });
 
       group('Sync section', () {
@@ -283,6 +360,40 @@ void main() {
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_ntp1)).tap();
           expect($(Localization.current.I18nModuleSettings_ntp1), findsWidgets);
+        });
+      });
+
+      group('GPS section', () {
+        patrolWidgetTest('Shows GPS enabled switch', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_gpsEnabled)).scrollTo(),
+            findsOneWidget,
+          );
+
+          final gpsSwitchTile = find.widgetWithText(SettingsTile, Localization.current.I18nModuleSettings_gpsEnabled);
+          final gpsSwitchFinder = find.descendant(of: gpsSwitchTile, matching: find.byType(Switch));
+          final gpsSwitch = $.tester.widget<Switch>(gpsSwitchFinder);
+          expect(gpsSwitch.value, isTrue);
+        });
+
+        patrolWidgetTest('Updates GPS enabled when switch toggled', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_gpsEnabled)).scrollTo().tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.gps.enabled,
+                  'gps.enabled',
+                  false,
+                ),
+              ),
+            ),
+          ).called(1);
         });
       });
 

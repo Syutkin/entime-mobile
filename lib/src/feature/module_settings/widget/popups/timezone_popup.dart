@@ -7,7 +7,9 @@ Future<int?> timezonePopup({
   int? initialValue,
 }) async {
   int? timezone;
-  final controller = TextEditingController(text: initialValue?.toString() ?? '');
+  final controller = TextEditingController(
+    text: initialValue?.formatUtcOffset() ?? '',
+  );
   final formKey = GlobalKey<FormState>();
 
   return showDialog<int>(
@@ -18,7 +20,7 @@ Future<int?> timezonePopup({
         key: formKey,
         child: TextFormField(
           controller: controller,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.datetime,
           autofocus: true,
           decoration: InputDecoration(labelText: labelText),
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -27,11 +29,11 @@ Future<int?> timezonePopup({
             if (trimmed.isEmpty) {
               return Localization.current.I18nModuleSettings_timezoneEmpty;
             }
-            final parsed = int.tryParse(trimmed);
+            final parsed = trimmed.toUtcOffsetMinutes();
             if (parsed == null) {
               return Localization.current.I18nModuleSettings_timezoneInvalid;
             }
-            if (parsed < -12 || parsed > 12) {
+            if (parsed < minUtcOffsetMinutes || parsed > maxUtcOffsetMinutes) {
               return Localization.current.I18nModuleSettings_timezoneRange;
             }
             timezone = parsed;
