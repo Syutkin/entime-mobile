@@ -1,16 +1,20 @@
 import 'package:entime/src/feature/module_settings/module_settings.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const _deviceBase = DeviceSettings(name: 'BT', number: 100, type: 1, timezone: 0);
-const _deviceAlt = DeviceSettings(name: 'BT', number: 101, type: 1, timezone: 0);
+const _deviceBase = DeviceSettings(name: 'BT', number: 100, type: 1, timezoneOffsetMin: 0);
+const _deviceAlt = DeviceSettings(name: 'BT', number: 101, type: 1, timezoneOffsetMin: 0);
 const _syncBase = SyncSettings(auto: false, source: 0, ntp1: 'ntp', ntp2: '', ntp3: '');
 const _wifiBase = WiFi(active: false, ssid: 'none', passwd: '');
+const _gpsBase = GpsSettings(enabled: true);
+const _touchBase = TouchSettings(enabled: true, calValid: false, calibration: [0, 0, 0, 0, 0]);
 
 const _entimeModel = ModSettingsModel.entime(
   ModSettingsEntime(
     device: _deviceBase,
     sync: _syncBase,
     wifi: _wifiBase,
+    gps: _gpsBase,
+    touch: _touchBase,
   ),
 );
 
@@ -19,6 +23,8 @@ const _entimeModelAlt = ModSettingsModel.entime(
     device: _deviceAlt,
     sync: _syncBase,
     wifi: _wifiBase,
+    gps: _gpsBase,
+    touch: _touchBase,
   ),
 );
 

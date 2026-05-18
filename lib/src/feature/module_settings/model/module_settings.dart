@@ -23,6 +23,8 @@ abstract class ModSettingsEntime with _$ModSettingsEntime {
     @JsonKey(name: 'device') required DeviceSettings device,
     @JsonKey(name: 'sync') required SyncSettings sync,
     @JsonKey(name: 'wifi') required WiFi wifi,
+    @JsonKey(name: 'gps') required GpsSettings gps,
+    @JsonKey(name: 'touch') required TouchSettings touch,
   }) = _ModSettingsEntime;
 
   factory ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
@@ -34,7 +36,7 @@ abstract class DeviceSettings with _$DeviceSettings {
     required String name,
     required int number,
     required int type,
-    required int timezone,
+    @JsonKey(name: 'timezone_offset_min') required int timezoneOffsetMin,
   }) = _DeviceSettings;
 
   factory DeviceSettings.fromJson(Map<String, dynamic> json) => _$DeviceSettingsFromJson(json);
@@ -78,6 +80,24 @@ abstract class WiFi with _$WiFi {
   const factory WiFi({required bool active, required String ssid, required String passwd}) = _WiFi;
 
   factory WiFi.fromJson(Map<String, dynamic> json) => _$WiFiFromJson(json);
+}
+
+@freezed
+abstract class GpsSettings with _$GpsSettings {
+  const factory GpsSettings({required bool enabled}) = _GpsSettings;
+
+  factory GpsSettings.fromJson(Map<String, dynamic> json) => _$GpsSettingsFromJson(json);
+}
+
+@freezed
+abstract class TouchSettings with _$TouchSettings {
+  const factory TouchSettings({
+    required bool enabled,
+    @JsonKey(name: 'cal_valid') required bool calValid,
+    required List<int> calibration,
+  }) = _TouchSettings;
+
+  factory TouchSettings.fromJson(Map<String, dynamic> json) => _$TouchSettingsFromJson(json);
 }
 
 @freezed

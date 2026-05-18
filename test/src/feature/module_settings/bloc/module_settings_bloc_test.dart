@@ -29,7 +29,7 @@ void main() {
         {
           "cmd": "load_config",
           "data": {
-            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone": 3},
+            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone_offset_min": 180},
             "sync": {
               "auto": true,
               "source": 0,
@@ -37,7 +37,9 @@ void main() {
               "ntp2": "time.google.com",
               "ntp3": "time.cloudflare.com"
             },
-            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"}
+            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "gps": {"enabled": true},
+            "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
           }
         }'''),
         ),
@@ -50,7 +52,27 @@ void main() {
           ),
         ],
         verify: (bloc) {
-          expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelEntime>());
+          final moduleSettings = (bloc.state as ModuleSettingsLoaded).moduleSettings;
+          expect(moduleSettings, isA<ModSettingsModelEntime>());
+
+          final entime = (moduleSettings as ModSettingsModelEntime).entime;
+          expect(entime.device.timezoneOffsetMin, 180);
+          expect(entime.gps.enabled, true);
+          expect(entime.touch.enabled, true);
+          expect(entime.touch.calValid, false);
+          expect(entime.touch.calibration, [0, 0, 0, 0, 0]);
+
+          final json = entime.toJson();
+          expect(json['device'], isA<Map<String, dynamic>>());
+          final deviceJson = json['device'] as Map<String, dynamic>;
+          expect(deviceJson['timezone_offset_min'], 180);
+          expect(deviceJson.containsKey('timezone'), isFalse);
+          expect(json['gps'], {'enabled': true});
+          expect(json['touch'], {
+            'enabled': true,
+            'cal_valid': false,
+            'calibration': [0, 0, 0, 0, 0],
+          });
         },
       );
 
@@ -146,7 +168,7 @@ void main() {
           {
             "cmd": "load_config",
             "data": {
-              "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone": 3},
+              "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone_offset_min": 180},
               "sync": {
                 "auto": true,
                 "source": 0,
@@ -154,7 +176,9 @@ void main() {
                 "ntp2": "time.google.com",
                 "ntp3": "time.cloudflare.com"
               },
-              "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"}
+              "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+              "gps": {"enabled": true},
+              "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
             }
           }''';
 
@@ -272,7 +296,7 @@ void main() {
         {
           "cmd": "load_config",
           "data": {
-            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone": 3},
+            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone_offset_min": 180},
             "sync": {
               "auto": true,
               "source": 0,
@@ -280,7 +304,9 @@ void main() {
               "ntp2": "time.google.com",
               "ntp3": "time.cloudflare.com"
             },
-            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"}
+            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "gps": {"enabled": true},
+            "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
           }
         }'''),
         );

@@ -51,7 +51,7 @@ void main() {
   setUpAll(() {
     jsonEntime = '''
           {
-            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone": 3},
+            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone_offset_min": 180},
             "sync": {
               "auto": true,
               "source": 0,
@@ -59,7 +59,9 @@ void main() {
               "ntp2": "time.google.com",
               "ntp3": "time.cloudflare.com"
             },
-            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"}
+            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "gps": {"enabled": true},
+            "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
           }''';
 
     jsonLed = '''

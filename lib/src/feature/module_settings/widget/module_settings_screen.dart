@@ -189,19 +189,21 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                         ),
                         SettingsTile(
                           title: Text(i18n.I18nModuleSettings_deviceTimezone),
-                          trailing: Text('${moduleSettings.device.timezone}'),
+                          trailing: Text('${moduleSettings.device.timezoneOffsetMin}'),
                           onPressed: (context) async {
                             final value = await timezonePopup(
                               context: context,
                               text: i18n.I18nModuleSettings_deviceTimezone,
                               labelText: i18n.I18nModuleSettings_deviceTimezone,
-                              initialValue: moduleSettings.device.timezone,
+                              initialValue: moduleSettings.device.timezoneOffsetMin,
                             );
                             if (value != null) {
                               widget.onChanged();
                               bloc.add(
                                 ModuleSettingsEvent.update(
-                                  ModSettingsModel.entime(moduleSettings.copyWith.device(timezone: value)),
+                                  ModSettingsModel.entime(
+                                    moduleSettings.copyWith.device(timezoneOffsetMin: value),
+                                  ),
                                 ),
                               );
                             }

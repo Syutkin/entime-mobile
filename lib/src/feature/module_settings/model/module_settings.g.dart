@@ -17,6 +17,8 @@ _ModSettingsEntime _$ModSettingsEntimeFromJson(Map<String, dynamic> json) =>
       device: DeviceSettings.fromJson(json['device'] as Map<String, dynamic>),
       sync: SyncSettings.fromJson(json['sync'] as Map<String, dynamic>),
       wifi: WiFi.fromJson(json['wifi'] as Map<String, dynamic>),
+      gps: GpsSettings.fromJson(json['gps'] as Map<String, dynamic>),
+      touch: TouchSettings.fromJson(json['touch'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ModSettingsEntimeToJson(_ModSettingsEntime instance) =>
@@ -24,6 +26,8 @@ Map<String, dynamic> _$ModSettingsEntimeToJson(_ModSettingsEntime instance) =>
       'device': instance.device.toJson(),
       'sync': instance.sync.toJson(),
       'wifi': instance.wifi.toJson(),
+      'gps': instance.gps.toJson(),
+      'touch': instance.touch.toJson(),
     };
 
 _DeviceSettings _$DeviceSettingsFromJson(Map<String, dynamic> json) =>
@@ -31,7 +35,7 @@ _DeviceSettings _$DeviceSettingsFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       number: (json['number'] as num).toInt(),
       type: (json['type'] as num).toInt(),
-      timezone: (json['timezone'] as num).toInt(),
+      timezoneOffsetMin: (json['timezone_offset_min'] as num).toInt(),
     );
 
 Map<String, dynamic> _$DeviceSettingsToJson(_DeviceSettings instance) =>
@@ -39,7 +43,7 @@ Map<String, dynamic> _$DeviceSettingsToJson(_DeviceSettings instance) =>
       'name': instance.name,
       'number': instance.number,
       'type': instance.type,
-      'timezone': instance.timezone,
+      'timezone_offset_min': instance.timezoneOffsetMin,
     };
 
 _SyncSettings _$SyncSettingsFromJson(Map<String, dynamic> json) =>
@@ -102,6 +106,28 @@ Map<String, dynamic> _$WiFiToJson(_WiFi instance) => <String, dynamic>{
   'ssid': instance.ssid,
   'passwd': instance.passwd,
 };
+
+_GpsSettings _$GpsSettingsFromJson(Map<String, dynamic> json) =>
+    _GpsSettings(enabled: json['enabled'] as bool);
+
+Map<String, dynamic> _$GpsSettingsToJson(_GpsSettings instance) =>
+    <String, dynamic>{'enabled': instance.enabled};
+
+_TouchSettings _$TouchSettingsFromJson(Map<String, dynamic> json) =>
+    _TouchSettings(
+      enabled: json['enabled'] as bool,
+      calValid: json['cal_valid'] as bool,
+      calibration: (json['calibration'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
+    );
+
+Map<String, dynamic> _$TouchSettingsToJson(_TouchSettings instance) =>
+    <String, dynamic>{
+      'enabled': instance.enabled,
+      'cal_valid': instance.calValid,
+      'calibration': instance.calibration,
+    };
 
 _LedPanel _$LedPanelFromJson(Map<String, dynamic> json) =>
     _LedPanel(brightness: (json['brightness'] as num).toInt());

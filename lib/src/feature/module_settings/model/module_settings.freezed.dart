@@ -588,7 +588,7 @@ as String,
 /// @nodoc
 mixin _$ModSettingsEntime {
 
-@JsonKey(name: 'device') DeviceSettings get device;@JsonKey(name: 'sync') SyncSettings get sync;@JsonKey(name: 'wifi') WiFi get wifi;
+@JsonKey(name: 'device') DeviceSettings get device;@JsonKey(name: 'sync') SyncSettings get sync;@JsonKey(name: 'wifi') WiFi get wifi;@JsonKey(name: 'gps') GpsSettings get gps;@JsonKey(name: 'touch') TouchSettings get touch;
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -601,16 +601,16 @@ $ModSettingsEntimeCopyWith<ModSettingsEntime> get copyWith => _$ModSettingsEntim
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsEntime&&(identical(other.device, device) || other.device == device)&&(identical(other.sync, sync) || other.sync == sync)&&(identical(other.wifi, wifi) || other.wifi == wifi));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ModSettingsEntime&&(identical(other.device, device) || other.device == device)&&(identical(other.sync, sync) || other.sync == sync)&&(identical(other.wifi, wifi) || other.wifi == wifi)&&(identical(other.gps, gps) || other.gps == gps)&&(identical(other.touch, touch) || other.touch == touch));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,device,sync,wifi);
+int get hashCode => Object.hash(runtimeType,device,sync,wifi,gps,touch);
 
 @override
 String toString() {
-  return 'ModSettingsEntime(device: $device, sync: $sync, wifi: $wifi)';
+  return 'ModSettingsEntime(device: $device, sync: $sync, wifi: $wifi, gps: $gps, touch: $touch)';
 }
 
 
@@ -621,11 +621,11 @@ abstract mixin class $ModSettingsEntimeCopyWith<$Res>  {
   factory $ModSettingsEntimeCopyWith(ModSettingsEntime value, $Res Function(ModSettingsEntime) _then) = _$ModSettingsEntimeCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'device') DeviceSettings device,@JsonKey(name: 'sync') SyncSettings sync,@JsonKey(name: 'wifi') WiFi wifi
+@JsonKey(name: 'device') DeviceSettings device,@JsonKey(name: 'sync') SyncSettings sync,@JsonKey(name: 'wifi') WiFi wifi,@JsonKey(name: 'gps') GpsSettings gps,@JsonKey(name: 'touch') TouchSettings touch
 });
 
 
-$DeviceSettingsCopyWith<$Res> get device;$SyncSettingsCopyWith<$Res> get sync;$WiFiCopyWith<$Res> get wifi;
+$DeviceSettingsCopyWith<$Res> get device;$SyncSettingsCopyWith<$Res> get sync;$WiFiCopyWith<$Res> get wifi;$GpsSettingsCopyWith<$Res> get gps;$TouchSettingsCopyWith<$Res> get touch;
 
 }
 /// @nodoc
@@ -638,12 +638,14 @@ class _$ModSettingsEntimeCopyWithImpl<$Res>
 
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? device = null,Object? sync = null,Object? wifi = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? device = null,Object? sync = null,Object? wifi = null,Object? gps = null,Object? touch = null,}) {
   return _then(_self.copyWith(
 device: null == device ? _self.device : device // ignore: cast_nullable_to_non_nullable
 as DeviceSettings,sync: null == sync ? _self.sync : sync // ignore: cast_nullable_to_non_nullable
 as SyncSettings,wifi: null == wifi ? _self.wifi : wifi // ignore: cast_nullable_to_non_nullable
-as WiFi,
+as WiFi,gps: null == gps ? _self.gps : gps // ignore: cast_nullable_to_non_nullable
+as GpsSettings,touch: null == touch ? _self.touch : touch // ignore: cast_nullable_to_non_nullable
+as TouchSettings,
   ));
 }
 /// Create a copy of ModSettingsEntime
@@ -669,9 +671,27 @@ $SyncSettingsCopyWith<$Res> get sync {
 @override
 @pragma('vm:prefer-inline')
 $WiFiCopyWith<$Res> get wifi {
-  
+
   return $WiFiCopyWith<$Res>(_self.wifi, (value) {
     return _then(_self.copyWith(wifi: value));
+  });
+}/// Create a copy of ModSettingsEntime
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$GpsSettingsCopyWith<$Res> get gps {
+
+  return $GpsSettingsCopyWith<$Res>(_self.gps, (value) {
+    return _then(_self.copyWith(gps: value));
+  });
+}/// Create a copy of ModSettingsEntime
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TouchSettingsCopyWith<$Res> get touch {
+
+  return $TouchSettingsCopyWith<$Res>(_self.touch, (value) {
+    return _then(_self.copyWith(touch: value));
   });
 }
 }
@@ -755,10 +775,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi, @JsonKey(name: 'gps')  GpsSettings gps, @JsonKey(name: 'touch')  TouchSettings touch)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ModSettingsEntime() when $default != null:
-return $default(_that.device,_that.sync,_that.wifi);case _:
+return $default(_that.device,_that.sync,_that.wifi,_that.gps,_that.touch);case _:
   return orElse();
 
 }
@@ -776,10 +796,10 @@ return $default(_that.device,_that.sync,_that.wifi);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi, @JsonKey(name: 'gps')  GpsSettings gps, @JsonKey(name: 'touch')  TouchSettings touch)  $default,) {final _that = this;
 switch (_that) {
 case _ModSettingsEntime():
-return $default(_that.device,_that.sync,_that.wifi);case _:
+return $default(_that.device,_that.sync,_that.wifi,_that.gps,_that.touch);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -796,10 +816,10 @@ return $default(_that.device,_that.sync,_that.wifi);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'device')  DeviceSettings device, @JsonKey(name: 'sync')  SyncSettings sync, @JsonKey(name: 'wifi')  WiFi wifi, @JsonKey(name: 'gps')  GpsSettings gps, @JsonKey(name: 'touch')  TouchSettings touch)?  $default,) {final _that = this;
 switch (_that) {
 case _ModSettingsEntime() when $default != null:
-return $default(_that.device,_that.sync,_that.wifi);case _:
+return $default(_that.device,_that.sync,_that.wifi,_that.gps,_that.touch);case _:
   return null;
 
 }
@@ -811,12 +831,14 @@ return $default(_that.device,_that.sync,_that.wifi);case _:
 @JsonSerializable()
 
 class _ModSettingsEntime implements ModSettingsEntime {
-  const _ModSettingsEntime({@JsonKey(name: 'device') required this.device, @JsonKey(name: 'sync') required this.sync, @JsonKey(name: 'wifi') required this.wifi});
+  const _ModSettingsEntime({@JsonKey(name: 'device') required this.device, @JsonKey(name: 'sync') required this.sync, @JsonKey(name: 'wifi') required this.wifi, @JsonKey(name: 'gps') required this.gps, @JsonKey(name: 'touch') required this.touch});
   factory _ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
 
 @override@JsonKey(name: 'device') final  DeviceSettings device;
 @override@JsonKey(name: 'sync') final  SyncSettings sync;
 @override@JsonKey(name: 'wifi') final  WiFi wifi;
+@override@JsonKey(name: 'gps') final  GpsSettings gps;
+@override@JsonKey(name: 'touch') final  TouchSettings touch;
 
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
@@ -831,16 +853,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsEntime&&(identical(other.device, device) || other.device == device)&&(identical(other.sync, sync) || other.sync == sync)&&(identical(other.wifi, wifi) || other.wifi == wifi));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ModSettingsEntime&&(identical(other.device, device) || other.device == device)&&(identical(other.sync, sync) || other.sync == sync)&&(identical(other.wifi, wifi) || other.wifi == wifi)&&(identical(other.gps, gps) || other.gps == gps)&&(identical(other.touch, touch) || other.touch == touch));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,device,sync,wifi);
+int get hashCode => Object.hash(runtimeType,device,sync,wifi,gps,touch);
 
 @override
 String toString() {
-  return 'ModSettingsEntime(device: $device, sync: $sync, wifi: $wifi)';
+  return 'ModSettingsEntime(device: $device, sync: $sync, wifi: $wifi, gps: $gps, touch: $touch)';
 }
 
 
@@ -851,11 +873,11 @@ abstract mixin class _$ModSettingsEntimeCopyWith<$Res> implements $ModSettingsEn
   factory _$ModSettingsEntimeCopyWith(_ModSettingsEntime value, $Res Function(_ModSettingsEntime) _then) = __$ModSettingsEntimeCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'device') DeviceSettings device,@JsonKey(name: 'sync') SyncSettings sync,@JsonKey(name: 'wifi') WiFi wifi
+@JsonKey(name: 'device') DeviceSettings device,@JsonKey(name: 'sync') SyncSettings sync,@JsonKey(name: 'wifi') WiFi wifi,@JsonKey(name: 'gps') GpsSettings gps,@JsonKey(name: 'touch') TouchSettings touch
 });
 
 
-@override $DeviceSettingsCopyWith<$Res> get device;@override $SyncSettingsCopyWith<$Res> get sync;@override $WiFiCopyWith<$Res> get wifi;
+@override $DeviceSettingsCopyWith<$Res> get device;@override $SyncSettingsCopyWith<$Res> get sync;@override $WiFiCopyWith<$Res> get wifi;@override $GpsSettingsCopyWith<$Res> get gps;@override $TouchSettingsCopyWith<$Res> get touch;
 
 }
 /// @nodoc
@@ -868,12 +890,14 @@ class __$ModSettingsEntimeCopyWithImpl<$Res>
 
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? device = null,Object? sync = null,Object? wifi = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? device = null,Object? sync = null,Object? wifi = null,Object? gps = null,Object? touch = null,}) {
   return _then(_ModSettingsEntime(
 device: null == device ? _self.device : device // ignore: cast_nullable_to_non_nullable
 as DeviceSettings,sync: null == sync ? _self.sync : sync // ignore: cast_nullable_to_non_nullable
 as SyncSettings,wifi: null == wifi ? _self.wifi : wifi // ignore: cast_nullable_to_non_nullable
-as WiFi,
+as WiFi,gps: null == gps ? _self.gps : gps // ignore: cast_nullable_to_non_nullable
+as GpsSettings,touch: null == touch ? _self.touch : touch // ignore: cast_nullable_to_non_nullable
+as TouchSettings,
   ));
 }
 
@@ -904,6 +928,24 @@ $WiFiCopyWith<$Res> get wifi {
   return $WiFiCopyWith<$Res>(_self.wifi, (value) {
     return _then(_self.copyWith(wifi: value));
   });
+}/// Create a copy of ModSettingsEntime
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$GpsSettingsCopyWith<$Res> get gps {
+
+  return $GpsSettingsCopyWith<$Res>(_self.gps, (value) {
+    return _then(_self.copyWith(gps: value));
+  });
+}/// Create a copy of ModSettingsEntime
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TouchSettingsCopyWith<$Res> get touch {
+
+  return $TouchSettingsCopyWith<$Res>(_self.touch, (value) {
+    return _then(_self.copyWith(touch: value));
+  });
 }
 }
 
@@ -911,7 +953,7 @@ $WiFiCopyWith<$Res> get wifi {
 /// @nodoc
 mixin _$DeviceSettings {
 
- String get name; int get number; int get type; int get timezone;
+ String get name; int get number; int get type;@JsonKey(name: 'timezone_offset_min') int get timezoneOffsetMin;
 /// Create a copy of DeviceSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -924,16 +966,16 @@ $DeviceSettingsCopyWith<DeviceSettings> get copyWith => _$DeviceSettingsCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceSettings&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.type, type) || other.type == type)&&(identical(other.timezone, timezone) || other.timezone == timezone));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceSettings&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.type, type) || other.type == type)&&(identical(other.timezoneOffsetMin, timezoneOffsetMin) || other.timezoneOffsetMin == timezoneOffsetMin));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,number,type,timezone);
+int get hashCode => Object.hash(runtimeType,name,number,type,timezoneOffsetMin);
 
 @override
 String toString() {
-  return 'DeviceSettings(name: $name, number: $number, type: $type, timezone: $timezone)';
+  return 'DeviceSettings(name: $name, number: $number, type: $type, timezoneOffsetMin: $timezoneOffsetMin)';
 }
 
 
@@ -944,7 +986,7 @@ abstract mixin class $DeviceSettingsCopyWith<$Res>  {
   factory $DeviceSettingsCopyWith(DeviceSettings value, $Res Function(DeviceSettings) _then) = _$DeviceSettingsCopyWithImpl;
 @useResult
 $Res call({
- String name, int number, int type, int timezone
+ String name, int number, int type,@JsonKey(name: 'timezone_offset_min') int timezoneOffsetMin
 });
 
 
@@ -961,12 +1003,12 @@ class _$DeviceSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DeviceSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? number = null,Object? type = null,Object? timezone = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? number = null,Object? type = null,Object? timezoneOffsetMin = null,}) {
   return _then(_self.copyWith(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as int,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as int,timezone: null == timezone ? _self.timezone : timezone // ignore: cast_nullable_to_non_nullable
+as int,timezoneOffsetMin: null == timezoneOffsetMin ? _self.timezoneOffsetMin : timezoneOffsetMin // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -1052,10 +1094,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  int number,  int type,  int timezone)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  int number,  int type, @JsonKey(name: 'timezone_offset_min')  int timezoneOffsetMin)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DeviceSettings() when $default != null:
-return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
+return $default(_that.name,_that.number,_that.type,_that.timezoneOffsetMin);case _:
   return orElse();
 
 }
@@ -1073,10 +1115,10 @@ return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  int number,  int type,  int timezone)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  int number,  int type, @JsonKey(name: 'timezone_offset_min')  int timezoneOffsetMin)  $default,) {final _that = this;
 switch (_that) {
 case _DeviceSettings():
-return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
+return $default(_that.name,_that.number,_that.type,_that.timezoneOffsetMin);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1093,10 +1135,10 @@ return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  int number,  int type,  int timezone)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  int number,  int type, @JsonKey(name: 'timezone_offset_min')  int timezoneOffsetMin)?  $default,) {final _that = this;
 switch (_that) {
 case _DeviceSettings() when $default != null:
-return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
+return $default(_that.name,_that.number,_that.type,_that.timezoneOffsetMin);case _:
   return null;
 
 }
@@ -1108,13 +1150,13 @@ return $default(_that.name,_that.number,_that.type,_that.timezone);case _:
 @JsonSerializable()
 
 class _DeviceSettings implements DeviceSettings {
-  const _DeviceSettings({required this.name, required this.number, required this.type, required this.timezone});
+  const _DeviceSettings({required this.name, required this.number, required this.type, @JsonKey(name: 'timezone_offset_min') required this.timezoneOffsetMin});
   factory _DeviceSettings.fromJson(Map<String, dynamic> json) => _$DeviceSettingsFromJson(json);
 
 @override final  String name;
 @override final  int number;
 @override final  int type;
-@override final  int timezone;
+@override@JsonKey(name: 'timezone_offset_min') final  int timezoneOffsetMin;
 
 /// Create a copy of DeviceSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1129,16 +1171,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceSettings&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.type, type) || other.type == type)&&(identical(other.timezone, timezone) || other.timezone == timezone));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceSettings&&(identical(other.name, name) || other.name == name)&&(identical(other.number, number) || other.number == number)&&(identical(other.type, type) || other.type == type)&&(identical(other.timezoneOffsetMin, timezoneOffsetMin) || other.timezoneOffsetMin == timezoneOffsetMin));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,number,type,timezone);
+int get hashCode => Object.hash(runtimeType,name,number,type,timezoneOffsetMin);
 
 @override
 String toString() {
-  return 'DeviceSettings(name: $name, number: $number, type: $type, timezone: $timezone)';
+  return 'DeviceSettings(name: $name, number: $number, type: $type, timezoneOffsetMin: $timezoneOffsetMin)';
 }
 
 
@@ -1149,7 +1191,7 @@ abstract mixin class _$DeviceSettingsCopyWith<$Res> implements $DeviceSettingsCo
   factory _$DeviceSettingsCopyWith(_DeviceSettings value, $Res Function(_DeviceSettings) _then) = __$DeviceSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String name, int number, int type, int timezone
+ String name, int number, int type,@JsonKey(name: 'timezone_offset_min') int timezoneOffsetMin
 });
 
 
@@ -1166,12 +1208,12 @@ class __$DeviceSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DeviceSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? number = null,Object? type = null,Object? timezone = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? number = null,Object? type = null,Object? timezoneOffsetMin = null,}) {
   return _then(_DeviceSettings(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as int,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as int,timezone: null == timezone ? _self.timezone : timezone // ignore: cast_nullable_to_non_nullable
+as int,timezoneOffsetMin: null == timezoneOffsetMin ? _self.timezoneOffsetMin : timezoneOffsetMin // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -2315,6 +2357,544 @@ active: null == active ? _self.active : active // ignore: cast_nullable_to_non_n
 as bool,ssid: null == ssid ? _self.ssid : ssid // ignore: cast_nullable_to_non_nullable
 as String,passwd: null == passwd ? _self.passwd : passwd // ignore: cast_nullable_to_non_nullable
 as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$GpsSettings {
+
+ bool get enabled;
+/// Create a copy of GpsSettings
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GpsSettingsCopyWith<GpsSettings> get copyWith => _$GpsSettingsCopyWithImpl<GpsSettings>(this as GpsSettings, _$identity);
+
+  /// Serializes this GpsSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GpsSettings&&(identical(other.enabled, enabled) || other.enabled == enabled));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
+
+@override
+String toString() {
+  return 'GpsSettings(enabled: $enabled)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $GpsSettingsCopyWith<$Res>  {
+  factory $GpsSettingsCopyWith(GpsSettings value, $Res Function(GpsSettings) _then) = _$GpsSettingsCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class _$GpsSettingsCopyWithImpl<$Res>
+    implements $GpsSettingsCopyWith<$Res> {
+  _$GpsSettingsCopyWithImpl(this._self, this._then);
+
+  final GpsSettings _self;
+  final $Res Function(GpsSettings) _then;
+
+/// Create a copy of GpsSettings
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? enabled = null,}) {
+  return _then(_self.copyWith(
+enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [GpsSettings].
+extension GpsSettingsPatterns on GpsSettings {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _GpsSettings value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _GpsSettings() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _GpsSettings value)  $default,){
+final _that = this;
+switch (_that) {
+case _GpsSettings():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _GpsSettings value)?  $default,){
+final _that = this;
+switch (_that) {
+case _GpsSettings() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool enabled)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _GpsSettings() when $default != null:
+return $default(_that.enabled);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool enabled)  $default,) {final _that = this;
+switch (_that) {
+case _GpsSettings():
+return $default(_that.enabled);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool enabled)?  $default,) {final _that = this;
+switch (_that) {
+case _GpsSettings() when $default != null:
+return $default(_that.enabled);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _GpsSettings implements GpsSettings {
+  const _GpsSettings({required this.enabled});
+  factory _GpsSettings.fromJson(Map<String, dynamic> json) => _$GpsSettingsFromJson(json);
+
+@override final  bool enabled;
+
+/// Create a copy of GpsSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$GpsSettingsCopyWith<_GpsSettings> get copyWith => __$GpsSettingsCopyWithImpl<_GpsSettings>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$GpsSettingsToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GpsSettings&&(identical(other.enabled, enabled) || other.enabled == enabled));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,enabled);
+
+@override
+String toString() {
+  return 'GpsSettings(enabled: $enabled)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$GpsSettingsCopyWith<$Res> implements $GpsSettingsCopyWith<$Res> {
+  factory _$GpsSettingsCopyWith(_GpsSettings value, $Res Function(_GpsSettings) _then) = __$GpsSettingsCopyWithImpl;
+@override @useResult
+$Res call({
+ bool enabled
+});
+
+
+
+
+}
+/// @nodoc
+class __$GpsSettingsCopyWithImpl<$Res>
+    implements _$GpsSettingsCopyWith<$Res> {
+  __$GpsSettingsCopyWithImpl(this._self, this._then);
+
+  final _GpsSettings _self;
+  final $Res Function(_GpsSettings) _then;
+
+/// Create a copy of GpsSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? enabled = null,}) {
+  return _then(_GpsSettings(
+enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$TouchSettings {
+
+ bool get enabled;@JsonKey(name: 'cal_valid') bool get calValid; List<int> get calibration;
+/// Create a copy of TouchSettings
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TouchSettingsCopyWith<TouchSettings> get copyWith => _$TouchSettingsCopyWithImpl<TouchSettings>(this as TouchSettings, _$identity);
+
+  /// Serializes this TouchSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TouchSettings&&(identical(other.enabled, enabled) || other.enabled == enabled)&&(identical(other.calValid, calValid) || other.calValid == calValid)&&const DeepCollectionEquality().equals(other.calibration, calibration));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,enabled,calValid,const DeepCollectionEquality().hash(calibration));
+
+@override
+String toString() {
+  return 'TouchSettings(enabled: $enabled, calValid: $calValid, calibration: $calibration)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $TouchSettingsCopyWith<$Res>  {
+  factory $TouchSettingsCopyWith(TouchSettings value, $Res Function(TouchSettings) _then) = _$TouchSettingsCopyWithImpl;
+@useResult
+$Res call({
+ bool enabled,@JsonKey(name: 'cal_valid') bool calValid, List<int> calibration
+});
+
+
+
+
+}
+/// @nodoc
+class _$TouchSettingsCopyWithImpl<$Res>
+    implements $TouchSettingsCopyWith<$Res> {
+  _$TouchSettingsCopyWithImpl(this._self, this._then);
+
+  final TouchSettings _self;
+  final $Res Function(TouchSettings) _then;
+
+/// Create a copy of TouchSettings
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? enabled = null,Object? calValid = null,Object? calibration = null,}) {
+  return _then(_self.copyWith(
+enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,calValid: null == calValid ? _self.calValid : calValid // ignore: cast_nullable_to_non_nullable
+as bool,calibration: null == calibration ? _self.calibration : calibration // ignore: cast_nullable_to_non_nullable
+as List<int>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [TouchSettings].
+extension TouchSettingsPatterns on TouchSettings {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TouchSettings value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TouchSettings() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TouchSettings value)  $default,){
+final _that = this;
+switch (_that) {
+case _TouchSettings():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TouchSettings value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TouchSettings() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool enabled, @JsonKey(name: 'cal_valid')  bool calValid,  List<int> calibration)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TouchSettings() when $default != null:
+return $default(_that.enabled,_that.calValid,_that.calibration);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool enabled, @JsonKey(name: 'cal_valid')  bool calValid,  List<int> calibration)  $default,) {final _that = this;
+switch (_that) {
+case _TouchSettings():
+return $default(_that.enabled,_that.calValid,_that.calibration);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool enabled, @JsonKey(name: 'cal_valid')  bool calValid,  List<int> calibration)?  $default,) {final _that = this;
+switch (_that) {
+case _TouchSettings() when $default != null:
+return $default(_that.enabled,_that.calValid,_that.calibration);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _TouchSettings implements TouchSettings {
+  const _TouchSettings({required this.enabled, @JsonKey(name: 'cal_valid') required this.calValid, required final  List<int> calibration}): _calibration = calibration;
+  factory _TouchSettings.fromJson(Map<String, dynamic> json) => _$TouchSettingsFromJson(json);
+
+@override final  bool enabled;
+@override@JsonKey(name: 'cal_valid') final  bool calValid;
+ final  List<int> _calibration;
+@override List<int> get calibration {
+  if (_calibration is EqualUnmodifiableListView) return _calibration;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_calibration);
+}
+
+
+/// Create a copy of TouchSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TouchSettingsCopyWith<_TouchSettings> get copyWith => __$TouchSettingsCopyWithImpl<_TouchSettings>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$TouchSettingsToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TouchSettings&&(identical(other.enabled, enabled) || other.enabled == enabled)&&(identical(other.calValid, calValid) || other.calValid == calValid)&&const DeepCollectionEquality().equals(other._calibration, _calibration));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,enabled,calValid,const DeepCollectionEquality().hash(_calibration));
+
+@override
+String toString() {
+  return 'TouchSettings(enabled: $enabled, calValid: $calValid, calibration: $calibration)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TouchSettingsCopyWith<$Res> implements $TouchSettingsCopyWith<$Res> {
+  factory _$TouchSettingsCopyWith(_TouchSettings value, $Res Function(_TouchSettings) _then) = __$TouchSettingsCopyWithImpl;
+@override @useResult
+$Res call({
+ bool enabled,@JsonKey(name: 'cal_valid') bool calValid, List<int> calibration
+});
+
+
+
+
+}
+/// @nodoc
+class __$TouchSettingsCopyWithImpl<$Res>
+    implements _$TouchSettingsCopyWith<$Res> {
+  __$TouchSettingsCopyWithImpl(this._self, this._then);
+
+  final _TouchSettings _self;
+  final $Res Function(_TouchSettings) _then;
+
+/// Create a copy of TouchSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? enabled = null,Object? calValid = null,Object? calibration = null,}) {
+  return _then(_TouchSettings(
+enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,calValid: null == calValid ? _self.calValid : calValid // ignore: cast_nullable_to_non_nullable
+as bool,calibration: null == calibration ? _self._calibration : calibration // ignore: cast_nullable_to_non_nullable
+as List<int>,
   ));
 }
 
