@@ -320,6 +320,7 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         rtc: _parseRtcInfo(json['rtc'].asMap()),
         gps: _parseGpsInfo(json['gps'].asMap()),
         sync: _parseSyncInfo(json['sync'].asMap()),
+        touch: _parseTouchInfo(json['touch'].asMap()),
         storage: _parseStorageInfo(json['storage'].asMap()),
         power: _parsePowerInfo(json['power'].asMap()),
       );
@@ -485,6 +486,7 @@ BluetoothJsonRtcInfo? _parseRtcInfo(Map<String, Object?>? json) {
   return BluetoothJsonRtcInfo(
     ready: json['ready'].asBool(),
     lostPower: json['lost_power'].asBool(),
+    timeValid: json['time_valid'].asBool(),
     lastSyncMs: json['last_sync_ms'].asInt(),
     temperatureC: json['temperature_c'].asDouble(),
   );
@@ -498,9 +500,15 @@ BluetoothJsonGpsInfo? _parseGpsInfo(Map<String, Object?>? json) {
   return BluetoothJsonGpsInfo(
     state: _parseGpsState(json['state']),
     fixAgeMs: json['fix_age_ms'].asInt(),
+    nmeaAgeMs: json['nmea_age_ms'].asInt(),
+    gsvAgeMs: json['gsv_age_ms'].asInt(),
+    utcAgeMs: json['utc_age_ms'].asInt(),
+    ppsAgeMs: json['pps_age_ms'].asInt(),
     fix: json['fix'].asBool(),
-    satellites: json['satellites'].asInt(),
+    satellitesUsed: json['satellites_used'].asInt(),
+    satellitesView: json['satellites_view'].asInt(),
     ppsSignal: json['pps_signal'].asBool(),
+    enabled: json['enabled'].asBool(),
   );
 }
 
@@ -514,6 +522,18 @@ BluetoothJsonSyncInfo? _parseSyncInfo(Map<String, Object?>? json) {
     state: _parseSyncState(json['state']),
     accuracyUs: json['accuracy_us'].asInt(),
     source: _parseTimeSource(json['source']),
+  );
+}
+
+BluetoothJsonTouchInfo? _parseTouchInfo(Map<String, Object?>? json) {
+  if (json == null) {
+    return null;
+  }
+
+  return BluetoothJsonTouchInfo(
+    ready: json['ready'].asBool(),
+    enabled: json['enabled'].asBool(),
+    calibrated: json['calibrated'].asBool(),
   );
 }
 

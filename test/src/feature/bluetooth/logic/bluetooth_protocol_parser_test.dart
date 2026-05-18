@@ -393,17 +393,32 @@ void main() {
 
       test('parses status response fields', () {
         const raw = '''
-{"cmd":"status","id":3,"status":"ok","device":{"name":"ENTIME","number":1,"type":"start"},"system":{"uptime_s":12,"free_heap_bytes":1024,"reset_reason":"power_on"},"wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"},"ble":{"state":"advertising","clients":0},"rtc":{"ready":true,"lost_power":false,"last_sync_ms":600000,"temperature_c":24.5},"gps":{"state":"searching","fix_age_ms":120000,"fix":true,"satellites":12,"pps_signal":true},"sync":{"last_ms":5000,"state":"gps_ok","accuracy_us":50,"source":"gps"},"storage":{"used_pct":42,"ok":true},"power":{"battery_voltage":5.0}}
+{"cmd":"status","id":2,"device":{"name":"ENTIME","number":1,"type":"start"},"firmware":{"version":"0.1.0","build_date":"2024-01-01"},"system":{"uptime_s":12345,"free_heap_bytes":142336,"reset_reason":"power_on"},"wifi":{"state":"connected","rssi":-62,"ip":"192.168.1.10","ssid":"MyWiFi"},"ble":{"state":"advertising","clients":0},"rtc":{"ready":true,"lost_power":false,"time_valid":true,"last_sync_ms":600000,"temperature_c":24.5},"gps":{"state":"searching","fix_age_ms":120000,"nmea_age_ms":350,"gsv_age_ms":410,"utc_age_ms":900,"pps_age_ms":120,"fix":true,"satellites_used":8,"satellites_view":12,"pps_signal":true,"enabled":true},"sync":{"last_ms":5000,"state":"gps_ok","accuracy_us":50,"source":"gps"},"touch":{"ready":true,"enabled":true,"calibrated":false},"storage":{"used_pct":42,"ok":true},"power":{"battery_voltage":5.0},"status":"ok"}
 ''';
 
         final response = parseStatusResponse(raw);
+        expect(response.id, 2);
+        expect(response.status, BluetoothProtocolStatus.ok);
         expect(response.device?.name, 'ENTIME');
         expect(response.device?.type, BluetoothProtocolDeviceType.start);
+        expect(response.firmware?.version, '0.1.0');
+        expect(response.system?.uptimeS, 12345);
         expect(response.wifi?.state, BluetoothProtocolWifiState.connected);
         expect(response.ble?.state, BluetoothProtocolBleState.advertising);
         expect(response.rtc?.ready, true);
+        expect(response.rtc?.timeValid, true);
         expect(response.gps?.state, BluetoothProtocolGpsState.searching);
+        expect(response.gps?.nmeaAgeMs, 350);
+        expect(response.gps?.gsvAgeMs, 410);
+        expect(response.gps?.utcAgeMs, 900);
+        expect(response.gps?.ppsAgeMs, 120);
+        expect(response.gps?.satellitesUsed, 8);
+        expect(response.gps?.satellitesView, 12);
+        expect(response.gps?.enabled, true);
         expect(response.sync?.state, BluetoothProtocolSyncState.gpsOk);
+        expect(response.touch?.ready, true);
+        expect(response.touch?.enabled, true);
+        expect(response.touch?.calibrated, false);
         expect(response.storage?.usedPct, 42);
         expect(response.power?.batteryVoltage, 5.0);
       });
@@ -494,6 +509,13 @@ void main() {
         expect(response.sync, null);
       });
 
+      test('parses status response without touch info', () {
+        const raw = '{"cmd":"status","id":3,"status":"ok"}';
+
+        final response = parseStatusResponse(raw);
+        expect(response.touch, null);
+      });
+
       test('parses status response without storage info', () {
         const raw = '{"cmd":"status","id":3,"status":"ok"}';
 
@@ -564,7 +586,6 @@ void main() {
         expect(parseStatusResponse(rawSdio).system?.resetReason, BluetoothProtocolResetReason.sdio);
         expect(parseStatusResponse(rawUnknown).system?.resetReason, BluetoothProtocolResetReason.unknown);
       });
-
 
       test('parses wifi response', () {
         const raw = '{"cmd":"wifi","id":5,"state":"enabled","status":"ok"}';

@@ -235,6 +235,7 @@ final class BluetoothJsonResponseStatus extends BluetoothJsonResponse {
     this.rtc,
     this.gps,
     this.sync,
+    this.touch,
     this.storage,
     this.power,
   }) : super(command: BluetoothProtocolCommandType.status);
@@ -247,6 +248,7 @@ final class BluetoothJsonResponseStatus extends BluetoothJsonResponse {
   final BluetoothJsonRtcInfo? rtc;
   final BluetoothJsonGpsInfo? gps;
   final BluetoothJsonSyncInfo? sync;
+  final BluetoothJsonTouchInfo? touch;
   final BluetoothJsonStorageInfo? storage;
   final BluetoothJsonPowerInfo? power;
 }
@@ -437,12 +439,14 @@ final class BluetoothJsonRtcInfo {
   const BluetoothJsonRtcInfo({
     this.ready,
     this.lostPower,
+    this.timeValid,
     this.lastSyncMs,
     this.temperatureC,
   });
 
   final bool? ready;
   final bool? lostPower;
+  final bool? timeValid;
   final int? lastSyncMs;
   final double? temperatureC;
 }
@@ -451,16 +455,28 @@ final class BluetoothJsonGpsInfo {
   const BluetoothJsonGpsInfo({
     this.state,
     this.fixAgeMs,
+    this.nmeaAgeMs,
+    this.gsvAgeMs,
+    this.utcAgeMs,
+    this.ppsAgeMs,
     this.fix,
-    this.satellites,
+    this.satellitesUsed,
+    this.satellitesView,
     this.ppsSignal,
+    this.enabled,
   });
 
   final BluetoothProtocolGpsState? state;
   final int? fixAgeMs;
+  final int? nmeaAgeMs;
+  final int? gsvAgeMs;
+  final int? utcAgeMs;
+  final int? ppsAgeMs;
   final bool? fix;
-  final int? satellites;
+  final int? satellitesUsed;
+  final int? satellitesView;
   final bool? ppsSignal;
+  final bool? enabled;
 }
 
 final class BluetoothJsonSyncInfo {
@@ -475,6 +491,18 @@ final class BluetoothJsonSyncInfo {
   final BluetoothProtocolSyncState? state;
   final int? accuracyUs;
   final BluetoothProtocolTimeSource? source;
+}
+
+final class BluetoothJsonTouchInfo {
+  const BluetoothJsonTouchInfo({
+    this.ready,
+    this.enabled,
+    this.calibrated,
+  });
+
+  final bool? ready;
+  final bool? enabled;
+  final bool? calibrated;
 }
 
 final class BluetoothJsonStorageInfo {
