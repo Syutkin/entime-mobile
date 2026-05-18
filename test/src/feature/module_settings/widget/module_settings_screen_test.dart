@@ -175,21 +175,27 @@ void main() {
         await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_syncAuto)).tap();
         await $(BackButton).tap();
         await $(#okButton).tap();
-        verify(
-          () => bluetoothBloc.add(
-            any(
-              that: isA<BluetoothEvent>().having(
-                (event) => event.whenOrNull(sendMessage: (message) => message),
-                'message',
-                isA<String>().having(
-                  (message) => message.contains('"cmd":"save_config"'),
-                  'message',
-                  isTrue,
-                ),
-              ),
-            ),
-          ),
-        ).called(1);
+
+        final capturedEvent = verify(() => bluetoothBloc.add(captureAny())).captured.single as BluetoothEvent;
+        final message = capturedEvent.whenOrNull(sendMessage: (message) => message);
+        expect(message, isNotNull);
+
+        final payload = jsonDecode(message!) as Map<String, dynamic>;
+        expect(payload['cmd'], 'save_config');
+        expect(payload['data'], isA<Map<String, dynamic>>());
+
+        final data = payload['data'] as Map<String, dynamic>;
+        expect(data['gps'], {'enabled': true});
+        expect(data['touch'], {
+          'enabled': true,
+          'cal_valid': false,
+          'calibration': [0, 0, 0, 0, 0],
+        });
+        expect(data['device'], isA<Map<String, dynamic>>());
+
+        final device = data['device'] as Map<String, dynamic>;
+        expect(device['timezone_offset_min'], 180);
+        expect(device.containsKey('timezone'), isFalse);
       });
 
       patrolWidgetTest('Sends bluetooth message when save confirmed for LED', (PatrolTester $) async {
