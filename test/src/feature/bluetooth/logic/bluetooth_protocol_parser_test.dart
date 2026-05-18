@@ -133,19 +133,6 @@ void main() {
         expect((command as BluetoothJsonCommandStatus).id, 3);
       });
 
-      test('parses gps command', () {
-        const raw = '{"cmd": "gps", "enable": true, "id": 4}';
-
-        final message = parser.parse(raw);
-
-        expect(message, isA<BluetoothProtocolJsonCommandMessage>());
-        final command = (message as BluetoothProtocolJsonCommandMessage).command;
-        expect(command, isA<BluetoothJsonCommandGps>());
-        final gps = command as BluetoothJsonCommandGps;
-        expect(gps.enable, true);
-        expect(gps.id, 4);
-      });
-
       test('parses wifi command', () {
         const raw = '{"cmd": "wifi", "enable": true, "ssid": "MyWiFi", "passwd": "secret", "id": 5}';
 
@@ -172,6 +159,17 @@ void main() {
         final calibrate = command as BluetoothJsonCommandCalibrate;
         expect(calibrate.offset, 0.5);
         expect(calibrate.id, 6);
+      });
+
+      test('parses touch_calibrate command', () {
+        const raw = '{"cmd": "touch_calibrate", "id": 6}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolJsonCommandMessage>());
+        final command = (message as BluetoothProtocolJsonCommandMessage).command;
+        expect(command, isA<BluetoothJsonCommandTouchCalibrate>());
+        expect((command as BluetoothJsonCommandTouchCalibrate).id, 6);
       });
 
       test('parses sync_source command', () {
@@ -567,16 +565,6 @@ void main() {
         expect(parseStatusResponse(rawUnknown).system?.resetReason, BluetoothProtocolResetReason.unknown);
       });
 
-      test('parses gps response', () {
-        const raw = '{"cmd":"gps","id":4,"state":"enabled","status":"ok"}';
-
-        final message = parser.parse(raw);
-
-        expect(message, isA<BluetoothProtocolJsonResponseMessage>());
-        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
-        final response = responseMessage.response as BluetoothJsonResponseGps;
-        expect(response.state, 'enabled');
-      });
 
       test('parses wifi response', () {
         const raw = '{"cmd":"wifi","id":5,"state":"enabled","status":"ok"}';
@@ -601,6 +589,38 @@ void main() {
         expect(response.previousOffset, 0.2);
         expect(response.newOffset, 0.5);
         expect(response.estimatedErrorUs, 10);
+      });
+
+      test('parses touch_calibrate response', () {
+        const raw =
+            '{"cmd":"touch_calibrate","id":6,"status":"ok","saved_keys":6,"cal_valid":true,"calibration":[3800,220,3700,240,7]}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolJsonResponseMessage>());
+        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
+        final response = responseMessage.response as BluetoothJsonResponseTouchCalibrate;
+        expect(response.id, 6);
+        expect(response.status, BluetoothProtocolStatus.ok);
+        expect(response.savedKeys, 6);
+        expect(response.calValid, true);
+        expect(response.calibration, [3800, 220, 3700, 240, 7]);
+      });
+
+      test('parses touch_calibrate error response', () {
+        const raw =
+            '{"cmd":"touch_calibrate","id":6,"status":"error","error_code":202,"error_message":"Touch calibration failed"}';
+
+        final message = parser.parse(raw);
+
+        expect(message, isA<BluetoothProtocolJsonResponseMessage>());
+        final responseMessage = message as BluetoothProtocolJsonResponseMessage;
+        final response = responseMessage.response as BluetoothJsonResponseTouchCalibrate;
+        expect(response.id, 6);
+        expect(response.status, BluetoothProtocolStatus.error);
+        expect(response.errorCode, 202);
+        expect(response.errorMessage, 'Touch calibration failed');
+        expect(response.calibration, null);
       });
 
       test('parses sync_source response', () {

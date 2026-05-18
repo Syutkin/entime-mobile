@@ -213,12 +213,6 @@ BluetoothJsonCommand? _parseCommand(String commandName, Map<String, Object?> jso
       return BluetoothJsonCommandTime(id: id);
     case BluetoothProtocolCommandType.status:
       return BluetoothJsonCommandStatus(id: id);
-    case BluetoothProtocolCommandType.gps:
-      return BluetoothJsonCommandGps(
-        id: id,
-        enable: json['enable'].asBool(),
-        disable: json['disable'].asBool(),
-      );
     case BluetoothProtocolCommandType.wifi:
       return BluetoothJsonCommandWifi(
         id: id,
@@ -232,6 +226,8 @@ BluetoothJsonCommand? _parseCommand(String commandName, Map<String, Object?> jso
         return null;
       }
       return BluetoothJsonCommandCalibrate(id: id, offset: offset);
+    case BluetoothProtocolCommandType.touchCalibrate:
+      return BluetoothJsonCommandTouchCalibrate(id: id);
     case BluetoothProtocolCommandType.syncSource:
       final source = json['source'].asString();
       if (source == null) {
@@ -327,15 +323,6 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         storage: _parseStorageInfo(json['storage'].asMap()),
         power: _parsePowerInfo(json['power'].asMap()),
       );
-    case BluetoothProtocolCommandType.gps:
-      return BluetoothJsonResponseGps(
-        id: base.id,
-        status: base.status,
-        errorCode: base.errorCode,
-        errorMessage: base.errorMessage,
-        timestamp: base.timestamp,
-        state: json['state'].asString(),
-      );
     case BluetoothProtocolCommandType.wifi:
       return BluetoothJsonResponseWifi(
         id: base.id,
@@ -355,6 +342,17 @@ BluetoothJsonResponse? _parseResponse(String commandName, Map<String, Object?> j
         previousOffset: json['previous_offset'].asDouble(),
         newOffset: json['new_offset'].asDouble(),
         estimatedErrorUs: json['estimated_error_us'].asInt(),
+      );
+    case BluetoothProtocolCommandType.touchCalibrate:
+      return BluetoothJsonResponseTouchCalibrate(
+        id: base.id,
+        status: base.status,
+        errorCode: base.errorCode,
+        errorMessage: base.errorMessage,
+        timestamp: base.timestamp,
+        savedKeys: json['saved_keys'].asInt(),
+        calValid: json['cal_valid'].asBool(),
+        calibration: _parseIntList(json['calibration']),
       );
     case BluetoothProtocolCommandType.syncSource:
       return BluetoothJsonResponseSyncSource(
@@ -551,6 +549,24 @@ BluetoothProtocolStatus? _parseStatus(Object? value) {
       return BluetoothProtocolStatus.error;
   }
   return null;
+}
+
+List<int>? _parseIntList(Object? value) {
+  final self = value;
+  if (self is! List) {
+    return null;
+  }
+
+  final result = <int>[];
+  for (final item in self) {
+    final value = item as Object?;
+    final parsed = value.asInt();
+    if (parsed == null) {
+      return null;
+    }
+    result.add(parsed);
+  }
+  return result;
 }
 
 BluetoothProtocolTimeSource? _parseTimeSource(Object? value) {

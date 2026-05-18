@@ -80,17 +80,6 @@ final class BluetoothJsonCommandStatus extends BluetoothJsonCommand {
   const BluetoothJsonCommandStatus({super.id});
 }
 
-final class BluetoothJsonCommandGps extends BluetoothJsonCommand {
-  const BluetoothJsonCommandGps({
-    super.id,
-    this.enable,
-    this.disable,
-  });
-
-  final bool? enable;
-  final bool? disable;
-}
-
 final class BluetoothJsonCommandWifi extends BluetoothJsonCommand {
   const BluetoothJsonCommandWifi({
     super.id,
@@ -111,6 +100,10 @@ final class BluetoothJsonCommandCalibrate extends BluetoothJsonCommand {
   });
 
   final double offset;
+}
+
+final class BluetoothJsonCommandTouchCalibrate extends BluetoothJsonCommand {
+  const BluetoothJsonCommandTouchCalibrate({super.id});
 }
 
 final class BluetoothJsonCommandSyncSource extends BluetoothJsonCommand {
@@ -258,19 +251,6 @@ final class BluetoothJsonResponseStatus extends BluetoothJsonResponse {
   final BluetoothJsonPowerInfo? power;
 }
 
-final class BluetoothJsonResponseGps extends BluetoothJsonResponse {
-  const BluetoothJsonResponseGps({
-    super.id,
-    super.status,
-    super.errorCode,
-    super.errorMessage,
-    super.timestamp,
-    this.state,
-  }) : super(command: BluetoothProtocolCommandType.gps);
-
-  final String? state;
-}
-
 final class BluetoothJsonResponseWifi extends BluetoothJsonResponse {
   const BluetoothJsonResponseWifi({
     super.id,
@@ -299,6 +279,23 @@ final class BluetoothJsonResponseCalibrate extends BluetoothJsonResponse {
   final double? previousOffset;
   final double? newOffset;
   final int? estimatedErrorUs;
+}
+
+final class BluetoothJsonResponseTouchCalibrate extends BluetoothJsonResponse {
+  const BluetoothJsonResponseTouchCalibrate({
+    super.id,
+    super.status,
+    super.errorCode,
+    super.errorMessage,
+    super.timestamp,
+    this.savedKeys,
+    this.calValid,
+    this.calibration,
+  }) : super(command: BluetoothProtocolCommandType.touchCalibrate);
+
+  final int? savedKeys;
+  final bool? calValid;
+  final List<int>? calibration;
 }
 
 final class BluetoothJsonResponseSyncSource extends BluetoothJsonResponse {
