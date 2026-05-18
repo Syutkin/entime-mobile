@@ -19,6 +19,9 @@ class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> 
     on<ModuleSettingsEventUnload>((event, emit) {
       emit(const ModuleSettingsUninitialized());
     });
+    on<ModuleSettingsEventLoadFailed>((event, emit) {
+      emit(const ModuleSettingsError());
+    });
   }
 
   Future<void> _handleGetModuleSettings(ModuleSettingsEventGet event, Emitter<ModuleSettingsState> emit) async {

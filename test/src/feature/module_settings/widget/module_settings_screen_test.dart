@@ -20,6 +20,7 @@ class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> imp
 void main() {
   late ModuleSettingsBloc moduleSettingsBloc;
   late BluetoothBloc bluetoothBloc;
+  late BluetoothRequestCubit bluetoothRequestCubit;
   late String jsonEntime;
   late String jsonLed;
   late String text;
@@ -27,22 +28,25 @@ void main() {
   Widget testWidget() {
     return BlocProvider.value(
       value: bluetoothBloc,
-      child: BlocProvider.value(
-        value: moduleSettingsBloc,
-        child: MaterialApp(
-          localizationsDelegates: const [Localization.delegate],
-          supportedLocales: Localization.supportedLocales,
-          home: Builder(
-            builder: (context) {
-              return TextButton(
-                onPressed: () async {
-                  await Navigator.of(
-                    context,
-                  ).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
-                },
-                child: Text(text),
-              );
-            },
+      child: BlocProvider<BluetoothRequestCubit>(
+        create: (_) => bluetoothRequestCubit,
+        child: BlocProvider.value(
+          value: moduleSettingsBloc,
+          child: MaterialApp(
+            localizationsDelegates: const [Localization.delegate],
+            supportedLocales: Localization.supportedLocales,
+            home: Builder(
+              builder: (context) {
+                return TextButton(
+                  onPressed: () async {
+                    await Navigator.of(
+                      context,
+                    ).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
+                  },
+                  child: Text(text),
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -84,6 +88,13 @@ void main() {
   setUp(() {
     moduleSettingsBloc = MockModuleSettingsBloc();
     bluetoothBloc = MockBluetoothBloc();
+    bluetoothRequestCubit = BluetoothRequestCubit();
+  });
+
+  tearDown(() async {
+    if (!bluetoothRequestCubit.isClosed) {
+      await bluetoothRequestCubit.close();
+    }
   });
 
   group('Timezone offset helpers', () {
@@ -198,7 +209,7 @@ void main() {
 
         final payload = jsonDecode(message!) as Map<String, dynamic>;
         expect(payload['cmd'], 'save_config');
-        expect(payload['id'], moduleSettingsSaveConfigRequestId);
+        expect(payload['id'], isA<int>());
         expect(payload['data'], isA<Map<String, dynamic>>());
 
         final data = payload['data'] as Map<String, dynamic>;
@@ -233,7 +244,7 @@ void main() {
 
         final payload = jsonDecode(message!) as Map<String, dynamic>;
         expect(payload['cmd'], 'save_config');
-        expect(payload['id'], moduleSettingsSaveConfigRequestId);
+        expect(payload['id'], isA<int>());
         expect(payload['data'], isA<Map<String, dynamic>>());
 
         final data = payload['data'] as Map<String, dynamic>;

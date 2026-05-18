@@ -626,6 +626,11 @@ class I18nModuleSettings {
   static String get saveSettingsError =>
       Intl.message('Ошибка сохранения настроек', name: 'I18nModuleSettings_saveSettingsError');
 
+  static String get saveSettingsTimeout => Intl.message(
+    'Модуль не ответил. Не удалось подтвердить сохранение настроек.',
+    name: 'I18nModuleSettings_saveSettingsTimeout',
+  );
+
   static String saveSettingsErrorMessage(String message) => Intl.message(
     'Ошибка сохранения настроек: $message',
     name: 'I18nModuleSettings_saveSettingsErrorMessage',

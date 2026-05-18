@@ -172,6 +172,7 @@ class EntimeApp extends StatelessWidget {
         BlocProvider<BluetoothDiscoveryCubit>(
           create: (context) => BluetoothDiscoveryCubit(bluetoothProvider: bluetoothProvider),
         ),
+        BlocProvider<BluetoothRequestCubit>(create: (context) => BluetoothRequestCubit()),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
             audioController: audioController,

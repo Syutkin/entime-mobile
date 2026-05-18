@@ -10,9 +10,8 @@ import '../../../common/localization/localization.dart';
 import '../../../common/utils/extensions.dart';
 import '../../../common/widget/cancel_ok_buttons.dart';
 import '../../../common/widget/splash_widget.dart';
-import '../../bluetooth/bloc/bluetooth_bloc.dart';
+import '../../bluetooth/bluetooth.dart';
 import '../bloc/module_settings_bloc.dart';
-import '../model/module_settings_protocol.dart';
 import 'popups.dart';
 
 class ModuleSettingsInitScreen extends StatefulWidget {
@@ -51,9 +50,14 @@ class _ModuleSettingsInitScreenState extends State<ModuleSettingsInitScreen> {
                       if (data.isEmpty) {
                         return;
                       }
+                      final requestId = context.read<BluetoothRequestCubit>().track(
+                        command: BluetoothProtocolCommandType.saveConfig,
+                        purpose: BluetoothRequestPurpose.moduleSettingsSave,
+                        timeout: const Duration(seconds: 5),
+                      );
                       final message = jsonEncode({
                         'cmd': 'save_config',
-                        'id': moduleSettingsSaveConfigRequestId,
+                        'id': requestId,
                         'data': data,
                       });
                       BlocProvider.of<BluetoothBloc>(context).add(

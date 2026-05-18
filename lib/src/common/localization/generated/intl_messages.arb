@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2026-05-18T23:12:40.446879",
+  "@@last_modified": "2026-05-18T23:20:18.183480",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1117,6 +1117,11 @@
   },
   "I18nModuleSettings_saveSettingsError": "Ошибка сохранения настроек",
   "@I18nModuleSettings_saveSettingsError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_saveSettingsTimeout": "Модуль не ответил. Не удалось подтвердить сохранение настроек.",
+  "@I18nModuleSettings_saveSettingsTimeout": {
     "type": "text",
     "placeholders": {}
   },

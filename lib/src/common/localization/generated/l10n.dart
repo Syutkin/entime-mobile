@@ -2077,6 +2077,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Модуль не ответил. Не удалось подтвердить сохранение настроек.`
+  String get I18nModuleSettings_saveSettingsTimeout {
+    return Intl.message(
+      'Модуль не ответил. Не удалось подтвердить сохранение настроек.',
+      name: 'I18nModuleSettings_saveSettingsTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Ошибка сохранения настроек: {message}`
   String I18nModuleSettings_saveSettingsErrorMessage(Object message) {
     return Intl.message(

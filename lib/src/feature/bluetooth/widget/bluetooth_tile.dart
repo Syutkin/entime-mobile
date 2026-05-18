@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -69,8 +71,17 @@ class BluetoothTile extends StatelessWidget {
   }
 
   Future<void> _moduleSettings(BuildContext context) async {
+    final requestId = context.read<BluetoothRequestCubit>().track(
+      command: BluetoothProtocolCommandType.loadConfig,
+      purpose: BluetoothRequestPurpose.moduleSettingsLoad,
+      timeout: const Duration(seconds: 5),
+    );
     BlocProvider.of<ModuleSettingsBloc>(context).add(const ModuleSettingsEvent.unload());
-    BlocProvider.of<BluetoothBloc>(context).add(const BluetoothEvent.sendMessage(message: '{"cmd":"load_config"}'));
+    BlocProvider.of<BluetoothBloc>(context).add(
+      BluetoothEvent.sendMessage(
+        message: jsonEncode({'cmd': 'load_config', 'id': requestId}),
+      ),
+    );
     await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const ModuleSettingsInitScreen()));
   }
 }

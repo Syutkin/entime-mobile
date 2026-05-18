@@ -1,5 +1,6 @@
 export 'bloc/bluetooth_bloc.dart';
 export 'bloc/bluetooth_discovery_cubit.dart';
+export 'bloc/bluetooth_request_cubit.dart';
 export 'logic/bluetooth_background_connection.dart';
 export 'logic/bluetooth_connection_interface.dart';
 export 'logic/bluetooth_provider.dart';

@@ -262,6 +262,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_saveSettingsSuccessReboot": MessageLookupByLibrary.simpleMessage(
       "Settings saved. Restart the module",
     ),
+    "I18nModuleSettings_saveSettingsTimeout": MessageLookupByLibrary.simpleMessage(
+      "Module did not respond. Settings save was not confirmed.",
+    ),
     "I18nModuleSettings_saveSettingsToModule": MessageLookupByLibrary.simpleMessage("Save settings to module?"),
     "I18nModuleSettings_screen": MessageLookupByLibrary.simpleMessage("Screen"),
     "I18nModuleSettings_selectLongFrequency": MessageLookupByLibrary.simpleMessage("Select long beep frequency"),

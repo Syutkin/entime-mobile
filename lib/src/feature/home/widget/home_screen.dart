@@ -71,6 +71,8 @@ class HomeScreen extends StatelessWidget {
             _listenToCountdownEvents(),
             // Следим за наличием новой версии
             _listenToUpdater(),
+            // Следим за таймаутами Bluetooth JSON запросов
+            _listenToBluetoothRequests(),
           ],
           child: const TabBarView(
             physics: NeverScrollableScrollPhysics(),
@@ -120,11 +122,17 @@ class HomeScreen extends StatelessWidget {
                 );
               }
             case BluetoothMessageJsonResponse(response: final response, rawJson: final rawJson):
-              if (response is BluetoothJsonResponseLoadConfig) {
-                context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(rawJson));
-              }
-              if (response is BluetoothJsonResponseSaveConfig && response.id == moduleSettingsSaveConfigRequestId) {
-                _showModuleSettingsSaveConfigSnackBar(context, response);
+              final request = context.read<BluetoothRequestCubit>().complete(response);
+              switch (request?.purpose) {
+                case BluetoothRequestPurpose.moduleSettingsLoad:
+                  if (response is BluetoothJsonResponseLoadConfig) {
+                    context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(rawJson));
+                  }
+                case BluetoothRequestPurpose.moduleSettingsSave:
+                  if (response is BluetoothJsonResponseSaveConfig) {
+                    _showModuleSettingsSaveConfigSnackBar(context, response);
+                  }
+                case null:
               }
             default:
           }
@@ -135,9 +143,7 @@ class HomeScreen extends StatelessWidget {
 
   void _showModuleSettingsSaveConfigSnackBar(BuildContext context, BluetoothJsonResponseSaveConfig response) {
     final text = _moduleSettingsSaveConfigText(response);
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(text)));
+    _showSnackBar(context, text);
   }
 
   String _moduleSettingsSaveConfigText(BluetoothJsonResponseSaveConfig response) {
@@ -153,6 +159,27 @@ class HomeScreen extends StatelessWidget {
       return i18n.I18nModuleSettings_saveSettingsError;
     }
     return i18n.I18nModuleSettings_saveSettingsErrorMessage(message);
+  }
+
+  SingleChildWidget _listenToBluetoothRequests() => BlocListener<BluetoothRequestCubit, BluetoothRequestState>(
+    listener: (context, state) {
+      switch (state) {
+        case BluetoothRequestTimedOut(request: final request):
+          switch (request.purpose) {
+            case BluetoothRequestPurpose.moduleSettingsLoad:
+              context.read<ModuleSettingsBloc>().add(const ModuleSettingsEvent.loadFailed());
+            case BluetoothRequestPurpose.moduleSettingsSave:
+              _showSnackBar(context, Localization.current.I18nModuleSettings_saveSettingsTimeout);
+          }
+        case BluetoothRequestIdle():
+      }
+    },
+  );
+
+  void _showSnackBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(text)));
   }
 
   SingleChildWidget _listenToNewStartTime() => BlocListener<DatabaseBloc, DatabaseState>(

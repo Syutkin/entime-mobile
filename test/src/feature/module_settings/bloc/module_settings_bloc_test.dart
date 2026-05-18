@@ -164,6 +164,16 @@ void main() {
           const ModuleSettingsState.uninitialized(),
         ],
       );
+
+      blocTest<ModuleSettingsBloc, ModuleSettingsState>(
+        'emits error on loadFailed event',
+        build: () => bloc,
+        seed: () => const ModuleSettingsState.loading(),
+        act: (bloc) => bloc.add(const ModuleSettingsEvent.loadFailed()),
+        expect: () => [
+          const ModuleSettingsState.error(),
+        ],
+      );
     });
 
     group('Update module settings', () {

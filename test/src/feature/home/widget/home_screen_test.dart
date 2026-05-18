@@ -56,6 +56,7 @@ void main() {
   late ConnectivityBloc connectivityBloc;
   late NtpBloc ntpBloc;
   late ModuleSettingsBloc moduleSettingsBloc;
+  late BluetoothRequestCubit bluetoothRequestCubit;
   late QueryRow row;
 
   late SharedPrefsSettingsProvider settingsProvider;
@@ -77,6 +78,7 @@ void main() {
     connectivityBloc = MockConnectivityBloc();
     ntpBloc = MockNtpBloc();
     bluetoothBloc = MockBluetoothBloc();
+    bluetoothRequestCubit = BluetoothRequestCubit();
     databaseBloc = MockDatabaseBloc();
     moduleSettingsBloc = MockModuleSettingsBloc();
     row = MockQueryRow();
@@ -107,6 +109,12 @@ void main() {
     when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.uninitialized());
   });
 
+  tearDown(() async {
+    if (!bluetoothRequestCubit.isClosed) {
+      await bluetoothRequestCubit.close();
+    }
+  });
+
   Future<Widget> testWidget() async {
     await initializeDateFormatting();
     return MaterialApp(
@@ -129,7 +137,13 @@ void main() {
                       value: connectivityBloc,
                       child: BlocProvider.value(
                         value: ntpBloc,
-                        child: BlocProvider.value(value: moduleSettingsBloc, child: const HomeScreen()),
+                        child: BlocProvider.value(
+                          value: moduleSettingsBloc,
+                          child: BlocProvider<BluetoothRequestCubit>(
+                            create: (_) => bluetoothRequestCubit,
+                            child: const HomeScreen(),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -380,28 +394,38 @@ void main() {
         });
 
         patrolWidgetTest('Get ModuleSettings message', (PatrolTester $) async {
-          const json = '{"cmd":"load_config","id":10,"data":{},"status":"ok"}';
+          final requestId = bluetoothRequestCubit.track(
+            command: BluetoothProtocolCommandType.loadConfig,
+            purpose: BluetoothRequestPurpose.moduleSettingsLoad,
+            timeout: const Duration(seconds: 1),
+          );
+          final json = '{"cmd":"load_config","id":$requestId,"data":{},"status":"ok"}';
           final expectedStates = [
             const BluetoothBlocState.notInitialized(),
-            const BluetoothBlocState.connected(
+            BluetoothBlocState.connected(
               message: BluetoothMessage.jsonResponse(
-                response: BluetoothJsonResponseLoadConfig(),
+                response: BluetoothJsonResponseLoadConfig(id: requestId),
                 rawJson: json,
               ),
             ),
           ];
           whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
           await $.pumpWidgetAndSettle(await testWidget());
-          verify(() => moduleSettingsBloc.add(const ModuleSettingsEvent.get(json))).called(1);
+          verify(() => moduleSettingsBloc.add(ModuleSettingsEvent.get(json))).called(1);
         });
 
         patrolWidgetTest('Shows success SnackBar when module settings save succeeds', (PatrolTester $) async {
-          const expectedStates = [
-            BluetoothBlocState.notInitialized(),
+          final requestId = bluetoothRequestCubit.track(
+            command: BluetoothProtocolCommandType.saveConfig,
+            purpose: BluetoothRequestPurpose.moduleSettingsSave,
+            timeout: const Duration(seconds: 1),
+          );
+          final expectedStates = [
+            const BluetoothBlocState.notInitialized(),
             BluetoothBlocState.connected(
               message: BluetoothMessage.jsonResponse(
                 response: BluetoothJsonResponseSaveConfig(
-                  id: moduleSettingsSaveConfigRequestId,
+                  id: requestId,
                   status: BluetoothProtocolStatus.ok,
                   rebootNeeded: false,
                 ),
@@ -419,12 +443,17 @@ void main() {
         });
 
         patrolWidgetTest('Shows reboot SnackBar when module settings save requires restart', (PatrolTester $) async {
-          const expectedStates = [
-            BluetoothBlocState.notInitialized(),
+          final requestId = bluetoothRequestCubit.track(
+            command: BluetoothProtocolCommandType.saveConfig,
+            purpose: BluetoothRequestPurpose.moduleSettingsSave,
+            timeout: const Duration(seconds: 1),
+          );
+          final expectedStates = [
+            const BluetoothBlocState.notInitialized(),
             BluetoothBlocState.connected(
               message: BluetoothMessage.jsonResponse(
                 response: BluetoothJsonResponseSaveConfig(
-                  id: moduleSettingsSaveConfigRequestId,
+                  id: requestId,
                   status: BluetoothProtocolStatus.ok,
                   rebootNeeded: true,
                 ),
@@ -443,12 +472,17 @@ void main() {
 
         patrolWidgetTest('Shows error SnackBar when module settings save fails', (PatrolTester $) async {
           const errorMessage = 'Invalid config values';
-          const expectedStates = [
-            BluetoothBlocState.notInitialized(),
+          final requestId = bluetoothRequestCubit.track(
+            command: BluetoothProtocolCommandType.saveConfig,
+            purpose: BluetoothRequestPurpose.moduleSettingsSave,
+            timeout: const Duration(seconds: 1),
+          );
+          final expectedStates = [
+            const BluetoothBlocState.notInitialized(),
             BluetoothBlocState.connected(
               message: BluetoothMessage.jsonResponse(
                 response: BluetoothJsonResponseSaveConfig(
-                  id: moduleSettingsSaveConfigRequestId,
+                  id: requestId,
                   status: BluetoothProtocolStatus.error,
                   errorMessage: errorMessage,
                 ),
@@ -466,6 +500,11 @@ void main() {
         });
 
         patrolWidgetTest('Ignores module settings save response with unrelated id', (PatrolTester $) async {
+          bluetoothRequestCubit.track(
+            command: BluetoothProtocolCommandType.saveConfig,
+            purpose: BluetoothRequestPurpose.moduleSettingsSave,
+            timeout: const Duration(seconds: 1),
+          );
           const expectedStates = [
             BluetoothBlocState.notInitialized(),
             BluetoothBlocState.connected(
@@ -487,6 +526,35 @@ void main() {
 
           expect($(SnackBar), findsNothing);
           expect($(Localization.current.I18nModuleSettings_saveSettingsSuccess), findsNothing);
+        });
+
+        patrolWidgetTest('Shows timeout SnackBar when module settings save response does not arrive', (
+          PatrolTester $,
+        ) async {
+          bluetoothRequestCubit.track(
+            command: BluetoothProtocolCommandType.saveConfig,
+            purpose: BluetoothRequestPurpose.moduleSettingsSave,
+            timeout: const Duration(milliseconds: 100),
+          );
+
+          await $.pumpWidget(await testWidget());
+          await $.tester.pump(const Duration(milliseconds: 150));
+          await $.tester.pump(const Duration(milliseconds: 250));
+
+          expect($(Localization.current.I18nModuleSettings_saveSettingsTimeout), findsOneWidget);
+        });
+
+        patrolWidgetTest('Marks module settings as failed when load response does not arrive', (PatrolTester $) async {
+          bluetoothRequestCubit.track(
+            command: BluetoothProtocolCommandType.loadConfig,
+            purpose: BluetoothRequestPurpose.moduleSettingsLoad,
+            timeout: const Duration(milliseconds: 100),
+          );
+
+          await $.pumpWidget(await testWidget());
+          await $.tester.pump(const Duration(milliseconds: 150));
+
+          verify(() => moduleSettingsBloc.add(const ModuleSettingsEvent.loadFailed())).called(1);
         });
       });
 

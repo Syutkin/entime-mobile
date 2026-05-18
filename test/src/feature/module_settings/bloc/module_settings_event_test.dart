@@ -146,6 +146,13 @@ void main() {
         expect(getEvent, isNot(equals(updateEvent)));
         expect(getEvent.hashCode, isNot(equals(updateEvent.hashCode)));
       });
+
+      test('loadFailed events are equal', () {
+        expect(
+          const ModuleSettingsEvent.loadFailed(),
+          equals(const ModuleSettingsEvent.loadFailed()),
+        );
+      });
     });
   });
 }

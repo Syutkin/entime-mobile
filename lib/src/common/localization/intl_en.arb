@@ -739,6 +739,12 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
+	"I18nModuleSettings_saveSettingsTimeout": "Module did not respond. Settings save was not confirmed.",
+	"@I18nModuleSettings_saveSettingsTimeout": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
 	"I18nModuleSettings_saveSettingsErrorMessage": "Failed to save settings: {message}",
 	"@I18nModuleSettings_saveSettingsErrorMessage": {
 		"type": "text",

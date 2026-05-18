@@ -438,6 +438,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_saveSettingsSuccessReboot": MessageLookupByLibrary.simpleMessage(
       "Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.",
     ),
+    "I18nModuleSettings_saveSettingsTimeout": MessageLookupByLibrary.simpleMessage(
+      "Модуль не ответил. Не удалось подтвердить сохранение настроек.",
+    ),
     "I18nModuleSettings_saveSettingsToModule": MessageLookupByLibrary.simpleMessage(
       "Записать новые настройки в модуль?",
     ),

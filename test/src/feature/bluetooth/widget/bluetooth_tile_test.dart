@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
@@ -25,23 +26,31 @@ class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 void main() {
   late BluetoothBloc btBloc;
   late BluetoothDiscoveryCubit bdCubit;
+  late BluetoothRequestCubit bluetoothRequestCubit;
   late ModuleSettingsBloc moduleSettingsBloc;
   late BluetoothDevice bluetoothDevice;
   late MockBluetoothProvider bluetoothProvider;
   late StreamController<bool> scanningController;
   late StreamController<List<ScanResult>> resultsController;
 
+  setUpAll(() {
+    registerFallbackValue(const BluetoothEvent.enable());
+  });
+
   Widget testWidget() {
     return BlocProvider.value(
       value: btBloc,
       child: BlocProvider.value(
         value: bdCubit,
-        child: BlocProvider.value(
-          value: moduleSettingsBloc,
-          child: MaterialApp(
-            localizationsDelegates: const [Localization.delegate],
-            supportedLocales: Localization.supportedLocales,
-            home: const Material(child: BluetoothTile()),
+        child: BlocProvider<BluetoothRequestCubit>(
+          create: (_) => bluetoothRequestCubit,
+          child: BlocProvider.value(
+            value: moduleSettingsBloc,
+            child: MaterialApp(
+              localizationsDelegates: const [Localization.delegate],
+              supportedLocales: Localization.supportedLocales,
+              home: const Material(child: BluetoothTile()),
+            ),
           ),
         ),
       ),
@@ -51,6 +60,7 @@ void main() {
   setUp(() {
     btBloc = MockBluetoothBloc();
     bdCubit = MockBluetoothDiscoveryCubit();
+    bluetoothRequestCubit = BluetoothRequestCubit();
     moduleSettingsBloc = MockModuleSettingsBloc();
     bluetoothDevice = MockBluetoothDevice();
     bluetoothProvider = MockBluetoothProvider();
@@ -72,6 +82,9 @@ void main() {
   });
 
   tearDown(() async {
+    if (!bluetoothRequestCubit.isClosed) {
+      await bluetoothRequestCubit.close();
+    }
     await scanningController.close();
     await resultsController.close();
   });
@@ -161,10 +174,14 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget());
       await $.tester.tap($(Icon).at(2));
 
-      verifyInOrder([
-        () => moduleSettingsBloc.add(const ModuleSettingsEvent.unload()),
-        () => btBloc.add(const BluetoothEvent.sendMessage(message: '{"cmd":"load_config"}')),
-      ]);
+      verify(() => moduleSettingsBloc.add(const ModuleSettingsEvent.unload())).called(1);
+      final capturedEvent = verify(() => btBloc.add(captureAny())).captured.single as BluetoothEvent;
+      final message = capturedEvent.whenOrNull(sendMessage: (message) => message);
+      expect(message, isNotNull);
+
+      final payload = jsonDecode(message!) as Map<String, dynamic>;
+      expect(payload['cmd'], 'load_config');
+      expect(payload['id'], isA<int>());
     });
 
     patrolWidgetTest('disconnecting state', (PatrolTester $) async {
