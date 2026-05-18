@@ -419,7 +419,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_frequencyHz": m8,
     "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
     "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
-      "Активно",
+      "GPS",
     ),
     "I18nModuleSettings_longFrequency": MessageLookupByLibrary.simpleMessage(
       "Частота длинных гудков",
@@ -505,6 +505,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "I18nModuleSettings_timezoneRange": MessageLookupByLibrary.simpleMessage(
       "Диапазон UTC-12:00..UTC+14:00",
+    ),
+    "I18nModuleSettings_touch": MessageLookupByLibrary.simpleMessage(
+      "Тачскрин",
+    ),
+    "I18nModuleSettings_touchCalValid": MessageLookupByLibrary.simpleMessage(
+      "Сенсор откалиброван",
+    ),
+    "I18nModuleSettings_touchCalibration": MessageLookupByLibrary.simpleMessage(
+      "Калибровка",
+    ),
+    "I18nModuleSettings_touchEnabled": MessageLookupByLibrary.simpleMessage(
+      "Сенсорный ввод",
     ),
     "I18nModuleSettings_turnOnAtEvent": MessageLookupByLibrary.simpleMessage(
       "Включать после события",

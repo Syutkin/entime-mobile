@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2026-05-18T21:25:42.927243",
+  "@@last_modified": "2026-05-18T22:09:42.150703",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1382,8 +1382,28 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_gpsEnabled": "Активно",
+  "I18nModuleSettings_gpsEnabled": "GPS",
   "@I18nModuleSettings_gpsEnabled": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_touch": "Тачскрин",
+  "@I18nModuleSettings_touch": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_touchEnabled": "Сенсорный ввод",
+  "@I18nModuleSettings_touchEnabled": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_touchCalValid": "Сенсор откалиброван",
+  "@I18nModuleSettings_touchCalValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_touchCalibration": "Калибровка",
+  "@I18nModuleSettings_touchCalibration": {
     "type": "text",
     "placeholders": {}
   },

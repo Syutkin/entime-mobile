@@ -746,7 +746,15 @@ class I18nModuleSettings {
 
   static String get gps => Intl.message('GPS', name: 'I18nModuleSettings_gps');
 
-  static String get gpsEnabled => Intl.message('Активно', name: 'I18nModuleSettings_gpsEnabled');
+  static String get gpsEnabled => Intl.message('GPS', name: 'I18nModuleSettings_gpsEnabled');
+
+  static String get touch => Intl.message('Тачскрин', name: 'I18nModuleSettings_touch');
+
+  static String get touchEnabled => Intl.message('Сенсорный ввод', name: 'I18nModuleSettings_touchEnabled');
+
+  static String get touchCalValid => Intl.message('Сенсор откалиброван', name: 'I18nModuleSettings_touchCalValid');
+
+  static String get touchCalibration => Intl.message('Калибровка', name: 'I18nModuleSettings_touchCalibration');
 
   static String get ntp1 => Intl.message('NTP 1', name: 'I18nModuleSettings_ntp1');
 

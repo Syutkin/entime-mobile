@@ -2590,11 +2590,51 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Активно`
+  /// `GPS`
   String get I18nModuleSettings_gpsEnabled {
     return Intl.message(
-      'Активно',
+      'GPS',
       name: 'I18nModuleSettings_gpsEnabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Тачскрин`
+  String get I18nModuleSettings_touch {
+    return Intl.message(
+      'Тачскрин',
+      name: 'I18nModuleSettings_touch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сенсорный ввод`
+  String get I18nModuleSettings_touchEnabled {
+    return Intl.message(
+      'Сенсорный ввод',
+      name: 'I18nModuleSettings_touchEnabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сенсор откалиброван`
+  String get I18nModuleSettings_touchCalValid {
+    return Intl.message(
+      'Сенсор откалиброван',
+      name: 'I18nModuleSettings_touchCalValid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Калибровка`
+  String get I18nModuleSettings_touchCalibration {
+    return Intl.message(
+      'Калибровка',
+      name: 'I18nModuleSettings_touchCalibration',
       desc: '',
       args: [],
     );

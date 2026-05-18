@@ -246,7 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_frequencyHz": m8,
     "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
     "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
-      "Active",
+      "GPS",
     ),
     "I18nModuleSettings_longFrequency": MessageLookupByLibrary.simpleMessage(
       "Long beep frequency",
@@ -317,6 +317,16 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "I18nModuleSettings_timezoneRange": MessageLookupByLibrary.simpleMessage(
       "Range UTC-12:00..UTC+14:00",
+    ),
+    "I18nModuleSettings_touch": MessageLookupByLibrary.simpleMessage("Touch"),
+    "I18nModuleSettings_touchCalValid": MessageLookupByLibrary.simpleMessage(
+      "Calibration valid",
+    ),
+    "I18nModuleSettings_touchCalibration": MessageLookupByLibrary.simpleMessage(
+      "Calibration",
+    ),
+    "I18nModuleSettings_touchEnabled": MessageLookupByLibrary.simpleMessage(
+      "Touch input",
     ),
     "I18nModuleSettings_turnOnAtEvent": MessageLookupByLibrary.simpleMessage(
       "Turn on after event",

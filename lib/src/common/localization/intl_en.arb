@@ -1029,8 +1029,32 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
-	"I18nModuleSettings_gpsEnabled": "Active",
+	"I18nModuleSettings_gpsEnabled": "GPS",
 	"@I18nModuleSettings_gpsEnabled": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_touch": "Touch",
+	"@I18nModuleSettings_touch": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_touchEnabled": "Touch input",
+	"@I18nModuleSettings_touchEnabled": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_touchCalValid": "Calibration valid",
+	"@I18nModuleSettings_touchCalValid": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_touchCalibration": "Calibration",
+	"@I18nModuleSettings_touchCalibration": {
 		"type": "text",
 		"placeholders_order": [],
 		"placeholders": {}

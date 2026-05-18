@@ -337,6 +337,31 @@ class _ModuleSettingsScreenState extends State<ModuleSettingsScreen> {
                       ],
                     ),
                     SettingsSection(
+                      title: Text(i18n.I18nModuleSettings_touch),
+                      tiles: [
+                        SettingsTile.switchTile(
+                          title: Text(i18n.I18nModuleSettings_touchEnabled),
+                          initialValue: moduleSettings.touch.enabled,
+                          onToggle: (value) {
+                            widget.onChanged();
+                            bloc.add(
+                              ModuleSettingsEvent.update(
+                                ModSettingsModel.entime(moduleSettings.copyWith.touch(enabled: value)),
+                              ),
+                            );
+                          },
+                        ),
+                        SettingsTile(
+                          title: Text(i18n.I18nModuleSettings_touchCalValid),
+                          trailing: Text(moduleSettings.touch.calValid ? i18n.I18nCore_yes : i18n.I18nCore_no),
+                        ),
+                        SettingsTile(
+                          title: Text(i18n.I18nModuleSettings_touchCalibration),
+                          trailing: Text(moduleSettings.touch.calibration.join(', ')),
+                        ),
+                      ],
+                    ),
+                    SettingsSection(
                       title: Text(i18n.I18nModuleSettings_wifi),
                       tiles: [
                         SettingsTile.switchTile(

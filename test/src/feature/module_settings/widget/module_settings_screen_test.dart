@@ -397,6 +397,57 @@ void main() {
         });
       });
 
+      group('Touch section', () {
+        patrolWidgetTest('Shows touch settings values', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          expect(
+            await $(
+              SettingsList,
+            ).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_touch)).scrollTo(),
+            findsOneWidget,
+          );
+
+          final touchEnabledTile = find.widgetWithText(
+            SettingsTile,
+            Localization.current.I18nModuleSettings_touchEnabled,
+          );
+          final touchSwitchFinder = find.descendant(of: touchEnabledTile, matching: find.byType(Switch));
+          final touchSwitch = $.tester.widget<Switch>(touchSwitchFinder);
+          expect(touchSwitch.value, isTrue);
+
+          final calValidTile = find.widgetWithText(SettingsTile, Localization.current.I18nModuleSettings_touchCalValid);
+          expect(
+            find.descendant(of: calValidTile, matching: find.text(Localization.current.I18nCore_no)),
+            findsOneWidget,
+          );
+
+          final calibrationTile = find.widgetWithText(
+            SettingsTile,
+            Localization.current.I18nModuleSettings_touchCalibration,
+          );
+          expect(find.descendant(of: calibrationTile, matching: find.text('0, 0, 0, 0, 0')), findsOneWidget);
+        });
+
+        patrolWidgetTest('Updates touch enabled when switch toggled', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+          await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_touchEnabled)).scrollTo().tap();
+
+          verify(
+            () => moduleSettingsBloc.add(
+              any(
+                that: isA<ModuleSettingsEventUpdate>().having(
+                  (event) => (event.moduleSettings as ModSettingsModelEntime).entime.touch.enabled,
+                  'touch.enabled',
+                  false,
+                ),
+              ),
+            ),
+          ).called(1);
+        });
+      });
+
       group('WiFi section', () {
         patrolWidgetTest('Shows WiFi section', (PatrolTester $) async {
           await $.pumpWidgetAndSettle(testWidget());
