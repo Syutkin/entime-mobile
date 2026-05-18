@@ -721,6 +721,34 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
+	"I18nModuleSettings_saveSettingsSuccess": "Settings saved",
+	"@I18nModuleSettings_saveSettingsSuccess": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_saveSettingsSuccessReboot": "Settings saved. Restart the module",
+	"@I18nModuleSettings_saveSettingsSuccessReboot": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_saveSettingsError": "Failed to save settings",
+	"@I18nModuleSettings_saveSettingsError": {
+		"type": "text",
+		"placeholders_order": [],
+		"placeholders": {}
+	},
+	"I18nModuleSettings_saveSettingsErrorMessage": "Failed to save settings: {message}",
+	"@I18nModuleSettings_saveSettingsErrorMessage": {
+		"type": "text",
+		"placeholders_order": [
+			"message"
+		],
+		"placeholders": {
+			"message": {}
+		}
+	},
 	"I18nModuleSettings_awaitingSettings": "Awaiting settings",
 	"@I18nModuleSettings_awaitingSettings": {
 		"type": "text",

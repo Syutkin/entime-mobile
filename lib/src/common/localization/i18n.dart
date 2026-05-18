@@ -615,6 +615,23 @@ class I18nModuleSettings {
   static String get errorLoadSettings =>
       Intl.message('Ошибка загрузки настроек!', name: 'I18nModuleSettings_errorLoadSettings');
 
+  static String get saveSettingsSuccess =>
+      Intl.message('Настройки сохранены', name: 'I18nModuleSettings_saveSettingsSuccess');
+
+  static String get saveSettingsSuccessReboot => Intl.message(
+    'Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.',
+    name: 'I18nModuleSettings_saveSettingsSuccessReboot',
+  );
+
+  static String get saveSettingsError =>
+      Intl.message('Ошибка сохранения настроек', name: 'I18nModuleSettings_saveSettingsError');
+
+  static String saveSettingsErrorMessage(String message) => Intl.message(
+    'Ошибка сохранения настроек: $message',
+    name: 'I18nModuleSettings_saveSettingsErrorMessage',
+    args: [message],
+  );
+
   static String get awaitingSettings => Intl.message('Ждём настройки...', name: 'I18nModuleSettings_awaitingSettings');
 
   static String get module => Intl.message('Модуль', name: 'I18nModuleSettings_module');

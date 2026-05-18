@@ -394,6 +394,100 @@ void main() {
           await $.pumpWidgetAndSettle(await testWidget());
           verify(() => moduleSettingsBloc.add(const ModuleSettingsEvent.get(json))).called(1);
         });
+
+        patrolWidgetTest('Shows success SnackBar when module settings save succeeds', (PatrolTester $) async {
+          const expectedStates = [
+            BluetoothBlocState.notInitialized(),
+            BluetoothBlocState.connected(
+              message: BluetoothMessage.jsonResponse(
+                response: BluetoothJsonResponseSaveConfig(
+                  id: moduleSettingsSaveConfigRequestId,
+                  status: BluetoothProtocolStatus.ok,
+                  rebootNeeded: false,
+                ),
+                rawJson: '{"cmd":"save_config","status":"ok"}',
+              ),
+            ),
+          ];
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
+
+          await $.pumpWidget(await testWidget());
+          await $.pump();
+          await $.tester.pump(const Duration(milliseconds: 250));
+
+          expect($(Localization.current.I18nModuleSettings_saveSettingsSuccess), findsOneWidget);
+        });
+
+        patrolWidgetTest('Shows reboot SnackBar when module settings save requires restart', (PatrolTester $) async {
+          const expectedStates = [
+            BluetoothBlocState.notInitialized(),
+            BluetoothBlocState.connected(
+              message: BluetoothMessage.jsonResponse(
+                response: BluetoothJsonResponseSaveConfig(
+                  id: moduleSettingsSaveConfigRequestId,
+                  status: BluetoothProtocolStatus.ok,
+                  rebootNeeded: true,
+                ),
+                rawJson: '{"cmd":"save_config","status":"ok","reboot_needed":true}',
+              ),
+            ),
+          ];
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
+
+          await $.pumpWidget(await testWidget());
+          await $.pump();
+          await $.tester.pump(const Duration(milliseconds: 250));
+
+          expect($(Localization.current.I18nModuleSettings_saveSettingsSuccessReboot), findsOneWidget);
+        });
+
+        patrolWidgetTest('Shows error SnackBar when module settings save fails', (PatrolTester $) async {
+          const errorMessage = 'Invalid config values';
+          const expectedStates = [
+            BluetoothBlocState.notInitialized(),
+            BluetoothBlocState.connected(
+              message: BluetoothMessage.jsonResponse(
+                response: BluetoothJsonResponseSaveConfig(
+                  id: moduleSettingsSaveConfigRequestId,
+                  status: BluetoothProtocolStatus.error,
+                  errorMessage: errorMessage,
+                ),
+                rawJson: '{"cmd":"save_config","status":"error"}',
+              ),
+            ),
+          ];
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
+
+          await $.pumpWidget(await testWidget());
+          await $.pump();
+          await $.tester.pump(const Duration(milliseconds: 250));
+
+          expect($(Localization.current.I18nModuleSettings_saveSettingsErrorMessage(errorMessage)), findsOneWidget);
+        });
+
+        patrolWidgetTest('Ignores module settings save response with unrelated id', (PatrolTester $) async {
+          const expectedStates = [
+            BluetoothBlocState.notInitialized(),
+            BluetoothBlocState.connected(
+              message: BluetoothMessage.jsonResponse(
+                response: BluetoothJsonResponseSaveConfig(
+                  id: 'other_save',
+                  status: BluetoothProtocolStatus.ok,
+                  rebootNeeded: false,
+                ),
+                rawJson: '{"cmd":"save_config","status":"ok"}',
+              ),
+            ),
+          ];
+          whenListen(bluetoothBloc, Stream.fromIterable(expectedStates));
+
+          await $.pumpWidget(await testWidget());
+          await $.pump();
+          await $.tester.pump(const Duration(milliseconds: 250));
+
+          expect($(SnackBar), findsNothing);
+          expect($(Localization.current.I18nModuleSettings_saveSettingsSuccess), findsNothing);
+        });
       });
 
       group('Update start time listener', () {

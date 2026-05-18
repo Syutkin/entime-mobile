@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2026-05-18T22:09:42.150703",
+  "@@last_modified": "2026-05-18T23:12:40.446879",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1104,6 +1104,28 @@
   "@I18nModuleSettings_errorLoadSettings": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nModuleSettings_saveSettingsSuccess": "Настройки сохранены",
+  "@I18nModuleSettings_saveSettingsSuccess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_saveSettingsSuccessReboot": "Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.",
+  "@I18nModuleSettings_saveSettingsSuccessReboot": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_saveSettingsError": "Ошибка сохранения настроек",
+  "@I18nModuleSettings_saveSettingsError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nModuleSettings_saveSettingsErrorMessage": "Ошибка сохранения настроек: {message}",
+  "@I18nModuleSettings_saveSettingsErrorMessage": {
+    "type": "text",
+    "placeholders": {
+      "message": {}
+    }
   },
   "I18nModuleSettings_awaitingSettings": "Ждём настройки...",
   "@I18nModuleSettings_awaitingSettings": {

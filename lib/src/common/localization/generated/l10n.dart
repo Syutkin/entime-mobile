@@ -2047,6 +2047,46 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Настройки сохранены`
+  String get I18nModuleSettings_saveSettingsSuccess {
+    return Intl.message(
+      'Настройки сохранены',
+      name: 'I18nModuleSettings_saveSettingsSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.`
+  String get I18nModuleSettings_saveSettingsSuccessReboot {
+    return Intl.message(
+      'Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.',
+      name: 'I18nModuleSettings_saveSettingsSuccessReboot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сохранения настроек`
+  String get I18nModuleSettings_saveSettingsError {
+    return Intl.message(
+      'Ошибка сохранения настроек',
+      name: 'I18nModuleSettings_saveSettingsError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сохранения настроек: {message}`
+  String I18nModuleSettings_saveSettingsErrorMessage(Object message) {
+    return Intl.message(
+      'Ошибка сохранения настроек: $message',
+      name: 'I18nModuleSettings_saveSettingsErrorMessage',
+      desc: '',
+      args: [message],
+    );
+  }
+
   /// `Ждём настройки...`
   String get I18nModuleSettings_awaitingSettings {
     return Intl.message(

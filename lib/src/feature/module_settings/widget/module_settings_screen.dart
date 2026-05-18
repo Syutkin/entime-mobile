@@ -12,6 +12,7 @@ import '../../../common/widget/cancel_ok_buttons.dart';
 import '../../../common/widget/splash_widget.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../bloc/module_settings_bloc.dart';
+import '../model/module_settings_protocol.dart';
 import 'popups.dart';
 
 class ModuleSettingsInitScreen extends StatefulWidget {
@@ -52,6 +53,7 @@ class _ModuleSettingsInitScreenState extends State<ModuleSettingsInitScreen> {
                       }
                       final message = jsonEncode({
                         'cmd': 'save_config',
+                        'id': moduleSettingsSaveConfigRequestId,
                         'data': data,
                       });
                       BlocProvider.of<BluetoothBloc>(context).add(

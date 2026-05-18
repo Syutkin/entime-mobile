@@ -198,6 +198,7 @@ void main() {
 
         final payload = jsonDecode(message!) as Map<String, dynamic>;
         expect(payload['cmd'], 'save_config');
+        expect(payload['id'], moduleSettingsSaveConfigRequestId);
         expect(payload['data'], isA<Map<String, dynamic>>());
 
         final data = payload['data'] as Map<String, dynamic>;
@@ -232,6 +233,7 @@ void main() {
 
         final payload = jsonDecode(message!) as Map<String, dynamic>;
         expect(payload['cmd'], 'save_config');
+        expect(payload['id'], moduleSettingsSaveConfigRequestId);
         expect(payload['data'], isA<Map<String, dynamic>>());
 
         final data = payload['data'] as Map<String, dynamic>;

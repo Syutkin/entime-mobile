@@ -123,12 +123,37 @@ class HomeScreen extends StatelessWidget {
               if (response is BluetoothJsonResponseLoadConfig) {
                 context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(rawJson));
               }
+              if (response is BluetoothJsonResponseSaveConfig && response.id == moduleSettingsSaveConfigRequestId) {
+                _showModuleSettingsSaveConfigSnackBar(context, response);
+              }
             default:
           }
         default:
       }
     },
   );
+
+  void _showModuleSettingsSaveConfigSnackBar(BuildContext context, BluetoothJsonResponseSaveConfig response) {
+    final text = _moduleSettingsSaveConfigText(response);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(text)));
+  }
+
+  String _moduleSettingsSaveConfigText(BluetoothJsonResponseSaveConfig response) {
+    final i18n = Localization.current;
+    if (response.status == BluetoothProtocolStatus.ok) {
+      return response.rebootNeeded ?? false
+          ? i18n.I18nModuleSettings_saveSettingsSuccessReboot
+          : i18n.I18nModuleSettings_saveSettingsSuccess;
+    }
+
+    final message = response.errorMessage;
+    if (message == null || message.isEmpty) {
+      return i18n.I18nModuleSettings_saveSettingsError;
+    }
+    return i18n.I18nModuleSettings_saveSettingsErrorMessage(message);
+  }
 
   SingleChildWidget _listenToNewStartTime() => BlocListener<DatabaseBloc, DatabaseState>(
     listener: (context, state) async {
