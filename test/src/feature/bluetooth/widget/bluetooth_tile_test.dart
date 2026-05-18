@@ -4,6 +4,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/bluetooth/widget/bluetooth_tile.dart';
+import 'package:entime/src/feature/module_settings/module_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -15,6 +16,8 @@ class MockBluetoothBloc extends MockBloc<BluetoothEvent, BluetoothBlocState> imp
 
 class MockBluetoothDiscoveryCubit extends MockCubit<BluetoothDiscoveryState> implements BluetoothDiscoveryCubit {}
 
+class MockModuleSettingsBloc extends MockBloc<ModuleSettingsEvent, ModuleSettingsState> implements ModuleSettingsBloc {}
+
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
@@ -22,6 +25,7 @@ class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 void main() {
   late BluetoothBloc btBloc;
   late BluetoothDiscoveryCubit bdCubit;
+  late ModuleSettingsBloc moduleSettingsBloc;
   late BluetoothDevice bluetoothDevice;
   late MockBluetoothProvider bluetoothProvider;
   late StreamController<bool> scanningController;
@@ -32,10 +36,13 @@ void main() {
       value: btBloc,
       child: BlocProvider.value(
         value: bdCubit,
-        child: MaterialApp(
-          localizationsDelegates: const [Localization.delegate],
-          supportedLocales: Localization.supportedLocales,
-          home: const Material(child: BluetoothTile()),
+        child: BlocProvider.value(
+          value: moduleSettingsBloc,
+          child: MaterialApp(
+            localizationsDelegates: const [Localization.delegate],
+            supportedLocales: Localization.supportedLocales,
+            home: const Material(child: BluetoothTile()),
+          ),
         ),
       ),
     );
@@ -44,6 +51,7 @@ void main() {
   setUp(() {
     btBloc = MockBluetoothBloc();
     bdCubit = MockBluetoothDiscoveryCubit();
+    moduleSettingsBloc = MockModuleSettingsBloc();
     bluetoothDevice = MockBluetoothDevice();
     bluetoothProvider = MockBluetoothProvider();
     scanningController = StreamController<bool>.broadcast();
@@ -56,6 +64,8 @@ void main() {
     when(() => bluetoothProvider.stopScan()).thenAnswer((_) async {});
     when(() => btBloc.bluetoothProvider).thenReturn(bluetoothProvider);
     when(() => btBloc.stream).thenAnswer((_) => const Stream<BluetoothBlocState>.empty());
+    when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.uninitialized());
+    when(() => moduleSettingsBloc.stream).thenAnswer((_) => const Stream<ModuleSettingsState>.empty());
     when(() => bluetoothDevice.platformName).thenReturn('BluetoothDeviceName');
     when(() => bdCubit.startDiscovery()).thenAnswer((_) async {});
     when(() => bdCubit.state).thenReturn(const BluetoothDiscoveryState.initial());
@@ -150,6 +160,11 @@ void main() {
 
       await $.pumpWidgetAndSettle(testWidget());
       await $.tester.tap($(Icon).at(2));
+
+      verifyInOrder([
+        () => moduleSettingsBloc.add(const ModuleSettingsEvent.unload()),
+        () => btBloc.add(const BluetoothEvent.sendMessage(message: '{"cmd":"load_config"}')),
+      ]);
     });
 
     patrolWidgetTest('disconnecting state', (PatrolTester $) async {
