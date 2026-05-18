@@ -20,17 +20,20 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m30(emailLaunchUri) => "Could not launch ${emailLaunchUri}";
+  static String m26(emailLaunchUri) => "Could not launch ${emailLaunchUri}";
 
-  static String m31(version) => "Версия: ${version}";
+  static String m27(version) => "Версия: ${version}";
 
-  static String m32(raceName) => "Вы уверены, что хотите удалить гонку \"${raceName}\"?";
+  static String m28(raceName) =>
+      "Вы уверены, что хотите удалить гонку \"${raceName}\"?";
 
-  static String m33(stageName) => "Вы уверены, что хотите удалить этап \"${stageName}\"?";
+  static String m29(stageName) =>
+      "Вы уверены, что хотите удалить этап \"${stageName}\"?";
 
-  static String m34(trailName) => "Вы уверены, что хотите удалить трейл \"${trailName}\"?";
+  static String m30(trailName) =>
+      "Вы уверены, что хотите удалить трейл \"${trailName}\"?";
 
-  static String m35(limit) => "Максимальный размер ${limit} Мб";
+  static String m31(limit) => "Максимальный размер ${limit} Мб";
 
   static String m0(version) => "v${version}";
 
@@ -53,61 +56,55 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(brightness) => "Яркость ${brightness}";
 
-  static String m8(frequency) => "${frequency}Гц";
+  static String m8(message) => "Ошибка сохранения настроек: ${message}";
 
-  static String m9(note, frequency) => "Нота ${note}, ${frequency}Гц";
+  static String m9(type) => "Неизвестный тип модуля: ${type}";
 
-  static String m10(ohm) => "${ohm} Ом";
-
-  static String m11(message) => "Ошибка сохранения настроек: ${message}";
-
-  static String m12(seconds) =>
-      "${Intl.plural(seconds, one: '${seconds} секунда', few: '${seconds} секунды', other: 'секунд')}";
-
-  static String m13(type) => "Неизвестный тип модуля: ${type}";
-
-  static String m14(offset) =>
+  static String m10(offset) =>
       "${Intl.plural(offset, one: 'Смещение ${offset} миллисекунда', few: 'Смещение ${offset} миллисекунды', other: 'Смещение ${offset} миллисекунд')}";
 
-  static String m15(number) => "Финишировал номер ${number}";
+  static String m11(number) => "Финишировал номер ${number}";
 
-  static String m16(raceName, stageName) => "Результаты финишей гонки ${raceName}, этап ${stageName}";
+  static String m12(raceName, stageName) =>
+      "Результаты финишей гонки ${raceName}, этап ${stageName}";
 
-  static String m17(raceName, stageName) => "Результаты стартов гонки ${raceName}, этап ${stageName}";
+  static String m13(raceName, stageName) =>
+      "Результаты стартов гонки ${raceName}, этап ${stageName}";
 
-  static String m18(number) => "Участнику с номером ${number} уже присвоено финишное время. Установить новое значение?";
+  static String m14(number) =>
+      "Участнику с номером ${number} уже присвоено финишное время. Установить новое значение?";
 
-  static String m19(milliseconds) => "${milliseconds}мс";
+  static String m15(milliseconds) => "${milliseconds}мс";
 
-  static String m20(size) => "${size}px";
+  static String m16(size) => "${size}px";
 
-  static String m36(seconds) => "${seconds}с";
+  static String m32(seconds) => "${seconds}с";
 
-  static String m21(category) => "Категория: ${category}";
+  static String m17(category) => "Категория: ${category}";
 
-  static String m22(city) => "Город: ${city}";
+  static String m18(city) => "Город: ${city}";
 
-  static String m23(nickname) => "Никнейм: ${nickname}";
+  static String m19(nickname) => "Никнейм: ${nickname}";
 
-  static String m24(number) => "Участник №${number}";
+  static String m20(number) => "Участник №${number}";
 
-  static String m25(number, name) => "№${number}, ${name}";
+  static String m21(number, name) => "№${number}, ${name}";
 
-  static String m26(team) => "Команда: ${team}";
+  static String m22(team) => "Команда: ${team}";
 
-  static String m27(year) => "Год/Возраст: ${year}";
+  static String m23(year) => "Год/Возраст: ${year}";
 
-  static String m37(automaticCorrection, timestampCorrection) =>
+  static String m33(automaticCorrection, timestampCorrection) =>
       "Вы уверены что хотите заменить автоматическую поправку (${automaticCorrection}) на поправку относительно времени смартфона (${timestampCorrection})?";
 
-  static String m38(number) => "Участник с номером ${number} не стартовал?";
+  static String m34(number) => "Участник с номером ${number} не стартовал?";
 
-  static String m39(number, time) =>
+  static String m35(number, time) =>
       "Сдвинуть время стартов на указанное количество минут от номера ${number} (время старта ${time}) и далее?";
 
-  static String m28(current, total) => "${current} из ${total}";
+  static String m24(current, total) => "${current} из ${total}";
 
-  static String m29(version) => "Обновить до ${version}";
+  static String m25(version) => "Обновить до ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -120,11 +117,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nAbout_copyright": MessageLookupByLibrary.simpleMessage(
       "© 2021-2025 Andrey Syutkin",
     ),
-    "I18nAbout_emailSendError": m30,
+    "I18nAbout_emailSendError": m26,
     "I18nAbout_emailSubject": MessageLookupByLibrary.simpleMessage(
       "Entime замечания/предложения",
     ),
-    "I18nAbout_version": m31,
+    "I18nAbout_version": m27,
     "I18nBluetooth_bluetoothNotAvailable": MessageLookupByLibrary.simpleMessage(
       "Bluetooth недоступен на устройстве",
     ),
@@ -164,9 +161,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nDatabase_category": MessageLookupByLibrary.simpleMessage("Категория"),
     "I18nDatabase_city": MessageLookupByLibrary.simpleMessage("Город"),
     "I18nDatabase_comment": MessageLookupByLibrary.simpleMessage("Комментарий"),
-    "I18nDatabase_deleteRace": m32,
-    "I18nDatabase_deleteStage": m33,
-    "I18nDatabase_deleteTrail": m34,
+    "I18nDatabase_deleteRace": m28,
+    "I18nDatabase_deleteStage": m29,
+    "I18nDatabase_deleteTrail": m30,
     "I18nDatabase_editRace": MessageLookupByLibrary.simpleMessage(
       "Редактирование",
     ),
@@ -191,7 +188,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nDatabase_incorrectTrailDistance": MessageLookupByLibrary.simpleMessage(
       "Неверная длина",
     ),
-    "I18nDatabase_incorrectTrailElevation": MessageLookupByLibrary.simpleMessage("Неверный перепад высот"),
+    "I18nDatabase_incorrectTrailElevation":
+        MessageLookupByLibrary.simpleMessage("Неверный перепад высот"),
     "I18nDatabase_incorrectTrailUrl": MessageLookupByLibrary.simpleMessage(
       "Некорректная ссылка",
     ),
@@ -244,7 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nDatabase_trailName": MessageLookupByLibrary.simpleMessage("Название"),
     "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
     "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
-    "I18nDatabase_uploadLimit": m35,
+    "I18nDatabase_uploadLimit": m31,
     "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
     "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
     "I18nDrawer_settings": MessageLookupByLibrary.simpleMessage("Настройки"),
@@ -345,8 +343,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_bluetooth": MessageLookupByLibrary.simpleMessage(
       "Bluetooth",
     ),
-    "I18nModuleSettings_bluetoothModuleName": MessageLookupByLibrary.simpleMessage("Имя модуля"),
-    "I18nModuleSettings_bluetoothModuleNumber": MessageLookupByLibrary.simpleMessage("Номер модуля"),
+    "I18nModuleSettings_bluetoothModuleName":
+        MessageLookupByLibrary.simpleMessage("Имя модуля"),
+    "I18nModuleSettings_bluetoothModuleNumber":
+        MessageLookupByLibrary.simpleMessage("Номер модуля"),
     "I18nModuleSettings_bluetoothNumber": MessageLookupByLibrary.simpleMessage(
       "Номер",
     ),
@@ -354,9 +354,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Яркость",
     ),
     "I18nModuleSettings_brightnessInt": m7,
-    "I18nModuleSettings_buzzer": MessageLookupByLibrary.simpleMessage("Buzzer"),
-    "I18nModuleSettings_codingRateDenominator": MessageLookupByLibrary.simpleMessage("Coding Rate Denominator"),
-    "I18nModuleSettings_crc": MessageLookupByLibrary.simpleMessage("CRC"),
     "I18nModuleSettings_device": MessageLookupByLibrary.simpleMessage(
       "Устройство",
     ),
@@ -366,53 +363,41 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceNameEmpty": MessageLookupByLibrary.simpleMessage(
       "Введите имя модуля",
     ),
-    "I18nModuleSettings_deviceNameInvalid": MessageLookupByLibrary.simpleMessage(
-      "Только ASCII символы (A-Z, a-z, 0-9, -, _)",
-    ),
-    "I18nModuleSettings_deviceNameTooLong": MessageLookupByLibrary.simpleMessage("Максимум 16 символов"),
+    "I18nModuleSettings_deviceNameInvalid":
+        MessageLookupByLibrary.simpleMessage(
+          "Только ASCII символы (A-Z, a-z, 0-9, -, _)",
+        ),
+    "I18nModuleSettings_deviceNameTooLong":
+        MessageLookupByLibrary.simpleMessage("Максимум 16 символов"),
     "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
       "Номер",
     ),
-    "I18nModuleSettings_deviceNumberEmpty": MessageLookupByLibrary.simpleMessage("Введите номер устройства"),
-    "I18nModuleSettings_deviceNumberInvalid": MessageLookupByLibrary.simpleMessage("Номер должен быть целым"),
-    "I18nModuleSettings_deviceNumberRange": MessageLookupByLibrary.simpleMessage("Диапазон 1..255"),
+    "I18nModuleSettings_deviceNumberEmpty":
+        MessageLookupByLibrary.simpleMessage("Введите номер устройства"),
+    "I18nModuleSettings_deviceNumberInvalid":
+        MessageLookupByLibrary.simpleMessage("Номер должен быть целым"),
+    "I18nModuleSettings_deviceNumberRange":
+        MessageLookupByLibrary.simpleMessage("Диапазон 1..255"),
     "I18nModuleSettings_deviceTimezone": MessageLookupByLibrary.simpleMessage(
       "Смещение UTC",
     ),
     "I18nModuleSettings_deviceType": MessageLookupByLibrary.simpleMessage(
       "Тип",
     ),
-    "I18nModuleSettings_enterBluetoothModuleNumber": MessageLookupByLibrary.simpleMessage("Введите номер модуля"),
-    "I18nModuleSettings_enterCurrentVoltage": MessageLookupByLibrary.simpleMessage(
-      "Введите текущее значение напряжения на батареях",
-    ),
-    "I18nModuleSettings_enterMeasuredVoltage": MessageLookupByLibrary.simpleMessage("Ввод измеренного напряжения"),
-    "I18nModuleSettings_enterResistor1": MessageLookupByLibrary.simpleMessage(
-      "Введите значение резистора R1",
-    ),
-    "I18nModuleSettings_enterResistor2": MessageLookupByLibrary.simpleMessage(
-      "Введите значение резистора R2",
-    ),
-    "I18nModuleSettings_enterWifiCredentials": MessageLookupByLibrary.simpleMessage("Введите данные сети"),
-    "I18nModuleSettings_errorLoadSettings": MessageLookupByLibrary.simpleMessage("Ошибка загрузки настроек!"),
-    "I18nModuleSettings_frequency": MessageLookupByLibrary.simpleMessage(
-      "Частота",
-    ),
-    "I18nModuleSettings_frequencyHz": m8,
+    "I18nModuleSettings_enterBluetoothModuleNumber":
+        MessageLookupByLibrary.simpleMessage("Введите номер модуля"),
+    "I18nModuleSettings_enterWifiCredentials":
+        MessageLookupByLibrary.simpleMessage("Введите данные сети"),
+    "I18nModuleSettings_errorLoadSettings":
+        MessageLookupByLibrary.simpleMessage("Ошибка загрузки настроек!"),
     "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
     "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
       "GPS",
     ),
-    "I18nModuleSettings_longFrequency": MessageLookupByLibrary.simpleMessage(
-      "Частота длинных гудков",
-    ),
-    "I18nModuleSettings_lora": MessageLookupByLibrary.simpleMessage("LoRa"),
     "I18nModuleSettings_module": MessageLookupByLibrary.simpleMessage("Модуль"),
     "I18nModuleSettings_moduleSettings": MessageLookupByLibrary.simpleMessage(
       "Настройки модуля",
     ),
-    "I18nModuleSettings_mv": MessageLookupByLibrary.simpleMessage("мВ"),
-    "I18nModuleSettings_noteFrequency": m9,
     "I18nModuleSettings_ntp1": MessageLookupByLibrary.simpleMessage("NTP 1"),
     "I18nModuleSettings_ntp2": MessageLookupByLibrary.simpleMessage("NTP 2"),
     "I18nModuleSettings_ntp3": MessageLookupByLibrary.simpleMessage("NTP 3"),
@@ -425,45 +410,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_ntpTooLong": MessageLookupByLibrary.simpleMessage(
       "Максимум 64 символа",
     ),
-    "I18nModuleSettings_ohm": MessageLookupByLibrary.simpleMessage("Ом"),
-    "I18nModuleSettings_preambleLength": MessageLookupByLibrary.simpleMessage(
-      "Preamble Length",
-    ),
-    "I18nModuleSettings_resistor1": MessageLookupByLibrary.simpleMessage("R1"),
-    "I18nModuleSettings_resistor2": MessageLookupByLibrary.simpleMessage("R2"),
-    "I18nModuleSettings_resistorOhm": m10,
-    "I18nModuleSettings_saveSettingsError": MessageLookupByLibrary.simpleMessage("Ошибка сохранения настроек"),
-    "I18nModuleSettings_saveSettingsErrorMessage": m11,
-    "I18nModuleSettings_saveSettingsSuccess": MessageLookupByLibrary.simpleMessage("Настройки сохранены"),
-    "I18nModuleSettings_saveSettingsSuccessReboot": MessageLookupByLibrary.simpleMessage(
-      "Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.",
-    ),
-    "I18nModuleSettings_saveSettingsTimeout": MessageLookupByLibrary.simpleMessage(
-      "Модуль не ответил. Проверьте подключение и повторите сохранение.",
-    ),
-    "I18nModuleSettings_saveSettingsToModule": MessageLookupByLibrary.simpleMessage(
-      "Записать новые настройки в модуль?",
-    ),
-    "I18nModuleSettings_screen": MessageLookupByLibrary.simpleMessage("Экран"),
-    "I18nModuleSettings_selectLongFrequency": MessageLookupByLibrary.simpleMessage("Выберите частоту длинного гудка"),
-    "I18nModuleSettings_selectShortFrequency": MessageLookupByLibrary.simpleMessage(
-      "Выберите частоту короткого гудка",
-    ),
+    "I18nModuleSettings_saveSettingsError":
+        MessageLookupByLibrary.simpleMessage("Ошибка сохранения настроек"),
+    "I18nModuleSettings_saveSettingsErrorMessage": m8,
+    "I18nModuleSettings_saveSettingsSuccess":
+        MessageLookupByLibrary.simpleMessage("Настройки сохранены"),
+    "I18nModuleSettings_saveSettingsSuccessReboot":
+        MessageLookupByLibrary.simpleMessage(
+          "Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.",
+        ),
+    "I18nModuleSettings_saveSettingsTimeout":
+        MessageLookupByLibrary.simpleMessage(
+          "Модуль не ответил. Проверьте подключение и повторите сохранение.",
+        ),
+    "I18nModuleSettings_saveSettingsToModule":
+        MessageLookupByLibrary.simpleMessage(
+          "Записать новые настройки в модуль?",
+        ),
     "I18nModuleSettings_setBrightness": MessageLookupByLibrary.simpleMessage(
       "Установите яркость панели",
-    ),
-    "I18nModuleSettings_shortFrequency": MessageLookupByLibrary.simpleMessage(
-      "Частота коротких гудков",
-    ),
-    "I18nModuleSettings_signalBandwidth": MessageLookupByLibrary.simpleMessage(
-      "Signal Bandwidth",
-    ),
-    "I18nModuleSettings_sleepMode": MessageLookupByLibrary.simpleMessage(
-      "Спящий режим",
-    ),
-    "I18nModuleSettings_sleepModeSeconds": m12,
-    "I18nModuleSettings_spreadingFactor": MessageLookupByLibrary.simpleMessage(
-      "Spreading Factor",
     ),
     "I18nModuleSettings_sync": MessageLookupByLibrary.simpleMessage(
       "Синхронизация",
@@ -481,10 +446,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_syncSourceRtc": MessageLookupByLibrary.simpleMessage(
       "RTC",
     ),
-    "I18nModuleSettings_syncWord": MessageLookupByLibrary.simpleMessage(
-      "Sync Word",
-    ),
-    "I18nModuleSettings_tft": MessageLookupByLibrary.simpleMessage("TFT"),
     "I18nModuleSettings_timezoneEmpty": MessageLookupByLibrary.simpleMessage(
       "Введите смещение UTC, например 3 или 5:45",
     ),
@@ -506,14 +467,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_touchEnabled": MessageLookupByLibrary.simpleMessage(
       "Сенсорный ввод",
     ),
-    "I18nModuleSettings_turnOnAtEvent": MessageLookupByLibrary.simpleMessage(
-      "Включать после события",
-    ),
-    "I18nModuleSettings_txPower": MessageLookupByLibrary.simpleMessage(
-      "TX Power",
-    ),
-    "I18nModuleSettings_unknownModuleType": m13,
-    "I18nModuleSettings_vcc": MessageLookupByLibrary.simpleMessage("VCC"),
+    "I18nModuleSettings_unknownModuleType": m9,
     "I18nModuleSettings_wifi": MessageLookupByLibrary.simpleMessage("WiFi"),
     "I18nModuleSettings_wifiActive": MessageLookupByLibrary.simpleMessage(
       "Активно",
@@ -528,7 +482,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Имя сети",
     ),
     "I18nNtp_ntpOffset": MessageLookupByLibrary.simpleMessage("NTP offset"),
-    "I18nNtp_offsetInMilliseconds": m14,
+    "I18nNtp_offsetInMilliseconds": m10,
     "I18nNtp_sync": MessageLookupByLibrary.simpleMessage(
       "Нажмите для синхронизации",
     ),
@@ -549,7 +503,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nProtocol_enterFinishNumber": MessageLookupByLibrary.simpleMessage(
       "Введите номер финишировавшего участника",
     ),
-    "I18nProtocol_finishNumber": m15,
+    "I18nProtocol_finishNumber": m11,
     "I18nProtocol_finishTimeCutoff": MessageLookupByLibrary.simpleMessage(
       "Финишная отсечка",
     ),
@@ -559,14 +513,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Неверный номер",
     ),
     "I18nProtocol_number": MessageLookupByLibrary.simpleMessage("Номер"),
-    "I18nProtocol_shareFinishResults": m16,
-    "I18nProtocol_shareStartResults": m17,
+    "I18nProtocol_shareFinishResults": m12,
+    "I18nProtocol_shareStartResults": m13,
     "I18nProtocol_startTimeCutoff": MessageLookupByLibrary.simpleMessage(
       "Стартовая отсечка",
     ),
     "I18nProtocol_time": MessageLookupByLibrary.simpleMessage("Время"),
     "I18nProtocol_type": MessageLookupByLibrary.simpleMessage("Тип"),
-    "I18nProtocol_updateNumber": m18,
+    "I18nProtocol_updateNumber": m14,
     "I18nProtocol_warning": MessageLookupByLibrary.simpleMessage(
       "Предупреждение",
     ),
@@ -594,7 +548,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_countdownFromApp": MessageLookupByLibrary.simpleMessage(
       "Использовать время приложения",
     ),
-    "I18nSettings_countdownFromAppDetails": MessageLookupByLibrary.simpleMessage("Для озвучивания без модуля"),
+    "I18nSettings_countdownFromAppDetails":
+        MessageLookupByLibrary.simpleMessage("Для озвучивания без модуля"),
     "I18nSettings_darkBlue": MessageLookupByLibrary.simpleMessage(
       "Синяя тёмная тема",
     ),
@@ -617,9 +572,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_finishButtonSize": MessageLookupByLibrary.simpleMessage(
       "Размер кнопки \"отсечка\"",
     ),
-    "I18nSettings_finishButtonSizeDescription": MessageLookupByLibrary.simpleMessage(
-      "Размер кнопки \"отсечка\" на финишном экране",
-    ),
+    "I18nSettings_finishButtonSizeDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Размер кнопки \"отсечка\" на финишном экране",
+        ),
     "I18nSettings_finishScreen": MessageLookupByLibrary.simpleMessage(
       "Финишный экран",
     ),
@@ -630,14 +586,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_incorrectStartDelta": MessageLookupByLibrary.simpleMessage(
       "Неверный отрезок времени",
     ),
-    "I18nSettings_incorrectStartFinishDifference": MessageLookupByLibrary.simpleMessage("Неверный порог"),
+    "I18nSettings_incorrectStartFinishDifference":
+        MessageLookupByLibrary.simpleMessage("Неверный порог"),
     "I18nSettings_journal": MessageLookupByLibrary.simpleMessage("Журнал"),
     "I18nSettings_journalLinesNumber": MessageLookupByLibrary.simpleMessage(
       "Количество показываемых записей",
     ),
-    "I18nSettings_journalLinesNumberPopup": MessageLookupByLibrary.simpleMessage(
-      "Количество отображаемых строк в журнале",
-    ),
+    "I18nSettings_journalLinesNumberPopup":
+        MessageLookupByLibrary.simpleMessage(
+          "Количество отображаемых строк в журнале",
+        ),
     "I18nSettings_language": MessageLookupByLibrary.simpleMessage("Язык"),
     "I18nSettings_lightBlue": MessageLookupByLibrary.simpleMessage(
       "Синяя светлая тема",
@@ -645,7 +603,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_lightRed": MessageLookupByLibrary.simpleMessage(
       "Красная светлая тема",
     ),
-    "I18nSettings_milliseconds": m19,
+    "I18nSettings_milliseconds": m15,
     "I18nSettings_ntpOffset": MessageLookupByLibrary.simpleMessage(
       "NTP смещение",
     ),
@@ -662,7 +620,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Называть имена участников",
     ),
     "I18nSettings_pitch": MessageLookupByLibrary.simpleMessage("Тембр"),
-    "I18nSettings_pixelSize": m20,
+    "I18nSettings_pixelSize": m16,
     "I18nSettings_rate": MessageLookupByLibrary.simpleMessage("Скорость"),
     "I18nSettings_reconnect": MessageLookupByLibrary.simpleMessage(
       "Переподключение",
@@ -676,30 +634,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_resetToDefaults": MessageLookupByLibrary.simpleMessage(
       "Настройки по умолчанию",
     ),
-    "I18nSettings_seconds": m36,
+    "I18nSettings_seconds": m32,
     "I18nSettings_settings": MessageLookupByLibrary.simpleMessage("Настройки"),
-    "I18nSettings_showColorFinishDifference": MessageLookupByLibrary.simpleMessage(
-      "Выделение цветом разницы во времени",
-    ),
-    "I18nSettings_showColorFinishDifferenceDescription": MessageLookupByLibrary.simpleMessage("При достижении порога"),
-    "I18nSettings_showColorStartDifference": MessageLookupByLibrary.simpleMessage(
-      "Выделение цветом разницы во времени",
-    ),
-    "I18nSettings_showColorStartDifferenceDescription": MessageLookupByLibrary.simpleMessage(
-      "При достижении порога между временем модуля и временем устройства",
-    ),
+    "I18nSettings_showColorFinishDifference":
+        MessageLookupByLibrary.simpleMessage(
+          "Выделение цветом разницы во времени",
+        ),
+    "I18nSettings_showColorFinishDifferenceDescription":
+        MessageLookupByLibrary.simpleMessage("При достижении порога"),
+    "I18nSettings_showColorStartDifference":
+        MessageLookupByLibrary.simpleMessage(
+          "Выделение цветом разницы во времени",
+        ),
+    "I18nSettings_showColorStartDifferenceDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "При достижении порога между временем модуля и временем устройства",
+        ),
     "I18nSettings_showFinishDifference": MessageLookupByLibrary.simpleMessage(
       "Показывать разницу во времени",
     ),
-    "I18nSettings_showFinishDifferenceDescription": MessageLookupByLibrary.simpleMessage(
-      "Между временем модуля и временем устройства",
-    ),
+    "I18nSettings_showFinishDifferenceDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Между временем модуля и временем устройства",
+        ),
     "I18nSettings_showStartDifference": MessageLookupByLibrary.simpleMessage(
       "Показывать разницу во времени",
     ),
-    "I18nSettings_showStartDifferenceDescription": MessageLookupByLibrary.simpleMessage(
-      "Между временем модуля и временем устройства",
-    ),
+    "I18nSettings_showStartDifferenceDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Между временем модуля и временем устройства",
+        ),
     "I18nSettings_sound": MessageLookupByLibrary.simpleMessage("Звук"),
     "I18nSettings_startButton": MessageLookupByLibrary.simpleMessage(
       "Кнопка \"отсечка\"",
@@ -707,9 +671,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_startButtonSize": MessageLookupByLibrary.simpleMessage(
       "Размер кнопки \"отсечка\"",
     ),
-    "I18nSettings_startButtonSizeDescription": MessageLookupByLibrary.simpleMessage(
-      "Размер кнопки \"отсечка\" на стартовом экране",
-    ),
+    "I18nSettings_startButtonSizeDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Размер кнопки \"отсечка\" на стартовом экране",
+        ),
     "I18nSettings_startDelta": MessageLookupByLibrary.simpleMessage("Секунды"),
     "I18nSettings_startDeltaInSeconds": MessageLookupByLibrary.simpleMessage(
       "Отрезок времени старта после сигнала",
@@ -717,7 +682,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_startDeltaInSecondsContent": MessageLookupByLibrary.simpleMessage(
       "Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта",
     ),
-    "I18nSettings_startDeltaInSecondsTitle": MessageLookupByLibrary.simpleMessage("Окно старта"),
+    "I18nSettings_startDeltaInSecondsTitle":
+        MessageLookupByLibrary.simpleMessage("Окно старта"),
     "I18nSettings_startFinishDifference": MessageLookupByLibrary.simpleMessage(
       "Порог цветовой индикации",
     ),
@@ -734,9 +700,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_timeForAutomaticStamps": MessageLookupByLibrary.simpleMessage(
       "Время автоматических отсечек",
     ),
-    "I18nSettings_timeForAutomaticStampsDescription": MessageLookupByLibrary.simpleMessage(
-      "Использовать время приложения",
-    ),
+    "I18nSettings_timeForAutomaticStampsDescription":
+        MessageLookupByLibrary.simpleMessage("Использовать время приложения"),
     "I18nSettings_ttsEngine": MessageLookupByLibrary.simpleMessage(
       "Синтезатор речи",
     ),
@@ -806,23 +771,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nStart_incorrectTime": MessageLookupByLibrary.simpleMessage(
       "Неверное значение времени",
     ),
-    "I18nStart_participantCategory": m21,
-    "I18nStart_participantCity": m22,
-    "I18nStart_participantNickname": m23,
-    "I18nStart_participantNumber": m24,
-    "I18nStart_participantNumberWithName": m25,
-    "I18nStart_participantTeam": m26,
-    "I18nStart_participantYear": m27,
-    "I18nStart_replaceAutomaticCorrection": MessageLookupByLibrary.simpleMessage(
-      "Заменить автоматическую поправку",
-    ),
-    "I18nStart_replaceAutomaticCorrectionConfirmation": m37,
-    "I18nStart_setDnsConfirmation": m38,
+    "I18nStart_participantCategory": m17,
+    "I18nStart_participantCity": m18,
+    "I18nStart_participantNickname": m19,
+    "I18nStart_participantNumber": m20,
+    "I18nStart_participantNumberWithName": m21,
+    "I18nStart_participantTeam": m22,
+    "I18nStart_participantYear": m23,
+    "I18nStart_replaceAutomaticCorrection":
+        MessageLookupByLibrary.simpleMessage(
+          "Заменить автоматическую поправку",
+        ),
+    "I18nStart_replaceAutomaticCorrectionConfirmation": m33,
+    "I18nStart_setDnsConfirmation": m34,
     "I18nStart_shiftMinutes": MessageLookupByLibrary.simpleMessage("Минуты"),
     "I18nStart_shiftStartsTime": MessageLookupByLibrary.simpleMessage(
       "Сдвинуть время стартов",
     ),
-    "I18nStart_shiftStartsTimeFromNumber": m39,
+    "I18nStart_shiftStartsTimeFromNumber": m35,
     "I18nStart_sliverAutomaticCorrection": MessageLookupByLibrary.simpleMessage(
       "Авто\r\nпоправка",
     ),
@@ -847,8 +813,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nUpdate_connecting": MessageLookupByLibrary.simpleMessage(
       "Соединение...",
     ),
-    "I18nUpdate_downloaded": m28,
-    "I18nUpdate_updateToVersion": m29,
+    "I18nUpdate_downloaded": m24,
+    "I18nUpdate_updateToVersion": m25,
     "I18nUpdate_whatsNew": MessageLookupByLibrary.simpleMessage("Что нового"),
   };
 }

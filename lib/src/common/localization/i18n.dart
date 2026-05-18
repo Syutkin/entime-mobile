@@ -641,61 +641,6 @@ class I18nModuleSettings {
 
   static String get module => Intl.message('Модуль', name: 'I18nModuleSettings_module');
 
-  static String get buzzer => Intl.message('Buzzer', name: 'I18nModuleSettings_buzzer');
-
-  static String get shortFrequency =>
-      Intl.message('Частота коротких гудков', name: 'I18nModuleSettings_shortFrequency');
-
-  static String get selectShortFrequency =>
-      Intl.message('Выберите частоту короткого гудка', name: 'I18nModuleSettings_selectShortFrequency');
-
-  static String get longFrequency => Intl.message('Частота длинных гудков', name: 'I18nModuleSettings_longFrequency');
-
-  static String get selectLongFrequency =>
-      Intl.message('Выберите частоту длинного гудка', name: 'I18nModuleSettings_selectLongFrequency');
-
-  static String noteFrequency(String note, int frequency) =>
-      Intl.message('Нота $note, $frequencyГц', name: 'I18nModuleSettings_noteFrequency', args: [note, frequency]);
-
-  static String get lora => Intl.message('LoRa', name: 'I18nModuleSettings_lora');
-
-  static String get frequency => Intl.message('Частота', name: 'I18nModuleSettings_frequency');
-
-  static String frequencyHz(int frequency) =>
-      Intl.message('$frequencyГц', name: 'I18nModuleSettings_frequencyHz', args: [frequency]);
-
-  static String get txPower => Intl.message('TX Power', name: 'I18nModuleSettings_txPower');
-
-  static String get spreadingFactor => Intl.message('Spreading Factor', name: 'I18nModuleSettings_spreadingFactor');
-
-  static String get signalBandwidth => Intl.message('Signal Bandwidth', name: 'I18nModuleSettings_signalBandwidth');
-
-  static String get codingRateDenominator =>
-      Intl.message('Coding Rate Denominator', name: 'I18nModuleSettings_codingRateDenominator');
-
-  static String get preambleLength => Intl.message('Preamble Length', name: 'I18nModuleSettings_preambleLength');
-
-  static String get syncWord => Intl.message('Sync Word', name: 'I18nModuleSettings_syncWord');
-
-  static String get crc => Intl.message('CRC', name: 'I18nModuleSettings_crc');
-
-  static String get screen => Intl.message('Экран', name: 'I18nModuleSettings_screen');
-
-  static String get tft => Intl.message('TFT', name: 'I18nModuleSettings_tft');
-
-  static String get sleepMode => Intl.message('Спящий режим', name: 'I18nModuleSettings_sleepMode');
-
-  static String sleepModeSeconds(int seconds) => Intl.plural(
-    seconds,
-    one: '$seconds секунда',
-    few: '$seconds секунды',
-    other: 'секунд',
-    name: 'I18nModuleSettings_sleepModeSeconds',
-    args: [seconds],
-  );
-
-  static String get turnOnAtEvent => Intl.message('Включать после события', name: 'I18nModuleSettings_turnOnAtEvent');
-
   static String get bluetooth => Intl.message('Bluetooth', name: 'I18nModuleSettings_bluetooth');
 
   static String get bluetoothModuleName => Intl.message('Имя модуля', name: 'I18nModuleSettings_bluetoothModuleName');
@@ -791,30 +736,6 @@ class I18nModuleSettings {
   static String get ntpTooLong => Intl.message('Максимум 64 символа', name: 'I18nModuleSettings_ntpTooLong');
 
   static String get wifiActive => Intl.message('Активно', name: 'I18nModuleSettings_wifiActive');
-
-  static String get vcc => Intl.message('VCC', name: 'I18nModuleSettings_vcc');
-
-  static String get resistor1 => Intl.message('R1', name: 'I18nModuleSettings_resistor1');
-
-  static String get resistor2 => Intl.message('R2', name: 'I18nModuleSettings_resistor2');
-
-  static String get ohm => Intl.message('Ом', name: 'I18nModuleSettings_ohm');
-
-  static String resistorOhm(int ohm) => Intl.message('$ohm Ом', name: 'I18nModuleSettings_resistorOhm', args: [ohm]);
-
-  static String get enterResistor1 =>
-      Intl.message('Введите значение резистора R1', name: 'I18nModuleSettings_enterResistor1');
-
-  static String get enterResistor2 =>
-      Intl.message('Введите значение резистора R2', name: 'I18nModuleSettings_enterResistor2');
-
-  static String get enterMeasuredVoltage =>
-      Intl.message('Ввод измеренного напряжения', name: 'I18nModuleSettings_enterMeasuredVoltage');
-
-  static String get mv => Intl.message('мВ', name: 'I18nModuleSettings_mv');
-
-  static String get enterCurrentVoltage =>
-      Intl.message('Введите текущее значение напряжения на батареях', name: 'I18nModuleSettings_enterCurrentVoltage');
 
   static String get brightness => Intl.message('Яркость', name: 'I18nModuleSettings_brightness');
 

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2026-05-18T23:56:27.268358",
+  "@@last_modified": "2026-05-19T00:04:39.058952",
   "I18nCore_edit": "Редактировать",
   "@I18nCore_edit": {
     "type": "text",
@@ -1142,118 +1142,6 @@
     "type": "text",
     "placeholders": {}
   },
-  "I18nModuleSettings_buzzer": "Buzzer",
-  "@I18nModuleSettings_buzzer": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_shortFrequency": "Частота коротких гудков",
-  "@I18nModuleSettings_shortFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_selectShortFrequency": "Выберите частоту короткого гудка",
-  "@I18nModuleSettings_selectShortFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_longFrequency": "Частота длинных гудков",
-  "@I18nModuleSettings_longFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_selectLongFrequency": "Выберите частоту длинного гудка",
-  "@I18nModuleSettings_selectLongFrequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_noteFrequency": "Нота {note}, {frequency}Гц",
-  "@I18nModuleSettings_noteFrequency": {
-    "type": "text",
-    "placeholders": {
-      "note": {},
-      "frequency": {}
-    }
-  },
-  "I18nModuleSettings_lora": "LoRa",
-  "@I18nModuleSettings_lora": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_frequency": "Частота",
-  "@I18nModuleSettings_frequency": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_frequencyHz": "{frequency}Гц",
-  "@I18nModuleSettings_frequencyHz": {
-    "type": "text",
-    "placeholders": {
-      "frequency": {}
-    }
-  },
-  "I18nModuleSettings_txPower": "TX Power",
-  "@I18nModuleSettings_txPower": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_spreadingFactor": "Spreading Factor",
-  "@I18nModuleSettings_spreadingFactor": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_signalBandwidth": "Signal Bandwidth",
-  "@I18nModuleSettings_signalBandwidth": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_codingRateDenominator": "Coding Rate Denominator",
-  "@I18nModuleSettings_codingRateDenominator": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_preambleLength": "Preamble Length",
-  "@I18nModuleSettings_preambleLength": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_syncWord": "Sync Word",
-  "@I18nModuleSettings_syncWord": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_crc": "CRC",
-  "@I18nModuleSettings_crc": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_screen": "Экран",
-  "@I18nModuleSettings_screen": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_tft": "TFT",
-  "@I18nModuleSettings_tft": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_sleepMode": "Спящий режим",
-  "@I18nModuleSettings_sleepMode": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_sleepModeSeconds": "{seconds,plural, =1{{seconds} секунда}few{{seconds} секунды}other{секунд}}",
-  "@I18nModuleSettings_sleepModeSeconds": {
-    "type": "text",
-    "placeholders": {
-      "seconds": {}
-    }
-  },
-  "I18nModuleSettings_turnOnAtEvent": "Включать после события",
-  "@I18nModuleSettings_turnOnAtEvent": {
-    "type": "text",
-    "placeholders": {}
-  },
   "I18nModuleSettings_bluetooth": "Bluetooth",
   "@I18nModuleSettings_bluetooth": {
     "type": "text",
@@ -1466,58 +1354,6 @@
   },
   "I18nModuleSettings_wifiActive": "Активно",
   "@I18nModuleSettings_wifiActive": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_vcc": "VCC",
-  "@I18nModuleSettings_vcc": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_resistor1": "R1",
-  "@I18nModuleSettings_resistor1": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_resistor2": "R2",
-  "@I18nModuleSettings_resistor2": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_ohm": "Ом",
-  "@I18nModuleSettings_ohm": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_resistorOhm": "{ohm} Ом",
-  "@I18nModuleSettings_resistorOhm": {
-    "type": "text",
-    "placeholders": {
-      "ohm": {}
-    }
-  },
-  "I18nModuleSettings_enterResistor1": "Введите значение резистора R1",
-  "@I18nModuleSettings_enterResistor1": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterResistor2": "Введите значение резистора R2",
-  "@I18nModuleSettings_enterResistor2": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterMeasuredVoltage": "Ввод измеренного напряжения",
-  "@I18nModuleSettings_enterMeasuredVoltage": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_mv": "мВ",
-  "@I18nModuleSettings_mv": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "I18nModuleSettings_enterCurrentVoltage": "Введите текущее значение напряжения на батареях",
-  "@I18nModuleSettings_enterCurrentVoltage": {
     "type": "text",
     "placeholders": {}
   },

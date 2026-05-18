@@ -641,12 +641,33 @@ void main() {
             findsOneWidget,
           );
         });
-        patrolWidgetTest('Shows bluetooth switch disabled for LED', skip: true, (PatrolTester $) async {
-          // TODO: Bluetooth
+        patrolWidgetTest('Shows bluetooth switch disabled for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+
+          final bluetoothSwitchTile = find.widgetWithText(
+            SettingsTile,
+            Localization.current.I18nModuleSettings_bluetooth,
+          );
+          expect(bluetoothSwitchTile, findsOneWidget);
+          expect($.tester.widget<SettingsTile>(bluetoothSwitchTile).enabled, isFalse);
+
+          final bluetoothSwitchFinder = find.descendant(of: bluetoothSwitchTile, matching: find.byType(Switch));
+          final bluetoothSwitch = $.tester.widget<Switch>(bluetoothSwitchFinder);
+          expect(bluetoothSwitch.value, isTrue);
         });
 
-        patrolWidgetTest('Shows bluetooth module name tile disabled for LED', skip: true, (PatrolTester $) async {
-          // TODO: Bluetooth
+        patrolWidgetTest('Shows bluetooth module name tile disabled for LED', (PatrolTester $) async {
+          await $.pumpWidgetAndSettle(testWidget());
+          await $(text).tap();
+
+          final moduleNameTile = find.widgetWithText(
+            SettingsTile,
+            Localization.current.I18nModuleSettings_bluetoothModuleName,
+          );
+          expect(moduleNameTile, findsOneWidget);
+          expect($.tester.widget<SettingsTile>(moduleNameTile).enabled, isFalse);
+          expect(find.descendant(of: moduleNameTile, matching: find.text('TestBTLed')), findsOneWidget);
         });
 
         patrolWidgetTest('Shows bluetooth module number with correct initial value for LED', (PatrolTester $) async {
@@ -774,8 +795,20 @@ void main() {
             );
           });
 
-          patrolWidgetTest('Shows WiFi switch disabled for LED', skip: true, (PatrolTester $) async {
-            // TODO: WiFi
+          patrolWidgetTest('Shows WiFi switch for LED', (PatrolTester $) async {
+            await $.pumpWidgetAndSettle(testWidget());
+            await $(text).tap();
+            await $(
+              SettingsList,
+            ).$(SettingsSection).containing($(Localization.current.I18nModuleSettings_wifi)).scrollTo();
+
+            final wifiSwitchTile = find.widgetWithText(SettingsTile, Localization.current.I18nModuleSettings_wifi);
+            expect(wifiSwitchTile, findsOneWidget);
+            expect($.tester.widget<SettingsTile>(wifiSwitchTile).enabled, isTrue);
+
+            final wifiSwitchFinder = find.descendant(of: wifiSwitchTile, matching: find.byType(Switch));
+            final wifiSwitch = $.tester.widget<Switch>(wifiSwitchFinder);
+            expect(wifiSwitch.value, isTrue);
           });
 
           patrolWidgetTest('Shows WiFi network tile with current SSID for LED', (PatrolTester $) async {

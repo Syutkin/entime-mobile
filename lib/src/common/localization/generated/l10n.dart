@@ -28,7 +28,9 @@ class GeneratedLocalization {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<GeneratedLocalization> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -2117,219 +2119,6 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Buzzer`
-  String get I18nModuleSettings_buzzer {
-    return Intl.message(
-      'Buzzer',
-      name: 'I18nModuleSettings_buzzer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Частота коротких гудков`
-  String get I18nModuleSettings_shortFrequency {
-    return Intl.message(
-      'Частота коротких гудков',
-      name: 'I18nModuleSettings_shortFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Выберите частоту короткого гудка`
-  String get I18nModuleSettings_selectShortFrequency {
-    return Intl.message(
-      'Выберите частоту короткого гудка',
-      name: 'I18nModuleSettings_selectShortFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Частота длинных гудков`
-  String get I18nModuleSettings_longFrequency {
-    return Intl.message(
-      'Частота длинных гудков',
-      name: 'I18nModuleSettings_longFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Выберите частоту длинного гудка`
-  String get I18nModuleSettings_selectLongFrequency {
-    return Intl.message(
-      'Выберите частоту длинного гудка',
-      name: 'I18nModuleSettings_selectLongFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Нота {note}, {frequency}Гц`
-  String I18nModuleSettings_noteFrequency(Object note, Object frequency) {
-    return Intl.message(
-      'Нота $note, $frequencyГц',
-      name: 'I18nModuleSettings_noteFrequency',
-      desc: '',
-      args: [note, frequency],
-    );
-  }
-
-  /// `LoRa`
-  String get I18nModuleSettings_lora {
-    return Intl.message(
-      'LoRa',
-      name: 'I18nModuleSettings_lora',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Частота`
-  String get I18nModuleSettings_frequency {
-    return Intl.message(
-      'Частота',
-      name: 'I18nModuleSettings_frequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{frequency}Гц`
-  String I18nModuleSettings_frequencyHz(Object frequency) {
-    return Intl.message(
-      '$frequencyГц',
-      name: 'I18nModuleSettings_frequencyHz',
-      desc: '',
-      args: [frequency],
-    );
-  }
-
-  /// `TX Power`
-  String get I18nModuleSettings_txPower {
-    return Intl.message(
-      'TX Power',
-      name: 'I18nModuleSettings_txPower',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Spreading Factor`
-  String get I18nModuleSettings_spreadingFactor {
-    return Intl.message(
-      'Spreading Factor',
-      name: 'I18nModuleSettings_spreadingFactor',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Signal Bandwidth`
-  String get I18nModuleSettings_signalBandwidth {
-    return Intl.message(
-      'Signal Bandwidth',
-      name: 'I18nModuleSettings_signalBandwidth',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Coding Rate Denominator`
-  String get I18nModuleSettings_codingRateDenominator {
-    return Intl.message(
-      'Coding Rate Denominator',
-      name: 'I18nModuleSettings_codingRateDenominator',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Preamble Length`
-  String get I18nModuleSettings_preambleLength {
-    return Intl.message(
-      'Preamble Length',
-      name: 'I18nModuleSettings_preambleLength',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sync Word`
-  String get I18nModuleSettings_syncWord {
-    return Intl.message(
-      'Sync Word',
-      name: 'I18nModuleSettings_syncWord',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `CRC`
-  String get I18nModuleSettings_crc {
-    return Intl.message(
-      'CRC',
-      name: 'I18nModuleSettings_crc',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Экран`
-  String get I18nModuleSettings_screen {
-    return Intl.message(
-      'Экран',
-      name: 'I18nModuleSettings_screen',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `TFT`
-  String get I18nModuleSettings_tft {
-    return Intl.message(
-      'TFT',
-      name: 'I18nModuleSettings_tft',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Спящий режим`
-  String get I18nModuleSettings_sleepMode {
-    return Intl.message(
-      'Спящий режим',
-      name: 'I18nModuleSettings_sleepMode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{seconds,plural, =1{{seconds} секунда}few{{seconds} секунды}other{секунд}}`
-  String I18nModuleSettings_sleepModeSeconds(num seconds) {
-    return Intl.plural(
-      seconds,
-      one: '$seconds секунда',
-      few: '$seconds секунды',
-      other: 'секунд',
-      name: 'I18nModuleSettings_sleepModeSeconds',
-      desc: '',
-      args: [seconds],
-    );
-  }
-
-  /// `Включать после события`
-  String get I18nModuleSettings_turnOnAtEvent {
-    return Intl.message(
-      'Включать после события',
-      name: 'I18nModuleSettings_turnOnAtEvent',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Bluetooth`
   String get I18nModuleSettings_bluetooth {
     return Intl.message(
@@ -2755,106 +2544,6 @@ class GeneratedLocalization {
     return Intl.message(
       'Активно',
       name: 'I18nModuleSettings_wifiActive',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `VCC`
-  String get I18nModuleSettings_vcc {
-    return Intl.message(
-      'VCC',
-      name: 'I18nModuleSettings_vcc',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `R1`
-  String get I18nModuleSettings_resistor1 {
-    return Intl.message(
-      'R1',
-      name: 'I18nModuleSettings_resistor1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `R2`
-  String get I18nModuleSettings_resistor2 {
-    return Intl.message(
-      'R2',
-      name: 'I18nModuleSettings_resistor2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ом`
-  String get I18nModuleSettings_ohm {
-    return Intl.message(
-      'Ом',
-      name: 'I18nModuleSettings_ohm',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{ohm} Ом`
-  String I18nModuleSettings_resistorOhm(Object ohm) {
-    return Intl.message(
-      '$ohm Ом',
-      name: 'I18nModuleSettings_resistorOhm',
-      desc: '',
-      args: [ohm],
-    );
-  }
-
-  /// `Введите значение резистора R1`
-  String get I18nModuleSettings_enterResistor1 {
-    return Intl.message(
-      'Введите значение резистора R1',
-      name: 'I18nModuleSettings_enterResistor1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Введите значение резистора R2`
-  String get I18nModuleSettings_enterResistor2 {
-    return Intl.message(
-      'Введите значение резистора R2',
-      name: 'I18nModuleSettings_enterResistor2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ввод измеренного напряжения`
-  String get I18nModuleSettings_enterMeasuredVoltage {
-    return Intl.message(
-      'Ввод измеренного напряжения',
-      name: 'I18nModuleSettings_enterMeasuredVoltage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `мВ`
-  String get I18nModuleSettings_mv {
-    return Intl.message(
-      'мВ',
-      name: 'I18nModuleSettings_mv',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Введите текущее значение напряжения на батареях`
-  String get I18nModuleSettings_enterCurrentVoltage {
-    return Intl.message(
-      'Введите текущее значение напряжения на батареях',
-      name: 'I18nModuleSettings_enterCurrentVoltage',
       desc: '',
       args: [],
     );
@@ -3454,7 +3143,8 @@ class GeneratedLocalization {
   }
 }
 
-class AppLocalizationDelegate extends LocalizationsDelegate<GeneratedLocalization> {
+class AppLocalizationDelegate
+    extends LocalizationsDelegate<GeneratedLocalization> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
@@ -3467,7 +3157,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<GeneratedLocalizatio
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-  Future<GeneratedLocalization> load(Locale locale) => GeneratedLocalization.load(locale);
+  Future<GeneratedLocalization> load(Locale locale) =>
+      GeneratedLocalization.load(locale);
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 
