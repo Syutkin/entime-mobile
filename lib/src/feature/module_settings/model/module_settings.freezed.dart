@@ -2098,7 +2098,7 @@ as int,
 /// @nodoc
 mixin _$WiFi {
 
- bool get active; String get ssid; String get passwd;
+ bool get active; String get ssid;@JsonKey(includeIfNull: false) String? get passwd;
 /// Create a copy of WiFi
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2131,7 +2131,7 @@ abstract mixin class $WiFiCopyWith<$Res>  {
   factory $WiFiCopyWith(WiFi value, $Res Function(WiFi) _then) = _$WiFiCopyWithImpl;
 @useResult
 $Res call({
- bool active, String ssid, String passwd
+ bool active, String ssid,@JsonKey(includeIfNull: false) String? passwd
 });
 
 
@@ -2148,12 +2148,12 @@ class _$WiFiCopyWithImpl<$Res>
 
 /// Create a copy of WiFi
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? active = null,Object? ssid = null,Object? passwd = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? active = null,Object? ssid = null,Object? passwd = freezed,}) {
   return _then(_self.copyWith(
 active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
 as bool,ssid: null == ssid ? _self.ssid : ssid // ignore: cast_nullable_to_non_nullable
-as String,passwd: null == passwd ? _self.passwd : passwd // ignore: cast_nullable_to_non_nullable
-as String,
+as String,passwd: freezed == passwd ? _self.passwd : passwd // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -2238,7 +2238,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool active,  String ssid,  String passwd)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool active,  String ssid, @JsonKey(includeIfNull: false)  String? passwd)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _WiFi() when $default != null:
 return $default(_that.active,_that.ssid,_that.passwd);case _:
@@ -2259,7 +2259,7 @@ return $default(_that.active,_that.ssid,_that.passwd);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool active,  String ssid,  String passwd)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool active,  String ssid, @JsonKey(includeIfNull: false)  String? passwd)  $default,) {final _that = this;
 switch (_that) {
 case _WiFi():
 return $default(_that.active,_that.ssid,_that.passwd);case _:
@@ -2279,7 +2279,7 @@ return $default(_that.active,_that.ssid,_that.passwd);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool active,  String ssid,  String passwd)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool active,  String ssid, @JsonKey(includeIfNull: false)  String? passwd)?  $default,) {final _that = this;
 switch (_that) {
 case _WiFi() when $default != null:
 return $default(_that.active,_that.ssid,_that.passwd);case _:
@@ -2294,12 +2294,12 @@ return $default(_that.active,_that.ssid,_that.passwd);case _:
 @JsonSerializable()
 
 class _WiFi implements WiFi {
-  const _WiFi({required this.active, required this.ssid, required this.passwd});
+  const _WiFi({required this.active, required this.ssid, @JsonKey(includeIfNull: false) required this.passwd});
   factory _WiFi.fromJson(Map<String, dynamic> json) => _$WiFiFromJson(json);
 
 @override final  bool active;
 @override final  String ssid;
-@override final  String passwd;
+@override@JsonKey(includeIfNull: false) final  String? passwd;
 
 /// Create a copy of WiFi
 /// with the given fields replaced by the non-null parameter values.
@@ -2334,7 +2334,7 @@ abstract mixin class _$WiFiCopyWith<$Res> implements $WiFiCopyWith<$Res> {
   factory _$WiFiCopyWith(_WiFi value, $Res Function(_WiFi) _then) = __$WiFiCopyWithImpl;
 @override @useResult
 $Res call({
- bool active, String ssid, String passwd
+ bool active, String ssid,@JsonKey(includeIfNull: false) String? passwd
 });
 
 
@@ -2351,12 +2351,12 @@ class __$WiFiCopyWithImpl<$Res>
 
 /// Create a copy of WiFi
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? active = null,Object? ssid = null,Object? passwd = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? active = null,Object? ssid = null,Object? passwd = freezed,}) {
   return _then(_WiFi(
 active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
 as bool,ssid: null == ssid ? _self.ssid : ssid // ignore: cast_nullable_to_non_nullable
-as String,passwd: null == passwd ? _self.passwd : passwd // ignore: cast_nullable_to_non_nullable
-as String,
+as String,passwd: freezed == passwd ? _self.passwd : passwd // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

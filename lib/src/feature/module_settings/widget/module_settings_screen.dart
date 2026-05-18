@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:entime/src/feature/module_settings/model/module_settings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -13,11 +14,19 @@ import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../bloc/module_settings_bloc.dart';
 import 'popups.dart';
 
-class ModuleSettingsInitScreen extends StatelessWidget {
+class ModuleSettingsInitScreen extends StatefulWidget {
   const ModuleSettingsInitScreen({super.key});
 
-  Future<bool> _onBackPressed(BuildContext context, bool updated) async {
-    if (updated) {
+  @override
+  State<ModuleSettingsInitScreen> createState() => _ModuleSettingsInitScreenState();
+}
+
+class _ModuleSettingsInitScreenState extends State<ModuleSettingsInitScreen> {
+  var _updated = false;
+  ModSettingsModel? _initialModuleSettings;
+
+  Future<bool> _onBackPressed(BuildContext context) async {
+    if (_updated) {
       await showDialog<void>(
         context: context,
         builder: (context) => AlertDialog(
@@ -34,9 +43,16 @@ class ModuleSettingsInitScreen extends StatelessWidget {
                 loaded: (moduleSettings) {
                   moduleSettings.map(
                     entime: (entime) {
+                      final data = _entimeSaveConfigData(
+                        current: entime.entime,
+                        initial: _initialModuleSettings,
+                      );
+                      if (data.isEmpty) {
+                        return;
+                      }
                       final message = jsonEncode({
                         'cmd': 'save_config',
-                        'data': entime.entime.toJson(),
+                        'data': data,
                       });
                       BlocProvider.of<BluetoothBloc>(context).add(
                         BluetoothEvent.sendMessage(message: message),
@@ -65,7 +81,6 @@ class ModuleSettingsInitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var updated = false;
     // migration from WillPopScope to PopScope is taken from
     // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
     return PopScope(
@@ -75,7 +90,7 @@ class ModuleSettingsInitScreen extends StatelessWidget {
           return;
         }
         final navigator = Navigator.of(context);
-        final shouldPop = await _onBackPressed(context, updated);
+        final shouldPop = await _onBackPressed(context);
         if (shouldPop) {
           navigator.pop();
         }
@@ -86,16 +101,88 @@ class ModuleSettingsInitScreen extends StatelessWidget {
           builder: (context, state) {
             switch (state) {
               case ModuleSettingsLoaded():
-                return ModuleSettingsScreen(onChanged: () => updated = true);
+                _initialModuleSettings ??= state.moduleSettings;
+                return ModuleSettingsScreen(onChanged: () => _updated = true);
               case ModuleSettingsError():
+                _initialModuleSettings = null;
+                _updated = false;
                 return Splash(text: Localization.current.I18nModuleSettings_errorLoadSettings);
               default:
+                _initialModuleSettings = null;
+                _updated = false;
                 return Splash(text: Localization.current.I18nModuleSettings_awaitingSettings);
             }
           },
         ),
       ),
     );
+  }
+}
+
+Map<String, dynamic> _entimeSaveConfigData({
+  required ModSettingsEntime current,
+  required ModSettingsModel? initial,
+}) {
+  if (initial is! ModSettingsModelEntime) {
+    return current.toJson();
+  }
+
+  return _entimeSettingsDiff(initial.entime, current);
+}
+
+Map<String, dynamic> _entimeSettingsDiff(ModSettingsEntime initial, ModSettingsEntime current) {
+  final data = <String, dynamic>{};
+
+  final device = <String, dynamic>{};
+  _putIfChanged(device, 'name', initial.device.name, current.device.name);
+  _putIfChanged(device, 'number', initial.device.number, current.device.number);
+  _putIfChanged(device, 'type', initial.device.type, current.device.type);
+  _putIfChanged(
+    device,
+    'timezone_offset_min',
+    initial.device.timezoneOffsetMin,
+    current.device.timezoneOffsetMin,
+  );
+  _putGroupIfNotEmpty(data, 'device', device);
+
+  final sync = <String, dynamic>{};
+  _putIfChanged(sync, 'auto', initial.sync.auto, current.sync.auto);
+  _putIfChanged(sync, 'source', initial.sync.source, current.sync.source);
+  _putIfChanged(sync, 'ntp1', initial.sync.ntp1, current.sync.ntp1);
+  _putIfChanged(sync, 'ntp2', initial.sync.ntp2, current.sync.ntp2);
+  _putIfChanged(sync, 'ntp3', initial.sync.ntp3, current.sync.ntp3);
+  _putGroupIfNotEmpty(data, 'sync', sync);
+
+  final wifi = <String, dynamic>{};
+  _putIfChanged(wifi, 'active', initial.wifi.active, current.wifi.active);
+  _putIfChanged(wifi, 'ssid', initial.wifi.ssid, current.wifi.ssid);
+  _putIfChanged(wifi, 'passwd', initial.wifi.passwd, current.wifi.passwd);
+  _putGroupIfNotEmpty(data, 'wifi', wifi);
+
+  final gps = <String, dynamic>{};
+  _putIfChanged(gps, 'enabled', initial.gps.enabled, current.gps.enabled);
+  _putGroupIfNotEmpty(data, 'gps', gps);
+
+  final touch = <String, dynamic>{};
+  _putIfChanged(touch, 'enabled', initial.touch.enabled, current.touch.enabled);
+  _putIfChanged(touch, 'cal_valid', initial.touch.calValid, current.touch.calValid);
+  if (!listEquals(initial.touch.calibration, current.touch.calibration)) {
+    touch['calibration'] = List<int>.from(current.touch.calibration);
+  }
+  _putGroupIfNotEmpty(data, 'touch', touch);
+
+  return data;
+}
+
+void _putIfChanged(Map<String, dynamic> target, String key, Object? initial, Object? current) {
+  if (initial != current) {
+    target[key] = current;
+  }
+}
+
+void _putGroupIfNotEmpty(Map<String, dynamic> target, String key, Map<String, dynamic> group) {
+  if (group.isNotEmpty) {
+    target[key] = group;
   }
 }
 

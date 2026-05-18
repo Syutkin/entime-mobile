@@ -60,7 +60,7 @@ void main() {
               "ntp2": "time.google.com",
               "ntp3": "time.cloudflare.com"
             },
-            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": ""},
             "gps": {"enabled": true},
             "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
           }''';
@@ -147,6 +147,18 @@ void main() {
           ),
         );
       });
+
+      void stubMutableModuleSettings(ModSettingsModel moduleSettings) {
+        var state = ModuleSettingsState.loaded(moduleSettings);
+        when(() => moduleSettingsBloc.state).thenAnswer((_) => state);
+        when(() => moduleSettingsBloc.add(any())).thenAnswer((invocation) {
+          final event = invocation.positionalArguments.single as ModuleSettingsEvent;
+          if (event is ModuleSettingsEventUpdate) {
+            state = ModuleSettingsState.loaded(event.moduleSettings);
+          }
+        });
+      }
+
       patrolWidgetTest('Shows save confirmation dialog when back pressed with changes', (PatrolTester $) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(text).tap();
@@ -170,6 +182,10 @@ void main() {
       });
 
       patrolWidgetTest('Sends bluetooth message when save confirmed', (PatrolTester $) async {
+        stubMutableModuleSettings(
+          ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
+        );
+
         await $.pumpWidgetAndSettle(testWidget());
         await $(text).tap();
         await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_syncAuto)).tap();
@@ -185,17 +201,43 @@ void main() {
         expect(payload['data'], isA<Map<String, dynamic>>());
 
         final data = payload['data'] as Map<String, dynamic>;
-        expect(data['gps'], {'enabled': true});
-        expect(data['touch'], {
-          'enabled': true,
-          'cal_valid': false,
-          'calibration': [0, 0, 0, 0, 0],
+        expect(data, {
+          'sync': {'auto': false},
         });
-        expect(data['device'], isA<Map<String, dynamic>>());
+        expect(data.containsKey('device'), isFalse);
+        expect(data.containsKey('wifi'), isFalse);
+        expect(data.containsKey('gps'), isFalse);
+        expect(data.containsKey('touch'), isFalse);
+      });
 
-        final device = data['device'] as Map<String, dynamic>;
-        expect(device['timezone_offset_min'], 180);
-        expect(device.containsKey('timezone'), isFalse);
+      patrolWidgetTest('Sends empty WiFi password when WiFi popup confirmed with empty password', (
+        PatrolTester $,
+      ) async {
+        final moduleSettings = ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>);
+        stubMutableModuleSettings(
+          ModSettingsModel.entime(moduleSettings),
+        );
+
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(text).tap();
+        await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
+        await $(TextField).at(0).enterText('NewWiFi');
+        await $(#okButton).tap();
+        await $(BackButton).tap();
+        await $(#okButton).tap();
+
+        final capturedEvent = verify(() => bluetoothBloc.add(captureAny())).captured.single as BluetoothEvent;
+        final message = capturedEvent.whenOrNull(sendMessage: (message) => message);
+        expect(message, isNotNull);
+
+        final payload = jsonDecode(message!) as Map<String, dynamic>;
+        expect(payload['cmd'], 'save_config');
+        expect(payload['data'], isA<Map<String, dynamic>>());
+
+        final data = payload['data'] as Map<String, dynamic>;
+        expect(data, {
+          'wifi': {'ssid': 'NewWiFi', 'passwd': ''},
+        });
       });
 
       patrolWidgetTest('Sends bluetooth message when save confirmed for LED', (PatrolTester $) async {

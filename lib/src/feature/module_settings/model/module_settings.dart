@@ -27,7 +27,8 @@ abstract class ModSettingsEntime with _$ModSettingsEntime {
     @JsonKey(name: 'touch') required TouchSettings touch,
   }) = _ModSettingsEntime;
 
-  factory ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
+  factory ModSettingsEntime.fromJson(Map<String, dynamic> json) =>
+      _$ModSettingsEntimeFromJson(_normalizeEntimeSettingsJson(json));
 }
 
 @freezed
@@ -77,7 +78,11 @@ abstract class Bluetooth with _$Bluetooth {
 
 @freezed
 abstract class WiFi with _$WiFi {
-  const factory WiFi({required bool active, required String ssid, required String passwd}) = _WiFi;
+  const factory WiFi({
+    required bool active,
+    required String ssid,
+    @JsonKey(includeIfNull: false) required String? passwd,
+  }) = _WiFi;
 
   factory WiFi.fromJson(Map<String, dynamic> json) => _$WiFiFromJson(json);
 }
@@ -105,4 +110,15 @@ abstract class LedPanel with _$LedPanel {
   const factory LedPanel({required int brightness}) = _LedPanel;
 
   factory LedPanel.fromJson(Map<String, dynamic> json) => _$LedPanelFromJson(json);
+}
+
+Map<String, dynamic> _normalizeEntimeSettingsJson(Map<String, dynamic> json) {
+  final wifi = json['wifi'];
+  if (wifi is! Map || wifi['passwd'] != '') {
+    return json;
+  }
+
+  final normalizedJson = Map<String, dynamic>.from(json);
+  normalizedJson['wifi'] = Map<String, dynamic>.from(wifi)..['passwd'] = null;
+  return normalizedJson;
 }

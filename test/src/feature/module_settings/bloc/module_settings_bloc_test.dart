@@ -37,7 +37,7 @@ void main() {
               "ntp2": "time.google.com",
               "ntp3": "time.cloudflare.com"
             },
-            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": ""},
             "gps": {"enabled": true},
             "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
           }
@@ -61,6 +61,7 @@ void main() {
           expect(entime.touch.enabled, true);
           expect(entime.touch.calValid, false);
           expect(entime.touch.calibration, [0, 0, 0, 0, 0]);
+          expect(entime.wifi.passwd, isNull);
 
           final json = entime.toJson();
           expect(json['device'], isA<Map<String, dynamic>>());
@@ -73,6 +74,8 @@ void main() {
             'cal_valid': false,
             'calibration': [0, 0, 0, 0, 0],
           });
+          expect(json['wifi'], isA<Map<String, dynamic>>());
+          expect((json['wifi'] as Map<String, dynamic>).containsKey('passwd'), isFalse);
         },
       );
 
