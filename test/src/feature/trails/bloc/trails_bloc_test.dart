@@ -704,8 +704,9 @@ void main() {
     test('Save track error when db is corrupt keeps list empty', () async {
       final corruptDocumentsPath = path.join(tempDir.path, 'corrupt_documents');
       await Directory(corruptDocumentsPath).create(recursive: true);
-      await File(path.join(corruptDocumentsPath, 'database.sqlite'))
-          .writeAsBytes(utf8.encode('not a sqlite db'), flush: true);
+      await File(
+        path.join(corruptDocumentsPath, 'database.sqlite'),
+      ).writeAsBytes(utf8.encode('not a sqlite db'), flush: true);
 
       final previousProvider = PathProviderPlatform.instance;
       PathProviderPlatform.instance = FakePathProviderPlatform(

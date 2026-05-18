@@ -260,10 +260,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_saveSettingsErrorMessage": m11,
     "I18nModuleSettings_saveSettingsSuccess": MessageLookupByLibrary.simpleMessage("Settings saved"),
     "I18nModuleSettings_saveSettingsSuccessReboot": MessageLookupByLibrary.simpleMessage(
-      "Settings saved. Restart the module",
+      "Settings saved successfully.\nRestart the module for the changes to take effect.",
     ),
     "I18nModuleSettings_saveSettingsTimeout": MessageLookupByLibrary.simpleMessage(
-      "Module did not respond. Settings save was not confirmed.",
+      "Module did not respond. Check the connection and try saving again.",
     ),
     "I18nModuleSettings_saveSettingsToModule": MessageLookupByLibrary.simpleMessage("Save settings to module?"),
     "I18nModuleSettings_screen": MessageLookupByLibrary.simpleMessage("Screen"),

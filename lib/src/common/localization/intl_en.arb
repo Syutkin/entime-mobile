@@ -727,7 +727,7 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
-	"I18nModuleSettings_saveSettingsSuccessReboot": "Settings saved. Restart the module",
+	"I18nModuleSettings_saveSettingsSuccessReboot": "Settings saved successfully.\nRestart the module for the changes to take effect.",
 	"@I18nModuleSettings_saveSettingsSuccessReboot": {
 		"type": "text",
 		"placeholders_order": [],
@@ -739,7 +739,7 @@
 		"placeholders_order": [],
 		"placeholders": {}
 	},
-	"I18nModuleSettings_saveSettingsTimeout": "Module did not respond. Settings save was not confirmed.",
+	"I18nModuleSettings_saveSettingsTimeout": "Module did not respond. Check the connection and try saving again.",
 	"@I18nModuleSettings_saveSettingsTimeout": {
 		"type": "text",
 		"placeholders_order": [],

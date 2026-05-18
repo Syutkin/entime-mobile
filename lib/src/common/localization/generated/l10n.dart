@@ -2077,10 +2077,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Модуль не ответил. Не удалось подтвердить сохранение настроек.`
+  /// `Модуль не ответил. Проверьте подключение и повторите сохранение.`
   String get I18nModuleSettings_saveSettingsTimeout {
     return Intl.message(
-      'Модуль не ответил. Не удалось подтвердить сохранение настроек.',
+      'Модуль не ответил. Проверьте подключение и повторите сохранение.',
       name: 'I18nModuleSettings_saveSettingsTimeout',
       desc: '',
       args: [],

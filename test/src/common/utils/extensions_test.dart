@@ -398,7 +398,12 @@ void main() {
       });
 
       test('Skip nested lists and nulls', () {
-        final Object? value = ['a', null, ['b'], 'c'];
+        final Object? value = [
+          'a',
+          null,
+          ['b'],
+          'c',
+        ];
         expect(value.asStringList(), ['a', 'c']);
       });
 

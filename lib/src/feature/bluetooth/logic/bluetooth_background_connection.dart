@@ -38,7 +38,6 @@ abstract class IBluetoothBackgroundConnection {
 }
 
 class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
-
   /// Конструктор с возможностью внедрения фабрики соединений
   BluetoothBackgroundConnection({
     IBluetoothConnectionFactory? connectionFactory,

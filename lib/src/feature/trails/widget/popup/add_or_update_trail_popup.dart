@@ -261,29 +261,29 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                       // Создаём новую запись
                       if (trail == null) {
                         context.read<TrailsBloc>().add(
-                              TrailsEvent.addTrail(
-                                name: name,
-                                elevation: elevation,
-                                distance: distance,
-                                url: url,
-                                description: description,
-                                filePath: path,
-                              ),
-                            );
+                          TrailsEvent.addTrail(
+                            name: name,
+                            elevation: elevation,
+                            distance: distance,
+                            url: url,
+                            description: description,
+                            filePath: path,
+                          ),
+                        );
                       } else {
                         context.read<TrailsBloc>().add(
-                              TrailsEvent.updateTrail(
-                                id: trail.id,
-                                name: name,
-                                elevation: elevation,
-                                distance: distance,
-                                url: url,
-                                description: description,
-                                fileId: trail.fileId,
-                                deleteTrack: deleteTrack,
-                                filePath: path,
-                              ),
-                            );
+                          TrailsEvent.updateTrail(
+                            id: trail.id,
+                            name: name,
+                            elevation: elevation,
+                            distance: distance,
+                            url: url,
+                            description: description,
+                            fileId: trail.fileId,
+                            deleteTrack: deleteTrack,
+                            filePath: path,
+                          ),
+                        );
                       }
                       if (hasNewFile) {
                         waitingForSave = true;

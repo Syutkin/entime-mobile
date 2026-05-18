@@ -21,10 +21,8 @@ class ShareProvider implements IShareProvider {
         return;
       }
 
-      final fallbackName =
-          file.path.split(Platform.pathSeparator).last;
-      final fileName =
-          params.fileNameOverrides?.firstOrNull ?? fallbackName;
+      final fallbackName = file.path.split(Platform.pathSeparator).last;
+      final fileName = params.fileNameOverrides?.firstOrNull ?? fallbackName;
       final extension = _fileExtension(fileName);
       final typeGroups = extension == null
           ? <XTypeGroup>[]

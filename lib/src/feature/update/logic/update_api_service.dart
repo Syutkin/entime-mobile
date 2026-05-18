@@ -18,10 +18,10 @@ class UpdateApiService implements IUpdateApiService {
     String repo = 'syutkin/entime-mobile',
     int maxRetries = 2,
     Duration baseBackoff = const Duration(milliseconds: 500),
-  })  : _client = client,
-        _repo = repo,
-        _maxRetries = maxRetries,
-        _baseBackoff = baseBackoff;
+  }) : _client = client,
+       _repo = repo,
+       _maxRetries = maxRetries,
+       _baseBackoff = baseBackoff;
 
   final http.Client _client;
   final String _repo;

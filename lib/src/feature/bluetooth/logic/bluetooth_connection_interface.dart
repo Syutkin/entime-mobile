@@ -5,6 +5,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import '../../../common/logger/logger.dart';
 import 'bluetooth_uuids.dart';
+
 /// Интерфейс для Bluetooth-соединения
 /// Позволяет легко тестировать BluetoothBackgroundConnection
 abstract class IBluetoothConnection {

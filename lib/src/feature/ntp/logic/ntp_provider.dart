@@ -18,9 +18,9 @@ class NtpProvider implements INtpProvider {
   NtpProvider({
     INtpClient? ntpClient,
     Duration offsetRefreshInterval = const Duration(minutes: 5),
-  })  : assert(offsetRefreshInterval > Duration.zero, 'offsetRefreshInterval must be positive'),
-        _ntpClient = ntpClient ?? const FlutterNtpClient(),
-        _offsetRefreshInterval = offsetRefreshInterval {
+  }) : assert(offsetRefreshInterval > Duration.zero, 'offsetRefreshInterval must be positive'),
+       _ntpClient = ntpClient ?? const FlutterNtpClient(),
+       _offsetRefreshInterval = offsetRefreshInterval {
     _offsetController = StreamController<int>.broadcast(
       onListen: _startOffsetUpdates,
       onCancel: _stopOffsetUpdates,

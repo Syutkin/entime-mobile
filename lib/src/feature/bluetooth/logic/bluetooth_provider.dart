@@ -39,9 +39,9 @@ class BluetoothProvider implements IBluetoothProvider {
     required IAppInfoProvider appInfo,
     required IBluetoothBackgroundConnection bluetoothBackgroundConnection,
     PlatformInfo? platformInfo,
-  })  : _appInfo = appInfo,
-        _platformInfo = platformInfo ?? DefaultPlatformInfo(),
-        _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
+  }) : _appInfo = appInfo,
+       _platformInfo = platformInfo ?? DefaultPlatformInfo(),
+       _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
   final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
   final IAppInfoProvider _appInfo;
   final PlatformInfo _platformInfo;
@@ -87,9 +87,7 @@ class BluetoothProvider implements IBluetoothProvider {
     }
     try {
       if (_platformInfo.isAndroid) {
-        final sdkInt = _appInfo is AndroidAppInfoProvider
-            ? _appInfo.androidSdkInt
-            : null;
+        final sdkInt = _appInfo is AndroidAppInfoProvider ? _appInfo.androidSdkInt : null;
         if (sdkInt != null && sdkInt >= 31) {
           await [
             Permission.bluetoothScan,

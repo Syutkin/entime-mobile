@@ -68,9 +68,7 @@ void main() {
       expect(fakePlatform.lastAcceptedTypeGroups?.first.extensions, ['csv']);
       expect(fakePlatform.lastAcceptedTypeGroups?.last.allowsAny, isTrue);
     },
-    skip: Platform.isAndroid || Platform.isIOS
-        ? 'Uses share_plus on mobile platforms.'
-        : false,
+    skip: Platform.isAndroid || Platform.isIOS ? 'Uses share_plus on mobile platforms.' : false,
   );
 
   test(
@@ -83,8 +81,6 @@ void main() {
       expect(fakePlatform.lastOptions, isNull);
       expect(fakePlatform.lastAcceptedTypeGroups, isNull);
     },
-    skip: Platform.isAndroid || Platform.isIOS
-        ? 'Uses share_plus on mobile platforms.'
-        : false,
+    skip: Platform.isAndroid || Platform.isIOS ? 'Uses share_plus on mobile platforms.' : false,
   );
 }

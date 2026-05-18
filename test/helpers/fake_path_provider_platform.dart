@@ -4,9 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class FakePathProviderPlatform extends Fake
-    with MockPlatformInterfaceMixin
-    implements PathProviderPlatform {
+class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
   FakePathProviderPlatform({
     required this.documentsPath,
     this.temporaryPath,
@@ -43,8 +41,7 @@ class FakePathProviderPlatform extends Fake
   Future<String?> getExternalStoragePath() async => externalStoragePath ?? documentsPath;
 
   @override
-  Future<List<String>?> getExternalCachePaths() async =>
-      externalCachePaths ?? <String>[documentsPath];
+  Future<List<String>?> getExternalCachePaths() async => externalCachePaths ?? <String>[documentsPath];
 
   @override
   Future<List<String>?> getExternalStoragePaths({StorageDirectory? type}) async =>

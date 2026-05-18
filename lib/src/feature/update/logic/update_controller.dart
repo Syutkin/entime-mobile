@@ -36,29 +36,31 @@ class UpdateController implements IUpdateController {
     required IUpdateInstaller installer,
     required IUpdateChangelogService changelogService,
     required IAppInfoProvider appInfo,
-  })  : _apiService = apiService,
-        _assetResolver = assetResolver,
-        _downloadService = downloadService,
-        _installer = installer,
-        _changelogService = changelogService,
-        _appInfo = appInfo;
+  }) : _apiService = apiService,
+       _assetResolver = assetResolver,
+       _downloadService = downloadService,
+       _installer = installer,
+       _changelogService = changelogService,
+       _appInfo = appInfo;
 
   static Future<UpdateController> init({
     required http.Client client,
     required IAppInfoProvider appInfoProvider,
     required ISettingsProvider settingsProvider,
   }) {
-    return Future.value(UpdateController(
-      apiService: UpdateApiService(client: client),
-      assetResolver: UpdateAssetResolver(appInfo: appInfoProvider),
-      downloadService: UpdateDownloadService(client: client),
-      installer: UpdateInstaller(),
-      changelogService: UpdateChangelogService(
-        settingsProvider: settingsProvider,
-        appInfoProvider: appInfoProvider,
+    return Future.value(
+      UpdateController(
+        apiService: UpdateApiService(client: client),
+        assetResolver: UpdateAssetResolver(appInfo: appInfoProvider),
+        downloadService: UpdateDownloadService(client: client),
+        installer: UpdateInstaller(),
+        changelogService: UpdateChangelogService(
+          settingsProvider: settingsProvider,
+          appInfoProvider: appInfoProvider,
+        ),
+        appInfo: appInfoProvider,
       ),
-      appInfo: appInfoProvider,
-    ));
+    );
   }
 
   final IUpdateApiService _apiService;
