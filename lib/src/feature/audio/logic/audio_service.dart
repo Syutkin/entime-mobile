@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../../common/logger/logger.dart';
 import '../../settings/settings.dart';
 import '../audio.dart';
@@ -6,11 +8,13 @@ abstract interface class IAudioService {
   Future<bool> countdown();
 
   Future<bool> speak(String text);
+
+  Future<void> dispose();
 }
 
 class AudioService implements IAudioService {
   AudioService({required this._settings, required this._audio}) {
-    _settings.state.listen((settings) async {
+    _settingsSubscription = _settings.state.listen((settings) async {
       _sound = settings.sound;
       _voice = settings.voice;
       _beep = settings.beep;
@@ -23,6 +27,7 @@ class AudioService implements IAudioService {
 
   final IAudioProvider _audio;
   final ISettingsProvider _settings;
+  late final StreamSubscription<AppSettings> _settingsSubscription;
 
   bool _sound = true;
   bool _voice = true;
@@ -48,5 +53,10 @@ class AudioService implements IAudioService {
       logger.d('AudioService -> Sound is $_sound, voice is $_voice');
       return false;
     }
+  }
+
+  @override
+  Future<void> dispose() async {
+    await _settingsSubscription.cancel();
   }
 }

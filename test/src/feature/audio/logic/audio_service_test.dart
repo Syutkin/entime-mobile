@@ -86,5 +86,47 @@ void main() {
       await Future<void>.delayed(Duration.zero);
       expect(await audioService.countdown(), false);
     });
+
+    test('Stops listening to settings after dispose', () async {
+      final settingsStream = BehaviorSubject<AppSettings>.seeded(defaults);
+      when(() => settingsProvider.state).thenAnswer((_) => settingsStream);
+      audioService = AudioService(settings: settingsProvider, audio: audioProvider);
+      addTearDown(settingsStream.close);
+
+      await Future<void>.delayed(Duration.zero);
+      clearInteractions(audioProvider);
+
+      final changedSettings = defaults.copyWith(
+        language: 'en',
+        volume: 0.25,
+        rate: 0.75,
+        pitch: 0.5,
+      );
+      settingsStream.add(changedSettings);
+      await Future<void>.delayed(Duration.zero);
+
+      verify(() => audioProvider.setLanguage(changedSettings.language)).called(1);
+      verify(() => audioProvider.setVolume(changedSettings.volume)).called(1);
+      verify(() => audioProvider.setSpeechRate(changedSettings.rate)).called(1);
+      verify(() => audioProvider.setPitch(changedSettings.pitch)).called(1);
+
+      clearInteractions(audioProvider);
+      await audioService.dispose();
+
+      settingsStream.add(
+        defaults.copyWith(
+          language: 'fr',
+          volume: 0.5,
+          rate: 1,
+          pitch: 1.5,
+        ),
+      );
+      await Future<void>.delayed(Duration.zero);
+
+      verifyNever(() => audioProvider.setLanguage(any()));
+      verifyNever(() => audioProvider.setVolume(any()));
+      verifyNever(() => audioProvider.setSpeechRate(any()));
+      verifyNever(() => audioProvider.setPitch(any()));
+    });
   });
 }
