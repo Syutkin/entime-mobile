@@ -21,6 +21,3 @@ targets:
       json_serializable:
         options:
           explicit_to_json: true
-      pubspec_generator:
-        options:
-          output: lib/src/constants/pubspec.yaml.g.dart      
