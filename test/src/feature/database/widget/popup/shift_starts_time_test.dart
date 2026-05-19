@@ -65,7 +65,7 @@ void main() {
   });
 
   group('ShiftStartsTimePopup tests', () {
-    patrolWidgetTest('Pump widget', (PatrolTester $) async {
+    patrolWidgetTest('Pump widget', ($) async {
       await $.pumpWidgetAndSettle(testWidget(item));
 
       expect($(Localization.current.I18nCore_warning), findsNothing);
@@ -80,7 +80,7 @@ void main() {
       expect($(Localization.current.I18nStart_shiftMinutes), findsOneWidget);
     });
 
-    patrolWidgetTest('Do not call bloc event, when shist is empty', (PatrolTester $) async {
+    patrolWidgetTest('Do not call bloc event, when shist is empty', ($) async {
       await $.pumpWidgetAndSettle(testWidget(item));
       await $(TextButton).tap();
       await $.pumpAndSettle();
@@ -94,7 +94,7 @@ void main() {
       expect($(Localization.current.I18nStart_shiftMinutes), findsNothing);
     });
 
-    patrolWidgetTest('Do not call bloc event, when shift is empty', (PatrolTester $) async {
+    patrolWidgetTest('Do not call bloc event, when shift is empty', ($) async {
       await $.pumpWidgetAndSettle(testWidget(item));
       await $(TextButton).tap();
       await $.pumpAndSettle();
@@ -111,7 +111,7 @@ void main() {
       expect($(Localization.current.I18nStart_shiftMinutes), findsNothing);
     });
 
-    patrolWidgetTest('Call bloc event on correct shift', (PatrolTester $) async {
+    patrolWidgetTest('Call bloc event on correct shift', ($) async {
       await $.pumpWidgetAndSettle(testShiftStartsTimePopup(item));
 
       expect($(Localization.current.I18nCore_warning), findsOneWidget);

@@ -28,11 +28,10 @@ part 'database_state.dart';
 class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   DatabaseBloc({
     required AppDatabase database,
-    required ISettingsProvider settingsProvider,
+    required this._settingsProvider,
     required this.startlistProvider,
     this.shareProvider = const ShareProvider(),
   }) : _db = database,
-       _settingsProvider = settingsProvider,
        super(
          const DatabaseState(
            races: [],

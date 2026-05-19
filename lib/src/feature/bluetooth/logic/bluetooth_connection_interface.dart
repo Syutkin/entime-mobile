@@ -39,14 +39,11 @@ abstract class IBluetoothConnectionFactory {
 /// Реализует интерфейс IBluetoothConnection
 class BleConnectionWrapper implements IBluetoothConnection {
   BleConnectionWrapper({
-    required BluetoothDevice device,
-    required BluetoothCharacteristic txCharacteristic,
-    required BluetoothCharacteristic rxCharacteristic,
-    BluetoothCharacteristic? batteryCharacteristic,
-  }) : _device = device,
-       _txCharacteristic = txCharacteristic,
-       _rxCharacteristic = rxCharacteristic,
-       _batteryCharacteristic = batteryCharacteristic {
+    required this._device,
+    required this._txCharacteristic,
+    required this._rxCharacteristic,
+    this._batteryCharacteristic,
+  }) {
     _rxSubscription = _rxCharacteristic.onValueReceived.listen((value) {
       if (!_inputController.isClosed) {
         _inputController.add(Uint8List.fromList(value));

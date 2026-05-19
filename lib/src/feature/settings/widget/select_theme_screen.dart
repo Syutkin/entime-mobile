@@ -23,7 +23,7 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
         actions: [
           RadioGroup(
             groupValue: context.read<SettingsCubit>().state.seedColor,
-            onChanged: (ColorSeed? value) {},
+            onChanged: (value) {},
             child: PopupMenuButton(
               icon: const Icon(Icons.palette),
               itemBuilder: colorItemBuilder,

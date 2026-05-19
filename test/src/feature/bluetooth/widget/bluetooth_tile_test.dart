@@ -90,7 +90,7 @@ void main() {
   });
 
   group('BluetoothTile tests', () {
-    patrolWidgetTest('notInitialized state', (PatrolTester $) async {
+    patrolWidgetTest('notInitialized state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.notInitialized());
       await $.pumpWidgetAndSettle(testWidget());
 
@@ -102,7 +102,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsNothing);
     });
 
-    patrolWidgetTest('notAvailable state', (PatrolTester $) async {
+    patrolWidgetTest('notAvailable state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.notAvailable());
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, false);
@@ -113,7 +113,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsNothing);
     });
 
-    patrolWidgetTest('notEnabled state', (PatrolTester $) async {
+    patrolWidgetTest('notEnabled state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.notEnabled());
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, false);
@@ -124,7 +124,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsNothing);
     });
 
-    patrolWidgetTest('connecting state w/o bluetoothDevice at bloc', (PatrolTester $) async {
+    patrolWidgetTest('connecting state w/o bluetoothDevice at bloc', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connecting());
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, true);
@@ -135,7 +135,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
     });
 
-    patrolWidgetTest('connecting state with bluetoothDevice at bloc', (PatrolTester $) async {
+    patrolWidgetTest('connecting state with bluetoothDevice at bloc', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connecting());
       when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());
@@ -147,7 +147,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
     });
 
-    patrolWidgetTest('connected state', (PatrolTester $) async {
+    patrolWidgetTest('connected state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected());
       when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());
@@ -159,7 +159,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
     });
 
-    patrolWidgetTest('Press log button at connected state', (PatrolTester $) async {
+    patrolWidgetTest('Press log button at connected state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected());
       when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
 
@@ -167,7 +167,7 @@ void main() {
       await $.tester.tap($(Icon).at(1));
     });
 
-    patrolWidgetTest('Press module settings button at connected state', (PatrolTester $) async {
+    patrolWidgetTest('Press module settings button at connected state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected());
       when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
 
@@ -184,7 +184,7 @@ void main() {
       expect(payload['id'], isA<int>());
     });
 
-    patrolWidgetTest('disconnecting state', (PatrolTester $) async {
+    patrolWidgetTest('disconnecting state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.disconnecting());
       when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());
@@ -196,7 +196,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
     });
 
-    patrolWidgetTest('disconnected state w/o device', (PatrolTester $) async {
+    patrolWidgetTest('disconnected state w/o device', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.disconnecting());
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, true);
@@ -207,7 +207,7 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
     });
 
-    patrolWidgetTest('disconnected state with device', (PatrolTester $) async {
+    patrolWidgetTest('disconnected state with device', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.disconnecting());
       when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
       await $.pumpWidgetAndSettle(testWidget());

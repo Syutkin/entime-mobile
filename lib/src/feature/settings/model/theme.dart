@@ -40,8 +40,7 @@ enum ColorSeed {
   pink('Pink', Colors.pink),
   brightBlue('Bright Blue', Color(0xFF0000FF)),
   brightGreen('Bright Green', Color(0xFF00FF00)),
-  brightRed('Bright Red', Color(0xFFFF0000))
-  ;
+  brightRed('Bright Red', Color(0xFFFF0000));
 
   const ColorSeed(this.label, this.color);
 

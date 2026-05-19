@@ -35,7 +35,7 @@ void main() {
   });
 
   group('AboutPopup tests', () {
-    patrolWidgetTest('Initial state', (PatrolTester $) async {
+    patrolWidgetTest('Initial state', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(AlertDialog), findsOneWidget);
       expect($(appName), findsOneWidget);
@@ -46,13 +46,13 @@ void main() {
       expect($(TextButton), findsNWidgets(2));
     });
 
-    patrolWidgetTest('Press changelog', (PatrolTester $) async {
+    patrolWidgetTest('Press changelog', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(Localization.current.I18nAbout_changelog).tap();
       expect($(ChangelogScreen), findsOneWidget);
     });
 
-    patrolWidgetTest('Press close button', (PatrolTester $) async {
+    patrolWidgetTest('Press close button', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(TextButton).at(1).tap();
       expect($(AboutPopup), findsNothing);

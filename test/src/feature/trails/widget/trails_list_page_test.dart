@@ -94,7 +94,7 @@ void main() {
   });
 
   group('TrailsListPage tests', () {
-    patrolWidgetTest('Initial page with loading state', (PatrolTester $) async {
+    patrolWidgetTest('Initial page with loading state', ($) async {
       when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
       await $.pumpWidget(await testWidget());
@@ -105,7 +105,7 @@ void main() {
       expect($(TrailItemTile), findsNothing);
     });
 
-    patrolWidgetTest('Page with trails list', (PatrolTester $) async {
+    patrolWidgetTest('Page with trails list', ($) async {
       when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: trails));
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -118,7 +118,7 @@ void main() {
       expect($(CircularProgressIndicator), findsNothing);
     });
 
-    patrolWidgetTest('Empty trails list', (PatrolTester $) async {
+    patrolWidgetTest('Empty trails list', ($) async {
       when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -129,7 +129,7 @@ void main() {
       expect($(CircularProgressIndicator), findsNothing);
     });
 
-    patrolWidgetTest('Loading track state', (PatrolTester $) async {
+    patrolWidgetTest('Loading track state', ($) async {
       when(() => trailsBloc.state).thenReturn(TrailsState.loadingTrack(trails: trails, progress: 0));
 
       await $.pumpWidget(await testWidget());
@@ -140,7 +140,7 @@ void main() {
       expect($(TrailItemTile), findsNothing);
     });
 
-    patrolWidgetTest('Tap floating action button', (PatrolTester $) async {
+    patrolWidgetTest('Tap floating action button', ($) async {
       when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: trails));
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -149,7 +149,7 @@ void main() {
       expect($(ExpandedAlertDialog), findsOneWidget);
     });
 
-    patrolWidgetTest('Scroll through trails list', (PatrolTester $) async {
+    patrolWidgetTest('Scroll through trails list', ($) async {
       // Create more trails to test scrolling
       final manyTrails = List.generate(20, (index) {
         final row = MockQueryRow();
@@ -173,7 +173,7 @@ void main() {
       verify(() => trailsBloc.add(const TrailsEvent.getTrails())).called(1);
     });
 
-    patrolWidgetTest('Trails with different states', (PatrolTester $) async {
+    patrolWidgetTest('Trails with different states', ($) async {
       final trailWithFile = TrailInfo(
         row: MockQueryRow(),
         id: 3,

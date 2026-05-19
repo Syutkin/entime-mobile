@@ -86,9 +86,9 @@ class HomeScreen extends StatelessWidget {
   SingleChildWidget _listenToBluetooth() => BlocListener<BluetoothBloc, BluetoothBlocState>(
     listener: (context, state) {
       switch (state) {
-        case BluetoothBlocStateConnected(message: final message):
+        case BluetoothBlocStateConnected(:final message):
           switch (message) {
-            case BluetoothMessageAutomaticStart(automaticStart: final automaticStart):
+            case BluetoothMessageAutomaticStart(:final automaticStart):
               if (automaticStart.correction == null) {
                 logger.i('Bluetooth -> Start packet without correction; skipping DB update.');
                 return;
@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 );
               }
-            case BluetoothMessageFinish(time: final time, timestamp: final timestamp):
+            case BluetoothMessageFinish(:final time, :final timestamp):
               final databaseBloc = context.read<DatabaseBloc>();
               final offset = context.read<NtpBloc>().state.offset;
               final stage = databaseBloc.state.stage;
@@ -121,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                   DatabaseEvent.addFinishTime(stage: stage, finishTime: time, timestamp: timestamp, ntpOffset: offset),
                 );
               }
-            case BluetoothMessageJsonResponse(response: final response, rawJson: final rawJson):
+            case BluetoothMessageJsonResponse(:final response, :final rawJson):
               final request = context.read<BluetoothRequestCubit>().complete(response);
               switch (request?.purpose) {
                 case BluetoothRequestPurpose.moduleSettingsLoad:
@@ -164,7 +164,7 @@ class HomeScreen extends StatelessWidget {
   SingleChildWidget _listenToBluetoothRequests() => BlocListener<BluetoothRequestCubit, BluetoothRequestState>(
     listener: (context, state) {
       switch (state) {
-        case BluetoothRequestTimedOut(request: final request):
+        case BluetoothRequestTimedOut(:final request):
           switch (request.purpose) {
             case BluetoothRequestPurpose.moduleSettingsLoad:
               context.read<ModuleSettingsBloc>().add(const ModuleSettingsEvent.loadFailed());
@@ -240,11 +240,11 @@ class HomeScreen extends StatelessWidget {
     },
     listener: (context, state) async {
       switch (state) {
-        case UpdateStateInitial(changelog: final changelog):
+        case UpdateStateInitial(:final changelog):
           if (changelog != null) {
             await showChangelogAtStartup(context, changelog);
           }
-        case UpdateStateUpdateAvailable(version: final version):
+        case UpdateStateUpdateAvailable(:final version):
           if (!Scaffold.of(context).isDrawerOpen) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -270,7 +270,7 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {
         if (context.read<SettingsCubit>().state.beepFromApp) {
           switch (state) {
-            case CountdownStateWorking(tick: final tick):
+            case CountdownStateWorking(:final tick):
               // за три секунды до старта запускаем "бип"
               if (tick.text == '3') {
                 context.read<CountdownBloc>().add(const CountdownEvent.beep());
@@ -280,7 +280,7 @@ class HomeScreen extends StatelessWidget {
         }
         if (context.read<SettingsCubit>().state.voiceFromApp) {
           switch (state) {
-            case CountdownStateWorking(tick: final tick):
+            case CountdownStateWorking(:final tick):
               // Ищем участников для голосового вызова
               // если получили информацию от обратного отсчёта
               if (tick.callNextParticipant) {

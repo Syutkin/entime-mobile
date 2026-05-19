@@ -27,7 +27,7 @@ void main() {
   });
 
   group('Updater widget tests', () {
-    patrolWidgetTest('Initial state - shows check for updates', (PatrolTester $) async {
+    patrolWidgetTest('Initial state - shows check for updates', ($) async {
       when(() => updateBloc.state).thenReturn(const UpdateState.initial());
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -36,7 +36,7 @@ void main() {
       expect($(Localization.current.I18nUpdate_checkForUpdates), findsOneWidget);
     });
 
-    patrolWidgetTest('Initial state - tap triggers checkUpdate event', (PatrolTester $) async {
+    patrolWidgetTest('Initial state - tap triggers checkUpdate event', ($) async {
       when(() => updateBloc.state).thenReturn(const UpdateState.initial());
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -45,7 +45,7 @@ void main() {
       verify(() => updateBloc.add(const UpdateEvent.checkUpdate())).called(1);
     });
 
-    patrolWidgetTest('Update available state - shows update version', (PatrolTester $) async {
+    patrolWidgetTest('Update available state - shows update version', ($) async {
       const version = '1.2.3';
       when(() => updateBloc.state).thenReturn(const UpdateState.updateAvailable(version: version));
 
@@ -55,7 +55,7 @@ void main() {
       expect($(Localization.current.I18nUpdate_updateToVersion(version)), findsOneWidget);
     });
 
-    patrolWidgetTest('Update available state - tap triggers downloadUpdate event', (PatrolTester $) async {
+    patrolWidgetTest('Update available state - tap triggers downloadUpdate event', ($) async {
       const version = '1.2.3';
       when(() => updateBloc.state).thenReturn(const UpdateState.updateAvailable(version: version));
 
@@ -65,7 +65,7 @@ void main() {
       verify(() => updateBloc.add(const UpdateEvent.downloadUpdate())).called(1);
     });
 
-    patrolWidgetTest('Connecting state - shows progress indicator and text', (PatrolTester $) async {
+    patrolWidgetTest('Connecting state - shows progress indicator and text', ($) async {
       when(() => updateBloc.state).thenReturn(const UpdateState.connecting());
 
       await $.pumpWidget(testWidget());
@@ -77,7 +77,7 @@ void main() {
       expect($(ListTile).$(Stack), findsOneWidget);
     });
 
-    patrolWidgetTest('Downloading state - shows progress and download info', (PatrolTester $) async {
+    patrolWidgetTest('Downloading state - shows progress and download info', ($) async {
       const bytes = 1024;
       const total = 2048;
       when(() => updateBloc.state).thenReturn(const UpdateState.downloading(bytes: bytes, total: total));
@@ -93,7 +93,7 @@ void main() {
       expect(progressIndicator.value, equals(bytes / total));
     });
 
-    patrolWidgetTest('Download error state - shows error message', (PatrolTester $) async {
+    patrolWidgetTest('Download error state - shows error message', ($) async {
       const errorMessage = 'Download failed';
       when(() => updateBloc.state).thenReturn(const UpdateState.downloadError(error: errorMessage));
 
@@ -103,7 +103,7 @@ void main() {
       expect($(errorMessage), findsOneWidget);
     });
 
-    patrolWidgetTest('Download error state - tap triggers checkUpdate event', (PatrolTester $) async {
+    patrolWidgetTest('Download error state - tap triggers checkUpdate event', ($) async {
       const errorMessage = 'Download failed';
       when(() => updateBloc.state).thenReturn(const UpdateState.downloadError(error: errorMessage));
 
@@ -113,7 +113,7 @@ void main() {
       verify(() => updateBloc.add(const UpdateEvent.checkUpdate())).called(1);
     });
 
-    patrolWidgetTest('All states use correct content padding', (PatrolTester $) async {
+    patrolWidgetTest('All states use correct content padding', ($) async {
       const expectedPadding = EdgeInsets.fromLTRB(24, 0, 8, 0);
 
       // Test initial state

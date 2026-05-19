@@ -54,7 +54,7 @@ void main() {
   });
 
   group('FinishDetailsPopup tests', () {
-    patrolWidgetTest('Open dialog then close it when ok button pressed', (PatrolTester $) async {
+    patrolWidgetTest('Open dialog then close it when ok button pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(FinishDetailsPopup), findsOneWidget);
@@ -62,7 +62,7 @@ void main() {
       expect($(FinishDetailsPopup), findsNothing);
     });
 
-    patrolWidgetTest('Dialog details', (PatrolTester $) async {
+    patrolWidgetTest('Dialog details', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nProtocol_finishTimeCutoff), findsOneWidget);
@@ -75,7 +75,7 @@ void main() {
       expect($(#okButton), findsOneWidget);
     });
 
-    patrolWidgetTest('Show finish info', (PatrolTester $) async {
+    patrolWidgetTest('Show finish info', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(finish.finishTime), findsOneWidget);
@@ -86,7 +86,7 @@ void main() {
       expect($(Localization.current.I18nCore_no), findsOneWidget);
     });
 
-    patrolWidgetTest('Show different finish info', (PatrolTester $) async {
+    patrolWidgetTest('Show different finish info', ($) async {
       finish = Finish(
         id: 1,
         stageId: 1,

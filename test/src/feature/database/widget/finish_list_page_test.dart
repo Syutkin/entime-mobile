@@ -64,7 +64,7 @@ void main() {
 
   group('FinishListPage tests', () {
     group('Finish list', () {
-      patrolWidgetTest('Empty list', (PatrolTester $) async {
+      patrolWidgetTest('Empty list', ($) async {
         settings = settings.copyWith(showHidden: true);
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(
@@ -84,7 +84,7 @@ void main() {
         expect($(FinishItemTile), findsNothing);
       });
 
-      patrolWidgetTest('Show 8 finishes with any states', (PatrolTester $) async {
+      patrolWidgetTest('Show 8 finishes with any states', ($) async {
         settings = settings.copyWith(showHidden: true);
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
@@ -105,7 +105,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(count));
       });
 
-      patrolWidgetTest('Do not show difference', (PatrolTester $) async {
+      patrolWidgetTest('Do not show difference', ($) async {
         settings = settings.copyWith(showFinishDifference: false);
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
@@ -126,7 +126,7 @@ void main() {
         expect($(Localization.current.I18nProtocol_difference), findsNothing);
       });
 
-      patrolWidgetTest('Show difference', (PatrolTester $) async {
+      patrolWidgetTest('Show difference', ($) async {
         settings = settings.copyWith(showFinishDifference: true);
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
@@ -147,7 +147,7 @@ void main() {
         expect($(Localization.current.I18nProtocol_difference), findsOneWidget);
       });
 
-      patrolWidgetTest('Filter hidden finishes', (PatrolTester $) async {
+      patrolWidgetTest('Filter hidden finishes', ($) async {
         const count = 10;
         // filter 4 from 10
         const expected = 6;
@@ -169,7 +169,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter finishes with numbers', (PatrolTester $) async {
+      patrolWidgetTest('Filter finishes with numbers', ($) async {
         settings = settings.copyWith(showHidden: true, showNumbers: false);
         const count = 11;
         // filter 4 from 11
@@ -192,7 +192,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter manual finishes', (PatrolTester $) async {
+      patrolWidgetTest('Filter manual finishes', ($) async {
         settings = settings.copyWith(showHidden: true, showManual: false);
         const count = 9;
         // filter 4 from 9
@@ -215,7 +215,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter manual and with numbers finishes', (PatrolTester $) async {
+      patrolWidgetTest('Filter manual and with numbers finishes', ($) async {
         settings = settings.copyWith(showHidden: true, showManual: false, showNumbers: false);
         const count = 11;
         // filter 6 from 11
@@ -238,7 +238,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden and with numbers finishes', (PatrolTester $) async {
+      patrolWidgetTest('Filter hidden and with numbers finishes', ($) async {
         settings = settings.copyWith(showHidden: false, showManual: true, showNumbers: false);
         const count = 10;
         // filter 6 from 10
@@ -261,7 +261,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden and manual finishes', (PatrolTester $) async {
+      patrolWidgetTest('Filter hidden and manual finishes', ($) async {
         settings = settings.copyWith(showHidden: false, showManual: false, showNumbers: true);
         const count = 10;
         // filter 6 from 10
@@ -284,7 +284,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Filter hidden, manual and with numbers finishes', (PatrolTester $) async {
+      patrolWidgetTest('Filter hidden, manual and with numbers finishes', ($) async {
         settings = settings.copyWith(showHidden: false, showManual: false, showNumbers: false);
         const count = 12;
         // filter 7 from 12
@@ -306,7 +306,7 @@ void main() {
         expect($(FinishItemTile), findsNWidgets(expected));
       });
 
-      patrolWidgetTest('Tap FinishItemTile and get AlertDialog', (PatrolTester $) async {
+      patrolWidgetTest('Tap FinishItemTile and get AlertDialog', ($) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -327,7 +327,7 @@ void main() {
         expect($(AlertDialog), findsOneWidget);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile w/o number', (PatrolTester $) async {
+      patrolWidgetTest('Long press on FinishItemTile w/o number', ($) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -350,7 +350,7 @@ void main() {
         expect($(Localization.current.I18nCore_details), findsOneWidget);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile with number', (PatrolTester $) async {
+      patrolWidgetTest('Long press on FinishItemTile with number', ($) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -373,7 +373,7 @@ void main() {
         expect($(Localization.current.I18nCore_details), findsOneWidget);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile and select clearNumber', (PatrolTester $) async {
+      patrolWidgetTest('Long press on FinishItemTile and select clearNumber', ($) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -395,7 +395,7 @@ void main() {
         verify(() => databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: 1))).called(1);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile and select hideAll', (PatrolTester $) async {
+      patrolWidgetTest('Long press on FinishItemTile and select hideAll', ($) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -417,7 +417,7 @@ void main() {
         verify(() => databaseBloc.add(DatabaseEvent.hideAllFinishes(stage.id))).called(1);
       });
 
-      patrolWidgetTest('Long press on FinishItemTile and select details', (PatrolTester $) async {
+      patrolWidgetTest('Long press on FinishItemTile and select details', ($) async {
         const count = 8;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -441,7 +441,7 @@ void main() {
     });
 
     group('NumbersOnTrace list', () {
-      patrolWidgetTest('Empty list', (PatrolTester $) async {
+      patrolWidgetTest('Empty list', ($) async {
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(
             races: [],
@@ -460,7 +460,7 @@ void main() {
         expect($(NumberOnTraceTile), findsNothing);
       });
 
-      patrolWidgetTest('3 numbers on trace', (PatrolTester $) async {
+      patrolWidgetTest('3 numbers on trace', ($) async {
         const n = 3;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -480,7 +480,7 @@ void main() {
         expect($(NumberOnTraceTile), findsNWidgets(n));
       });
 
-      patrolWidgetTest('Widget shows number', (PatrolTester $) async {
+      patrolWidgetTest('Widget shows number', ($) async {
         const n = 4;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -503,7 +503,7 @@ void main() {
         expect($('4'), findsOneWidget);
       });
 
-      patrolWidgetTest('Show popup on number on trace', (PatrolTester $) async {
+      patrolWidgetTest('Show popup on number on trace', ($) async {
         const n = 1;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -526,7 +526,7 @@ void main() {
         expect($(Localization.current.I18nProtocol_didNotFinish), findsOneWidget);
       });
 
-      patrolWidgetTest('Tap DNS on number on trace popup', (PatrolTester $) async {
+      patrolWidgetTest('Tap DNS on number on trace popup', ($) async {
         const n = 1;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -548,7 +548,7 @@ void main() {
         verify(() => databaseBloc.add(DatabaseEvent.setDNSForStage(stage: stage, number: 1))).called(1);
       });
 
-      patrolWidgetTest('Tap DNF on number on trace popup', (PatrolTester $) async {
+      patrolWidgetTest('Tap DNF on number on trace popup', ($) async {
         const n = 1;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -570,7 +570,7 @@ void main() {
         verify(() => databaseBloc.add(DatabaseEvent.setDNFForStage(stage: stage, number: 1))).called(1);
       });
 
-      patrolWidgetTest('Select number on trace when tap', (PatrolTester $) async {
+      patrolWidgetTest('Select number on trace when tap', ($) async {
         const n = 1;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -591,7 +591,7 @@ void main() {
         verify(() => databaseBloc.add(const DatabaseEvent.selectAwaitingNumber(number: n))).called(1);
       });
 
-      patrolWidgetTest('Deselect number on trace when tap if selected', (PatrolTester $) async {
+      patrolWidgetTest('Deselect number on trace when tap if selected', ($) async {
         const number = 199;
         when(() => databaseBloc.state).thenReturn(
           DatabaseState(
@@ -650,7 +650,7 @@ void main() {
       });
 
       group('autoFinishNumber listener', () {
-        patrolWidgetTest('Show toast with automatically added number', (PatrolTester $) async {
+        patrolWidgetTest('Show toast with automatically added number', ($) async {
           final expectedStates = [
             emptyState,
             DatabaseState(
@@ -673,7 +673,7 @@ void main() {
           expect($(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')), findsOneWidget);
         });
 
-        patrolWidgetTest('Tap cancel on toast with automatically added number', (PatrolTester $) async {
+        patrolWidgetTest('Tap cancel on toast with automatically added number', ($) async {
           final expectedStates = [
             emptyState,
             DatabaseState(
@@ -706,7 +706,7 @@ void main() {
       });
 
       group('changeFinishTimeToNumber listener', () {
-        patrolWidgetTest('Show updateFinishTimePopup and accept it', (PatrolTester $) async {
+        patrolWidgetTest('Show updateFinishTimePopup and accept it', ($) async {
           const number = 2;
           const finishTime = '10:10:10';
           final notification = Notification.changeFinishTimeToNumber(
@@ -760,7 +760,7 @@ void main() {
           }
         });
 
-        patrolWidgetTest('Show updateFinishTimePopup and do nothing if cancel pressed', (PatrolTester $) async {
+        patrolWidgetTest('Show updateFinishTimePopup and do nothing if cancel pressed', ($) async {
           const number = 2;
           const finishTime = '10:10:10';
           final notification = Notification.changeFinishTimeToNumber(
@@ -801,7 +801,7 @@ void main() {
 
   group('Widget tests', () {
     group('FAB tests', () {
-      patrolWidgetTest('Taping FAB calls DatabaseEvent', (PatrolTester $) async {
+      patrolWidgetTest('Taping FAB calls DatabaseEvent', ($) async {
         const ntpOffset = 100;
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(

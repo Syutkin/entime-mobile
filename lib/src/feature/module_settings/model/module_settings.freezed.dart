@@ -671,7 +671,7 @@ $SyncSettingsCopyWith<$Res> get sync {
 @override
 @pragma('vm:prefer-inline')
 $WiFiCopyWith<$Res> get wifi {
-
+  
   return $WiFiCopyWith<$Res>(_self.wifi, (value) {
     return _then(_self.copyWith(wifi: value));
   });
@@ -680,7 +680,7 @@ $WiFiCopyWith<$Res> get wifi {
 @override
 @pragma('vm:prefer-inline')
 $GpsSettingsCopyWith<$Res> get gps {
-
+  
   return $GpsSettingsCopyWith<$Res>(_self.gps, (value) {
     return _then(_self.copyWith(gps: value));
   });
@@ -689,7 +689,7 @@ $GpsSettingsCopyWith<$Res> get gps {
 @override
 @pragma('vm:prefer-inline')
 $TouchSettingsCopyWith<$Res> get touch {
-
+  
   return $TouchSettingsCopyWith<$Res>(_self.touch, (value) {
     return _then(_self.copyWith(touch: value));
   });
@@ -933,7 +933,7 @@ $WiFiCopyWith<$Res> get wifi {
 @override
 @pragma('vm:prefer-inline')
 $GpsSettingsCopyWith<$Res> get gps {
-
+  
   return $GpsSettingsCopyWith<$Res>(_self.gps, (value) {
     return _then(_self.copyWith(gps: value));
   });
@@ -942,7 +942,7 @@ $GpsSettingsCopyWith<$Res> get gps {
 @override
 @pragma('vm:prefer-inline')
 $TouchSettingsCopyWith<$Res> get touch {
-
+  
   return $TouchSettingsCopyWith<$Res>(_self.touch, (value) {
     return _then(_self.copyWith(touch: value));
   });

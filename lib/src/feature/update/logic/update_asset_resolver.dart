@@ -22,10 +22,9 @@ abstract interface class IUpdateAssetResolver {
 
 class UpdateAssetResolver implements IUpdateAssetResolver {
   UpdateAssetResolver({
-    required IAppInfoProvider appInfo,
+    required this._appInfo,
     PlatformInfo? platformInfo,
-  }) : _appInfo = appInfo,
-       _platformInfo = platformInfo ?? DefaultPlatformInfo();
+  }) : _platformInfo = platformInfo ?? DefaultPlatformInfo();
 
   final IAppInfoProvider _appInfo;
   final PlatformInfo _platformInfo;

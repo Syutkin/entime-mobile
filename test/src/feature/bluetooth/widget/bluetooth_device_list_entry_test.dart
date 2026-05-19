@@ -40,7 +40,7 @@ void main() {
   });
 
   group('BluetoothDeviceListEntry tests', () {
-    patrolWidgetTest('Bonded and connected device with name and rssi', (PatrolTester $) async {
+    patrolWidgetTest('Bonded and connected device with name and rssi', ($) async {
       when(() => device.platformName).thenReturn(name);
       when(() => device.isConnected).thenReturn(true);
 
@@ -54,7 +54,7 @@ void main() {
       expect(($(Icon).at(1).evaluate().single.widget as Icon).icon, Icons.import_export);
     });
 
-    patrolWidgetTest('Device with address only', (PatrolTester $) async {
+    patrolWidgetTest('Device with address only', ($) async {
       when(() => device.platformName).thenReturn('');
       when(() => device.isConnected).thenReturn(false);
 

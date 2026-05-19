@@ -15,10 +15,8 @@ part 'countdown_event.dart';
 part 'countdown_state.dart';
 
 class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
-  CountdownBloc({required IAudioController audioController, required CountdownAtStart countdown, required int stageId})
-    : _audioController = audioController,
-      _countdown = countdown,
-      super(const CountdownState.initial()) {
+  CountdownBloc({required this._audioController, required this._countdown, required int stageId})
+    : super(const CountdownState.initial()) {
     if (stageId > 0) {
       unawaited(_countdown.start(stageId));
     }

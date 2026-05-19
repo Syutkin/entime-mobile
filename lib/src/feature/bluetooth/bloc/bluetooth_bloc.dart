@@ -21,13 +21,10 @@ part 'bluetooth_bloc_state.dart';
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   BluetoothBloc({
     required IBluetoothProvider bluetoothProvider,
-    required AppDatabase database,
-    required IAudioController audioController,
-    required ISettingsProvider settingsProvider,
+    required this._database,
+    required this._audioController,
+    required this._settingsProvider,
   }) : _bluetoothProvider = bluetoothProvider,
-       _database = database,
-       _audioController = audioController,
-       _settingsProvider = settingsProvider,
        super(const BluetoothBlocState.notInitialized()) {
     _settingsSubscription = _settingsProvider.state.listen((state) {
       _reconnect = state.reconnect;
@@ -155,7 +152,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
                 final stageId = event.stageId;
                 await _audioController.playCountdown(time: countdown, stageId: stageId);
               }
-            case BluetoothMessageVoice(time: final time):
+            case BluetoothMessageVoice(:final time):
               // Вызываем участника голосом только если не используем
               // время из приложения
               if (!_settingsProvider.settings.voiceFromApp) {
@@ -175,7 +172,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           }
           _batteryLevel = event.level;
           switch (state) {
-            case BluetoothBlocStateConnected(message: final message):
+            case BluetoothBlocStateConnected(:final message):
               emit(BluetoothBlocState.connected(message: message, batteryLevel: _batteryLevel));
             default:
           }
@@ -246,9 +243,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     switch (protocolMessage) {
       case BluetoothProtocolPacketMessage(
         type: BluetoothProtocolPacketType.start,
-        raw: final raw,
-        time: final time,
-        correction: final correction,
+        :final raw,
+        :final time,
+        :final correction,
       ):
         if (correction == null) {
           logger.i('Bluetooth -> Start packet without correction: $raw');
@@ -267,29 +264,29 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
         return BluetoothMessage.automaticStart(automaticStart: automaticStart);
       case BluetoothProtocolPacketMessage(
         type: BluetoothProtocolPacketType.beep,
-        time: final time,
+        :final time,
       ):
         logger.t('Bluetooth -> Message parsed: beep: $time');
         return BluetoothMessage.countdown(time: time);
       case BluetoothProtocolPacketMessage(
         type: BluetoothProtocolPacketType.voice,
-        time: final time,
+        :final time,
       ):
         logger.t('Bluetooth -> Message parsed: speak: $time');
         return BluetoothMessage.voice(time: time);
       case BluetoothProtocolPacketMessage(
         type: BluetoothProtocolPacketType.finish,
-        time: final time,
+        :final time,
       ):
         logger.t('Bluetooth -> Message parsed: finish: $time');
         return BluetoothMessage.finish(time: time, timestamp: now);
       case BluetoothProtocolJsonCommandMessage():
         logger.i('Bluetooth -> Received JSON command from module: $parsedMessage');
         return const BluetoothMessage.empty();
-      case BluetoothProtocolJsonEventMessage(event: final event):
+      case BluetoothProtocolJsonEventMessage(:final event):
         logger.i('Bluetooth -> Parsing JSON event...');
         return BluetoothMessage.jsonEvent(event: event, rawJson: parsedMessage);
-      case BluetoothProtocolJsonResponseMessage(response: final response):
+      case BluetoothProtocolJsonResponseMessage(:final response):
         logger.i('Bluetooth -> Parsing JSON response...');
         return BluetoothMessage.jsonResponse(response: response, rawJson: parsedMessage);
       case BluetoothProtocolUnknownMessage():

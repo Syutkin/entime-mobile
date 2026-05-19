@@ -459,7 +459,7 @@ void main() {
       },
       verify: (bloc) {
         switch (bloc.state.notification) {
-          case NotificationUpdateStartNumber(number: final number, startTime: final startTime):
+          case NotificationUpdateStartNumber(:final number, :final startTime):
             expect(number, 1);
             expect(startTime, '10:00:00');
           default:

@@ -361,7 +361,7 @@ String toString() {
 
 class ModuleSettingsEventLoadFailed implements ModuleSettingsEvent {
   const ModuleSettingsEventLoadFailed();
-
+  
 
 
 

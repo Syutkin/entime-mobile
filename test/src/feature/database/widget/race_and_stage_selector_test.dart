@@ -46,12 +46,12 @@ void main() {
   });
 
   group('RaceAndStageSelector tests', () {
-    patrolWidgetTest('Race and stage not selected', (PatrolTester $) async {
+    patrolWidgetTest('Race and stage not selected', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(RacesListPage), findsOneWidget);
     });
 
-    patrolWidgetTest('Race selected and stage not selected', (PatrolTester $) async {
+    patrolWidgetTest('Race selected and stage not selected', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],
@@ -69,7 +69,7 @@ void main() {
       expect($(StagesListPage), findsOneWidget);
     });
 
-    patrolWidgetTest('Race and stage selected', (PatrolTester $) async {
+    patrolWidgetTest('Race and stage selected', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],

@@ -113,13 +113,13 @@ void main() {
   });
 
   group('editStartTime tests', () {
-    patrolWidgetTest('Initial showDialog popup', (PatrolTester $) async {
+    patrolWidgetTest('Initial showDialog popup', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
     });
 
-    patrolWidgetTest('Correct populate showDialog with existing data', (PatrolTester $) async {
+    patrolWidgetTest('Correct populate showDialog with existing data', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nStart_participantNumber(item.number)), findsNothing);
@@ -131,7 +131,7 @@ void main() {
       expect($(Localization.current.I18nStart_participantYear(item.birthday!)), findsOneWidget);
     });
 
-    patrolWidgetTest('Show only number if name is absent', (PatrolTester $) async {
+    patrolWidgetTest('Show only number if name is absent', ($) async {
       item = ParticipantAtStart(
         row: MockQueryRow(),
         stageId: id,
@@ -165,7 +165,7 @@ void main() {
       expect($(Localization.current.I18nStart_participantNumberWithName(item.number, item.name)), findsNothing);
     });
 
-    patrolWidgetTest('Do not show some Text fields if data is absent', (PatrolTester $) async {
+    patrolWidgetTest('Do not show some Text fields if data is absent', ($) async {
       item = ParticipantAtStart(
         row: MockQueryRow(),
         stageId: id,
@@ -203,7 +203,7 @@ void main() {
       expect($(Localization.current.I18nStart_participantYear(item.birthday!)), findsNothing);
     });
 
-    patrolWidgetTest('Correct show TextFormFields', (PatrolTester $) async {
+    patrolWidgetTest('Correct show TextFormFields', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -213,7 +213,7 @@ void main() {
       expect($(Localization.current.I18nCore_correction), findsNWidgets(3));
     });
 
-    patrolWidgetTest('Correct populate TextFormFields with existing data', (PatrolTester $) async {
+    patrolWidgetTest('Correct populate TextFormFields with existing data', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -226,7 +226,7 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Validators is set to start times', (PatrolTester $) async {
+    patrolWidgetTest('Validators is set to start times', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -236,7 +236,7 @@ void main() {
       expect($(Localization.current.I18nStart_incorrectTime), findsNWidgets(3));
     });
 
-    patrolWidgetTest('Validators is set to corrections', (PatrolTester $) async {
+    patrolWidgetTest('Validators is set to corrections', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -245,7 +245,7 @@ void main() {
       expect($(Localization.current.I18nStart_incorrectCorrection), findsNWidgets(2));
     });
 
-    patrolWidgetTest('Press cancel', (PatrolTester $) async {
+    patrolWidgetTest('Press cancel', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#cancelButton).tap();
@@ -253,7 +253,7 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('Press OK', (PatrolTester $) async {
+    patrolWidgetTest('Press OK', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#okButton).tap();
@@ -274,7 +274,7 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('Press OK checks validation', (PatrolTester $) async {
+    patrolWidgetTest('Press OK checks validation', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(TextFormField).containing(Localization.current.I18nStart_startTime).at(0).enterText('A');

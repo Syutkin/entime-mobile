@@ -14,14 +14,11 @@ abstract interface class IUpdateApiService {
 
 class UpdateApiService implements IUpdateApiService {
   UpdateApiService({
-    required http.Client client,
-    String repo = 'syutkin/entime-mobile',
-    int maxRetries = 2,
-    Duration baseBackoff = const Duration(milliseconds: 500),
-  }) : _client = client,
-       _repo = repo,
-       _maxRetries = maxRetries,
-       _baseBackoff = baseBackoff;
+    required this._client,
+    this._repo = 'syutkin/entime-mobile',
+    this._maxRetries = 2,
+    this._baseBackoff = const Duration(milliseconds: 500),
+  });
 
   final http.Client _client;
   final String _repo;

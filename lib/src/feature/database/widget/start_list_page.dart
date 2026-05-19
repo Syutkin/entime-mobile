@@ -223,7 +223,7 @@ class _StartListPage extends State<StartListPage> {
 
   String? _activeStartTime(CountdownState countdownState) => switch (countdownState) {
     CountdownStateInitial() => null,
-    CountdownStateWorking(tick: final tick) =>
+    CountdownStateWorking(:final tick) =>
       tick.nextStartTime != null ? DateFormat(shortTimeFormat).format(tick.nextStartTime!) : '',
   };
 
@@ -242,9 +242,9 @@ class _StartListPage extends State<StartListPage> {
           // Если стартовое время уже присвоено другому номеру
           switch (state.notification) {
             case NotificationUpdateStartNumber(
-              existedStartingParticipants: final existedStartingParticipants,
-              number: final number,
-              startTime: final startTime,
+              :final existedStartingParticipants,
+              :final number,
+              :final startTime,
             ):
               var text = '';
               for (final element in existedStartingParticipants) {

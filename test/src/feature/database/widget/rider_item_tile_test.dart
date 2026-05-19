@@ -47,7 +47,7 @@ void main() {
   });
 
   group('RiderItemTile tests', () {
-    patrolWidgetTest('Shows rider name without additional info', (PatrolTester $) async {
+    patrolWidgetTest('Shows rider name without additional info', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -65,7 +65,7 @@ void main() {
       expect(listTile.subtitle, isNull);
     });
 
-    patrolWidgetTest('Shows rider name with birthday only', (PatrolTester $) async {
+    patrolWidgetTest('Shows rider name with birthday only', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -86,7 +86,7 @@ void main() {
       expect(subtitleText, equals(rider.birthday));
     });
 
-    patrolWidgetTest('Shows rider name with city only', (PatrolTester $) async {
+    patrolWidgetTest('Shows rider name with city only', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -107,7 +107,7 @@ void main() {
       expect(subtitleText, equals(rider.city));
     });
 
-    patrolWidgetTest('Shows rider name with birthday and city', (PatrolTester $) async {
+    patrolWidgetTest('Shows rider name with birthday and city', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -128,7 +128,7 @@ void main() {
       expect(subtitleText, equals('${rider.birthday}, ${rider.city}'));
     });
 
-    patrolWidgetTest('Tap on tile triggers editRacer', (PatrolTester $) async {
+    patrolWidgetTest('Tap on tile triggers editRacer', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -142,7 +142,7 @@ void main() {
       expect($(EditRiderPopup), findsOneWidget);
     });
 
-    patrolWidgetTest('PopupMenu contains edit menu item', (PatrolTester $) async {
+    patrolWidgetTest('PopupMenu contains edit menu item', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -157,7 +157,7 @@ void main() {
       expect($(Icon), findsAtLeastNWidgets(1)); // edit icon
     });
 
-    patrolWidgetTest('Tap edit menu item triggers editRacer', (PatrolTester $) async {
+    patrolWidgetTest('Tap edit menu item triggers editRacer', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -172,7 +172,7 @@ void main() {
       expect($(EditRiderPopup), findsOneWidget);
     });
 
-    patrolWidgetTest('PopupMenuButton has correct icon', (PatrolTester $) async {
+    patrolWidgetTest('PopupMenuButton has correct icon', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -186,7 +186,7 @@ void main() {
       expect(icon.icon, equals(Icons.more_vert));
     });
 
-    patrolWidgetTest('Subtitle has correct text style', (PatrolTester $) async {
+    patrolWidgetTest('Subtitle has correct text style', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -204,7 +204,7 @@ void main() {
       expect(subtitleWidget.style?.fontSize, isNotNull);
     });
 
-    patrolWidgetTest('Rider with team info (team not shown in subtitle)', (PatrolTester $) async {
+    patrolWidgetTest('Rider with team info (team not shown in subtitle)', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -225,7 +225,7 @@ void main() {
       expect(subtitleText, isNot(contains(rider.team)));
     });
 
-    patrolWidgetTest('All rider fields present but only birthday and city in subtitle', (PatrolTester $) async {
+    patrolWidgetTest('All rider fields present but only birthday and city in subtitle', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
@@ -255,7 +255,7 @@ void main() {
       expect(subtitleText, isNot(contains(rider.phone)));
     });
 
-    patrolWidgetTest('Correctly aggregate teams and cities for edit popup', (PatrolTester $) async {
+    patrolWidgetTest('Correctly aggregate teams and cities for edit popup', ($) async {
       rider = const Rider(
         id: 1,
         name: 'John Doe',

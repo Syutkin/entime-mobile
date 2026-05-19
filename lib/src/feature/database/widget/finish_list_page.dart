@@ -96,10 +96,10 @@ class _FinishListPage extends State<FinishListPage> {
       // Вызывается, если номеру уже присвоена финишная отсечка
       switch (state.notification) {
         case NotificationChangeFinishTimeToNumber(
-          number: final number,
-          stage: final stage,
-          finishId: final finishId,
-          finishTime: final finishTime,
+          :final number,
+          :final stage,
+          :final finishId,
+          :final finishTime,
         ):
           final update = await updateFinishTimePopup(context, number);
           if (update ?? false) {

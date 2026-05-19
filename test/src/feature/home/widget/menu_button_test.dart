@@ -115,14 +115,14 @@ void main() {
 
   group('MenuButton tests', () {
     group('Tests for init page', () {
-      patrolWidgetTest('Initial build for init page', (PatrolTester $) async {
+      patrolWidgetTest('Initial build for init page', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.init));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         expect($(PopupMenuItem<HomeMenuButton>), findsOneWidget);
         expect($(Localization.current.I18nHome_bluetooth), findsOneWidget);
       });
 
-      patrolWidgetTest('Tap on bluetooth button', (PatrolTester $) async {
+      patrolWidgetTest('Tap on bluetooth button', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.init));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_bluetooth).tap();
@@ -131,7 +131,7 @@ void main() {
     });
 
     group('Tests for start page', () {
-      patrolWidgetTest('Initial build for start page', (PatrolTester $) async {
+      patrolWidgetTest('Initial build for start page', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.start));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         expect($(PopupMenuItem<HomeMenuButton>), findsNWidgets(5));
@@ -142,14 +142,14 @@ void main() {
         expect($(Localization.current.I18nCore_share), findsOneWidget);
       });
 
-      patrolWidgetTest('Tap on add racer button, show add racer popup', (PatrolTester $) async {
+      patrolWidgetTest('Tap on add racer button, show add racer popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.start));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_addRacer).tap();
         expect($(Localization.current.I18nStart_addParticipant), findsOneWidget);
       });
 
-      patrolWidgetTest('Tap on disabled add racer button, because stage not selected', (PatrolTester $) async {
+      patrolWidgetTest('Tap on disabled add racer button, because stage not selected', ($) async {
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(
             races: [],
@@ -177,7 +177,7 @@ void main() {
       //   await $(Localization.current.I18nHome_countdownPage).tap();
       // });
 
-      patrolWidgetTest('Tap on disabled countdown page button, because stage not selected', (PatrolTester $) async {
+      patrolWidgetTest('Tap on disabled countdown page button, because stage not selected', ($) async {
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(
             races: [],
@@ -196,21 +196,21 @@ void main() {
         expect($(AppBar).$(Localization.current.I18nCountdown_countdown), findsNothing);
       });
 
-      patrolWidgetTest('Tap on countdown button', (PatrolTester $) async {
+      patrolWidgetTest('Tap on countdown button', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.start));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_countdown).tap();
         verify(() => settingsCubit.update(settings.copyWith(countdown: !settings.countdown))).called(1);
       });
 
-      patrolWidgetTest('Tap on fab button at start page', (PatrolTester $) async {
+      patrolWidgetTest('Tap on fab button at start page', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.start));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_fab).tap();
         verify(() => settingsCubit.update(settings.copyWith(startFab: !settings.startFab))).called(1);
       });
 
-      patrolWidgetTest('Tap on share button at start page', (PatrolTester $) async {
+      patrolWidgetTest('Tap on share button at start page', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.start));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nCore_share).tap();
@@ -228,7 +228,7 @@ void main() {
       });
 
       patrolWidgetTest('Tap on disabled share button at start page, because stage not selected', (
-        PatrolTester $,
+        $,
       ) async {
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(
@@ -249,7 +249,7 @@ void main() {
     });
 
     group('Tests for finish page', () {
-      patrolWidgetTest('Initial build for finish page', (PatrolTester $) async {
+      patrolWidgetTest('Initial build for finish page', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.finish));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         expect($(PopupMenuItem<HomeMenuButton>), findsNWidgets(4));
@@ -259,7 +259,7 @@ void main() {
         expect($(Localization.current.I18nCore_share), findsOneWidget);
       });
 
-      patrolWidgetTest('Tap on showColorFinishDifference button', (PatrolTester $) async {
+      patrolWidgetTest('Tap on showColorFinishDifference button', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.finish));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_showColorFinishDifference).tap();
@@ -268,7 +268,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Tap on showFinishDifference button', (PatrolTester $) async {
+      patrolWidgetTest('Tap on showFinishDifference button', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.finish));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_showFinishDifference).tap();
@@ -277,14 +277,14 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Tap on fab button at finish page', (PatrolTester $) async {
+      patrolWidgetTest('Tap on fab button at finish page', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.finish));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nHome_fab).tap();
         verify(() => settingsCubit.update(settings.copyWith(finishFab: !settings.finishFab))).called(1);
       });
 
-      patrolWidgetTest('Tap on share button at finish page', (PatrolTester $) async {
+      patrolWidgetTest('Tap on share button at finish page', ($) async {
         await $.pumpWidgetAndSettle(testWidget(AppTab.finish));
         await $(PopupMenuButton<HomeMenuButton>).tap();
         await $(Localization.current.I18nCore_share).tap();
@@ -302,7 +302,7 @@ void main() {
       });
 
       patrolWidgetTest('Tap on disabled share button at finish page, because stage not selected', (
-        PatrolTester $,
+        $,
       ) async {
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(

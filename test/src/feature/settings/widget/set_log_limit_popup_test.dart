@@ -35,7 +35,7 @@ void main() {
   }
 
   group('setLogLimitPopup tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(limit));
       await $(#button).tap();
       expect($(Localization.current.I18nSettings_journalLinesNumberPopup), findsOneWidget);
@@ -44,7 +44,7 @@ void main() {
       expect($(limit.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter wrong limit', (PatrolTester $) async {
+    patrolWidgetTest('Enter wrong limit', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(limit));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
@@ -53,7 +53,7 @@ void main() {
       expect($(Localization.current.I18nSettings_enterNumber), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter empty limit', (PatrolTester $) async {
+    patrolWidgetTest('Enter empty limit', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(limit));
       await $(#button).tap();
       await $(TextFormField).enterText('');
@@ -62,7 +62,7 @@ void main() {
       expect($(TextFormField), findsNothing);
     });
 
-    patrolWidgetTest('Enter negative limit', (PatrolTester $) async {
+    patrolWidgetTest('Enter negative limit', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(limit));
       await $(#button).tap();
       await $(TextFormField).enterText('-10');
@@ -71,7 +71,7 @@ void main() {
       expect($(TextFormField), findsNothing);
     });
 
-    patrolWidgetTest('Enter correct limit and return it from ok pressed', (PatrolTester $) async {
+    patrolWidgetTest('Enter correct limit and return it from ok pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(limit));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
@@ -79,7 +79,7 @@ void main() {
       await expectLater(result, 1234);
     });
 
-    patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
+    patrolWidgetTest('Return null when cancel pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(limit));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');

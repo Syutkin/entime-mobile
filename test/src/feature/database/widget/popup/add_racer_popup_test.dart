@@ -65,13 +65,13 @@ void main() {
   });
 
   group('addRacerPopup tests', () {
-    patrolWidgetTest('Show dialog when button is tapped', (PatrolTester $) async {
+    patrolWidgetTest('Show dialog when button is tapped', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
     });
 
-    patrolWidgetTest('Show dialog with correct title', (PatrolTester $) async {
+    patrolWidgetTest('Show dialog with correct title', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Text), findsWidgets);
@@ -79,26 +79,26 @@ void main() {
       expect($(Localization.current.I18nStart_addParticipant), findsOneWidget);
     });
 
-    patrolWidgetTest('Show TextFormField for number input', (PatrolTester $) async {
+    patrolWidgetTest('Show TextFormField for number input', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(TextFormField), findsOneWidget);
     });
 
-    patrolWidgetTest('Show CupertinoTimerPicker', (PatrolTester $) async {
+    patrolWidgetTest('Show CupertinoTimerPicker', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(CupertinoTimerPicker), findsOneWidget);
     });
 
-    patrolWidgetTest('Show cancel and ok buttons', (PatrolTester $) async {
+    patrolWidgetTest('Show cancel and ok buttons', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       // Проверяем наличие кнопок отмены и подтверждения
       expect($(TextButton), findsWidgets);
     });
 
-    patrolWidgetTest('Close dialog when cancel button is pressed', (PatrolTester $) async {
+    patrolWidgetTest('Close dialog when cancel button is pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
@@ -110,7 +110,7 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('Validate form when ok button is pressed with empty number', (PatrolTester $) async {
+    patrolWidgetTest('Validate form when ok button is pressed with empty number', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -121,7 +121,7 @@ void main() {
       expect($(Localization.current.I18nProtocol_incorrectNumber), findsOneWidget);
     });
 
-    patrolWidgetTest('Validate form when ok button is pressed with invalid number', (PatrolTester $) async {
+    patrolWidgetTest('Validate form when ok button is pressed with invalid number', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -136,7 +136,7 @@ void main() {
       expect($(Localization.current.I18nProtocol_incorrectNumber), findsOneWidget);
     });
 
-    patrolWidgetTest('Validate form when ok button is pressed with negative number', (PatrolTester $) async {
+    patrolWidgetTest('Validate form when ok button is pressed with negative number', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -151,7 +151,7 @@ void main() {
       expect($(Localization.current.I18nProtocol_incorrectNumber), findsOneWidget);
     });
 
-    patrolWidgetTest('Successfully add racer with valid number', (PatrolTester $) async {
+    patrolWidgetTest('Successfully add racer with valid number', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -169,7 +169,7 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('TextFormField has correct properties', (PatrolTester $) async {
+    patrolWidgetTest('TextFormField has correct properties', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -178,14 +178,14 @@ void main() {
       expect($(Localization.current.I18nProtocol_number), findsOneWidget);
     });
 
-    patrolWidgetTest('CupertinoTimerPicker is present', (PatrolTester $) async {
+    patrolWidgetTest('CupertinoTimerPicker is present', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
       expect($(CupertinoTimerPicker), findsOneWidget);
     });
 
-    patrolWidgetTest('Dialog closes after successful form submission', (PatrolTester $) async {
+    patrolWidgetTest('Dialog closes after successful form submission', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -200,7 +200,7 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('DatabaseBloc receives correct event data', (PatrolTester $) async {
+    patrolWidgetTest('DatabaseBloc receives correct event data', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -226,7 +226,7 @@ void main() {
       ).called(1);
     });
 
-    patrolWidgetTest('CupertinoTimerPicker onTimerDurationChanged callback works correctly', (PatrolTester $) async {
+    patrolWidgetTest('CupertinoTimerPicker onTimerDurationChanged callback works correctly', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 

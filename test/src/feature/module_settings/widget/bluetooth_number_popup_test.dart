@@ -41,7 +41,7 @@ void main() {
   }
 
   group('bluetoothNumberPopup tests', () {
-    patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
+    patrolWidgetTest('Initial popup dialog', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -53,7 +53,7 @@ void main() {
       expect($(#okButton), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter valid number and press OK', (PatrolTester $) async {
+    patrolWidgetTest('Enter valid number and press OK', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -64,7 +64,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Enter invalid number and press OK', (PatrolTester $) async {
+    patrolWidgetTest('Enter invalid number and press OK', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -75,7 +75,7 @@ void main() {
       expect($(AlertDialog), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter empty text and press OK', (PatrolTester $) async {
+    patrolWidgetTest('Enter empty text and press OK', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -86,7 +86,7 @@ void main() {
       expect($(AlertDialog), findsOneWidget);
     });
 
-    patrolWidgetTest('Press Cancel button', (PatrolTester $) async {
+    patrolWidgetTest('Press Cancel button', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -97,7 +97,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('TextField has correct properties', (PatrolTester $) async {
+    patrolWidgetTest('TextField has correct properties', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -107,7 +107,7 @@ void main() {
       expect($(labelText), findsOneWidget);
     });
 
-    patrolWidgetTest('Number parsing works correctly', (PatrolTester $) async {
+    patrolWidgetTest('Number parsing works correctly', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -135,7 +135,7 @@ void main() {
       await $(#cancelButton).tap();
     });
 
-    patrolWidgetTest('Popup closes after interaction', (PatrolTester $) async {
+    patrolWidgetTest('Popup closes after interaction', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 

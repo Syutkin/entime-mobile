@@ -48,25 +48,25 @@ void main() {
   });
 
   group('StagesItemTile_test', () {
-    patrolWidgetTest('Initial state', (PatrolTester $) async {
+    patrolWidgetTest('Initial state', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(stage.name), findsOneWidget);
       expect($(ListTile), findsOneWidget);
     });
 
-    patrolWidgetTest('Tap trailing icon', (PatrolTester $) async {
+    patrolWidgetTest('Tap trailing icon', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<void>).tap();
     });
 
-    patrolWidgetTest('Can tap edit', (PatrolTester $) async {
+    patrolWidgetTest('Can tap edit', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<void>).tap();
       await $.tester.tap($(Localization.current.I18nCore_edit));
       // await $(Localization.current.I18nCore_edit).tap(settlePolicy: SettlePolicy.noSettle);
     });
 
-    patrolWidgetTest('Tap delete, than cancel', (PatrolTester $) async {
+    patrolWidgetTest('Tap delete, than cancel', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
@@ -74,7 +74,7 @@ void main() {
       verifyNever(() => databaseBloc.add(DatabaseEvent.deleteStage(stage.id)));
     });
 
-    patrolWidgetTest('Tap delete, than ok', (PatrolTester $) async {
+    patrolWidgetTest('Tap delete, than ok', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
@@ -82,7 +82,7 @@ void main() {
       verify(() => databaseBloc.add(DatabaseEvent.deleteStage(stage.id))).called(1);
     });
 
-    patrolWidgetTest('Tap on widget', (PatrolTester $) async {
+    patrolWidgetTest('Tap on widget', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(StageItemTile).tap();
       verify(() => databaseBloc.add(DatabaseEvent.selectStage(stage))).called(1);

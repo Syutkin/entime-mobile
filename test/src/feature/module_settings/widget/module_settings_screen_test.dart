@@ -124,21 +124,21 @@ void main() {
 
   group('ModuleSettingsInitScreen tests', () {
     group('Initial states', () {
-      patrolWidgetTest('Shows loading splash when state is loading', (PatrolTester $) async {
+      patrolWidgetTest('Shows loading splash when state is loading', ($) async {
         when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.loading());
         await $.pumpWidgetAndSettle(testWidget());
         await $(text).tap();
         expect($(Splash).containing($(Localization.current.I18nModuleSettings_awaitingSettings)), findsOneWidget);
       });
 
-      patrolWidgetTest('Shows error splash when state is error', (PatrolTester $) async {
+      patrolWidgetTest('Shows error splash when state is error', ($) async {
         when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.error());
         await $.pumpWidgetAndSettle(testWidget());
         await $(text).tap();
         expect($(Splash).containing($(Localization.current.I18nModuleSettings_errorLoadSettings)), findsOneWidget);
       });
 
-      patrolWidgetTest('Shows settings screen when state is loaded', (PatrolTester $) async {
+      patrolWidgetTest('Shows settings screen when state is loaded', ($) async {
         when(() => moduleSettingsBloc.state).thenReturn(
           ModuleSettingsState.loaded(
             ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
@@ -170,7 +170,7 @@ void main() {
         });
       }
 
-      patrolWidgetTest('Shows save confirmation dialog when back pressed with changes', (PatrolTester $) async {
+      patrolWidgetTest('Shows save confirmation dialog when back pressed with changes', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(text).tap();
         await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_syncAuto)).tap();
@@ -181,7 +181,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Does not show save dialog when back pressed without changes', (PatrolTester $) async {
+      patrolWidgetTest('Does not show save dialog when back pressed without changes', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(text).tap();
         await $(BackButton).tap();
@@ -192,7 +192,7 @@ void main() {
         expect($(text), findsOneWidget);
       });
 
-      patrolWidgetTest('Sends bluetooth message when save confirmed', (PatrolTester $) async {
+      patrolWidgetTest('Sends bluetooth message when save confirmed', ($) async {
         stubMutableModuleSettings(
           ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
         );
@@ -223,7 +223,7 @@ void main() {
       });
 
       patrolWidgetTest('Sends empty WiFi password when WiFi popup confirmed with empty password', (
-        PatrolTester $,
+        $,
       ) async {
         final moduleSettings = ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>);
         stubMutableModuleSettings(
@@ -253,7 +253,7 @@ void main() {
         });
       });
 
-      patrolWidgetTest('Sends bluetooth message when save confirmed for LED', (PatrolTester $) async {
+      patrolWidgetTest('Sends bluetooth message when save confirmed for LED', ($) async {
         when(() => moduleSettingsBloc.state).thenReturn(
           ModuleSettingsState.loaded(
             ModSettingsModel.led(ModSettingsLed.fromJson(jsonDecode(jsonLed) as Map<String, dynamic>)),
@@ -282,7 +282,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Navigates back when save cancelled', (PatrolTester $) async {
+      patrolWidgetTest('Navigates back when save cancelled', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(text).tap();
         await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_syncAuto)).tap();
@@ -304,7 +304,7 @@ void main() {
         );
       });
       group('Module section', () {
-        patrolWidgetTest('Displays device section with name and number', (PatrolTester $) async {
+        patrolWidgetTest('Displays device section with name and number', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect($(ModuleSettingsScreen), findsOneWidget);
@@ -318,21 +318,21 @@ void main() {
       });
 
       group('Device section', () {
-        patrolWidgetTest('Opens module name popup when name tile tapped', (PatrolTester $) async {
+        patrolWidgetTest('Opens module name popup when name tile tapped', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceName)).tap();
           expect($(Localization.current.I18nModuleSettings_deviceName), findsWidgets);
         });
 
-        patrolWidgetTest('Opens device number popup when number tile tapped', (PatrolTester $) async {
+        patrolWidgetTest('Opens device number popup when number tile tapped', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceNumber)).tap();
           expect($(Localization.current.I18nModuleSettings_deviceNumber), findsWidgets);
         });
 
-        patrolWidgetTest('Updates device number when popup returns value', (PatrolTester $) async {
+        patrolWidgetTest('Updates device number when popup returns value', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceNumber)).tap();
@@ -351,7 +351,7 @@ void main() {
           ).called(1);
         });
 
-        patrolWidgetTest('Updates timezone offset in minutes from hours:minutes input', (PatrolTester $) async {
+        patrolWidgetTest('Updates timezone offset in minutes from hours:minutes input', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceTimezone)).tap();
@@ -371,7 +371,7 @@ void main() {
           ).called(1);
         });
 
-        patrolWidgetTest('Updates timezone offset in minutes from whole hours input', (PatrolTester $) async {
+        patrolWidgetTest('Updates timezone offset in minutes from whole hours input', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceTimezone)).tap();
@@ -391,7 +391,7 @@ void main() {
           ).called(1);
         });
 
-        patrolWidgetTest('Rejects timezone offset outside firmware range', (PatrolTester $) async {
+        patrolWidgetTest('Rejects timezone offset outside firmware range', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_deviceTimezone)).tap();
@@ -404,7 +404,7 @@ void main() {
       });
 
       group('Sync section', () {
-        patrolWidgetTest('Shows sync section and NTP tiles', (PatrolTester $) async {
+        patrolWidgetTest('Shows sync section and NTP tiles', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -416,7 +416,7 @@ void main() {
           expect($(Localization.current.I18nModuleSettings_ntp3), findsWidgets);
         });
 
-        patrolWidgetTest('Opens NTP popup when NTP1 tile tapped', (PatrolTester $) async {
+        patrolWidgetTest('Opens NTP popup when NTP1 tile tapped', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_ntp1)).tap();
@@ -425,7 +425,7 @@ void main() {
       });
 
       group('GPS section', () {
-        patrolWidgetTest('Shows GPS enabled switch', (PatrolTester $) async {
+        patrolWidgetTest('Shows GPS enabled switch', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -439,7 +439,7 @@ void main() {
           expect(gpsSwitch.value, isTrue);
         });
 
-        patrolWidgetTest('Updates GPS enabled when switch toggled', (PatrolTester $) async {
+        patrolWidgetTest('Updates GPS enabled when switch toggled', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_gpsEnabled)).scrollTo().tap();
@@ -459,7 +459,7 @@ void main() {
       });
 
       group('Touch section', () {
-        patrolWidgetTest('Shows touch settings values', (PatrolTester $) async {
+        patrolWidgetTest('Shows touch settings values', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -490,7 +490,7 @@ void main() {
           expect(find.descendant(of: calibrationTile, matching: find.text('0, 0, 0, 0, 0')), findsOneWidget);
         });
 
-        patrolWidgetTest('Updates touch enabled when switch toggled', (PatrolTester $) async {
+        patrolWidgetTest('Updates touch enabled when switch toggled', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_touchEnabled)).scrollTo().tap();
@@ -510,7 +510,7 @@ void main() {
       });
 
       group('WiFi section', () {
-        patrolWidgetTest('Shows WiFi section', (PatrolTester $) async {
+        patrolWidgetTest('Shows WiFi section', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -521,7 +521,7 @@ void main() {
           );
         });
 
-        patrolWidgetTest('Shows WiFi switch disabled', (PatrolTester $) async {
+        patrolWidgetTest('Shows WiFi switch disabled', ($) async {
           when(() => moduleSettingsBloc.state).thenReturn(
             ModuleSettingsState.loaded(
               ModSettingsModel.entime(
@@ -545,7 +545,7 @@ void main() {
           expect(wifiSwitch.value, isFalse);
         });
 
-        patrolWidgetTest('Shows WiFi network tile with current SSID', (PatrolTester $) async {
+        patrolWidgetTest('Shows WiFi network tile with current SSID', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -560,7 +560,7 @@ void main() {
           );
         });
 
-        patrolWidgetTest('Opens WiFi settings popup when network tile tapped', (PatrolTester $) async {
+        patrolWidgetTest('Opens WiFi settings popup when network tile tapped', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
@@ -568,7 +568,7 @@ void main() {
         });
 
         patrolWidgetTest('Updates SSID and password when popup returns value and asks to update', (
-          PatrolTester $,
+          $,
         ) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
@@ -597,7 +597,7 @@ void main() {
           expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
         });
 
-        patrolWidgetTest('Do nothing when SSID tile tapped and popup is cancelled', (PatrolTester $) async {
+        patrolWidgetTest('Do nothing when SSID tile tapped and popup is cancelled', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
@@ -618,7 +618,7 @@ void main() {
         );
       });
       group('Module LED section', () {
-        patrolWidgetTest('Displays module name and number correctly for LED', (PatrolTester $) async {
+        patrolWidgetTest('Displays module name and number correctly for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect($(ModuleSettingsScreen), findsOneWidget);
@@ -631,7 +631,7 @@ void main() {
       });
 
       group('Bluetooth LED section', () {
-        patrolWidgetTest('Shows Bluetooth section for LED', (PatrolTester $) async {
+        patrolWidgetTest('Shows Bluetooth section for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -641,7 +641,7 @@ void main() {
             findsOneWidget,
           );
         });
-        patrolWidgetTest('Shows bluetooth switch disabled for LED', (PatrolTester $) async {
+        patrolWidgetTest('Shows bluetooth switch disabled for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
 
@@ -657,7 +657,7 @@ void main() {
           expect(bluetoothSwitch.value, isTrue);
         });
 
-        patrolWidgetTest('Shows bluetooth module name tile disabled for LED', (PatrolTester $) async {
+        patrolWidgetTest('Shows bluetooth module name tile disabled for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
 
@@ -670,7 +670,7 @@ void main() {
           expect(find.descendant(of: moduleNameTile, matching: find.text('TestBTLed')), findsOneWidget);
         });
 
-        patrolWidgetTest('Shows bluetooth module number with correct initial value for LED', (PatrolTester $) async {
+        patrolWidgetTest('Shows bluetooth module number with correct initial value for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -686,7 +686,7 @@ void main() {
           );
         });
 
-        patrolWidgetTest('Opens bluetooth number popup when tile tapped for LED', (PatrolTester $) async {
+        patrolWidgetTest('Opens bluetooth number popup when tile tapped for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(
@@ -695,7 +695,7 @@ void main() {
           expect($(Localization.current.I18nModuleSettings_enterBluetoothModuleNumber), findsOneWidget);
         });
 
-        patrolWidgetTest('Updates bluetooth number when popup returns value for LED', (PatrolTester $) async {
+        patrolWidgetTest('Updates bluetooth number when popup returns value for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(
@@ -721,7 +721,7 @@ void main() {
         });
 
         patrolWidgetTest('Do nothing when bluetooth number tile tapped and popup is cancelled for LED', (
-          PatrolTester $,
+          $,
         ) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
@@ -734,7 +734,7 @@ void main() {
           expect($(text), findsOneWidget);
         });
 
-        patrolWidgetTest('Shows brightness tile for LED', (PatrolTester $) async {
+        patrolWidgetTest('Shows brightness tile for LED', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           expect(
@@ -745,7 +745,7 @@ void main() {
           );
         });
 
-        patrolWidgetTest('Opens brightness popup for LED when tile tapped and asks to update', (PatrolTester $) async {
+        patrolWidgetTest('Opens brightness popup for LED when tile tapped and asks to update', ($) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
           await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_brightness)).scrollTo().tap();
@@ -773,7 +773,7 @@ void main() {
         });
 
         patrolWidgetTest('Do nothing when brightness tile tapped and popup is cancelled for LED', (
-          PatrolTester $,
+          $,
         ) async {
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();
@@ -784,7 +784,7 @@ void main() {
         });
 
         group('WiFi LED section', () {
-          patrolWidgetTest('Shows WiFi LED section', (PatrolTester $) async {
+          patrolWidgetTest('Shows WiFi LED section', ($) async {
             await $.pumpWidgetAndSettle(testWidget());
             await $(text).tap();
             expect(
@@ -795,7 +795,7 @@ void main() {
             );
           });
 
-          patrolWidgetTest('Shows WiFi switch for LED', (PatrolTester $) async {
+          patrolWidgetTest('Shows WiFi switch for LED', ($) async {
             await $.pumpWidgetAndSettle(testWidget());
             await $(text).tap();
             await $(
@@ -811,7 +811,7 @@ void main() {
             expect(wifiSwitch.value, isTrue);
           });
 
-          patrolWidgetTest('Shows WiFi network tile with current SSID for LED', (PatrolTester $) async {
+          patrolWidgetTest('Shows WiFi network tile with current SSID for LED', ($) async {
             await $.pumpWidgetAndSettle(testWidget());
             await $(text).tap();
             expect(
@@ -826,7 +826,7 @@ void main() {
             );
           });
 
-          patrolWidgetTest('Opens WiFi settings popup when network tile tapped for LED', (PatrolTester $) async {
+          patrolWidgetTest('Opens WiFi settings popup when network tile tapped for LED', ($) async {
             await $.pumpWidgetAndSettle(testWidget());
             await $(text).tap();
             await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
@@ -834,7 +834,7 @@ void main() {
           });
 
           patrolWidgetTest('Updates SSID and password when popup returns value and asks to update for LED', (
-            PatrolTester $,
+            $,
           ) async {
             await $.pumpWidgetAndSettle(testWidget());
             await $(text).tap();
@@ -863,7 +863,7 @@ void main() {
             expect($(Localization.current.I18nModuleSettings_saveSettingsToModule), findsOneWidget);
           });
 
-          patrolWidgetTest('Do nothing when SSID tile tapped and popup is cancelled for LED', (PatrolTester $) async {
+          patrolWidgetTest('Do nothing when SSID tile tapped and popup is cancelled for LED', ($) async {
             await $.pumpWidgetAndSettle(testWidget());
             await $(text).tap();
             await $(SettingsTile).containing($(Localization.current.I18nModuleSettings_wifiNetwork)).scrollTo().tap();
@@ -876,7 +876,7 @@ void main() {
       });
 
       group('Unknown module type', () {
-        patrolWidgetTest('Shows unknown module type splash', (PatrolTester $) async {
+        patrolWidgetTest('Shows unknown module type splash', ($) async {
           when(() => moduleSettingsBloc.state).thenReturn(const ModuleSettingsState.error());
           await $.pumpWidgetAndSettle(testWidget());
           await $(text).tap();

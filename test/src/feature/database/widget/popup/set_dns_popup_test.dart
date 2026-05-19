@@ -34,21 +34,21 @@ void main() {
   });
 
   group('setDnsPopup tests', () {
-    patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
+    patrolWidgetTest('Initial popup dialog', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Localization.current.I18nCore_confirmation), findsOneWidget);
       expect($(Localization.current.I18nStart_setDnsConfirmation(number)), findsOneWidget);
     });
 
-    patrolWidgetTest('Tap Ok button', (PatrolTester $) async {
+    patrolWidgetTest('Tap Ok button', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#okButton).tap();
       expect(result, true);
     });
 
-    patrolWidgetTest('Tap Cancel button', (PatrolTester $) async {
+    patrolWidgetTest('Tap Cancel button', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(#cancelButton).tap();

@@ -36,12 +36,10 @@ abstract class IBluetoothProvider {
 
 class BluetoothProvider implements IBluetoothProvider {
   BluetoothProvider({
-    required IAppInfoProvider appInfo,
-    required IBluetoothBackgroundConnection bluetoothBackgroundConnection,
+    required this._appInfo,
+    required this._bluetoothBackgroundConnection,
     PlatformInfo? platformInfo,
-  }) : _appInfo = appInfo,
-       _platformInfo = platformInfo ?? DefaultPlatformInfo(),
-       _bluetoothBackgroundConnection = bluetoothBackgroundConnection;
+  }) : _platformInfo = platformInfo ?? DefaultPlatformInfo();
   final IBluetoothBackgroundConnection _bluetoothBackgroundConnection;
   final IAppInfoProvider _appInfo;
   final PlatformInfo _platformInfo;

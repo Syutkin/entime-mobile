@@ -111,14 +111,14 @@ void main() {
   });
 
   group('AppDrawer tests', () {
-    patrolWidgetTest('AppDrawer widget can be created', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer widget can be created', ($) async {
       await $.pumpWidget(testWidget());
 
       expect($(AppDrawer), findsOneWidget);
       expect($(Drawer), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer menu items is displayed', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer menu items is displayed', ($) async {
       await $.pumpWidget(testWidget());
 
       expect($(Localization.current.I18nDrawer_settings), findsOneWidget);
@@ -126,20 +126,20 @@ void main() {
       expect($(Localization.current.I18nDrawer_about), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer Updater menu item is displayed', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer Updater menu item is displayed', ($) async {
       await $.pumpWidget(testWidget());
 
       expect($(Updater), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer version text is displayed', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version text is displayed', ($) async {
       await $.pumpWidget(testWidget());
 
       // Проверяем что текст версии отображается
       expect($(Localization.current.I18nDrawer_version(appInfoProvider.version)), findsWidgets);
     });
 
-    patrolWidgetTest('AppDrawer settings navigation works', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer settings navigation works', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на пункт "Настройки"
@@ -150,7 +150,7 @@ void main() {
       expect($(SettingsScreen), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer help navigation works', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer help navigation works', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на пункт "Помощь"
@@ -161,7 +161,7 @@ void main() {
       expect($(HelpPage), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer about popup shows', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer about popup shows', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на пункт "О приложении"
@@ -172,7 +172,7 @@ void main() {
       expect($(AboutPopup), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer version button counter increments', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version button counter increments', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на версию 7 раз
@@ -184,7 +184,7 @@ void main() {
       verifyNever(() => databaseBloc.add(const DatabaseEvent.shareDatabase()));
     });
 
-    patrolWidgetTest('AppDrawer version button triggers shareDatabase after 8 taps', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version button triggers shareDatabase after 8 taps', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на версию 8 раз
@@ -196,7 +196,7 @@ void main() {
       verify(() => databaseBloc.add(const DatabaseEvent.shareDatabase())).called(1);
     });
 
-    patrolWidgetTest('AppDrawer version button styling is correct', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version button styling is correct', ($) async {
       await $.pumpWidget(testWidget());
 
       // Проверяем что кнопка версии имеет правильный стиль

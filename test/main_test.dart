@@ -95,7 +95,7 @@ void main() {
   });
 
   group('EntimeApp', () {
-    patrolWidgetTest('Renders home widget', (PatrolTester $) async {
+    patrolWidgetTest('Renders home widget', ($) async {
       await $.pumpWidgetAndSettle(
         RepositoryProvider(
           create: (context) => startlistProvider,

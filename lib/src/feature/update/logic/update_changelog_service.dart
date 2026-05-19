@@ -10,12 +10,10 @@ abstract interface class IUpdateChangelogService {
 
 class UpdateChangelogService implements IUpdateChangelogService {
   UpdateChangelogService({
-    required ISettingsProvider settingsProvider,
-    required IAppInfoProvider appInfoProvider,
+    required this._settingsProvider,
+    required this._appInfoProvider,
     ChangelogProvider? changelogProvider,
-  }) : _settingsProvider = settingsProvider,
-       _appInfoProvider = appInfoProvider,
-       _changelogProvider = changelogProvider ?? ChangelogProvider();
+  }) : _changelogProvider = changelogProvider ?? ChangelogProvider();
 
   final ISettingsProvider _settingsProvider;
   final IAppInfoProvider _appInfoProvider;

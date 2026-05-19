@@ -56,9 +56,9 @@ class TrailsBloc extends Bloc<TrailsEvent, TrailsState> {
       switch (event) {
         case _GetTrails():
           switch (state) {
-            case LoadingTrack(progress: final progress):
+            case LoadingTrack(:final progress):
               emit(TrailsState.loadingTrack(trails: _trails, progress: progress));
-            case SavingTrack(progress: final progress):
+            case SavingTrack(:final progress):
               emit(TrailsState.savingTrack(trails: _trails, progress: progress));
             default:
               emit(TrailsState.initialized(trails: _trails, track: _loadedTrack));

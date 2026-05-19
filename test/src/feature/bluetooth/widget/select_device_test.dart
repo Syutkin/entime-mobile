@@ -85,7 +85,7 @@ void main() {
   });
 
   group('SelectDeviceScreen tests', () {
-    patrolWidgetTest('When discovering state then shows scan indicator and title', (PatrolTester $) async {
+    patrolWidgetTest('When discovering state then shows scan indicator and title', ($) async {
       when(
         () => bluetoothDiscoveryCubit.state,
       ).thenReturn(const BluetoothDiscoveryState.initial().copyWith(isDiscovering: true));
@@ -97,7 +97,7 @@ void main() {
       expect($(CircularProgressIndicator), findsOneWidget);
     });
 
-    patrolWidgetTest('Shows replay icon when state is not discovering', (PatrolTester $) async {
+    patrolWidgetTest('Shows replay icon when state is not discovering', ($) async {
       when(
         () => bluetoothDiscoveryCubit.state,
       ).thenReturn(const BluetoothDiscoveryState.initial().copyWith(isDiscovering: false));
@@ -110,7 +110,7 @@ void main() {
       expect(icon.icon, Icons.replay);
     });
 
-    patrolWidgetTest('Lists scanned device and returns it on tap', (PatrolTester $) async {
+    patrolWidgetTest('Lists scanned device and returns it on tap', ($) async {
       late BuildContext rootContext;
 
       const rssi = -40;

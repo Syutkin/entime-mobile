@@ -91,7 +91,7 @@ class _ModuleSettingsInitScreenState extends State<ModuleSettingsInitScreen> {
     // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (bool didPop, result) async {
+      onPopInvokedWithResult: (didPop, result) async {
         if (didPop) {
           return;
         }

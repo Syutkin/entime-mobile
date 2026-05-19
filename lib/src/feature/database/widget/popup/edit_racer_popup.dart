@@ -17,7 +17,7 @@ Future<void> editRacerPopup({
 }) async {
   return showDialog<void>(
     context: context,
-    builder: (BuildContext context) => EditRacerPopup(item: participantAtStart, riders: riders, categories: categories),
+    builder: (context) => EditRacerPopup(item: participantAtStart, riders: riders, categories: categories),
   );
 }
 

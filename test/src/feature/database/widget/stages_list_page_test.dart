@@ -58,20 +58,20 @@ void main() {
   });
 
   group('StagesListPage tests', () {
-    patrolWidgetTest('Initial page, no stages', (PatrolTester $) async {
+    patrolWidgetTest('Initial page, no stages', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       expect($(AppBar).$(race.name), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
       expect($(StageItemTile), findsNothing);
     });
 
-    patrolWidgetTest('Tap FAB, then add stage popup appears', (PatrolTester $) async {
+    patrolWidgetTest('Tap FAB, then add stage popup appears', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(FloatingActionButton).tap();
       expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);
     });
 
-    patrolWidgetTest('Existing races list', (PatrolTester $) async {
+    patrolWidgetTest('Existing races list', ($) async {
       const race = Race(id: 1, name: 'name', isDeleted: false);
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(

@@ -89,7 +89,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
     context: context,
     builder: (context) => BlocConsumer<TrailsBloc, TrailsState>(
       listener: (context, state) {
-        if (state case SavingTrack(progress: final progress) when progress >= 1.0) {
+        if (state case SavingTrack(:final progress) when progress >= 1.0) {
           saveCompleted = true;
         }
         if (waitingForSave && saveCompleted && state is Initialized) {
@@ -137,7 +137,7 @@ Future<void> _upsertTrailPopup(BuildContext context, [TrailInfo? trail]) async {
                         autovalidateMode: AutovalidateMode.always,
                         validator: (_) {
                           final size = switch (state) {
-                            Initialized(track: final track) => track?.size,
+                            Initialized(:final track) => track?.size,
                             _ => null,
                           };
                           // max upload size in bytes

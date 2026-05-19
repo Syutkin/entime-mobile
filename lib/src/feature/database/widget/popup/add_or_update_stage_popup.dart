@@ -109,11 +109,11 @@ Future<void> _upsertStagePopup(BuildContext context, {Stage? stage, Race? race})
             // Активен ли этап (если не активен, это может обозначать его отмену)
             FormField<bool>(
               initialValue: isActive,
-              builder: (FormFieldState<bool> state) {
+              builder: (state) {
                 return SwitchListTile(
                   title: Text(Localization.current.I18nDatabase_trailIsActive),
                   value: isActive,
-                  onChanged: (bool value) {
+                  onChanged: (value) {
                     isActive = value;
                     state.didChange(value);
                   },

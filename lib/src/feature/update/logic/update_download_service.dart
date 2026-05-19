@@ -53,7 +53,7 @@ abstract interface class IUpdateDownloadService {
 }
 
 class UpdateDownloadService implements IUpdateDownloadService {
-  UpdateDownloadService({required http.Client client}) : _client = client;
+  UpdateDownloadService({required this._client});
 
   final http.Client _client;
 

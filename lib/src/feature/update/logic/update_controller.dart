@@ -30,18 +30,13 @@ abstract interface class IUpdateController {
 
 class UpdateController implements IUpdateController {
   UpdateController({
-    required IUpdateApiService apiService,
-    required IUpdateAssetResolver assetResolver,
-    required IUpdateDownloadService downloadService,
-    required IUpdateInstaller installer,
-    required IUpdateChangelogService changelogService,
-    required IAppInfoProvider appInfo,
-  }) : _apiService = apiService,
-       _assetResolver = assetResolver,
-       _downloadService = downloadService,
-       _installer = installer,
-       _changelogService = changelogService,
-       _appInfo = appInfo;
+    required this._apiService,
+    required this._assetResolver,
+    required this._downloadService,
+    required this._installer,
+    required this._changelogService,
+    required this._appInfo,
+  });
 
   static Future<UpdateController> init({
     required http.Client client,

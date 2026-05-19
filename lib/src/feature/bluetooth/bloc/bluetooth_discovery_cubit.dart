@@ -28,9 +28,7 @@ class BluetoothDiscoveryState {
 }
 
 class BluetoothDiscoveryCubit extends Cubit<BluetoothDiscoveryState> {
-  BluetoothDiscoveryCubit({required IBluetoothProvider bluetoothProvider})
-    : _bluetoothProvider = bluetoothProvider,
-      super(const BluetoothDiscoveryState.initial()) {
+  BluetoothDiscoveryCubit({required this._bluetoothProvider}) : super(const BluetoothDiscoveryState.initial()) {
     _isScanningSubscription = _bluetoothProvider.isScanning.listen(
       (isScanning) => emit(state.copyWith(isDiscovering: isScanning)),
     );

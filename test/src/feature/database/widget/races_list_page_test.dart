@@ -44,20 +44,20 @@ void main() {
       );
     });
 
-    patrolWidgetTest('Initial page, no races', (PatrolTester $) async {
+    patrolWidgetTest('Initial page, no races', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       expect($(Localization.current.I18nDatabase_races), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
       expect($(RaceItemTile), findsNothing);
     });
 
-    patrolWidgetTest('Tap FAB, then add race popup appears', (PatrolTester $) async {
+    patrolWidgetTest('Tap FAB, then add race popup appears', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(FloatingActionButton).tap();
       expect($(Localization.current.I18nDatabase_editRace), findsOneWidget);
     });
 
-    patrolWidgetTest('Existing races list', (PatrolTester $) async {
+    patrolWidgetTest('Existing races list', ($) async {
       const race = Race(id: 1, name: 'name', isDeleted: false);
       when(() => databaseBloc.state).thenReturn(
         const DatabaseState(
