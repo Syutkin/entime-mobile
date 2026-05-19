@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-dev+634',
+    representation: r'0.6.0-dev+635',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-dev+634',
+    canonical: r'0.6.0-dev+635',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'634'],
+    build: <String>[r'635'],
   );
 
   /// Build date and time (UTC)
@@ -126,10 +126,10 @@ sealed class Pubspec {
     5,
     19,
     18,
-    9,
-    0,
-    654,
-    360,
+    33,
+    43,
+    372,
+    890,
   );
 
   /// Name
@@ -415,7 +415,7 @@ sealed class Pubspec {
     'bot_toast': r'^4.1.3',
     'connectivity_plus': r'^7.0.0',
     'crypto': r'^3.0.7',
-    'csv': r'^6.0.0',
+    'csv': r'^8.0.0',
     'device_info_plus': r'^13.1.0',
     'drift': r'^2.33.0',
     'dropdown_search': r'^7.0.0',
@@ -427,11 +427,12 @@ sealed class Pubspec {
     },
     'flutter_bloc': r'^9.1.1',
     'flutter_blue_plus': r'^2.3.2',
+    'flutter_blue_plus_winrt': r'any',
     'flutter_charset_detector': r'^5.0.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
     },
-    'flutter_markdown': r'^0.7.7+1',
+    'flutter_markdown_plus': r'^1.0.7',
     'flutter_ntp': r'^0.0.2',
     'flutter_tts': r'^4.2.3',
     'freezed_annotation': r'^3.1.0',
