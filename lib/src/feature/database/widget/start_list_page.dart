@@ -5,8 +5,8 @@ import 'package:entime/src/feature/database/widget/popup/edit_racer_popup.dart';
 import 'package:flutter/cupertino.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/widget/expanded_alert_dialog.dart';
@@ -18,11 +18,11 @@ import '../../settings/settings.dart';
 import '../database.dart';
 import '../logic/filter_start_list.dart';
 
+part '../../../common/widget/warning_cancel_ok_popup.dart';
 part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
-part '../../../common/widget/warning_cancel_ok_popup.dart';
-part 'popup/shift_starts_time.dart';
 part 'popup/set_dns_popup.dart';
+part 'popup/shift_starts_time.dart';
 
 enum StartPopupMenu {
   /// Редактировать
@@ -311,7 +311,7 @@ class _StartListPage extends State<StartListPage> {
                           final offset = context.read<NtpBloc>().state.offset;
                           await _addManualStartTime(databaseBloc, now, offset);
                         },
-                        child: Icon(MdiIcons.handBackLeft),
+                        child: const Icon(MdiIcons.handBackLeft),
                       ),
                     ),
                   );

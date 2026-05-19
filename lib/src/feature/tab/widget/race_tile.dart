@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
@@ -24,7 +24,7 @@ class RaceTile extends StatelessWidget {
 
       return ListTile(
         onTap: routeToSelectRace,
-        leading: IconButton(icon: Icon(MdiIcons.flagCheckered), onPressed: routeToSelectRace),
+        leading: IconButton(icon: const Icon(MdiIcons.flagCheckered), onPressed: routeToSelectRace),
         title: databaseState.race == null
             ? Text(Localization.current.I18nInit_selectRace)
             : Text(databaseState.race!.name),
@@ -47,7 +47,7 @@ class _RaceMenuButton extends StatelessWidget {
       PopupMenuItem(
         value: RaceMenuButton.import,
         child: ListTile(
-          leading: Icon(MdiIcons.fileImportOutline),
+          leading: const Icon(MdiIcons.fileImportOutline),
           title: Text(Localization.current.I18nInit_importFromCsv),
         ),
       ),

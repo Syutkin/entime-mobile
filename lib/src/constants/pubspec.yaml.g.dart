@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-dev+635',
+    representation: r'0.6.0-dev+636',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-dev+635',
+    canonical: r'0.6.0-dev+636',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'635'],
+    build: <String>[r'636'],
   );
 
   /// Build date and time (UTC)
@@ -126,10 +126,10 @@ sealed class Pubspec {
     5,
     19,
     18,
-    33,
-    43,
-    372,
-    890,
+    54,
+    50,
+    907,
+    139,
   );
 
   /// Name
@@ -433,6 +433,7 @@ sealed class Pubspec {
       'sdk': r'flutter',
     },
     'flutter_markdown_plus': r'^1.0.7',
+    'flutter_material_design_icons': r'^3.1.0+7447',
     'flutter_ntp': r'^0.0.2',
     'flutter_tts': r'^4.2.3',
     'freezed_annotation': r'^3.1.0',
@@ -440,7 +441,6 @@ sealed class Pubspec {
     'intl': r'^0.20.2',
     'json_annotation': r'^4.9.0',
     'logger': r'^2.6.2',
-    'material_design_icons_flutter': r'^7.0.7296',
     'meta': r'^1.18.0',
     'nested': r'^1.0.0',
     'open_file': r'^3.5.10',

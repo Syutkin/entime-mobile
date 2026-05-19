@@ -74,7 +74,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTime,
-                icon: Icon(MdiIcons.clock),
+                icon: const Icon(MdiIcons.clock),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: validateStartTime,
@@ -84,7 +84,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               // keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTimestamp,
-                icon: Icon(MdiIcons.cellphone),
+                icon: const Icon(MdiIcons.cellphone),
               ),
               readOnly: true,
               // validator: (value) => validateStartTime(value),
@@ -93,7 +93,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               controller: timestampCorrectionController,
               // keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                icon: Icon(MdiIcons.cellphone),
+                icon: const Icon(MdiIcons.cellphone),
                 labelText: Localization.current.I18nCore_correction,
               ),
               readOnly: true,
@@ -103,7 +103,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTime,
-                icon: Icon(MdiIcons.cpu64Bit),
+                icon: const Icon(MdiIcons.cpu64Bit),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: validateStartTime,
@@ -112,7 +112,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               controller: automaticCorrectionController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                icon: Icon(MdiIcons.cpu64Bit),
+                icon: const Icon(MdiIcons.cpu64Bit),
                 labelText: Localization.current.I18nCore_correction,
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -123,7 +123,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               keyboardType: TextInputType.datetime,
               decoration: InputDecoration(
                 labelText: Localization.current.I18nStart_startTime,
-                icon: Icon(MdiIcons.handBackLeft),
+                icon: const Icon(MdiIcons.handBackLeft),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: validateStartTime,
@@ -132,7 +132,7 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
               controller: manualCorrectionController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                icon: Icon(MdiIcons.handBackLeft),
+                icon: const Icon(MdiIcons.handBackLeft),
                 labelText: Localization.current.I18nCore_correction,
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,

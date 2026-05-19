@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../connectivity/bloc/connectivity_bloc.dart';
@@ -18,7 +18,7 @@ class NtpTile extends StatelessWidget {
           context.read<NtpBloc>().add(const NtpEvent.getNtpOffset());
         },
         leading: IconButton(
-          icon: Icon(MdiIcons.timerSyncOutline),
+          icon: const Icon(MdiIcons.timerSyncOutline),
           onPressed: () {
             context.read<NtpBloc>().add(const NtpEvent.getNtpOffset());
           },

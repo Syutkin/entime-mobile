@@ -3,13 +3,12 @@ import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:entime/src/feature/database/widget/popup/finish_details.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
@@ -142,7 +141,7 @@ class _FinishListPage extends State<FinishListPage> {
               height: settingsState.finishFabSize,
               width: settingsState.finishFabSize,
               child: FittedBox(
-                child: FloatingActionButton(onPressed: _addFinishTimeManual, child: Icon(MdiIcons.handBackLeft)),
+                child: FloatingActionButton(onPressed: _addFinishTimeManual, child: const Icon(MdiIcons.handBackLeft)),
               ),
             );
           }

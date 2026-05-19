@@ -2,8 +2,8 @@ import 'package:app_settings/app_settings.dart' as apps;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../common/localization/localization.dart';
@@ -486,7 +486,7 @@ class SettingsScreen extends StatelessWidget {
                   trailing: settingsState.logLimit > -1
                       ? Text('${settingsState.logLimit}')
                       // : Text('без ограничений'),
-                      : Icon(MdiIcons.infinity),
+                      : const Icon(MdiIcons.infinity),
                   //leading:  Icon(MdiIcons.filter),
                   onPressed: (context) async {
                     final value = await setLogLimitPopup(context, settingsState.logLimit);

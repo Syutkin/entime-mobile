@@ -1,8 +1,8 @@
 import 'package:entime/src/feature/trails/widget/trails_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/utils/filesize.dart';
@@ -27,7 +27,7 @@ class TrailItemTile extends StatelessWidget {
       subtitle: subtitle.isNotEmpty
           ? Text(subtitle.join(', '), style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75))
           : null,
-      leading: trail.fileId != null ? Icon(MdiIcons.mapMarkerOutline) : Icon(MdiIcons.mapMarkerOffOutline),
+      leading: trail.fileId != null ? const Icon(MdiIcons.mapMarkerOutline) : const Icon(MdiIcons.mapMarkerOffOutline),
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
         itemBuilder: (context) => <PopupMenuEntry<void>>[

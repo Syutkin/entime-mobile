@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../bluetooth/bloc/bluetooth_bloc.dart';
@@ -89,16 +89,16 @@ class LogSourceIcon extends StatelessWidget {
       case LogSource.bluetooth:
         switch (direction) {
           case LogSourceDirection.input:
-            return Icon(MdiIcons.bluetoothTransfer);
+            return const Icon(MdiIcons.bluetoothTransfer);
           case LogSourceDirection.output:
-            return Icon(MdiIcons.bluetoothTransfer);
+            return const Icon(MdiIcons.bluetoothTransfer);
           case LogSourceDirection.undefined:
-            return Icon(MdiIcons.bluetooth);
+            return const Icon(MdiIcons.bluetooth);
           case null:
-            return Icon(MdiIcons.bluetooth);
+            return const Icon(MdiIcons.bluetooth);
         }
       case LogSource.other:
-        return Icon(MdiIcons.cloudPrintOutline);
+        return const Icon(MdiIcons.cloudPrintOutline);
       case LogSource.unknown:
         return const Icon(Icons.help_outline);
       case LogSource.app:
@@ -117,13 +117,13 @@ class LogLevelIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (level) {
       case LogLevel.error:
-        return Icon(MdiIcons.alertOctagon);
+        return const Icon(MdiIcons.alertOctagon);
       case LogLevel.warning:
         return const Icon(Icons.warning);
       case LogLevel.information:
         return const Icon(Icons.info_outline);
       case LogLevel.debug:
-        return Icon(MdiIcons.debugStepInto);
+        return const Icon(MdiIcons.debugStepInto);
       case LogLevel.verbose:
         return const Icon(Icons.circle_notifications);
     }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../trails/widget/trails_list_page.dart';
@@ -15,7 +15,7 @@ class TrailsTile extends StatelessWidget {
 
     return ListTile(
       onTap: routeToTrailsListPage,
-      leading: IconButton(icon: Icon(MdiIcons.mapMarkerOutline), onPressed: routeToTrailsListPage),
+      leading: IconButton(icon: const Icon(MdiIcons.mapMarkerOutline), onPressed: routeToTrailsListPage),
       title: Text(Localization.current.I18nInit_trails),
       // subtitle: Text(Localization.current.I18nInit_selectStage),
     );

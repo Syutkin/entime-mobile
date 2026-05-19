@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../log/log.dart';
@@ -44,7 +43,7 @@ class BluetoothTile extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       IconButton(
-        icon: Icon(MdiIcons.formatListBulleted),
+        icon: const Icon(Icons.format_list_bulleted_rounded),
         onPressed: () async {
           await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => LogScreen()));
         },

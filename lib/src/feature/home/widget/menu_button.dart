@@ -7,7 +7,7 @@ import 'package:entime/src/feature/home/model/home_menu_button.dart';
 import 'package:entime/src/feature/tab/tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import '../../settings/settings.dart';
 
@@ -38,7 +38,7 @@ class MenuButton extends StatelessWidget {
                   value: HomeMenuButton.countdownPage,
                   enabled: databaseBloc.state.stage != null,
                   child: ListTile(
-                    leading: Icon(MdiIcons.timer),
+                    leading: const Icon(MdiIcons.timer),
                     title: Text(Localization.current.I18nHome_countdownPage),
                   ),
                 ),
