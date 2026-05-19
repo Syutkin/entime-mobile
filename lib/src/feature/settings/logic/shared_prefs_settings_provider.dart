@@ -121,10 +121,10 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     await _prefs.setInt('raceId', settings.raceId);
     await _prefs.setInt('stageId', settings.stageId);
     await _prefs.setBool('wakelock', settings.wakelock);
-    await _prefs.setBool('start_fab', settings.startFab);
-    await _prefs.setDouble('start_fab_size', settings.startFabSize);
-    await _prefs.setBool('finish_fab', settings.finishFab);
-    await _prefs.setDouble('finish_fab_size', settings.finishFabSize);
+    await _prefs.setBool('startFab', settings.startFab);
+    await _prefs.setDouble('startFabSize', settings.startFabSize);
+    await _prefs.setBool('finishFab', settings.finishFab);
+    await _prefs.setDouble('finishFabSize', settings.finishFabSize);
     await _prefs.setBool('countdown', settings.countdown);
     await _prefs.setDouble('countdownSize', settings.countdownSize);
     await _prefs.setDouble('countdownLeft', settings.countdownLeft);
@@ -149,7 +149,7 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     await _prefs.setInt('finishDifferenceThreshold', settings.finishDifferenceThreshold);
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt('updateStartCorrectionDelay', settings.updateStartCorrectionDelay);
-    await _prefs.setInt('log_limit', settings.logLimit);
+    await _prefs.setInt('logLimit', settings.logLimit);
     await _prefs.setString('seedColor', settings.seedColor.name);
     await _prefs.setString('brightness', settings.brightness.name);
     await _prefs.setDouble('contrastLevel', settings.contrastLevel);
