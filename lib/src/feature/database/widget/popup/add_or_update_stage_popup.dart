@@ -85,7 +85,7 @@ Future<void> _upsertStagePopup(BuildContext context, {Stage? stage, Race? race})
                       items: (filter, loadProps) => state.trails,
                       itemAsString: (value) => value.name,
                       compareFn: (item1, item2) => item1.name == item2.name,
-                      onChanged: (value) {
+                      onSelected: (value) {
                         trail = value;
                         trailId = trail?.id;
                       },

@@ -131,7 +131,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
               itemAsString: (value) => value.name,
               compareFn: (item1, item2) => item1.id == item2.id,
               // При выборе райдера из существующего списка, обновляем нижеследующие поля
-              onChanged: (value) {
+              onSelected: (value) {
                 nicknameController.text = value?.nickname ?? '';
                 birthdayController.text = value?.birthday ?? '';
                 teamDropdownKey.currentState!.changeSelectedItem(value?.team);
