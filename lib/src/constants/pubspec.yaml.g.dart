@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-dev+631',
+    representation: r'0.6.0-dev+632',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-dev+631',
+    canonical: r'0.6.0-dev+632',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'631'],
+    build: <String>[r'632'],
   );
 
   /// Build date and time (UTC)
@@ -125,11 +125,11 @@ sealed class Pubspec {
     2026,
     5,
     19,
+    18,
+    1,
     17,
-    50,
-    0,
-    480,
-    999,
+    397,
+    54,
   );
 
   /// Name
@@ -416,11 +416,11 @@ sealed class Pubspec {
     'connectivity_plus': r'^7.0.0',
     'crypto': r'^3.0.7',
     'csv': r'^6.0.0',
-    'device_info_plus': r'^12.3.0',
+    'device_info_plus': r'^13.1.0',
     'drift': r'^2.33.0',
     'dropdown_search': r'^6.0.2',
     'equatable': r'^2.0.7',
-    'file_picker': r'^10.3.8',
+    'file_picker': r'^12.0.0-beta.3',
     'file_selector': r'^1.0.3',
     'flutter': <String, Object>{
       'sdk': r'flutter',
@@ -450,7 +450,7 @@ sealed class Pubspec {
     'rxdart': r'^0.28.0',
     'sentry_flutter': r'^9.9.1',
     'settings_ui': r'^3.0.1',
-    'share_plus': r'^12.0.1',
+    'share_plus': r'^13.1.0',
     'shared_preferences': r'^2.5.4',
     'sqlite3': r'^3.3.1',
     'url_launcher': r'^6.3.2',
