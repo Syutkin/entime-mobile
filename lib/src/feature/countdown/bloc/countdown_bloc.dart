@@ -47,7 +47,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
             stageId: event.stageId,
           );
         case _Stop():
-          _countdown.stop();
+          await _countdown.stop();
           emit(const CountdownState.initial());
       }
     });

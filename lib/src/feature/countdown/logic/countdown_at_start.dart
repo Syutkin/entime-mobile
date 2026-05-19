@@ -15,7 +15,7 @@ abstract interface class ICountdownAtStart {
 
   Future<void> start(int stageId);
 
-  void stop();
+  Future<void> stop();
 
   Future<void> close();
 }
@@ -31,6 +31,8 @@ class CountdownAtStart implements ICountdownAtStart {
   @override
   Stream<Tick> get ticks => _ticks.stream;
 
+  StreamSubscription<List<ParticipantAtStart>>? _startsSubscription;
+
   NextStartingParticipant? _nextStartingParticipant;
   bool _isFinished = false;
 
@@ -39,8 +41,11 @@ class CountdownAtStart implements ICountdownAtStart {
 
   @override
   Future<void> start(int stageId) async {
-    //subscribe to changes at starts table
-    database.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
+    // close previous subscription
+    await _startsSubscription?.cancel();
+
+    // subscribe to changes at starts table
+    _startsSubscription = database.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
       _isFinished = false;
       _nextStartingParticipant = await _getNextStartingParticipant(
         time: customTimeNow ?? DateTime.now(),
@@ -64,12 +69,17 @@ class CountdownAtStart implements ICountdownAtStart {
   }
 
   @override
-  void stop() {
+  Future<void> stop() async {
     _timer?.cancel();
+    _timer = null;
+
+    await _startsSubscription?.cancel();
+    _startsSubscription = null;
   }
 
   @override
   Future<void> close() async {
+    await stop();
     await _ticks.close();
   }
 

@@ -34,7 +34,7 @@ void main() {
 
     when(() => countdownAtStart.start(stageId)).thenAnswer((_) async {});
 
-    when(() => countdownAtStart.stop()).thenReturn(null);
+    when(() => countdownAtStart.stop()).thenAnswer((_) async {});
 
     when(() => countdownAtStart.ticks).thenAnswer((_) => BehaviorSubject<Tick>());
 
