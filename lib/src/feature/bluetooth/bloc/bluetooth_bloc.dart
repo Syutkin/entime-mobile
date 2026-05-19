@@ -18,6 +18,10 @@ part 'bluetooth_bloc.freezed.dart';
 part 'bluetooth_bloc_event.dart';
 part 'bluetooth_bloc_state.dart';
 
+// _handleConnect runs in background and reports the outcome back to the event
+// handler, so connection code does not dispatch bloc events directly.
+enum _ConnectResult { connected, disconnected, stale, canceled }
+
 class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   BluetoothBloc({
     required IBluetoothProvider bluetoothProvider,
@@ -33,6 +37,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
     _btStateSubscription = bluetoothProvider.adapterState.listen((btState) {
       if (btState == BluetoothAdapterState.off || btState == BluetoothAdapterState.on) {
+        if (!_canAddEvents) return;
         add(const BluetoothEvent.initialize());
       }
     });
@@ -56,6 +61,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
           add(const BluetoothEvent.initialize());
         case _SelectDevice():
           _reconnectActive = false;
+          _cancelReconnectTimer();
           final device = event.device;
           if (device != null) {
             // Если выбран новый блютусдевайс
@@ -80,6 +86,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             }
           }
         case _Connected():
+          _cancelReconnectTimer();
           //Успешное соединение
           emit(BluetoothBlocState.connected(batteryLevel: _batteryLevel));
           logger.i('Bluetooth -> Connected');
@@ -92,10 +99,31 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             final attempt = ++_connectAttempt;
             // Состояние соединения
             emit(const BluetoothBlocState.connecting());
-            unawaited(_handleConnect(device, attempt));
+            // Не await-им подключение: иначе sequential() заблокирует disconnect,
+            // selectDevice и новые connect-события до завершения connect().
+            unawaited(
+              _handleConnect(device, attempt).then((result) {
+                if (!_canAddEvents) return;
+                switch (result) {
+                  case _ConnectResult.connected:
+                    add(const BluetoothEvent.connected());
+                  case _ConnectResult.disconnected:
+                    if (state is! BluetoothBlocStateDisconnected) {
+                      add(const BluetoothEvent.disconnected());
+                    }
+                    _scheduleReconnect();
+                  case _ConnectResult.stale:
+                    if (state is! BluetoothBlocStateDisconnected) {
+                      add(const BluetoothEvent.disconnected());
+                    }
+                  case _ConnectResult.canceled:
+                }
+              }),
+            );
           }
         case _Disconnect():
           _reconnectActive = false;
+          _cancelReconnectTimer();
           logger.i('Bluetooth -> Disconnecting...');
           switch (state) {
             case BluetoothBlocStateConnected():
@@ -206,6 +234,10 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
   bool _reconnect = true;
   bool _reconnectActive = false;
   final int _reconnectDelay = 1;
+  Timer? _reconnectTimer;
+  // isClosed станет true только после super.close(), а async callbacks могут
+  // проснуться в промежутке между началом close() и закрытием bloc.
+  bool _isClosing = false;
 
   int _stageId = -1;
 
@@ -221,14 +253,40 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
 
   IBluetoothProvider get bluetoothProvider => _bluetoothProvider;
 
+  // Любой callback снаружи очереди bloc обязан проверить это перед add().
+  bool get _canAddEvents => !_isClosing && !isClosed;
+
   @override
   Future<void> close() async {
+    // Делаем текущие pending connect-попытки неактуальными до отмены подписок.
+    _isClosing = true;
+    _reconnectActive = false;
+    _connectAttempt++;
+    _cancelReconnectTimer();
     await _messageSubscription?.cancel();
     await _batterySubscription?.cancel();
     await _btStateSubscription.cancel();
     await _settingsSubscription.cancel();
     await _bluetoothProvider.dispose();
     return super.close();
+  }
+
+  void _cancelReconnectTimer() {
+    _reconnectTimer?.cancel();
+    _reconnectTimer = null;
+  }
+
+  void _scheduleReconnect() {
+    if (!_reconnectActive || !_canAddEvents) return;
+
+    // Timer храним явно, чтобы отменять reconnect при close(), disconnect(),
+    // выборе устройства и успешном подключении.
+    _cancelReconnectTimer();
+    _reconnectTimer = Timer(Duration(seconds: _reconnectDelay), () {
+      _reconnectTimer = null;
+      if (!_canAddEvents) return;
+      add(BluetoothEvent.connect(selectedDevice: _bluetoothDevice));
+    });
   }
 
   Future<BluetoothMessage> _parseBT(String message, DateTime now) async {
@@ -295,42 +353,50 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
     }
   }
 
-  Future<void> _handleConnect(BluetoothDevice device, int attempt) async {
+  // Этот метод может завершиться после close() или после новой connect-попытки.
+  // Поэтому он возвращает результат, а не вызывает add() сам.
+  Future<_ConnectResult> _handleConnect(BluetoothDevice device, int attempt) async {
     await bluetoothProvider.bluetoothBackgroundConnection.connect(device);
+    if (!_canAddEvents) return _ConnectResult.canceled;
+
+    // Пока connect ждал, пользователь мог выбрать другое устройство или
+    // стартовать новую попытку. Старую попытку надо остановить.
     if (attempt != _connectAttempt) {
       await bluetoothProvider.bluetoothBackgroundConnection.stop();
-      if (state is! BluetoothBlocStateDisconnected) {
-        add(const BluetoothEvent.disconnected());
-      }
-      return;
+      if (!_canAddEvents) return _ConnectResult.canceled;
+      return _ConnectResult.stale;
     }
+
     if (bluetoothProvider.bluetoothBackgroundConnection.isConnected) {
-      add(const BluetoothEvent.connected());
       logger.i('Bluetooth -> Connecting...');
       // Если соединение успешно, запускаем сборщик поступающих сообщений
       await bluetoothProvider.bluetoothBackgroundConnection.start();
+      if (!_canAddEvents) return _ConnectResult.canceled;
+
       // и подписываемся на его события (поступающие сообщения)
       await _batterySubscription?.cancel();
+      if (!_canAddEvents) return _ConnectResult.canceled;
+
       _batterySubscription = bluetoothProvider.bluetoothBackgroundConnection.batteryLevel.listen(
-        (level) => add(BluetoothEvent.batteryLevelUpdated(level: level)),
+        (level) {
+          if (!_canAddEvents) return;
+          add(BluetoothEvent.batteryLevelUpdated(level: level));
+        },
       );
       _messageSubscription = bluetoothProvider.bluetoothBackgroundConnection.message.listen(
-        (message) => add(BluetoothEvent.messageReceived(message: message, stageId: _stageId)),
+        (message) {
+          if (!_canAddEvents) return;
+          add(BluetoothEvent.messageReceived(message: message, stageId: _stageId));
+        },
       );
       bluetoothProvider.bluetoothBackgroundConnection.onDisconnect(() {
+        if (!_canAddEvents) return;
         add(const BluetoothEvent.disconnected());
       });
+      return _ConnectResult.connected;
     } else {
       logger.i("Bluetooth -> Can't connect");
-      if (state is! BluetoothBlocStateDisconnected) {
-        add(const BluetoothEvent.disconnected());
-      }
-      if (_reconnectActive) {
-        Timer(
-          Duration(seconds: _reconnectDelay),
-          () => add(BluetoothEvent.connect(selectedDevice: _bluetoothDevice)),
-        );
-      }
+      return _ConnectResult.disconnected;
     }
   }
 }

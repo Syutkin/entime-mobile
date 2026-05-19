@@ -517,6 +517,33 @@ void main() {
         },
       );
 
+      test('close while connect is pending does not emit after connect completes', () async {
+        final connect = Completer<void>();
+        when(() => bluetoothBackgroundConnection.connect(devicePrimary)).thenAnswer((_) => connect.future);
+        when(() => bluetoothBackgroundConnection.isConnected).thenReturn(true);
+
+        final bloc = BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        );
+        final states = <BluetoothBlocState>[];
+        final subscription = bloc.stream.listen(states.add);
+
+        bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
+        await Future<void>.delayed(Duration.zero);
+
+        await bloc.close();
+        connect.complete();
+        await Future<void>.delayed(Duration.zero);
+
+        expect(states, [const BluetoothBlocState.connecting()]);
+        verifyNever(() => bluetoothBackgroundConnection.start());
+
+        await subscription.cancel();
+      });
+
       test('reconnect timer triggers connect after failure', () async {
         var connectCall = 0;
         when(() => bluetoothBackgroundConnection.connect(devicePrimary)).thenAnswer((_) async {
@@ -579,6 +606,45 @@ void main() {
 
         await subscription.cancel();
         await bloc.close();
+      });
+
+      test('close cancels pending reconnect timer', () async {
+        var connectCall = 0;
+        final failedReconnect = Completer<void>();
+        when(() => bluetoothBackgroundConnection.connect(devicePrimary)).thenAnswer((_) async {
+          connectCall++;
+          if (connectCall == 2 && !failedReconnect.isCompleted) {
+            failedReconnect.complete();
+          }
+        });
+        when(() => bluetoothBackgroundConnection.isConnected).thenAnswer((_) => connectCall == 1);
+
+        final bloc = BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        );
+        final firstConnected = Completer<void>();
+        final subscription = bloc.stream.listen((state) {
+          if (state is BluetoothBlocStateConnected && !firstConnected.isCompleted) {
+            firstConnected.complete();
+          }
+        });
+
+        bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
+        await firstConnected.future.timeout(const Duration(seconds: 1));
+
+        bloc.add(const BluetoothEvent.disconnected());
+        await failedReconnect.future.timeout(const Duration(seconds: 1));
+        await Future<void>.delayed(Duration.zero);
+
+        await bloc.close();
+        await Future<void>.delayed(const Duration(milliseconds: 1100));
+
+        expect(connectCall, 2);
+
+        await subscription.cancel();
       });
     });
 
