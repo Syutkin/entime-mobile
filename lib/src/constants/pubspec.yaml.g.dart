@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-dev+632',
+    representation: r'0.6.0-dev+633',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-dev+632',
+    canonical: r'0.6.0-dev+633',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'632'],
+    build: <String>[r'633'],
   );
 
   /// Build date and time (UTC)
@@ -126,10 +126,10 @@ sealed class Pubspec {
     5,
     19,
     18,
-    1,
-    17,
-    397,
-    54,
+    7,
+    19,
+    196,
+    446,
   );
 
   /// Name
@@ -426,7 +426,7 @@ sealed class Pubspec {
       'sdk': r'flutter',
     },
     'flutter_bloc': r'^9.1.1',
-    'flutter_blue_plus': r'^2.1.0',
+    'flutter_blue_plus': r'^2.3.2',
     'flutter_charset_detector': r'^5.0.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
@@ -440,7 +440,7 @@ sealed class Pubspec {
     'json_annotation': r'^4.9.0',
     'logger': r'^2.6.2',
     'material_design_icons_flutter': r'^7.0.7296',
-    'meta': r'^1.17.0',
+    'meta': r'^1.18.0',
     'nested': r'^1.0.0',
     'open_file': r'^3.5.10',
     'path': r'^1.9.1',
@@ -461,7 +461,7 @@ sealed class Pubspec {
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^10.0.0',
     'build_runner': r'^2.10.5',
-    'dart_style': r'^3.1.3',
+    'dart_style': r'^3.1.8',
     'drift_dev': r'^2.30.0',
     'flutter_lints': r'^6.0.0',
     'flutter_test': <String, Object>{
@@ -474,8 +474,8 @@ sealed class Pubspec {
     'json_serializable': r'^6.11.1',
     'mocktail': r'^1.0.4',
     'patrol': r'^4.0.1',
-    'patrol_finders': r'^3.0.0',
-    'test': r'^1.26.3',
+    'patrol_finders': r'^3.2.0',
+    'test': r'^1.31.0',
     'very_good_analysis': r'^10.0.0',
   };
 

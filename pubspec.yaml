@@ -15,7 +15,7 @@ repository: https://github.com/Syutkin/entime-mobile
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.6.0-dev+632
+version: 0.6.0-dev+633
 
 environment:
   sdk: ^3.12.0
@@ -33,14 +33,14 @@ dependencies:
   device_info_plus: ^13.1.0
   drift: ^2.33.0
 #  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
-  dropdown_search: ^6.0.2
+  dropdown_search: ^7.0.0
   equatable: ^2.0.7
   file_picker: ^12.0.0-beta.3
   file_selector: ^1.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
-  flutter_blue_plus: ^2.1.0
+  flutter_blue_plus: ^2.3.2
   flutter_charset_detector: ^5.0.0
   flutter_localizations:
     sdk: flutter
@@ -53,7 +53,7 @@ dependencies:
   json_annotation: ^4.9.0
   logger: ^2.6.2
   material_design_icons_flutter: ^7.0.7296
-  meta: ^1.17.0
+  meta: ^1.18.0
   nested: ^1.0.0
   open_file: ^3.5.10
   # package_info_plus: any
@@ -78,7 +78,7 @@ dependency_overrides:
 dev_dependencies:
   bloc_test: ^10.0.0
   build_runner: ^2.10.5
-  dart_style: ^3.1.7
+  dart_style: ^3.1.8
   drift_dev: ^2.30.0
   flutter_lints: ^6.0.0
   flutter_test:
@@ -89,8 +89,8 @@ dev_dependencies:
   json_serializable: ^6.11.1
   mocktail: ^1.0.4
   patrol: ^4.0.1
-  patrol_finders: ^3.0.0
-  test: ^1.26.3
+  patrol_finders: ^3.2.0
+  test: ^1.31.0
   very_good_analysis: ^10.0.0
 
 flutter:

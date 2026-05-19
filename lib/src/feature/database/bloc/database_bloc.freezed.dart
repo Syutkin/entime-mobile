@@ -499,9 +499,7 @@ class _EmitState with DiagnosticableTreeMixin implements DatabaseEvent {
   return EqualUnmodifiableListView(_participants);
 }
 
-// required List<Start> starts,
  final  List<Finish> _finishes;
-// required List<Start> starts,
  List<Finish> get finishes {
   if (_finishes is EqualUnmodifiableListView) return _finishes;
   // ignore: implicit_dynamic_type
@@ -3506,8 +3504,7 @@ as TrailInfo,
 /// @nodoc
 mixin _$DatabaseState implements DiagnosticableTreeMixin {
 
- List<Race> get races; List<Stage> get stages; List<String?> get categories; List<Rider> get riders; List<ParticipantAtStart> get participants;// required List<Start> starts,
- List<Finish> get finishes; List<StartingParticipant> get numbersOnTrace;/// Выбранная гонка
+ List<Race> get races; List<Stage> get stages; List<String?> get categories; List<Rider> get riders; List<ParticipantAtStart> get participants; List<Finish> get finishes; List<StartingParticipant> get numbersOnTrace;/// Выбранная гонка
  Race? get race;///Выбранный этап
  Stage? get stage;/// Информация для различных всплывающих уведомлений
  Notification? get notification;/// Автоматически подставленный в финишное время номер
@@ -3765,9 +3762,7 @@ class DBState with DiagnosticableTreeMixin implements DatabaseState {
   return EqualUnmodifiableListView(_participants);
 }
 
-// required List<Start> starts,
  final  List<Finish> _finishes;
-// required List<Start> starts,
 @override List<Finish> get finishes {
   if (_finishes is EqualUnmodifiableListView) return _finishes;
   // ignore: implicit_dynamic_type
