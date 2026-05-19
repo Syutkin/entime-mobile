@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-dev+629',
+    representation: r'0.6.0-dev+630',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-dev+629',
+    canonical: r'0.6.0-dev+630',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'629'],
+    build: <String>[r'630'],
   );
 
   /// Build date and time (UTC)
@@ -126,10 +126,10 @@ sealed class Pubspec {
     5,
     19,
     17,
-    6,
-    15,
-    432,
-    538,
+    14,
+    35,
+    717,
+    250,
   );
 
   /// Name
@@ -417,7 +417,7 @@ sealed class Pubspec {
     'crypto': r'^3.0.7',
     'csv': r'^6.0.0',
     'device_info_plus': r'^12.3.0',
-    'drift': r'^2.30.0',
+    'drift': r'^2.33.0',
     'dropdown_search': r'^6.0.2',
     'equatable': r'^2.0.7',
     'file_picker': r'^10.3.8',
@@ -452,8 +452,7 @@ sealed class Pubspec {
     'settings_ui': r'^3.0.1',
     'share_plus': r'^12.0.1',
     'shared_preferences': r'^2.5.4',
-    'sqlite3': r'^2.9.4',
-    'sqlite3_flutter_libs': r'^0.5.41',
+    'sqlite3': r'^3.3.1',
     'url_launcher': r'^6.3.2',
     'wakelock_plus': r'^1.4.0',
   };
@@ -484,12 +483,6 @@ sealed class Pubspec {
   static const Map<String, Object> dependencyOverrides = <String, Object>{
     'flutter_ntp': <String, Object>{
       'git': r'https://github.com/Syutkin/flutter_ntp',
-    },
-    'settings_ui': <String, Object>{
-      'git': <String, Object>{
-        'url': r'https://github.com/yako-dev/flutter-settings-ui',
-        'ref': r'dev',
-      },
     },
   };
 

@@ -15,7 +15,7 @@ repository: https://github.com/Syutkin/entime-mobile
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.6.0-dev+629
+version: 0.6.0-dev+630
 
 environment:
   sdk: ^3.12.0
@@ -31,7 +31,7 @@ dependencies:
   crypto: ^3.0.7
   csv: ^6.0.0
   device_info_plus: ^12.3.0
-  drift: ^2.30.0
+  drift: ^2.33.0
 #  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
   dropdown_search: ^6.0.2
   equatable: ^2.0.7
@@ -66,20 +66,13 @@ dependencies:
   settings_ui: ^3.0.1
   share_plus: ^12.0.1
   shared_preferences: ^2.5.4
-  sqlite3: ^2.9.4
-  sqlite3_flutter_libs: ^0.5.41
+  sqlite3: ^3.3.1
   url_launcher: ^6.3.2
   wakelock_plus: ^1.4.0
 
 dependency_overrides:
   flutter_ntp:
     git: https://github.com/Syutkin/flutter_ntp
-  settings_ui:
-    #    path: ../flutter-settings-ui
-    git:
-      url: https://github.com/yako-dev/flutter-settings-ui
-      ref: dev
-  
 
 
 dev_dependencies:

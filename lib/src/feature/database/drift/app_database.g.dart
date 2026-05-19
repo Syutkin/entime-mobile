@@ -5029,14 +5029,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ).map((QueryRow row) => row.read<int>('id'));
   }
 
-  Selectable<Rider> _getRiders({required bool isDeleted}) {
-    return customSelect(
-      'SELECT * FROM riders WHERE is_deleted = ?1 ORDER BY name COLLATE NOCASE ASC',
-      variables: [Variable<bool>(isDeleted)],
-      readsFrom: {riders},
-    ).asyncMap(riders.mapFromRow);
-  }
-
   Future<int> _addParticipant({
     required int raceId,
     required int riderId,
