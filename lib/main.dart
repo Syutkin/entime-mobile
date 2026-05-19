@@ -138,7 +138,7 @@ class EntimeApp extends StatelessWidget {
 
   // final ILogProvider logProvider;
   final AppDatabase database;
-  final CountdownAtStart countdown;
+  final ICountdownAtStart countdown;
   final INtpProvider ntpProvider;
   final IConnectivityProvider connectivityProvider;
 

@@ -20,7 +20,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     if (stageId > 0) {
       unawaited(_countdown.start(stageId));
     }
-    _countdown.ticks.listen((value) {
+    _ticksSubscription = _countdown.ticks.listen((value) {
       add(CountdownEvent.tick(value));
     });
 
@@ -53,6 +53,13 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
     });
   }
 
+  @override
+  Future<void> close() async {
+    await _ticksSubscription.cancel();
+    return super.close();
+  }
+
   final IAudioController _audioController;
-  final CountdownAtStart _countdown;
+  final ICountdownAtStart _countdown;
+  late final StreamSubscription<Tick> _ticksSubscription;
 }

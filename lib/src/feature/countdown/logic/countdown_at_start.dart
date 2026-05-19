@@ -10,13 +10,26 @@ import '../../database/drift/app_database.dart';
 import '../../settings/settings.dart';
 import '../model/tick.dart';
 
-class CountdownAtStart {
+abstract interface class ICountdownAtStart {
+  Stream<Tick> get ticks;
+
+  Future<void> start(int stageId);
+
+  void stop();
+
+  Future<void> close();
+}
+
+class CountdownAtStart implements ICountdownAtStart {
   CountdownAtStart({required this.database, required this.settingsProvider});
   final AppDatabase database;
   final ISettingsProvider settingsProvider;
   Timer? _timer;
 
-  BehaviorSubject<Tick> ticks = BehaviorSubject();
+  final _ticks = BehaviorSubject<Tick>();
+
+  @override
+  Stream<Tick> get ticks => _ticks.stream;
 
   NextStartingParticipant? _nextStartingParticipant;
   bool _isFinished = false;
@@ -24,6 +37,7 @@ class CountdownAtStart {
   @visibleForTesting
   DateTime? customTimeNow;
 
+  @override
   Future<void> start(int stageId) async {
     //subscribe to changes at starts table
     database.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
@@ -49,12 +63,14 @@ class CountdownAtStart {
     });
   }
 
+  @override
   void stop() {
     _timer?.cancel();
   }
 
+  @override
   Future<void> close() async {
-    await ticks.close();
+    await _ticks.close();
   }
 
   Future<void> _countdown({required int stageId}) async {
@@ -66,16 +82,16 @@ class CountdownAtStart {
       if (nextStartTime != null) {
         final text = _formatDuration(nextStartTime.difference(now));
         if (nextStartTime.isAfter(now)) {
-          ticks.add(
+          _ticks.add(
             Tick(second: second, text: text, nextStartTime: nextStartTime, number: nextStartingParticipant.number),
           );
         } else {
           if (nextStartTime.isAfter(now.subtract(Duration(seconds: settingsProvider.settings.deltaInSeconds - 1)))) {
-            ticks.add(
+            _ticks.add(
               Tick(second: second, text: text, nextStartTime: nextStartTime, number: nextStartingParticipant.number),
             );
           } else {
-            ticks.add(
+            _ticks.add(
               Tick(
                 second: second,
                 text: text,
@@ -95,7 +111,7 @@ class CountdownAtStart {
         if (nextStartingParticipant != null) {
           final nextStartTime = nextStartingParticipant.startTime.toDateTime();
           if (nextStartTime != null) {
-            ticks.add(
+            _ticks.add(
               Tick(
                 second: second,
                 text: _formatDuration(nextStartTime.difference(now)),
@@ -106,7 +122,7 @@ class CountdownAtStart {
           }
         } else {
           _isFinished = true;
-          ticks.add(Tick(second: second, text: 'Fin'));
+          _ticks.add(Tick(second: second, text: 'Fin'));
         }
       }
     }

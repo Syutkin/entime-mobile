@@ -11,11 +11,11 @@ import 'package:rxdart/rxdart.dart';
 
 class MockIAudioController extends Mock implements IAudioController {}
 
-class MockCountdownAtStart extends Mock implements CountdownAtStart {}
+class MockCountdownAtStart extends Mock implements ICountdownAtStart {}
 
 void main() {
   late IAudioController audioController;
-  late CountdownAtStart countdownAtStart;
+  late ICountdownAtStart countdownAtStart;
   late int stageId;
   late int second;
   late String text;
@@ -34,7 +34,7 @@ void main() {
 
     when(() => countdownAtStart.start(stageId)).thenAnswer((_) async {});
 
-    when(() => countdownAtStart.stop()).thenAnswer((_) async {});
+    when(() => countdownAtStart.stop()).thenReturn(null);
 
     when(() => countdownAtStart.ticks).thenAnswer((_) => BehaviorSubject<Tick>());
 
@@ -154,5 +154,24 @@ void main() {
         verify(() => countdownAtStart.stop()).called(1);
       },
     );
+
+    test('Cancels ticks subscription on close', () async {
+      var canceled = false;
+      final ticksController = StreamController<Tick>.broadcast(
+        onCancel: () {
+          canceled = true;
+        },
+      );
+      addTearDown(ticksController.close);
+
+      when(() => countdownAtStart.ticks).thenAnswer((_) => ticksController.stream);
+
+      final bloc = CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: -1);
+
+      await bloc.close();
+      await Future<void>.delayed(Duration.zero);
+
+      expect(canceled, true);
+    });
   });
 }

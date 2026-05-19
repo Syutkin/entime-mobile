@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/feature/countdown/logic/countdown_at_start.dart';
+import 'package:entime/src/feature/countdown/model/tick.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:mocktail/mocktail.dart';
@@ -42,84 +43,118 @@ void main() {
 
     test('Format countdown time, more then a hour', () async {
       countdown.customTimeNow = '08:00:00.001'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '02:00:00');
+      var tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '02:00:00');
 
       countdown.customTimeNow = '08:00:00'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '02:00:01');
+      tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '02:00:01');
     });
 
     test('Format countdown time, less then a hour', () async {
       countdown.customTimeNow = '09:30:00.001'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '30:00');
+      var tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '30:00');
 
       countdown.customTimeNow = '09:30:00'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '30:01');
+      tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '30:01');
     });
 
     test('Format countdown time, less then a ten minute', () async {
       countdown.customTimeNow = '09:55:10.001'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '04:50');
+      var tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '04:50');
 
       countdown.customTimeNow = '09:55:10'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '04:51');
+      tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '04:51');
     });
 
     test('Format countdown time, less then a minute', () async {
       countdown.customTimeNow = '09:59:15.001'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '45');
+      var tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '45');
 
       countdown.customTimeNow = '09:59:15'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, '46');
+      tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, '46');
     });
 
     test('Format countdown time, right after start', () async {
       countdown.customTimeNow = '09:59:59.001'.toDateTime();
-      await countdown.start(1);
-      await Future<void>.delayed(const Duration(seconds: 2));
-      countdown.stop();
-      expect(countdown.ticks.value.text, 'GO');
+      final tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        await Future<void>.delayed(const Duration(seconds: 2));
+        countdown.stop();
+      });
+      expect(tick.text, 'GO');
     });
 
     test('Start countdown before all starts', () async {
       countdown.customTimeNow = '09:00:00'.toDateTime();
       final nextStartTime = '10:00:00'.toDateTime()!;
       const number = 2;
-      await countdown.start(1);
-      await Future<void>.delayed(const Duration(seconds: 5));
-      countdown.stop();
-      expect(countdown.ticks.value.nextStartTime, nextStartTime);
-      expect(countdown.ticks.value.number, number);
+      final tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        await Future<void>.delayed(const Duration(seconds: 5));
+        countdown.stop();
+      });
+      expect(tick.nextStartTime, nextStartTime);
+      expect(tick.number, number);
+    });
+
+    test('Replays last tick to new subscriber', () async {
+      countdown.customTimeNow = '09:00:00'.toDateTime();
+      final tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+
+      await expectLater(countdown.ticks, emits(tick));
     });
 
     test('Start countdown after all starts, show Fin text', () async {
       countdown.customTimeNow = '19:00:00'.toDateTime();
-      await countdown.start(1);
-      countdown.stop();
-      expect(countdown.ticks.value.text, 'Fin');
+      final tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        countdown.stop();
+      });
+      expect(tick.text, 'Fin');
     });
 
     test('Show Fin after last start, defaults value', () async {
       countdown.customTimeNow = '11:47:59'.toDateTime();
-      await countdown.start(1);
-      await Future<void>.delayed(const Duration(seconds: 13));
-      countdown.stop();
-      expect(countdown.ticks.value.text, 'Fin');
+      final tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        await Future<void>.delayed(const Duration(seconds: 13));
+        countdown.stop();
+      });
+      expect(tick.text, 'Fin');
     });
 
     test('Show Fin after last start, custom delta value', () async {
@@ -127,10 +162,12 @@ void main() {
       defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
       when(() => settings.settings).thenReturn(defaults);
       countdown = CountdownAtStart(database: db, settingsProvider: settings)..customTimeNow = '11:47:59'.toDateTime();
-      await countdown.start(1);
-      await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 3));
-      countdown.stop();
-      expect(countdown.ticks.value.text, 'Fin');
+      final tick = await _lastTickDuring(countdown, () async {
+        await countdown.start(1);
+        await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 3));
+        countdown.stop();
+      });
+      expect(tick.text, 'Fin');
     });
 
     test('Call next participant once', () async {
@@ -155,22 +192,34 @@ void main() {
       defaults = defaults.copyWith(deltaInSeconds: deltaInSeconds);
       when(() => settings.settings).thenReturn(defaults);
       countdown = CountdownAtStart(database: db, settingsProvider: settings)..customTimeNow = '10:00:59.5'.toDateTime();
-      countdown.ticks.stream.listen((tick) {
+      final subscription = countdown.ticks.listen((tick) {
         if (tick.second < deltaInSeconds) {
-          expect(countdown.ticks.value.text, 'GO');
+          expect(tick.text, 'GO');
         } else {
-          expect(countdown.ticks.value.text, isNot('GO'));
+          expect(tick.text, isNot('GO'));
         }
       });
       await countdown.start(1);
       await Future<void>.delayed(const Duration(seconds: deltaInSeconds + 2));
       countdown.stop();
+      await subscription.cancel();
     });
 
     test('Close stream', () async {
-      expect(countdown.ticks.isClosed, false);
+      final doneExpectation = expectLater(countdown.ticks, emitsDone);
       await countdown.close();
-      expect(countdown.ticks.isClosed, true);
+      await doneExpectation;
     });
   });
+}
+
+Future<Tick> _lastTickDuring(CountdownAtStart countdown, Future<void> Function() action) async {
+  final ticks = <Tick>[];
+  final subscription = countdown.ticks.listen(ticks.add);
+  await action();
+  await Future<void>.delayed(Duration.zero);
+  await subscription.cancel();
+
+  expect(ticks, isNotEmpty);
+  return ticks.last;
 }
