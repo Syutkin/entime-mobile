@@ -17,7 +17,7 @@ class LogBloc extends Bloc<LogEvent, LogState> {
   LogBloc({required AppDatabase database, required this._settingsProvider})
     : _db = database,
       super(const LogState(log: [])) {
-    _settingsProvider.state.listen((state) {
+    _settingsSubscription = _settingsProvider.state.listen((state) {
       _limit = state.logLimit;
     });
 
@@ -50,9 +50,12 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   late StreamSubscription<List<Log>> _logsSubscription;
 
+  late StreamSubscription<AppSettings> _settingsSubscription;
+
   @override
   Future<void> close() async {
     await _logsSubscription.cancel();
+    await _settingsSubscription.cancel();
     return super.close();
   }
 }
