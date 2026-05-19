@@ -38,7 +38,7 @@ jobs:
 
       - name: Generate with build_runner
         run: |
-          flutter pub run build_runner build --delete-conflicting-outputs
+          flutter pub run build_runner build
           dart pub global run pubspec_generator:generate -o lib/src/constants/pubspec.yaml.g.dart
 
       - name: Analyze project source
