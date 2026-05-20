@@ -20,14 +20,16 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(number) => "Duplicate participant number in stages CSV: ${number}";
+  static String m0(number) =>
+      "Duplicate participant number in stages CSV: ${number}";
 
   static String m1(version) => "v${version}";
 
   static String m2(time, prevNumber, currentNumber) =>
       "The start time ${time} has already been assigned to number ${prevNumber}. Are you sure you want to set the same start time for numbers ${currentNumber} and ${prevNumber}?";
 
-  static String m3(cancelButtonLabel) => "Error when adding participant! Press \"${cancelButtonLabel}\" to continue\n";
+  static String m3(cancelButtonLabel) =>
+      "Error when adding participant! Press \"${cancelButtonLabel}\" to continue\n";
 
   static String m4(number, prevCorrection, correction) =>
       "Participant number ${number} already has the initial correction ${prevCorrection} set. Would you like to update it to ${correction}?";
@@ -51,11 +53,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m12(number) => "Number ${number} finished";
 
-  static String m13(raceName, stageName) => "Results of the finish of the race ${raceName}, stage ${stageName}";
+  static String m13(raceName, stageName) =>
+      "Results of the finish of the race ${raceName}, stage ${stageName}";
 
-  static String m14(raceName, stageName) => "Results of the race ${raceName}, stage ${stageName}";
+  static String m14(raceName, stageName) =>
+      "Results of the race ${raceName}, stage ${stageName}";
 
-  static String m15(number) => "Finish time for participant with number ${number} already setted. Set new value?";
+  static String m15(number) =>
+      "Finish time for participant with number ${number} already setted. Set new value?";
 
   static String m16(milliseconds) => "${milliseconds}ms";
 
@@ -179,8 +184,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_bluetooth": MessageLookupByLibrary.simpleMessage(
       "Bluetooth",
     ),
-    "I18nModuleSettings_bluetoothModuleName": MessageLookupByLibrary.simpleMessage("Module name"),
-    "I18nModuleSettings_bluetoothModuleNumber": MessageLookupByLibrary.simpleMessage("Module number"),
+    "I18nModuleSettings_bluetoothModuleName":
+        MessageLookupByLibrary.simpleMessage("Module name"),
+    "I18nModuleSettings_bluetoothModuleNumber":
+        MessageLookupByLibrary.simpleMessage("Module number"),
     "I18nModuleSettings_bluetoothNumber": MessageLookupByLibrary.simpleMessage(
       "Number",
     ),
@@ -195,10 +202,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceNameEmpty": MessageLookupByLibrary.simpleMessage(
       "Enter module name",
     ),
-    "I18nModuleSettings_deviceNameInvalid": MessageLookupByLibrary.simpleMessage(
-      "ASCII only (A-Z, a-z, 0-9, -, _)",
-    ),
-    "I18nModuleSettings_deviceNameTooLong": MessageLookupByLibrary.simpleMessage("Max 16 characters"),
+    "I18nModuleSettings_deviceNameInvalid":
+        MessageLookupByLibrary.simpleMessage(
+          "ASCII only (A-Z, a-z, 0-9, -, _)",
+        ),
+    "I18nModuleSettings_deviceNameTooLong":
+        MessageLookupByLibrary.simpleMessage("Max 16 characters"),
     "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
       "Number",
     ),
@@ -208,8 +217,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceType": MessageLookupByLibrary.simpleMessage(
       "Type",
     ),
-    "I18nModuleSettings_enterBluetoothModuleNumber": MessageLookupByLibrary.simpleMessage("Enter module number"),
-    "I18nModuleSettings_errorLoadSettings": MessageLookupByLibrary.simpleMessage("Error load settings!"),
+    "I18nModuleSettings_enterBluetoothModuleNumber":
+        MessageLookupByLibrary.simpleMessage("Enter module number"),
+    "I18nModuleSettings_errorLoadSettings":
+        MessageLookupByLibrary.simpleMessage("Error load settings!"),
     "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
     "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
       "GPS",
@@ -221,16 +232,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_ntp1": MessageLookupByLibrary.simpleMessage("NTP 1"),
     "I18nModuleSettings_ntp2": MessageLookupByLibrary.simpleMessage("NTP 2"),
     "I18nModuleSettings_ntp3": MessageLookupByLibrary.simpleMessage("NTP 3"),
-    "I18nModuleSettings_saveSettingsError": MessageLookupByLibrary.simpleMessage("Failed to save settings"),
+    "I18nModuleSettings_saveSettingsError":
+        MessageLookupByLibrary.simpleMessage("Failed to save settings"),
     "I18nModuleSettings_saveSettingsErrorMessage": m9,
-    "I18nModuleSettings_saveSettingsSuccess": MessageLookupByLibrary.simpleMessage("Settings saved"),
-    "I18nModuleSettings_saveSettingsSuccessReboot": MessageLookupByLibrary.simpleMessage(
-      "Settings saved successfully.\nRestart the module for the changes to take effect.",
-    ),
-    "I18nModuleSettings_saveSettingsTimeout": MessageLookupByLibrary.simpleMessage(
-      "Module did not respond. Check the connection and try saving again.",
-    ),
-    "I18nModuleSettings_saveSettingsToModule": MessageLookupByLibrary.simpleMessage("Save settings to module?"),
+    "I18nModuleSettings_saveSettingsSuccess":
+        MessageLookupByLibrary.simpleMessage("Settings saved"),
+    "I18nModuleSettings_saveSettingsSuccessReboot":
+        MessageLookupByLibrary.simpleMessage(
+          "Settings saved successfully.\nRestart the module for the changes to take effect.",
+        ),
+    "I18nModuleSettings_saveSettingsTimeout":
+        MessageLookupByLibrary.simpleMessage(
+          "Module did not respond. Check the connection and try saving again.",
+        ),
+    "I18nModuleSettings_saveSettingsToModule":
+        MessageLookupByLibrary.simpleMessage("Save settings to module?"),
     "I18nModuleSettings_setBrightness": MessageLookupByLibrary.simpleMessage(
       "Set panel brightness",
     ),
@@ -323,7 +339,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_countdownFromApp": MessageLookupByLibrary.simpleMessage(
       "Use the app\'s time",
     ),
-    "I18nSettings_countdownFromAppDetails": MessageLookupByLibrary.simpleMessage("For playback without a module"),
+    "I18nSettings_countdownFromAppDetails":
+        MessageLookupByLibrary.simpleMessage("For playback without a module"),
     "I18nSettings_darkBlue": MessageLookupByLibrary.simpleMessage(
       "Dark blue theme",
     ),
@@ -344,9 +361,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_finishButtonSize": MessageLookupByLibrary.simpleMessage(
       "Timestamp button size",
     ),
-    "I18nSettings_finishButtonSizeDescription": MessageLookupByLibrary.simpleMessage(
-      "Timestamp button size at finish screen",
-    ),
+    "I18nSettings_finishButtonSizeDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Timestamp button size at finish screen",
+        ),
     "I18nSettings_finishScreen": MessageLookupByLibrary.simpleMessage(
       "Finish screen",
     ),
@@ -358,9 +376,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_journalLinesNumber": MessageLookupByLibrary.simpleMessage(
       "Number of records displayed",
     ),
-    "I18nSettings_journalLinesNumberPopup": MessageLookupByLibrary.simpleMessage(
-      "Number of visible lines at journal",
-    ),
+    "I18nSettings_journalLinesNumberPopup":
+        MessageLookupByLibrary.simpleMessage(
+          "Number of visible lines at journal",
+        ),
     "I18nSettings_language": MessageLookupByLibrary.simpleMessage("Language"),
     "I18nSettings_lightBlue": MessageLookupByLibrary.simpleMessage(
       "Light blue theme",
@@ -402,9 +421,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_startButtonSize": MessageLookupByLibrary.simpleMessage(
       "Timestamp button size",
     ),
-    "I18nSettings_startButtonSizeDescription": MessageLookupByLibrary.simpleMessage(
-      "Timestamp button size at start screen",
-    ),
+    "I18nSettings_startButtonSizeDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Timestamp button size at start screen",
+        ),
     "I18nSettings_startScreen": MessageLookupByLibrary.simpleMessage(
       "Start screen",
     ),

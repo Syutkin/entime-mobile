@@ -8,21 +8,19 @@ find lib test -name '*.dart' \
   ! -name '*.g.dart' \
   ! -name '*.freezed.dart' \
   ! -name '*.steps.dart' \
+  ! -path 'lib/src/common/localization/generated/intl/*' \
   -print0 | xargs -0 dart format
 
 find lib test -name '*.dart' \
   ! -name '*.g.dart' \
   ! -name '*.freezed.dart' \
   ! -name '*.steps.dart' \
+  ! -path 'lib/src/common/localization/generated/intl/*' \
   -print0 | xargs -0 git add --
 
-dart pub global activate cider
 cider bump build
 
-dart pub global activate pubspec_generator
-dart pub global run pubspec_generator:generate --input pubspec.yaml --output lib/src/constants/pubspec.yaml.g.dart
-
-dart run build_runner build
+scripts/generate.sh
 
 git add pubspec.yaml
 git add -- "lib/**/*.freezed.dart" "lib/**/*.g.dart" "lib/**/*.steps.dart" "lib/src/common/localization/**/*.dart"

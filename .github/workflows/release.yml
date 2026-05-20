@@ -46,14 +46,16 @@ jobs:
       - run: flutter doctor -v
 
       - name: Install dependencies from pub
-        run: |
-          flutter pub get
-          dart pub global activate pubspec_generator
+        run: flutter pub get
 
-      - name: Generate with build_runner
-        run: |
-          flutter pub run build_runner build
-          dart pub global run pubspec_generator:generate -o lib/src/constants/pubspec.yaml.g.dart
+      - name: Install global tools
+        run: scripts/install_dependencies.sh
+
+      - name: Generate sources
+        run: scripts/generate.sh
+
+      - name: Verify generated sources are committed
+        run: git diff --exit-code
 
       - name: Analyze project source
         run: flutter analyze --no-fatal-infos
