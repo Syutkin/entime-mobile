@@ -247,14 +247,14 @@ SELECT
 	participants.category as category,
 	participants.rfid as rfid,
 	participants.status_id as participant_status_id,
-	riders.name as name,
-	riders.nickname as nickname,
-	riders.birthday as birthday,
-	riders.team as team,
-	riders.city as city,
-	riders.email as email,
-	riders.phone as phone,
-	riders.comment as comment,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN '<DELETED>' ELSE riders.name END as name,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.nickname END as nickname,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.birthday END as birthday,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.team END as team,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.city END as city,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.email END as email,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.phone END as phone,
+	CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.comment END as comment,
 	starts.id as start_id,
 	starts.stage_id as stage_id,
 	starts.participant_id as participant_id,
@@ -388,7 +388,7 @@ SELECT
 	starts.start_time as start_time,
 	starts.automatic_start_time as automatic_start_time,
 	starts.automatic_correction as automatic_correction,
-	riders.name as name
+	CASE WHEN riders.deleted_at IS NOT NULL THEN '<DELETED>' ELSE riders.name END as name
 FROM
 	starts, participants, riders
 WHERE

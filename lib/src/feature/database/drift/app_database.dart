@@ -503,11 +503,7 @@ class AppDatabase extends _$AppDatabase {
     return _getCategories(raceId: raceId).get();
   }
 
-  /// Список участников на старте
-  ///
-  /// Список содержит только участников со статусом [ParticipantStatus.active]
-  /// Статус учитывается и для старта на спецучастке,
-  /// и непосредственно для участника
+  /// Полный стартовый протокол для спецучастка
   Selectable<ParticipantAtStart> getParticipantsAtStart({required int stageId}) {
     return _getParticipantsAtStart(stageId: stageId);
   }

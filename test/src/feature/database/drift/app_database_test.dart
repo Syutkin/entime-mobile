@@ -825,6 +825,43 @@ void main() {
       });
     });
 
+    group('Test getParticipantsAtStart', () {
+      test('Masks soft-deleted rider personal data', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const riderId = 1;
+        const number = 2;
+        const deletedRiderName = '<DELETED>';
+        final deletedAt = DateTime.utc(2020, 1, 3, 12);
+
+        await db.updateRider(
+          id: riderId,
+          name: 'name',
+          nickname: 'nickname',
+          birthday: '10-10-2000',
+          city: 'city',
+          comment: 'comment',
+          email: 'email@mail.mail',
+          phone: '+79990009999',
+          team: 'team',
+        );
+        final count = await db.updateRider(id: riderId, deletedAt: deletedAt);
+
+        final participants = await db.getParticipantsAtStart(stageId: stage.id).get();
+        final participant = participants.singleWhere((participant) => participant.number == number);
+
+        expect(count, 1);
+        expect(participants.length, firstStageStartCount);
+        expect(participant.name, deletedRiderName);
+        expect(participant.nickname, null);
+        expect(participant.birthday, null);
+        expect(participant.city, null);
+        expect(participant.comment, null);
+        expect(participant.email, null);
+        expect(participant.phone, null);
+        expect(participant.team, null);
+      });
+    });
+
     group('Test addStartNumber', () {
       test('Add unique start number', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
@@ -1513,6 +1550,24 @@ void main() {
 
         final result = await db.getStartingParticipants(time: time, stageId: stage.id);
         expect(result.length, 1);
+      });
+
+      test('Masks soft-deleted rider name', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const time = '10:14:53,001';
+        const riderId = 11;
+        const number = 9;
+        const deletedRiderName = '<DELETED>';
+        final deletedAt = DateTime.utc(2020, 1, 3, 12);
+
+        final count = await db.updateRider(id: riderId, deletedAt: deletedAt);
+
+        final result = await db.getStartingParticipants(time: time, stageId: stage.id);
+
+        expect(count, 1);
+        expect(result.length, 1);
+        expect(result.first.number, number);
+        expect(result.first.name, deletedRiderName);
       });
 
       test('Starting participant not exists after time', () async {
