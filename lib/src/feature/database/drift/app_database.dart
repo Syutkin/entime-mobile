@@ -1019,9 +1019,10 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> createRaceFromRaceCsv(RaceCsv race) async {
-    final raceId = await addRace(name: path.basenameWithoutExtension(race.fileName));
+    late final int raceId;
     final stages = <String, int>{};
     await transaction(() async {
+      raceId = await addRace(name: path.basenameWithoutExtension(race.fileName));
       for (final stageName in race.stageNames) {
         stages[stageName] = await addStage(raceId: raceId, name: stageName);
       }

@@ -1167,6 +1167,50 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
+      'Create race from file with duplicate numbers fails without creating race',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+        final startTimes = <String, String>{
+          'stage1': '10:10:10',
+          'stage2': '10:10:10',
+          'stage3': '10:10:10',
+          'stage4': '10:10:10',
+          'stage5': '10:10:10',
+        };
+        final startItem = StartItemCsv(number: 1, name: 'name', startTimes: startTimes);
+        raceCsv = RaceCsv(
+          fileName: 'fileName',
+          stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
+          startItems: [startItem, startItem],
+        );
+        when(() => startlistProvider.getRaceFromFile()).thenAnswer((_) => Future.value(raceCsv));
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(const DatabaseEvent.createRaceFromFile());
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        isA<DatabaseState>().having(
+          (state) => state.errorMessage,
+          'errorMessage',
+          contains('UNIQUE constraint failed'),
+        ),
+      ),
+      verify: (bloc) async {
+        final races = await db.getRaces().get();
+        final stages = await db.getStages(raceId: 3).get();
+        final participants = await db.getParticipantsAtStart(stageId: 9).get();
+
+        expect(bloc.state.race, null);
+        expect(races.length, 2);
+        expect(stages, isEmpty);
+        expect(participants, isEmpty);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
       'Create stages from file',
       setUp: () {
         Bloc.observer = AppBlocObserver();
