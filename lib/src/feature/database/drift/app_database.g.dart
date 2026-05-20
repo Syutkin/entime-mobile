@@ -5311,7 +5311,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Future<int> _setDNSForStartId({required int statusId, required int id}) {
     return customUpdate(
-      'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, timestamp_correction = NULL, ntp_offset = NULL WHERE id = ?2',
+      'UPDATE starts SET status_id = ?1 WHERE id = ?2',
       variables: [Variable<int>(statusId), Variable<int>(id)],
       updates: {starts},
       updateKind: UpdateKind.update,

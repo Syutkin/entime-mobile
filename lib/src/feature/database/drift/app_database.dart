@@ -813,7 +813,6 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> setStatusForStartId({required int startId, required ParticipantStatus status}) async {
-    const status = ParticipantStatus.dns;
     final result = await _setDNSForStartId(id: startId, statusId: status.index);
 
     if (result > 0) {

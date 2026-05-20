@@ -1543,7 +1543,7 @@ void main() {
     });
 
     group('Test setStatusForStartId', () {
-      test('Set DNS and start with id exists, DNS set successfully', () async {
+      test('Set DNS preserves timing fields', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const number = 1;
         var participants = await db.getNumberAtStarts(stageId: stage.id, number: number).get();
@@ -1598,13 +1598,30 @@ void main() {
 
         expect(participants.length, 1);
         expect(participants.first.startStatusId, ParticipantStatus.dns.index);
-        expect(participants.first.automaticStartTime, null);
-        expect(participants.first.automaticCorrection, null);
+        expect(participants.first.automaticStartTime, automaticStartTime);
+        expect(participants.first.automaticCorrection, automaticCorrection);
         expect(participants.first.startTime, startTime);
-        expect(participants.first.timestamp, null);
-        expect(participants.first.ntpOffset, null);
-        expect(participants.first.manualStartTime, null);
-        expect(participants.first.manualCorrection, null);
+        expect(participants.first.timestamp, timestamp);
+        expect(participants.first.ntpOffset, offset);
+        expect(participants.first.manualStartTime, manualStartTime);
+        expect(participants.first.manualCorrection, automaticCorrection);
+      });
+
+      test('Set DNF and start with id exists, DNF set successfully', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const number = 1;
+        final participants = await db.getNumberAtStarts(stageId: stage.id, number: number).get();
+
+        final result = await db.setStatusForStartId(
+          startId: participants.first.startId,
+          status: ParticipantStatus.dnf,
+        );
+        expect(result, 1);
+
+        final updatedParticipants = await db.getNumberAtStarts(stageId: stage.id, number: number).get();
+
+        expect(updatedParticipants.length, 1);
+        expect(updatedParticipants.first.startStatusId, ParticipantStatus.dnf.index);
       });
 
       test('Set DNS but start with id does not exists', () async {
