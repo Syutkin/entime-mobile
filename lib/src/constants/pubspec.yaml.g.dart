@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-dev+658',
+    representation: r'0.6.0-dev+659',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-dev+658',
+    canonical: r'0.6.0-dev+659',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'658'],
+    build: <String>[r'659'],
   );
 
   /// Name
@@ -152,7 +152,7 @@ sealed class Pubspec {
   /// Think of the description as the sales pitch for your package.
   /// Users see it when they [browse for packages](https://pub.dev/packages).
   /// The description is plain text: no markdown or HTML.
-  static const String description = r'A mobile application for Entime project.';
+  static const String description = r'A start/finish application for Entime project.';
 
   /// Homepage
   ///
@@ -371,7 +371,11 @@ sealed class Pubspec {
   ///   linux:
   ///   macos:
   /// ```
-  static const Map<String, Object> platforms = <String, Object>{};
+  static const Map<String, Object> platforms = <String, Object>{
+    'android': r'',
+    'linux': r'',
+    'windows': r'',
+  };
 
   /// Dependencies
   ///
@@ -415,7 +419,7 @@ sealed class Pubspec {
     },
     'flutter_bloc': r'^9.1.1',
     'flutter_blue_plus': r'^2.3.2',
-    'flutter_blue_plus_winrt': r'any',
+    'flutter_blue_plus_winrt': r'^0.0.20',
     'flutter_charset_detector': r'^5.0.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
