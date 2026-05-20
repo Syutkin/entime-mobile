@@ -440,7 +440,7 @@ WHERE
     AND julianday(time(:time_now)) > julianday(time(starts.start_time))
     AND starts.finish_id ISNULL
     AND starts.status_id = 1
-    AND starts.automatic_start_time ISNULL
+--    AND starts.automatic_start_time ISNULL
 ORDER BY starts.start_time ASC;
 
 _shiftStartsTime:

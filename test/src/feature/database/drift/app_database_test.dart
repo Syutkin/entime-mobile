@@ -899,6 +899,56 @@ void main() {
         expect(secondStageStart.startTime, secondStartTime);
       });
 
+      test('Update existed start number does not update same participant on another stage', () async {
+        final stages = await db.getStages(raceId: 1).get();
+        final firstStage = stages[0];
+        final secondStage = stages[1];
+        const firstStartTime = '01:00:00';
+        const secondStartTime = '01:01:00';
+        const updatedFirstStartTime = '02:00:00';
+        const number = 100;
+
+        var result = await db.addStartNumber(number: number, stage: firstStage, startTime: firstStartTime);
+        expect(result, null);
+
+        result = await db.addStartNumber(number: number, stage: secondStage, startTime: secondStartTime);
+        expect(result, null);
+
+        final secondStageStartBefore = await db.getNumberAtStarts(stageId: secondStage.id, number: number).getSingle();
+        await (db.update(db.starts)..where((start) => start.id.equals(secondStageStartBefore.startId))).write(
+          StartsCompanion(
+            timestamp: Value('01:01:01,000'.toDateTime()),
+            timestampCorrection: const Value(1000),
+            ntpOffset: const Value(2000),
+            automaticStartTime: const Value('01:01:01,000'),
+            automaticCorrection: const Value(3000),
+            manualStartTime: const Value('01:01:02,000'),
+            manualCorrection: const Value(4000),
+          ),
+        );
+
+        result = await db.addStartNumber(number: number, stage: firstStage, startTime: updatedFirstStartTime);
+        expect(result, null);
+
+        final firstStageStartAfter = await db.getNumberAtStarts(stageId: firstStage.id, number: number).getSingle();
+        final secondStageStartAfter = await db.getNumberAtStarts(stageId: secondStage.id, number: number).getSingle();
+
+        expect(firstStageStartAfter.startTime, updatedFirstStartTime);
+        expect(firstStageStartAfter.automaticStartTime, null);
+        expect(firstStageStartAfter.automaticCorrection, null);
+        expect(firstStageStartAfter.manualStartTime, null);
+        expect(firstStageStartAfter.manualCorrection, null);
+
+        expect(secondStageStartAfter.startTime, secondStartTime);
+        expect(secondStageStartAfter.timestamp, '01:01:01,000'.toDateTime());
+        expect(secondStageStartAfter.timestampCorrection, 1000);
+        expect(secondStageStartAfter.ntpOffset, 2000);
+        expect(secondStageStartAfter.automaticStartTime, '01:01:01,000');
+        expect(secondStageStartAfter.automaticCorrection, 3000);
+        expect(secondStageStartAfter.manualStartTime, '01:01:02,000');
+        expect(secondStageStartAfter.manualCorrection, 4000);
+      });
+
       test('Add start number creates separate participant for same number in another race', () async {
         final firstRaceStage = (await db.getStages(raceId: 1).get()).first;
         final secondRaceStage = (await db.getStages(raceId: 2).get()).first;
@@ -1728,6 +1778,78 @@ void main() {
 
         expect(result.length, 2);
         expect(result.first.number, number2);
+      });
+
+      test('Numbers with timing data stay on trace until finish', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        final dateTimeNow = '10:02:01.111'.toDateTime()!;
+        const automaticNumber = 2;
+        const manualNumber = 7;
+        const allTimingFieldsNumber = 14;
+
+        final automaticStart = await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: '10:00:00,000',
+          correction: 0,
+          timestamp: '10:00:00,000'.toDateTime()!,
+          ntpOffset: 0,
+          deltaInSeconds: 0,
+        );
+        expect(automaticStart, null);
+
+        final manualStart = await db.updateManualStartTime(
+          stageId: stage.id,
+          timestamp: '10:01:00,000'.toDateTime()!,
+          ntpOffset: 0,
+          deltaInSeconds: 0,
+        );
+        expect(manualStart, 1);
+
+        final allTimingFieldsStart = await db
+            .getNumberAtStarts(
+              stageId: stage.id,
+              number: allTimingFieldsNumber,
+            )
+            .getSingle();
+        await (db.update(db.starts)..where((start) => start.id.equals(allTimingFieldsStart.startId))).write(
+          StartsCompanion(
+            timestamp: Value('10:02:00,000'.toDateTime()),
+            timestampCorrection: const Value(0),
+            ntpOffset: const Value(0),
+            automaticStartTime: const Value('10:02:00,000'),
+            automaticCorrection: const Value(0),
+            manualStartTime: const Value('10:02:00,000'),
+            manualCorrection: const Value(0),
+          ),
+        );
+
+        var result = await db.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: dateTimeNow).get();
+        var numbers = result.map((item) => item.number);
+
+        expect(result.length, 3);
+        expect(numbers, containsAll([automaticNumber, manualNumber, allTimingFieldsNumber]));
+
+        const finishTime = '10:05:23,123';
+        await db.addFinishTime(
+          stage: stage,
+          finish: finishTime,
+          timestamp: '10:05:23,456'.toDateTime()!,
+          ntpOffset: 0,
+        );
+        final finishId = (await db.getFinishesFromStage(stageId: stage.id).get()).single.id;
+        await db.addNumberToFinish(
+          stage: stage,
+          finishId: finishId,
+          number: automaticNumber,
+          finishTime: finishTime,
+        );
+
+        result = await db.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: dateTimeNow).get();
+        numbers = result.map((item) => item.number);
+
+        expect(result.length, 2);
+        expect(numbers, isNot(contains(automaticNumber)));
+        expect(numbers, containsAll([manualNumber, allTimingFieldsNumber]));
       });
     });
 
