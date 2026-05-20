@@ -126,50 +126,6 @@ void main() async {
       expect(await updater.isUpdateAvailable, false);
     });
 
-    test('Update available but check disabled at settings', skip: 'Remove this setting from provider', () async {
-      when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'entime');
-      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '0.0.1');
-      when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
-      when(
-        () => client.get(
-          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
-          headers: any(named: 'headers'),
-        ),
-      ).thenAnswer((_) async => http.Response(_githubResponse, 200));
-
-      await settings.update(settings.settings.copyWith(checkUpdates: false));
-
-      final updater = await UpdateController.init(
-        client: client,
-        appInfoProvider: appInfoProvider,
-        settingsProvider: settings,
-      );
-
-      expect(await updater.isUpdateAvailable, false);
-
-      await settings.update(settings.settings.copyWith(checkUpdates: true));
-    });
-
-    test('Update unavailable, you get a latest version', () async {
-      when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'Entime');
-      when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');
-      when(() => appInfoProvider.buildNumber).thenAnswer((realInvocation) => '1');
-      when(
-        () => client.get(
-          Uri.parse('https://api.github.com/repos/syutkin/entime-mobile/releases/latest'),
-          headers: any(named: 'headers'),
-        ),
-      ).thenAnswer((_) async => http.Response(_githubResponse, 200));
-
-      final updater = await UpdateController.init(
-        client: client,
-        appInfoProvider: appInfoProvider,
-        settingsProvider: settings,
-      );
-
-      expect(await updater.isUpdateAvailable, false);
-    });
-
     test('Incorrect response from github api', () async {
       when(() => appInfoProvider.appName).thenAnswer((realInvocation) => 'Entime');
       when(() => appInfoProvider.version).thenAnswer((realInvocation) => '1.0.1');

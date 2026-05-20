@@ -28,13 +28,16 @@ void main() {
   late String voice;
 
   Widget testWidget() {
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(
-          value: audioBloc,
-          child: BlocProvider.value(value: settingsCubit, child: const SettingsScreen()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: audioBloc),
+        BlocProvider.value(value: settingsCubit),
+      ],
+      child: MaterialApp(
+        localizationsDelegates: const [Localization.delegate],
+        supportedLocales: Localization.supportedLocales,
+        home: const Material(
+          child: SettingsScreen(),
         ),
       ),
     );
@@ -509,13 +512,13 @@ void main() {
         verify(() => settingsCubit.update(settings.copyWith(isOLEDBackground: !settings.isOLEDBackground))).called(1);
       });
 
-      // Error: Could not find the correct Provider<SettingsCubit> above this SelectThemeScreen Widget
-      patrolWidgetTest('Open theme settings screen', skip: true, ($) async {
+      patrolWidgetTest('Open theme settings screen', ($) async {
         settings = const AppSettings.defaults().copyWith(logLimit: -1);
         when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_themes).$(SettingsTile).$(Localization.current.I18nSettings_themeSettings).scrollTo(maxScrolls: 100).tap();
+        await $.pumpAndSettle();
         expect($(SelectThemeScreen), findsOneWidget);
       });
     });
