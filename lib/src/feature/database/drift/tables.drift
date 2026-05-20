@@ -342,7 +342,8 @@ FROM starts, participants
 WHERE
 	stage_id = :stage_id
 	AND participants.id = starts.participant_id
-	AND start_time BETWEEN :before AND :after;
+	AND start_time BETWEEN :before AND :after
+	AND starts.status_id = 1;
 
 _setManualStartTime:
 UPDATE starts

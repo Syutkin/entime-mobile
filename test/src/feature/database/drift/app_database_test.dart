@@ -1422,6 +1422,49 @@ void main() {
         expect(start.first.manualStartTime, manualStartTime);
         expect(start.first.manualCorrection, correction);
       });
+
+      test('Update only active starts with same starttime at manual', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const startTime = '08:15:00';
+        const diff = 3001;
+        final timestamp = startTime.toDateTime()!.add(const Duration(milliseconds: diff));
+        const offset = 3456;
+        final manualStartTime = timestamp.add(const Duration(milliseconds: offset)).format(longTimeFormat);
+        const correction = -(diff + offset);
+
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 1);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 2);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 3);
+        await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: 4);
+
+        await db.setDNSForStage(stage: stage, number: 7);
+        await db.setDNFForStage(stage: stage, number: 14);
+
+        final result = await db.updateManualStartTime(
+          stageId: stage.id,
+          timestamp: timestamp,
+          ntpOffset: offset,
+          deltaInSeconds: deltaInSeconds,
+        );
+        expect(result, 2);
+
+        final starts = await startsByStartTime(db: db, startTime: startTime, stageId: stage.id);
+        final startsByParticipantId = {for (final start in starts) start.participantId: start};
+
+        expect(starts.length, 4);
+        expect(startsByParticipantId[1]!.statusId, ParticipantStatus.active.index);
+        expect(startsByParticipantId[1]!.manualStartTime, manualStartTime);
+        expect(startsByParticipantId[1]!.manualCorrection, correction);
+        expect(startsByParticipantId[2]!.statusId, ParticipantStatus.dns.index);
+        expect(startsByParticipantId[2]!.manualStartTime, null);
+        expect(startsByParticipantId[2]!.manualCorrection, null);
+        expect(startsByParticipantId[3]!.statusId, ParticipantStatus.dnf.index);
+        expect(startsByParticipantId[3]!.manualStartTime, null);
+        expect(startsByParticipantId[3]!.manualCorrection, null);
+        expect(startsByParticipantId[4]!.statusId, ParticipantStatus.active.index);
+        expect(startsByParticipantId[4]!.manualStartTime, manualStartTime);
+        expect(startsByParticipantId[4]!.manualCorrection, correction);
+      });
     });
 
     group('Test checkParticipantAroundStartTime', () {

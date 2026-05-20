@@ -5191,7 +5191,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String after,
   }) {
     return customSelect(
-      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3',
+      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3 AND starts.status_id = 1',
       variables: [
         Variable<int>(stageId),
         Variable<String>(before),
