@@ -41,8 +41,8 @@ void main() {
   });
 
   setUp(() {
-    race = const Race(id: 1, name: 'Race name', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'Race name');
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
     when(() => databaseBloc.state).thenReturn(
       const DatabaseState(
         races: [],

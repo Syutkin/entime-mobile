@@ -245,11 +245,11 @@ return shareTrack(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function( Race? race,  Stage? stage,  List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  bool? updateFinishNumber)?  emitState,TResult Function( String name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  addRace,TResult Function( int id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  updateRace,TResult Function( int? id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  upsertRace,TResult Function( int id)?  deleteRace,TResult Function()?  getRaces,TResult Function( Race race)?  selectRace,TResult Function()?  deselectRace,TResult Function( String name,  int raceId,  int? trailId)?  addStage,TResult Function( int? id,  String? name,  String? description,  int? raceId,  int? trailId,  bool? isActive,  bool? isDeleted,  bool removeTrailId)?  upsertStage,TResult Function( int id)?  deleteStage,TResult Function( int raceId)?  getStages,TResult Function( Stage stage)?  selectStage,TResult Function( int stageId)?  getParticipantsAtStart,TResult Function( Stage stage,  int number,  String startTime,  bool forceAdd)?  addStartNumber,TResult Function( int riderId,  String name,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment,  bool? isDeleted)?  updateRider,TResult Function( int riderId,  int participantId,  String name,  String? category,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment)?  updateRacer,TResult Function( int stageId,  int participantId,  String startTime,  int? timestampCorrection,  String? automaticStartTime,  int? automaticCorrection,  String? manualStartTime,  int? manualCorrection)?  updateStartingInfo,TResult Function( int stageId,  String startTime,  int correction,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds,  bool forceUpdate,  bool useTimestampForTime)?  updateAutomaticCorrection,TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds)?  updateManualStartTime,TResult Function( int startId,  ParticipantStatus status)?  setStatusForStartId,TResult Function( Stage stage,  String finishTime,  DateTime timestamp,  int ntpOffset,  int? finishDelay,  bool? substituteNumbers,  int? substituteNumbersDelay,  DateTime? dateTimeNow,  int? number)?  addFinishTime,TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int? number)?  addFinishTimeManual,TResult Function( int stageId)?  clearStartResultsDebug,TResult Function( int stageId)?  clearFinishResultsDebug,TResult Function( int stageId)?  hideAllFinishes,TResult Function( Stage stage,  int number)?  clearNumberAtFinish,TResult Function( Stage stage,  int number)?  setDNSForStage,TResult Function( Stage stage,  int number)?  setDNFForStage,TResult Function( int id)?  hideFinish,TResult Function( Stage stage,  int finishId,  int number,  String finishTime)?  addNumberToFinish,TResult Function( int stageId,  DateTime dateTimeNow)?  getNumbersOnTraceNow,TResult Function( int stageId,  int minutes,  String? fromTime)?  shiftStartsTime,TResult Function( int number)?  selectAwaitingNumber,TResult Function()?  deselectAwaitingNumber,TResult Function()?  createRaceFromFile,TResult Function( int raceId)?  createStagesFromFile,TResult Function( bool useTimestamp,  String numberName,  String starttimeName,  String correctionName,  String? text)?  shareStart,TResult Function( bool useTimestamp,  String numberName,  String finishtimeName,  String? text)?  shareFinish,TResult Function()?  shareDatabase,TResult Function( TrailInfo trail)?  shareTrack,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function( Race? race,  Stage? stage,  List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  bool? updateFinishNumber,  String? errorMessage)?  emitState,TResult Function( String name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  addRace,TResult Function( int id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  updateRace,TResult Function( int? id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  upsertRace,TResult Function( int id)?  deleteRace,TResult Function()?  getRaces,TResult Function( Race race)?  selectRace,TResult Function()?  deselectRace,TResult Function( String name,  int raceId,  int? trailId)?  addStage,TResult Function( int? id,  String? name,  String? description,  int? raceId,  int? trailId,  bool? isActive,  DateTime? deletedAt,  bool removeTrailId)?  upsertStage,TResult Function( int id)?  deleteStage,TResult Function( int raceId)?  getStages,TResult Function( Stage stage)?  selectStage,TResult Function( int stageId)?  getParticipantsAtStart,TResult Function( Stage stage,  int number,  String startTime,  bool forceAdd)?  addStartNumber,TResult Function( int riderId,  String name,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment,  DateTime? deletedAt)?  updateRider,TResult Function( int riderId,  int participantId,  String name,  String? category,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment)?  updateRacer,TResult Function( int stageId,  int participantId,  String startTime,  int? timestampCorrection,  String? automaticStartTime,  int? automaticCorrection,  String? manualStartTime,  int? manualCorrection)?  updateStartingInfo,TResult Function( int stageId,  String startTime,  int correction,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds,  bool forceUpdate,  bool useTimestampForTime)?  updateAutomaticCorrection,TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds)?  updateManualStartTime,TResult Function( int startId,  ParticipantStatus status)?  setStatusForStartId,TResult Function( Stage stage,  String finishTime,  DateTime timestamp,  int ntpOffset,  int? finishDelay,  bool? substituteNumbers,  int? substituteNumbersDelay,  DateTime? dateTimeNow,  int? number)?  addFinishTime,TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int? number)?  addFinishTimeManual,TResult Function( int stageId)?  clearStartResultsDebug,TResult Function( int stageId)?  clearFinishResultsDebug,TResult Function( int stageId)?  hideAllFinishes,TResult Function( Stage stage,  int number)?  clearNumberAtFinish,TResult Function( Stage stage,  int number)?  setDNSForStage,TResult Function( Stage stage,  int number)?  setDNFForStage,TResult Function( int id)?  hideFinish,TResult Function( Stage stage,  int finishId,  int number,  String finishTime)?  addNumberToFinish,TResult Function( int stageId,  DateTime dateTimeNow)?  getNumbersOnTraceNow,TResult Function( int stageId,  int minutes,  String? fromTime)?  shiftStartsTime,TResult Function( int number)?  selectAwaitingNumber,TResult Function()?  deselectAwaitingNumber,TResult Function()?  createRaceFromFile,TResult Function( int raceId)?  createStagesFromFile,TResult Function( bool useTimestamp,  String numberName,  String starttimeName,  String correctionName,  String? text)?  shareStart,TResult Function( bool useTimestamp,  String numberName,  String finishtimeName,  String? text)?  shareFinish,TResult Function()?  shareDatabase,TResult Function( TrailInfo trail)?  shareTrack,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
 return initialize();case _EmitState() when emitState != null:
-return emitState(_that.race,_that.stage,_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.updateFinishNumber);case _AddRace() when addRace != null:
+return emitState(_that.race,_that.stage,_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.updateFinishNumber,_that.errorMessage);case _AddRace() when addRace != null:
 return addRace(_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _UpdateRace() when updateRace != null:
 return updateRace(_that.id,_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _UpsertRace() when upsertRace != null:
 return upsertRace(_that.id,_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _DeleteRace() when deleteRace != null:
@@ -258,13 +258,13 @@ return getRaces();case _SelectRace() when selectRace != null:
 return selectRace(_that.race);case _DeselectRace() when deselectRace != null:
 return deselectRace();case _AddStage() when addStage != null:
 return addStage(_that.name,_that.raceId,_that.trailId);case _UpsertStage() when upsertStage != null:
-return upsertStage(_that.id,_that.name,_that.description,_that.raceId,_that.trailId,_that.isActive,_that.isDeleted,_that.removeTrailId);case _DeleteStage() when deleteStage != null:
+return upsertStage(_that.id,_that.name,_that.description,_that.raceId,_that.trailId,_that.isActive,_that.deletedAt,_that.removeTrailId);case _DeleteStage() when deleteStage != null:
 return deleteStage(_that.id);case _GetStages() when getStages != null:
 return getStages(_that.raceId);case _SelectStage() when selectStage != null:
 return selectStage(_that.stage);case _GetParticipantsAtStart() when getParticipantsAtStart != null:
 return getParticipantsAtStart(_that.stageId);case _AddStartNumber() when addStartNumber != null:
 return addStartNumber(_that.stage,_that.number,_that.startTime,_that.forceAdd);case _UpdateRider() when updateRider != null:
-return updateRider(_that.riderId,_that.name,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment,_that.isDeleted);case _UpdateRacer() when updateRacer != null:
+return updateRider(_that.riderId,_that.name,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment,_that.deletedAt);case _UpdateRacer() when updateRacer != null:
 return updateRacer(_that.riderId,_that.participantId,_that.name,_that.category,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment);case _UpdateStartingInfo() when updateStartingInfo != null:
 return updateStartingInfo(_that.stageId,_that.participantId,_that.startTime,_that.timestampCorrection,_that.automaticStartTime,_that.automaticCorrection,_that.manualStartTime,_that.manualCorrection);case _UpdateAutomaticCorrection() when updateAutomaticCorrection != null:
 return updateAutomaticCorrection(_that.stageId,_that.startTime,_that.correction,_that.timestamp,_that.ntpOffset,_that.deltaInSeconds,_that.forceUpdate,_that.useTimestampForTime);case DatabaseEventUpdateManualStartTime() when updateManualStartTime != null:
@@ -307,11 +307,11 @@ return shareTrack(_that.trail);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function( Race? race,  Stage? stage,  List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  bool? updateFinishNumber)  emitState,required TResult Function( String name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)  addRace,required TResult Function( int id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)  updateRace,required TResult Function( int? id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)  upsertRace,required TResult Function( int id)  deleteRace,required TResult Function()  getRaces,required TResult Function( Race race)  selectRace,required TResult Function()  deselectRace,required TResult Function( String name,  int raceId,  int? trailId)  addStage,required TResult Function( int? id,  String? name,  String? description,  int? raceId,  int? trailId,  bool? isActive,  bool? isDeleted,  bool removeTrailId)  upsertStage,required TResult Function( int id)  deleteStage,required TResult Function( int raceId)  getStages,required TResult Function( Stage stage)  selectStage,required TResult Function( int stageId)  getParticipantsAtStart,required TResult Function( Stage stage,  int number,  String startTime,  bool forceAdd)  addStartNumber,required TResult Function( int riderId,  String name,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment,  bool? isDeleted)  updateRider,required TResult Function( int riderId,  int participantId,  String name,  String? category,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment)  updateRacer,required TResult Function( int stageId,  int participantId,  String startTime,  int? timestampCorrection,  String? automaticStartTime,  int? automaticCorrection,  String? manualStartTime,  int? manualCorrection)  updateStartingInfo,required TResult Function( int stageId,  String startTime,  int correction,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds,  bool forceUpdate,  bool useTimestampForTime)  updateAutomaticCorrection,required TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds)  updateManualStartTime,required TResult Function( int startId,  ParticipantStatus status)  setStatusForStartId,required TResult Function( Stage stage,  String finishTime,  DateTime timestamp,  int ntpOffset,  int? finishDelay,  bool? substituteNumbers,  int? substituteNumbersDelay,  DateTime? dateTimeNow,  int? number)  addFinishTime,required TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int? number)  addFinishTimeManual,required TResult Function( int stageId)  clearStartResultsDebug,required TResult Function( int stageId)  clearFinishResultsDebug,required TResult Function( int stageId)  hideAllFinishes,required TResult Function( Stage stage,  int number)  clearNumberAtFinish,required TResult Function( Stage stage,  int number)  setDNSForStage,required TResult Function( Stage stage,  int number)  setDNFForStage,required TResult Function( int id)  hideFinish,required TResult Function( Stage stage,  int finishId,  int number,  String finishTime)  addNumberToFinish,required TResult Function( int stageId,  DateTime dateTimeNow)  getNumbersOnTraceNow,required TResult Function( int stageId,  int minutes,  String? fromTime)  shiftStartsTime,required TResult Function( int number)  selectAwaitingNumber,required TResult Function()  deselectAwaitingNumber,required TResult Function()  createRaceFromFile,required TResult Function( int raceId)  createStagesFromFile,required TResult Function( bool useTimestamp,  String numberName,  String starttimeName,  String correctionName,  String? text)  shareStart,required TResult Function( bool useTimestamp,  String numberName,  String finishtimeName,  String? text)  shareFinish,required TResult Function()  shareDatabase,required TResult Function( TrailInfo trail)  shareTrack,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function( Race? race,  Stage? stage,  List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  bool? updateFinishNumber,  String? errorMessage)  emitState,required TResult Function( String name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)  addRace,required TResult Function( int id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)  updateRace,required TResult Function( int? id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)  upsertRace,required TResult Function( int id)  deleteRace,required TResult Function()  getRaces,required TResult Function( Race race)  selectRace,required TResult Function()  deselectRace,required TResult Function( String name,  int raceId,  int? trailId)  addStage,required TResult Function( int? id,  String? name,  String? description,  int? raceId,  int? trailId,  bool? isActive,  DateTime? deletedAt,  bool removeTrailId)  upsertStage,required TResult Function( int id)  deleteStage,required TResult Function( int raceId)  getStages,required TResult Function( Stage stage)  selectStage,required TResult Function( int stageId)  getParticipantsAtStart,required TResult Function( Stage stage,  int number,  String startTime,  bool forceAdd)  addStartNumber,required TResult Function( int riderId,  String name,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment,  DateTime? deletedAt)  updateRider,required TResult Function( int riderId,  int participantId,  String name,  String? category,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment)  updateRacer,required TResult Function( int stageId,  int participantId,  String startTime,  int? timestampCorrection,  String? automaticStartTime,  int? automaticCorrection,  String? manualStartTime,  int? manualCorrection)  updateStartingInfo,required TResult Function( int stageId,  String startTime,  int correction,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds,  bool forceUpdate,  bool useTimestampForTime)  updateAutomaticCorrection,required TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds)  updateManualStartTime,required TResult Function( int startId,  ParticipantStatus status)  setStatusForStartId,required TResult Function( Stage stage,  String finishTime,  DateTime timestamp,  int ntpOffset,  int? finishDelay,  bool? substituteNumbers,  int? substituteNumbersDelay,  DateTime? dateTimeNow,  int? number)  addFinishTime,required TResult Function( int stageId,  DateTime timestamp,  int ntpOffset,  int? number)  addFinishTimeManual,required TResult Function( int stageId)  clearStartResultsDebug,required TResult Function( int stageId)  clearFinishResultsDebug,required TResult Function( int stageId)  hideAllFinishes,required TResult Function( Stage stage,  int number)  clearNumberAtFinish,required TResult Function( Stage stage,  int number)  setDNSForStage,required TResult Function( Stage stage,  int number)  setDNFForStage,required TResult Function( int id)  hideFinish,required TResult Function( Stage stage,  int finishId,  int number,  String finishTime)  addNumberToFinish,required TResult Function( int stageId,  DateTime dateTimeNow)  getNumbersOnTraceNow,required TResult Function( int stageId,  int minutes,  String? fromTime)  shiftStartsTime,required TResult Function( int number)  selectAwaitingNumber,required TResult Function()  deselectAwaitingNumber,required TResult Function()  createRaceFromFile,required TResult Function( int raceId)  createStagesFromFile,required TResult Function( bool useTimestamp,  String numberName,  String starttimeName,  String correctionName,  String? text)  shareStart,required TResult Function( bool useTimestamp,  String numberName,  String finishtimeName,  String? text)  shareFinish,required TResult Function()  shareDatabase,required TResult Function( TrailInfo trail)  shareTrack,}) {final _that = this;
 switch (_that) {
 case _Initialize():
 return initialize();case _EmitState():
-return emitState(_that.race,_that.stage,_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.updateFinishNumber);case _AddRace():
+return emitState(_that.race,_that.stage,_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.updateFinishNumber,_that.errorMessage);case _AddRace():
 return addRace(_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _UpdateRace():
 return updateRace(_that.id,_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _UpsertRace():
 return upsertRace(_that.id,_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _DeleteRace():
@@ -320,13 +320,13 @@ return getRaces();case _SelectRace():
 return selectRace(_that.race);case _DeselectRace():
 return deselectRace();case _AddStage():
 return addStage(_that.name,_that.raceId,_that.trailId);case _UpsertStage():
-return upsertStage(_that.id,_that.name,_that.description,_that.raceId,_that.trailId,_that.isActive,_that.isDeleted,_that.removeTrailId);case _DeleteStage():
+return upsertStage(_that.id,_that.name,_that.description,_that.raceId,_that.trailId,_that.isActive,_that.deletedAt,_that.removeTrailId);case _DeleteStage():
 return deleteStage(_that.id);case _GetStages():
 return getStages(_that.raceId);case _SelectStage():
 return selectStage(_that.stage);case _GetParticipantsAtStart():
 return getParticipantsAtStart(_that.stageId);case _AddStartNumber():
 return addStartNumber(_that.stage,_that.number,_that.startTime,_that.forceAdd);case _UpdateRider():
-return updateRider(_that.riderId,_that.name,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment,_that.isDeleted);case _UpdateRacer():
+return updateRider(_that.riderId,_that.name,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment,_that.deletedAt);case _UpdateRacer():
 return updateRacer(_that.riderId,_that.participantId,_that.name,_that.category,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment);case _UpdateStartingInfo():
 return updateStartingInfo(_that.stageId,_that.participantId,_that.startTime,_that.timestampCorrection,_that.automaticStartTime,_that.automaticCorrection,_that.manualStartTime,_that.manualCorrection);case _UpdateAutomaticCorrection():
 return updateAutomaticCorrection(_that.stageId,_that.startTime,_that.correction,_that.timestamp,_that.ntpOffset,_that.deltaInSeconds,_that.forceUpdate,_that.useTimestampForTime);case DatabaseEventUpdateManualStartTime():
@@ -365,11 +365,11 @@ return shareTrack(_that.trail);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function( Race? race,  Stage? stage,  List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  bool? updateFinishNumber)?  emitState,TResult? Function( String name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  addRace,TResult? Function( int id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  updateRace,TResult? Function( int? id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  upsertRace,TResult? Function( int id)?  deleteRace,TResult? Function()?  getRaces,TResult? Function( Race race)?  selectRace,TResult? Function()?  deselectRace,TResult? Function( String name,  int raceId,  int? trailId)?  addStage,TResult? Function( int? id,  String? name,  String? description,  int? raceId,  int? trailId,  bool? isActive,  bool? isDeleted,  bool removeTrailId)?  upsertStage,TResult? Function( int id)?  deleteStage,TResult? Function( int raceId)?  getStages,TResult? Function( Stage stage)?  selectStage,TResult? Function( int stageId)?  getParticipantsAtStart,TResult? Function( Stage stage,  int number,  String startTime,  bool forceAdd)?  addStartNumber,TResult? Function( int riderId,  String name,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment,  bool? isDeleted)?  updateRider,TResult? Function( int riderId,  int participantId,  String name,  String? category,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment)?  updateRacer,TResult? Function( int stageId,  int participantId,  String startTime,  int? timestampCorrection,  String? automaticStartTime,  int? automaticCorrection,  String? manualStartTime,  int? manualCorrection)?  updateStartingInfo,TResult? Function( int stageId,  String startTime,  int correction,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds,  bool forceUpdate,  bool useTimestampForTime)?  updateAutomaticCorrection,TResult? Function( int stageId,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds)?  updateManualStartTime,TResult? Function( int startId,  ParticipantStatus status)?  setStatusForStartId,TResult? Function( Stage stage,  String finishTime,  DateTime timestamp,  int ntpOffset,  int? finishDelay,  bool? substituteNumbers,  int? substituteNumbersDelay,  DateTime? dateTimeNow,  int? number)?  addFinishTime,TResult? Function( int stageId,  DateTime timestamp,  int ntpOffset,  int? number)?  addFinishTimeManual,TResult? Function( int stageId)?  clearStartResultsDebug,TResult? Function( int stageId)?  clearFinishResultsDebug,TResult? Function( int stageId)?  hideAllFinishes,TResult? Function( Stage stage,  int number)?  clearNumberAtFinish,TResult? Function( Stage stage,  int number)?  setDNSForStage,TResult? Function( Stage stage,  int number)?  setDNFForStage,TResult? Function( int id)?  hideFinish,TResult? Function( Stage stage,  int finishId,  int number,  String finishTime)?  addNumberToFinish,TResult? Function( int stageId,  DateTime dateTimeNow)?  getNumbersOnTraceNow,TResult? Function( int stageId,  int minutes,  String? fromTime)?  shiftStartsTime,TResult? Function( int number)?  selectAwaitingNumber,TResult? Function()?  deselectAwaitingNumber,TResult? Function()?  createRaceFromFile,TResult? Function( int raceId)?  createStagesFromFile,TResult? Function( bool useTimestamp,  String numberName,  String starttimeName,  String correctionName,  String? text)?  shareStart,TResult? Function( bool useTimestamp,  String numberName,  String finishtimeName,  String? text)?  shareFinish,TResult? Function()?  shareDatabase,TResult? Function( TrailInfo trail)?  shareTrack,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function( Race? race,  Stage? stage,  List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  bool? updateFinishNumber,  String? errorMessage)?  emitState,TResult? Function( String name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  addRace,TResult? Function( int id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  updateRace,TResult? Function( int? id,  String? name,  DateTime? startDate,  DateTime? finishDate,  String? location,  String? url,  String? description)?  upsertRace,TResult? Function( int id)?  deleteRace,TResult? Function()?  getRaces,TResult? Function( Race race)?  selectRace,TResult? Function()?  deselectRace,TResult? Function( String name,  int raceId,  int? trailId)?  addStage,TResult? Function( int? id,  String? name,  String? description,  int? raceId,  int? trailId,  bool? isActive,  DateTime? deletedAt,  bool removeTrailId)?  upsertStage,TResult? Function( int id)?  deleteStage,TResult? Function( int raceId)?  getStages,TResult? Function( Stage stage)?  selectStage,TResult? Function( int stageId)?  getParticipantsAtStart,TResult? Function( Stage stage,  int number,  String startTime,  bool forceAdd)?  addStartNumber,TResult? Function( int riderId,  String name,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment,  DateTime? deletedAt)?  updateRider,TResult? Function( int riderId,  int participantId,  String name,  String? category,  String? nickname,  String? birthday,  String? team,  String? city,  String? email,  String? phone,  String? comment)?  updateRacer,TResult? Function( int stageId,  int participantId,  String startTime,  int? timestampCorrection,  String? automaticStartTime,  int? automaticCorrection,  String? manualStartTime,  int? manualCorrection)?  updateStartingInfo,TResult? Function( int stageId,  String startTime,  int correction,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds,  bool forceUpdate,  bool useTimestampForTime)?  updateAutomaticCorrection,TResult? Function( int stageId,  DateTime timestamp,  int ntpOffset,  int deltaInSeconds)?  updateManualStartTime,TResult? Function( int startId,  ParticipantStatus status)?  setStatusForStartId,TResult? Function( Stage stage,  String finishTime,  DateTime timestamp,  int ntpOffset,  int? finishDelay,  bool? substituteNumbers,  int? substituteNumbersDelay,  DateTime? dateTimeNow,  int? number)?  addFinishTime,TResult? Function( int stageId,  DateTime timestamp,  int ntpOffset,  int? number)?  addFinishTimeManual,TResult? Function( int stageId)?  clearStartResultsDebug,TResult? Function( int stageId)?  clearFinishResultsDebug,TResult? Function( int stageId)?  hideAllFinishes,TResult? Function( Stage stage,  int number)?  clearNumberAtFinish,TResult? Function( Stage stage,  int number)?  setDNSForStage,TResult? Function( Stage stage,  int number)?  setDNFForStage,TResult? Function( int id)?  hideFinish,TResult? Function( Stage stage,  int finishId,  int number,  String finishTime)?  addNumberToFinish,TResult? Function( int stageId,  DateTime dateTimeNow)?  getNumbersOnTraceNow,TResult? Function( int stageId,  int minutes,  String? fromTime)?  shiftStartsTime,TResult? Function( int number)?  selectAwaitingNumber,TResult? Function()?  deselectAwaitingNumber,TResult? Function()?  createRaceFromFile,TResult? Function( int raceId)?  createStagesFromFile,TResult? Function( bool useTimestamp,  String numberName,  String starttimeName,  String correctionName,  String? text)?  shareStart,TResult? Function( bool useTimestamp,  String numberName,  String finishtimeName,  String? text)?  shareFinish,TResult? Function()?  shareDatabase,TResult? Function( TrailInfo trail)?  shareTrack,}) {final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
 return initialize();case _EmitState() when emitState != null:
-return emitState(_that.race,_that.stage,_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.updateFinishNumber);case _AddRace() when addRace != null:
+return emitState(_that.race,_that.stage,_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.updateFinishNumber,_that.errorMessage);case _AddRace() when addRace != null:
 return addRace(_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _UpdateRace() when updateRace != null:
 return updateRace(_that.id,_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _UpsertRace() when upsertRace != null:
 return upsertRace(_that.id,_that.name,_that.startDate,_that.finishDate,_that.location,_that.url,_that.description);case _DeleteRace() when deleteRace != null:
@@ -378,13 +378,13 @@ return getRaces();case _SelectRace() when selectRace != null:
 return selectRace(_that.race);case _DeselectRace() when deselectRace != null:
 return deselectRace();case _AddStage() when addStage != null:
 return addStage(_that.name,_that.raceId,_that.trailId);case _UpsertStage() when upsertStage != null:
-return upsertStage(_that.id,_that.name,_that.description,_that.raceId,_that.trailId,_that.isActive,_that.isDeleted,_that.removeTrailId);case _DeleteStage() when deleteStage != null:
+return upsertStage(_that.id,_that.name,_that.description,_that.raceId,_that.trailId,_that.isActive,_that.deletedAt,_that.removeTrailId);case _DeleteStage() when deleteStage != null:
 return deleteStage(_that.id);case _GetStages() when getStages != null:
 return getStages(_that.raceId);case _SelectStage() when selectStage != null:
 return selectStage(_that.stage);case _GetParticipantsAtStart() when getParticipantsAtStart != null:
 return getParticipantsAtStart(_that.stageId);case _AddStartNumber() when addStartNumber != null:
 return addStartNumber(_that.stage,_that.number,_that.startTime,_that.forceAdd);case _UpdateRider() when updateRider != null:
-return updateRider(_that.riderId,_that.name,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment,_that.isDeleted);case _UpdateRacer() when updateRacer != null:
+return updateRider(_that.riderId,_that.name,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment,_that.deletedAt);case _UpdateRacer() when updateRacer != null:
 return updateRacer(_that.riderId,_that.participantId,_that.name,_that.category,_that.nickname,_that.birthday,_that.team,_that.city,_that.email,_that.phone,_that.comment);case _UpdateStartingInfo() when updateStartingInfo != null:
 return updateStartingInfo(_that.stageId,_that.participantId,_that.startTime,_that.timestampCorrection,_that.automaticStartTime,_that.automaticCorrection,_that.manualStartTime,_that.manualCorrection);case _UpdateAutomaticCorrection() when updateAutomaticCorrection != null:
 return updateAutomaticCorrection(_that.stageId,_that.startTime,_that.correction,_that.timestamp,_that.ntpOffset,_that.deltaInSeconds,_that.forceUpdate,_that.useTimestampForTime);case DatabaseEventUpdateManualStartTime() when updateManualStartTime != null:
@@ -459,7 +459,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 
 
 class _EmitState with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _EmitState({required this.race, required this.stage, required final  List<Race> races, required final  List<Stage> stages, required final  List<String?> categories, required final  List<Rider> riders, required final  List<ParticipantAtStart> participants, required final  List<Finish> finishes, required final  List<StartingParticipant> numbersOnTrace, required this.notification, required this.autoFinishNumber, required this.awaitingNumber, required this.updateFinishNumber}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
+  const _EmitState({required this.race, required this.stage, required final  List<Race> races, required final  List<Stage> stages, required final  List<String?> categories, required final  List<Rider> riders, required final  List<ParticipantAtStart> participants, required final  List<Finish> finishes, required final  List<StartingParticipant> numbersOnTrace, required this.notification, required this.autoFinishNumber, required this.awaitingNumber, required this.updateFinishNumber, required this.errorMessage}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
   
 
  final  Race? race;
@@ -517,6 +517,7 @@ class _EmitState with DiagnosticableTreeMixin implements DatabaseEvent {
  final  int? autoFinishNumber;
  final  int? awaitingNumber;
  final  bool? updateFinishNumber;
+ final  String? errorMessage;
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -529,21 +530,21 @@ _$EmitStateCopyWith<_EmitState> get copyWith => __$EmitStateCopyWithImpl<_EmitSt
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.emitState'))
-    ..add(DiagnosticsProperty('race', race))..add(DiagnosticsProperty('stage', stage))..add(DiagnosticsProperty('races', races))..add(DiagnosticsProperty('stages', stages))..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('riders', riders))..add(DiagnosticsProperty('participants', participants))..add(DiagnosticsProperty('finishes', finishes))..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))..add(DiagnosticsProperty('notification', notification))..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))..add(DiagnosticsProperty('awaitingNumber', awaitingNumber))..add(DiagnosticsProperty('updateFinishNumber', updateFinishNumber));
+    ..add(DiagnosticsProperty('race', race))..add(DiagnosticsProperty('stage', stage))..add(DiagnosticsProperty('races', races))..add(DiagnosticsProperty('stages', stages))..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('riders', riders))..add(DiagnosticsProperty('participants', participants))..add(DiagnosticsProperty('finishes', finishes))..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))..add(DiagnosticsProperty('notification', notification))..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))..add(DiagnosticsProperty('awaitingNumber', awaitingNumber))..add(DiagnosticsProperty('updateFinishNumber', updateFinishNumber))..add(DiagnosticsProperty('errorMessage', errorMessage));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EmitState&&const DeepCollectionEquality().equals(other.race, race)&&const DeepCollectionEquality().equals(other.stage, stage)&&const DeepCollectionEquality().equals(other._races, _races)&&const DeepCollectionEquality().equals(other._stages, _stages)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._riders, _riders)&&const DeepCollectionEquality().equals(other._participants, _participants)&&const DeepCollectionEquality().equals(other._finishes, _finishes)&&const DeepCollectionEquality().equals(other._numbersOnTrace, _numbersOnTrace)&&(identical(other.notification, notification) || other.notification == notification)&&(identical(other.autoFinishNumber, autoFinishNumber) || other.autoFinishNumber == autoFinishNumber)&&(identical(other.awaitingNumber, awaitingNumber) || other.awaitingNumber == awaitingNumber)&&(identical(other.updateFinishNumber, updateFinishNumber) || other.updateFinishNumber == updateFinishNumber));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EmitState&&const DeepCollectionEquality().equals(other.race, race)&&const DeepCollectionEquality().equals(other.stage, stage)&&const DeepCollectionEquality().equals(other._races, _races)&&const DeepCollectionEquality().equals(other._stages, _stages)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._riders, _riders)&&const DeepCollectionEquality().equals(other._participants, _participants)&&const DeepCollectionEquality().equals(other._finishes, _finishes)&&const DeepCollectionEquality().equals(other._numbersOnTrace, _numbersOnTrace)&&(identical(other.notification, notification) || other.notification == notification)&&(identical(other.autoFinishNumber, autoFinishNumber) || other.autoFinishNumber == autoFinishNumber)&&(identical(other.awaitingNumber, awaitingNumber) || other.awaitingNumber == awaitingNumber)&&(identical(other.updateFinishNumber, updateFinishNumber) || other.updateFinishNumber == updateFinishNumber)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(race),const DeepCollectionEquality().hash(stage),const DeepCollectionEquality().hash(_races),const DeepCollectionEquality().hash(_stages),const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_riders),const DeepCollectionEquality().hash(_participants),const DeepCollectionEquality().hash(_finishes),const DeepCollectionEquality().hash(_numbersOnTrace),notification,autoFinishNumber,awaitingNumber,updateFinishNumber);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(race),const DeepCollectionEquality().hash(stage),const DeepCollectionEquality().hash(_races),const DeepCollectionEquality().hash(_stages),const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_riders),const DeepCollectionEquality().hash(_participants),const DeepCollectionEquality().hash(_finishes),const DeepCollectionEquality().hash(_numbersOnTrace),notification,autoFinishNumber,awaitingNumber,updateFinishNumber,errorMessage);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber)';
+  return 'DatabaseEvent.emitState(race: $race, stage: $stage, races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, updateFinishNumber: $updateFinishNumber, errorMessage: $errorMessage)';
 }
 
 
@@ -554,7 +555,7 @@ abstract mixin class _$EmitStateCopyWith<$Res> implements $DatabaseEventCopyWith
   factory _$EmitStateCopyWith(_EmitState value, $Res Function(_EmitState) _then) = __$EmitStateCopyWithImpl;
 @useResult
 $Res call({
- Race? race, Stage? stage, List<Race> races, List<Stage> stages, List<String?> categories, List<Rider> riders, List<ParticipantAtStart> participants, List<Finish> finishes, List<StartingParticipant> numbersOnTrace, Notification? notification, int? autoFinishNumber, int? awaitingNumber, bool? updateFinishNumber
+ Race? race, Stage? stage, List<Race> races, List<Stage> stages, List<String?> categories, List<Rider> riders, List<ParticipantAtStart> participants, List<Finish> finishes, List<StartingParticipant> numbersOnTrace, Notification? notification, int? autoFinishNumber, int? awaitingNumber, bool? updateFinishNumber, String? errorMessage
 });
 
 
@@ -571,7 +572,7 @@ class __$EmitStateCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? race = freezed,Object? stage = freezed,Object? races = null,Object? stages = null,Object? categories = null,Object? riders = null,Object? participants = null,Object? finishes = null,Object? numbersOnTrace = null,Object? notification = freezed,Object? autoFinishNumber = freezed,Object? awaitingNumber = freezed,Object? updateFinishNumber = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? race = freezed,Object? stage = freezed,Object? races = null,Object? stages = null,Object? categories = null,Object? riders = null,Object? participants = null,Object? finishes = null,Object? numbersOnTrace = null,Object? notification = freezed,Object? autoFinishNumber = freezed,Object? awaitingNumber = freezed,Object? updateFinishNumber = freezed,Object? errorMessage = freezed,}) {
   return _then(_EmitState(
 race: freezed == race ? _self.race : race // ignore: cast_nullable_to_non_nullable
 as Race?,stage: freezed == stage ? _self.stage : stage // ignore: cast_nullable_to_non_nullable
@@ -586,7 +587,8 @@ as List<StartingParticipant>,notification: freezed == notification ? _self.notif
 as Notification?,autoFinishNumber: freezed == autoFinishNumber ? _self.autoFinishNumber : autoFinishNumber // ignore: cast_nullable_to_non_nullable
 as int?,awaitingNumber: freezed == awaitingNumber ? _self.awaitingNumber : awaitingNumber // ignore: cast_nullable_to_non_nullable
 as int?,updateFinishNumber: freezed == updateFinishNumber ? _self.updateFinishNumber : updateFinishNumber // ignore: cast_nullable_to_non_nullable
-as bool?,
+as bool?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -1155,7 +1157,7 @@ as int?,
 
 
 class _UpsertStage with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _UpsertStage({this.id, this.name, this.description, this.raceId, this.trailId, this.isActive, this.isDeleted, this.removeTrailId = false});
+  const _UpsertStage({this.id, this.name, this.description, this.raceId, this.trailId, this.isActive, this.deletedAt, this.removeTrailId = false});
   
 
  final  int? id;
@@ -1164,7 +1166,7 @@ class _UpsertStage with DiagnosticableTreeMixin implements DatabaseEvent {
  final  int? raceId;
  final  int? trailId;
  final  bool? isActive;
- final  bool? isDeleted;
+ final  DateTime? deletedAt;
 @JsonKey() final  bool removeTrailId;
 
 /// Create a copy of DatabaseEvent
@@ -1178,21 +1180,21 @@ _$UpsertStageCopyWith<_UpsertStage> get copyWith => __$UpsertStageCopyWithImpl<_
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.upsertStage'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('raceId', raceId))..add(DiagnosticsProperty('trailId', trailId))..add(DiagnosticsProperty('isActive', isActive))..add(DiagnosticsProperty('isDeleted', isDeleted))..add(DiagnosticsProperty('removeTrailId', removeTrailId));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('raceId', raceId))..add(DiagnosticsProperty('trailId', trailId))..add(DiagnosticsProperty('isActive', isActive))..add(DiagnosticsProperty('deletedAt', deletedAt))..add(DiagnosticsProperty('removeTrailId', removeTrailId));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpsertStage&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.raceId, raceId) || other.raceId == raceId)&&(identical(other.trailId, trailId) || other.trailId == trailId)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.removeTrailId, removeTrailId) || other.removeTrailId == removeTrailId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpsertStage&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description)&&(identical(other.raceId, raceId) || other.raceId == raceId)&&(identical(other.trailId, trailId) || other.trailId == trailId)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt)&&(identical(other.removeTrailId, removeTrailId) || other.removeTrailId == removeTrailId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,description,raceId,trailId,isActive,isDeleted,removeTrailId);
+int get hashCode => Object.hash(runtimeType,id,name,description,raceId,trailId,isActive,deletedAt,removeTrailId);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.upsertStage(id: $id, name: $name, description: $description, raceId: $raceId, trailId: $trailId, isActive: $isActive, isDeleted: $isDeleted, removeTrailId: $removeTrailId)';
+  return 'DatabaseEvent.upsertStage(id: $id, name: $name, description: $description, raceId: $raceId, trailId: $trailId, isActive: $isActive, deletedAt: $deletedAt, removeTrailId: $removeTrailId)';
 }
 
 
@@ -1203,7 +1205,7 @@ abstract mixin class _$UpsertStageCopyWith<$Res> implements $DatabaseEventCopyWi
   factory _$UpsertStageCopyWith(_UpsertStage value, $Res Function(_UpsertStage) _then) = __$UpsertStageCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? name, String? description, int? raceId, int? trailId, bool? isActive, bool? isDeleted, bool removeTrailId
+ int? id, String? name, String? description, int? raceId, int? trailId, bool? isActive, DateTime? deletedAt, bool removeTrailId
 });
 
 
@@ -1220,7 +1222,7 @@ class __$UpsertStageCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? description = freezed,Object? raceId = freezed,Object? trailId = freezed,Object? isActive = freezed,Object? isDeleted = freezed,Object? removeTrailId = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? description = freezed,Object? raceId = freezed,Object? trailId = freezed,Object? isActive = freezed,Object? deletedAt = freezed,Object? removeTrailId = null,}) {
   return _then(_UpsertStage(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1228,8 +1230,8 @@ as String?,description: freezed == description ? _self.description : description
 as String?,raceId: freezed == raceId ? _self.raceId : raceId // ignore: cast_nullable_to_non_nullable
 as int?,trailId: freezed == trailId ? _self.trailId : trailId // ignore: cast_nullable_to_non_nullable
 as int?,isActive: freezed == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
-as bool?,isDeleted: freezed == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
-as bool?,removeTrailId: null == removeTrailId ? _self.removeTrailId : removeTrailId // ignore: cast_nullable_to_non_nullable
+as bool?,deletedAt: freezed == deletedAt ? _self.deletedAt : deletedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,removeTrailId: null == removeTrailId ? _self.removeTrailId : removeTrailId // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -1607,7 +1609,7 @@ as bool,
 
 
 class _UpdateRider with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _UpdateRider({required this.riderId, required this.name, this.nickname, this.birthday, this.team, this.city, this.email, this.phone, this.comment, this.isDeleted});
+  const _UpdateRider({required this.riderId, required this.name, this.nickname, this.birthday, this.team, this.city, this.email, this.phone, this.comment, this.deletedAt});
   
 
  final  int riderId;
@@ -1619,7 +1621,7 @@ class _UpdateRider with DiagnosticableTreeMixin implements DatabaseEvent {
  final  String? email;
  final  String? phone;
  final  String? comment;
- final  bool? isDeleted;
+ final  DateTime? deletedAt;
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -1632,21 +1634,21 @@ _$UpdateRiderCopyWith<_UpdateRider> get copyWith => __$UpdateRiderCopyWithImpl<_
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseEvent.updateRider'))
-    ..add(DiagnosticsProperty('riderId', riderId))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('nickname', nickname))..add(DiagnosticsProperty('birthday', birthday))..add(DiagnosticsProperty('team', team))..add(DiagnosticsProperty('city', city))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('phone', phone))..add(DiagnosticsProperty('comment', comment))..add(DiagnosticsProperty('isDeleted', isDeleted));
+    ..add(DiagnosticsProperty('riderId', riderId))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('nickname', nickname))..add(DiagnosticsProperty('birthday', birthday))..add(DiagnosticsProperty('team', team))..add(DiagnosticsProperty('city', city))..add(DiagnosticsProperty('email', email))..add(DiagnosticsProperty('phone', phone))..add(DiagnosticsProperty('comment', comment))..add(DiagnosticsProperty('deletedAt', deletedAt));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateRider&&(identical(other.riderId, riderId) || other.riderId == riderId)&&(identical(other.name, name) || other.name == name)&&(identical(other.nickname, nickname) || other.nickname == nickname)&&(identical(other.birthday, birthday) || other.birthday == birthday)&&(identical(other.team, team) || other.team == team)&&(identical(other.city, city) || other.city == city)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.comment, comment) || other.comment == comment)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateRider&&(identical(other.riderId, riderId) || other.riderId == riderId)&&(identical(other.name, name) || other.name == name)&&(identical(other.nickname, nickname) || other.nickname == nickname)&&(identical(other.birthday, birthday) || other.birthday == birthday)&&(identical(other.team, team) || other.team == team)&&(identical(other.city, city) || other.city == city)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.comment, comment) || other.comment == comment)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,riderId,name,nickname,birthday,team,city,email,phone,comment,isDeleted);
+int get hashCode => Object.hash(runtimeType,riderId,name,nickname,birthday,team,city,email,phone,comment,deletedAt);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseEvent.updateRider(riderId: $riderId, name: $name, nickname: $nickname, birthday: $birthday, team: $team, city: $city, email: $email, phone: $phone, comment: $comment, isDeleted: $isDeleted)';
+  return 'DatabaseEvent.updateRider(riderId: $riderId, name: $name, nickname: $nickname, birthday: $birthday, team: $team, city: $city, email: $email, phone: $phone, comment: $comment, deletedAt: $deletedAt)';
 }
 
 
@@ -1657,7 +1659,7 @@ abstract mixin class _$UpdateRiderCopyWith<$Res> implements $DatabaseEventCopyWi
   factory _$UpdateRiderCopyWith(_UpdateRider value, $Res Function(_UpdateRider) _then) = __$UpdateRiderCopyWithImpl;
 @useResult
 $Res call({
- int riderId, String name, String? nickname, String? birthday, String? team, String? city, String? email, String? phone, String? comment, bool? isDeleted
+ int riderId, String name, String? nickname, String? birthday, String? team, String? city, String? email, String? phone, String? comment, DateTime? deletedAt
 });
 
 
@@ -1674,7 +1676,7 @@ class __$UpdateRiderCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? riderId = null,Object? name = null,Object? nickname = freezed,Object? birthday = freezed,Object? team = freezed,Object? city = freezed,Object? email = freezed,Object? phone = freezed,Object? comment = freezed,Object? isDeleted = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? riderId = null,Object? name = null,Object? nickname = freezed,Object? birthday = freezed,Object? team = freezed,Object? city = freezed,Object? email = freezed,Object? phone = freezed,Object? comment = freezed,Object? deletedAt = freezed,}) {
   return _then(_UpdateRider(
 riderId: null == riderId ? _self.riderId : riderId // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1685,8 +1687,8 @@ as String?,city: freezed == city ? _self.city : city // ignore: cast_nullable_to
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,comment: freezed == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
-as String?,isDeleted: freezed == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
-as bool?,
+as String?,deletedAt: freezed == deletedAt ? _self.deletedAt : deletedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
@@ -3509,7 +3511,8 @@ mixin _$DatabaseState implements DiagnosticableTreeMixin {
  Stage? get stage;/// Информация для различных всплывающих уведомлений
  Notification? get notification;/// Автоматически подставленный в финишное время номер
  int? get autoFinishNumber;/// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
- int? get awaitingNumber;
+ int? get awaitingNumber;/// Ошибка базы данных
+ String? get errorMessage;
 /// Create a copy of DatabaseState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3521,21 +3524,21 @@ $DatabaseStateCopyWith<DatabaseState> get copyWith => _$DatabaseStateCopyWithImp
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseState'))
-    ..add(DiagnosticsProperty('races', races))..add(DiagnosticsProperty('stages', stages))..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('riders', riders))..add(DiagnosticsProperty('participants', participants))..add(DiagnosticsProperty('finishes', finishes))..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))..add(DiagnosticsProperty('race', race))..add(DiagnosticsProperty('stage', stage))..add(DiagnosticsProperty('notification', notification))..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))..add(DiagnosticsProperty('awaitingNumber', awaitingNumber));
+    ..add(DiagnosticsProperty('races', races))..add(DiagnosticsProperty('stages', stages))..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('riders', riders))..add(DiagnosticsProperty('participants', participants))..add(DiagnosticsProperty('finishes', finishes))..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))..add(DiagnosticsProperty('race', race))..add(DiagnosticsProperty('stage', stage))..add(DiagnosticsProperty('notification', notification))..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))..add(DiagnosticsProperty('awaitingNumber', awaitingNumber))..add(DiagnosticsProperty('errorMessage', errorMessage));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseState&&const DeepCollectionEquality().equals(other.races, races)&&const DeepCollectionEquality().equals(other.stages, stages)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.riders, riders)&&const DeepCollectionEquality().equals(other.participants, participants)&&const DeepCollectionEquality().equals(other.finishes, finishes)&&const DeepCollectionEquality().equals(other.numbersOnTrace, numbersOnTrace)&&const DeepCollectionEquality().equals(other.race, race)&&const DeepCollectionEquality().equals(other.stage, stage)&&(identical(other.notification, notification) || other.notification == notification)&&(identical(other.autoFinishNumber, autoFinishNumber) || other.autoFinishNumber == autoFinishNumber)&&(identical(other.awaitingNumber, awaitingNumber) || other.awaitingNumber == awaitingNumber));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseState&&const DeepCollectionEquality().equals(other.races, races)&&const DeepCollectionEquality().equals(other.stages, stages)&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.riders, riders)&&const DeepCollectionEquality().equals(other.participants, participants)&&const DeepCollectionEquality().equals(other.finishes, finishes)&&const DeepCollectionEquality().equals(other.numbersOnTrace, numbersOnTrace)&&const DeepCollectionEquality().equals(other.race, race)&&const DeepCollectionEquality().equals(other.stage, stage)&&(identical(other.notification, notification) || other.notification == notification)&&(identical(other.autoFinishNumber, autoFinishNumber) || other.autoFinishNumber == autoFinishNumber)&&(identical(other.awaitingNumber, awaitingNumber) || other.awaitingNumber == awaitingNumber)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(races),const DeepCollectionEquality().hash(stages),const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(riders),const DeepCollectionEquality().hash(participants),const DeepCollectionEquality().hash(finishes),const DeepCollectionEquality().hash(numbersOnTrace),const DeepCollectionEquality().hash(race),const DeepCollectionEquality().hash(stage),notification,autoFinishNumber,awaitingNumber);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(races),const DeepCollectionEquality().hash(stages),const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(riders),const DeepCollectionEquality().hash(participants),const DeepCollectionEquality().hash(finishes),const DeepCollectionEquality().hash(numbersOnTrace),const DeepCollectionEquality().hash(race),const DeepCollectionEquality().hash(stage),notification,autoFinishNumber,awaitingNumber,errorMessage);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+  return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, errorMessage: $errorMessage)';
 }
 
 
@@ -3546,7 +3549,7 @@ abstract mixin class $DatabaseStateCopyWith<$Res>  {
   factory $DatabaseStateCopyWith(DatabaseState value, $Res Function(DatabaseState) _then) = _$DatabaseStateCopyWithImpl;
 @useResult
 $Res call({
- List<Race> races, List<Stage> stages, List<String?> categories, List<Rider> riders, List<ParticipantAtStart> participants, List<Finish> finishes, List<StartingParticipant> numbersOnTrace, Race? race, Stage? stage, Notification? notification, int? autoFinishNumber, int? awaitingNumber
+ List<Race> races, List<Stage> stages, List<String?> categories, List<Rider> riders, List<ParticipantAtStart> participants, List<Finish> finishes, List<StartingParticipant> numbersOnTrace, Race? race, Stage? stage, Notification? notification, int? autoFinishNumber, int? awaitingNumber, String? errorMessage
 });
 
 
@@ -3563,7 +3566,7 @@ class _$DatabaseStateCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? races = null,Object? stages = null,Object? categories = null,Object? riders = null,Object? participants = null,Object? finishes = null,Object? numbersOnTrace = null,Object? race = freezed,Object? stage = freezed,Object? notification = freezed,Object? autoFinishNumber = freezed,Object? awaitingNumber = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? races = null,Object? stages = null,Object? categories = null,Object? riders = null,Object? participants = null,Object? finishes = null,Object? numbersOnTrace = null,Object? race = freezed,Object? stage = freezed,Object? notification = freezed,Object? autoFinishNumber = freezed,Object? awaitingNumber = freezed,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 races: null == races ? _self.races : races // ignore: cast_nullable_to_non_nullable
 as List<Race>,stages: null == stages ? _self.stages : stages // ignore: cast_nullable_to_non_nullable
@@ -3577,7 +3580,8 @@ as Race?,stage: freezed == stage ? _self.stage : stage // ignore: cast_nullable_
 as Stage?,notification: freezed == notification ? _self.notification : notification // ignore: cast_nullable_to_non_nullable
 as Notification?,autoFinishNumber: freezed == autoFinishNumber ? _self.autoFinishNumber : autoFinishNumber // ignore: cast_nullable_to_non_nullable
 as int?,awaitingNumber: freezed == awaitingNumber ? _self.awaitingNumber : awaitingNumber // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 /// Create a copy of DatabaseState
@@ -3671,10 +3675,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Race? race,  Stage? stage,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Race? race,  Stage? stage,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case DBState() when $default != null:
-return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.race,_that.stage,_that.notification,_that.autoFinishNumber,_that.awaitingNumber);case _:
+return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.race,_that.stage,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -3692,10 +3696,10 @@ return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.par
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Race? race,  Stage? stage,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Race? race,  Stage? stage,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case DBState():
-return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.race,_that.stage,_that.notification,_that.autoFinishNumber,_that.awaitingNumber);}
+return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.race,_that.stage,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.errorMessage);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -3709,10 +3713,10 @@ return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.par
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Race? race,  Stage? stage,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Race> races,  List<Stage> stages,  List<String?> categories,  List<Rider> riders,  List<ParticipantAtStart> participants,  List<Finish> finishes,  List<StartingParticipant> numbersOnTrace,  Race? race,  Stage? stage,  Notification? notification,  int? autoFinishNumber,  int? awaitingNumber,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case DBState() when $default != null:
-return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.race,_that.stage,_that.notification,_that.autoFinishNumber,_that.awaitingNumber);case _:
+return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.participants,_that.finishes,_that.numbersOnTrace,_that.race,_that.stage,_that.notification,_that.autoFinishNumber,_that.awaitingNumber,_that.errorMessage);case _:
   return null;
 
 }
@@ -3724,7 +3728,7 @@ return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.par
 
 
 class DBState with DiagnosticableTreeMixin implements DatabaseState {
-  const DBState({required final  List<Race> races, required final  List<Stage> stages, required final  List<String?> categories, required final  List<Rider> riders, required final  List<ParticipantAtStart> participants, required final  List<Finish> finishes, required final  List<StartingParticipant> numbersOnTrace, this.race, this.stage, this.notification, this.autoFinishNumber, this.awaitingNumber}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
+  const DBState({required final  List<Race> races, required final  List<Stage> stages, required final  List<String?> categories, required final  List<Rider> riders, required final  List<ParticipantAtStart> participants, required final  List<Finish> finishes, required final  List<StartingParticipant> numbersOnTrace, this.race, this.stage, this.notification, this.autoFinishNumber, this.awaitingNumber, this.errorMessage}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
   
 
  final  List<Race> _races;
@@ -3786,6 +3790,8 @@ class DBState with DiagnosticableTreeMixin implements DatabaseState {
 @override final  int? autoFinishNumber;
 /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
 @override final  int? awaitingNumber;
+/// Ошибка базы данных
+@override final  String? errorMessage;
 
 /// Create a copy of DatabaseState
 /// with the given fields replaced by the non-null parameter values.
@@ -3798,21 +3804,21 @@ $DBStateCopyWith<DBState> get copyWith => _$DBStateCopyWithImpl<DBState>(this, _
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DatabaseState'))
-    ..add(DiagnosticsProperty('races', races))..add(DiagnosticsProperty('stages', stages))..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('riders', riders))..add(DiagnosticsProperty('participants', participants))..add(DiagnosticsProperty('finishes', finishes))..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))..add(DiagnosticsProperty('race', race))..add(DiagnosticsProperty('stage', stage))..add(DiagnosticsProperty('notification', notification))..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))..add(DiagnosticsProperty('awaitingNumber', awaitingNumber));
+    ..add(DiagnosticsProperty('races', races))..add(DiagnosticsProperty('stages', stages))..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('riders', riders))..add(DiagnosticsProperty('participants', participants))..add(DiagnosticsProperty('finishes', finishes))..add(DiagnosticsProperty('numbersOnTrace', numbersOnTrace))..add(DiagnosticsProperty('race', race))..add(DiagnosticsProperty('stage', stage))..add(DiagnosticsProperty('notification', notification))..add(DiagnosticsProperty('autoFinishNumber', autoFinishNumber))..add(DiagnosticsProperty('awaitingNumber', awaitingNumber))..add(DiagnosticsProperty('errorMessage', errorMessage));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DBState&&const DeepCollectionEquality().equals(other._races, _races)&&const DeepCollectionEquality().equals(other._stages, _stages)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._riders, _riders)&&const DeepCollectionEquality().equals(other._participants, _participants)&&const DeepCollectionEquality().equals(other._finishes, _finishes)&&const DeepCollectionEquality().equals(other._numbersOnTrace, _numbersOnTrace)&&const DeepCollectionEquality().equals(other.race, race)&&const DeepCollectionEquality().equals(other.stage, stage)&&(identical(other.notification, notification) || other.notification == notification)&&(identical(other.autoFinishNumber, autoFinishNumber) || other.autoFinishNumber == autoFinishNumber)&&(identical(other.awaitingNumber, awaitingNumber) || other.awaitingNumber == awaitingNumber));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DBState&&const DeepCollectionEquality().equals(other._races, _races)&&const DeepCollectionEquality().equals(other._stages, _stages)&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._riders, _riders)&&const DeepCollectionEquality().equals(other._participants, _participants)&&const DeepCollectionEquality().equals(other._finishes, _finishes)&&const DeepCollectionEquality().equals(other._numbersOnTrace, _numbersOnTrace)&&const DeepCollectionEquality().equals(other.race, race)&&const DeepCollectionEquality().equals(other.stage, stage)&&(identical(other.notification, notification) || other.notification == notification)&&(identical(other.autoFinishNumber, autoFinishNumber) || other.autoFinishNumber == autoFinishNumber)&&(identical(other.awaitingNumber, awaitingNumber) || other.awaitingNumber == awaitingNumber)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_races),const DeepCollectionEquality().hash(_stages),const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_riders),const DeepCollectionEquality().hash(_participants),const DeepCollectionEquality().hash(_finishes),const DeepCollectionEquality().hash(_numbersOnTrace),const DeepCollectionEquality().hash(race),const DeepCollectionEquality().hash(stage),notification,autoFinishNumber,awaitingNumber);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_races),const DeepCollectionEquality().hash(_stages),const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_riders),const DeepCollectionEquality().hash(_participants),const DeepCollectionEquality().hash(_finishes),const DeepCollectionEquality().hash(_numbersOnTrace),const DeepCollectionEquality().hash(race),const DeepCollectionEquality().hash(stage),notification,autoFinishNumber,awaitingNumber,errorMessage);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber)';
+  return 'DatabaseState(races: $races, stages: $stages, categories: $categories, riders: $riders, participants: $participants, finishes: $finishes, numbersOnTrace: $numbersOnTrace, race: $race, stage: $stage, notification: $notification, autoFinishNumber: $autoFinishNumber, awaitingNumber: $awaitingNumber, errorMessage: $errorMessage)';
 }
 
 
@@ -3823,7 +3829,7 @@ abstract mixin class $DBStateCopyWith<$Res> implements $DatabaseStateCopyWith<$R
   factory $DBStateCopyWith(DBState value, $Res Function(DBState) _then) = _$DBStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Race> races, List<Stage> stages, List<String?> categories, List<Rider> riders, List<ParticipantAtStart> participants, List<Finish> finishes, List<StartingParticipant> numbersOnTrace, Race? race, Stage? stage, Notification? notification, int? autoFinishNumber, int? awaitingNumber
+ List<Race> races, List<Stage> stages, List<String?> categories, List<Rider> riders, List<ParticipantAtStart> participants, List<Finish> finishes, List<StartingParticipant> numbersOnTrace, Race? race, Stage? stage, Notification? notification, int? autoFinishNumber, int? awaitingNumber, String? errorMessage
 });
 
 
@@ -3840,7 +3846,7 @@ class _$DBStateCopyWithImpl<$Res>
 
 /// Create a copy of DatabaseState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? races = null,Object? stages = null,Object? categories = null,Object? riders = null,Object? participants = null,Object? finishes = null,Object? numbersOnTrace = null,Object? race = freezed,Object? stage = freezed,Object? notification = freezed,Object? autoFinishNumber = freezed,Object? awaitingNumber = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? races = null,Object? stages = null,Object? categories = null,Object? riders = null,Object? participants = null,Object? finishes = null,Object? numbersOnTrace = null,Object? race = freezed,Object? stage = freezed,Object? notification = freezed,Object? autoFinishNumber = freezed,Object? awaitingNumber = freezed,Object? errorMessage = freezed,}) {
   return _then(DBState(
 races: null == races ? _self._races : races // ignore: cast_nullable_to_non_nullable
 as List<Race>,stages: null == stages ? _self._stages : stages // ignore: cast_nullable_to_non_nullable
@@ -3854,7 +3860,8 @@ as Race?,stage: freezed == stage ? _self.stage : stage // ignore: cast_nullable_
 as Stage?,notification: freezed == notification ? _self.notification : notification // ignore: cast_nullable_to_non_nullable
 as Notification?,autoFinishNumber: freezed == autoFinishNumber ? _self.autoFinishNumber : autoFinishNumber // ignore: cast_nullable_to_non_nullable
 as int?,awaitingNumber: freezed == awaitingNumber ? _self.awaitingNumber : awaitingNumber // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

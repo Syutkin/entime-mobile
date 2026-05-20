@@ -41,7 +41,7 @@ void main() {
   }
 
   setUp(() {
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
     trailsBloc = MockTrailsBloc();
     databaseBloc = MockDatabaseBloc();
     countdownBloc = MockCountdownBloc();

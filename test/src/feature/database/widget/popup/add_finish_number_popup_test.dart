@@ -57,7 +57,7 @@ void main() {
       isHidden: false,
       isManual: false,
     );
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
 
     when(() => databaseBloc.state).thenReturn(
       DatabaseState(

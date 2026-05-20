@@ -10,7 +10,7 @@ CREATE TABLE races (
 	location text,
 	url text,
 	description text,
-	is_deleted BOOLEAN NOT NULL DEFAULT false
+	deleted_at DATETIME
 ) AS Race;
 
 CREATE TABLE stages (
@@ -20,7 +20,7 @@ CREATE TABLE stages (
 	name text NOT NULL,
 	description text,
 	is_active BOOLEAN NOT NULL DEFAULT true,
-	is_deleted BOOLEAN NOT NULL DEFAULT false,
+	deleted_at DATETIME,
     FOREIGN KEY (trail_id) REFERENCES trails(id) ON DELETE SET NULL,
     FOREIGN KEY (race_id) REFERENCES races(id) ON DELETE CASCADE
 );
@@ -38,7 +38,7 @@ CREATE TABLE riders (
 --	email text UNIQUE,
 --	phone text UNIQUE,
 	comment text,
-	is_deleted BOOLEAN NOT NULL DEFAULT false
+	deleted_at DATETIME
 );
 
 CREATE TABLE statuses (
@@ -54,10 +54,10 @@ CREATE TABLE participants (
 	category text, /* может быть NULL для быстрого добавления номера на старте */
 	rfid text,
 	status_id integer NOT NULL DEFAULT 1,
-	is_deleted BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (rider_id) REFERENCES riders(id),
     FOREIGN KEY (race_id) REFERENCES races(id) ON DELETE CASCADE,
-    FOREIGN KEY (status_id) REFERENCES statuses(id)
+    FOREIGN KEY (status_id) REFERENCES statuses(id),
+	UNIQUE (race_id, number)
 );
 
 CREATE TABLE starts (
@@ -100,7 +100,7 @@ CREATE TABLE trails (
 	file_id integer,
 	url text,
 	description text,
-	is_deleted BOOLEAN NOT NULL DEFAULT false,
+	deleted_at DATETIME,
 	FOREIGN KEY (file_id) REFERENCES track_files(id) ON DELETE SET NULL
 );
 
@@ -125,23 +125,23 @@ CREATE TABLE logs (
 );
 
 
-_getRaces: SELECT * FROM races WHERE is_deleted = false;
+_getRaces: SELECT * FROM races WHERE deleted_at IS NULL;
 
 /*
 _addRace:
 INSERT INTO races (name, start_date, finish_date, location, url, description)
 VALUES (:name, :start_date, :finish_date, :location, :url, :description);
 
-_deleteRace: UPDATE races SET is_deleted = true WHERE id = :id;
+_deleteRace: UPDATE races SET deleted_at IS NOT NULL WHERE id = :id;
 */
 
-_getStages: SELECT * FROM stages WHERE race_id = :race_id AND is_deleted = false;
+_getStages: SELECT * FROM stages WHERE race_id = :race_id AND deleted_at IS NULL;
 /*
 _addStage: INSERT INTO stages (trail_id, race_id, name) VALUES (:trail_id, :race_id, :name);
-_deleteStage: UPDATE stages SET is_deleted = true WHERE id = :id;
+_deleteStage: UPDATE stages SET deleted_at IS NOT NULL WHERE id = :id;
 */
 
-/*_getTrails: SELECT * FROM trails WHERE is_deleted = false;*/
+/*_getTrails: SELECT * FROM trails WHERE deleted_at IS NULL;*/
 _getTrails AS TrailInfo:
 SELECT
 	trails.id as id,
@@ -160,7 +160,7 @@ SELECT
 FROM trails LEFT JOIN track_files
 ON trails.file_id = track_files.id
 WHERE
-    trails.is_deleted = false;
+    trails.deleted_at IS NULL;
 
 _getTrail AS TrailInfo:
 SELECT
@@ -181,7 +181,7 @@ FROM trails LEFT JOIN track_files
 ON trails.file_id = track_files.id
 WHERE
     trails.id = :id AND
-    trails.is_deleted = false;
+    trails.deleted_at IS NULL;
 
 _getTrackIdByHash:
 SELECT id
@@ -197,7 +197,7 @@ VALUES(:name, :nickname, :birthday, :team, :city, :email, :phone, :comment);
 
 -- ToDo: dunno why nocase didn't work
 _getRiders:
-SELECT * FROM riders WHERE is_deleted = :is_deleted ORDER BY name COLLATE NOCASE ASC ;
+SELECT * FROM riders WHERE deleted_at IS NULL ORDER BY name COLLATE NOCASE ASC ;
 
 _addParticipant:
 INSERT INTO participants (race_id, rider_id, number, category, rfid)

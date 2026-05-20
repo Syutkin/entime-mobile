@@ -154,7 +154,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
                     title: Text(Localization.current.I18nDatabase_newRider),
                     trailing: TextButton(
                       onPressed: () {
-                        final rider = Rider(id: -1, name: query, isDeleted: false);
+                        final rider = Rider(id: -1, name: query);
                         riderDropdownKey.currentState!.changeSelectedItem(rider);
                         riderDropdownKey.currentState!.closeDropDownSearch();
                         setState(() {

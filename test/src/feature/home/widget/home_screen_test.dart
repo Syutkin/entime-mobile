@@ -300,7 +300,7 @@ void main() {
     group('Listeners tests', () {
       group('Bluetooth listener', () {
         patrolWidgetTest('Get AutomaticStart message and add starttime from it to to database', ($) async {
-          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true);
           final automaticStart = AutomaticStart('10:10:10', 1111, DateTime.now());
           when(() => databaseBloc.state).thenReturn(
             const DatabaseState(
@@ -349,7 +349,7 @@ void main() {
         });
 
         patrolWidgetTest('Get Finish message and add finishtime from it to to database', ($) async {
-          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true);
           const time = '10:10:10';
           final timestamp = DateTime.now();
           when(() => databaseBloc.state).thenReturn(
@@ -873,7 +873,7 @@ void main() {
         patrolWidgetTest('Call participant from app if enable at settings', ($) async {
           await settingsCubit.update(settingsCubit.state.copyWith(voiceFromApp: true));
 
-          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+          const stage = Stage(id: 1, raceId: 1, name: 'name', isActive: true);
 
           when(() => databaseBloc.state).thenReturn(
             const DatabaseState(
@@ -936,8 +936,8 @@ void main() {
     group('TextTitle tests', () {
       const raceName = 'race name123';
       const stageName = 'stage name123';
-      const race = Race(id: 1, name: raceName, isDeleted: false);
-      const stage = Stage(id: 1, raceId: 1, name: stageName, isActive: true, isDeleted: false);
+      const race = Race(id: 1, name: raceName);
+      const stage = Stage(id: 1, raceId: 1, name: stageName, isActive: true);
       patrolWidgetTest('App name if race or stage not selected', ($) async {
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(

@@ -103,8 +103,8 @@ void main() {
         participants: [],
         finishes: [],
         numbersOnTrace: [],
-        race: Race(id: 1, name: 'race', isDeleted: false),
-        stage: Stage(id: 1, raceId: 1, name: 'stage', isActive: true, isDeleted: false),
+        race: Race(id: 1, name: 'race'),
+        stage: Stage(id: 1, raceId: 1, name: 'stage', isActive: true),
       ),
     );
     when(() => updateBloc.state).thenReturn(const UpdateState.initial());

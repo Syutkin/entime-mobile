@@ -36,8 +36,8 @@ void main() {
   }
 
   setUp(() async {
-    race = const Race(id: 1, name: 'Race name', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'Race name');
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
 
     databaseBloc = MockDatabaseBloc();
     trailsBloc = MockTrailsBloc();
@@ -72,7 +72,7 @@ void main() {
     });
 
     patrolWidgetTest('Existing races list', ($) async {
-      const race = Race(id: 1, name: 'name', isDeleted: false);
+      const race = Race(id: 1, name: 'name');
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [race, race, race, race, race],

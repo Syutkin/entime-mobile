@@ -176,7 +176,7 @@ void main() {
             participants: [],
             finishes: [],
             numbersOnTrace: [],
-            stage: Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false),
+            stage: Stage(id: 1, raceId: 1, name: 'name', isActive: true),
           ),
         );
       });
@@ -364,7 +364,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true);
         expectedStates = [
           const DatabaseState(
             races: [],
@@ -663,4 +663,4 @@ final participants = <ParticipantAtStart>[
   ),
 ];
 
-final riders = <Rider>[const Rider(id: 1, name: 'name', isDeleted: false)];
+final riders = <Rider>[const Rider(id: 1, name: 'name')];

@@ -51,7 +51,6 @@ void main() {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -70,7 +69,6 @@ void main() {
         id: 1,
         name: 'John Doe',
         birthday: '1990-05-15',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -91,7 +89,6 @@ void main() {
         id: 1,
         name: 'John Doe',
         city: 'Moscow',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -113,7 +110,6 @@ void main() {
         name: 'John Doe',
         birthday: '1990-05-15',
         city: 'Moscow',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -132,7 +128,6 @@ void main() {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -146,7 +141,6 @@ void main() {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -161,7 +155,6 @@ void main() {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -176,7 +169,6 @@ void main() {
       rider = const Rider(
         id: 1,
         name: 'John Doe',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -191,7 +183,6 @@ void main() {
         id: 1,
         name: 'John Doe',
         birthday: '1990-05-15',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -211,7 +202,6 @@ void main() {
         team: 'Team A',
         birthday: '1990-05-15',
         city: 'Moscow',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -236,7 +226,6 @@ void main() {
         email: 'john@example.com',
         phone: '+1234567890',
         comment: 'Test rider',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(testWidget());
@@ -262,7 +251,6 @@ void main() {
         team: 'Team A',
         birthday: '1990-05-15',
         city: 'Moscow',
-        isDeleted: false,
       );
 
       when(() => databaseBloc.state).thenReturn(
@@ -277,7 +265,6 @@ void main() {
               team: 'Team A',
               birthday: '1990-05-15',
               city: 'Moscow',
-              isDeleted: false,
             ),
             Rider(
               id: 1,
@@ -285,7 +272,6 @@ void main() {
               team: 'Team B',
               birthday: '1991-05-15',
               city: 'SPb',
-              isDeleted: false,
             ),
           ],
           participants: [],

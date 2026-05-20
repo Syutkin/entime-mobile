@@ -88,8 +88,8 @@ void main() {
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     settingsProvider = await SharedPrefsSettingsProvider.load();
 
-    race = const Race(id: 1, name: 'raceName', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'stageName', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'raceName');
+    stage = const Stage(id: 1, raceId: 1, name: 'stageName', isActive: true);
     deltaInSeconds = 10;
 
     when(() => shareProvider.share(any())).thenAnswer((_) => Future.value());
@@ -394,7 +394,7 @@ void main() {
       setUp: () {
         Bloc.observer = AppBlocObserver();
         bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
-        stage = const Stage(id: 2, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+        stage = const Stage(id: 2, raceId: 1, name: 'name', isActive: true);
       },
       build: () => bloc,
       act: (bloc) {

@@ -39,7 +39,7 @@ void main() {
   setUpAll(() {
     registerFallbackValue(
       const DatabaseEvent.addStartNumber(
-        stage: Stage(id: 1, raceId: 1, name: 'Test', isActive: true, isDeleted: false),
+        stage: Stage(id: 1, raceId: 1, name: 'Test', isActive: true),
         number: 1,
         startTime: '',
       ),
@@ -48,7 +48,7 @@ void main() {
 
   setUp(() {
     databaseBloc = MockDatabaseBloc();
-    stage = const Stage(id: 1, raceId: 1, name: 'Test Stage', isActive: true, isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'Test Stage', isActive: true);
 
     when(() => databaseBloc.state).thenReturn(
       DatabaseState(

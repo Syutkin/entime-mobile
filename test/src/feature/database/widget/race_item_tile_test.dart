@@ -38,7 +38,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -58,7 +57,6 @@ void main() {
         name: 'Test Race with Dates',
         startDate: '2024-01-15',
         finishDate: '2024-01-17',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -79,7 +77,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -92,7 +89,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -109,7 +105,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -124,7 +119,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -138,7 +132,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -156,7 +149,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -171,7 +163,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -187,8 +178,6 @@ void main() {
         id: 1,
         name: 'Test Race',
         startDate: '2024-01-15',
-        // finishDate отсутствует
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -206,7 +195,6 @@ void main() {
         name: 'Test Race',
         // startDate отсутствует
         finishDate: '2024-01-17',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
@@ -222,7 +210,6 @@ void main() {
       race = const Race(
         id: 1,
         name: 'Test Race',
-        isDeleted: false,
       );
 
       await $.pumpWidgetAndSettle(await testWidget());

@@ -58,7 +58,7 @@ void main() {
     });
 
     patrolWidgetTest('Existing races list', ($) async {
-      const race = Race(id: 1, name: 'name', isDeleted: false);
+      const race = Race(id: 1, name: 'name');
       when(() => databaseBloc.state).thenReturn(
         const DatabaseState(
           races: [race, race, race, race, race],

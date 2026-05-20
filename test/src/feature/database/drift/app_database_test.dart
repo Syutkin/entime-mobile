@@ -13,6 +13,7 @@ import 'package:entime/src/feature/database/drift/app_database.dart';
 import 'package:entime/src/feature/database/model/participant_status.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
+import 'package:sqlite3/sqlite3.dart';
 
 part 'helpers/raw_queries.dart';
 
@@ -575,7 +576,7 @@ void main() {
       test('"Delete" rider', () async {
         const id = 5;
 
-        final count = await db.updateRider(id: id, isDeleted: true);
+        final count = await db.updateRider(id: id, deletedAt: DateTime.now().toUtc());
 
         final riders = await db.getRiders.get();
         expect(count, 1);
@@ -583,7 +584,103 @@ void main() {
       });
     });
 
+    group('Database constraints tests', () {
+      test('Does not allow duplicate participant number in same race', () async {
+        final participantsBefore = await db.select(db.participants).get();
+
+        expect(
+          db
+              .into(db.participants)
+              .insert(
+                const ParticipantsCompanion(
+                  raceId: Value(1),
+                  riderId: Value(2),
+                  number: Value(2),
+                ),
+              ),
+          throwsA(isA<SqliteException>()),
+        );
+
+        final participantsAfter = await db.select(db.participants).get();
+        expect(participantsAfter.length, participantsBefore.length);
+      });
+
+      test('Allows same participant number in different races', () async {
+        const number = 999;
+
+        await db
+            .into(db.participants)
+            .insert(
+              const ParticipantsCompanion(
+                raceId: Value(1),
+                riderId: Value(1),
+                number: Value(number),
+              ),
+            );
+        await db
+            .into(db.participants)
+            .insert(
+              const ParticipantsCompanion(
+                raceId: Value(2),
+                riderId: Value(2),
+                number: Value(number),
+              ),
+            );
+
+        final participants = await (db.select(db.participants)..where((p) => p.number.equals(number))).get();
+
+        expect(participants.length, 2);
+        expect(participants.map((p) => p.raceId), containsAll([1, 2]));
+      });
+
+      test('Update participant does not allow changing number to occupied number', () async {
+        final participant =
+            await (db.select(db.participants)
+                  ..where((p) => p.raceId.equals(1) & p.number.equals(7))
+                  ..limit(1))
+                .getSingle();
+
+        expect(
+          (db.update(db.participants)..where((p) => p.id.equals(participant.id))).write(
+            const ParticipantsCompanion(number: Value(2)),
+          ),
+          throwsA(isA<SqliteException>()),
+        );
+
+        final unchanged = await (db.select(db.participants)..where((p) => p.id.equals(participant.id))).getSingle();
+
+        expect(unchanged.number, 7);
+      });
+    });
+
     group('Participants tests', () {
+      test('Update participant allows keeping own number', () async {
+        const stageId = 1;
+        const number = 55;
+        const category = 'updated category';
+        const rfid = 'updated rfid';
+
+        final existed = await db.getNumberAtStarts(stageId: stageId, number: number).getSingle();
+
+        final count = await db.updateParticipant(
+          id: existed.participantId,
+          number: number,
+          category: category,
+          rfid: rfid,
+        );
+
+        expect(count, 1);
+
+        final updated = await db.getNumberAtStarts(stageId: stageId, number: number).getSingle();
+
+        expect(updated.participantId, existed.participantId);
+        expect(updated.raceId, existed.raceId);
+        expect(updated.riderId, existed.riderId);
+        expect(updated.number, number);
+        expect(updated.category, category);
+        expect(updated.rfid, rfid);
+      });
+
       test('Update participant', () async {
         const raceId = 2;
         const riderId = 5;

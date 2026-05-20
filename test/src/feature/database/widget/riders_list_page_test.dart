@@ -37,7 +37,6 @@ void main() {
       name: 'John Doe',
       birthday: '1990-05-15',
       city: 'Moscow',
-      isDeleted: false,
     );
 
     rider2 = const Rider(
@@ -45,7 +44,6 @@ void main() {
       name: 'Jane Smith',
       team: 'Team Alpha',
       email: 'jane@example.com',
-      isDeleted: false,
     );
 
     rider3 = const Rider(
@@ -53,7 +51,6 @@ void main() {
       name: 'Bob Johnson',
       nickname: 'Bobby',
       phone: '+1234567890',
-      isDeleted: false,
     );
 
     when(() => databaseBloc.state).thenReturn(
@@ -160,7 +157,6 @@ void main() {
         email: 'full@example.com',
         phone: '+9876543210',
         comment: 'Test comment',
-        isDeleted: false,
       );
 
       when(() => databaseBloc.state).thenReturn(

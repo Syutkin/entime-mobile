@@ -52,7 +52,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   /// Весь список гонок, кроме "удалённых" (is_deleted = true)
   Selectable<Race> getRaces() {
@@ -61,7 +61,7 @@ class AppDatabase extends _$AppDatabase {
 
   Future<Race?> getRace(int id) {
     return (select(races)
-          ..where((r) => r.id.equals(id) & r.isDeleted.not())
+          ..where((r) => r.id.equals(id) & r.deletedAt.isNull())
           ..limit(1))
         .getSingleOrNull();
   }
@@ -87,7 +87,7 @@ class AppDatabase extends _$AppDatabase {
 
   /// Удаляет гонку с [id]
   Future<int> deleteRace(int id) {
-    return (update(races)..where((r) => r.id.equals(id))).write(const RacesCompanion(isDeleted: Value(true)));
+    return (update(races)..where((r) => r.id.equals(id))).write(RacesCompanion(deletedAt: Value(DateTime.now().toUtc())));
   }
 
   /// Обновление информации о гонке с [id]
@@ -120,7 +120,7 @@ class AppDatabase extends _$AppDatabase {
     String? location,
     String? url,
     String? description,
-    bool? isDeleted,
+    DateTime? deletedAt,
   }) async {
     final raceId = await into(races).insertOnConflictUpdate(
       RacesCompanion(
@@ -131,7 +131,7 @@ class AppDatabase extends _$AppDatabase {
         location: location != null ? Value(location) : const Value.absent(),
         url: url != null ? Value(url) : const Value.absent(),
         description: description != null ? Value(description) : const Value.absent(),
-        isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
+        deletedAt: deletedAt != null ? Value(deletedAt) : const Value.absent(),
       ),
     );
 
@@ -146,7 +146,7 @@ class AppDatabase extends _$AppDatabase {
   /// Возвращает [Stage] с [id]
   Future<Stage?> getStage(int id) {
     return (select(stages)
-          ..where((r) => r.id.equals(id) & r.isDeleted.not())
+          ..where((r) => r.id.equals(id) & r.deletedAt.isNull())
           ..limit(1))
         .getSingleOrNull();
   }
@@ -158,7 +158,7 @@ class AppDatabase extends _$AppDatabase {
 
   /// Удаляет спецучасток с [id]
   Future<int> deleteStage(int id) {
-    return (update(stages)..where((r) => r.id.equals(id))).write(const StagesCompanion(isDeleted: Value(true)));
+    return (update(stages)..where((r) => r.id.equals(id))).write(StagesCompanion(deletedAt: Value(DateTime.now().toUtc())));
   }
 
   /// Обновление информации о гоночном этапе с [id]
@@ -188,7 +188,7 @@ class AppDatabase extends _$AppDatabase {
     int? raceId,
     int? trailId,
     bool? isActive,
-    bool? isDeleted,
+    DateTime? deletedAt,
     bool removeTrailId = false,
   }) async {
     Value<int?>? trailIdValue;
@@ -205,7 +205,7 @@ class AppDatabase extends _$AppDatabase {
         raceId: raceId != null ? Value(raceId) : const Value.absent(),
         trailId: trailIdValue,
         isActive: isActive != null ? Value(isActive) : const Value.absent(),
-        isDeleted: isDeleted != null ? Value(isDeleted) : const Value.absent(),
+        deletedAt: deletedAt != null ? Value(deletedAt) : const Value.absent(),
       ),
     );
 
@@ -292,7 +292,7 @@ class AppDatabase extends _$AppDatabase {
   /// Удаляет трейл с [id]
   Future<int> deleteTrail(int id) async {
     // ToDo: если был файл трека, то вот его надо бы удалять
-    return (update(trails)..where((r) => r.id.equals(id))).write(const TrailsCompanion(isDeleted: Value(true)));
+    return (update(trails)..where((r) => r.id.equals(id))).write(TrailsCompanion(deletedAt: Value(DateTime.now().toUtc())));
   }
 
   /// Добавляет трек
@@ -333,7 +333,7 @@ class AppDatabase extends _$AppDatabase {
 
   /// Список "не удалённых" гонщиков, отсортированных по именам
   Selectable<Rider> get getRiders {
-    return _getRiders(isDeleted: false);
+    return _getRiders();
   }
 
   /// Добавляет гонщика
@@ -375,7 +375,7 @@ class AppDatabase extends _$AppDatabase {
     String? email,
     String? phone,
     String? comment,
-    bool? isDeleted,
+    DateTime? deletedAt,
   }) {
     return (update(riders)..where((r) => r.id.equals(id))).write(
       RidersCompanion(
@@ -415,7 +415,7 @@ class AppDatabase extends _$AppDatabase {
             : comment.isNotEmpty
             ? Value(comment)
             : const Value(null),
-        isDeleted: isDeleted == null ? const Value.absent() : Value(isDeleted),
+        deletedAt: deletedAt == null ? const Value.absent() : Value(deletedAt),
       ),
     );
   }
@@ -446,7 +446,6 @@ class AppDatabase extends _$AppDatabase {
     int? statusId,
     String? category,
     String? rfid,
-    bool isDeleted = false,
   }) {
     return (update(participants)..where((p) => p.id.equals(id))).write(
       ParticipantsCompanion(
@@ -456,7 +455,6 @@ class AppDatabase extends _$AppDatabase {
         category: category == null ? const Value.absent() : Value(category),
         rfid: rfid == null ? const Value.absent() : Value(rfid),
         statusId: statusId == null ? const Value.absent() : Value(statusId),
-        isDeleted: Value(isDeleted),
       ),
     );
   }
@@ -1035,7 +1033,7 @@ class AppDatabase extends _$AppDatabase {
           final startTime = item.startTimes?[stageName];
           if (id != null && startTime != null) {
             await addStartNumber(
-              stage: Stage(id: id, raceId: raceId, name: stageName, isActive: true, isDeleted: false),
+              stage: Stage(id: id, raceId: raceId, name: stageName, isActive: true),
               number: item.number,
               startTime: startTime,
               forceAdd: true,

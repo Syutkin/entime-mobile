@@ -19,6 +19,7 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     required int? autoFinishNumber,
     required int? awaitingNumber,
     required bool? updateFinishNumber,
+    required String? errorMessage,
   }) = _EmitState;
 
   const factory DatabaseEvent.addRace({
@@ -67,7 +68,7 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     int? raceId,
     int? trailId,
     bool? isActive,
-    bool? isDeleted,
+    DateTime? deletedAt,
     @Default(false) bool removeTrailId,
   }) = _UpsertStage;
 
@@ -96,7 +97,7 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     String? email,
     String? phone,
     String? comment,
-    bool? isDeleted,
+    DateTime? deletedAt,
   }) = _UpdateRider;
 
   const factory DatabaseEvent.updateRacer({

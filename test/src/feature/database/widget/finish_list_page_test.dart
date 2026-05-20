@@ -59,7 +59,7 @@ void main() {
     ntpBloc = MockNtpBloc();
     settingsCubit = MockSettingsCubit();
     settings = const AppSettings.defaults();
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
   });
 
   group('FinishListPage tests', () {
@@ -633,7 +633,7 @@ void main() {
       late int autoFinishNumber;
       setUp(() {
         autoFinishNumber = 21;
-        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true);
 
         emptyState = const DatabaseState(
           races: [],
@@ -812,7 +812,7 @@ void main() {
             participants: [],
             finishes: [],
             numbersOnTrace: [],
-            stage: Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false),
+            stage: Stage(id: 1, raceId: 1, name: 'name', isActive: true),
           ),
         );
         when(() => ntpBloc.state).thenReturn(const NtpState.success(ntpOffset));

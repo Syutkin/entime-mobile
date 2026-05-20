@@ -73,6 +73,8 @@ class HomeScreen extends StatelessWidget {
             _listenToUpdater(),
             // Следим за таймаутами Bluetooth JSON запросов
             _listenToBluetoothRequests(),
+            // Показываем ошибки базы данных
+            _listenToDatabaseErrors(),
           ],
           child: const TabBarView(
             physics: NeverScrollableScrollPhysics(),
@@ -292,6 +294,17 @@ class HomeScreen extends StatelessWidget {
             default:
           }
         }
+      },
+    );
+  }
+
+  SingleChildWidget _listenToDatabaseErrors() {
+    return BlocListener<DatabaseBloc, DatabaseState>(
+      listenWhen: (previous, current) => previous.errorMessage != current.errorMessage && current.errorMessage != null,
+      listener: (context, state) {
+        final message = state.errorMessage;
+        if (message == null) return;
+        _showSnackBar(context, message);
       },
     );
   }

@@ -84,10 +84,10 @@ void main() {
     );
 
     riders = [
-      const Rider(id: 1, name: 'Test Rider', isDeleted: false, team: 'Team 1', city: 'City 1'),
-      const Rider(id: 2, name: 'Another Rider', isDeleted: false, team: 'Team 2', city: 'City 2'),
-      const Rider(id: 3, name: 'Rider 3', isDeleted: false, team: 'Team 2', city: 'City 2'),
-      const Rider(id: 4, name: 'Rider 4', isDeleted: false),
+      const Rider(id: 1, name: 'Test Rider', team: 'Team 1', city: 'City 1'),
+      const Rider(id: 2, name: 'Another Rider', team: 'Team 2', city: 'City 2'),
+      const Rider(id: 3, name: 'Rider 3', team: 'Team 2', city: 'City 2'),
+      const Rider(id: 4, name: 'Rider 4'),
     ];
 
     categories = ['Test Category', 'Another Category'];
@@ -101,7 +101,7 @@ void main() {
         participants: [],
         finishes: [],
         numbersOnTrace: [],
-        stage: const Stage(id: 1, raceId: 1, name: 'Test Stage', isActive: true, isDeleted: false),
+        stage: const Stage(id: 1, raceId: 1, name: 'Test Stage', isActive: true),
       ),
     );
   });
