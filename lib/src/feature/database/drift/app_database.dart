@@ -580,18 +580,21 @@ class AppDatabase extends _$AppDatabase {
       } else {
         //Номер уже был в стартовом протоколе, обновляем
         logger.i('Database -> Number $number already in starts list. Update start time to $startTime...');
-        await (update(starts)..where((start) => start.participantId.equals(participantAtRace.first.id))).write(
-          StartsCompanion(
-            automaticCorrection: const Value(null),
-            automaticStartTime: const Value(null),
-            manualCorrection: const Value(null),
-            manualStartTime: const Value(null),
-            startTime: Value(startTime),
-            timestamp: const Value(null),
-            ntpOffset: const Value(null),
-            statusId: const Value(1),
-          ),
-        );
+        await (update(starts)..where(
+              (start) => start.participantId.equals(participantAtRace.first.id) & start.stageId.equals(stage.id),
+            ))
+            .write(
+              StartsCompanion(
+                automaticCorrection: const Value(null),
+                automaticStartTime: const Value(null),
+                manualCorrection: const Value(null),
+                manualStartTime: const Value(null),
+                startTime: Value(startTime),
+                timestamp: const Value(null),
+                ntpOffset: const Value(null),
+                statusId: const Value(1),
+              ),
+            );
       }
     }
     return null;
