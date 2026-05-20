@@ -66,14 +66,13 @@ class Races extends Table with TableInfo<Races, RacesData> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<String> deletedAt = GeneratedColumn<String>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.string,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -84,7 +83,7 @@ class Races extends Table with TableInfo<Races, RacesData> {
     location,
     url,
     description,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -125,10 +124,10 @@ class Races extends Table with TableInfo<Races, RacesData> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -149,7 +148,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
   final String? location;
   final String? url;
   final String? description;
-  final bool isDeleted;
+  final String? deletedAt;
   const RacesData({
     required this.id,
     required this.name,
@@ -158,7 +157,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
     this.location,
     this.url,
     this.description,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -180,7 +179,9 @@ class RacesData extends DataClass implements Insertable<RacesData> {
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<String>(deletedAt);
+    }
     return map;
   }
 
@@ -201,7 +202,9 @@ class RacesData extends DataClass implements Insertable<RacesData> {
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -218,7 +221,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
       location: serializer.fromJson<String?>(json['location']),
       url: serializer.fromJson<String?>(json['url']),
       description: serializer.fromJson<String?>(json['description']),
-      isDeleted: serializer.fromJson<bool>(json['isDeleted']),
+      deletedAt: serializer.fromJson<String?>(json['deletedAt']),
     );
   }
   @override
@@ -232,7 +235,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
       'location': serializer.toJson<String?>(location),
       'url': serializer.toJson<String?>(url),
       'description': serializer.toJson<String?>(description),
-      'isDeleted': serializer.toJson<bool>(isDeleted),
+      'deletedAt': serializer.toJson<String?>(deletedAt),
     };
   }
 
@@ -244,7 +247,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
     Value<String?> location = const Value.absent(),
     Value<String?> url = const Value.absent(),
     Value<String?> description = const Value.absent(),
-    bool? isDeleted,
+    Value<String?> deletedAt = const Value.absent(),
   }) => RacesData(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -253,7 +256,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
     location: location.present ? location.value : this.location,
     url: url.present ? url.value : this.url,
     description: description.present ? description.value : this.description,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   RacesData copyWithCompanion(RacesCompanion data) {
     return RacesData(
@@ -268,7 +271,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
       description: data.description.present
           ? data.description.value
           : this.description,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -282,7 +285,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
           ..write('location: $location, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -296,7 +299,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
     location,
     url,
     description,
-    isDeleted,
+    deletedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -309,7 +312,7 @@ class RacesData extends DataClass implements Insertable<RacesData> {
           other.location == this.location &&
           other.url == this.url &&
           other.description == this.description &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class RacesCompanion extends UpdateCompanion<RacesData> {
@@ -320,7 +323,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
   final Value<String?> location;
   final Value<String?> url;
   final Value<String?> description;
-  final Value<bool> isDeleted;
+  final Value<String?> deletedAt;
   const RacesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -329,7 +332,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
     this.location = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   RacesCompanion.insert({
     this.id = const Value.absent(),
@@ -339,7 +342,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
     this.location = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : name = Value(name);
   static Insertable<RacesData> custom({
     Expression<int>? id,
@@ -349,7 +352,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
     Expression<String>? location,
     Expression<String>? url,
     Expression<String>? description,
-    Expression<bool>? isDeleted,
+    Expression<String>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -359,7 +362,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
       if (location != null) 'location': location,
       if (url != null) 'url': url,
       if (description != null) 'description': description,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -371,7 +374,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
     Value<String?>? location,
     Value<String?>? url,
     Value<String?>? description,
-    Value<bool>? isDeleted,
+    Value<String?>? deletedAt,
   }) {
     return RacesCompanion(
       id: id ?? this.id,
@@ -381,7 +384,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
       location: location ?? this.location,
       url: url ?? this.url,
       description: description ?? this.description,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -409,8 +412,8 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<String>(deletedAt.value);
     }
     return map;
   }
@@ -425,7 +428,7 @@ class RacesCompanion extends UpdateCompanion<RacesData> {
           ..write('location: $location, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -492,11 +495,11 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFilesData> {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
     'timestamp',
     aliasedName,
     false,
-    type: DriftSqlType.dateTime,
+    type: DriftSqlType.string,
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
@@ -551,7 +554,7 @@ class TrackFiles extends Table with TableInfo<TrackFiles, TrackFilesData> {
         data['${effectivePrefix}data'],
       )!,
       timestamp: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
+        DriftSqlType.string,
         data['${effectivePrefix}timestamp'],
       )!,
     );
@@ -574,7 +577,7 @@ class TrackFilesData extends DataClass implements Insertable<TrackFilesData> {
   final String? description;
   final String hashSha1;
   final i2.Uint8List data;
-  final DateTime timestamp;
+  final String timestamp;
   const TrackFilesData({
     required this.id,
     required this.name,
@@ -599,7 +602,7 @@ class TrackFilesData extends DataClass implements Insertable<TrackFilesData> {
     }
     map['hash_sha1'] = Variable<String>(hashSha1);
     map['data'] = Variable<i2.Uint8List>(data);
-    map['timestamp'] = Variable<DateTime>(timestamp);
+    map['timestamp'] = Variable<String>(timestamp);
     return map;
   }
 
@@ -633,7 +636,7 @@ class TrackFilesData extends DataClass implements Insertable<TrackFilesData> {
       description: serializer.fromJson<String?>(json['description']),
       hashSha1: serializer.fromJson<String>(json['hashSha1']),
       data: serializer.fromJson<i2.Uint8List>(json['data']),
-      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
+      timestamp: serializer.fromJson<String>(json['timestamp']),
     );
   }
   @override
@@ -647,7 +650,7 @@ class TrackFilesData extends DataClass implements Insertable<TrackFilesData> {
       'description': serializer.toJson<String?>(description),
       'hashSha1': serializer.toJson<String>(hashSha1),
       'data': serializer.toJson<i2.Uint8List>(data),
-      'timestamp': serializer.toJson<DateTime>(timestamp),
+      'timestamp': serializer.toJson<String>(timestamp),
     };
   }
 
@@ -659,7 +662,7 @@ class TrackFilesData extends DataClass implements Insertable<TrackFilesData> {
     Value<String?> description = const Value.absent(),
     String? hashSha1,
     i2.Uint8List? data,
-    DateTime? timestamp,
+    String? timestamp,
   }) => TrackFilesData(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -733,7 +736,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFilesData> {
   final Value<String?> description;
   final Value<String> hashSha1;
   final Value<i2.Uint8List> data;
-  final Value<DateTime> timestamp;
+  final Value<String> timestamp;
   const TrackFilesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -752,7 +755,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFilesData> {
     this.description = const Value.absent(),
     required String hashSha1,
     required i2.Uint8List data,
-    required DateTime timestamp,
+    required String timestamp,
   }) : name = Value(name),
        size = Value(size),
        hashSha1 = Value(hashSha1),
@@ -766,7 +769,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFilesData> {
     Expression<String>? description,
     Expression<String>? hashSha1,
     Expression<i2.Uint8List>? data,
-    Expression<DateTime>? timestamp,
+    Expression<String>? timestamp,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -788,7 +791,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFilesData> {
     Value<String?>? description,
     Value<String>? hashSha1,
     Value<i2.Uint8List>? data,
-    Value<DateTime>? timestamp,
+    Value<String>? timestamp,
   }) {
     return TrackFilesCompanion(
       id: id ?? this.id,
@@ -827,7 +830,7 @@ class TrackFilesCompanion extends UpdateCompanion<TrackFilesData> {
       map['data'] = Variable<i2.Uint8List>(data.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<DateTime>(timestamp.value);
+      map['timestamp'] = Variable<String>(timestamp.value);
     }
     return map;
   }
@@ -909,14 +912,13 @@ class Trails extends Table with TableInfo<Trails, TrailsData> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<String> deletedAt = GeneratedColumn<String>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.string,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -927,7 +929,7 @@ class Trails extends Table with TableInfo<Trails, TrailsData> {
     fileId,
     url,
     description,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -968,10 +970,10 @@ class Trails extends Table with TableInfo<Trails, TrailsData> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -996,7 +998,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
   final int? fileId;
   final String? url;
   final String? description;
-  final bool isDeleted;
+  final String? deletedAt;
   const TrailsData({
     required this.id,
     required this.name,
@@ -1005,7 +1007,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
     this.fileId,
     this.url,
     this.description,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -1027,7 +1029,9 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<String>(deletedAt);
+    }
     return map;
   }
 
@@ -1048,7 +1052,9 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -1065,7 +1071,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
       fileId: serializer.fromJson<int?>(json['fileId']),
       url: serializer.fromJson<String?>(json['url']),
       description: serializer.fromJson<String?>(json['description']),
-      isDeleted: serializer.fromJson<bool>(json['isDeleted']),
+      deletedAt: serializer.fromJson<String?>(json['deletedAt']),
     );
   }
   @override
@@ -1079,7 +1085,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
       'fileId': serializer.toJson<int?>(fileId),
       'url': serializer.toJson<String?>(url),
       'description': serializer.toJson<String?>(description),
-      'isDeleted': serializer.toJson<bool>(isDeleted),
+      'deletedAt': serializer.toJson<String?>(deletedAt),
     };
   }
 
@@ -1091,7 +1097,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
     Value<int?> fileId = const Value.absent(),
     Value<String?> url = const Value.absent(),
     Value<String?> description = const Value.absent(),
-    bool? isDeleted,
+    Value<String?> deletedAt = const Value.absent(),
   }) => TrailsData(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -1100,7 +1106,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
     fileId: fileId.present ? fileId.value : this.fileId,
     url: url.present ? url.value : this.url,
     description: description.present ? description.value : this.description,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   TrailsData copyWithCompanion(TrailsCompanion data) {
     return TrailsData(
@@ -1113,7 +1119,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
       description: data.description.present
           ? data.description.value
           : this.description,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -1127,7 +1133,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
           ..write('fileId: $fileId, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -1141,7 +1147,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
     fileId,
     url,
     description,
-    isDeleted,
+    deletedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -1154,7 +1160,7 @@ class TrailsData extends DataClass implements Insertable<TrailsData> {
           other.fileId == this.fileId &&
           other.url == this.url &&
           other.description == this.description &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class TrailsCompanion extends UpdateCompanion<TrailsData> {
@@ -1165,7 +1171,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
   final Value<int?> fileId;
   final Value<String?> url;
   final Value<String?> description;
-  final Value<bool> isDeleted;
+  final Value<String?> deletedAt;
   const TrailsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -1174,7 +1180,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
     this.fileId = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   TrailsCompanion.insert({
     this.id = const Value.absent(),
@@ -1184,7 +1190,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
     this.fileId = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : name = Value(name);
   static Insertable<TrailsData> custom({
     Expression<int>? id,
@@ -1194,7 +1200,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
     Expression<int>? fileId,
     Expression<String>? url,
     Expression<String>? description,
-    Expression<bool>? isDeleted,
+    Expression<String>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1204,7 +1210,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
       if (fileId != null) 'file_id': fileId,
       if (url != null) 'url': url,
       if (description != null) 'description': description,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -1216,7 +1222,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
     Value<int?>? fileId,
     Value<String?>? url,
     Value<String?>? description,
-    Value<bool>? isDeleted,
+    Value<String?>? deletedAt,
   }) {
     return TrailsCompanion(
       id: id ?? this.id,
@@ -1226,7 +1232,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
       fileId: fileId ?? this.fileId,
       url: url ?? this.url,
       description: description ?? this.description,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -1254,8 +1260,8 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<String>(deletedAt.value);
     }
     return map;
   }
@@ -1270,7 +1276,7 @@ class TrailsCompanion extends UpdateCompanion<TrailsData> {
           ..write('fileId: $fileId, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -1321,23 +1327,22 @@ class Stages extends Table with TableInfo<Stages, StagesData> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  late final GeneratedColumn<bool> isActive = GeneratedColumn<bool>(
+  late final GeneratedColumn<int> isActive = GeneratedColumn<int>(
     'is_active',
     aliasedName,
     false,
-    type: DriftSqlType.bool,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     $customConstraints: 'NOT NULL DEFAULT TRUE',
     defaultValue: const CustomExpression('TRUE'),
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<String> deletedAt = GeneratedColumn<String>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.string,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -1347,7 +1352,7 @@ class Stages extends Table with TableInfo<Stages, StagesData> {
     name,
     description,
     isActive,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1381,13 +1386,13 @@ class Stages extends Table with TableInfo<Stages, StagesData> {
         data['${effectivePrefix}description'],
       ),
       isActive: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
+        DriftSqlType.int,
         data['${effectivePrefix}is_active'],
       )!,
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -1411,8 +1416,8 @@ class StagesData extends DataClass implements Insertable<StagesData> {
   final int raceId;
   final String name;
   final String? description;
-  final bool isActive;
-  final bool isDeleted;
+  final int isActive;
+  final String? deletedAt;
   const StagesData({
     required this.id,
     this.trailId,
@@ -1420,7 +1425,7 @@ class StagesData extends DataClass implements Insertable<StagesData> {
     required this.name,
     this.description,
     required this.isActive,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -1434,8 +1439,10 @@ class StagesData extends DataClass implements Insertable<StagesData> {
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
-    map['is_active'] = Variable<bool>(isActive);
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    map['is_active'] = Variable<int>(isActive);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<String>(deletedAt);
+    }
     return map;
   }
 
@@ -1451,7 +1458,9 @@ class StagesData extends DataClass implements Insertable<StagesData> {
           ? const Value.absent()
           : Value(description),
       isActive: Value(isActive),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -1466,8 +1475,8 @@ class StagesData extends DataClass implements Insertable<StagesData> {
       raceId: serializer.fromJson<int>(json['raceId']),
       name: serializer.fromJson<String>(json['name']),
       description: serializer.fromJson<String?>(json['description']),
-      isActive: serializer.fromJson<bool>(json['isActive']),
-      isDeleted: serializer.fromJson<bool>(json['isDeleted']),
+      isActive: serializer.fromJson<int>(json['isActive']),
+      deletedAt: serializer.fromJson<String?>(json['deletedAt']),
     );
   }
   @override
@@ -1479,8 +1488,8 @@ class StagesData extends DataClass implements Insertable<StagesData> {
       'raceId': serializer.toJson<int>(raceId),
       'name': serializer.toJson<String>(name),
       'description': serializer.toJson<String?>(description),
-      'isActive': serializer.toJson<bool>(isActive),
-      'isDeleted': serializer.toJson<bool>(isDeleted),
+      'isActive': serializer.toJson<int>(isActive),
+      'deletedAt': serializer.toJson<String?>(deletedAt),
     };
   }
 
@@ -1490,8 +1499,8 @@ class StagesData extends DataClass implements Insertable<StagesData> {
     int? raceId,
     String? name,
     Value<String?> description = const Value.absent(),
-    bool? isActive,
-    bool? isDeleted,
+    int? isActive,
+    Value<String?> deletedAt = const Value.absent(),
   }) => StagesData(
     id: id ?? this.id,
     trailId: trailId.present ? trailId.value : this.trailId,
@@ -1499,7 +1508,7 @@ class StagesData extends DataClass implements Insertable<StagesData> {
     name: name ?? this.name,
     description: description.present ? description.value : this.description,
     isActive: isActive ?? this.isActive,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   StagesData copyWithCompanion(StagesCompanion data) {
     return StagesData(
@@ -1511,7 +1520,7 @@ class StagesData extends DataClass implements Insertable<StagesData> {
           ? data.description.value
           : this.description,
       isActive: data.isActive.present ? data.isActive.value : this.isActive,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -1524,14 +1533,14 @@ class StagesData extends DataClass implements Insertable<StagesData> {
           ..write('name: $name, ')
           ..write('description: $description, ')
           ..write('isActive: $isActive, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode =>
-      Object.hash(id, trailId, raceId, name, description, isActive, isDeleted);
+      Object.hash(id, trailId, raceId, name, description, isActive, deletedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1542,7 +1551,7 @@ class StagesData extends DataClass implements Insertable<StagesData> {
           other.name == this.name &&
           other.description == this.description &&
           other.isActive == this.isActive &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class StagesCompanion extends UpdateCompanion<StagesData> {
@@ -1551,8 +1560,8 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
   final Value<int> raceId;
   final Value<String> name;
   final Value<String?> description;
-  final Value<bool> isActive;
-  final Value<bool> isDeleted;
+  final Value<int> isActive;
+  final Value<String?> deletedAt;
   const StagesCompanion({
     this.id = const Value.absent(),
     this.trailId = const Value.absent(),
@@ -1560,7 +1569,7 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
     this.name = const Value.absent(),
     this.description = const Value.absent(),
     this.isActive = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   StagesCompanion.insert({
     this.id = const Value.absent(),
@@ -1569,7 +1578,7 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
     required String name,
     this.description = const Value.absent(),
     this.isActive = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : raceId = Value(raceId),
        name = Value(name);
   static Insertable<StagesData> custom({
@@ -1578,8 +1587,8 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
     Expression<int>? raceId,
     Expression<String>? name,
     Expression<String>? description,
-    Expression<bool>? isActive,
-    Expression<bool>? isDeleted,
+    Expression<int>? isActive,
+    Expression<String>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1588,7 +1597,7 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
       if (name != null) 'name': name,
       if (description != null) 'description': description,
       if (isActive != null) 'is_active': isActive,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -1598,8 +1607,8 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
     Value<int>? raceId,
     Value<String>? name,
     Value<String?>? description,
-    Value<bool>? isActive,
-    Value<bool>? isDeleted,
+    Value<int>? isActive,
+    Value<String?>? deletedAt,
   }) {
     return StagesCompanion(
       id: id ?? this.id,
@@ -1608,7 +1617,7 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
       name: name ?? this.name,
       description: description ?? this.description,
       isActive: isActive ?? this.isActive,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -1631,10 +1640,10 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
       map['description'] = Variable<String>(description.value);
     }
     if (isActive.present) {
-      map['is_active'] = Variable<bool>(isActive.value);
+      map['is_active'] = Variable<int>(isActive.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<String>(deletedAt.value);
     }
     return map;
   }
@@ -1648,7 +1657,7 @@ class StagesCompanion extends UpdateCompanion<StagesData> {
           ..write('name: $name, ')
           ..write('description: $description, ')
           ..write('isActive: $isActive, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -1731,14 +1740,13 @@ class Riders extends Table with TableInfo<Riders, RidersData> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<String> deletedAt = GeneratedColumn<String>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.string,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -1751,7 +1759,7 @@ class Riders extends Table with TableInfo<Riders, RidersData> {
     email,
     phone,
     comment,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1800,10 +1808,10 @@ class Riders extends Table with TableInfo<Riders, RidersData> {
         DriftSqlType.string,
         data['${effectivePrefix}comment'],
       ),
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -1826,7 +1834,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
   final String? email;
   final String? phone;
   final String? comment;
-  final bool isDeleted;
+  final String? deletedAt;
   const RidersData({
     required this.id,
     required this.name,
@@ -1837,7 +1845,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
     this.email,
     this.phone,
     this.comment,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -1865,7 +1873,9 @@ class RidersData extends DataClass implements Insertable<RidersData> {
     if (!nullToAbsent || comment != null) {
       map['comment'] = Variable<String>(comment);
     }
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<String>(deletedAt);
+    }
     return map;
   }
 
@@ -1890,7 +1900,9 @@ class RidersData extends DataClass implements Insertable<RidersData> {
       comment: comment == null && nullToAbsent
           ? const Value.absent()
           : Value(comment),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -1909,7 +1921,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
       email: serializer.fromJson<String?>(json['email']),
       phone: serializer.fromJson<String?>(json['phone']),
       comment: serializer.fromJson<String?>(json['comment']),
-      isDeleted: serializer.fromJson<bool>(json['isDeleted']),
+      deletedAt: serializer.fromJson<String?>(json['deletedAt']),
     );
   }
   @override
@@ -1925,7 +1937,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
       'email': serializer.toJson<String?>(email),
       'phone': serializer.toJson<String?>(phone),
       'comment': serializer.toJson<String?>(comment),
-      'isDeleted': serializer.toJson<bool>(isDeleted),
+      'deletedAt': serializer.toJson<String?>(deletedAt),
     };
   }
 
@@ -1939,7 +1951,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
     Value<String?> email = const Value.absent(),
     Value<String?> phone = const Value.absent(),
     Value<String?> comment = const Value.absent(),
-    bool? isDeleted,
+    Value<String?> deletedAt = const Value.absent(),
   }) => RidersData(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -1950,7 +1962,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
     email: email.present ? email.value : this.email,
     phone: phone.present ? phone.value : this.phone,
     comment: comment.present ? comment.value : this.comment,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   RidersData copyWithCompanion(RidersCompanion data) {
     return RidersData(
@@ -1963,7 +1975,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
       email: data.email.present ? data.email.value : this.email,
       phone: data.phone.present ? data.phone.value : this.phone,
       comment: data.comment.present ? data.comment.value : this.comment,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -1979,7 +1991,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
           ..write('email: $email, ')
           ..write('phone: $phone, ')
           ..write('comment: $comment, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -1995,7 +2007,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
     email,
     phone,
     comment,
-    isDeleted,
+    deletedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -2010,7 +2022,7 @@ class RidersData extends DataClass implements Insertable<RidersData> {
           other.email == this.email &&
           other.phone == this.phone &&
           other.comment == this.comment &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class RidersCompanion extends UpdateCompanion<RidersData> {
@@ -2023,7 +2035,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
   final Value<String?> email;
   final Value<String?> phone;
   final Value<String?> comment;
-  final Value<bool> isDeleted;
+  final Value<String?> deletedAt;
   const RidersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -2034,7 +2046,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
     this.email = const Value.absent(),
     this.phone = const Value.absent(),
     this.comment = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   RidersCompanion.insert({
     this.id = const Value.absent(),
@@ -2046,7 +2058,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
     this.email = const Value.absent(),
     this.phone = const Value.absent(),
     this.comment = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : name = Value(name);
   static Insertable<RidersData> custom({
     Expression<int>? id,
@@ -2058,7 +2070,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
     Expression<String>? email,
     Expression<String>? phone,
     Expression<String>? comment,
-    Expression<bool>? isDeleted,
+    Expression<String>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2070,7 +2082,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
       if (email != null) 'email': email,
       if (phone != null) 'phone': phone,
       if (comment != null) 'comment': comment,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -2084,7 +2096,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
     Value<String?>? email,
     Value<String?>? phone,
     Value<String?>? comment,
-    Value<bool>? isDeleted,
+    Value<String?>? deletedAt,
   }) {
     return RidersCompanion(
       id: id ?? this.id,
@@ -2096,7 +2108,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       comment: comment ?? this.comment,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -2130,8 +2142,8 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
     if (comment.present) {
       map['comment'] = Variable<String>(comment.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<String>(deletedAt.value);
     }
     return map;
   }
@@ -2148,7 +2160,7 @@ class RidersCompanion extends UpdateCompanion<RidersData> {
           ..write('email: $email, ')
           ..write('phone: $phone, ')
           ..write('comment: $comment, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -2379,15 +2391,6 @@ class Participants extends Table
     $customConstraints: 'NOT NULL DEFAULT 1',
     defaultValue: const CustomExpression('1'),
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
-  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -2397,7 +2400,6 @@ class Participants extends Table
     category,
     rfid,
     statusId,
-    isDeleted,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -2406,6 +2408,10 @@ class Participants extends Table
   static const String $name = 'participants';
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {raceId, number},
+  ];
   @override
   ParticipantsData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -2438,10 +2444,6 @@ class Participants extends Table
         DriftSqlType.int,
         data['${effectivePrefix}status_id'],
       )!,
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
     );
   }
 
@@ -2455,6 +2457,7 @@ class Participants extends Table
     'FOREIGN KEY(rider_id)REFERENCES riders(id)',
     'FOREIGN KEY(race_id)REFERENCES races(id)ON DELETE CASCADE',
     'FOREIGN KEY(status_id)REFERENCES statuses(id)',
+    'UNIQUE(race_id, number)',
   ];
   @override
   bool get dontWriteConstraints => true;
@@ -2469,7 +2472,6 @@ class ParticipantsData extends DataClass
   final String? category;
   final String? rfid;
   final int statusId;
-  final bool isDeleted;
   const ParticipantsData({
     required this.id,
     required this.raceId,
@@ -2478,7 +2480,6 @@ class ParticipantsData extends DataClass
     this.category,
     this.rfid,
     required this.statusId,
-    required this.isDeleted,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2494,7 +2495,6 @@ class ParticipantsData extends DataClass
       map['rfid'] = Variable<String>(rfid);
     }
     map['status_id'] = Variable<int>(statusId);
-    map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
 
@@ -2509,7 +2509,6 @@ class ParticipantsData extends DataClass
           : Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
-      isDeleted: Value(isDeleted),
     );
   }
 
@@ -2526,7 +2525,6 @@ class ParticipantsData extends DataClass
       category: serializer.fromJson<String?>(json['category']),
       rfid: serializer.fromJson<String?>(json['rfid']),
       statusId: serializer.fromJson<int>(json['statusId']),
-      isDeleted: serializer.fromJson<bool>(json['isDeleted']),
     );
   }
   @override
@@ -2540,7 +2538,6 @@ class ParticipantsData extends DataClass
       'category': serializer.toJson<String?>(category),
       'rfid': serializer.toJson<String?>(rfid),
       'statusId': serializer.toJson<int>(statusId),
-      'isDeleted': serializer.toJson<bool>(isDeleted),
     };
   }
 
@@ -2552,7 +2549,6 @@ class ParticipantsData extends DataClass
     Value<String?> category = const Value.absent(),
     Value<String?> rfid = const Value.absent(),
     int? statusId,
-    bool? isDeleted,
   }) => ParticipantsData(
     id: id ?? this.id,
     raceId: raceId ?? this.raceId,
@@ -2561,7 +2557,6 @@ class ParticipantsData extends DataClass
     category: category.present ? category.value : this.category,
     rfid: rfid.present ? rfid.value : this.rfid,
     statusId: statusId ?? this.statusId,
-    isDeleted: isDeleted ?? this.isDeleted,
   );
   ParticipantsData copyWithCompanion(ParticipantsCompanion data) {
     return ParticipantsData(
@@ -2572,7 +2567,6 @@ class ParticipantsData extends DataClass
       category: data.category.present ? data.category.value : this.category,
       rfid: data.rfid.present ? data.rfid.value : this.rfid,
       statusId: data.statusId.present ? data.statusId.value : this.statusId,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
 
@@ -2585,23 +2579,14 @@ class ParticipantsData extends DataClass
           ..write('number: $number, ')
           ..write('category: $category, ')
           ..write('rfid: $rfid, ')
-          ..write('statusId: $statusId, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('statusId: $statusId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    raceId,
-    riderId,
-    number,
-    category,
-    rfid,
-    statusId,
-    isDeleted,
-  );
+  int get hashCode =>
+      Object.hash(id, raceId, riderId, number, category, rfid, statusId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2612,8 +2597,7 @@ class ParticipantsData extends DataClass
           other.number == this.number &&
           other.category == this.category &&
           other.rfid == this.rfid &&
-          other.statusId == this.statusId &&
-          other.isDeleted == this.isDeleted);
+          other.statusId == this.statusId);
 }
 
 class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
@@ -2624,7 +2608,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
   final Value<String?> category;
   final Value<String?> rfid;
   final Value<int> statusId;
-  final Value<bool> isDeleted;
   const ParticipantsCompanion({
     this.id = const Value.absent(),
     this.raceId = const Value.absent(),
@@ -2633,7 +2616,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
     this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
-    this.isDeleted = const Value.absent(),
   });
   ParticipantsCompanion.insert({
     this.id = const Value.absent(),
@@ -2643,7 +2625,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
     this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
-    this.isDeleted = const Value.absent(),
   }) : raceId = Value(raceId),
        riderId = Value(riderId),
        number = Value(number);
@@ -2655,7 +2636,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
     Expression<String>? category,
     Expression<String>? rfid,
     Expression<int>? statusId,
-    Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2665,7 +2645,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
       if (category != null) 'category': category,
       if (rfid != null) 'rfid': rfid,
       if (statusId != null) 'status_id': statusId,
-      if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
 
@@ -2677,7 +2656,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
     Value<String?>? category,
     Value<String?>? rfid,
     Value<int>? statusId,
-    Value<bool>? isDeleted,
   }) {
     return ParticipantsCompanion(
       id: id ?? this.id,
@@ -2687,7 +2665,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
       category: category ?? this.category,
       rfid: rfid ?? this.rfid,
       statusId: statusId ?? this.statusId,
-      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -2715,9 +2692,6 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
     if (statusId.present) {
       map['status_id'] = Variable<int>(statusId.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
-    }
     return map;
   }
 
@@ -2730,8 +2704,7 @@ class ParticipantsCompanion extends UpdateCompanion<ParticipantsData> {
           ..write('number: $number, ')
           ..write('category: $category, ')
           ..write('rfid: $rfid, ')
-          ..write('statusId: $statusId, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('statusId: $statusId')
           ..write(')'))
         .toString();
   }
@@ -2766,11 +2739,11 @@ class Finishes extends Table with TableInfo<Finishes, FinishesData> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
     'timestamp',
     aliasedName,
     false,
-    type: DriftSqlType.dateTime,
+    type: DriftSqlType.string,
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
@@ -2790,20 +2763,20 @@ class Finishes extends Table with TableInfo<Finishes, FinishesData> {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  late final GeneratedColumn<bool> isHidden = GeneratedColumn<bool>(
+  late final GeneratedColumn<int> isHidden = GeneratedColumn<int>(
     'is_hidden',
     aliasedName,
     false,
-    type: DriftSqlType.bool,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     $customConstraints: 'NOT NULL DEFAULT FALSE',
     defaultValue: const CustomExpression('FALSE'),
   );
-  late final GeneratedColumn<bool> isManual = GeneratedColumn<bool>(
+  late final GeneratedColumn<int> isManual = GeneratedColumn<int>(
     'is_manual',
     aliasedName,
     false,
-    type: DriftSqlType.bool,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     $customConstraints: 'NOT NULL DEFAULT FALSE',
     defaultValue: const CustomExpression('FALSE'),
@@ -2843,7 +2816,7 @@ class Finishes extends Table with TableInfo<Finishes, FinishesData> {
         data['${effectivePrefix}number'],
       ),
       timestamp: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
+        DriftSqlType.string,
         data['${effectivePrefix}timestamp'],
       )!,
       ntpOffset: attachedDatabase.typeMapping.read(
@@ -2855,11 +2828,11 @@ class Finishes extends Table with TableInfo<Finishes, FinishesData> {
         data['${effectivePrefix}finish_time'],
       )!,
       isHidden: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
+        DriftSqlType.int,
         data['${effectivePrefix}is_hidden'],
       )!,
       isManual: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
+        DriftSqlType.int,
         data['${effectivePrefix}is_manual'],
       )!,
     );
@@ -2882,11 +2855,11 @@ class FinishesData extends DataClass implements Insertable<FinishesData> {
   final int id;
   final int stageId;
   final int? number;
-  final DateTime timestamp;
+  final String timestamp;
   final int ntpOffset;
   final String finishTime;
-  final bool isHidden;
-  final bool isManual;
+  final int isHidden;
+  final int isManual;
   const FinishesData({
     required this.id,
     required this.stageId,
@@ -2905,11 +2878,11 @@ class FinishesData extends DataClass implements Insertable<FinishesData> {
     if (!nullToAbsent || number != null) {
       map['number'] = Variable<int>(number);
     }
-    map['timestamp'] = Variable<DateTime>(timestamp);
+    map['timestamp'] = Variable<String>(timestamp);
     map['ntp_offset'] = Variable<int>(ntpOffset);
     map['finish_time'] = Variable<String>(finishTime);
-    map['is_hidden'] = Variable<bool>(isHidden);
-    map['is_manual'] = Variable<bool>(isManual);
+    map['is_hidden'] = Variable<int>(isHidden);
+    map['is_manual'] = Variable<int>(isManual);
     return map;
   }
 
@@ -2937,11 +2910,11 @@ class FinishesData extends DataClass implements Insertable<FinishesData> {
       id: serializer.fromJson<int>(json['id']),
       stageId: serializer.fromJson<int>(json['stageId']),
       number: serializer.fromJson<int?>(json['number']),
-      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
+      timestamp: serializer.fromJson<String>(json['timestamp']),
       ntpOffset: serializer.fromJson<int>(json['ntpOffset']),
       finishTime: serializer.fromJson<String>(json['finishTime']),
-      isHidden: serializer.fromJson<bool>(json['isHidden']),
-      isManual: serializer.fromJson<bool>(json['isManual']),
+      isHidden: serializer.fromJson<int>(json['isHidden']),
+      isManual: serializer.fromJson<int>(json['isManual']),
     );
   }
   @override
@@ -2951,11 +2924,11 @@ class FinishesData extends DataClass implements Insertable<FinishesData> {
       'id': serializer.toJson<int>(id),
       'stageId': serializer.toJson<int>(stageId),
       'number': serializer.toJson<int?>(number),
-      'timestamp': serializer.toJson<DateTime>(timestamp),
+      'timestamp': serializer.toJson<String>(timestamp),
       'ntpOffset': serializer.toJson<int>(ntpOffset),
       'finishTime': serializer.toJson<String>(finishTime),
-      'isHidden': serializer.toJson<bool>(isHidden),
-      'isManual': serializer.toJson<bool>(isManual),
+      'isHidden': serializer.toJson<int>(isHidden),
+      'isManual': serializer.toJson<int>(isManual),
     };
   }
 
@@ -2963,11 +2936,11 @@ class FinishesData extends DataClass implements Insertable<FinishesData> {
     int? id,
     int? stageId,
     Value<int?> number = const Value.absent(),
-    DateTime? timestamp,
+    String? timestamp,
     int? ntpOffset,
     String? finishTime,
-    bool? isHidden,
-    bool? isManual,
+    int? isHidden,
+    int? isManual,
   }) => FinishesData(
     id: id ?? this.id,
     stageId: stageId ?? this.stageId,
@@ -3037,11 +3010,11 @@ class FinishesCompanion extends UpdateCompanion<FinishesData> {
   final Value<int> id;
   final Value<int> stageId;
   final Value<int?> number;
-  final Value<DateTime> timestamp;
+  final Value<String> timestamp;
   final Value<int> ntpOffset;
   final Value<String> finishTime;
-  final Value<bool> isHidden;
-  final Value<bool> isManual;
+  final Value<int> isHidden;
+  final Value<int> isManual;
   const FinishesCompanion({
     this.id = const Value.absent(),
     this.stageId = const Value.absent(),
@@ -3056,7 +3029,7 @@ class FinishesCompanion extends UpdateCompanion<FinishesData> {
     this.id = const Value.absent(),
     required int stageId,
     this.number = const Value.absent(),
-    required DateTime timestamp,
+    required String timestamp,
     required int ntpOffset,
     required String finishTime,
     this.isHidden = const Value.absent(),
@@ -3069,11 +3042,11 @@ class FinishesCompanion extends UpdateCompanion<FinishesData> {
     Expression<int>? id,
     Expression<int>? stageId,
     Expression<int>? number,
-    Expression<DateTime>? timestamp,
+    Expression<String>? timestamp,
     Expression<int>? ntpOffset,
     Expression<String>? finishTime,
-    Expression<bool>? isHidden,
-    Expression<bool>? isManual,
+    Expression<int>? isHidden,
+    Expression<int>? isManual,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -3091,11 +3064,11 @@ class FinishesCompanion extends UpdateCompanion<FinishesData> {
     Value<int>? id,
     Value<int>? stageId,
     Value<int?>? number,
-    Value<DateTime>? timestamp,
+    Value<String>? timestamp,
     Value<int>? ntpOffset,
     Value<String>? finishTime,
-    Value<bool>? isHidden,
-    Value<bool>? isManual,
+    Value<int>? isHidden,
+    Value<int>? isManual,
   }) {
     return FinishesCompanion(
       id: id ?? this.id,
@@ -3122,7 +3095,7 @@ class FinishesCompanion extends UpdateCompanion<FinishesData> {
       map['number'] = Variable<int>(number.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<DateTime>(timestamp.value);
+      map['timestamp'] = Variable<String>(timestamp.value);
     }
     if (ntpOffset.present) {
       map['ntp_offset'] = Variable<int>(ntpOffset.value);
@@ -3131,10 +3104,10 @@ class FinishesCompanion extends UpdateCompanion<FinishesData> {
       map['finish_time'] = Variable<String>(finishTime.value);
     }
     if (isHidden.present) {
-      map['is_hidden'] = Variable<bool>(isHidden.value);
+      map['is_hidden'] = Variable<int>(isHidden.value);
     }
     if (isManual.present) {
-      map['is_manual'] = Variable<bool>(isManual.value);
+      map['is_manual'] = Variable<int>(isManual.value);
     }
     return map;
   }
@@ -3192,11 +3165,19 @@ class Starts extends Table with TableInfo<Starts, StartsData> {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
     'timestamp',
     aliasedName,
     true,
-    type: DriftSqlType.dateTime,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    $customConstraints: '',
+  );
+  late final GeneratedColumn<int> timestampCorrection = GeneratedColumn<int>(
+    'timestamp_correction',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
     requiredDuringInsert: false,
     $customConstraints: '',
   );
@@ -3265,6 +3246,7 @@ class Starts extends Table with TableInfo<Starts, StartsData> {
     participantId,
     startTime,
     timestamp,
+    timestampCorrection,
     ntpOffset,
     automaticStartTime,
     automaticCorrection,
@@ -3301,8 +3283,12 @@ class Starts extends Table with TableInfo<Starts, StartsData> {
         data['${effectivePrefix}start_time'],
       )!,
       timestamp: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
+        DriftSqlType.string,
         data['${effectivePrefix}timestamp'],
+      ),
+      timestampCorrection: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}timestamp_correction'],
       ),
       ntpOffset: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
@@ -3356,7 +3342,8 @@ class StartsData extends DataClass implements Insertable<StartsData> {
   final int stageId;
   final int participantId;
   final String startTime;
-  final DateTime? timestamp;
+  final String? timestamp;
+  final int? timestampCorrection;
   final int? ntpOffset;
   final String? automaticStartTime;
   final int? automaticCorrection;
@@ -3370,6 +3357,7 @@ class StartsData extends DataClass implements Insertable<StartsData> {
     required this.participantId,
     required this.startTime,
     this.timestamp,
+    this.timestampCorrection,
     this.ntpOffset,
     this.automaticStartTime,
     this.automaticCorrection,
@@ -3386,7 +3374,10 @@ class StartsData extends DataClass implements Insertable<StartsData> {
     map['participant_id'] = Variable<int>(participantId);
     map['start_time'] = Variable<String>(startTime);
     if (!nullToAbsent || timestamp != null) {
-      map['timestamp'] = Variable<DateTime>(timestamp);
+      map['timestamp'] = Variable<String>(timestamp);
+    }
+    if (!nullToAbsent || timestampCorrection != null) {
+      map['timestamp_correction'] = Variable<int>(timestampCorrection);
     }
     if (!nullToAbsent || ntpOffset != null) {
       map['ntp_offset'] = Variable<int>(ntpOffset);
@@ -3419,6 +3410,9 @@ class StartsData extends DataClass implements Insertable<StartsData> {
       timestamp: timestamp == null && nullToAbsent
           ? const Value.absent()
           : Value(timestamp),
+      timestampCorrection: timestampCorrection == null && nullToAbsent
+          ? const Value.absent()
+          : Value(timestampCorrection),
       ntpOffset: ntpOffset == null && nullToAbsent
           ? const Value.absent()
           : Value(ntpOffset),
@@ -3451,7 +3445,10 @@ class StartsData extends DataClass implements Insertable<StartsData> {
       stageId: serializer.fromJson<int>(json['stageId']),
       participantId: serializer.fromJson<int>(json['participantId']),
       startTime: serializer.fromJson<String>(json['startTime']),
-      timestamp: serializer.fromJson<DateTime?>(json['timestamp']),
+      timestamp: serializer.fromJson<String?>(json['timestamp']),
+      timestampCorrection: serializer.fromJson<int?>(
+        json['timestampCorrection'],
+      ),
       ntpOffset: serializer.fromJson<int?>(json['ntpOffset']),
       automaticStartTime: serializer.fromJson<String?>(
         json['automaticStartTime'],
@@ -3473,7 +3470,8 @@ class StartsData extends DataClass implements Insertable<StartsData> {
       'stageId': serializer.toJson<int>(stageId),
       'participantId': serializer.toJson<int>(participantId),
       'startTime': serializer.toJson<String>(startTime),
-      'timestamp': serializer.toJson<DateTime?>(timestamp),
+      'timestamp': serializer.toJson<String?>(timestamp),
+      'timestampCorrection': serializer.toJson<int?>(timestampCorrection),
       'ntpOffset': serializer.toJson<int?>(ntpOffset),
       'automaticStartTime': serializer.toJson<String?>(automaticStartTime),
       'automaticCorrection': serializer.toJson<int?>(automaticCorrection),
@@ -3489,7 +3487,8 @@ class StartsData extends DataClass implements Insertable<StartsData> {
     int? stageId,
     int? participantId,
     String? startTime,
-    Value<DateTime?> timestamp = const Value.absent(),
+    Value<String?> timestamp = const Value.absent(),
+    Value<int?> timestampCorrection = const Value.absent(),
     Value<int?> ntpOffset = const Value.absent(),
     Value<String?> automaticStartTime = const Value.absent(),
     Value<int?> automaticCorrection = const Value.absent(),
@@ -3503,6 +3502,9 @@ class StartsData extends DataClass implements Insertable<StartsData> {
     participantId: participantId ?? this.participantId,
     startTime: startTime ?? this.startTime,
     timestamp: timestamp.present ? timestamp.value : this.timestamp,
+    timestampCorrection: timestampCorrection.present
+        ? timestampCorrection.value
+        : this.timestampCorrection,
     ntpOffset: ntpOffset.present ? ntpOffset.value : this.ntpOffset,
     automaticStartTime: automaticStartTime.present
         ? automaticStartTime.value
@@ -3528,6 +3530,9 @@ class StartsData extends DataClass implements Insertable<StartsData> {
           : this.participantId,
       startTime: data.startTime.present ? data.startTime.value : this.startTime,
       timestamp: data.timestamp.present ? data.timestamp.value : this.timestamp,
+      timestampCorrection: data.timestampCorrection.present
+          ? data.timestampCorrection.value
+          : this.timestampCorrection,
       ntpOffset: data.ntpOffset.present ? data.ntpOffset.value : this.ntpOffset,
       automaticStartTime: data.automaticStartTime.present
           ? data.automaticStartTime.value
@@ -3554,6 +3559,7 @@ class StartsData extends DataClass implements Insertable<StartsData> {
           ..write('participantId: $participantId, ')
           ..write('startTime: $startTime, ')
           ..write('timestamp: $timestamp, ')
+          ..write('timestampCorrection: $timestampCorrection, ')
           ..write('ntpOffset: $ntpOffset, ')
           ..write('automaticStartTime: $automaticStartTime, ')
           ..write('automaticCorrection: $automaticCorrection, ')
@@ -3572,6 +3578,7 @@ class StartsData extends DataClass implements Insertable<StartsData> {
     participantId,
     startTime,
     timestamp,
+    timestampCorrection,
     ntpOffset,
     automaticStartTime,
     automaticCorrection,
@@ -3589,6 +3596,7 @@ class StartsData extends DataClass implements Insertable<StartsData> {
           other.participantId == this.participantId &&
           other.startTime == this.startTime &&
           other.timestamp == this.timestamp &&
+          other.timestampCorrection == this.timestampCorrection &&
           other.ntpOffset == this.ntpOffset &&
           other.automaticStartTime == this.automaticStartTime &&
           other.automaticCorrection == this.automaticCorrection &&
@@ -3603,7 +3611,8 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
   final Value<int> stageId;
   final Value<int> participantId;
   final Value<String> startTime;
-  final Value<DateTime?> timestamp;
+  final Value<String?> timestamp;
+  final Value<int?> timestampCorrection;
   final Value<int?> ntpOffset;
   final Value<String?> automaticStartTime;
   final Value<int?> automaticCorrection;
@@ -3617,6 +3626,7 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
     this.participantId = const Value.absent(),
     this.startTime = const Value.absent(),
     this.timestamp = const Value.absent(),
+    this.timestampCorrection = const Value.absent(),
     this.ntpOffset = const Value.absent(),
     this.automaticStartTime = const Value.absent(),
     this.automaticCorrection = const Value.absent(),
@@ -3631,6 +3641,7 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
     required int participantId,
     required String startTime,
     this.timestamp = const Value.absent(),
+    this.timestampCorrection = const Value.absent(),
     this.ntpOffset = const Value.absent(),
     this.automaticStartTime = const Value.absent(),
     this.automaticCorrection = const Value.absent(),
@@ -3646,7 +3657,8 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
     Expression<int>? stageId,
     Expression<int>? participantId,
     Expression<String>? startTime,
-    Expression<DateTime>? timestamp,
+    Expression<String>? timestamp,
+    Expression<int>? timestampCorrection,
     Expression<int>? ntpOffset,
     Expression<String>? automaticStartTime,
     Expression<int>? automaticCorrection,
@@ -3661,6 +3673,8 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
       if (participantId != null) 'participant_id': participantId,
       if (startTime != null) 'start_time': startTime,
       if (timestamp != null) 'timestamp': timestamp,
+      if (timestampCorrection != null)
+        'timestamp_correction': timestampCorrection,
       if (ntpOffset != null) 'ntp_offset': ntpOffset,
       if (automaticStartTime != null)
         'automatic_start_time': automaticStartTime,
@@ -3678,7 +3692,8 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
     Value<int>? stageId,
     Value<int>? participantId,
     Value<String>? startTime,
-    Value<DateTime?>? timestamp,
+    Value<String?>? timestamp,
+    Value<int?>? timestampCorrection,
     Value<int?>? ntpOffset,
     Value<String?>? automaticStartTime,
     Value<int?>? automaticCorrection,
@@ -3693,6 +3708,7 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
       participantId: participantId ?? this.participantId,
       startTime: startTime ?? this.startTime,
       timestamp: timestamp ?? this.timestamp,
+      timestampCorrection: timestampCorrection ?? this.timestampCorrection,
       ntpOffset: ntpOffset ?? this.ntpOffset,
       automaticStartTime: automaticStartTime ?? this.automaticStartTime,
       automaticCorrection: automaticCorrection ?? this.automaticCorrection,
@@ -3719,7 +3735,10 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
       map['start_time'] = Variable<String>(startTime.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<DateTime>(timestamp.value);
+      map['timestamp'] = Variable<String>(timestamp.value);
+    }
+    if (timestampCorrection.present) {
+      map['timestamp_correction'] = Variable<int>(timestampCorrection.value);
     }
     if (ntpOffset.present) {
       map['ntp_offset'] = Variable<int>(ntpOffset.value);
@@ -3753,6 +3772,7 @@ class StartsCompanion extends UpdateCompanion<StartsData> {
           ..write('participantId: $participantId, ')
           ..write('startTime: $startTime, ')
           ..write('timestamp: $timestamp, ')
+          ..write('timestampCorrection: $timestampCorrection, ')
           ..write('ntpOffset: $ntpOffset, ')
           ..write('automaticStartTime: $automaticStartTime, ')
           ..write('automaticCorrection: $automaticCorrection, ')
@@ -3786,11 +3806,11 @@ class Logs extends Table with TableInfo<Logs, LogsData> {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  late final GeneratedColumn<DateTime> timestamp = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<String> timestamp = GeneratedColumn<String>(
     'timestamp',
     aliasedName,
     false,
-    type: DriftSqlType.dateTime,
+    type: DriftSqlType.string,
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
@@ -3847,7 +3867,7 @@ class Logs extends Table with TableInfo<Logs, LogsData> {
         data['${effectivePrefix}level'],
       )!,
       timestamp: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
+        DriftSqlType.string,
         data['${effectivePrefix}timestamp'],
       )!,
       source: attachedDatabase.typeMapping.read(
@@ -3877,7 +3897,7 @@ class Logs extends Table with TableInfo<Logs, LogsData> {
 class LogsData extends DataClass implements Insertable<LogsData> {
   final int id;
   final String level;
-  final DateTime timestamp;
+  final String timestamp;
   final String source;
   final String direction;
   final String? rawData;
@@ -3894,7 +3914,7 @@ class LogsData extends DataClass implements Insertable<LogsData> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['level'] = Variable<String>(level);
-    map['timestamp'] = Variable<DateTime>(timestamp);
+    map['timestamp'] = Variable<String>(timestamp);
     map['source'] = Variable<String>(source);
     map['direction'] = Variable<String>(direction);
     if (!nullToAbsent || rawData != null) {
@@ -3924,7 +3944,7 @@ class LogsData extends DataClass implements Insertable<LogsData> {
     return LogsData(
       id: serializer.fromJson<int>(json['id']),
       level: serializer.fromJson<String>(json['level']),
-      timestamp: serializer.fromJson<DateTime>(json['timestamp']),
+      timestamp: serializer.fromJson<String>(json['timestamp']),
       source: serializer.fromJson<String>(json['source']),
       direction: serializer.fromJson<String>(json['direction']),
       rawData: serializer.fromJson<String?>(json['rawData']),
@@ -3936,7 +3956,7 @@ class LogsData extends DataClass implements Insertable<LogsData> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'level': serializer.toJson<String>(level),
-      'timestamp': serializer.toJson<DateTime>(timestamp),
+      'timestamp': serializer.toJson<String>(timestamp),
       'source': serializer.toJson<String>(source),
       'direction': serializer.toJson<String>(direction),
       'rawData': serializer.toJson<String?>(rawData),
@@ -3946,7 +3966,7 @@ class LogsData extends DataClass implements Insertable<LogsData> {
   LogsData copyWith({
     int? id,
     String? level,
-    DateTime? timestamp,
+    String? timestamp,
     String? source,
     String? direction,
     Value<String?> rawData = const Value.absent(),
@@ -4000,7 +4020,7 @@ class LogsData extends DataClass implements Insertable<LogsData> {
 class LogsCompanion extends UpdateCompanion<LogsData> {
   final Value<int> id;
   final Value<String> level;
-  final Value<DateTime> timestamp;
+  final Value<String> timestamp;
   final Value<String> source;
   final Value<String> direction;
   final Value<String?> rawData;
@@ -4015,7 +4035,7 @@ class LogsCompanion extends UpdateCompanion<LogsData> {
   LogsCompanion.insert({
     this.id = const Value.absent(),
     required String level,
-    required DateTime timestamp,
+    required String timestamp,
     required String source,
     required String direction,
     this.rawData = const Value.absent(),
@@ -4026,7 +4046,7 @@ class LogsCompanion extends UpdateCompanion<LogsData> {
   static Insertable<LogsData> custom({
     Expression<int>? id,
     Expression<String>? level,
-    Expression<DateTime>? timestamp,
+    Expression<String>? timestamp,
     Expression<String>? source,
     Expression<String>? direction,
     Expression<String>? rawData,
@@ -4044,7 +4064,7 @@ class LogsCompanion extends UpdateCompanion<LogsData> {
   LogsCompanion copyWith({
     Value<int>? id,
     Value<String>? level,
-    Value<DateTime>? timestamp,
+    Value<String>? timestamp,
     Value<String>? source,
     Value<String>? direction,
     Value<String?>? rawData,
@@ -4069,7 +4089,7 @@ class LogsCompanion extends UpdateCompanion<LogsData> {
       map['level'] = Variable<String>(level.value);
     }
     if (timestamp.present) {
-      map['timestamp'] = Variable<DateTime>(timestamp.value);
+      map['timestamp'] = Variable<String>(timestamp.value);
     }
     if (source.present) {
       map['source'] = Variable<String>(source.value);
@@ -4097,8 +4117,8 @@ class LogsCompanion extends UpdateCompanion<LogsData> {
   }
 }
 
-class DatabaseAtV1 extends GeneratedDatabase {
-  DatabaseAtV1(QueryExecutor e) : super(e);
+class DatabaseAtV3 extends GeneratedDatabase {
+  DatabaseAtV3(QueryExecutor e) : super(e);
   late final Races races = Races(this);
   late final TrackFiles trackFiles = TrackFiles(this);
   late final Trails trails = Trails(this);
@@ -4126,7 +4146,52 @@ class DatabaseAtV1 extends GeneratedDatabase {
     logs,
   ];
   @override
-  int get schemaVersion => 1;
+  StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'track_files',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('trails', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'trails',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('stages', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'races',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('stages', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'races',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('participants', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'stages',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('finishes', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'stages',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('starts', kind: UpdateKind.delete)],
+    ),
+  ]);
+  @override
+  int get schemaVersion => 3;
   @override
   DriftDatabaseOptions get options =>
       const DriftDatabaseOptions(storeDateTimeAsText: true);
