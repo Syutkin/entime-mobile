@@ -28,9 +28,7 @@ class GeneratedLocalization {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<GeneratedLocalization> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -2819,6 +2817,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `В стартовом протоколе повторяется номер участника: {number}`
+  String I18nDatabase_duplicateParticipantNumberInStagesCsv(Object number) {
+    return Intl.message(
+      'В стартовом протоколе повторяется номер участника: $number',
+      name: 'I18nDatabase_duplicateParticipantNumberInStagesCsv',
+      desc: '',
+      args: [number],
+    );
+  }
+
   /// `Вы уверены, что хотите удалить гонку "{raceName}"?`
   String I18nDatabase_deleteRace(Object raceName) {
     return Intl.message(
@@ -3143,8 +3151,7 @@ class GeneratedLocalization {
   }
 }
 
-class AppLocalizationDelegate
-    extends LocalizationsDelegate<GeneratedLocalization> {
+class AppLocalizationDelegate extends LocalizationsDelegate<GeneratedLocalization> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
@@ -3157,8 +3164,7 @@ class AppLocalizationDelegate
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-  Future<GeneratedLocalization> load(Locale locale) =>
-      GeneratedLocalization.load(locale);
+  Future<GeneratedLocalization> load(Locale locale) => GeneratedLocalization.load(locale);
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

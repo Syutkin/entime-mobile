@@ -1193,9 +1193,13 @@ void main() {
       wait: const Duration(milliseconds: 10),
       expect: () => contains(
         isA<DatabaseState>().having(
-          (state) => state.errorMessage,
-          'errorMessage',
-          contains('UNIQUE constraint failed'),
+          (state) => state.error,
+          'error',
+          isA<DatabaseUnexpectedError>().having(
+            (error) => error.message,
+            'message',
+            contains('UNIQUE constraint failed'),
+          ),
         ),
       ),
       verify: (bloc) async {
@@ -1225,7 +1229,16 @@ void main() {
         final startItem = StartNumberAndTimesCsv(number: 1, startTimes: startTimes);
         stagesCsv = StagesCsv(
           stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
-          startItems: [startItem, startItem, startItem, startItem, startItem, startItem, startItem, startItem],
+          startItems: [
+            startItem,
+            startItem.copyWith(number: 2),
+            startItem.copyWith(number: 3),
+            startItem.copyWith(number: 4),
+            startItem.copyWith(number: 5),
+            startItem.copyWith(number: 6),
+            startItem.copyWith(number: 7),
+            startItem.copyWith(number: 8),
+          ],
         );
         when(() => startlistProvider.getStagesFromFile()).thenAnswer((_) => Future.value(stagesCsv));
       },
@@ -1238,6 +1251,51 @@ void main() {
       verify: (bloc) {
         expect(bloc.state.stages.length, 9);
         expect(bloc.state.stages.last.name, 'stage5');
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Create stages from file with duplicate numbers fails without creating stages',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+        final startTimes = <String, String>{
+          'stage1': '10:10:10',
+          'stage2': '10:10:10',
+          'stage3': '10:10:10',
+          'stage4': '10:10:10',
+          'stage5': '10:10:10',
+        };
+        final startItem = StartNumberAndTimesCsv(number: 100, startTimes: startTimes);
+        stagesCsv = StagesCsv(
+          stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
+          startItems: [startItem, startItem],
+        );
+        when(() => startlistProvider.getStagesFromFile()).thenAnswer((_) => Future.value(stagesCsv));
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(DatabaseEvent.createStagesFromFile(raceId: race.id));
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        isA<DatabaseState>().having(
+          (state) => state.error,
+          'error',
+          isA<DatabaseDuplicateParticipantNumberInStagesCsv>().having(
+            (error) => error.number,
+            'number',
+            100,
+          ),
+        ),
+      ),
+      verify: (bloc) async {
+        final races = await db.getRaces().get();
+        final stages = await db.getStages(raceId: race.id).get();
+
+        expect(races.length, 2);
+        expect(stages.length, 4);
+        expect(bloc.state.race, null);
       },
     );
 

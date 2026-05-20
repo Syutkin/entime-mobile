@@ -558,6 +558,71 @@ void main() {
         });
       });
 
+      group('Database error listener', () {
+        patrolWidgetTest('Shows SnackBar for race CSV creation error', ($) async {
+          const errorMessage = 'UNIQUE constraint failed: participants.race_id, participants.number';
+          const expectedStates = [
+            DatabaseState(
+              races: [],
+              stages: [],
+              categories: [],
+              riders: [],
+              participants: [],
+              finishes: [],
+              numbersOnTrace: [],
+            ),
+            DatabaseState(
+              races: [],
+              stages: [],
+              categories: [],
+              riders: [],
+              participants: [],
+              finishes: [],
+              numbersOnTrace: [],
+              error: DatabaseUnexpectedError(errorMessage),
+            ),
+          ];
+          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+
+          await $.pumpWidget(await testWidget());
+          await $.pump();
+          await $.tester.pump(const Duration(milliseconds: 250));
+
+          expect($(errorMessage), findsOneWidget);
+        });
+
+        patrolWidgetTest('Shows localized SnackBar for duplicate participant number in stages CSV', ($) async {
+          const expectedStates = [
+            DatabaseState(
+              races: [],
+              stages: [],
+              categories: [],
+              riders: [],
+              participants: [],
+              finishes: [],
+              numbersOnTrace: [],
+            ),
+            DatabaseState(
+              races: [],
+              stages: [],
+              categories: [],
+              riders: [],
+              participants: [],
+              finishes: [],
+              numbersOnTrace: [],
+              error: DatabaseDuplicateParticipantNumberInStagesCsv(100),
+            ),
+          ];
+          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+
+          await $.pumpWidget(await testWidget());
+          await $.pump();
+          await $.tester.pump(const Duration(milliseconds: 250));
+
+          expect($(Localization.current.I18nDatabase_duplicateParticipantNumberInStagesCsv(100)), findsOneWidget);
+        });
+      });
+
       group('Update start time listener', () {
         patrolWidgetTest('Popup update correction dialog and accept it, '
             'if new correction more than updateStartCorrectionDelay at settings', ($) async {

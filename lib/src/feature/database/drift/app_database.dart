@@ -19,6 +19,12 @@ import 'app_database.steps.dart';
 
 part 'app_database.g.dart';
 
+class DuplicateParticipantNumberInStagesCsvException implements Exception {
+  const DuplicateParticipantNumberInStagesCsvException(this.number);
+
+  final int number;
+}
+
 @DriftDatabase(include: {'tables.drift'})
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());
@@ -1056,6 +1062,13 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> createStagesFromStagesCsv(int raceId, StagesCsv stagesCsv) async {
+    final numbers = <int>{};
+    for (final item in stagesCsv.startItems) {
+      if (!numbers.add(item.number)) {
+        throw DuplicateParticipantNumberInStagesCsvException(item.number);
+      }
+    }
+
     final stages = <String, int>{};
     await transaction(() async {
       for (final stageName in stagesCsv.stageNames) {

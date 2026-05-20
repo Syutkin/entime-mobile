@@ -798,6 +798,12 @@ class I18nDatabase {
 
   static String get isActiveStage => Intl.message('Активный', name: 'I18nDatabase_isActiveStage');
 
+  static String duplicateParticipantNumberInStagesCsv(int number) => Intl.message(
+    'В стартовом протоколе повторяется номер участника: $number',
+    name: 'I18nDatabase_duplicateParticipantNumberInStagesCsv',
+    args: [number],
+  );
+
   static String deleteRace(String raceName) => Intl.message(
     'Вы уверены, что хотите удалить гонку "$raceName"?',
     name: 'I18nDatabase_deleteRace',

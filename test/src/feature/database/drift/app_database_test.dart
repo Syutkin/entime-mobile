@@ -2585,6 +2585,34 @@ void main() {
         participants = await db.getParticipantsAtStart(stageId: stages[stages.length - 4].id).get();
         expect(participants.length, 99);
       });
+
+      test('Reject duplicate numbers without creating stages', () async {
+        final race = (await db.getRaces().get()).first;
+        final initialStages = await db.getStages(raceId: race.id).get();
+        const stage1 = 'stage1';
+        const stage2 = 'stage2';
+        final stagesCsv = StagesCsv(
+          stageNames: [stage1, stage2],
+          startItems: [
+            const StartNumberAndTimesCsv(number: 100, startTimes: {stage1: '10:10:00', stage2: '12:10:00'}),
+            const StartNumberAndTimesCsv(number: 100, startTimes: {stage1: '10:11:00', stage2: '12:11:00'}),
+          ],
+        );
+
+        await expectLater(
+          () => db.createStagesFromStagesCsv(race.id, stagesCsv),
+          throwsA(
+            isA<DuplicateParticipantNumberInStagesCsvException>().having(
+              (error) => error.number,
+              'number',
+              100,
+            ),
+          ),
+        );
+
+        final stages = await db.getStages(raceId: race.id).get();
+        expect(stages, initialStages);
+      });
     });
 
     group('Test getStartResults', () {

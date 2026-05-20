@@ -18,6 +18,7 @@ import '../../../constants/date_time_formats.dart';
 import '../../../feature/csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
+import '../model/database_error.dart';
 import '../model/notification.dart';
 import '../model/participant_status.dart';
 
@@ -121,7 +122,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
                 notification: event.notification,
                 autoFinishNumber: event.autoFinishNumber,
                 awaitingNumber: _awaitingNumber,
-                errorMessage: event.errorMessage,
+                error: event.error,
               ),
             );
           case _AddRace():
@@ -454,8 +455,12 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               }
             }
         }
+      } on DuplicateParticipantNumberInStagesCsvException catch (e) {
+        await _emitState(
+          error: DatabaseDuplicateParticipantNumberInStagesCsv(e.number),
+        );
       } catch (e) {
-        await _emitState(errorMessage: e.toString());
+        await _emitState(error: DatabaseUnexpectedError(e.toString()));
       }
     });
     add(const DatabaseEvent.initialize());
@@ -496,7 +501,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     Notification? notification,
     int? autoFinishNumber,
     bool? updateFinishNumber,
-    String? errorMessage,
+    DatabaseError? error,
   }) async {
     add(
       DatabaseEvent.emitState(
@@ -513,7 +518,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         autoFinishNumber: autoFinishNumber,
         awaitingNumber: _awaitingNumber,
         updateFinishNumber: updateFinishNumber,
-        errorMessage: errorMessage,
+        error: error,
       ),
     );
   }

@@ -28,6 +28,6 @@ sealed class DatabaseState with _$DatabaseState {
     int? awaitingNumber,
 
     /// Ошибка базы данных
-    String? errorMessage,
+    DatabaseError? error,
   }) = DBState;
 }

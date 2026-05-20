@@ -10,6 +10,7 @@ import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
+import '../../database/model/database_error.dart';
 import '../../database/model/filter_finish.dart';
 import '../../database/model/filter_start.dart';
 import '../../database/widget/start_list_page.dart';
@@ -300,13 +301,21 @@ class HomeScreen extends StatelessWidget {
 
   SingleChildWidget _listenToDatabaseErrors() {
     return BlocListener<DatabaseBloc, DatabaseState>(
-      listenWhen: (previous, current) => previous.errorMessage != current.errorMessage && current.errorMessage != null,
+      listenWhen: (previous, current) => previous.error != current.error && current.error != null,
       listener: (context, state) {
-        final message = state.errorMessage;
-        if (message == null) return;
-        _showSnackBar(context, message);
+        final error = state.error;
+        if (error == null) return;
+        _showSnackBar(context, _databaseErrorMessage(error));
       },
     );
+  }
+
+  String _databaseErrorMessage(DatabaseError error) {
+    return switch (error) {
+      DatabaseDuplicateParticipantNumberInStagesCsv(:final number) =>
+        Localization.current.I18nDatabase_duplicateParticipantNumberInStagesCsv(number),
+      DatabaseUnexpectedError(:final message) => message,
+    };
   }
 }
 

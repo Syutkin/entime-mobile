@@ -1031,6 +1031,7 @@
 	"I18nCore_warning": "Warning",
 	"I18nDatabase_addRace": "Create a competition",
 	"I18nDatabase_addStage": "Create a stage",
+	"I18nDatabase_duplicateParticipantNumberInStagesCsv": "Duplicate participant number in stages CSV: {number}",
 	"I18nDatabase_enterRaceName": "Enter the name of the competition",
 	"I18nDatabase_enterStageName": "Enter the name of the stage",
 	"I18nDatabase_raceDates": "Dates of Conduct",

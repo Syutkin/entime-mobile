@@ -20,66 +20,64 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(version) => "v${version}";
+  static String m0(number) => "Duplicate participant number in stages CSV: ${number}";
 
-  static String m1(time, prevNumber, currentNumber) =>
+  static String m1(version) => "v${version}";
+
+  static String m2(time, prevNumber, currentNumber) =>
       "The start time ${time} has already been assigned to number ${prevNumber}. Are you sure you want to set the same start time for numbers ${currentNumber} and ${prevNumber}?";
 
-  static String m2(cancelButtonLabel) =>
-      "Error when adding participant! Press \"${cancelButtonLabel}\" to continue\n";
+  static String m3(cancelButtonLabel) => "Error when adding participant! Press \"${cancelButtonLabel}\" to continue\n";
 
-  static String m3(number, prevCorrection, correction) =>
+  static String m4(number, prevCorrection, correction) =>
       "Participant number ${number} already has the initial correction ${prevCorrection} set. Would you like to update it to ${correction}?";
 
-  static String m4(number, automaticCorrection) =>
+  static String m5(number, automaticCorrection) =>
       "For number ${number}, the automatic start timer has already been set to: ${automaticCorrection}. Would you like to set a new start time and remove the previous setting?";
 
-  static String m5(version) => "Update available";
+  static String m6(version) => "Update available";
 
-  static String m6(number, manualCorrection) =>
+  static String m7(number, manualCorrection) =>
       "For number ${number}, the manual start time has already been set: ${manualCorrection}. Would you like to set a new start time and remove the previous entry?";
 
-  static String m7(brightness) => "Brightness ${brightness}";
+  static String m8(brightness) => "Brightness ${brightness}";
 
-  static String m8(message) => "Failed to save settings: ${message}";
+  static String m9(message) => "Failed to save settings: ${message}";
 
-  static String m9(type) => "Unknown module type: ${type}";
+  static String m10(type) => "Unknown module type: ${type}";
 
-  static String m10(offset) =>
+  static String m11(offset) =>
       "${Intl.plural(offset, one: '${offset} millisecond offset', other: '${offset} milliseconds offset')}";
 
-  static String m11(number) => "Number ${number} finished";
+  static String m12(number) => "Number ${number} finished";
 
-  static String m12(raceName, stageName) =>
-      "Results of the finish of the race ${raceName}, stage ${stageName}";
+  static String m13(raceName, stageName) => "Results of the finish of the race ${raceName}, stage ${stageName}";
 
-  static String m13(raceName, stageName) =>
-      "Results of the race ${raceName}, stage ${stageName}";
+  static String m14(raceName, stageName) => "Results of the race ${raceName}, stage ${stageName}";
 
-  static String m14(number) =>
-      "Finish time for participant with number ${number} already setted. Set new value?";
+  static String m15(number) => "Finish time for participant with number ${number} already setted. Set new value?";
 
-  static String m15(milliseconds) => "${milliseconds}ms";
+  static String m16(milliseconds) => "${milliseconds}ms";
 
-  static String m16(size) => "${size}px";
+  static String m17(size) => "${size}px";
 
-  static String m17(category) => "Category: ${category}";
+  static String m18(category) => "Category: ${category}";
 
-  static String m18(city) => "City: ${city}";
+  static String m19(city) => "City: ${city}";
 
-  static String m19(nickname) => "Nickname: ${nickname}";
+  static String m20(nickname) => "Nickname: ${nickname}";
 
-  static String m20(number) => "Participant No. ${number}";
+  static String m21(number) => "Participant No. ${number}";
 
-  static String m21(number, name) => "No. ${number}, ${name}";
+  static String m22(number, name) => "No. ${number}, ${name}";
 
-  static String m22(team) => "Team: ${team}";
+  static String m23(team) => "Team: ${team}";
 
-  static String m23(year) => "Year/Age: ${year}";
+  static String m24(year) => "Year/Age: ${year}";
 
-  static String m24(current, total) => "${current} from ${total}";
+  static String m25(current, total) => "${current} from ${total}";
 
-  static String m25(version) => "Update to ${version}";
+  static String m26(version) => "Update to ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -103,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nDatabase_addStage": MessageLookupByLibrary.simpleMessage(
       "Create a stage",
     ),
+    "I18nDatabase_duplicateParticipantNumberInStagesCsv": m0,
     "I18nDatabase_enterRaceName": MessageLookupByLibrary.simpleMessage(
       "Enter the name of the competition",
     ),
@@ -123,7 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("About"),
     "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Help"),
     "I18nDrawer_settings": MessageLookupByLibrary.simpleMessage("Settings"),
-    "I18nDrawer_version": m0,
+    "I18nDrawer_version": m1,
     "I18nHelp_manual": MessageLookupByLibrary.simpleMessage("Manual"),
     "I18nHelp_manualMd": MessageLookupByLibrary.simpleMessage(
       "# Entime mobile\n\nПриложение для старт/финиш‑тайминга соревнований с поддержкой модулей по BLE и ручного ввода.\n\n## Быстрый старт\n\n1) Во вкладке **Начало** выберите соревнование и спецучасток.\n- Создайте новые или импортируйте из CSV (меню у плитки соревнования).\n- Формат CSV: см. `CSV_FORMAT.md`.\n\n2) Подключите модуль во вкладке **Начало** → Bluetooth.\n- Включите Bluetooth, выберите устройство и подключитесь.\n- После подключения доступны настройки модуля (имя/номер/часовой пояс, Wi‑Fi, и др.).\n\n3) При необходимости синхронизируйте время через NTP (плитка **NTP**).\n\n4) Дополнительно: в **Трейлах** можно вести список трасс/треков, в **Гонщиках** — список участников.\n\n## Старт\n\nВо вкладке **Старт** отображается стартовый протокол:\n- Колонки: номер, плановое время, фактическое время (от модуля/устройства), поправка.\n- DNS/DNF/DSQ можно отмечать в строке участника (жесты/меню), а видимость фильтровать через кнопку фильтра вверху.\n- Кнопка **+** позволяет добавить участника или изменить его стартовое время.\n- Результаты стартов отправляются через стандартную кнопку **поделиться**.\n\nТакже доступен экран обратного отсчёта и голосовые/звуковые уведомления (настраиваются в **Настройках**).\n\n## Финиш\n\nВо вкладке **Финиш** отображаются финишные времена:\n- Время приходит от модуля или вводится вручную кнопкой с иконкой руки.\n- Номер участника назначается перетаскиванием из списка «на трассе» либо через диалог по нажатию на время.\n- Финишные времена можно скрывать свайпом; массовое скрытие доступно через контекстное меню (долгое нажатие).\n- Кнопка фильтра позволяет показывать/скрывать ручные значения, скрытые строки и записи с номерами.\n- Результаты финиша отправляются через стандартную кнопку **поделиться**.\n\n## Настройки\n\nВ боковом меню доступны:\n- звук и голосовые сообщения, язык;\n- обратный отсчёт, окно старта, автоподстановка номеров;\n- использование времени устройства вместо времени модуля;\n- темы и параметры интерфейса;\n- журнал и обновления.\n\nПримечание: поддерживается только BLE‑подключение, Bluetooth Classic не используется.\n",
@@ -134,8 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nHome_countdownPage": MessageLookupByLibrary.simpleMessage(
       "Countdown page",
     ),
-    "I18nHome_equalStartTime": m1,
-    "I18nHome_errorAddParticipant": m2,
+    "I18nHome_equalStartTime": m2,
+    "I18nHome_errorAddParticipant": m3,
     "I18nHome_fab": MessageLookupByLibrary.simpleMessage("FAB"),
     "I18nHome_finish": MessageLookupByLibrary.simpleMessage("Finish"),
     "I18nHome_home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -148,10 +147,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nHome_setDefaults": MessageLookupByLibrary.simpleMessage("Defaults"),
     "I18nHome_start": MessageLookupByLibrary.simpleMessage("Start"),
     "I18nHome_update": MessageLookupByLibrary.simpleMessage("Update"),
-    "I18nHome_updateAutomaticCorrection": m3,
-    "I18nHome_updateAutomaticStartCorrection": m4,
-    "I18nHome_updateAvailable": m5,
-    "I18nHome_updateManualStartCorrection": m6,
+    "I18nHome_updateAutomaticCorrection": m4,
+    "I18nHome_updateAutomaticStartCorrection": m5,
+    "I18nHome_updateAvailable": m6,
+    "I18nHome_updateManualStartCorrection": m7,
     "I18nInit_bluetoothModule": MessageLookupByLibrary.simpleMessage(
       "Bluetooth module",
     ),
@@ -180,17 +179,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_bluetooth": MessageLookupByLibrary.simpleMessage(
       "Bluetooth",
     ),
-    "I18nModuleSettings_bluetoothModuleName":
-        MessageLookupByLibrary.simpleMessage("Module name"),
-    "I18nModuleSettings_bluetoothModuleNumber":
-        MessageLookupByLibrary.simpleMessage("Module number"),
+    "I18nModuleSettings_bluetoothModuleName": MessageLookupByLibrary.simpleMessage("Module name"),
+    "I18nModuleSettings_bluetoothModuleNumber": MessageLookupByLibrary.simpleMessage("Module number"),
     "I18nModuleSettings_bluetoothNumber": MessageLookupByLibrary.simpleMessage(
       "Number",
     ),
     "I18nModuleSettings_brightness": MessageLookupByLibrary.simpleMessage(
       "Brightness",
     ),
-    "I18nModuleSettings_brightnessInt": m7,
+    "I18nModuleSettings_brightnessInt": m8,
     "I18nModuleSettings_device": MessageLookupByLibrary.simpleMessage("Device"),
     "I18nModuleSettings_deviceName": MessageLookupByLibrary.simpleMessage(
       "Name",
@@ -198,12 +195,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceNameEmpty": MessageLookupByLibrary.simpleMessage(
       "Enter module name",
     ),
-    "I18nModuleSettings_deviceNameInvalid":
-        MessageLookupByLibrary.simpleMessage(
-          "ASCII only (A-Z, a-z, 0-9, -, _)",
-        ),
-    "I18nModuleSettings_deviceNameTooLong":
-        MessageLookupByLibrary.simpleMessage("Max 16 characters"),
+    "I18nModuleSettings_deviceNameInvalid": MessageLookupByLibrary.simpleMessage(
+      "ASCII only (A-Z, a-z, 0-9, -, _)",
+    ),
+    "I18nModuleSettings_deviceNameTooLong": MessageLookupByLibrary.simpleMessage("Max 16 characters"),
     "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
       "Number",
     ),
@@ -213,10 +208,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_deviceType": MessageLookupByLibrary.simpleMessage(
       "Type",
     ),
-    "I18nModuleSettings_enterBluetoothModuleNumber":
-        MessageLookupByLibrary.simpleMessage("Enter module number"),
-    "I18nModuleSettings_errorLoadSettings":
-        MessageLookupByLibrary.simpleMessage("Error load settings!"),
+    "I18nModuleSettings_enterBluetoothModuleNumber": MessageLookupByLibrary.simpleMessage("Enter module number"),
+    "I18nModuleSettings_errorLoadSettings": MessageLookupByLibrary.simpleMessage("Error load settings!"),
     "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
     "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
       "GPS",
@@ -228,21 +221,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_ntp1": MessageLookupByLibrary.simpleMessage("NTP 1"),
     "I18nModuleSettings_ntp2": MessageLookupByLibrary.simpleMessage("NTP 2"),
     "I18nModuleSettings_ntp3": MessageLookupByLibrary.simpleMessage("NTP 3"),
-    "I18nModuleSettings_saveSettingsError":
-        MessageLookupByLibrary.simpleMessage("Failed to save settings"),
-    "I18nModuleSettings_saveSettingsErrorMessage": m8,
-    "I18nModuleSettings_saveSettingsSuccess":
-        MessageLookupByLibrary.simpleMessage("Settings saved"),
-    "I18nModuleSettings_saveSettingsSuccessReboot":
-        MessageLookupByLibrary.simpleMessage(
-          "Settings saved successfully.\nRestart the module for the changes to take effect.",
-        ),
-    "I18nModuleSettings_saveSettingsTimeout":
-        MessageLookupByLibrary.simpleMessage(
-          "Module did not respond. Check the connection and try saving again.",
-        ),
-    "I18nModuleSettings_saveSettingsToModule":
-        MessageLookupByLibrary.simpleMessage("Save settings to module?"),
+    "I18nModuleSettings_saveSettingsError": MessageLookupByLibrary.simpleMessage("Failed to save settings"),
+    "I18nModuleSettings_saveSettingsErrorMessage": m9,
+    "I18nModuleSettings_saveSettingsSuccess": MessageLookupByLibrary.simpleMessage("Settings saved"),
+    "I18nModuleSettings_saveSettingsSuccessReboot": MessageLookupByLibrary.simpleMessage(
+      "Settings saved successfully.\nRestart the module for the changes to take effect.",
+    ),
+    "I18nModuleSettings_saveSettingsTimeout": MessageLookupByLibrary.simpleMessage(
+      "Module did not respond. Check the connection and try saving again.",
+    ),
+    "I18nModuleSettings_saveSettingsToModule": MessageLookupByLibrary.simpleMessage("Save settings to module?"),
     "I18nModuleSettings_setBrightness": MessageLookupByLibrary.simpleMessage(
       "Set panel brightness",
     ),
@@ -279,7 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_touchEnabled": MessageLookupByLibrary.simpleMessage(
       "Touch input",
     ),
-    "I18nModuleSettings_unknownModuleType": m9,
+    "I18nModuleSettings_unknownModuleType": m10,
     "I18nModuleSettings_wifi": MessageLookupByLibrary.simpleMessage("WiFi"),
     "I18nModuleSettings_wifiActive": MessageLookupByLibrary.simpleMessage(
       "Active",
@@ -288,7 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Network",
     ),
     "I18nNtp_ntpOffset": MessageLookupByLibrary.simpleMessage("NTP offset"),
-    "I18nNtp_offsetInMilliseconds": m10,
+    "I18nNtp_offsetInMilliseconds": m11,
     "I18nNtp_sync": MessageLookupByLibrary.simpleMessage("Press to sync"),
     "I18nNtp_syncError": MessageLookupByLibrary.simpleMessage(
       "Synchronization error",
@@ -306,18 +294,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nProtocol_enterFinishNumber": MessageLookupByLibrary.simpleMessage(
       "Enter number for finished participant",
     ),
-    "I18nProtocol_finishNumber": m11,
+    "I18nProtocol_finishNumber": m12,
     "I18nProtocol_hide": MessageLookupByLibrary.simpleMessage("Hide"),
     "I18nProtocol_hideAll": MessageLookupByLibrary.simpleMessage("Hide all"),
     "I18nProtocol_incorrectNumber": MessageLookupByLibrary.simpleMessage(
       "Incorrect number",
     ),
     "I18nProtocol_number": MessageLookupByLibrary.simpleMessage("Number"),
-    "I18nProtocol_shareFinishResults": m12,
-    "I18nProtocol_shareStartResults": m13,
+    "I18nProtocol_shareFinishResults": m13,
+    "I18nProtocol_shareStartResults": m14,
     "I18nProtocol_time": MessageLookupByLibrary.simpleMessage("Time"),
     "I18nProtocol_type": MessageLookupByLibrary.simpleMessage("Type"),
-    "I18nProtocol_updateNumber": m14,
+    "I18nProtocol_updateNumber": m15,
     "I18nProtocol_warning": MessageLookupByLibrary.simpleMessage("Warning"),
     "I18nSettings_brightness": MessageLookupByLibrary.simpleMessage(
       "Light theme",
@@ -335,8 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_countdownFromApp": MessageLookupByLibrary.simpleMessage(
       "Use the app\'s time",
     ),
-    "I18nSettings_countdownFromAppDetails":
-        MessageLookupByLibrary.simpleMessage("For playback without a module"),
+    "I18nSettings_countdownFromAppDetails": MessageLookupByLibrary.simpleMessage("For playback without a module"),
     "I18nSettings_darkBlue": MessageLookupByLibrary.simpleMessage(
       "Dark blue theme",
     ),
@@ -357,10 +344,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_finishButtonSize": MessageLookupByLibrary.simpleMessage(
       "Timestamp button size",
     ),
-    "I18nSettings_finishButtonSizeDescription":
-        MessageLookupByLibrary.simpleMessage(
-          "Timestamp button size at finish screen",
-        ),
+    "I18nSettings_finishButtonSizeDescription": MessageLookupByLibrary.simpleMessage(
+      "Timestamp button size at finish screen",
+    ),
     "I18nSettings_finishScreen": MessageLookupByLibrary.simpleMessage(
       "Finish screen",
     ),
@@ -372,10 +358,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_journalLinesNumber": MessageLookupByLibrary.simpleMessage(
       "Number of records displayed",
     ),
-    "I18nSettings_journalLinesNumberPopup":
-        MessageLookupByLibrary.simpleMessage(
-          "Number of visible lines at journal",
-        ),
+    "I18nSettings_journalLinesNumberPopup": MessageLookupByLibrary.simpleMessage(
+      "Number of visible lines at journal",
+    ),
     "I18nSettings_language": MessageLookupByLibrary.simpleMessage("Language"),
     "I18nSettings_lightBlue": MessageLookupByLibrary.simpleMessage(
       "Light blue theme",
@@ -383,7 +368,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_lightRed": MessageLookupByLibrary.simpleMessage(
       "Light red theme",
     ),
-    "I18nSettings_milliseconds": m15,
+    "I18nSettings_milliseconds": m16,
     "I18nSettings_ntpOffset": MessageLookupByLibrary.simpleMessage(
       "NTP offset",
     ),
@@ -397,7 +382,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Name the participants",
     ),
     "I18nSettings_pitch": MessageLookupByLibrary.simpleMessage("Pitch"),
-    "I18nSettings_pixelSize": m16,
+    "I18nSettings_pixelSize": m17,
     "I18nSettings_rate": MessageLookupByLibrary.simpleMessage("Rate"),
     "I18nSettings_reconnect": MessageLookupByLibrary.simpleMessage("Reconnect"),
     "I18nSettings_reconnectDescription": MessageLookupByLibrary.simpleMessage(
@@ -417,10 +402,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_startButtonSize": MessageLookupByLibrary.simpleMessage(
       "Timestamp button size",
     ),
-    "I18nSettings_startButtonSizeDescription":
-        MessageLookupByLibrary.simpleMessage(
-          "Timestamp button size at start screen",
-        ),
+    "I18nSettings_startButtonSizeDescription": MessageLookupByLibrary.simpleMessage(
+      "Timestamp button size at start screen",
+    ),
     "I18nSettings_startScreen": MessageLookupByLibrary.simpleMessage(
       "Start screen",
     ),
@@ -462,13 +446,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nStart_incorrectTime": MessageLookupByLibrary.simpleMessage(
       "Incorrect time",
     ),
-    "I18nStart_participantCategory": m17,
-    "I18nStart_participantCity": m18,
-    "I18nStart_participantNickname": m19,
-    "I18nStart_participantNumber": m20,
-    "I18nStart_participantNumberWithName": m21,
-    "I18nStart_participantTeam": m22,
-    "I18nStart_participantYear": m23,
+    "I18nStart_participantCategory": m18,
+    "I18nStart_participantCity": m19,
+    "I18nStart_participantNickname": m20,
+    "I18nStart_participantNumber": m21,
+    "I18nStart_participantNumberWithName": m22,
+    "I18nStart_participantTeam": m23,
+    "I18nStart_participantYear": m24,
     "I18nStart_sliverAutomaticCorrection": MessageLookupByLibrary.simpleMessage(
       "Auto\ncorrection",
     ),
@@ -485,8 +469,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nUpdate_connecting": MessageLookupByLibrary.simpleMessage(
       "Connecting...",
     ),
-    "I18nUpdate_downloaded": m24,
-    "I18nUpdate_updateToVersion": m25,
+    "I18nUpdate_downloaded": m25,
+    "I18nUpdate_updateToVersion": m26,
     "I18nUpdate_whatsNew": MessageLookupByLibrary.simpleMessage("What\'s new"),
   };
 }
