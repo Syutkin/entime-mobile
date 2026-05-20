@@ -1142,7 +1142,16 @@ void main() {
         raceCsv = RaceCsv(
           fileName: 'fileName',
           stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
-          startItems: [startItem, startItem, startItem, startItem, startItem, startItem, startItem, startItem],
+          startItems: [
+            startItem,
+            startItem.copyWith(number: 2),
+            startItem.copyWith(number: 3),
+            startItem.copyWith(number: 4),
+            startItem.copyWith(number: 5),
+            startItem.copyWith(number: 6),
+            startItem.copyWith(number: 7),
+            startItem.copyWith(number: 8),
+          ],
         );
         when(() => startlistProvider.getRaceFromFile()).thenAnswer((_) => Future.value(raceCsv));
       },

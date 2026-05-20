@@ -43,6 +43,33 @@ class AppDatabase extends _$AppDatabase {
         from1To2: (m, schema) async {
           await m.addColumn(schema.starts, schema.starts.timestampCorrection);
         },
+        from2To3: (m, schema) async {
+          final time = DateTime.now().toUtc();
+          await m.addColumn(schema.races, schema.races.deletedAt);
+          await (update(races)..where((_) => const CustomExpression<bool>('is_deleted = 1'))).write(
+            RacesCompanion(deletedAt: Value(time)),
+          );
+          await m.alterTable(TableMigration(schema.races));
+
+          await m.addColumn(schema.stages, schema.stages.deletedAt);
+          await (update(stages)..where((_) => const CustomExpression<bool>('is_deleted = 1'))).write(
+            StagesCompanion(deletedAt: Value(time)),
+          );
+          await m.alterTable(TableMigration(schema.stages));
+
+          await m.addColumn(schema.riders, schema.riders.deletedAt);
+          await (update(riders)..where((_) => const CustomExpression<bool>('is_deleted = 1'))).write(
+            RidersCompanion(deletedAt: Value(time)),
+          );
+          await m.alterTable(TableMigration(schema.riders));
+
+          await m.addColumn(schema.trails, schema.trails.deletedAt);
+          await (update(trails)..where((_) => const CustomExpression<bool>('is_deleted = 1'))).write(
+            TrailsCompanion(deletedAt: Value(time)),
+          );
+          await m.alterTable(TableMigration(schema.trails));
+          await m.alterTable(TableMigration(schema.participants));
+        },
       ),
       beforeOpen: (details) async {
         // Enable foreign_keys
