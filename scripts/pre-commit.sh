@@ -4,6 +4,18 @@ set -euo pipefail
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
+find lib test -name '*.dart' \
+  ! -name '*.g.dart' \
+  ! -name '*.freezed.dart' \
+  ! -name '*.steps.dart' \
+  -print0 | xargs -0 dart format
+
+find lib test -name '*.dart' \
+  ! -name '*.g.dart' \
+  ! -name '*.freezed.dart' \
+  ! -name '*.steps.dart' \
+  -print0 | xargs -0 git add --
+
 dart pub global activate cider
 cider bump build
 
