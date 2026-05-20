@@ -5518,7 +5518,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<StartForCsv> _getStartsForCsv({required int stageId}) {
     return customSelect(
-      'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.automatic_correction, IFNULL(starts.manual_correction, \'DNS\')) AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+      'SELECT participants.number AS number, starts.start_time AS start_time, CASE WHEN starts.status_id = 2 THEN \'DNS\' ELSE IFNULL(starts.automatic_correction, IFNULL(starts.manual_correction, \'DNS\')) END AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL ORDER BY starts.start_time ASC',
       variables: [Variable<int>(stageId)],
       readsFrom: {participants, starts},
     ).map(
@@ -5535,7 +5535,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required int stageId,
   }) {
     return customSelect(
-      'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.timestamp_correction, IFNULL(starts.manual_correction, \'DNS\')) AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+      'SELECT participants.number AS number, starts.start_time AS start_time, CASE WHEN starts.status_id = 2 THEN \'DNS\' ELSE IFNULL(starts.timestamp_correction, IFNULL(starts.manual_correction, \'DNS\')) END AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL ORDER BY starts.start_time ASC',
       variables: [Variable<int>(stageId)],
       readsFrom: {participants, starts},
     ).map(

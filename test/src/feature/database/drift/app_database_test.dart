@@ -20,6 +20,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late AppDatabase db;
   const deltaInSeconds = 15;
+  const firstStageStartCount = 79;
 
   setUp(() {
     db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
@@ -2818,7 +2819,7 @@ void main() {
         expect(result, null);
 
         final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
+        expect(results.length, firstStageStartCount);
         expect(results.first.correction, '$correction');
         expect(results.first.startTime, '10:00:00');
       });
@@ -2841,7 +2842,7 @@ void main() {
         expect(result, 1);
 
         final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
+        expect(results.length, firstStageStartCount);
         expect(results.first.correction, '$correction');
         expect(results.first.startTime, '10:00:00');
       });
@@ -2881,21 +2882,141 @@ void main() {
         expect(participant.first.manualCorrection, manualCorrection);
 
         final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
+        expect(results.length, firstStageStartCount);
         expect(results.first.correction, '$automaticCorrection');
         expect(results.first.startTime, '10:00:00');
       });
 
-      test('Participants with DNS status gets to the list', () async {
-        const useTimestamp = false;
+      test('DNS status has priority over timing fields', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
-        const number = 1;
+        const time = '10:00:01,222';
+        final timestamp = time.toDateTime()!;
+        const correction = 555;
+        const ntpOffset = 1111;
+        const number = 2;
+        final participant = (await db.getNumberAtStarts(stageId: stage.id, number: number).get()).first;
 
-        await db.setDNSForStage(stage: stage, number: number);
-        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
-        expect(results.first.correction, 'DNS');
-        expect(results.first.number, number);
+        await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: time,
+          correction: correction,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
+        );
+        await db.updateManualStartTime(
+          stageId: stage.id,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
+        );
+        await db.setStatusForStartId(startId: participant.startId, status: ParticipantStatus.dns);
+
+        final results = await db.getStartResults(stage.id, useTimestamp: false);
+        final timestampResults = await db.getStartResults(stage.id, useTimestamp: true);
+        final result = startResultByNumber(results, number);
+        final timestampResult = startResultByNumber(timestampResults, number);
+
+        expect(results.length, firstStageStartCount);
+        expect(result.correction, 'DNS');
+        expect(result.number, number);
+        expect(timestampResults.length, firstStageStartCount);
+        expect(timestampResult.correction, 'DNS');
+        expect(timestampResult.number, number);
+      });
+
+      test('DNF status does not affect start results', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const dnfWithoutStartCorrectionNumber = 1;
+        const dnfWithStartCorrectionNumber = 2;
+        const time = '10:00:01,222';
+        final timestamp = time.toDateTime()!;
+        const correction = 555;
+        const ntpOffset = 1111;
+        const timestampCorrection = -2333;
+
+        await db.setDNFForStage(stage: stage, number: dnfWithoutStartCorrectionNumber);
+        await db.updateAutomaticCorrection(
+          stageId: stage.id,
+          time: time,
+          correction: correction,
+          timestamp: timestamp,
+          ntpOffset: ntpOffset,
+          deltaInSeconds: deltaInSeconds,
+        );
+        await db.setDNFForStage(stage: stage, number: dnfWithStartCorrectionNumber);
+
+        final results = await db.getStartResults(stage.id, useTimestamp: false);
+        final timestampResults = await db.getStartResults(stage.id, useTimestamp: true);
+        final dnfWithoutStartCorrection = startResultByNumber(results, dnfWithoutStartCorrectionNumber);
+        final dnfWithoutTimestampCorrection = startResultByNumber(timestampResults, dnfWithoutStartCorrectionNumber);
+        final dnfWithStartCorrection = startResultByNumber(results, dnfWithStartCorrectionNumber);
+        final dnfWithTimestampCorrection = startResultByNumber(timestampResults, dnfWithStartCorrectionNumber);
+
+        expect(results.length, firstStageStartCount);
+        expect(dnfWithoutStartCorrection.correction, 'DNS');
+        expect(dnfWithStartCorrection.correction, '$correction');
+        expect(timestampResults.length, firstStageStartCount);
+        expect(dnfWithoutTimestampCorrection.correction, 'DNS');
+        expect(dnfWithTimestampCorrection.correction, '$timestampCorrection');
+      });
+
+      test('Counts DNS corrections for mixed start protocol rows', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const startedNumber = 2;
+        const dnsWithoutTimingNumber = 7;
+        const dnsWithTimingNumber = 14;
+        const dnfWithoutTimingNumber = 21;
+        const dnfWithTimingNumber = 31;
+        const automaticCorrection = 555;
+        const ntpOffset = 1111;
+        const timestampCorrection = -2333;
+        const expectedDnsCount = firstStageStartCount - 2;
+
+        Future<void> setAllStartTimingFields(String startTime) async {
+          final timestamp = startTime.toDateTime()!.add(const Duration(milliseconds: 1222));
+          final automaticStartTime = timestamp.format(longTimeFormat);
+
+          final automaticResult = await db.updateAutomaticCorrection(
+            stageId: stage.id,
+            time: automaticStartTime,
+            correction: automaticCorrection,
+            timestamp: timestamp,
+            ntpOffset: ntpOffset,
+            deltaInSeconds: deltaInSeconds,
+          );
+          expect(automaticResult, null);
+
+          final manualResult = await db.updateManualStartTime(
+            stageId: stage.id,
+            timestamp: timestamp,
+            ntpOffset: ntpOffset,
+            deltaInSeconds: deltaInSeconds,
+          );
+          expect(manualResult, 1);
+        }
+
+        await setAllStartTimingFields('10:00:00');
+        expect(await db.setDNSForStage(stage: stage, number: dnsWithoutTimingNumber), 1);
+        await setAllStartTimingFields('10:02:00');
+        expect(await db.setDNSForStage(stage: stage, number: dnsWithTimingNumber), 1);
+        expect(await db.setDNFForStage(stage: stage, number: dnfWithoutTimingNumber), 1);
+        await setAllStartTimingFields('10:04:00');
+        expect(await db.setDNFForStage(stage: stage, number: dnfWithTimingNumber), 1);
+
+        final results = await db.getStartResults(stage.id, useTimestamp: false);
+        final timestampResults = await db.getStartResults(stage.id, useTimestamp: true);
+
+        expect(results.length, firstStageStartCount);
+        expect(timestampResults.length, firstStageStartCount);
+        expect(results.where((result) => result.correction == 'DNS'), hasLength(expectedDnsCount));
+        expect(timestampResults.where((result) => result.correction == 'DNS'), hasLength(expectedDnsCount));
+        expect(startResultByNumber(results, startedNumber).correction, '$automaticCorrection');
+        expect(startResultByNumber(results, dnsWithTimingNumber).correction, 'DNS');
+        expect(startResultByNumber(results, dnfWithTimingNumber).correction, '$automaticCorrection');
+        expect(startResultByNumber(timestampResults, startedNumber).correction, '$timestampCorrection');
+        expect(startResultByNumber(timestampResults, dnsWithTimingNumber).correction, 'DNS');
+        expect(startResultByNumber(timestampResults, dnfWithTimingNumber).correction, '$timestampCorrection');
       });
 
       test('Get timestamp correction for start result', () async {
@@ -2921,7 +3042,7 @@ void main() {
         expect(result, null);
 
         final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
+        expect(results.length, firstStageStartCount);
         expect(results.first.correction, '$timestampCorrection');
         expect(results.first.startTime, '10:00:00');
       });
@@ -2944,7 +3065,7 @@ void main() {
         expect(result, 1);
 
         final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
+        expect(results.length, firstStageStartCount);
         expect(results.first.correction, '$correction');
         expect(results.first.startTime, '10:00:00');
       });
@@ -2987,21 +3108,9 @@ void main() {
         expect(participant.first.manualCorrection, manualCorrection);
 
         final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
+        expect(results.length, firstStageStartCount);
         expect(results.first.correction, '$timestampCorrection');
         expect(results.first.startTime, '10:00:00');
-      });
-
-      test('Participants with DNS status gets to the list when timestamp correction used', () async {
-        const useTimestamp = true;
-        final stage = (await db.getStages(raceId: 1).get()).first;
-        const number = 1;
-
-        await db.setDNSForStage(stage: stage, number: number);
-        final results = await db.getStartResults(stage.id, useTimestamp: useTimestamp);
-        expect(results.length, 1);
-        expect(results.first.correction, 'DNS');
-        expect(results.first.number, number);
       });
     });
 
@@ -3126,4 +3235,8 @@ Future<List<Start>> startsByStartTime({required AppDatabase db, required String 
   return (db.select(
     db.starts,
   )..where((start) => start.startTime.equals(startTime) & start.stageId.equals(stageId))).get();
+}
+
+StartForCsv startResultByNumber(List<StartForCsv> results, int number) {
+  return results.singleWhere((result) => result.number == number);
 }
