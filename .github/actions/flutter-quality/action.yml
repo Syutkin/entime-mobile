@@ -1,0 +1,61 @@
+name: Flutter quality checks
+description: Generate sources, run analyzer, run tests, and upload coverage.
+
+inputs:
+  codecov_token:
+    description: Codecov upload token.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Flutter doctor
+      shell: bash
+      run: flutter doctor -v
+
+    - name: Install dependencies from pub
+      shell: bash
+      run: flutter pub get
+
+    - name: Check Dart formatting
+      shell: bash
+      run: scripts/format.sh check
+
+    - name: Install global tools
+      shell: bash
+      run: scripts/install_dependencies.sh
+
+    - name: Generate sources
+      shell: bash
+      run: scripts/generate.sh
+
+    - name: Verify generated sources are committed
+      shell: bash
+      run: git diff --exit-code
+
+    - name: Analyze project source
+      shell: bash
+      run: flutter analyze --no-fatal-infos
+
+    - name: Run tests and collect coverage
+      shell: bash
+      run: flutter test --coverage test/
+
+    - name: Clean coverage
+      shell: bash
+      run: |
+        sudo apt-get -y install lcov
+        lcov -r coverage/lcov.info -o coverage/lcov.info \
+          "lib/**.freezed.dart" \
+          "lib/**.g.dart" \
+          "lib/**.steps.dart" \
+          "lib/**debug*.dart" \
+          "lib/src/common/localization/**.dart" \
+          "lib/src/common/bloc/app_bloc_observer.dart" \
+          "lib/src/common/model/platform_info.dart" \
+          --ignore-errors unused
+
+    - name: Upload to Codecov
+      uses: codecov/codecov-action@v5
+      env:
+        CODECOV_TOKEN: ${{ inputs.codecov_token }}

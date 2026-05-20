@@ -43,43 +43,10 @@ jobs:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
 
       - run: java --version
-      - run: flutter doctor -v
 
-      - name: Install dependencies from pub
-        run: flutter pub get
-
-      - name: Install global tools
-        run: scripts/install_dependencies.sh
-
-      - name: Generate sources
-        run: scripts/generate.sh
-
-      - name: Verify generated sources are committed
-        run: git diff --exit-code
-
-      - name: Analyze project source
-        run: flutter analyze --no-fatal-infos
-
-      - name: Run tests and collect coverage
-        run: flutter test --coverage test/
-
-      - name: Clean coverage
-        run: |
-          sudo apt-get -y install lcov
-          lcov -r coverage/lcov.info -o coverage/lcov.info \
-            "lib/**.freezed.dart" \
-            "lib/**.g.dart" \
-            "lib/**.steps.dart" \
-            "lib/**debug*.dart" \
-            "lib/src/common/localization/**.dart" \
-            "lib/src/common/bloc/app_bloc_observer.dart" \
-            "lib/src/common/model/platform_info.dart" \
-            --ignore-errors unused
-
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v5
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - uses: ./.github/actions/flutter-quality
+        with:
+          codecov_token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build APK
         run: flutter build apk --release --split-per-abi -v
