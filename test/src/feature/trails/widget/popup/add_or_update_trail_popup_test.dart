@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
@@ -43,6 +45,7 @@ void main() {
   late int fileId;
   late String fileName;
   late String fileExtension;
+  late String fileFullName;
   late int fileSize;
   late DateTime timestamp;
 
@@ -110,8 +113,9 @@ void main() {
     url = 'https://example.com';
     description = 'Test description';
     fileId = 1;
-    fileName = 'test.gpx';
-    fileExtension = '.gpx';
+    fileName = 'test';
+    fileExtension = 'gpx';
+    fileFullName = '$fileName.$fileExtension';
     fileSize = 12345;
     timestamp = DateTime.now();
 
@@ -159,7 +163,7 @@ void main() {
 
   group('AddOrUpdateTrailPopup tests', () {
     group('addTrailPopup tests', () {
-      patrolWidgetTest('Shows add trail dialog', (PatrolTester $) async {
+      patrolWidgetTest('Shows add trail dialog', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -168,7 +172,7 @@ void main() {
         expect($(ExpandedAlertDialog), findsOneWidget);
       });
 
-      patrolWidgetTest('Fields are visible', (PatrolTester $) async {
+      patrolWidgetTest('Fields are visible', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -185,7 +189,7 @@ void main() {
         expect($(#okButton), findsOneWidget);
       });
 
-      patrolWidgetTest('When adding trail shows "edit race"', (PatrolTester $) async {
+      patrolWidgetTest('When adding trail shows "edit race"', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -194,7 +198,7 @@ void main() {
         expect($(Localization.current.I18nDatabase_editRace), findsOneWidget);
       });
 
-      patrolWidgetTest('Do not show icons when state is initial at GPX track field', (PatrolTester $) async {
+      patrolWidgetTest('Do not show icons when state is initial at GPX track field', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -218,7 +222,7 @@ void main() {
         expect(sizedBox.width, 0);
       });
 
-      patrolWidgetTest('Show icons when state is initialized at GPX track field', (PatrolTester $) async {
+      patrolWidgetTest('Show icons when state is initialized at GPX track field', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -234,8 +238,8 @@ void main() {
         expect((iconButton.icon as Icon).icon, (const Icon(Icons.add_location_alt_outlined)).icon);
       });
 
-      patrolWidgetTest('Show loading indicator when state is loading track at GPX track field', (PatrolTester $) async {
-        when(() => trailsBloc.state).thenReturn(const TrailsState.loadingTrack(trails: []));
+      patrolWidgetTest('Show loading indicator when state is loading track at GPX track field', ($) async {
+        when(() => trailsBloc.state).thenReturn(const TrailsState.loadingTrack(trails: [], progress: 0.4));
 
         await $.pumpWidgetAndSettle(await testAddWidget());
         await $(addTrailButton).tap();
@@ -244,13 +248,16 @@ void main() {
           $(Row).$(Flexible).$(TextFormField).containing($(Localization.current.I18nDatabase_trailGpxTrack)),
           findsOneWidget,
         );
-        expect(
-          $(Row).containing($(Localization.current.I18nDatabase_trailGpxTrack)).$(CircularProgressIndicator),
-          findsOneWidget,
-        );
+        final progressIndicator = $(Row)
+            .containing($(Localization.current.I18nDatabase_trailGpxTrack))
+            .$(CustomPaint)
+            .which<CustomPaint>(
+              (widget) => widget.painter?.runtimeType.toString() == '_FilledCircularProgressPainter',
+            );
+        expect(progressIndicator, findsOneWidget);
       });
 
-      patrolWidgetTest('Enter trail description', (PatrolTester $) async {
+      patrolWidgetTest('Enter trail description', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -273,7 +280,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Handles correct file picker when adding new trail', (PatrolTester $) async {
+      patrolWidgetTest('Handles correct file picker when adding new trail', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
@@ -295,7 +302,7 @@ void main() {
         expect($(TextFormField).containing('test.gpx'), findsOneWidget);
       });
 
-      patrolWidgetTest('Handles file picker when adding two files', (PatrolTester $) async {
+      patrolWidgetTest('Handles file picker when adding two files', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => PlatformFile(path: '/mnt/sdcard/0/test.gpx', name: 'test.gpx', size: 100, bytes: Uint8List(100)),
@@ -335,7 +342,7 @@ void main() {
         expect($(TextFormField).containing('test2.gpx'), findsOneWidget);
       });
 
-      patrolWidgetTest('Handles file picker when adding new trail with null path file', (PatrolTester $) async {
+      patrolWidgetTest('Handles file picker when adding new trail with null path file', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => PlatformFile(name: 'test.gpx', size: 100, bytes: Uint8List(100)),
@@ -352,7 +359,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Handles file picker when adding new trail with null file', (PatrolTester $) async {
+      patrolWidgetTest('Handles file picker when adding new trail with null file', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
         when(() => filePicker.pickFile()).thenAnswer(
           (_) async => null,
@@ -369,7 +376,14 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Submits form with valid data', (PatrolTester $) async {
+      patrolWidgetTest('Submits form with valid data', ($) async {
+        final stateController = StreamController<TrailsState>.broadcast();
+        addTearDown(stateController.close);
+        whenListen(
+          trailsBloc,
+          stateController.stream,
+          initialState: const TrailsState.initialized(trails: []),
+        );
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
         when(() => filePicker.pickFile()).thenAnswer(
@@ -397,7 +411,7 @@ void main() {
 
         await $(#okButton).tap();
 
-        expect($(ExpandedAlertDialog), findsNothing);
+        expect($(ExpandedAlertDialog), findsOneWidget);
 
         verify(
           () => trailsBloc.add(
@@ -411,9 +425,17 @@ void main() {
             ),
           ),
         ).called(1);
+
+        stateController
+          ..add(const TrailsState.savingTrack(trails: [], progress: 1))
+          ..add(const TrailsState.initialized(trails: []));
+
+        await $.pumpAndSettle();
+
+        expect($(ExpandedAlertDialog), findsNothing);
       });
 
-      patrolWidgetTest('Cancels dialog', (PatrolTester $) async {
+      patrolWidgetTest('Cancels dialog', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -426,7 +448,7 @@ void main() {
     });
 
     group('updateTrailPopup tests', () {
-      patrolWidgetTest('Shows update trail dialog with existing data', (PatrolTester $) async {
+      patrolWidgetTest('Shows update trail dialog with existing data', ($) async {
         when(() => trailsBloc.state).thenReturn(TrailsState.initialized(trails: [trail]));
 
         await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
@@ -434,7 +456,7 @@ void main() {
 
         expect($(ExpandedAlertDialog), findsOneWidget);
         expect($(TextFormField).containing($(name)), findsOneWidget);
-        expect($(TextFormField).containing($(fileName + fileExtension)), findsOneWidget);
+        expect($(TextFormField).containing($(fileFullName)), findsOneWidget);
         expect($(TextFormField).containing($(distance.toString())), findsOneWidget);
         expect($(TextFormField).containing($(elevation.toString())), findsOneWidget);
         expect($(TextFormField).containing($(url)), findsOneWidget);
@@ -442,7 +464,7 @@ void main() {
         expect($(#cancelButton), findsOneWidget);
       });
 
-      patrolWidgetTest('Emit "dummy" track when trail has track', (PatrolTester $) async {
+      patrolWidgetTest('Emit "dummy" track when trail has track', ($) async {
         when(() => trailsBloc.state).thenReturn(
           TrailsState.initialized(trails: [trail]),
         );
@@ -458,7 +480,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Handles correct file picker when updating trail', (PatrolTester $) async {
+      patrolWidgetTest('Handles correct file picker when updating trail', ($) async {
         when(() => trailsBloc.state).thenReturn(
           TrailsState.initialized(trails: [trail]),
         );
@@ -483,7 +505,7 @@ void main() {
         expect($(TextFormField).containing('test.gpx'), findsOneWidget);
       });
 
-      patrolWidgetTest('Handles track removal', (PatrolTester $) async {
+      patrolWidgetTest('Handles track removal', ($) async {
         when(() => trailsBloc.state).thenReturn(
           TrailsState.initialized(
             trails: [trail],
@@ -494,7 +516,7 @@ void main() {
         await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
         await $(updateTrailButton).tap();
 
-        expect($(TextFormField).containing($(fileName + fileExtension)), findsOneWidget);
+        expect($(TextFormField).containing($(fileFullName)), findsOneWidget);
 
         await $(#removeTrackIconButton).tap();
 
@@ -503,10 +525,10 @@ void main() {
           () => trailsBloc.add(const TrailsEvent.unloadTrack()),
         ).called(1);
 
-        expect($(TextFormField).containing($(fileName + fileExtension)), findsNothing);
+        expect($(TextFormField).containing($(fileFullName)), findsNothing);
       });
 
-      patrolWidgetTest('Updates trail with new data', (PatrolTester $) async {
+      patrolWidgetTest('Updates trail with new data', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initialized(trails: []));
 
         await $.pumpWidgetAndSettle(await testUpdateWidget(trail));
@@ -548,7 +570,7 @@ void main() {
     });
 
     group('Form validation tests', () {
-      patrolWidgetTest('Validates when entering empty trail name', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering empty trail name', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -562,7 +584,7 @@ void main() {
         expect($(ExpandedAlertDialog), findsOneWidget);
       });
 
-      patrolWidgetTest('Validates when entering correct trail name', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering correct trail name', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -582,7 +604,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when entering empty trail distance', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering empty trail distance', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -605,7 +627,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when entering correct trail distance', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering correct trail distance', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -628,7 +650,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when entering incorrect trail distance', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering incorrect trail distance', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -650,7 +672,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Validates when entering not positive trail distance', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering not positive trail distance', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -681,7 +703,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Validates when entering empty trail elevation', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering empty trail elevation', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -704,7 +726,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when entering correct trail elevation', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering correct trail elevation', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -727,7 +749,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when entering incorrect trail elevation', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering incorrect trail elevation', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -749,7 +771,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Validates when entering empty trail url', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering empty trail url', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -772,7 +794,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when entering correct trail url', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering correct trail url', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -795,7 +817,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when entering incorrect trail url', (PatrolTester $) async {
+      patrolWidgetTest('Validates when entering incorrect trail url', ($) async {
         when(() => trailsBloc.state).thenReturn(const TrailsState.initial());
 
         await $.pumpWidgetAndSettle(await testAddWidget());
@@ -817,7 +839,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Validates when uploading file size is under limit', (PatrolTester $) async {
+      patrolWidgetTest('Validates when uploading file size is under limit', ($) async {
         when(() => trailsBloc.state).thenReturn(
           TrailsState.initialized(
             trails: [],
@@ -853,7 +875,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Validates when uploading file size is above limit', (PatrolTester $) async {
+      patrolWidgetTest('Validates when uploading file size is above limit', ($) async {
         when(() => trailsBloc.state).thenReturn(
           TrailsState.initialized(
             trails: [],

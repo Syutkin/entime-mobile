@@ -26,124 +26,125 @@ Future<void> _upsertStagePopup(BuildContext context, {Stage? stage, Race? race})
   final formKey = GlobalKey<FormState>();
   return showDialog<void>(
     context: context,
-    builder:
-        (context) => ExpandedAlertDialog(
-          title: stage == null ? Text(Localization.current.I18nDatabase_addStage) : Text(name),
-          content: Form(
-            key: formKey,
-            child: ListView(
-              // shrinkWrap: true,
-              children: <Widget>[
-                // Название этапа
-                TextFormField(
-                  autofocus: true,
-                  initialValue: stage?.name,
-                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_stageName),
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return Localization.current.I18nDatabase_enterStageName;
-                    }
-                    name = value;
-                    return null;
-                  },
-                ),
-                // Описание этапа
-                TextFormField(
-                  initialValue: description,
-                  decoration: InputDecoration(labelText: Localization.current.I18nDatabase_stageDescription),
-                  onChanged: (value) {
-                    description = value;
-                  },
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                ),
-                // Трейл этапа
-                BlocBuilder<TrailsBloc, TrailsState>(
-                  builder: (context, state) {
-                    switch (state) {
-                      case Initial():
-                        return const SizedBox.shrink();
-                      case LoadingTrack():
-                        return const SizedBox.shrink();
-                      case Initialized():
-                        if (trailId != null) {
-                          switch (context.read<TrailsBloc>().state) {
-                            case Initialized():
-                              for (final t in state.trails) {
-                                if (t.id == trailId) {
-                                  trail = t;
-                                  break;
-                                }
-                              }
-                            default:
-                          }
-                        }
-                        return DropdownSearch<TrailInfo>(
-                          selectedItem: trail,
-                          items: (filter, loadProps) => state.trails,
-                          itemAsString: (value) => value.name,
-                          compareFn: (item1, item2) => item1.name == item2.name,
-                          onChanged: (value) {
-                            trail = value;
-                            trailId = trail?.id;
-                          },
-                          decoratorProps: DropDownDecoratorProps(
-                            decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trail),
-                          ),
-                          suffixProps: const DropdownSuffixProps(clearButtonProps: ClearButtonProps(isVisible: true)),
-                          popupProps: PopupProps.menu(
-                            showSearchBox: true,
-                            searchDelay: Duration.zero,
-                            searchFieldProps: TextFieldProps(
-                              decoration: InputDecoration(hintText: Localization.current.I18nDatabase_searchTrail),
-                            ),
-                            // fit: FlexFit.loose,
-                          ),
-                        );
-                    }
-                  },
-                ),
-
-                // Активен ли этап (если не активен, это может обозначать его отмену)
-                FormField<bool>(
-                  initialValue: isActive,
-                  builder: (FormFieldState<bool> state) {
-                    return SwitchListTile(
-                      title: Text(Localization.current.I18nDatabase_trailIsActive),
-                      value: isActive,
-                      onChanged: (bool value) {
-                        isActive = value;
-                        state.didChange(value);
-                      },
-                    );
-                  },
-                ),
-              ],
+    builder: (context) => ExpandedAlertDialog(
+      title: stage == null ? Text(Localization.current.I18nDatabase_addStage) : Text(name),
+      content: Form(
+        key: formKey,
+        child: ListView(
+          // shrinkWrap: true,
+          children: <Widget>[
+            // Название этапа
+            TextFormField(
+              autofocus: true,
+              initialValue: stage?.name,
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_stageName),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return Localization.current.I18nDatabase_enterStageName;
+                }
+                name = value;
+                return null;
+              },
             ),
-          ),
-          actions: cancelOkButtons(
-            context: context,
-            onCancelPressed: () {
-              Navigator.of(context).pop();
-            },
-            onOkPressed: () {
-              if (formKey.currentState!.validate()) {
-                context.read<DatabaseBloc>().add(
-                  DatabaseEvent.upsertStage(
-                    id: stage?.id,
-                    name: name,
-                    description: description,
-                    raceId: raceId,
-                    trailId: trailId,
-                    isActive: isActive,
-                    removeTrailId: trailId == null,
-                  ),
+            // Описание этапа
+            TextFormField(
+              initialValue: description,
+              decoration: InputDecoration(labelText: Localization.current.I18nDatabase_stageDescription),
+              onChanged: (value) {
+                description = value;
+              },
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+            ),
+            // Трейл этапа
+            BlocBuilder<TrailsBloc, TrailsState>(
+              builder: (context, state) {
+                switch (state) {
+                  case Initial():
+                    return const SizedBox.shrink();
+                  case LoadingTrack():
+                    return const SizedBox.shrink();
+                  case SavingTrack():
+                    return const SizedBox.shrink();
+                  case Initialized():
+                    if (trailId != null) {
+                      switch (context.read<TrailsBloc>().state) {
+                        case Initialized():
+                          for (final t in state.trails) {
+                            if (t.id == trailId) {
+                              trail = t;
+                              break;
+                            }
+                          }
+                        default:
+                      }
+                    }
+                    return DropdownSearch<TrailInfo>(
+                      selectedItem: trail,
+                      items: (filter, loadProps) => state.trails,
+                      itemAsString: (value) => value.name,
+                      compareFn: (item1, item2) => item1.name == item2.name,
+                      onSelected: (value) {
+                        trail = value;
+                        trailId = trail?.id;
+                      },
+                      decoratorProps: DropDownDecoratorProps(
+                        decoration: InputDecoration(labelText: Localization.current.I18nDatabase_trail),
+                      ),
+                      suffixProps: const DropdownSuffixProps(clearButtonProps: ClearButtonProps(isVisible: true)),
+                      popupProps: PopupProps.menu(
+                        showSearchBox: true,
+                        searchDelay: Duration.zero,
+                        searchFieldProps: TextFieldProps(
+                          decoration: InputDecoration(hintText: Localization.current.I18nDatabase_searchTrail),
+                        ),
+                        // fit: FlexFit.loose,
+                      ),
+                    );
+                }
+              },
+            ),
+
+            // Активен ли этап (если не активен, это может обозначать его отмену)
+            FormField<bool>(
+              initialValue: isActive,
+              builder: (state) {
+                return SwitchListTile(
+                  title: Text(Localization.current.I18nDatabase_trailIsActive),
+                  value: isActive,
+                  onChanged: (value) {
+                    isActive = value;
+                    state.didChange(value);
+                  },
                 );
-                Navigator.of(context).pop();
-              }
-            },
-          ),
+              },
+            ),
+          ],
         ),
+      ),
+      actions: cancelOkButtons(
+        context: context,
+        onCancelPressed: () {
+          Navigator.of(context).pop();
+        },
+        onOkPressed: () {
+          if (formKey.currentState!.validate()) {
+            context.read<DatabaseBloc>().add(
+              DatabaseEvent.upsertStage(
+                id: stage?.id,
+                name: name,
+                description: description,
+                raceId: raceId,
+                trailId: trailId,
+                isActive: isActive,
+                removeTrailId: trailId == null,
+              ),
+            );
+            Navigator.of(context).pop();
+          }
+        },
+      ),
+    ),
   );
 }

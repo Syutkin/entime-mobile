@@ -43,7 +43,7 @@ void main() {
   }
 
   group('PasswordTextField tests', () {
-    patrolWidgetTest('Initial build with default values', (PatrolTester $) async {
+    patrolWidgetTest('Initial build with default values', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
 
       // Проверяем, что TextField отображается
@@ -60,7 +60,7 @@ void main() {
       expect(textField.obscureText, isTrue);
     });
 
-    patrolWidgetTest('Initial build with custom label and hint', (PatrolTester $) async {
+    patrolWidgetTest('Initial build with custom label and hint', ($) async {
       await $.pumpWidgetAndSettle(
         await testWidget(
           label: 'Custom Label',
@@ -75,7 +75,7 @@ void main() {
       expect($('Enter your password'), findsOneWidget);
     });
 
-    patrolWidgetTest('Toggle password visibility', (PatrolTester $) async {
+    patrolWidgetTest('Toggle password visibility', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
 
       // Проверяем начальное состояние - пароль скрыт
@@ -99,7 +99,7 @@ void main() {
       expect($(Icons.visibility_off), findsNothing);
     });
 
-    patrolWidgetTest('Text input functionality', (PatrolTester $) async {
+    patrolWidgetTest('Text input functionality', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       // Вводим текст
@@ -110,7 +110,7 @@ void main() {
       expect(controller.text, equals('testPassword123'));
     });
 
-    patrolWidgetTest('onChanged callback', (PatrolTester $) async {
+    patrolWidgetTest('onChanged callback', ($) async {
       await $.pumpWidgetAndSettle(
         await testWidget(
           controller: controller,
@@ -126,7 +126,7 @@ void main() {
       expect(onChangedResult, equals('callbackTest'));
     });
 
-    patrolWidgetTest('Controller updates widget', (PatrolTester $) async {
+    patrolWidgetTest('Controller updates widget', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       // Устанавливаем текст через контроллер
@@ -137,7 +137,7 @@ void main() {
       expect($(TextField).evaluate().single.widget.toString(), contains('controllerText'));
     });
 
-    patrolWidgetTest('Clear text functionality', (PatrolTester $) async {
+    patrolWidgetTest('Clear text functionality', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       // Вводим текст
@@ -151,7 +151,7 @@ void main() {
       expect(controller.text, isEmpty);
     });
 
-    patrolWidgetTest('Long text input', (PatrolTester $) async {
+    patrolWidgetTest('Long text input', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       const longText = 'veryLongPasswordThatMightOverflowTheTextfield';
@@ -162,7 +162,7 @@ void main() {
       expect(controller.text, equals(longText));
     });
 
-    patrolWidgetTest('Special characters input', (PatrolTester $) async {
+    patrolWidgetTest('Special characters input', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(controller: controller));
 
       const specialText = r'!@#$%^&*()_+-=[]{}|;:,.<>?';

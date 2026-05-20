@@ -2,6 +2,15 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"type": "shell",
+			"command": "./scripts/generate_intl.sh",
+			"problemMatcher": [],
+			"label": "flutter: generate intl",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		},
+		{
 			"type": "flutter",
 			"command": "flutter",
 			"args": [
@@ -26,7 +35,10 @@
 				"'lib/**.freezed.dart'",
 				"'lib/**.g.dart'",
 				"'lib/**.steps.dart'",
+				"'lib/**debug*.dart'",
 				"'lib/src/common/localization/**.dart'",
+				"'lib/src/common/bloc/app_bloc_observer.dart'",
+				"'lib/src/common/model/platform_info.dart'",
 				"--ignore-errors=unused"
 			],
 			"options": {},

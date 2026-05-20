@@ -3,13 +3,12 @@ import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:entime/src/feature/database/widget/popup/finish_details.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
@@ -70,23 +69,22 @@ class _FinishListPage extends State<FinishListPage> {
       if (autoFinishNumber != null) {
         BotToast.showAttachedWidget(
           verticalOffset: 36.0,
-          attachedBuilder:
-              (cancel) => Card(
-                child: ListTile(
-                  title: Text(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')),
-                  trailing: TextButton(
-                    key: const Key('cancelToast'),
-                    onPressed: () {
-                      final stage = state.stage;
-                      if (stage != null) {
-                        databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: autoFinishNumber));
-                      }
-                      cancel();
-                    },
-                    child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-                  ),
-                ),
+          attachedBuilder: (cancel) => Card(
+            child: ListTile(
+              title: Text(Localization.current.I18nProtocol_finishNumber('$autoFinishNumber')),
+              trailing: TextButton(
+                key: const Key('cancelToast'),
+                onPressed: () {
+                  final stage = state.stage;
+                  if (stage != null) {
+                    databaseBloc.add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: autoFinishNumber));
+                  }
+                  cancel();
+                },
+                child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               ),
+            ),
+          ),
           // enableSafeArea: false,
           animationDuration: Durations.medium3,
           duration: const Duration(seconds: 5),
@@ -97,10 +95,10 @@ class _FinishListPage extends State<FinishListPage> {
       // Вызывается, если номеру уже присвоена финишная отсечка
       switch (state.notification) {
         case NotificationChangeFinishTimeToNumber(
-          number: final number,
-          stage: final stage,
-          finishId: final finishId,
-          finishTime: final finishTime,
+          :final number,
+          :final stage,
+          :final finishId,
+          :final finishTime,
         ):
           final update = await updateFinishTimePopup(context, number);
           if (update ?? false) {
@@ -143,7 +141,7 @@ class _FinishListPage extends State<FinishListPage> {
               height: settingsState.finishFabSize,
               width: settingsState.finishFabSize,
               child: FittedBox(
-                child: FloatingActionButton(onPressed: _addFinishTimeManual, child: Icon(MdiIcons.handBackLeft)),
+                child: FloatingActionButton(onPressed: _addFinishTimeManual, child: const Icon(MdiIcons.handBackLeft)),
               ),
             );
           }
@@ -163,11 +161,10 @@ class _FinishListPage extends State<FinishListPage> {
         delegate: SliverSubHeaderDelegate(minHeight: 40, maxHeight: 40, child: _SliverFinishSubHeader()),
       ),
       BlocBuilder<SettingsCubit, AppSettings>(
-        buildWhen:
-            (previous, current) =>
-                previous.showHidden != current.showHidden ||
-                previous.showManual != current.showManual ||
-                previous.showNumbers != current.showNumbers,
+        buildWhen: (previous, current) =>
+            previous.showHidden != current.showHidden ||
+            previous.showManual != current.showManual ||
+            previous.showNumbers != current.showNumbers,
         builder: (context, state) {
           final filteredList = filterFinishList(
             finishProtocol,
@@ -391,7 +388,7 @@ class _FinishListPage extends State<FinishListPage> {
                     // source: [LogSource.Bluetooth]);
                     BlocProvider.of<BluetoothBloc>(context).add(
                       BluetoothEvent.messageReceived(
-                        message: 'F12:12:12,121#\r\nF13:13:13,131#\r\nF14:14:14,141#\r\nF15:16:17,181#',
+                        message: 'F12:12:12,121#\nF13:13:13,131#\nF14:14:14,141#\nF15:16:17,181#',
                         stageId: stage!.id,
                       ),
                     );

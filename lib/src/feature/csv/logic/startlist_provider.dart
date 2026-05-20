@@ -1,7 +1,8 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:entime/src/common/utils/text_decoder.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
@@ -32,7 +33,25 @@ class StartlistProvider {
   Future<RaceCsv?> getRaceFromFile() async {
     final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
-      final csv = await decoder(file.bytes!);
+      late String csv;
+      try {
+        csv = await decoder(file.bytes!);
+      } on MissingPluginException {
+        final path = file.path;
+        if (path != null) {
+          try {
+            csv = File(path).readAsStringSync();
+          } catch (e, st) {
+            logger.e('CSV -> Error while reading starting list', error: e, stackTrace: st);
+            return null;
+          }
+        } else {
+          return null;
+        }
+      } catch (e, st) {
+        logger.e('CSV -> Error while decoding starting list', error: e, stackTrace: st);
+        return null;
+      }
       try {
         final maps = _convertCsv(csv);
         final riders = <StartItemCsv>[];

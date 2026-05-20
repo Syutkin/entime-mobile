@@ -1,5 +1,12 @@
 export 'bloc/update_bloc.dart';
-export 'logic/update_provider.dart';
+export 'logic/update_api_service.dart';
+export 'logic/update_asset_resolver.dart';
+export 'logic/update_changelog_service.dart';
+export 'logic/update_controller.dart';
+export 'logic/update_controller_event.dart';
+export 'logic/update_download_service.dart';
+export 'logic/update_installer.dart';
+export 'logic/update_types.dart';
 export 'model/updater.dart';
 export 'widget/changelog_markdown.dart';
 export 'widget/changelog_popup.dart';

@@ -23,7 +23,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: countdownBloc, child: const CountdownPage())),
+      home: Material(
+        child: BlocProvider.value(value: countdownBloc, child: const CountdownPage()),
+      ),
     );
   }
 
@@ -41,14 +43,14 @@ void main() {
   });
 
   group('CountdownPage tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(Localization.current.I18nCountdown_countdown), findsOneWidget);
       expect($(Center), findsOneWidget);
     });
 
-    patrolWidgetTest('Initial bloc state', (PatrolTester $) async {
+    patrolWidgetTest('Initial bloc state', ($) async {
       when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
       await $.pumpWidgetAndSettle(await testWidget());
 
@@ -58,7 +60,7 @@ void main() {
       expect($(''), findsOneWidget);
     });
 
-    patrolWidgetTest('Working bloc state, landscape (default for test) orientation', (PatrolTester $) async {
+    patrolWidgetTest('Working bloc state, landscape (default for test) orientation', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
 
       expect($(Row), findsOneWidget);
@@ -67,7 +69,7 @@ void main() {
       expect($('$number'), findsOneWidget);
     });
 
-    patrolWidgetTest('Working bloc state, portrait orientation', (PatrolTester $) async {
+    patrolWidgetTest('Working bloc state, portrait orientation', ($) async {
       $.tester.view.physicalSize = const Size(1024, 2400);
       await $.pumpWidgetAndSettle(await testWidget());
 

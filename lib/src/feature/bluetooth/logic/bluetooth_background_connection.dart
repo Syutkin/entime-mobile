@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../../../common/logger/logger.dart';
@@ -16,15 +16,17 @@ abstract class IBluetoothBackgroundConnection {
 
   Stream<String> get message;
 
+  Stream<int> get batteryLevel;
+
   bool get isConnected;
 
   Future<void> start();
 
   Future<void> stop();
 
-  /// Отсылает [text] в Bluetooth Serial
+  /// Отсылает [text] в BLE (Nordic UART Service)
   ///
-  /// Обрезает [text] с помощью trim() и добавляет в конец \r\n.
+  /// Обрезает [text] с помощью trim() и добавляет в конец \n.
   /// Вызывает [onSendError] при ошибке
   Future<bool> sendMessage(String text);
 
@@ -40,17 +42,24 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   BluetoothBackgroundConnection({
     IBluetoothConnectionFactory? connectionFactory,
   }) : _connectionFactory = connectionFactory ?? BluetoothConnectionFactory();
+  static const int maxMessageBufferLength = 64 * 1024;
   IBluetoothConnection? _connection;
   StreamSubscription<Uint8List>? _connectionSubscription;
+  StreamSubscription<int>? _batterySubscription;
+  int _connectionToken = 0;
 
   String _messageBuffer = '';
   String _messagePacket = '';
 
   // Стрим с поступающей информацией от модуля
   final StreamController<String> _messageController = BehaviorSubject();
+  final StreamController<int> _batteryController = BehaviorSubject();
 
   @override
   Stream<String> get message => _messageController.stream;
+
+  @override
+  Stream<int> get batteryLevel => _batteryController.stream;
 
   // bool isDisconnecting = false;
 
@@ -76,16 +85,28 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> connect(BluetoothDevice bluetoothDevice) async {
+    final token = ++_connectionToken;
+    _resetMessageBuffer();
     try {
       await _connection?.close();
-      _connection = await _connectionFactory.connectToAddress(bluetoothDevice.address);
-      _connectionSubscription = _connection?.input?.listen(_onDataReceived);
-      _connectionSubscription?.onDone(() async {
+      await _batterySubscription?.cancel();
+      await _connectionSubscription?.cancel();
+      _connection = await _connectionFactory.connectToDevice(bluetoothDevice);
+      final connectionSubscription = _connection?.input?.listen(_onDataReceived);
+      final batterySubscription = _connection?.batteryLevel?.listen(_batteryController.add);
+      _connectionSubscription = connectionSubscription;
+      _batterySubscription = batterySubscription;
+      connectionSubscription?.onDone(() async {
+        if (token != _connectionToken) {
+          return;
+        }
         // Сообщаем что соединение закрыто
         // Далее на основе того, когда это произошло,
         // определяем кто закрыл соединение (в BluetoothBloc event/state)
         _onDisconnect?.call();
-        await _connectionSubscription?.cancel();
+        _resetMessageBuffer();
+        await connectionSubscription.cancel();
+        await batterySubscription?.cancel();
       });
     } catch (e) {
       logger.e('BluetoothConnection -> Cannot connect', error: e);
@@ -94,19 +115,23 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
 
   @override
   Future<void> start() async {
-    await _connection?.output?.allSent;
+    // BLE notify is configured in the connection factory.
   }
 
   @override
   Future<void> stop() async {
+    _resetMessageBuffer();
     await _connection?.finish();
   }
 
   @override
   Future<void> dispose() async {
-    await _messageController.close();
+    _resetMessageBuffer();
     await _connectionSubscription?.cancel();
+    await _batterySubscription?.cancel();
     await _connection?.finish();
+    await _messageController.close();
+    await _batteryController.close();
   }
 
   @override
@@ -117,8 +142,7 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
       if (text.isNotEmpty) {
         try {
           logger.i('Sending message: $text');
-          _connection?.output?.add(utf8.encode('$text\r\n'));
-          await _connection?.output?.allSent;
+          await _connection?.write(Uint8List.fromList(utf8.encode('$text\n')));
           result = true;
         } on Exception catch (e) {
           // Ignore error, but notify state
@@ -135,13 +159,23 @@ class BluetoothBackgroundConnection implements IBluetoothBackgroundConnection {
   }
 
   void _onDataReceived(Uint8List data) {
-    // Create message if there is '\r\n' sequence
+    // Create message if there is '\n' sequence
     _messageBuffer += String.fromCharCodes(data);
-    while (_messageBuffer.contains('\r\n')) {
-      final index = _messageBuffer.indexOf('\r\n');
+    while (_messageBuffer.contains('\n')) {
+      final index = _messageBuffer.indexOf('\n');
       _messagePacket = _messageBuffer.substring(0, index).trim();
       _messageController.add(_messagePacket);
-      _messageBuffer = _messageBuffer.substring(index + 2);
+      _messageBuffer = _messageBuffer.substring(index + 1);
     }
+    if (_messageBuffer.length > maxMessageBufferLength) {
+      logger.w('Bluetooth -> Message buffer overflow, clearing buffer');
+      _resetMessageBuffer();
+      return;
+    }
+  }
+
+  void _resetMessageBuffer() {
+    _messageBuffer = '';
+    _messagePacket = '';
   }
 }

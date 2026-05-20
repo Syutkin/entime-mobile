@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:entime/main.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
@@ -20,9 +22,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'helpers/shared_prefs_defaults.dart';
 
-class MockAppInfoProvider extends Mock implements AppInfoProvider {}
+class MockAppInfoProvider extends Mock implements IAppInfoProvider {}
 
-class MockUpdateProvider extends Mock implements UpdateProvider {}
+class MockUpdateController extends Mock implements IUpdateController {}
 
 class MockBluetoothProvider extends Mock implements IBluetoothProvider {}
 
@@ -53,7 +55,7 @@ void main() {
 
   late SharedPrefsSettingsProvider settingsProvider;
   late MockAppInfoProvider appInfo;
-  late UpdateProvider updateProvider;
+  late IUpdateController updateController;
   late IBluetoothProvider bluetoothProvider;
   late TtsProvider ttsProvider;
   late IAudioController audioController;
@@ -75,7 +77,9 @@ void main() {
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     settingsProvider = await SharedPrefsSettingsProvider.load();
     appInfo = MockAppInfoProvider();
-    updateProvider = MockUpdateProvider();
+    updateController = MockUpdateController();
+    when(() => updateController.events).thenAnswer((_) => const Stream.empty());
+    when(() => updateController.dispose()).thenAnswer((_) {});
     bluetoothProvider = MockBluetoothProvider();
     ttsProvider = MockTtsProvider();
     audioController = MockIAudioController();
@@ -85,19 +89,19 @@ void main() {
     connectivityProvider = MockIConnectivityProvider();
     startlistProvider = MockStartlistProvider();
 
-    when(() => updateProvider.showChangelog()).thenAnswer((_) => Future.value(''));
+    when(() => updateController.showChangelog()).thenAnswer((_) => Future.value(''));
 
-    when(() => updateProvider.isUpdateAvailable).thenAnswer((_) => Future.value(false));
+    when(() => updateController.isUpdateAvailable).thenAnswer((_) => Future.value(false));
   });
 
   group('EntimeApp', () {
-    patrolWidgetTest('Renders home widget', (PatrolTester $) async {
+    patrolWidgetTest('Renders home widget', ($) async {
       await $.pumpWidgetAndSettle(
         RepositoryProvider(
           create: (context) => startlistProvider,
           child: EntimeApp(
             settingsProvider: settingsProvider,
-            updateProvider: updateProvider,
+            updateController: updateController,
             bluetoothProvider: bluetoothProvider,
             ttsProvider: ttsProvider,
             audioController: audioController,

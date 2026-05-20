@@ -1282,10 +1282,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку "Start", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку "Finish", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  `
+  /// `# Entime mobile\n\nПриложение для старт/финиш‑тайминга соревнований с поддержкой модулей по BLE и ручного ввода.\n\n## Быстрый старт\n\n1) Во вкладке **Начало** выберите соревнование и спецучасток.\n- Создайте новые или импортируйте из CSV (меню у плитки соревнования).\n- Формат CSV: см. 'CSV_FORMAT.md'.\n\n2) Подключите модуль во вкладке **Начало** → Bluetooth.\n- Включите Bluetooth, выберите устройство и подключитесь.\n- После подключения доступны настройки модуля (имя/номер/часовой пояс, Wi‑Fi, и др.).\n\n3) При необходимости синхронизируйте время через NTP (плитка **NTP**).\n\n4) Дополнительно: в **Трейлах** можно вести список трасс/треков, в **Гонщиках** — список участников.\n\n## Старт\n\nВо вкладке **Старт** отображается стартовый протокол:\n- Колонки: номер, плановое время, фактическое время (от модуля/устройства), поправка.\n- DNS/DNF/DSQ можно отмечать в строке участника (жесты/меню), а видимость фильтровать через кнопку фильтра вверху.\n- Кнопка **+** позволяет добавить участника или изменить его стартовое время.\n- Результаты стартов отправляются через стандартную кнопку **поделиться**.\n\nТакже доступен экран обратного отсчёта и голосовые/звуковые уведомления (настраиваются в **Настройках**).\n\n## Финиш\n\nВо вкладке **Финиш** отображаются финишные времена:\n- Время приходит от модуля или вводится вручную кнопкой с иконкой руки.\n- Номер участника назначается перетаскиванием из списка «на трассе» либо через диалог по нажатию на время.\n- Финишные времена можно скрывать свайпом; массовое скрытие доступно через контекстное меню (долгое нажатие).\n- Кнопка фильтра позволяет показывать/скрывать ручные значения, скрытые строки и записи с номерами.\n- Результаты финиша отправляются через стандартную кнопку **поделиться**.\n\n## Настройки\n\nВ боковом меню доступны:\n- звук и голосовые сообщения, язык;\n- обратный отсчёт, окно старта, автоподстановка номеров;\n- использование времени устройства вместо времени модуля;\n- темы и параметры интерфейса;\n- журнал и обновления.\n\nПримечание: поддерживается только BLE‑подключение, Bluetooth Classic не используется.\n  `
   String get I18nHelp_manualMd {
     return Intl.message(
-      '# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку "Start", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку "Finish", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  ',
+      '# Entime mobile\n\nПриложение для старт/финиш‑тайминга соревнований с поддержкой модулей по BLE и ручного ввода.\n\n## Быстрый старт\n\n1) Во вкладке **Начало** выберите соревнование и спецучасток.\n- Создайте новые или импортируйте из CSV (меню у плитки соревнования).\n- Формат CSV: см. `CSV_FORMAT.md`.\n\n2) Подключите модуль во вкладке **Начало** → Bluetooth.\n- Включите Bluetooth, выберите устройство и подключитесь.\n- После подключения доступны настройки модуля (имя/номер/часовой пояс, Wi‑Fi, и др.).\n\n3) При необходимости синхронизируйте время через NTP (плитка **NTP**).\n\n4) Дополнительно: в **Трейлах** можно вести список трасс/треков, в **Гонщиках** — список участников.\n\n## Старт\n\nВо вкладке **Старт** отображается стартовый протокол:\n- Колонки: номер, плановое время, фактическое время (от модуля/устройства), поправка.\n- DNS/DNF/DSQ можно отмечать в строке участника (жесты/меню), а видимость фильтровать через кнопку фильтра вверху.\n- Кнопка **+** позволяет добавить участника или изменить его стартовое время.\n- Результаты стартов отправляются через стандартную кнопку **поделиться**.\n\nТакже доступен экран обратного отсчёта и голосовые/звуковые уведомления (настраиваются в **Настройках**).\n\n## Финиш\n\nВо вкладке **Финиш** отображаются финишные времена:\n- Время приходит от модуля или вводится вручную кнопкой с иконкой руки.\n- Номер участника назначается перетаскиванием из списка «на трассе» либо через диалог по нажатию на время.\n- Финишные времена можно скрывать свайпом; массовое скрытие доступно через контекстное меню (долгое нажатие).\n- Кнопка фильтра позволяет показывать/скрывать ручные значения, скрытые строки и записи с номерами.\n- Результаты финиша отправляются через стандартную кнопку **поделиться**.\n\n## Настройки\n\nВ боковом меню доступны:\n- звук и голосовые сообщения, язык;\n- обратный отсчёт, окно старта, автоподстановка номеров;\n- использование времени устройства вместо времени модуля;\n- темы и параметры интерфейса;\n- журнал и обновления.\n\nПримечание: поддерживается только BLE‑подключение, Bluetooth Classic не используется.\n  ',
       name: 'I18nHelp_manualMd',
       desc: '',
       args: [],
@@ -2049,6 +2049,56 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Настройки сохранены`
+  String get I18nModuleSettings_saveSettingsSuccess {
+    return Intl.message(
+      'Настройки сохранены',
+      name: 'I18nModuleSettings_saveSettingsSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.`
+  String get I18nModuleSettings_saveSettingsSuccessReboot {
+    return Intl.message(
+      'Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.',
+      name: 'I18nModuleSettings_saveSettingsSuccessReboot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сохранения настроек`
+  String get I18nModuleSettings_saveSettingsError {
+    return Intl.message(
+      'Ошибка сохранения настроек',
+      name: 'I18nModuleSettings_saveSettingsError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Модуль не ответил. Проверьте подключение и повторите сохранение.`
+  String get I18nModuleSettings_saveSettingsTimeout {
+    return Intl.message(
+      'Модуль не ответил. Проверьте подключение и повторите сохранение.',
+      name: 'I18nModuleSettings_saveSettingsTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ошибка сохранения настроек: {message}`
+  String I18nModuleSettings_saveSettingsErrorMessage(Object message) {
+    return Intl.message(
+      'Ошибка сохранения настроек: $message',
+      name: 'I18nModuleSettings_saveSettingsErrorMessage',
+      desc: '',
+      args: [message],
+    );
+  }
+
   /// `Ждём настройки...`
   String get I18nModuleSettings_awaitingSettings {
     return Intl.message(
@@ -2064,219 +2114,6 @@ class GeneratedLocalization {
     return Intl.message(
       'Модуль',
       name: 'I18nModuleSettings_module',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Buzzer`
-  String get I18nModuleSettings_buzzer {
-    return Intl.message(
-      'Buzzer',
-      name: 'I18nModuleSettings_buzzer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Частота коротких гудков`
-  String get I18nModuleSettings_shortFrequency {
-    return Intl.message(
-      'Частота коротких гудков',
-      name: 'I18nModuleSettings_shortFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Выберите частоту короткого гудка`
-  String get I18nModuleSettings_selectShortFrequency {
-    return Intl.message(
-      'Выберите частоту короткого гудка',
-      name: 'I18nModuleSettings_selectShortFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Частота длинных гудков`
-  String get I18nModuleSettings_longFrequency {
-    return Intl.message(
-      'Частота длинных гудков',
-      name: 'I18nModuleSettings_longFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Выберите частоту длинного гудка`
-  String get I18nModuleSettings_selectLongFrequency {
-    return Intl.message(
-      'Выберите частоту длинного гудка',
-      name: 'I18nModuleSettings_selectLongFrequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Нота {note}, {frequency}Гц`
-  String I18nModuleSettings_noteFrequency(Object note, Object frequency) {
-    return Intl.message(
-      'Нота $note, $frequencyГц',
-      name: 'I18nModuleSettings_noteFrequency',
-      desc: '',
-      args: [note, frequency],
-    );
-  }
-
-  /// `LoRa`
-  String get I18nModuleSettings_lora {
-    return Intl.message(
-      'LoRa',
-      name: 'I18nModuleSettings_lora',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Частота`
-  String get I18nModuleSettings_frequency {
-    return Intl.message(
-      'Частота',
-      name: 'I18nModuleSettings_frequency',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{frequency}Гц`
-  String I18nModuleSettings_frequencyHz(Object frequency) {
-    return Intl.message(
-      '$frequencyГц',
-      name: 'I18nModuleSettings_frequencyHz',
-      desc: '',
-      args: [frequency],
-    );
-  }
-
-  /// `TX Power`
-  String get I18nModuleSettings_txPower {
-    return Intl.message(
-      'TX Power',
-      name: 'I18nModuleSettings_txPower',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Spreading Factor`
-  String get I18nModuleSettings_spreadingFactor {
-    return Intl.message(
-      'Spreading Factor',
-      name: 'I18nModuleSettings_spreadingFactor',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Signal Bandwidth`
-  String get I18nModuleSettings_signalBandwidth {
-    return Intl.message(
-      'Signal Bandwidth',
-      name: 'I18nModuleSettings_signalBandwidth',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Coding Rate Denominator`
-  String get I18nModuleSettings_codingRateDenominator {
-    return Intl.message(
-      'Coding Rate Denominator',
-      name: 'I18nModuleSettings_codingRateDenominator',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Preamble Length`
-  String get I18nModuleSettings_preambleLength {
-    return Intl.message(
-      'Preamble Length',
-      name: 'I18nModuleSettings_preambleLength',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sync Word`
-  String get I18nModuleSettings_syncWord {
-    return Intl.message(
-      'Sync Word',
-      name: 'I18nModuleSettings_syncWord',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `CRC`
-  String get I18nModuleSettings_crc {
-    return Intl.message(
-      'CRC',
-      name: 'I18nModuleSettings_crc',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Экран`
-  String get I18nModuleSettings_screen {
-    return Intl.message(
-      'Экран',
-      name: 'I18nModuleSettings_screen',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `TFT`
-  String get I18nModuleSettings_tft {
-    return Intl.message(
-      'TFT',
-      name: 'I18nModuleSettings_tft',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Спящий режим`
-  String get I18nModuleSettings_sleepMode {
-    return Intl.message(
-      'Спящий режим',
-      name: 'I18nModuleSettings_sleepMode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `{seconds,plural, =1{{seconds} секунда}few{{seconds} секунды}other{секунд}}`
-  String I18nModuleSettings_sleepModeSeconds(num seconds) {
-    return Intl.plural(
-      seconds,
-      one: '$seconds секунда',
-      few: '$seconds секунды',
-      other: 'секунд',
-      name: 'I18nModuleSettings_sleepModeSeconds',
-      desc: '',
-      args: [seconds],
-    );
-  }
-
-  /// `Включать после события`
-  String get I18nModuleSettings_turnOnAtEvent {
-    return Intl.message(
-      'Включать после события',
-      name: 'I18nModuleSettings_turnOnAtEvent',
       desc: '',
       args: [],
     );
@@ -2382,101 +2219,331 @@ class GeneratedLocalization {
     );
   }
 
-  /// `VCC`
-  String get I18nModuleSettings_vcc {
+  /// `Устройство`
+  String get I18nModuleSettings_device {
     return Intl.message(
-      'VCC',
-      name: 'I18nModuleSettings_vcc',
+      'Устройство',
+      name: 'I18nModuleSettings_device',
       desc: '',
       args: [],
     );
   }
 
-  /// `R1`
-  String get I18nModuleSettings_resistor1 {
+  /// `Имя`
+  String get I18nModuleSettings_deviceName {
     return Intl.message(
-      'R1',
-      name: 'I18nModuleSettings_resistor1',
+      'Имя',
+      name: 'I18nModuleSettings_deviceName',
       desc: '',
       args: [],
     );
   }
 
-  /// `R2`
-  String get I18nModuleSettings_resistor2 {
+  /// `Введите имя модуля`
+  String get I18nModuleSettings_deviceNameEmpty {
     return Intl.message(
-      'R2',
-      name: 'I18nModuleSettings_resistor2',
+      'Введите имя модуля',
+      name: 'I18nModuleSettings_deviceNameEmpty',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ом`
-  String get I18nModuleSettings_ohm {
+  /// `Только ASCII символы (A-Z, a-z, 0-9, -, _)`
+  String get I18nModuleSettings_deviceNameInvalid {
     return Intl.message(
-      'Ом',
-      name: 'I18nModuleSettings_ohm',
+      'Только ASCII символы (A-Z, a-z, 0-9, -, _)',
+      name: 'I18nModuleSettings_deviceNameInvalid',
       desc: '',
       args: [],
     );
   }
 
-  /// `{ohm} Ом`
-  String I18nModuleSettings_resistorOhm(Object ohm) {
+  /// `Максимум 16 символов`
+  String get I18nModuleSettings_deviceNameTooLong {
     return Intl.message(
-      '$ohm Ом',
-      name: 'I18nModuleSettings_resistorOhm',
-      desc: '',
-      args: [ohm],
-    );
-  }
-
-  /// `Введите значение резистора R1`
-  String get I18nModuleSettings_enterResistor1 {
-    return Intl.message(
-      'Введите значение резистора R1',
-      name: 'I18nModuleSettings_enterResistor1',
+      'Максимум 16 символов',
+      name: 'I18nModuleSettings_deviceNameTooLong',
       desc: '',
       args: [],
     );
   }
 
-  /// `Введите значение резистора R2`
-  String get I18nModuleSettings_enterResistor2 {
+  /// `Номер`
+  String get I18nModuleSettings_deviceNumber {
     return Intl.message(
-      'Введите значение резистора R2',
-      name: 'I18nModuleSettings_enterResistor2',
+      'Номер',
+      name: 'I18nModuleSettings_deviceNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ввод измеренного напряжения`
-  String get I18nModuleSettings_enterMeasuredVoltage {
+  /// `Введите номер устройства`
+  String get I18nModuleSettings_deviceNumberEmpty {
     return Intl.message(
-      'Ввод измеренного напряжения',
-      name: 'I18nModuleSettings_enterMeasuredVoltage',
+      'Введите номер устройства',
+      name: 'I18nModuleSettings_deviceNumberEmpty',
       desc: '',
       args: [],
     );
   }
 
-  /// `мВ`
-  String get I18nModuleSettings_mv {
+  /// `Номер должен быть целым`
+  String get I18nModuleSettings_deviceNumberInvalid {
     return Intl.message(
-      'мВ',
-      name: 'I18nModuleSettings_mv',
+      'Номер должен быть целым',
+      name: 'I18nModuleSettings_deviceNumberInvalid',
       desc: '',
       args: [],
     );
   }
 
-  /// `Введите текущее значение напряжения на батареях`
-  String get I18nModuleSettings_enterCurrentVoltage {
+  /// `Диапазон 1..255`
+  String get I18nModuleSettings_deviceNumberRange {
     return Intl.message(
-      'Введите текущее значение напряжения на батареях',
-      name: 'I18nModuleSettings_enterCurrentVoltage',
+      'Диапазон 1..255',
+      name: 'I18nModuleSettings_deviceNumberRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Тип`
+  String get I18nModuleSettings_deviceType {
+    return Intl.message(
+      'Тип',
+      name: 'I18nModuleSettings_deviceType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Смещение UTC`
+  String get I18nModuleSettings_deviceTimezone {
+    return Intl.message(
+      'Смещение UTC',
+      name: 'I18nModuleSettings_deviceTimezone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите смещение UTC, например 3 или 5:45`
+  String get I18nModuleSettings_timezoneEmpty {
+    return Intl.message(
+      'Введите смещение UTC, например 3 или 5:45',
+      name: 'I18nModuleSettings_timezoneEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите целые часы или часы:минуты`
+  String get I18nModuleSettings_timezoneInvalid {
+    return Intl.message(
+      'Введите целые часы или часы:минуты',
+      name: 'I18nModuleSettings_timezoneInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Диапазон UTC-12:00..UTC+14:00`
+  String get I18nModuleSettings_timezoneRange {
+    return Intl.message(
+      'Диапазон UTC-12:00..UTC+14:00',
+      name: 'I18nModuleSettings_timezoneRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Синхронизация`
+  String get I18nModuleSettings_sync {
+    return Intl.message(
+      'Синхронизация',
+      name: 'I18nModuleSettings_sync',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Авто`
+  String get I18nModuleSettings_syncAuto {
+    return Intl.message(
+      'Авто',
+      name: 'I18nModuleSettings_syncAuto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Источник`
+  String get I18nModuleSettings_syncSource {
+    return Intl.message(
+      'Источник',
+      name: 'I18nModuleSettings_syncSource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Авто`
+  String get I18nModuleSettings_syncSourceAuto {
+    return Intl.message(
+      'Авто',
+      name: 'I18nModuleSettings_syncSourceAuto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GPS`
+  String get I18nModuleSettings_syncSourceGps {
+    return Intl.message(
+      'GPS',
+      name: 'I18nModuleSettings_syncSourceGps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RTC`
+  String get I18nModuleSettings_syncSourceRtc {
+    return Intl.message(
+      'RTC',
+      name: 'I18nModuleSettings_syncSourceRtc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GPS`
+  String get I18nModuleSettings_gps {
+    return Intl.message(
+      'GPS',
+      name: 'I18nModuleSettings_gps',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GPS`
+  String get I18nModuleSettings_gpsEnabled {
+    return Intl.message(
+      'GPS',
+      name: 'I18nModuleSettings_gpsEnabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Тачскрин`
+  String get I18nModuleSettings_touch {
+    return Intl.message(
+      'Тачскрин',
+      name: 'I18nModuleSettings_touch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сенсорный ввод`
+  String get I18nModuleSettings_touchEnabled {
+    return Intl.message(
+      'Сенсорный ввод',
+      name: 'I18nModuleSettings_touchEnabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сенсор откалиброван`
+  String get I18nModuleSettings_touchCalValid {
+    return Intl.message(
+      'Сенсор откалиброван',
+      name: 'I18nModuleSettings_touchCalValid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Калибровка`
+  String get I18nModuleSettings_touchCalibration {
+    return Intl.message(
+      'Калибровка',
+      name: 'I18nModuleSettings_touchCalibration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NTP 1`
+  String get I18nModuleSettings_ntp1 {
+    return Intl.message(
+      'NTP 1',
+      name: 'I18nModuleSettings_ntp1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NTP 2`
+  String get I18nModuleSettings_ntp2 {
+    return Intl.message(
+      'NTP 2',
+      name: 'I18nModuleSettings_ntp2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NTP 3`
+  String get I18nModuleSettings_ntp3 {
+    return Intl.message(
+      'NTP 3',
+      name: 'I18nModuleSettings_ntp3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите NTP сервер`
+  String get I18nModuleSettings_ntpEmpty {
+    return Intl.message(
+      'Введите NTP сервер',
+      name: 'I18nModuleSettings_ntpEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный адрес сервера`
+  String get I18nModuleSettings_ntpInvalid {
+    return Intl.message(
+      'Неверный адрес сервера',
+      name: 'I18nModuleSettings_ntpInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Максимум 64 символа`
+  String get I18nModuleSettings_ntpTooLong {
+    return Intl.message(
+      'Максимум 64 символа',
+      name: 'I18nModuleSettings_ntpTooLong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Активно`
+  String get I18nModuleSettings_wifiActive {
+    return Intl.message(
+      'Активно',
+      name: 'I18nModuleSettings_wifiActive',
       desc: '',
       args: [],
     );
@@ -2749,6 +2816,16 @@ class GeneratedLocalization {
       name: 'I18nDatabase_isActiveStage',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `В стартовом протоколе повторяется номер участника: {number}`
+  String I18nDatabase_duplicateParticipantNumberInStagesCsv(Object number) {
+    return Intl.message(
+      'В стартовом протоколе повторяется номер участника: $number',
+      name: 'I18nDatabase_duplicateParticipantNumberInStagesCsv',
+      desc: '',
+      args: [number],
     );
   }
 

@@ -20,98 +20,94 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m29(emailLaunchUri) => "Could not launch ${emailLaunchUri}";
+  static String m27(emailLaunchUri) => "Could not launch ${emailLaunchUri}";
 
-  static String m30(version) => "Версия: ${version}";
+  static String m28(version) => "Версия: ${version}";
 
-  static String m31(raceName) =>
+  static String m29(raceName) =>
       "Вы уверены, что хотите удалить гонку \"${raceName}\"?";
 
-  static String m32(stageName) =>
+  static String m30(stageName) =>
       "Вы уверены, что хотите удалить этап \"${stageName}\"?";
 
-  static String m33(trailName) =>
+  static String m31(trailName) =>
       "Вы уверены, что хотите удалить трейл \"${trailName}\"?";
 
-  static String m34(limit) => "Максимальный размер ${limit} Мб";
+  static String m0(number) =>
+      "В стартовом протоколе повторяется номер участника: ${number}";
 
-  static String m0(version) => "v${version}";
+  static String m32(limit) => "Максимальный размер ${limit} Мб";
 
-  static String m1(time, prevNumber, currentNumber) =>
+  static String m1(version) => "v${version}";
+
+  static String m2(time, prevNumber, currentNumber) =>
       "Стартовое время ${time} уже присвоено номеру ${prevNumber}. Вы уверены что хотите установить одинаковое стартовое время для номеров ${currentNumber} и ${prevNumber}?\n";
 
-  static String m2(cancelButtonLabel) =>
+  static String m3(cancelButtonLabel) =>
       "Ошибка при добавлении участника! Для продолжения нажмите \"${cancelButtonLabel}\"\n";
 
-  static String m3(number, prevCorrection, correction) =>
+  static String m4(number, prevCorrection, correction) =>
       "Участнику под номером ${number} уже установлена стартовая поправка ${prevCorrection}. Обновить её на ${correction}?";
 
-  static String m4(number, automaticCorrection) =>
+  static String m5(number, automaticCorrection) =>
       "У номера ${number} уже проставлена автоматическая стартовая отсечка: ${automaticCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n";
 
-  static String m5(version) => "Доступна новая версия ${version}";
+  static String m6(version) => "Доступна новая версия ${version}";
 
-  static String m6(number, manualCorrection) =>
+  static String m7(number, manualCorrection) =>
       "У номера ${number} уже проставлена ручная стартовая отсечка: ${manualCorrection}. Установить новое стартовое время и удалить предыдущее значение?\n";
 
-  static String m7(brightness) => "Яркость ${brightness}";
+  static String m8(brightness) => "Яркость ${brightness}";
 
-  static String m8(frequency) => "${frequency}Гц";
+  static String m9(message) => "Ошибка сохранения настроек: ${message}";
 
-  static String m9(note, frequency) => "Нота ${note}, ${frequency}Гц";
+  static String m10(type) => "Неизвестный тип модуля: ${type}";
 
-  static String m10(ohm) => "${ohm} Ом";
-
-  static String m11(seconds) =>
-      "${Intl.plural(seconds, one: '${seconds} секунда', few: '${seconds} секунды', other: 'секунд')}";
-
-  static String m12(type) => "Неизвестный тип модуля: ${type}";
-
-  static String m13(offset) =>
+  static String m11(offset) =>
       "${Intl.plural(offset, one: 'Смещение ${offset} миллисекунда', few: 'Смещение ${offset} миллисекунды', other: 'Смещение ${offset} миллисекунд')}";
 
-  static String m14(number) => "Финишировал номер ${number}";
+  static String m12(number) => "Финишировал номер ${number}";
 
-  static String m15(raceName, stageName) =>
+  static String m13(raceName, stageName) =>
       "Результаты финишей гонки ${raceName}, этап ${stageName}";
 
-  static String m16(raceName, stageName) =>
+  static String m14(raceName, stageName) =>
       "Результаты стартов гонки ${raceName}, этап ${stageName}";
 
-  static String m17(number) =>
+  static String m15(number) =>
       "Участнику с номером ${number} уже присвоено финишное время. Установить новое значение?";
 
-  static String m18(milliseconds) => "${milliseconds}мс";
+  static String m16(milliseconds) => "${milliseconds}мс";
 
-  static String m19(size) => "${size}px";
+  static String m17(size) => "${size}px";
 
-  static String m35(seconds) => "${seconds}с";
+  static String m33(seconds) => "${seconds}с";
 
-  static String m20(category) => "Категория: ${category}";
+  static String m18(category) => "Категория: ${category}";
 
-  static String m21(city) => "Город: ${city}";
+  static String m19(city) => "Город: ${city}";
 
-  static String m22(nickname) => "Никнейм: ${nickname}";
+  static String m20(nickname) => "Никнейм: ${nickname}";
 
-  static String m23(number) => "Участник №${number}";
+  static String m21(number) => "Участник №${number}";
 
-  static String m24(number, name) => "№${number}, ${name}";
+  static String m22(number, name) => "№${number}, ${name}";
 
-  static String m25(team) => "Команда: ${team}";
+  static String m23(team) => "Команда: ${team}";
 
-  static String m26(year) => "Год/Возраст: ${year}";
+  static String m24(year) => "Год/Возраст: ${year}";
 
-  static String m36(automaticCorrection, timestampCorrection) =>
+  static String m34(automaticCorrection, timestampCorrection) =>
       "Вы уверены что хотите заменить автоматическую поправку (${automaticCorrection}) на поправку относительно времени смартфона (${timestampCorrection})?";
 
-  static String m37(number) => "Участник с номером ${number} не стартовал?";
+  static String m35(number) => "Участник с номером ${number} не стартовал?";
 
-  static String m38(number, time) =>
+  static String m36(number, time) =>
       "Сдвинуть время стартов на указанное количество минут от номера ${number} (время старта ${time}) и далее?";
 
-  static String m27(current, total) => "${current} из ${total}";
+  static String m25(current, total) => "${current} из ${total}";
 
-  static String m28(version) => "Обновить до ${version}";
+  static String m26(version) => "Обновить до ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -124,11 +120,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nAbout_copyright": MessageLookupByLibrary.simpleMessage(
       "© 2021-2025 Andrey Syutkin",
     ),
-    "I18nAbout_emailSendError": m29,
+    "I18nAbout_emailSendError": m27,
     "I18nAbout_emailSubject": MessageLookupByLibrary.simpleMessage(
       "Entime замечания/предложения",
     ),
-    "I18nAbout_version": m30,
+    "I18nAbout_version": m28,
     "I18nBluetooth_bluetoothNotAvailable": MessageLookupByLibrary.simpleMessage(
       "Bluetooth недоступен на устройстве",
     ),
@@ -168,9 +164,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nDatabase_category": MessageLookupByLibrary.simpleMessage("Категория"),
     "I18nDatabase_city": MessageLookupByLibrary.simpleMessage("Город"),
     "I18nDatabase_comment": MessageLookupByLibrary.simpleMessage("Комментарий"),
-    "I18nDatabase_deleteRace": m31,
-    "I18nDatabase_deleteStage": m32,
-    "I18nDatabase_deleteTrail": m33,
+    "I18nDatabase_deleteRace": m29,
+    "I18nDatabase_deleteStage": m30,
+    "I18nDatabase_deleteTrail": m31,
+    "I18nDatabase_duplicateParticipantNumberInStagesCsv": m0,
     "I18nDatabase_editRace": MessageLookupByLibrary.simpleMessage(
       "Редактирование",
     ),
@@ -249,11 +246,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nDatabase_trailName": MessageLookupByLibrary.simpleMessage("Название"),
     "I18nDatabase_trailUrl": MessageLookupByLibrary.simpleMessage("Ссылка"),
     "I18nDatabase_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
-    "I18nDatabase_uploadLimit": m34,
+    "I18nDatabase_uploadLimit": m32,
     "I18nDrawer_about": MessageLookupByLibrary.simpleMessage("О программе"),
     "I18nDrawer_help": MessageLookupByLibrary.simpleMessage("Помощь"),
     "I18nDrawer_settings": MessageLookupByLibrary.simpleMessage("Настройки"),
-    "I18nDrawer_version": m0,
+    "I18nDrawer_version": m1,
     "I18nFinish_automaticTime": MessageLookupByLibrary.simpleMessage(
       "Автоматическая отсечка",
     ),
@@ -269,7 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "I18nHelp_manual": MessageLookupByLibrary.simpleMessage("Руководство"),
     "I18nHelp_manualMd": MessageLookupByLibrary.simpleMessage(
-      "# Entime mobile\n\nПеред началом работы можно изменить настройки приложения.\n\n![](resource:assets/1.png)\n\n - Включить звук обратного отсчёта\n - Включить и настроить голосовые оповещения\n - Отключить выключение эрана во время работы приложения.\n\n![](resource:assets/9.png)\n![](resource:assets/11.png)\n\nДля непосредственной работы нужно выбрать файл стартового протокола.\n\n![](resource:assets/2.png)\n\nЗатем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.\n\n![](resource:assets/4.png)\n\nПосле выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.\n\n![](resource:assets/5.png)\n\nПосле установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.\n\n![](resource:assets/8.png)\n\n\nДля работы на старте переходим во вкладку \"Start\", в ней отображается стартовый протокол.\n\nВ первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.\n\n| Номер | Время старта | Фактическое время старта | Поправка |\n|-------|--------------|--------------------------|----------|\n\nЕсли участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.\n\nПосле окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.\n\n![](resource:assets/12.png)\n\nПри нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.\n\nДля этого в открывшемся диалоге вводим номер и новое стартовое время.\n\n![](resource:assets/20.png)\n\nДля работы на финише переходим во вкладку \"Finish\", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.\n\nВнизу отображаются номера гонщиков, которые сейчас должны быть на трассе.\n\n![](resource:assets/13.png)\n\nДля присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.\n\n![](resource:assets/15.png)\n\nОтработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,\n\n![](resource:assets/17.png)\n\nлибо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.\n\n![](resource:assets/14.png)\n\nПосле окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.\n  ",
+      "# Entime mobile\n\nПриложение для старт/финиш‑тайминга соревнований с поддержкой модулей по BLE и ручного ввода.\n\n## Быстрый старт\n\n1) Во вкладке **Начало** выберите соревнование и спецучасток.\n- Создайте новые или импортируйте из CSV (меню у плитки соревнования).\n- Формат CSV: см. `CSV_FORMAT.md`.\n\n2) Подключите модуль во вкладке **Начало** → Bluetooth.\n- Включите Bluetooth, выберите устройство и подключитесь.\n- После подключения доступны настройки модуля (имя/номер/часовой пояс, Wi‑Fi, и др.).\n\n3) При необходимости синхронизируйте время через NTP (плитка **NTP**).\n\n4) Дополнительно: в **Трейлах** можно вести список трасс/треков, в **Гонщиках** — список участников.\n\n## Старт\n\nВо вкладке **Старт** отображается стартовый протокол:\n- Колонки: номер, плановое время, фактическое время (от модуля/устройства), поправка.\n- DNS/DNF/DSQ можно отмечать в строке участника (жесты/меню), а видимость фильтровать через кнопку фильтра вверху.\n- Кнопка **+** позволяет добавить участника или изменить его стартовое время.\n- Результаты стартов отправляются через стандартную кнопку **поделиться**.\n\nТакже доступен экран обратного отсчёта и голосовые/звуковые уведомления (настраиваются в **Настройках**).\n\n## Финиш\n\nВо вкладке **Финиш** отображаются финишные времена:\n- Время приходит от модуля или вводится вручную кнопкой с иконкой руки.\n- Номер участника назначается перетаскиванием из списка «на трассе» либо через диалог по нажатию на время.\n- Финишные времена можно скрывать свайпом; массовое скрытие доступно через контекстное меню (долгое нажатие).\n- Кнопка фильтра позволяет показывать/скрывать ручные значения, скрытые строки и записи с номерами.\n- Результаты финиша отправляются через стандартную кнопку **поделиться**.\n\n## Настройки\n\nВ боковом меню доступны:\n- звук и голосовые сообщения, язык;\n- обратный отсчёт, окно старта, автоподстановка номеров;\n- использование времени устройства вместо времени модуля;\n- темы и параметры интерфейса;\n- журнал и обновления.\n\nПримечание: поддерживается только BLE‑подключение, Bluetooth Classic не используется.\n  ",
     ),
     "I18nHome_addRacer": MessageLookupByLibrary.simpleMessage(
       "Добавить участника",
@@ -281,8 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nHome_countdownPage": MessageLookupByLibrary.simpleMessage(
       "Страница с обратным отсчётом",
     ),
-    "I18nHome_equalStartTime": m1,
-    "I18nHome_errorAddParticipant": m2,
+    "I18nHome_equalStartTime": m2,
+    "I18nHome_errorAddParticipant": m3,
     "I18nHome_fab": MessageLookupByLibrary.simpleMessage("FAB"),
     "I18nHome_finish": MessageLookupByLibrary.simpleMessage("Финиш"),
     "I18nHome_home": MessageLookupByLibrary.simpleMessage("Начало"),
@@ -314,10 +311,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nHome_showNumbers": MessageLookupByLibrary.simpleMessage("С номерами"),
     "I18nHome_start": MessageLookupByLibrary.simpleMessage("Старт"),
     "I18nHome_update": MessageLookupByLibrary.simpleMessage("Обновить"),
-    "I18nHome_updateAutomaticCorrection": m3,
-    "I18nHome_updateAutomaticStartCorrection": m4,
-    "I18nHome_updateAvailable": m5,
-    "I18nHome_updateManualStartCorrection": m6,
+    "I18nHome_updateAutomaticCorrection": m4,
+    "I18nHome_updateAutomaticStartCorrection": m5,
+    "I18nHome_updateAvailable": m6,
+    "I18nHome_updateManualStartCorrection": m7,
     "I18nInit_bluetoothModule": MessageLookupByLibrary.simpleMessage(
       "Bluetooth модуль",
     ),
@@ -360,90 +357,125 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nModuleSettings_brightness": MessageLookupByLibrary.simpleMessage(
       "Яркость",
     ),
-    "I18nModuleSettings_brightnessInt": m7,
-    "I18nModuleSettings_buzzer": MessageLookupByLibrary.simpleMessage("Buzzer"),
-    "I18nModuleSettings_codingRateDenominator":
-        MessageLookupByLibrary.simpleMessage("Coding Rate Denominator"),
-    "I18nModuleSettings_crc": MessageLookupByLibrary.simpleMessage("CRC"),
+    "I18nModuleSettings_brightnessInt": m8,
+    "I18nModuleSettings_device": MessageLookupByLibrary.simpleMessage(
+      "Устройство",
+    ),
+    "I18nModuleSettings_deviceName": MessageLookupByLibrary.simpleMessage(
+      "Имя",
+    ),
+    "I18nModuleSettings_deviceNameEmpty": MessageLookupByLibrary.simpleMessage(
+      "Введите имя модуля",
+    ),
+    "I18nModuleSettings_deviceNameInvalid":
+        MessageLookupByLibrary.simpleMessage(
+          "Только ASCII символы (A-Z, a-z, 0-9, -, _)",
+        ),
+    "I18nModuleSettings_deviceNameTooLong":
+        MessageLookupByLibrary.simpleMessage("Максимум 16 символов"),
+    "I18nModuleSettings_deviceNumber": MessageLookupByLibrary.simpleMessage(
+      "Номер",
+    ),
+    "I18nModuleSettings_deviceNumberEmpty":
+        MessageLookupByLibrary.simpleMessage("Введите номер устройства"),
+    "I18nModuleSettings_deviceNumberInvalid":
+        MessageLookupByLibrary.simpleMessage("Номер должен быть целым"),
+    "I18nModuleSettings_deviceNumberRange":
+        MessageLookupByLibrary.simpleMessage("Диапазон 1..255"),
+    "I18nModuleSettings_deviceTimezone": MessageLookupByLibrary.simpleMessage(
+      "Смещение UTC",
+    ),
+    "I18nModuleSettings_deviceType": MessageLookupByLibrary.simpleMessage(
+      "Тип",
+    ),
     "I18nModuleSettings_enterBluetoothModuleNumber":
         MessageLookupByLibrary.simpleMessage("Введите номер модуля"),
-    "I18nModuleSettings_enterCurrentVoltage":
-        MessageLookupByLibrary.simpleMessage(
-          "Введите текущее значение напряжения на батареях",
-        ),
-    "I18nModuleSettings_enterMeasuredVoltage":
-        MessageLookupByLibrary.simpleMessage("Ввод измеренного напряжения"),
-    "I18nModuleSettings_enterResistor1": MessageLookupByLibrary.simpleMessage(
-      "Введите значение резистора R1",
-    ),
-    "I18nModuleSettings_enterResistor2": MessageLookupByLibrary.simpleMessage(
-      "Введите значение резистора R2",
-    ),
     "I18nModuleSettings_enterWifiCredentials":
         MessageLookupByLibrary.simpleMessage("Введите данные сети"),
     "I18nModuleSettings_errorLoadSettings":
         MessageLookupByLibrary.simpleMessage("Ошибка загрузки настроек!"),
-    "I18nModuleSettings_frequency": MessageLookupByLibrary.simpleMessage(
-      "Частота",
+    "I18nModuleSettings_gps": MessageLookupByLibrary.simpleMessage("GPS"),
+    "I18nModuleSettings_gpsEnabled": MessageLookupByLibrary.simpleMessage(
+      "GPS",
     ),
-    "I18nModuleSettings_frequencyHz": m8,
-    "I18nModuleSettings_longFrequency": MessageLookupByLibrary.simpleMessage(
-      "Частота длинных гудков",
-    ),
-    "I18nModuleSettings_lora": MessageLookupByLibrary.simpleMessage("LoRa"),
     "I18nModuleSettings_module": MessageLookupByLibrary.simpleMessage("Модуль"),
     "I18nModuleSettings_moduleSettings": MessageLookupByLibrary.simpleMessage(
       "Настройки модуля",
     ),
-    "I18nModuleSettings_mv": MessageLookupByLibrary.simpleMessage("мВ"),
-    "I18nModuleSettings_noteFrequency": m9,
-    "I18nModuleSettings_ohm": MessageLookupByLibrary.simpleMessage("Ом"),
-    "I18nModuleSettings_preambleLength": MessageLookupByLibrary.simpleMessage(
-      "Preamble Length",
+    "I18nModuleSettings_ntp1": MessageLookupByLibrary.simpleMessage("NTP 1"),
+    "I18nModuleSettings_ntp2": MessageLookupByLibrary.simpleMessage("NTP 2"),
+    "I18nModuleSettings_ntp3": MessageLookupByLibrary.simpleMessage("NTP 3"),
+    "I18nModuleSettings_ntpEmpty": MessageLookupByLibrary.simpleMessage(
+      "Введите NTP сервер",
     ),
-    "I18nModuleSettings_resistor1": MessageLookupByLibrary.simpleMessage("R1"),
-    "I18nModuleSettings_resistor2": MessageLookupByLibrary.simpleMessage("R2"),
-    "I18nModuleSettings_resistorOhm": m10,
+    "I18nModuleSettings_ntpInvalid": MessageLookupByLibrary.simpleMessage(
+      "Неверный адрес сервера",
+    ),
+    "I18nModuleSettings_ntpTooLong": MessageLookupByLibrary.simpleMessage(
+      "Максимум 64 символа",
+    ),
+    "I18nModuleSettings_saveSettingsError":
+        MessageLookupByLibrary.simpleMessage("Ошибка сохранения настроек"),
+    "I18nModuleSettings_saveSettingsErrorMessage": m9,
+    "I18nModuleSettings_saveSettingsSuccess":
+        MessageLookupByLibrary.simpleMessage("Настройки сохранены"),
+    "I18nModuleSettings_saveSettingsSuccessReboot":
+        MessageLookupByLibrary.simpleMessage(
+          "Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.",
+        ),
+    "I18nModuleSettings_saveSettingsTimeout":
+        MessageLookupByLibrary.simpleMessage(
+          "Модуль не ответил. Проверьте подключение и повторите сохранение.",
+        ),
     "I18nModuleSettings_saveSettingsToModule":
         MessageLookupByLibrary.simpleMessage(
           "Записать новые настройки в модуль?",
         ),
-    "I18nModuleSettings_screen": MessageLookupByLibrary.simpleMessage("Экран"),
-    "I18nModuleSettings_selectLongFrequency":
-        MessageLookupByLibrary.simpleMessage("Выберите частоту длинного гудка"),
-    "I18nModuleSettings_selectShortFrequency":
-        MessageLookupByLibrary.simpleMessage(
-          "Выберите частоту короткого гудка",
-        ),
     "I18nModuleSettings_setBrightness": MessageLookupByLibrary.simpleMessage(
       "Установите яркость панели",
     ),
-    "I18nModuleSettings_shortFrequency": MessageLookupByLibrary.simpleMessage(
-      "Частота коротких гудков",
+    "I18nModuleSettings_sync": MessageLookupByLibrary.simpleMessage(
+      "Синхронизация",
     ),
-    "I18nModuleSettings_signalBandwidth": MessageLookupByLibrary.simpleMessage(
-      "Signal Bandwidth",
+    "I18nModuleSettings_syncAuto": MessageLookupByLibrary.simpleMessage("Авто"),
+    "I18nModuleSettings_syncSource": MessageLookupByLibrary.simpleMessage(
+      "Источник",
     ),
-    "I18nModuleSettings_sleepMode": MessageLookupByLibrary.simpleMessage(
-      "Спящий режим",
+    "I18nModuleSettings_syncSourceAuto": MessageLookupByLibrary.simpleMessage(
+      "Авто",
     ),
-    "I18nModuleSettings_sleepModeSeconds": m11,
-    "I18nModuleSettings_spreadingFactor": MessageLookupByLibrary.simpleMessage(
-      "Spreading Factor",
+    "I18nModuleSettings_syncSourceGps": MessageLookupByLibrary.simpleMessage(
+      "GPS",
     ),
-    "I18nModuleSettings_syncWord": MessageLookupByLibrary.simpleMessage(
-      "Sync Word",
+    "I18nModuleSettings_syncSourceRtc": MessageLookupByLibrary.simpleMessage(
+      "RTC",
     ),
-    "I18nModuleSettings_tft": MessageLookupByLibrary.simpleMessage("TFT"),
-    "I18nModuleSettings_turnOnAtEvent": MessageLookupByLibrary.simpleMessage(
-      "Включать после события",
+    "I18nModuleSettings_timezoneEmpty": MessageLookupByLibrary.simpleMessage(
+      "Введите смещение UTC, например 3 или 5:45",
     ),
-    "I18nModuleSettings_txPower": MessageLookupByLibrary.simpleMessage(
-      "TX Power",
+    "I18nModuleSettings_timezoneInvalid": MessageLookupByLibrary.simpleMessage(
+      "Введите целые часы или часы:минуты",
     ),
-    "I18nModuleSettings_unknownModuleType": m12,
-    "I18nModuleSettings_vcc": MessageLookupByLibrary.simpleMessage("VCC"),
+    "I18nModuleSettings_timezoneRange": MessageLookupByLibrary.simpleMessage(
+      "Диапазон UTC-12:00..UTC+14:00",
+    ),
+    "I18nModuleSettings_touch": MessageLookupByLibrary.simpleMessage(
+      "Тачскрин",
+    ),
+    "I18nModuleSettings_touchCalValid": MessageLookupByLibrary.simpleMessage(
+      "Сенсор откалиброван",
+    ),
+    "I18nModuleSettings_touchCalibration": MessageLookupByLibrary.simpleMessage(
+      "Калибровка",
+    ),
+    "I18nModuleSettings_touchEnabled": MessageLookupByLibrary.simpleMessage(
+      "Сенсорный ввод",
+    ),
+    "I18nModuleSettings_unknownModuleType": m10,
     "I18nModuleSettings_wifi": MessageLookupByLibrary.simpleMessage("WiFi"),
+    "I18nModuleSettings_wifiActive": MessageLookupByLibrary.simpleMessage(
+      "Активно",
+    ),
     "I18nModuleSettings_wifiNetwork": MessageLookupByLibrary.simpleMessage(
       "Сеть",
     ),
@@ -454,7 +486,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Имя сети",
     ),
     "I18nNtp_ntpOffset": MessageLookupByLibrary.simpleMessage("NTP offset"),
-    "I18nNtp_offsetInMilliseconds": m13,
+    "I18nNtp_offsetInMilliseconds": m11,
     "I18nNtp_sync": MessageLookupByLibrary.simpleMessage(
       "Нажмите для синхронизации",
     ),
@@ -475,7 +507,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nProtocol_enterFinishNumber": MessageLookupByLibrary.simpleMessage(
       "Введите номер финишировавшего участника",
     ),
-    "I18nProtocol_finishNumber": m14,
+    "I18nProtocol_finishNumber": m12,
     "I18nProtocol_finishTimeCutoff": MessageLookupByLibrary.simpleMessage(
       "Финишная отсечка",
     ),
@@ -485,14 +517,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Неверный номер",
     ),
     "I18nProtocol_number": MessageLookupByLibrary.simpleMessage("Номер"),
-    "I18nProtocol_shareFinishResults": m15,
-    "I18nProtocol_shareStartResults": m16,
+    "I18nProtocol_shareFinishResults": m13,
+    "I18nProtocol_shareStartResults": m14,
     "I18nProtocol_startTimeCutoff": MessageLookupByLibrary.simpleMessage(
       "Стартовая отсечка",
     ),
     "I18nProtocol_time": MessageLookupByLibrary.simpleMessage("Время"),
     "I18nProtocol_type": MessageLookupByLibrary.simpleMessage("Тип"),
-    "I18nProtocol_updateNumber": m17,
+    "I18nProtocol_updateNumber": m15,
     "I18nProtocol_warning": MessageLookupByLibrary.simpleMessage(
       "Предупреждение",
     ),
@@ -575,7 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_lightRed": MessageLookupByLibrary.simpleMessage(
       "Красная светлая тема",
     ),
-    "I18nSettings_milliseconds": m18,
+    "I18nSettings_milliseconds": m16,
     "I18nSettings_ntpOffset": MessageLookupByLibrary.simpleMessage(
       "NTP смещение",
     ),
@@ -592,7 +624,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Называть имена участников",
     ),
     "I18nSettings_pitch": MessageLookupByLibrary.simpleMessage("Тембр"),
-    "I18nSettings_pixelSize": m19,
+    "I18nSettings_pixelSize": m17,
     "I18nSettings_rate": MessageLookupByLibrary.simpleMessage("Скорость"),
     "I18nSettings_reconnect": MessageLookupByLibrary.simpleMessage(
       "Переподключение",
@@ -606,7 +638,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_resetToDefaults": MessageLookupByLibrary.simpleMessage(
       "Настройки по умолчанию",
     ),
-    "I18nSettings_seconds": m35,
+    "I18nSettings_seconds": m33,
     "I18nSettings_settings": MessageLookupByLibrary.simpleMessage("Настройки"),
     "I18nSettings_showColorFinishDifference":
         MessageLookupByLibrary.simpleMessage(
@@ -743,24 +775,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nStart_incorrectTime": MessageLookupByLibrary.simpleMessage(
       "Неверное значение времени",
     ),
-    "I18nStart_participantCategory": m20,
-    "I18nStart_participantCity": m21,
-    "I18nStart_participantNickname": m22,
-    "I18nStart_participantNumber": m23,
-    "I18nStart_participantNumberWithName": m24,
-    "I18nStart_participantTeam": m25,
-    "I18nStart_participantYear": m26,
+    "I18nStart_participantCategory": m18,
+    "I18nStart_participantCity": m19,
+    "I18nStart_participantNickname": m20,
+    "I18nStart_participantNumber": m21,
+    "I18nStart_participantNumberWithName": m22,
+    "I18nStart_participantTeam": m23,
+    "I18nStart_participantYear": m24,
     "I18nStart_replaceAutomaticCorrection":
         MessageLookupByLibrary.simpleMessage(
           "Заменить автоматическую поправку",
         ),
-    "I18nStart_replaceAutomaticCorrectionConfirmation": m36,
-    "I18nStart_setDnsConfirmation": m37,
+    "I18nStart_replaceAutomaticCorrectionConfirmation": m34,
+    "I18nStart_setDnsConfirmation": m35,
     "I18nStart_shiftMinutes": MessageLookupByLibrary.simpleMessage("Минуты"),
     "I18nStart_shiftStartsTime": MessageLookupByLibrary.simpleMessage(
       "Сдвинуть время стартов",
     ),
-    "I18nStart_shiftStartsTimeFromNumber": m38,
+    "I18nStart_shiftStartsTimeFromNumber": m36,
     "I18nStart_sliverAutomaticCorrection": MessageLookupByLibrary.simpleMessage(
       "Авто\r\nпоправка",
     ),
@@ -785,8 +817,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nUpdate_connecting": MessageLookupByLibrary.simpleMessage(
       "Соединение...",
     ),
-    "I18nUpdate_downloaded": m27,
-    "I18nUpdate_updateToVersion": m28,
+    "I18nUpdate_downloaded": m25,
+    "I18nUpdate_updateToVersion": m26,
     "I18nUpdate_whatsNew": MessageLookupByLibrary.simpleMessage("Что нового"),
   };
 }

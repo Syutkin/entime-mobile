@@ -1,12 +1,11 @@
 import 'package:csv/csv.dart';
-import 'package:csv/csv_settings_autodetection.dart';
 
 /// Convert a list of maps to csv
-String? mapListToCsv(List<Map<String, dynamic>>? mapList, {ListToCsvConverter? converter, String? eol}) {
+String? mapListToCsv(List<Map<String, dynamic>>? mapList, {CsvEncoder? converter, String? eol}) {
   if (mapList == null) {
     return null;
   }
-  converter ??= const ListToCsvConverter(fieldDelimiter: ';');
+  final encoder = _encoderFor(converter: converter, eol: eol);
   final data = <List<dynamic>>[];
   final keys = <String>[];
   final keyIndexMap = <String, int>{};
@@ -40,44 +39,62 @@ String? mapListToCsv(List<Map<String, dynamic>>? mapList, {ListToCsvConverter? c
     });
     data.add(dataRow);
   }
-  return converter.convert(<List<dynamic>>[keys, ...data], eol: eol);
+  return encoder.convert(<List<dynamic>>[keys, ...data]);
 }
 
-//CSV to List<Map<String, String>> instead of the normal List<List<String>> scheme of the original csv package
+CsvEncoder _encoderFor({CsvEncoder? converter, String? eol}) {
+  if (converter == null) {
+    return CsvEncoder(fieldDelimiter: ';', lineDelimiter: eol ?? '\r\n');
+  }
+  if (eol == null || eol == converter.lineDelimiter) {
+    return converter;
+  }
+
+  return CsvEncoder(
+    fieldDelimiter: converter.fieldDelimiter,
+    lineDelimiter: eol,
+    quoteCharacter: converter.quoteCharacter,
+    escapeCharacter: converter.escapeCharacter,
+    quoteMode: converter.quoteMode,
+    addBom: converter.addBom,
+    fieldTransform: converter.fieldTransform,
+  );
+}
+
+// CSV to List<Map<String, dynamic>> instead of the normal List<List<dynamic>> scheme of the csv package.
 class CsvToMapConverter {
   CsvToMapConverter({
-    String? fieldDelimiter = defaultFieldDelimiter,
-    String? textDelimiter = defaultTextDelimiter,
+    String? fieldDelimiter = ',',
+    String textDelimiter = '"',
     String? textEndDelimiter,
-    String? eol = defaultEol,
-    CsvSettingsDetector? csvSettingsDetector,
+    String? eol = '\r\n',
+    Object? csvSettingsDetector,
     bool? shouldParseNumbers,
-    bool? allowInvalid,
   }) {
-    converter = CsvToListConverter(
-      fieldDelimiter: fieldDelimiter,
-      textDelimiter: textDelimiter,
-      textEndDelimiter: textEndDelimiter,
-      eol: eol,
-      csvSettingsDetector: csvSettingsDetector,
-      shouldParseNumbers: shouldParseNumbers,
-      allowInvalid: allowInvalid,
+    converter = Csv(
+      fieldDelimiter: fieldDelimiter ?? ',',
+      lineDelimiter: eol ?? '\r\n',
+      quoteCharacter: textDelimiter,
+      escapeCharacter: textEndDelimiter == null ? null : textDelimiter,
+      autoDetect: fieldDelimiter == null || csvSettingsDetector != null,
+      parseHeaders: true,
+      decoderTransform: shouldParseNumbers ?? true ? _parseNumber : null,
     );
   }
 
-  late CsvToListConverter converter;
+  late Csv converter;
 
   List<Map<String, dynamic>> convert(String csv) {
-    final list = converter.convert<dynamic>(csv);
-    final List<dynamic> legend = list.first.map((dynamic category) => category.toString()).toList();
-    final maps = <Map<String, dynamic>>[];
-    list.sublist(1).forEach((l) {
-      final map = <String, dynamic>{};
-      for (var i = 0; i < legend.length; i++) {
-        map.putIfAbsent('${legend[i]}', () => l[i]);
-      }
-      maps.add(map);
-    });
-    return maps;
+    return [
+      for (final row in converter.decodeWithHeaders(csv)) row.toMap(),
+    ];
   }
+}
+
+dynamic _parseNumber(dynamic field, int index, String? header) {
+  if (field is! String) {
+    return field;
+  }
+
+  return int.tryParse(field) ?? double.tryParse(field) ?? field;
 }

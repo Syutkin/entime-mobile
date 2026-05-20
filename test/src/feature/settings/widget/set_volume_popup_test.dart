@@ -34,7 +34,7 @@ void main() {
   }
 
   group('setVolumePopup tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(volume));
       await $(#button).tap();
       expect($(Localization.current.I18nSettings_voiceVolume), findsOneWidget);
@@ -43,7 +43,7 @@ void main() {
       expect(slider.value, volume);
     });
 
-    patrolWidgetTest('Slide and get new size', (PatrolTester $) async {
+    patrolWidgetTest('Slide and get new size', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(volume));
       await $(#button).tap();
       await $.tester.drag($(Slider), const Offset(50, 0));
@@ -51,7 +51,7 @@ void main() {
       expect(result, 0.71); //0.71 - при сдвиге на 50
     });
 
-    patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
+    patrolWidgetTest('Return null when cancel pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(volume));
       await $(#button).tap();
       await $(#cancelButton).tap();

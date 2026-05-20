@@ -8,7 +8,7 @@ Future<void> editRiderPopup({
 }) async {
   return showDialog<void>(
     context: context,
-    builder: (BuildContext context) => EditRiderPopup(rider: rider, teams: teams, cities: cities),
+    builder: (context) => EditRiderPopup(rider: rider, teams: teams, cities: cities),
   );
 }
 

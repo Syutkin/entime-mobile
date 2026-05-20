@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.5.2-dev+533',
+    representation: r'0.6.0-dev+660',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.5.2-dev+533',
+    canonical: r'0.6.0-dev+660',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -107,29 +107,17 @@ sealed class Pubspec {
     /// MINOR version when you add functionality
     /// in a backward compatible manner.
     /// The minor version number: 2 in "1.2.3".
-    minor: 5,
+    minor: 6,
 
     /// PATCH version when you make backward compatible bug fixes.
     /// The patch version number: 3 in "1.2.3".
-    patch: 2,
+    patch: 0,
 
     /// The pre-release identifier: "foo" in "1.2.3-foo".
     preRelease: <String>[r'dev'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'533'],
-  );
-
-  /// Build date and time (UTC)
-  static final DateTime timestamp = DateTime.utc(
-    2025,
-    11,
-    15,
-    13,
-    47,
-    41,
-    430,
-    950,
+    build: <String>[r'660'],
   );
 
   /// Name
@@ -164,7 +152,7 @@ sealed class Pubspec {
   /// Think of the description as the sales pitch for your package.
   /// Users see it when they [browse for packages](https://pub.dev/packages).
   /// The description is plain text: no markdown or HTML.
-  static const String description = r'A mobile application for Entime project.';
+  static const String description = r'A start/finish application for Entime project.';
 
   /// Homepage
   ///
@@ -347,8 +335,8 @@ sealed class Pubspec {
 
   /// Environment
   static const Map<String, String> environment = <String, String>{
-    'sdk': '^3.10.0',
-    'flutter': '^3.10.0',
+    'sdk': '^3.12.0',
+    'flutter': '^3.44.0',
   };
 
   /// Platforms
@@ -383,7 +371,11 @@ sealed class Pubspec {
   ///   linux:
   ///   macos:
   /// ```
-  static const Map<String, Object> platforms = <String, Object>{};
+  static const Map<String, Object> platforms = <String, Object>{
+    'android': r'',
+    'linux': r'',
+    'windows': r'',
+  };
 
   /// Dependencies
   ///
@@ -409,28 +401,31 @@ sealed class Pubspec {
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
     'any_date': r'^1.2.1',
-    'app_settings': r'^6.1.1',
+    'app_settings': r'^7.0.0',
     'audioplayers': r'^6.5.1',
     'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
     'connectivity_plus': r'^7.0.0',
     'crypto': r'^3.0.7',
-    'csv': r'^6.0.0',
-    'device_info_plus': r'^12.2.0',
-    'drift': r'^2.29.0',
-    'dropdown_search': r'^6.0.2',
+    'csv': r'^8.0.0',
+    'device_info_plus': r'^13.1.0',
+    'drift': r'^2.33.0',
+    'dropdown_search': r'^7.0.0',
     'equatable': r'^2.0.7',
-    'file_picker': r'^10.3.6',
+    'file_picker': r'^12.0.0-beta.3',
+    'file_selector': r'^1.0.3',
     'flutter': <String, Object>{
       'sdk': r'flutter',
     },
     'flutter_bloc': r'^9.1.1',
-    'flutter_bluetooth_serial': r'^0.4.0',
+    'flutter_blue_plus': r'^2.3.2',
+    'flutter_blue_plus_winrt': r'^0.0.20',
     'flutter_charset_detector': r'^5.0.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
     },
-    'flutter_markdown': r'^0.7.7+1',
+    'flutter_markdown_plus': r'^1.0.7',
+    'flutter_material_design_icons': r'^3.1.0+7447',
     'flutter_ntp': r'^0.0.2',
     'flutter_tts': r'^4.2.3',
     'freezed_annotation': r'^3.1.0',
@@ -438,8 +433,7 @@ sealed class Pubspec {
     'intl': r'^0.20.2',
     'json_annotation': r'^4.9.0',
     'logger': r'^2.6.2',
-    'material_design_icons_flutter': r'^7.0.7296',
-    'meta': r'^1.17.0',
+    'meta': r'^1.18.0',
     'nested': r'^1.0.0',
     'open_file': r'^3.5.10',
     'path': r'^1.9.1',
@@ -447,12 +441,11 @@ sealed class Pubspec {
     'permission_handler': r'^12.0.1',
     'pub_semver': r'^2.2.0',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^9.8.0',
-    'settings_ui': r'^2.0.2',
-    'share_plus': r'^12.0.1',
-    'shared_preferences': r'^2.5.3',
-    'sqlite3': r'^2.9.4',
-    'sqlite3_flutter_libs': r'^0.5.40',
+    'sentry_flutter': r'^9.9.1',
+    'settings_ui': r'^3.0.1',
+    'share_plus': r'^13.1.0',
+    'shared_preferences': r'^2.5.4',
+    'sqlite3': r'^3.3.1',
     'url_launcher': r'^6.3.2',
     'wakelock_plus': r'^1.4.0',
   };
@@ -460,9 +453,9 @@ sealed class Pubspec {
   /// Developer dependencies
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^10.0.0',
-    'build_runner': r'^2.10.3',
-    'dart_style': r'^3.1.3',
-    'drift_dev': r'^2.29.0',
+    'build_runner': r'^2.10.5',
+    'dart_style': r'^3.1.8',
+    'drift_dev': r'^2.30.0',
     'flutter_lints': r'^6.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
@@ -473,25 +466,16 @@ sealed class Pubspec {
     },
     'json_serializable': r'^6.11.1',
     'mocktail': r'^1.0.4',
-    'patrol': r'^3.20.0',
-    'patrol_finders': r'^2.9.0',
-    'test': r'^1.26.3',
+    'patrol': r'^4.0.1',
+    'patrol_finders': r'^3.2.0',
+    'test': r'^1.31.0',
     'very_good_analysis': r'^10.0.0',
   };
 
   /// Dependency overrides
   static const Map<String, Object> dependencyOverrides = <String, Object>{
-    'flutter_bluetooth_serial': <String, Object>{
-      'git': r'https://github.com/Syutkin/flutter_bluetooth_serial.git',
-    },
     'flutter_ntp': <String, Object>{
       'git': r'https://github.com/Syutkin/flutter_ntp',
-    },
-    'settings_ui': <String, Object>{
-      'git': <String, Object>{
-        'url': r'https://github.com/yako-dev/flutter-settings-ui',
-        'ref': r'dev',
-      },
     },
   };
 
@@ -549,6 +533,7 @@ sealed class Pubspec {
       'assets': <Object>[
         r'assets/',
         r'CHANGELOG.md',
+        r'android/app/src/main/res/mipmap-xxxhdpi/entime.png',
       ],
     },
     'flutter_intl': <String, Object>{

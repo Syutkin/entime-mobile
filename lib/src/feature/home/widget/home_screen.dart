@@ -5,10 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/logger/logger.dart';
 import '../../../constants/pubspec.yaml.g.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
+import '../../database/model/database_error.dart';
 import '../../database/model/filter_finish.dart';
 import '../../database/model/filter_start.dart';
 import '../../database/widget/start_list_page.dart';
@@ -70,6 +72,10 @@ class HomeScreen extends StatelessWidget {
             _listenToCountdownEvents(),
             // Следим за наличием новой версии
             _listenToUpdater(),
+            // Следим за таймаутами Bluetooth JSON запросов
+            _listenToBluetoothRequests(),
+            // Показываем ошибки базы данных
+            _listenToDatabaseErrors(),
           ],
           child: const TabBarView(
             physics: NeverScrollableScrollPhysics(),
@@ -83,9 +89,13 @@ class HomeScreen extends StatelessWidget {
   SingleChildWidget _listenToBluetooth() => BlocListener<BluetoothBloc, BluetoothBlocState>(
     listener: (context, state) {
       switch (state) {
-        case BluetoothBlocStateConnected(message: final message):
+        case BluetoothBlocStateConnected(:final message):
           switch (message) {
-            case BluetoothMessageAutomaticStart(automaticStart: final automaticStart):
+            case BluetoothMessageAutomaticStart(:final automaticStart):
+              if (automaticStart.correction == null) {
+                logger.i('Bluetooth -> Start packet without correction; skipping DB update.');
+                return;
+              }
               final databaseBloc = context.read<DatabaseBloc>();
               final offset = context.read<NtpBloc>().state.offset;
               final deltaInSeconds = context.read<SettingsCubit>().state.deltaInSeconds;
@@ -96,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                   DatabaseEvent.updateAutomaticCorrection(
                     stageId: stageId,
                     startTime: automaticStart.time,
-                    correction: automaticStart.correction,
+                    correction: automaticStart.correction!,
                     timestamp: automaticStart.timestamp,
                     ntpOffset: offset,
                     deltaInSeconds: deltaInSeconds,
@@ -105,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 );
               }
-            case BluetoothMessageFinish(time: final time, timestamp: final timestamp):
+            case BluetoothMessageFinish(:final time, :final timestamp):
               final databaseBloc = context.read<DatabaseBloc>();
               final offset = context.read<NtpBloc>().state.offset;
               final stage = databaseBloc.state.stage;
@@ -114,14 +124,66 @@ class HomeScreen extends StatelessWidget {
                   DatabaseEvent.addFinishTime(stage: stage, finishTime: time, timestamp: timestamp, ntpOffset: offset),
                 );
               }
-            case BluetoothMessageModuleSettings(json: final json):
-              context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(json));
+            case BluetoothMessageJsonResponse(:final response, :final rawJson):
+              final request = context.read<BluetoothRequestCubit>().complete(response);
+              switch (request?.purpose) {
+                case BluetoothRequestPurpose.moduleSettingsLoad:
+                  if (response is BluetoothJsonResponseLoadConfig) {
+                    context.read<ModuleSettingsBloc>().add(ModuleSettingsEvent.get(rawJson));
+                  }
+                case BluetoothRequestPurpose.moduleSettingsSave:
+                  if (response is BluetoothJsonResponseSaveConfig) {
+                    _showModuleSettingsSaveConfigSnackBar(context, response);
+                  }
+                case null:
+              }
             default:
           }
         default:
       }
     },
   );
+
+  void _showModuleSettingsSaveConfigSnackBar(BuildContext context, BluetoothJsonResponseSaveConfig response) {
+    final text = _moduleSettingsSaveConfigText(response);
+    _showSnackBar(context, text);
+  }
+
+  String _moduleSettingsSaveConfigText(BluetoothJsonResponseSaveConfig response) {
+    final i18n = Localization.current;
+    if (response.status == BluetoothProtocolStatus.ok) {
+      return response.rebootNeeded ?? false
+          ? i18n.I18nModuleSettings_saveSettingsSuccessReboot
+          : i18n.I18nModuleSettings_saveSettingsSuccess;
+    }
+
+    final message = response.errorMessage;
+    if (message == null || message.isEmpty) {
+      return i18n.I18nModuleSettings_saveSettingsError;
+    }
+    return i18n.I18nModuleSettings_saveSettingsErrorMessage(message);
+  }
+
+  SingleChildWidget _listenToBluetoothRequests() => BlocListener<BluetoothRequestCubit, BluetoothRequestState>(
+    listener: (context, state) {
+      switch (state) {
+        case BluetoothRequestTimedOut(:final request):
+          switch (request.purpose) {
+            case BluetoothRequestPurpose.moduleSettingsLoad:
+              context.read<ModuleSettingsBloc>().add(const ModuleSettingsEvent.loadFailed());
+            case BluetoothRequestPurpose.moduleSettingsSave:
+              _showSnackBar(context, Localization.current.I18nModuleSettings_saveSettingsTimeout);
+          }
+        case BluetoothRequestIdle():
+      }
+    },
+  );
+
+  void _showSnackBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(text)));
+  }
 
   SingleChildWidget _listenToNewStartTime() => BlocListener<DatabaseBloc, DatabaseState>(
     listener: (context, state) async {
@@ -181,11 +243,11 @@ class HomeScreen extends StatelessWidget {
     },
     listener: (context, state) async {
       switch (state) {
-        case UpdateStateInitial(changelog: final changelog):
+        case UpdateStateInitial(:final changelog):
           if (changelog != null) {
             await showChangelogAtStartup(context, changelog);
           }
-        case UpdateStateUpdateAvailable(version: final version):
+        case UpdateStateUpdateAvailable(:final version):
           if (!Scaffold.of(context).isDrawerOpen) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -211,7 +273,7 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {
         if (context.read<SettingsCubit>().state.beepFromApp) {
           switch (state) {
-            case CountdownStateWorking(tick: final tick):
+            case CountdownStateWorking(:final tick):
               // за три секунды до старта запускаем "бип"
               if (tick.text == '3') {
                 context.read<CountdownBloc>().add(const CountdownEvent.beep());
@@ -221,7 +283,7 @@ class HomeScreen extends StatelessWidget {
         }
         if (context.read<SettingsCubit>().state.voiceFromApp) {
           switch (state) {
-            case CountdownStateWorking(tick: final tick):
+            case CountdownStateWorking(:final tick):
               // Ищем участников для голосового вызова
               // если получили информацию от обратного отсчёта
               if (tick.callNextParticipant) {
@@ -235,6 +297,25 @@ class HomeScreen extends StatelessWidget {
         }
       },
     );
+  }
+
+  SingleChildWidget _listenToDatabaseErrors() {
+    return BlocListener<DatabaseBloc, DatabaseState>(
+      listenWhen: (previous, current) => previous.error != current.error && current.error != null,
+      listener: (context, state) {
+        final error = state.error;
+        if (error == null) return;
+        _showSnackBar(context, _databaseErrorMessage(error));
+      },
+    );
+  }
+
+  String _databaseErrorMessage(DatabaseError error) {
+    return switch (error) {
+      DatabaseDuplicateParticipantNumberInStagesCsv(:final number) =>
+        Localization.current.I18nDatabase_duplicateParticipantNumberInStagesCsv(number),
+      DatabaseUnexpectedError(:final message) => message,
+    };
   }
 }
 

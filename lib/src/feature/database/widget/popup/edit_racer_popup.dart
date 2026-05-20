@@ -17,7 +17,7 @@ Future<void> editRacerPopup({
 }) async {
   return showDialog<void>(
     context: context,
-    builder: (BuildContext context) => EditRacerPopup(item: participantAtStart, riders: riders, categories: categories),
+    builder: (context) => EditRacerPopup(item: participantAtStart, riders: riders, categories: categories),
   );
 }
 
@@ -131,7 +131,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
               itemAsString: (value) => value.name,
               compareFn: (item1, item2) => item1.id == item2.id,
               // При выборе райдера из существующего списка, обновляем нижеследующие поля
-              onChanged: (value) {
+              onSelected: (value) {
                 nicknameController.text = value?.nickname ?? '';
                 birthdayController.text = value?.birthday ?? '';
                 teamDropdownKey.currentState!.changeSelectedItem(value?.team);
@@ -154,7 +154,7 @@ class _EditRacerPopupState extends State<EditRacerPopup> {
                     title: Text(Localization.current.I18nDatabase_newRider),
                     trailing: TextButton(
                       onPressed: () {
-                        final rider = Rider(id: -1, name: query, isDeleted: false);
+                        final rider = Rider(id: -1, name: query);
                         riderDropdownKey.currentState!.changeSelectedItem(rider);
                         riderDropdownKey.currentState!.closeDropDownSearch();
                         setState(() {

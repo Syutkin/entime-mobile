@@ -19,7 +19,7 @@ import 'package:patrol_finders/patrol_finders.dart';
 
 class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
-class MockAppInfoCubit extends MockCubit<AppInfoProvider> implements AppInfoCubit {}
+class MockAppInfoCubit extends MockCubit<IAppInfoProvider> implements AppInfoCubit {}
 
 class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
@@ -27,7 +27,7 @@ class MockUpdateBloc extends MockBloc<UpdateEvent, UpdateState> implements Updat
 
 class MockAudioBloc extends MockBloc<AudioEvent, AudioState> implements AudioBloc {}
 
-class FakeAppInfoProvider extends Fake implements AppInfoProvider {
+class FakeAppInfoProvider extends IAppInfoProvider {
   @override
   String get appName => 'appName';
 
@@ -103,22 +103,22 @@ void main() {
         participants: [],
         finishes: [],
         numbersOnTrace: [],
-        race: Race(id: 1, name: 'race', isDeleted: false),
-        stage: Stage(id: 1, raceId: 1, name: 'stage', isActive: true, isDeleted: false),
+        race: Race(id: 1, name: 'race'),
+        stage: Stage(id: 1, raceId: 1, name: 'stage', isActive: true),
       ),
     );
     when(() => updateBloc.state).thenReturn(const UpdateState.initial());
   });
 
   group('AppDrawer tests', () {
-    patrolWidgetTest('AppDrawer widget can be created', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer widget can be created', ($) async {
       await $.pumpWidget(testWidget());
 
       expect($(AppDrawer), findsOneWidget);
       expect($(Drawer), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer menu items is displayed', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer menu items is displayed', ($) async {
       await $.pumpWidget(testWidget());
 
       expect($(Localization.current.I18nDrawer_settings), findsOneWidget);
@@ -126,20 +126,20 @@ void main() {
       expect($(Localization.current.I18nDrawer_about), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer Updater menu item is displayed', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer Updater menu item is displayed', ($) async {
       await $.pumpWidget(testWidget());
 
       expect($(Updater), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer version text is displayed', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version text is displayed', ($) async {
       await $.pumpWidget(testWidget());
 
       // Проверяем что текст версии отображается
       expect($(Localization.current.I18nDrawer_version(appInfoProvider.version)), findsWidgets);
     });
 
-    patrolWidgetTest('AppDrawer settings navigation works', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer settings navigation works', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на пункт "Настройки"
@@ -150,7 +150,7 @@ void main() {
       expect($(SettingsScreen), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer help navigation works', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer help navigation works', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на пункт "Помощь"
@@ -161,7 +161,7 @@ void main() {
       expect($(HelpPage), findsOneWidget);
     });
 
-    patrolWidgetTest('AppDrawer about popup shows', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer about popup shows', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на пункт "О приложении"
@@ -172,8 +172,7 @@ void main() {
       expect($(AboutPopup), findsOneWidget);
     });
 
-
-    patrolWidgetTest('AppDrawer version button counter increments', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version button counter increments', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на версию 7 раз
@@ -185,7 +184,7 @@ void main() {
       verifyNever(() => databaseBloc.add(const DatabaseEvent.shareDatabase()));
     });
 
-    patrolWidgetTest('AppDrawer version button triggers shareDatabase after 8 taps', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version button triggers shareDatabase after 8 taps', ($) async {
       await $.pumpWidget(testWidget());
 
       // Нажимаем на версию 8 раз
@@ -197,7 +196,7 @@ void main() {
       verify(() => databaseBloc.add(const DatabaseEvent.shareDatabase())).called(1);
     });
 
-     patrolWidgetTest('AppDrawer version button styling is correct', (PatrolTester $) async {
+    patrolWidgetTest('AppDrawer version button styling is correct', ($) async {
       await $.pumpWidget(testWidget());
 
       // Проверяем что кнопка версии имеет правильный стиль

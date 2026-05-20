@@ -10,13 +10,28 @@ import '../../database/drift/app_database.dart';
 import '../../settings/settings.dart';
 import '../model/tick.dart';
 
-class CountdownAtStart {
+abstract interface class ICountdownAtStart {
+  Stream<Tick> get ticks;
+
+  Future<void> start(int stageId);
+
+  Future<void> stop();
+
+  Future<void> close();
+}
+
+class CountdownAtStart implements ICountdownAtStart {
   CountdownAtStart({required this.database, required this.settingsProvider});
   final AppDatabase database;
   final ISettingsProvider settingsProvider;
   Timer? _timer;
 
-  BehaviorSubject<Tick> ticks = BehaviorSubject();
+  final _ticks = BehaviorSubject<Tick>();
+
+  @override
+  Stream<Tick> get ticks => _ticks.stream;
+
+  StreamSubscription<List<ParticipantAtStart>>? _startsSubscription;
 
   NextStartingParticipant? _nextStartingParticipant;
   bool _isFinished = false;
@@ -24,9 +39,13 @@ class CountdownAtStart {
   @visibleForTesting
   DateTime? customTimeNow;
 
+  @override
   Future<void> start(int stageId) async {
-    //subscribe to changes at starts table
-    database.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
+    // close previous subscription
+    await _startsSubscription?.cancel();
+
+    // subscribe to changes at starts table
+    _startsSubscription = database.getParticipantsAtStart(stageId: stageId).watch().listen((event) async {
       _isFinished = false;
       _nextStartingParticipant = await _getNextStartingParticipant(
         time: customTimeNow ?? DateTime.now(),
@@ -49,12 +68,19 @@ class CountdownAtStart {
     });
   }
 
-  void stop() {
+  @override
+  Future<void> stop() async {
     _timer?.cancel();
+    _timer = null;
+
+    await _startsSubscription?.cancel();
+    _startsSubscription = null;
   }
 
+  @override
   Future<void> close() async {
-    await ticks.close();
+    await stop();
+    await _ticks.close();
   }
 
   Future<void> _countdown({required int stageId}) async {
@@ -66,16 +92,16 @@ class CountdownAtStart {
       if (nextStartTime != null) {
         final text = _formatDuration(nextStartTime.difference(now));
         if (nextStartTime.isAfter(now)) {
-          ticks.add(
+          _ticks.add(
             Tick(second: second, text: text, nextStartTime: nextStartTime, number: nextStartingParticipant.number),
           );
         } else {
           if (nextStartTime.isAfter(now.subtract(Duration(seconds: settingsProvider.settings.deltaInSeconds - 1)))) {
-            ticks.add(
+            _ticks.add(
               Tick(second: second, text: text, nextStartTime: nextStartTime, number: nextStartingParticipant.number),
             );
           } else {
-            ticks.add(
+            _ticks.add(
               Tick(
                 second: second,
                 text: text,
@@ -95,7 +121,7 @@ class CountdownAtStart {
         if (nextStartingParticipant != null) {
           final nextStartTime = nextStartingParticipant.startTime.toDateTime();
           if (nextStartTime != null) {
-            ticks.add(
+            _ticks.add(
               Tick(
                 second: second,
                 text: _formatDuration(nextStartTime.difference(now)),
@@ -106,17 +132,16 @@ class CountdownAtStart {
           }
         } else {
           _isFinished = true;
-          ticks.add(Tick(second: second, text: 'Fin'));
+          _ticks.add(Tick(second: second, text: 'Fin'));
         }
       }
     }
   }
 
   Future<NextStartingParticipant?> _getNextStartingParticipant({required DateTime time, required int stageId}) async {
-    final nextStart =
-        await database
-            .getNextStartingParticipants(stageId: stageId, time: DateFormat(shortTimeFormat).format(time))
-            .get();
+    final nextStart = await database
+        .getNextStartingParticipants(stageId: stageId, time: DateFormat(shortTimeFormat).format(time))
+        .get();
     return nextStart.isNotEmpty ? nextStart.first : null;
   }
 

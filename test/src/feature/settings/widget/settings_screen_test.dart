@@ -6,8 +6,8 @@ import 'package:entime/src/feature/audio/bloc/audio_bloc.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -28,13 +28,16 @@ void main() {
   late String voice;
 
   Widget testWidget() {
-    return MaterialApp(
-      localizationsDelegates: const [Localization.delegate],
-      supportedLocales: Localization.supportedLocales,
-      home: Material(
-        child: BlocProvider.value(
-          value: audioBloc,
-          child: BlocProvider.value(value: settingsCubit, child: const SettingsScreen()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: audioBloc),
+        BlocProvider.value(value: settingsCubit),
+      ],
+      child: MaterialApp(
+        localizationsDelegates: const [Localization.delegate],
+        supportedLocales: Localization.supportedLocales,
+        home: const Material(
+          child: SettingsScreen(),
         ),
       ),
     );
@@ -62,12 +65,12 @@ void main() {
   });
 
   group('Settings screen tests', () {
-    patrolWidgetTest('Check settings title', (PatrolTester $) async {
+    patrolWidgetTest('Check settings title', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(AppBar).$(Localization.current.I18nSettings_settings), findsOneWidget);
     });
 
-    patrolWidgetTest('Check settings sections', (PatrolTester $) async {
+    patrolWidgetTest('Check settings sections', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect(await $(SettingsSection).$(Localization.current.I18nSettings_general).scrollTo(), findsOneWidget);
       expect(await $(SettingsSection).$(Localization.current.I18nSettings_countdown).scrollTo(), findsAtLeastNWidgets(1));
@@ -81,7 +84,7 @@ void main() {
     });
 
     group('General section tests', () {
-      patrolWidgetTest('Check general section', (PatrolTester $) async {
+      patrolWidgetTest('Check general section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_reconnect).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_wakelock).scrollTo(), findsOneWidget);
@@ -89,19 +92,19 @@ void main() {
         // Disabled and didn't visible for tests?
         // expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_language).scrollTo(), findsOneWidget);
       });
-      patrolWidgetTest('Switch reconnect', (PatrolTester $) async {
+      patrolWidgetTest('Switch reconnect', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_reconnect)).tap();
         verify(() => settingsCubit.update(settings.copyWith(reconnect: !settings.reconnect))).called(1);
       });
 
-      patrolWidgetTest('Switch wakelock', (PatrolTester $) async {
+      patrolWidgetTest('Switch wakelock', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_wakelock)).tap();
         verify(() => settingsCubit.update(settings.copyWith(wakelock: !settings.wakelock))).called(1);
       });
 
-      patrolWidgetTest('Switch sound', (PatrolTester $) async {
+      patrolWidgetTest('Switch sound', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_sound)).tap();
         verify(() => settingsCubit.update(settings.copyWith(sound: !settings.sound))).called(1);
@@ -109,7 +112,7 @@ void main() {
     });
 
     group('Time control section tests', () {
-      patrolWidgetTest('Check time control section', (PatrolTester $) async {
+      patrolWidgetTest('Check time control section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_timeControl).$(SettingsTile).$(Localization.current.I18nSettings_ntpOffset).scrollTo(), findsOneWidget);
         expect(
@@ -118,13 +121,13 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Switch updateNtpOffsetAtStartup', (PatrolTester $) async {
+      patrolWidgetTest('Switch updateNtpOffsetAtStartup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_ntpOffset)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(updateNtpOffsetAtStartup: !settings.updateNtpOffsetAtStartup))).called(1);
       });
 
-      patrolWidgetTest('Switch useTimestampForAutomaticStamps', (PatrolTester $) async {
+      patrolWidgetTest('Switch useTimestampForAutomaticStamps', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_timeForAutomaticStamps)).tap();
         verify(() => settingsCubit.update(settings.copyWith(useTimestampForAutomaticStamps: !settings.useTimestampForAutomaticStamps))).called(1);
@@ -132,19 +135,19 @@ void main() {
     });
 
     group('Countdown section tests', () {
-      patrolWidgetTest('Check countdown section', (PatrolTester $) async {
+      patrolWidgetTest('Check countdown section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_countdown).$(SettingsTile).$(Localization.current.I18nSettings_countdown).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_countdown).$(SettingsTile).$(Localization.current.I18nSettings_countdownFromApp).scrollTo(), findsOneWidget);
       });
 
-      patrolWidgetTest('Switch countdown', (PatrolTester $) async {
+      patrolWidgetTest('Switch countdown', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_countdown).$(SettingsTile).containing($(Localization.current.I18nSettings_countdown)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(beep: !settings.beep))).called(1);
       });
 
-      patrolWidgetTest('Switch countdownFromApp', (PatrolTester $) async {
+      patrolWidgetTest('Switch countdownFromApp', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_countdown).$(SettingsTile).containing($(Localization.current.I18nSettings_countdownFromApp)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(beepFromApp: !settings.beepFromApp))).called(1);
@@ -158,7 +161,7 @@ void main() {
         when(() => audioBloc.state).thenReturn(AudioState.initialized(engine: engine, voice: voice));
       });
 
-      patrolWidgetTest('Check voiceMessages section', (PatrolTester $) async {
+      patrolWidgetTest('Check voiceMessages section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_voiceMessages).$(SettingsTile).$(Localization.current.I18nSettings_voice).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_voiceMessages).$(SettingsTile).$(Localization.current.I18nSettings_voiceFromApp).scrollTo(), findsOneWidget);
@@ -171,83 +174,83 @@ void main() {
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_voiceMessages).$(SettingsTile).$(Localization.current.I18nSettings_voiceLanguage).scrollTo(), findsOneWidget);
       });
 
-      patrolWidgetTest('Switch voice', (PatrolTester $) async {
+      patrolWidgetTest('Switch voice', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_voice)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(voice: !settings.voice))).called(1);
       });
 
-      patrolWidgetTest('Switch voiceFromApp', (PatrolTester $) async {
+      patrolWidgetTest('Switch voiceFromApp', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_voiceMessages).$(SettingsTile).containing($(Localization.current.I18nSettings_voiceFromApp)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(voiceFromApp: !settings.voiceFromApp))).called(1);
       });
 
-      patrolWidgetTest('Switch participantsName', (PatrolTester $) async {
+      patrolWidgetTest('Switch participantsName', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_participantsName)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(voiceName: !settings.voiceName))).called(1);
       });
 
-      patrolWidgetTest('Set volume when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set volume when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_volume)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(volume: settings.volume))).called(1);
       });
 
-      patrolWidgetTest('Do not set volume when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set volume when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_volume)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Set pitch when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set pitch when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_pitch)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(pitch: settings.pitch))).called(1);
       });
 
-      patrolWidgetTest('Do not set pitch when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set pitch when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_pitch)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Set rate when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set rate when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_rate)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(rate: settings.rate))).called(1);
       });
 
-      patrolWidgetTest('Do not set rate when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set rate when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_rate)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Show TTS engine', (PatrolTester $) async {
+      patrolWidgetTest('Show TTS engine', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(engine).scrollTo(maxScrolls: 100), findsOneWidget);
       });
 
-      patrolWidgetTest('Show TTS voice', (PatrolTester $) async {
+      patrolWidgetTest('Show TTS voice', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(voice).scrollTo(maxScrolls: 100), findsOneWidget);
       });
 
-      patrolWidgetTest('TTS engine not found', (PatrolTester $) async {
+      patrolWidgetTest('TTS engine not found', ($) async {
         when(() => audioBloc.state).thenReturn(const AudioState.initialized());
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(#TTSEngineName).$(Localization.current.I18nSettings_ttsEngineNotFound).scrollTo(maxScrolls: 100), findsOneWidget);
       });
 
-      patrolWidgetTest('TTS voice not found', (PatrolTester $) async {
+      patrolWidgetTest('TTS voice not found', ($) async {
         when(() => audioBloc.state).thenReturn(const AudioState.initialized());
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(#TTSVoiceName).$(Localization.current.I18nSettings_ttsVoiceNotFound).scrollTo(maxScrolls: 100), findsOneWidget);
@@ -255,7 +258,7 @@ void main() {
     });
 
     group('startScreen section tests', () {
-      patrolWidgetTest('Check startScreen section', (PatrolTester $) async {
+      patrolWidgetTest('Check startScreen section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).$(Localization.current.I18nSettings_startButton).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).$(Localization.current.I18nSettings_startButtonSize).scrollTo(), findsOneWidget);
@@ -279,80 +282,80 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Switch startButton', (PatrolTester $) async {
+      patrolWidgetTest('Switch startButton', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_startButton)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(startFab: !settings.startFab))).called(1);
       });
 
-      patrolWidgetTest('Set startButtonSize when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set startButtonSize when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_startButtonSize)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(startFabSize: settings.startFabSize))).called(1);
       });
 
-      patrolWidgetTest('Do not set startButtonSize when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set startButtonSize when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_startButtonSize)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Switch countdownAtStart', (PatrolTester $) async {
+      patrolWidgetTest('Switch countdownAtStart', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_countdownAtStart)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(countdown: !settings.countdown))).called(1);
       });
 
-      patrolWidgetTest('Set countdownAtStartSize when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set countdownAtStartSize when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_countdownAtStartSize)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(countdownSize: settings.countdownSize))).called(1);
       });
 
-      patrolWidgetTest('Do not set countdownAtStartSize when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set countdownAtStartSize when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_countdownAtStartSize)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Switch replaceStartCountdown', (PatrolTester $) async {
+      patrolWidgetTest('Switch replaceStartCountdown', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_replaceStartCountdown)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(countdownAtStartTime: !settings.countdownAtStartTime))).called(1);
       });
 
-      patrolWidgetTest('Switch showColorStartDifference', (PatrolTester $) async {
+      patrolWidgetTest('Switch showColorStartDifference', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_showColorStartDifference)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(showColorStartDifference: !settings.showColorStartDifference))).called(1);
       });
 
-      patrolWidgetTest('Set startDifferenceThreshold when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set startDifferenceThreshold when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(startDifferenceThreshold: settings.startDifferenceThreshold))).called(1);
       });
 
-      patrolWidgetTest('Do not set startDifferenceThreshold when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set startDifferenceThreshold when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_startScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Set startDeltaInSeconds when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set startDeltaInSeconds when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_startDeltaInSeconds)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(deltaInSeconds: settings.deltaInSeconds))).called(1);
       });
 
-      patrolWidgetTest('Do not set startDeltaInSeconds when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set startDeltaInSeconds when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_startDeltaInSeconds)).scrollTo().tap();
         await $(#cancelButton).tap();
@@ -361,7 +364,7 @@ void main() {
     });
 
     group('finishScreen section tests', () {
-      patrolWidgetTest('Check finishScreen section', (PatrolTester $) async {
+      patrolWidgetTest('Check finishScreen section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).$(Localization.current.I18nSettings_delayForNewEvents).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).$(Localization.current.I18nSettings_autoSubstitution).scrollTo(), findsOneWidget);
@@ -385,41 +388,41 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Set delayForNewEvents when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set delayForNewEvents when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_delayForNewEvents)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(finishDelay: settings.finishDelay))).called(1);
       });
 
-      patrolWidgetTest('Do not set delayForNewEvents when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set delayForNewEvents when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_delayForNewEvents)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Switch substituteNumbers', (PatrolTester $) async {
+      patrolWidgetTest('Switch substituteNumbers', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_autoSubstitution)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(substituteNumbers: !settings.substituteNumbers))).called(1);
       });
 
-      patrolWidgetTest('Set autoSubstitutionDelay when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set autoSubstitutionDelay when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_autoSubstitutionDelay)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(substituteNumbersDelay: settings.substituteNumbersDelay))).called(1);
       });
 
-      patrolWidgetTest('Do not set autoSubstitutionDelay when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set autoSubstitutionDelay when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_autoSubstitutionDelay)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Switch finishFab', (PatrolTester $) async {
+      patrolWidgetTest('Switch finishFab', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(
           SettingsSection,
@@ -427,27 +430,27 @@ void main() {
         verify(() => settingsCubit.update(settings.copyWith(finishFab: !settings.finishFab))).called(1);
       });
 
-      patrolWidgetTest('Set finishButtonSize when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set finishButtonSize when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_finishButtonSize)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(finishFabSize: settings.finishFabSize))).called(1);
       });
 
-      patrolWidgetTest('Do not set finishButtonSize when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set finishButtonSize when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_finishButtonSize)).scrollTo().tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Switch showFinishDifference', (PatrolTester $) async {
+      patrolWidgetTest('Switch showFinishDifference', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_showFinishDifference)).scrollTo().tap();
         verify(() => settingsCubit.update(settings.copyWith(showFinishDifference: !settings.showFinishDifference))).called(1);
       });
 
-      patrolWidgetTest('Switch showColorFinishDifference', (PatrolTester $) async {
+      patrolWidgetTest('Switch showColorFinishDifference', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(
           SettingsSection,
@@ -455,14 +458,14 @@ void main() {
         verify(() => settingsCubit.update(settings.copyWith(showColorFinishDifference: !settings.showColorFinishDifference))).called(1);
       });
 
-      patrolWidgetTest('Set finishDifferenceThreshold when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set finishDifferenceThreshold when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(finishDifferenceThreshold: settings.finishDifferenceThreshold))).called(1);
       });
 
-      patrolWidgetTest('Do not set finishDifferenceThreshold when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set finishDifferenceThreshold when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).containing($(Localization.current.I18nSettings_startFinishDifference)).scrollTo().tap();
         await $(#cancelButton).tap();
@@ -471,12 +474,12 @@ void main() {
     });
 
     group('Update section tests', () {
-      patrolWidgetTest('Check update section', (PatrolTester $) async {
+      patrolWidgetTest('Check update section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_update).$(SettingsTile).$(Localization.current.I18nSettings_checkUpdateAtStartup).scrollTo(), findsOneWidget);
       });
 
-      patrolWidgetTest('Switch checkUpdates', (PatrolTester $) async {
+      patrolWidgetTest('Switch checkUpdates', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_checkUpdateAtStartup)).scrollTo(maxScrolls: 50).tap();
         verify(() => settingsCubit.update(settings.copyWith(checkUpdates: !settings.checkUpdates))).called(1);
@@ -484,7 +487,7 @@ void main() {
     });
 
     group('Themes section tests', () {
-      patrolWidgetTest('Check themes section', (PatrolTester $) async {
+      patrolWidgetTest('Check themes section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_themes).$(SettingsTile).$(Localization.current.I18nSettings_brightness).scrollTo(maxScrolls: 100), findsOneWidget);
         expect(
@@ -497,31 +500,31 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Switch brightness', (PatrolTester $) async {
+      patrolWidgetTest('Switch brightness', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_brightness)).scrollTo(maxScrolls: 50).tap();
         verify(() => settingsCubit.update(settings.copyWith(brightness: !(settings.brightness == Brightness.light) ? Brightness.light : Brightness.dark))).called(1);
       });
 
-      patrolWidgetTest('Switch isOLEDBackground', (PatrolTester $) async {
+      patrolWidgetTest('Switch isOLEDBackground', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_oLEDBackground)).scrollTo(maxScrolls: 50).tap();
         verify(() => settingsCubit.update(settings.copyWith(isOLEDBackground: !settings.isOLEDBackground))).called(1);
       });
 
-      // Error: Could not find the correct Provider<SettingsCubit> above this SelectThemeScreen Widget
-      patrolWidgetTest('Open theme settings screen', skip: true, (PatrolTester $) async {
+      patrolWidgetTest('Open theme settings screen', ($) async {
         settings = const AppSettings.defaults().copyWith(logLimit: -1);
         when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsSection).containing(Localization.current.I18nSettings_themes).$(SettingsTile).$(Localization.current.I18nSettings_themeSettings).scrollTo(maxScrolls: 100).tap();
+        await $.pumpAndSettle();
         expect($(SelectThemeScreen), findsOneWidget);
       });
     });
 
     group('Journal section tests', () {
-      patrolWidgetTest('Check journal section', (PatrolTester $) async {
+      patrolWidgetTest('Check journal section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(
           await $(SettingsSection).containing(Localization.current.I18nSettings_journal).$(SettingsTile).$(Localization.current.I18nSettings_journalLinesNumber).scrollTo(maxScrolls: 100),
@@ -529,21 +532,21 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Set logLimit when OK button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Set logLimit when OK button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_journalLinesNumber)).scrollTo(maxScrolls: 100).tap();
         await $(#okButton).tap();
         verify(() => settingsCubit.update(settings.copyWith(logLimit: settings.logLimit))).called(1);
       });
 
-      patrolWidgetTest('Do not set logLimit when cancel button pressed from popup', (PatrolTester $) async {
+      patrolWidgetTest('Do not set logLimit when cancel button pressed from popup', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_journalLinesNumber)).scrollTo(maxScrolls: 100).tap();
         await $(#cancelButton).tap();
         verifyNever(() => settingsCubit.update(any()));
       });
 
-      patrolWidgetTest('Show icon when unlimited log lines', (PatrolTester $) async {
+      patrolWidgetTest('Show icon when unlimited log lines', ($) async {
         settings = const AppSettings.defaults().copyWith(logLimit: -1);
         when(() => settingsCubit.state).thenReturn(settings);
 
@@ -554,7 +557,7 @@ void main() {
     });
 
     group('Defaults section tests', () {
-      patrolWidgetTest('Check defaults section', (PatrolTester $) async {
+      patrolWidgetTest('Check defaults section', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         expect(
           await $(SettingsSection).containing(Localization.current.I18nSettings_defaults).$(SettingsTile).$(Localization.current.I18nSettings_resetToDefaults).scrollTo(maxScrolls: 100),
@@ -562,7 +565,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Set defaults', (PatrolTester $) async {
+      patrolWidgetTest('Set defaults', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_resetToDefaults)).scrollTo(maxScrolls: 50).tap();
         verify(() => settingsCubit.setDefault()).called(1);

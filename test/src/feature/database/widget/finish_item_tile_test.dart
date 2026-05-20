@@ -7,9 +7,9 @@ import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
@@ -29,7 +29,12 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: settingsCubit, child: FinishItemTile(item: item))),
+      home: Material(
+        child: BlocProvider.value(
+          value: settingsCubit,
+          child: FinishItemTile(item: item),
+        ),
+      ),
     );
   }
 
@@ -44,7 +49,7 @@ void main() {
       settings = const AppSettings.defaults();
     });
 
-    patrolWidgetTest('Show all basic info', (PatrolTester $) async {
+    patrolWidgetTest('Show all basic info', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
 
       final item = Finish(
@@ -67,7 +72,7 @@ void main() {
       expect(icon, MdiIcons.cpu64Bit);
     });
 
-    patrolWidgetTest('Correct hand icon for manual time', (PatrolTester $) async {
+    patrolWidgetTest('Correct hand icon for manual time', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
 
       final item = Finish(
@@ -86,7 +91,7 @@ void main() {
       expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.handBackLeft);
     });
 
-    patrolWidgetTest('Correct cellphone icon if using local time for automatic stamps', (PatrolTester $) async {
+    patrolWidgetTest('Correct cellphone icon if using local time for automatic stamps', ($) async {
       when(
         () => settingsCubit.state,
       ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
@@ -107,7 +112,7 @@ void main() {
       expect(($.tester.firstWidget($(Icon)) as Icon).icon, MdiIcons.cellphone);
     });
 
-    patrolWidgetTest('Show timestamp if using local time for automatic stamps', (PatrolTester $) async {
+    patrolWidgetTest('Show timestamp if using local time for automatic stamps', ($) async {
       when(
         () => settingsCubit.state,
       ).thenReturn(const AppSettings.defaults().copyWith(useTimestampForAutomaticStamps: true));
@@ -129,7 +134,7 @@ void main() {
     });
 
     patrolWidgetTest('Take into account ntpOffset for timestamp if using local time for automatic stamps', (
-      PatrolTester $,
+      $,
     ) async {
       when(
         () => settingsCubit.state,
@@ -155,7 +160,7 @@ void main() {
       expect($(finishTime), findsNothing);
     });
 
-    patrolWidgetTest('Show difference if enabled at settings', (PatrolTester $) async {
+    patrolWidgetTest('Show difference if enabled at settings', ($) async {
       settings = settings.copyWith(showFinishDifference: true);
       when(() => settingsCubit.state).thenReturn(settings);
 
@@ -175,7 +180,7 @@ void main() {
       expect($(difference), findsOneWidget);
     });
 
-    patrolWidgetTest('Change color if difference more than threshold and enabled at settings', (PatrolTester $) async {
+    patrolWidgetTest('Change color if difference more than threshold and enabled at settings', ($) async {
       settings = settings.copyWith(
         showFinishDifference: false,
         showColorFinishDifference: true,
@@ -208,7 +213,7 @@ void main() {
       expect($(Flexible), findsNWidgets(3));
     });
 
-    patrolWidgetTest('Change color and show difference if enabled at settings', (PatrolTester $) async {
+    patrolWidgetTest('Change color and show difference if enabled at settings', ($) async {
       settings = settings.copyWith(
         showFinishDifference: true,
         showColorFinishDifference: true,
@@ -243,7 +248,7 @@ void main() {
 
     patrolWidgetTest(
       'Do not change color if difference more than threshold but useTimestampForAutomaticStamps enabled',
-      (PatrolTester $) async {
+      ($) async {
         settings = settings.copyWith(
           showFinishDifference: false,
           showColorFinishDifference: true,
@@ -278,7 +283,7 @@ void main() {
       },
     );
 
-    patrolWidgetTest('Take into account ntpOffset when show difference', (PatrolTester $) async {
+    patrolWidgetTest('Take into account ntpOffset when show difference', ($) async {
       settings = settings.copyWith(
         showFinishDifference: true,
         showColorFinishDifference: true,

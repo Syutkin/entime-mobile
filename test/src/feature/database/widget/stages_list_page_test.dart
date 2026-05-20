@@ -36,8 +36,8 @@ void main() {
   }
 
   setUp(() async {
-    race = const Race(id: 1, name: 'Race name', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'Race name');
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
 
     databaseBloc = MockDatabaseBloc();
     trailsBloc = MockTrailsBloc();
@@ -58,22 +58,21 @@ void main() {
   });
 
   group('StagesListPage tests', () {
-    patrolWidgetTest('Initial page, no stages', (PatrolTester $) async {
+    patrolWidgetTest('Initial page, no stages', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       expect($(AppBar).$(race.name), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
       expect($(StageItemTile), findsNothing);
     });
 
-    patrolWidgetTest('Tap FAB, then add stage popup appears',
-        (PatrolTester $) async {
+    patrolWidgetTest('Tap FAB, then add stage popup appears', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(FloatingActionButton).tap();
       expect($(Localization.current.I18nDatabase_addStage), findsOneWidget);
     });
 
-    patrolWidgetTest('Existing races list', (PatrolTester $) async {
-      const race = Race(id: 1, name: 'name', isDeleted: false);
+    patrolWidgetTest('Existing races list', ($) async {
+      const race = Race(id: 1, name: 'name');
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [race, race, race, race, race],

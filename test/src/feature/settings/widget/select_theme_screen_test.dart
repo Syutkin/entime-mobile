@@ -16,7 +16,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: settingsCubit, child: const SelectThemeScreen())),
+      home: Material(
+        child: BlocProvider.value(value: settingsCubit, child: const SelectThemeScreen()),
+      ),
     );
   }
 
@@ -31,14 +33,14 @@ void main() {
   });
 
   group('SelectThemeScreen tests', () {
-    patrolWidgetTest('Initial SelectThemeScreen', (PatrolTester $) async {
+    patrolWidgetTest('Initial SelectThemeScreen', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(PopupMenuButton<ColorSeed>), findsOneWidget);
       expect($(PopupMenuButton<DynamicSchemeVariant>), findsOneWidget);
       expect($(ColorSample), findsNWidgets(6));
     });
 
-    patrolWidgetTest('Tap on PopupMenuButton<ColorSeed>', (PatrolTester $) async {
+    patrolWidgetTest('Tap on PopupMenuButton<ColorSeed>', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<ColorSeed>).tap();
       expect($(ListTile), findsNWidgets(ColorSeed.values.length));
@@ -47,7 +49,7 @@ void main() {
       }
     });
 
-    patrolWidgetTest('Change color', (PatrolTester $) async {
+    patrolWidgetTest('Change color', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<ColorSeed>).tap();
       expect($(ListTile), findsNWidgets(ColorSeed.values.length));
@@ -56,7 +58,7 @@ void main() {
       expect($(ListTile), findsNothing);
     });
 
-    patrolWidgetTest('Tap on PopupMenuButton<DynamicSchemeVariant>', (PatrolTester $) async {
+    patrolWidgetTest('Tap on PopupMenuButton<DynamicSchemeVariant>', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<DynamicSchemeVariant>).tap();
       expect($(ListTile), findsNWidgets(DynamicSchemeVariant.values.length));
@@ -65,7 +67,7 @@ void main() {
       }
     });
 
-    patrolWidgetTest('Change DynamicSchemeVariant>', (PatrolTester $) async {
+    patrolWidgetTest('Change DynamicSchemeVariant>', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(PopupMenuButton<DynamicSchemeVariant>).tap();
       expect($(ListTile), findsNWidgets(DynamicSchemeVariant.values.length));
@@ -74,7 +76,7 @@ void main() {
       expect($(ListTile), findsNothing);
     });
 
-    patrolWidgetTest('Tap on change brightness mode', (PatrolTester $) async {
+    patrolWidgetTest('Tap on change brightness mode', ($) async {
       final settings = const AppSettings.defaults().copyWith(brightness: Brightness.dark);
       await $.pumpWidgetAndSettle(testWidget());
       expect($(#brightnessButton), findsOneWidget);
@@ -82,7 +84,7 @@ void main() {
       verify(() => settingsCubit.update(settings)).called(1);
     });
 
-    patrolWidgetTest('Move contrast slider', (PatrolTester $) async {
+    patrolWidgetTest('Move contrast slider', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $.tester.drag($(Slider), const Offset(100, 0));
       var settings = const AppSettings.defaults().copyWith(contrastLevel: 0);

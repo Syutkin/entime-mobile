@@ -35,7 +35,7 @@ void main() {
   });
 
   group('setDeltaInSecondsPopup tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       expect($(AlertDialog), findsOneWidget);
@@ -43,7 +43,7 @@ void main() {
       expect($(delta.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter wrong seconds', (PatrolTester $) async {
+    patrolWidgetTest('Enter wrong seconds', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
@@ -51,7 +51,7 @@ void main() {
       expect($(Localization.current.I18nSettings_incorrectStartDelta), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter empty seconds', (PatrolTester $) async {
+    patrolWidgetTest('Enter empty seconds', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('');
@@ -59,7 +59,7 @@ void main() {
       expect($(Localization.current.I18nSettings_incorrectStartDelta), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter correct seconds and return it from ok pressed', (PatrolTester $) async {
+    patrolWidgetTest('Enter correct seconds and return it from ok pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
@@ -67,7 +67,7 @@ void main() {
       await expectLater(result, 1234);
     });
 
-    patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
+    patrolWidgetTest('Return null when cancel pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delta));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');

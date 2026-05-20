@@ -7,10 +7,10 @@ import 'package:entime/src/feature/settings/bloc/settings_bloc.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
@@ -37,7 +37,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Material(child: BlocProvider.value(value: settingsCubit, child: widget)),
+      home: Material(
+        child: BlocProvider.value(value: settingsCubit, child: widget),
+      ),
     );
   }
 
@@ -57,7 +59,7 @@ void main() {
       settings = const AppSettings.defaults();
     });
 
-    patrolWidgetTest('Show all basic info', (PatrolTester $) async {
+    patrolWidgetTest('Show all basic info', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
@@ -86,7 +88,7 @@ void main() {
       expect($(timestampCorrection.toString()), findsNothing);
     });
 
-    patrolWidgetTest('If countdown presents, show it instead of startTime', (PatrolTester $) async {
+    patrolWidgetTest('If countdown presents, show it instead of startTime', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
@@ -115,7 +117,7 @@ void main() {
       expect($(countdown), findsOneWidget);
     });
 
-    patrolWidgetTest('If participant is dns, show status name instead of manualCorrection', (PatrolTester $) async {
+    patrolWidgetTest('If participant is dns, show status name instead of manualCorrection', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
@@ -144,7 +146,7 @@ void main() {
       expect($(Localization.current.I18nCore_dns), findsOneWidget);
     });
 
-    patrolWidgetTest('If participant is dnf, show status name instead of manualCorrection', (PatrolTester $) async {
+    patrolWidgetTest('If participant is dnf, show status name instead of manualCorrection', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
@@ -173,7 +175,7 @@ void main() {
       expect($(Localization.current.I18nCore_dnf), findsOneWidget);
     });
 
-    patrolWidgetTest('If participant is dsq, show status name instead of manualCorrection', (PatrolTester $) async {
+    patrolWidgetTest('If participant is dsq, show status name instead of manualCorrection', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
@@ -202,7 +204,7 @@ void main() {
       expect($(Localization.current.I18nCore_dsq), findsOneWidget);
     });
 
-    patrolWidgetTest('Change color if highlighted', (PatrolTester $) async {
+    patrolWidgetTest('Change color if highlighted', ($) async {
       when(() => settingsCubit.state).thenReturn(settings);
       final item = ParticipantAtStart(
         row: row,
@@ -233,7 +235,7 @@ void main() {
       expect($(manualCorrection.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Change color if difference more than threshold', (PatrolTester $) async {
+    patrolWidgetTest('Change color if difference more than threshold', ($) async {
       settings = settings.copyWith(showColorStartDifference: true);
       when(() => settingsCubit.state).thenReturn(settings);
       final now = DateTime.now();
@@ -274,7 +276,7 @@ void main() {
 
     patrolWidgetTest(
       'Do not change color if difference more than threshold but useTimestampForAutomaticStamps enabled',
-      (PatrolTester $) async {
+      ($) async {
         settings = settings.copyWith(showColorStartDifference: true, useTimestampForAutomaticStamps: true);
         when(() => settingsCubit.state).thenReturn(settings);
         final now = DateTime.now();
@@ -313,7 +315,7 @@ void main() {
       },
     );
 
-    patrolWidgetTest('Take into account ntpOffset and do not change color', (PatrolTester $) async {
+    patrolWidgetTest('Take into account ntpOffset and do not change color', ($) async {
       settings = settings.copyWith(showColorStartDifference: true);
       when(() => settingsCubit.state).thenReturn(settings);
       final now = DateTime.now();
@@ -353,7 +355,7 @@ void main() {
     });
 
     patrolWidgetTest('Show cellphone icon and timestampCorrection if useTimestampForAutomaticStamps', (
-      PatrolTester $,
+      $,
     ) async {
       settings = settings.copyWith(useTimestampForAutomaticStamps: true);
       when(() => settingsCubit.state).thenReturn(settings);

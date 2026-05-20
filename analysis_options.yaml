@@ -20,7 +20,9 @@ analyzer:
     - lib/src/common/localization/generated/**
     - test/src/feature/database/drift/my_database/migration_test.dart
   errors:
+    cascade_invocations: ignore
     invalid_annotation_target: ignore
+    unnecessary_lambdas: ignore
   language:
     strict-casts: true
     strict-inference: true

@@ -36,11 +36,11 @@ class BluetoothButton extends StatelessWidget {
         BluetoothBlocStateDisconnected(bluetoothDevice: final device) =>
           device != null
               ? IconButton(
-                icon: const Icon(Icons.bluetooth),
-                onPressed: () async {
-                  bloc.add(BluetoothEvent.connect(selectedDevice: bloc.bluetoothDevice));
-                },
-              )
+                  icon: const Icon(Icons.bluetooth),
+                  onPressed: () async {
+                    bloc.add(BluetoothEvent.connect(selectedDevice: bloc.bluetoothDevice));
+                  },
+                )
               : IconButton(icon: const Icon(Icons.settings_bluetooth), onPressed: () => selectBluetoothDevice(context)),
       };
 

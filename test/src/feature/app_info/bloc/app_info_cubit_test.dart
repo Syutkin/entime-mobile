@@ -2,12 +2,12 @@ import 'package:entime/src/feature/app_info/app_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAppInfoProvider extends Mock implements AppInfoProvider {}
+class MockAppInfoProvider extends Mock implements IAppInfoProvider {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late AppInfoProvider appInfoProvider;
+  late IAppInfoProvider appInfoProvider;
   late AppInfoCubit appInfoCubit;
   const appName = 'appName';
   const buildNumber = '1234';

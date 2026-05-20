@@ -133,7 +133,7 @@ void main() {
         expect(validator, Localization.current.I18nStart_emptyName);
       });
       test('Rider not null, with valid name', () {
-        const rider = Rider(id: 1, name: 'name', isDeleted: false);
+        const rider = Rider(id: 1, name: 'name');
         final validator = validateRider(rider);
         expect(validator, null);
       });

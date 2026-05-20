@@ -37,7 +37,6 @@ void main() {
       name: 'John Doe',
       birthday: '1990-05-15',
       city: 'Moscow',
-      isDeleted: false,
     );
 
     rider2 = const Rider(
@@ -45,7 +44,6 @@ void main() {
       name: 'Jane Smith',
       team: 'Team Alpha',
       email: 'jane@example.com',
-      isDeleted: false,
     );
 
     rider3 = const Rider(
@@ -53,7 +51,6 @@ void main() {
       name: 'Bob Johnson',
       nickname: 'Bobby',
       phone: '+1234567890',
-      isDeleted: false,
     );
 
     when(() => databaseBloc.state).thenReturn(
@@ -70,7 +67,7 @@ void main() {
   });
 
   group('RidersListPage tests', () {
-    patrolWidgetTest('Initial page, no riders', (PatrolTester $) async {
+    patrolWidgetTest('Initial page, no riders', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
 
       expect($(AppBar).$(Localization.current.I18nInit_riders), findsOneWidget);
@@ -79,7 +76,7 @@ void main() {
       expect($(ListView), findsOneWidget);
     });
 
-    patrolWidgetTest('Page with one rider', (PatrolTester $) async {
+    patrolWidgetTest('Page with one rider', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],
@@ -100,7 +97,7 @@ void main() {
       expect($(rider1.name), findsOneWidget);
     });
 
-    patrolWidgetTest('Page with multiple riders', (PatrolTester $) async {
+    patrolWidgetTest('Page with multiple riders', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],
@@ -123,7 +120,7 @@ void main() {
       expect($(rider3.name), findsOneWidget);
     });
 
-    patrolWidgetTest('FloatingActionButton is present and tappable', (PatrolTester $) async {
+    patrolWidgetTest('FloatingActionButton is present and tappable', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
 
       final fab = $(FloatingActionButton);
@@ -136,20 +133,20 @@ void main() {
       await fab.tap();
     });
 
-    patrolWidgetTest('Scrollbar is present', (PatrolTester $) async {
+    patrolWidgetTest('Scrollbar is present', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
 
       expect($(Scrollbar), findsOneWidget);
     });
 
-    patrolWidgetTest('ListView has correct controller', (PatrolTester $) async {
+    patrolWidgetTest('ListView has correct controller', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
 
       final listView = $.tester.widget<ListView>(find.byType(ListView));
       expect(listView.controller, isNotNull);
     });
 
-    patrolWidgetTest('Riders with different data combinations', (PatrolTester $) async {
+    patrolWidgetTest('Riders with different data combinations', ($) async {
       const riderWithAllData = Rider(
         id: 4,
         name: 'Full Rider',
@@ -160,7 +157,6 @@ void main() {
         email: 'full@example.com',
         phone: '+9876543210',
         comment: 'Test comment',
-        isDeleted: false,
       );
 
       when(() => databaseBloc.state).thenReturn(
@@ -181,7 +177,7 @@ void main() {
       expect($(RiderItemTile), findsOneWidget);
     });
 
-    patrolWidgetTest('Empty state shows no riders but maintains structure', (PatrolTester $) async {
+    patrolWidgetTest('Empty state shows no riders but maintains structure', ($) async {
       when(() => databaseBloc.state).thenReturn(
         const DatabaseState(
           races: [],

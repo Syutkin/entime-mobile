@@ -14,11 +14,10 @@ part 'log_event.dart';
 part 'log_state.dart';
 
 class LogBloc extends Bloc<LogEvent, LogState> {
-  LogBloc({required AppDatabase database, required ISettingsProvider settingsProvider})
+  LogBloc({required AppDatabase database, required this._settingsProvider})
     : _db = database,
-      _settingsProvider = settingsProvider,
       super(const LogState(log: [])) {
-    _settingsProvider.state.listen((AppSettings state) {
+    _settingsSubscription = _settingsProvider.state.listen((state) {
       _limit = state.logLimit;
     });
 
@@ -51,9 +50,12 @@ class LogBloc extends Bloc<LogEvent, LogState> {
 
   late StreamSubscription<List<Log>> _logsSubscription;
 
+  late StreamSubscription<AppSettings> _settingsSubscription;
+
   @override
   Future<void> close() async {
     await _logsSubscription.cancel();
+    await _settingsSubscription.cancel();
     return super.close();
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, depend_on_referenced_packages
 
+import 'dart:io';
 import 'dart:typed_data' show Uint8List;
 
 import 'package:bloc_test/bloc_test.dart';
@@ -17,12 +18,12 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart' as path;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:share_plus/share_plus.dart' show ShareParams;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../helpers/fake_path_provider_platform.dart';
 import '../../../../helpers/shared_prefs_defaults.dart';
 import '../drift/app_database_test.dart';
 
@@ -31,56 +32,6 @@ class MockStartlistProvider extends Mock implements StartlistProvider {}
 class MockShareProvider extends Mock implements ShareProvider {}
 
 class MockQueryRow extends Mock implements QueryRow {}
-
-class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
-  @override
-  Future<String?> getTemporaryPath() async {
-    return kTemporaryPath;
-  }
-
-  @override
-  Future<String?> getApplicationSupportPath() async {
-    return kApplicationSupportPath;
-  }
-
-  @override
-  Future<String?> getLibraryPath() async {
-    return kLibraryPath;
-  }
-
-  @override
-  Future<String?> getApplicationDocumentsPath() async {
-    return kApplicationDocumentsPath;
-  }
-
-  @override
-  Future<String?> getExternalStoragePath() async {
-    return kExternalStoragePath;
-  }
-
-  @override
-  Future<List<String>?> getExternalCachePaths() async {
-    return <String>[kExternalCachePath];
-  }
-
-  @override
-  Future<List<String>?> getExternalStoragePaths({StorageDirectory? type}) async {
-    return <String>[kExternalStoragePath];
-  }
-
-  @override
-  Future<String?> getDownloadsPath() async {
-    return kDownloadsPath;
-  }
-}
-
-final String kTemporaryPath = p.join('tmp','temporaryPath');
-final String kApplicationSupportPath = p.join('tmp','applicationSupportPath');
-final String kDownloadsPath = p.join('tmp','downloadsPath');
-final String kLibraryPath = p.join('tmp','libraryPath');
-final String kApplicationDocumentsPath = p.join('tmp','applicationDocumentsPath');
-final String kExternalCachePath = p.join('tmp','externalCachePath');
-final String kExternalStoragePath = p.join('tmp','externalStoragePath');
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -96,6 +47,10 @@ void main() {
   late RaceCsv raceCsv;
   late StagesCsv stagesCsv;
   late int deltaInSeconds;
+  late Directory tempDir;
+  late String documentsPath;
+  late String tempPath;
+  late PathProviderPlatform previousPathProvider;
 
   setUpAll(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler(
@@ -109,8 +64,21 @@ void main() {
   });
 
   setUp(() async {
+    previousPathProvider = PathProviderPlatform.instance;
+    tempDir = await Directory.systemTemp.createTemp('database_bloc_test_');
+    documentsPath = path.join(tempDir.path, 'documents');
+    tempPath = path.join(tempDir.path, 'temp');
+    await Directory(documentsPath).create(recursive: true);
+    await Directory(tempPath).create(recursive: true);
+
+    await Directory(documentsPath).create(recursive: true);
+    await Directory(tempPath).create(recursive: true);
+
     db = AppDatabase.customConnection(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
-    PathProviderPlatform.instance = FakePathProviderPlatform();
+    PathProviderPlatform.instance = FakePathProviderPlatform(
+      documentsPath: documentsPath,
+      temporaryPath: tempPath,
+    );
 
     // populate DB
     for (final query in PopDB().queries) {
@@ -120,15 +88,17 @@ void main() {
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     settingsProvider = await SharedPrefsSettingsProvider.load();
 
-    race = const Race(id: 1, name: 'raceName', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'stageName', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'raceName');
+    stage = const Stage(id: 1, raceId: 1, name: 'stageName', isActive: true);
     deltaInSeconds = 10;
 
     when(() => shareProvider.share(any())).thenAnswer((_) => Future.value());
   });
 
   tearDown(() async {
+    PathProviderPlatform.instance = previousPathProvider;
     await db.close();
+    await tempDir.delete(recursive: true);
   });
 
   group('DatabaseBloc tests', () {
@@ -424,7 +394,7 @@ void main() {
       setUp: () {
         Bloc.observer = AppBlocObserver();
         bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
-        stage = const Stage(id: 2, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+        stage = const Stage(id: 2, raceId: 1, name: 'name', isActive: true);
       },
       build: () => bloc,
       act: (bloc) {
@@ -489,7 +459,7 @@ void main() {
       },
       verify: (bloc) {
         switch (bloc.state.notification) {
-          case NotificationUpdateStartNumber(number: final number, startTime: final startTime):
+          case NotificationUpdateStartNumber(:final number, :final startTime):
             expect(number, 1);
             expect(startTime, '10:00:00');
           default:
@@ -1172,7 +1142,16 @@ void main() {
         raceCsv = RaceCsv(
           fileName: 'fileName',
           stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
-          startItems: [startItem, startItem, startItem, startItem, startItem, startItem, startItem, startItem],
+          startItems: [
+            startItem,
+            startItem.copyWith(number: 2),
+            startItem.copyWith(number: 3),
+            startItem.copyWith(number: 4),
+            startItem.copyWith(number: 5),
+            startItem.copyWith(number: 6),
+            startItem.copyWith(number: 7),
+            startItem.copyWith(number: 8),
+          ],
         );
         when(() => startlistProvider.getRaceFromFile()).thenAnswer((_) => Future.value(raceCsv));
       },
@@ -1184,6 +1163,54 @@ void main() {
         expect(bloc.state.race?.id, 3);
         expect(bloc.state.stages.length, 5);
         expect(bloc.state.stages.last.name, 'stage5');
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Create race from file with duplicate numbers fails without creating race',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+        final startTimes = <String, String>{
+          'stage1': '10:10:10',
+          'stage2': '10:10:10',
+          'stage3': '10:10:10',
+          'stage4': '10:10:10',
+          'stage5': '10:10:10',
+        };
+        final startItem = StartItemCsv(number: 1, name: 'name', startTimes: startTimes);
+        raceCsv = RaceCsv(
+          fileName: 'fileName',
+          stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
+          startItems: [startItem, startItem],
+        );
+        when(() => startlistProvider.getRaceFromFile()).thenAnswer((_) => Future.value(raceCsv));
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(const DatabaseEvent.createRaceFromFile());
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        isA<DatabaseState>().having(
+          (state) => state.error,
+          'error',
+          isA<DatabaseUnexpectedError>().having(
+            (error) => error.message,
+            'message',
+            contains('UNIQUE constraint failed'),
+          ),
+        ),
+      ),
+      verify: (bloc) async {
+        final races = await db.getRaces().get();
+        final stages = await db.getStages(raceId: 3).get();
+        final participants = await db.getParticipantsAtStart(stageId: 9).get();
+
+        expect(bloc.state.race, null);
+        expect(races.length, 2);
+        expect(stages, isEmpty);
+        expect(participants, isEmpty);
       },
     );
 
@@ -1202,7 +1229,16 @@ void main() {
         final startItem = StartNumberAndTimesCsv(number: 1, startTimes: startTimes);
         stagesCsv = StagesCsv(
           stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
-          startItems: [startItem, startItem, startItem, startItem, startItem, startItem, startItem, startItem],
+          startItems: [
+            startItem,
+            startItem.copyWith(number: 2),
+            startItem.copyWith(number: 3),
+            startItem.copyWith(number: 4),
+            startItem.copyWith(number: 5),
+            startItem.copyWith(number: 6),
+            startItem.copyWith(number: 7),
+            startItem.copyWith(number: 8),
+          ],
         );
         when(() => startlistProvider.getStagesFromFile()).thenAnswer((_) => Future.value(stagesCsv));
       },
@@ -1215,6 +1251,51 @@ void main() {
       verify: (bloc) {
         expect(bloc.state.stages.length, 9);
         expect(bloc.state.stages.last.name, 'stage5');
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Create stages from file with duplicate numbers fails without creating stages',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+        final startTimes = <String, String>{
+          'stage1': '10:10:10',
+          'stage2': '10:10:10',
+          'stage3': '10:10:10',
+          'stage4': '10:10:10',
+          'stage5': '10:10:10',
+        };
+        final startItem = StartNumberAndTimesCsv(number: 100, startTimes: startTimes);
+        stagesCsv = StagesCsv(
+          stageNames: ['stage1', 'stage2', 'stage3', 'stage4', 'stage5'],
+          startItems: [startItem, startItem],
+        );
+        when(() => startlistProvider.getStagesFromFile()).thenAnswer((_) => Future.value(stagesCsv));
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(DatabaseEvent.createStagesFromFile(raceId: race.id));
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        isA<DatabaseState>().having(
+          (state) => state.error,
+          'error',
+          isA<DatabaseDuplicateParticipantNumberInStagesCsv>().having(
+            (error) => error.number,
+            'number',
+            100,
+          ),
+        ),
+      ),
+      verify: (bloc) async {
+        final races = await db.getRaces().get();
+        final stages = await db.getStages(raceId: race.id).get();
+
+        expect(races.length, 2);
+        expect(stages.length, 4);
+        expect(bloc.state.race, null);
       },
     );
 

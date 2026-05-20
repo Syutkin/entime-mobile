@@ -17,12 +17,10 @@ abstract class IAudioController {
 
 class AudioController implements IAudioController {
   AudioController({
-    required IAudioService audioService,
+    required this._audioService,
     required AppDatabase database,
-    required ISettingsProvider settingsProvider,
-  }) : _audioService = audioService,
-       _db = database,
-       _settingsProvider = settingsProvider;
+    required this._settingsProvider,
+  }) : _db = database;
 
   final IAudioService _audioService;
   final ISettingsProvider _settingsProvider;

@@ -84,13 +84,13 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
       });
-      patrolWidgetTest('Show initial widgets', (PatrolTester $) async {
+      patrolWidgetTest('Show initial widgets', ($) async {
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(StartItemTile), findsNothing);
         expect($(SliverPersistentHeader), findsOneWidget);
         expect($(FloatingActionButton), findsOneWidget);
       });
-      patrolWidgetTest('Sliver legend', (PatrolTester $) async {
+      patrolWidgetTest('Sliver legend', ($) async {
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nStart_sliverNumber), findsOneWidget);
         expect($(Localization.current.I18nStart_sliverStart), findsOneWidget);
@@ -114,14 +114,14 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Show countdown if enabled in settings', (PatrolTester $) async {
+      patrolWidgetTest('Show countdown if enabled in settings', ($) async {
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         settings = settings.copyWith(countdown: true);
         when(() => settingsCubit.state).thenReturn(settings);
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(Positioned), findsOneWidget);
       });
-      patrolWidgetTest('Show custom text', (PatrolTester $) async {
+      patrolWidgetTest('Show custom text', ($) async {
         settings = settings.copyWith(countdown: true);
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
@@ -130,7 +130,7 @@ void main() {
         expect($(text), findsOneWidget);
       });
 
-      patrolWidgetTest('Default 75 size', (PatrolTester $) async {
+      patrolWidgetTest('Default 75 size', ($) async {
         settings = settings.copyWith(countdown: true);
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
@@ -140,7 +140,7 @@ void main() {
         expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxHeight, 75);
       });
 
-      patrolWidgetTest('Change size', (PatrolTester $) async {
+      patrolWidgetTest('Change size', ($) async {
         settings = settings.copyWith(countdown: true, countdownSize: 150);
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
@@ -150,7 +150,7 @@ void main() {
         expect(($(CountdownWidget).$(Container).evaluate().single.widget as Container).constraints?.maxHeight, 150);
       });
 
-      patrolWidgetTest('Drag countdown and update settings with new place', (PatrolTester $) async {
+      patrolWidgetTest('Drag countdown and update settings with new place', ($) async {
         settings = settings.copyWith(countdown: true);
         const text = 'countdown text';
         when(() => settingsCubit.state).thenReturn(settings);
@@ -176,24 +176,24 @@ void main() {
             participants: [],
             finishes: [],
             numbersOnTrace: [],
-            stage: Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false),
+            stage: Stage(id: 1, raceId: 1, name: 'name', isActive: true),
           ),
         );
       });
-      patrolWidgetTest('Hide when disabled at settings', (PatrolTester $) async {
+      patrolWidgetTest('Hide when disabled at settings', ($) async {
         settings = settings.copyWith(startFab: false);
         when(() => settingsCubit.state).thenReturn(settings);
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(FloatingActionButton), findsNothing);
       });
-      patrolWidgetTest('Default 75 size', (PatrolTester $) async {
+      patrolWidgetTest('Default 75 size', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         await $.pumpWidgetAndSettle(await testWidget());
         expect(($(SizedBox).containing($(FittedBox)).evaluate().single.widget as SizedBox).height, 75);
         expect(($(SizedBox).containing($(FittedBox)).evaluate().single.widget as SizedBox).width, 75);
       });
 
-      patrolWidgetTest('Change size', (PatrolTester $) async {
+      patrolWidgetTest('Change size', ($) async {
         settings = settings.copyWith(startFabSize: 150);
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
@@ -202,7 +202,7 @@ void main() {
         expect(($(SizedBox).containing($(FittedBox)).evaluate().single.widget as SizedBox).width, 150);
       });
 
-      patrolWidgetTest('Tap FAB', (PatrolTester $) async {
+      patrolWidgetTest('Tap FAB', ($) async {
         const offset = 1111;
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => ntpBloc.state).thenReturn(const NtpState.initial(offset));
@@ -211,12 +211,12 @@ void main() {
         final captured = verify(() => databaseBloc.add(captureAny())).captured;
 
         expect(switch (captured.first as DatabaseEvent) {
-          DatabaseEventUpdateManualStartTime(ntpOffset: final ntpOffset) => ntpOffset,
+          DatabaseEventUpdateManualStartTime(:final ntpOffset) => ntpOffset,
           DatabaseEvent() => null,
         }, offset);
       });
 
-      patrolWidgetTest('Tap FAB and do nothing when stage not selected', (PatrolTester $) async {
+      patrolWidgetTest('Tap FAB and do nothing when stage not selected', ($) async {
         when(() => databaseBloc.state).thenReturn(
           const DatabaseState(
             races: [],
@@ -250,14 +250,14 @@ void main() {
           ),
         );
       });
-      patrolWidgetTest('Show default participants', (PatrolTester $) async {
+      patrolWidgetTest('Show default participants', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(StartItemTile), findsNWidgets(3));
       });
 
-      patrolWidgetTest('Tap then edit start time', (PatrolTester $) async {
+      patrolWidgetTest('Tap then edit start time', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         await $.pumpWidgetAndSettle(await testWidget());
@@ -266,7 +266,7 @@ void main() {
         expect($(TextFormField), findsNWidgets(7));
       });
 
-      patrolWidgetTest('Long press then popup appears', (PatrolTester $) async {
+      patrolWidgetTest('Long press then popup appears', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         await $.pumpWidgetAndSettle(await testWidget());
@@ -277,7 +277,7 @@ void main() {
         expect($(Localization.current.I18nStart_shiftStartsTime), findsOneWidget);
       });
 
-      patrolWidgetTest('Long press on tile with automaticCorrection, then popup appears', (PatrolTester $) async {
+      patrolWidgetTest('Long press on tile with automaticCorrection, then popup appears', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         await $.pumpWidgetAndSettle(await testWidget());
@@ -289,7 +289,7 @@ void main() {
         expect($(Localization.current.I18nStart_replaceAutomaticCorrection), findsOneWidget);
       });
 
-      patrolWidgetTest('Call replaceAutomaticCorrection popup, and confirm', (PatrolTester $) async {
+      patrolWidgetTest('Call replaceAutomaticCorrection popup, and confirm', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         await $.pumpWidgetAndSettle(await testWidget());
@@ -312,7 +312,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Call edit racer popup', (PatrolTester $) async {
+      patrolWidgetTest('Call edit racer popup', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         await $.pumpWidgetAndSettle(await testWidget());
@@ -321,7 +321,7 @@ void main() {
         expect($(EditRacerPopup), findsOneWidget);
       });
 
-      patrolWidgetTest('Call shift popup', (PatrolTester $) async {
+      patrolWidgetTest('Call shift popup', ($) async {
         when(() => settingsCubit.state).thenReturn(settings);
         when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         await $.pumpWidgetAndSettle(await testWidget());
@@ -332,7 +332,7 @@ void main() {
 
       patrolWidgetTest(
         'Set DNS when dismissed',
-        (PatrolTester $) async {
+        ($) async {
           when(() => settingsCubit.state).thenReturn(settings);
           when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
           await $.pumpWidgetAndSettle(await testWidget());
@@ -364,7 +364,7 @@ void main() {
         );
         when(() => settingsCubit.state).thenReturn(settings);
 
-        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true, isDeleted: false);
+        stage = const Stage(id: 1, raceId: 1, name: 'name', isActive: true);
         expectedStates = [
           const DatabaseState(
             races: [],
@@ -392,7 +392,7 @@ void main() {
         ];
       });
 
-      patrolWidgetTest('Show notification when updating starttime', (PatrolTester $) async {
+      patrolWidgetTest('Show notification when updating starttime', ($) async {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
         await $.pumpWidget(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsNothing);
@@ -400,7 +400,7 @@ void main() {
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
       });
 
-      patrolWidgetTest('Do nothing when cancel pressed', (PatrolTester $) async {
+      patrolWidgetTest('Do nothing when cancel pressed', ($) async {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
@@ -409,7 +409,7 @@ void main() {
         verifyNever(() => databaseBloc.add(any()));
       });
 
-      patrolWidgetTest('Do not update number when ok pressed, because stage must be selected', (PatrolTester $) async {
+      patrolWidgetTest('Do not update number when ok pressed, because stage must be selected', ($) async {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
@@ -418,7 +418,7 @@ void main() {
         verifyNever(() => databaseBloc.add(any()));
       });
 
-      patrolWidgetTest('Force update number when ok pressed', (PatrolTester $) async {
+      patrolWidgetTest('Force update number when ok pressed', ($) async {
         expectedStates = [
           DatabaseState(
             races: [],
@@ -474,7 +474,7 @@ void main() {
         ).called(1);
       });
 
-      patrolWidgetTest('Show warning when automatic start already exists', (PatrolTester $) async {
+      patrolWidgetTest('Show warning when automatic start already exists', ($) async {
         expectedStates = [
           DatabaseState(
             races: [],
@@ -526,7 +526,7 @@ void main() {
         );
       });
 
-      patrolWidgetTest('Show warning when manual start already exists', (PatrolTester $) async {
+      patrolWidgetTest('Show warning when manual start already exists', ($) async {
         expectedStates = [
           DatabaseState(
             races: [],
@@ -663,4 +663,4 @@ final participants = <ParticipantAtStart>[
   ),
 ];
 
-final riders = <Rider>[const Rider(id: 1, name: 'name', isDeleted: false)];
+final riders = <Rider>[const Rider(id: 1, name: 'name')];

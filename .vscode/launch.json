@@ -7,8 +7,13 @@
         {
             "name": "entime-mobile",
             "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "entime-mobile (verbose)",
+            "request": "launch",
             "type": "dart",
-            "args": ["-v"],
+            "args": ["-v"]
         },
         {
             "name": "All tests --coverage",

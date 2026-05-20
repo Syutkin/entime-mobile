@@ -41,8 +41,8 @@ void main() {
   });
 
   setUp(() {
-    race = const Race(id: 1, name: 'Race name', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'Race name');
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
     when(() => databaseBloc.state).thenReturn(
       const DatabaseState(
         races: [],
@@ -58,12 +58,12 @@ void main() {
   });
 
   group('FinishPage tests', () {
-    patrolWidgetTest('Race and stage not selected', (PatrolTester $) async {
+    patrolWidgetTest('Race and stage not selected', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(RaceTile), findsOneWidget);
     });
 
-    patrolWidgetTest('Race selected and stage not selected', (PatrolTester $) async {
+    patrolWidgetTest('Race selected and stage not selected', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],
@@ -81,7 +81,7 @@ void main() {
       expect($(RaceTile), findsOneWidget);
     });
 
-    patrolWidgetTest('Race and stage selected', (PatrolTester $) async {
+    patrolWidgetTest('Race and stage selected', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],

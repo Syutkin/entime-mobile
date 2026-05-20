@@ -11,15 +11,21 @@ import 'package:mocktail/mocktail.dart';
 import 'package:rxdart/subjects.dart';
 
 class MockSettingsProvider extends Mock implements ISettingsProvider {
-  MockSettingsProvider(this._settings);
+  MockSettingsProvider(AppSettings settings, {void Function()? onStateCancel})
+    : _state = BehaviorSubject<AppSettings>.seeded(
+        settings,
+        onCancel: onStateCancel,
+      ),
+      _settings = settings;
 
   AppSettings _settings;
+  final BehaviorSubject<AppSettings> _state;
 
   @override
   AppSettings get settings => _settings;
 
   @override
-  BehaviorSubject<AppSettings> get state => BehaviorSubject<AppSettings>.seeded(_settings);
+  BehaviorSubject<AppSettings> get state => _state;
 
   @override
   AppSettings getDefaults() => const AppSettings.defaults();
@@ -27,11 +33,27 @@ class MockSettingsProvider extends Mock implements ISettingsProvider {
   @override
   Future<void> setDefaults() async {
     _settings = const AppSettings.defaults();
+    _state.add(_settings);
   }
 
   @override
   Future<void> update(AppSettings settings) async {
     _settings = settings;
+    _state.add(_settings);
+  }
+
+  Future<void> close() => _state.close();
+}
+
+class _RecordingBlocObserver extends BlocObserver {
+  _RecordingBlocObserver(this.events);
+
+  final List<Object?> events;
+
+  @override
+  void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
+    events.add(event);
+    super.onEvent(bloc, event);
   }
 }
 
@@ -40,7 +62,7 @@ void main() {
 
   late LogBloc bloc;
   late AppDatabase db;
-  late ISettingsProvider settingsProvider;
+  late MockSettingsProvider settingsProvider;
 
   setUp(() async {
     db = AppDatabase.customConnection(
@@ -50,6 +72,7 @@ void main() {
   });
 
   tearDown(() async {
+    await settingsProvider.close();
     await db.close();
   });
 
@@ -240,5 +263,44 @@ void main() {
         expect(bloc.isClosed, true);
       },
     );
+
+    test('Close cancels settings subscription', () async {
+      await settingsProvider.close();
+
+      var settingsSubscriptionCanceled = false;
+      settingsProvider = MockSettingsProvider(
+        const AppSettings.defaults(),
+        onStateCancel: () {
+          settingsSubscriptionCanceled = true;
+        },
+      );
+
+      bloc = LogBloc(database: db, settingsProvider: settingsProvider);
+
+      await bloc.close();
+      await Future<void>.delayed(Duration.zero);
+
+      expect(settingsSubscriptionCanceled, true);
+    });
+
+    test('Close cancels logs subscription', () async {
+      final events = <Object?>[];
+      Bloc.observer = _RecordingBlocObserver(events);
+
+      bloc = LogBloc(database: db, settingsProvider: settingsProvider);
+      await Future<void>.delayed(Duration.zero);
+      events.clear();
+
+      await bloc.close();
+
+      await db.addLog(
+        level: LogLevel.warning,
+        source: LogSource.app,
+        rawData: 'Warning after close',
+      );
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+
+      expect(events, isEmpty);
+    });
   });
 }

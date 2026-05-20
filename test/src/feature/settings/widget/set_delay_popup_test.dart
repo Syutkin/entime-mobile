@@ -36,7 +36,7 @@ void main() {
   }
 
   group('setDelayPopup tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       expect($(title), findsOneWidget);
@@ -45,7 +45,7 @@ void main() {
       expect($(delay.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter wrong delay', (PatrolTester $) async {
+    patrolWidgetTest('Enter wrong delay', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
@@ -53,7 +53,7 @@ void main() {
       expect($(Localization.current.I18nSettings_incorrectDelay), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter correct seconds and return it from ok pressed', (PatrolTester $) async {
+    patrolWidgetTest('Enter correct seconds and return it from ok pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText((delay + delay).toString());
@@ -61,7 +61,7 @@ void main() {
       await expectLater(result, delay + delay);
     });
 
-    patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
+    patrolWidgetTest('Return null when cancel pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(delay));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');

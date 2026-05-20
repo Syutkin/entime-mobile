@@ -31,13 +31,12 @@ void main() {
         ).thenAnswer((_) => Stream.fromIterable([false, true, false, false, false, true, true, true]));
       },
       build: () => ConnectivityBloc(connectivityProvider),
-      expect:
-          () => [
-            const ConnectivityState.state(isConnected: false),
-            const ConnectivityState.state(isConnected: true),
-            const ConnectivityState.state(isConnected: false),
-            const ConnectivityState.state(isConnected: true),
-          ],
+      expect: () => [
+        const ConnectivityState.state(isConnected: false),
+        const ConnectivityState.state(isConnected: true),
+        const ConnectivityState.state(isConnected: false),
+        const ConnectivityState.state(isConnected: true),
+      ],
     );
   });
 }

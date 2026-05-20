@@ -1,7 +1,9 @@
 // ignore_for_file: strict_raw_type
 
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../feature/trails/bloc/trails_bloc.dart';
 import '../logger/logger.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -11,6 +13,17 @@ class AppBlocObserver extends BlocObserver {
 
     if ('$event'.contains('DatabaseEvent.emitState')) {
       logger.t('Event: DatabaseEvent.emitState');
+    } else if (event is TrailsEvent) {
+      event.maybeMap(
+        emitTrack: (value) {
+          final newTrack = value.track.copyWith(data: Uint8List(0));
+          final newEvent = TrailsEvent.emitTrack(track: newTrack);
+          logger.d('Event: $newEvent');
+        },
+        orElse: () {
+          logger.d('Event: $event');
+        },
+      );
     } else if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.d('Event: $event');
     }
@@ -27,6 +40,25 @@ class AppBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
     if ('$transition'.contains('currentState: DatabaseState')) {
       logger.t('Transition: from old to new DatabaseState');
+    } else if (transition.event is TrailsEvent) {
+      (transition.event as TrailsEvent).maybeMap(
+        emitTrack: (value) {
+          final newTrack = value.track.copyWith(data: Uint8List(0));
+          final newEvent = TrailsEvent.emitTrack(track: newTrack);
+          final newNextState = (transition.nextState as TrailsState).whenOrNull(
+            initialized: (trails, track) => TrailsState.initialized(trails: trails, track: newTrack),
+          );
+          final newTransition = Transition<TrailsEvent, dynamic>(
+            currentState: transition.currentState,
+            event: newEvent,
+            nextState: newNextState,
+          );
+          logger.d('Transition: $newTransition');
+        },
+        orElse: () {
+          logger.d('Transition: $transition');
+        },
+      );
     } else if (bloc.toString() != "Instance of 'CountdownBloc'") {
       logger.t('Transition: $transition');
     }

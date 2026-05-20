@@ -75,7 +75,8 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
       isOLEDBackground: prefs.getBool('isOLEDBackground') ?? defaults.isOLEDBackground,
       previousVersion: prefs.getString('previousVersion') ?? defaults.previousVersion,
       updateNtpOffsetAtStartup: prefs.getBool('updateNtpOffsetAtStartup') ?? defaults.updateNtpOffsetAtStartup,
-      useTimestampForAutomaticStamps: prefs.getBool('useTimestampForAutomaticStamps') ?? defaults.useTimestampForAutomaticStamps,
+      useTimestampForAutomaticStamps:
+          prefs.getBool('useTimestampForAutomaticStamps') ?? defaults.useTimestampForAutomaticStamps,
     );
 
     await WakelockPlus.toggle(enable: settings.wakelock);
@@ -120,10 +121,10 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     await _prefs.setInt('raceId', settings.raceId);
     await _prefs.setInt('stageId', settings.stageId);
     await _prefs.setBool('wakelock', settings.wakelock);
-    await _prefs.setBool('start_fab', settings.startFab);
-    await _prefs.setDouble('start_fab_size', settings.startFabSize);
-    await _prefs.setBool('finish_fab', settings.finishFab);
-    await _prefs.setDouble('finish_fab_size', settings.finishFabSize);
+    await _prefs.setBool('startFab', settings.startFab);
+    await _prefs.setDouble('startFabSize', settings.startFabSize);
+    await _prefs.setBool('finishFab', settings.finishFab);
+    await _prefs.setDouble('finishFabSize', settings.finishFabSize);
     await _prefs.setBool('countdown', settings.countdown);
     await _prefs.setDouble('countdownSize', settings.countdownSize);
     await _prefs.setDouble('countdownLeft', settings.countdownLeft);
@@ -148,7 +149,7 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     await _prefs.setInt('finishDifferenceThreshold', settings.finishDifferenceThreshold);
     await _prefs.setInt('deltaInSeconds', settings.deltaInSeconds);
     await _prefs.setInt('updateStartCorrectionDelay', settings.updateStartCorrectionDelay);
-    await _prefs.setInt('log_limit', settings.logLimit);
+    await _prefs.setInt('logLimit', settings.logLimit);
     await _prefs.setString('seedColor', settings.seedColor.name);
     await _prefs.setString('brightness', settings.brightness.name);
     await _prefs.setDouble('contrastLevel', settings.contrastLevel);
@@ -157,7 +158,6 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     await _prefs.setString('previousVersion', settings.previousVersion);
     await _prefs.setBool('updateNtpOffsetAtStartup', settings.updateNtpOffsetAtStartup);
     await _prefs.setBool('useTimestampForAutomaticStamps', settings.useTimestampForAutomaticStamps);
-    
 
     _settings = settings;
     _appSettingsController.add(_settings);

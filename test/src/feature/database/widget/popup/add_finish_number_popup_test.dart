@@ -57,7 +57,7 @@ void main() {
       isHidden: false,
       isManual: false,
     );
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
 
     when(() => databaseBloc.state).thenReturn(
       DatabaseState(
@@ -74,7 +74,7 @@ void main() {
   });
 
   group('addFinishNumberPopup tests', () {
-    patrolWidgetTest('Show nothing when stage is null', (PatrolTester $) async {
+    patrolWidgetTest('Show nothing when stage is null', ($) async {
       when(() => databaseBloc.state).thenReturn(
         const DatabaseState(
           races: [],
@@ -92,13 +92,13 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('Show dialog if stage not null', (PatrolTester $) async {
+    patrolWidgetTest('Show dialog if stage not null', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       expect($(Form), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter new number and add it to finish then close dialog', (PatrolTester $) async {
+    patrolWidgetTest('Enter new number and add it to finish then close dialog', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(TextFormField).enterText('$number');
@@ -111,7 +111,7 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('Enter new number then press cancel button', (PatrolTester $) async {
+    patrolWidgetTest('Enter new number then press cancel button', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       await $(TextFormField).enterText('$number');
@@ -120,7 +120,7 @@ void main() {
       expect($(Form), findsNothing);
     });
 
-    patrolWidgetTest('Check number validator', (PatrolTester $) async {
+    patrolWidgetTest('Check number validator', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
       // Negative

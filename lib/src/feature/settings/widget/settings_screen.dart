@@ -1,16 +1,29 @@
 import 'package:app_settings/app_settings.dart' as apps;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../common/localization/localization.dart';
+import '../../../common/logger/logger.dart';
 import '../../audio/bloc/audio_bloc.dart';
 import '../settings.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
+
+  Future<void> _openAccessibilitySettings() async {
+    try {
+      await apps.AppSettings.openAppSettings(type: apps.AppSettingsType.accessibility);
+    } on MissingPluginException {
+      logger.d('AppSettings -> openAppSettings is not implemented on this platform');
+      return;
+    } catch (e) {
+      logger.e('AppSettings -> Can not open settings', error: e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +215,7 @@ class SettingsScreen extends StatelessWidget {
                       };
                     },
                   ),
-                  onPressed: (_) => apps.AppSettings.openAppSettings(type: apps.AppSettingsType.accessibility),
+                  onPressed: (_) => _openAccessibilitySettings(),
                 ),
                 SettingsTile(
                   key: const Key('TTSVoiceName'),
@@ -218,7 +231,7 @@ class SettingsScreen extends StatelessWidget {
                       };
                     },
                   ),
-                  onPressed: (_) => apps.AppSettings.openAppSettings(type: apps.AppSettingsType.accessibility),
+                  onPressed: (_) => _openAccessibilitySettings(),
                 ),
                 SettingsTile(
                   enabled: settingsState.sound && settingsState.voice,
@@ -473,7 +486,7 @@ class SettingsScreen extends StatelessWidget {
                   trailing: settingsState.logLimit > -1
                       ? Text('${settingsState.logLimit}')
                       // : Text('без ограничений'),
-                      : Icon(MdiIcons.infinity),
+                      : const Icon(MdiIcons.infinity),
                   //leading:  Icon(MdiIcons.filter),
                   onPressed: (context) async {
                     final value = await setLogLimitPopup(context, settingsState.logLimit);

@@ -37,7 +37,7 @@ void main() {
   }
 
   group('setStartFinishDifferencePopup tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(difference));
       await $(#button).tap();
       expect($(title), findsOneWidget);
@@ -46,7 +46,7 @@ void main() {
       expect($(difference.toString()), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter wrong difference', (PatrolTester $) async {
+    patrolWidgetTest('Enter wrong difference', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('999-00');
@@ -54,7 +54,7 @@ void main() {
       expect($(Localization.current.I18nSettings_incorrectStartFinishDifference), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter empty difference', (PatrolTester $) async {
+    patrolWidgetTest('Enter empty difference', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('');
@@ -62,7 +62,7 @@ void main() {
       expect($(Localization.current.I18nSettings_incorrectStartFinishDifference), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter negative difference', (PatrolTester $) async {
+    patrolWidgetTest('Enter negative difference', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('-10');
@@ -70,7 +70,7 @@ void main() {
       expect($(Localization.current.I18nSettings_incorrectStartFinishDifference), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter correct difference and return it from ok pressed', (PatrolTester $) async {
+    patrolWidgetTest('Enter correct difference and return it from ok pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');
@@ -78,7 +78,7 @@ void main() {
       await expectLater(result, 1234);
     });
 
-    patrolWidgetTest('Return null when cancel pressed', (PatrolTester $) async {
+    patrolWidgetTest('Return null when cancel pressed', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(difference));
       await $(#button).tap();
       await $(TextFormField).enterText('1234');

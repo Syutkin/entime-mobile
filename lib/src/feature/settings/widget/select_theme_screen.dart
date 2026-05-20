@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 
 import '../settings.dart';
 
@@ -23,7 +23,7 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
         actions: [
           RadioGroup(
             groupValue: context.read<SettingsCubit>().state.seedColor,
-            onChanged: (ColorSeed? value) {  },
+            onChanged: (value) {},
             child: PopupMenuButton(
               icon: const Icon(Icons.palette),
               itemBuilder: colorItemBuilder,
@@ -32,7 +32,7 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
           ),
           RadioGroup(
             groupValue: context.read<SettingsCubit>().state.dynamicSchemeVariant,
-            onChanged: (value) {  },
+            onChanged: (value) {},
             child: PopupMenuButton(
               icon: const Icon(Icons.colorize),
               itemBuilder: dynamicSchemeVariantBuilder,
@@ -140,23 +140,21 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
             leading: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color:
-                    appThemeData(
-                      seedColor: colorSeed,
-                      brightness: brightness,
-                      contrastLevel: contrast,
-                      dynamicSchemeVariant: dynamicSchemeVariant,
-                    ).colorScheme.surfaceContainer,
+                color: appThemeData(
+                  seedColor: colorSeed,
+                  brightness: brightness,
+                  contrastLevel: contrast,
+                  dynamicSchemeVariant: dynamicSchemeVariant,
+                ).colorScheme.surfaceContainer,
               ),
               child: Icon(
                 MdiIcons.palette,
-                color:
-                    appThemeData(
-                      seedColor: colorSeed,
-                      brightness: brightness,
-                      contrastLevel: contrast,
-                      dynamicSchemeVariant: dynamicSchemeVariant,
-                    ).colorScheme.primary,
+                color: appThemeData(
+                  seedColor: colorSeed,
+                  brightness: brightness,
+                  contrastLevel: contrast,
+                  dynamicSchemeVariant: dynamicSchemeVariant,
+                ).colorScheme.primary,
               ),
             ),
             trailing: Radio(value: colorSeed),
@@ -182,23 +180,21 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
             leading: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color:
-                    appThemeData(
-                      seedColor: seedColor,
-                      brightness: brightness,
-                      contrastLevel: contrast,
-                      dynamicSchemeVariant: variant,
-                    ).colorScheme.surfaceContainer,
+                color: appThemeData(
+                  seedColor: seedColor,
+                  brightness: brightness,
+                  contrastLevel: contrast,
+                  dynamicSchemeVariant: variant,
+                ).colorScheme.surfaceContainer,
               ),
               child: Icon(
                 MdiIcons.palette,
-                color:
-                    appThemeData(
-                      seedColor: seedColor,
-                      brightness: brightness,
-                      contrastLevel: contrast,
-                      dynamicSchemeVariant: variant,
-                    ).colorScheme.primary,
+                color: appThemeData(
+                  seedColor: seedColor,
+                  brightness: brightness,
+                  contrastLevel: contrast,
+                  dynamicSchemeVariant: variant,
+                ).colorScheme.primary,
               ),
             ),
             trailing: Radio(value: variant),
@@ -236,7 +232,11 @@ class ColorSample extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(child: Center(child: Text(mainText, style: TextStyle(color: secondaryColor)))),
+          Expanded(
+            child: Center(
+              child: Text(mainText, style: TextStyle(color: secondaryColor)),
+            ),
+          ),
           Expanded(
             child: Container(
               margin: const EdgeInsets.all(8),
@@ -245,7 +245,9 @@ class ColorSample extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 color: secondaryColor,
               ),
-              child: Center(child: Text(secondaryText, style: TextStyle(color: mainColor))),
+              child: Center(
+                child: Text(secondaryText, style: TextStyle(color: mainColor)),
+              ),
             ),
           ),
         ],

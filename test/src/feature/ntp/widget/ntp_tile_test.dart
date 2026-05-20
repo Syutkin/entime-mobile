@@ -36,7 +36,7 @@ void main() {
   });
 
   group('Test NtpTile', () {
-    patrolWidgetTest('No internet connection, ListTile disabled', (PatrolTester $) async {
+    patrolWidgetTest('No internet connection, ListTile disabled', ($) async {
       when(() => connectivityBloc.state).thenReturn(const ConnectivityState.state(isConnected: false));
       when(() => ntpBloc.state).thenReturn(const NtpState.initial(0));
       await $.pumpWidgetAndSettle(testWidget());
@@ -44,33 +44,33 @@ void main() {
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, false);
     });
 
-    patrolWidgetTest('Internet enabled, initial ntp state', (PatrolTester $) async {
+    patrolWidgetTest('Internet enabled, initial ntp state', ($) async {
       when(() => connectivityBloc.state).thenReturn(const ConnectivityState.state(isConnected: true));
       when(() => ntpBloc.state).thenReturn(const NtpState.initial(0));
       await $.pumpWidgetAndSettle(testWidget());
       expect(($(ListTile).evaluate().single.widget as ListTile).enabled, true);
       expect($(Localization.current.I18nNtp_sync), findsOneWidget);
     });
-    patrolWidgetTest('Sync in progress', (PatrolTester $) async {
+    patrolWidgetTest('Sync in progress', ($) async {
       when(() => connectivityBloc.state).thenReturn(const ConnectivityState.state(isConnected: true));
       when(() => ntpBloc.state).thenReturn(const NtpState.loading(0));
       await $.pumpWidgetAndSettle(testWidget());
       expect($(Localization.current.I18nNtp_syncing), findsOneWidget);
     });
-    patrolWidgetTest('Sync error', (PatrolTester $) async {
+    patrolWidgetTest('Sync error', ($) async {
       when(() => connectivityBloc.state).thenReturn(const ConnectivityState.state(isConnected: true));
       when(() => ntpBloc.state).thenReturn(const NtpState.failure(0));
       await $.pumpWidgetAndSettle(testWidget());
       expect($(Localization.current.I18nNtp_syncError), findsOneWidget);
     });
-    patrolWidgetTest('Ntp synced', (PatrolTester $) async {
+    patrolWidgetTest('Ntp synced', ($) async {
       const offset = 111;
       when(() => connectivityBloc.state).thenReturn(const ConnectivityState.state(isConnected: true));
       when(() => ntpBloc.state).thenReturn(const NtpState.success(offset));
       await $.pumpWidgetAndSettle(testWidget());
       expect($(Localization.current.I18nNtp_offsetInMilliseconds(offset)), findsOneWidget);
     });
-    patrolWidgetTest('Press sync', (PatrolTester $) async {
+    patrolWidgetTest('Press sync', ($) async {
       when(() => connectivityBloc.state).thenReturn(const ConnectivityState.state(isConnected: true));
       when(() => ntpBloc.state).thenReturn(const NtpState.initial(0));
       await $.pumpWidgetAndSettle(testWidget());

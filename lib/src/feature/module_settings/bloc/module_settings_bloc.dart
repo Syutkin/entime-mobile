@@ -19,6 +19,9 @@ class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> 
     on<ModuleSettingsEventUnload>((event, emit) {
       emit(const ModuleSettingsUninitialized());
     });
+    on<ModuleSettingsEventLoadFailed>((event, emit) {
+      emit(const ModuleSettingsError());
+    });
   }
 
   Future<void> _handleGetModuleSettings(ModuleSettingsEventGet event, Emitter<ModuleSettingsState> emit) async {
@@ -26,6 +29,13 @@ class ModuleSettingsBloc extends Bloc<ModuleSettingsEvent, ModuleSettingsState> 
 
     try {
       final jsonMap = jsonDecode(event.json) as Map<String, dynamic>;
+
+      final data = jsonMap['data'];
+      if (jsonMap['cmd'] == 'load_config' && data is Map<String, dynamic>) {
+        final moduleSettings = ModSettingsModel.entime(ModSettingsEntime.fromJson(data));
+        emit(ModuleSettingsLoaded(moduleSettings));
+        return;
+      }
 
       if (jsonMap.containsKey('Type')) {
         switch (jsonMap['Type']) {

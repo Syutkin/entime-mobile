@@ -58,13 +58,12 @@ void main() {
           ..add(const NtpEvent.getNtpOffset())
           ..add(NtpEvent.getNtpOffset(lookUpAddress: lookUpAddress, port: port));
       },
-      expect:
-          () => [
-            const NtpState.loading(0),
-            const NtpState.failure(0),
-            const NtpState.loading(0),
-            const NtpState.success(5432),
-          ],
+      expect: () => [
+        const NtpState.loading(0),
+        const NtpState.failure(0),
+        const NtpState.loading(0),
+        const NtpState.success(5432),
+      ],
     );
   });
 }

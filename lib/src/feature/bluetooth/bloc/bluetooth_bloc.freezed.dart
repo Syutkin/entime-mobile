@@ -55,7 +55,7 @@ extension BluetoothEventPatterns on BluetoothEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initialize value)?  initialize,TResult Function( _Enable value)?  enable,TResult Function( _SelectDevice value)?  selectDevice,TResult Function( _Connected value)?  connected,TResult Function( _Connect value)?  connect,TResult Function( _Disconnect value)?  disconnect,TResult Function( _Disconnected value)?  disconnected,TResult Function( _MessageReceived value)?  messageReceived,TResult Function( _SendMessage value)?  sendMessage,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initialize value)?  initialize,TResult Function( _Enable value)?  enable,TResult Function( _SelectDevice value)?  selectDevice,TResult Function( _Connected value)?  connected,TResult Function( _Connect value)?  connect,TResult Function( _Disconnect value)?  disconnect,TResult Function( _Disconnected value)?  disconnected,TResult Function( _MessageReceived value)?  messageReceived,TResult Function( _SendMessage value)?  sendMessage,TResult Function( _BatteryLevelUpdated value)?  batteryLevelUpdated,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
@@ -67,7 +67,8 @@ return connect(_that);case _Disconnect() when disconnect != null:
 return disconnect(_that);case _Disconnected() when disconnected != null:
 return disconnected(_that);case _MessageReceived() when messageReceived != null:
 return messageReceived(_that);case _SendMessage() when sendMessage != null:
-return sendMessage(_that);case _:
+return sendMessage(_that);case _BatteryLevelUpdated() when batteryLevelUpdated != null:
+return batteryLevelUpdated(_that);case _:
   return orElse();
 
 }
@@ -85,7 +86,7 @@ return sendMessage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initialize value)  initialize,required TResult Function( _Enable value)  enable,required TResult Function( _SelectDevice value)  selectDevice,required TResult Function( _Connected value)  connected,required TResult Function( _Connect value)  connect,required TResult Function( _Disconnect value)  disconnect,required TResult Function( _Disconnected value)  disconnected,required TResult Function( _MessageReceived value)  messageReceived,required TResult Function( _SendMessage value)  sendMessage,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initialize value)  initialize,required TResult Function( _Enable value)  enable,required TResult Function( _SelectDevice value)  selectDevice,required TResult Function( _Connected value)  connected,required TResult Function( _Connect value)  connect,required TResult Function( _Disconnect value)  disconnect,required TResult Function( _Disconnected value)  disconnected,required TResult Function( _MessageReceived value)  messageReceived,required TResult Function( _SendMessage value)  sendMessage,required TResult Function( _BatteryLevelUpdated value)  batteryLevelUpdated,}){
 final _that = this;
 switch (_that) {
 case _Initialize():
@@ -97,7 +98,8 @@ return connect(_that);case _Disconnect():
 return disconnect(_that);case _Disconnected():
 return disconnected(_that);case _MessageReceived():
 return messageReceived(_that);case _SendMessage():
-return sendMessage(_that);}
+return sendMessage(_that);case _BatteryLevelUpdated():
+return batteryLevelUpdated(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -111,7 +113,7 @@ return sendMessage(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initialize value)?  initialize,TResult? Function( _Enable value)?  enable,TResult? Function( _SelectDevice value)?  selectDevice,TResult? Function( _Connected value)?  connected,TResult? Function( _Connect value)?  connect,TResult? Function( _Disconnect value)?  disconnect,TResult? Function( _Disconnected value)?  disconnected,TResult? Function( _MessageReceived value)?  messageReceived,TResult? Function( _SendMessage value)?  sendMessage,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initialize value)?  initialize,TResult? Function( _Enable value)?  enable,TResult? Function( _SelectDevice value)?  selectDevice,TResult? Function( _Connected value)?  connected,TResult? Function( _Connect value)?  connect,TResult? Function( _Disconnect value)?  disconnect,TResult? Function( _Disconnected value)?  disconnected,TResult? Function( _MessageReceived value)?  messageReceived,TResult? Function( _SendMessage value)?  sendMessage,TResult? Function( _BatteryLevelUpdated value)?  batteryLevelUpdated,}){
 final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
@@ -123,7 +125,8 @@ return connect(_that);case _Disconnect() when disconnect != null:
 return disconnect(_that);case _Disconnected() when disconnected != null:
 return disconnected(_that);case _MessageReceived() when messageReceived != null:
 return messageReceived(_that);case _SendMessage() when sendMessage != null:
-return sendMessage(_that);case _:
+return sendMessage(_that);case _BatteryLevelUpdated() when batteryLevelUpdated != null:
+return batteryLevelUpdated(_that);case _:
   return null;
 
 }
@@ -140,18 +143,19 @@ return sendMessage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function()?  enable,TResult Function( BluetoothDeviceWithAvailability? deviceWithAvailability)?  selectDevice,TResult Function()?  connected,TResult Function( BluetoothDevice? selectedDevice)?  connect,TResult Function()?  disconnect,TResult Function()?  disconnected,TResult Function( String message,  int stageId)?  messageReceived,TResult Function( String message)?  sendMessage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function()?  enable,TResult Function( BluetoothDevice? device)?  selectDevice,TResult Function()?  connected,TResult Function( BluetoothDevice? selectedDevice)?  connect,TResult Function()?  disconnect,TResult Function()?  disconnected,TResult Function( String message,  int stageId)?  messageReceived,TResult Function( String message)?  sendMessage,TResult Function( int level)?  batteryLevelUpdated,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
 return initialize();case _Enable() when enable != null:
 return enable();case _SelectDevice() when selectDevice != null:
-return selectDevice(_that.deviceWithAvailability);case _Connected() when connected != null:
+return selectDevice(_that.device);case _Connected() when connected != null:
 return connected();case _Connect() when connect != null:
 return connect(_that.selectedDevice);case _Disconnect() when disconnect != null:
 return disconnect();case _Disconnected() when disconnected != null:
 return disconnected();case _MessageReceived() when messageReceived != null:
 return messageReceived(_that.message,_that.stageId);case _SendMessage() when sendMessage != null:
-return sendMessage(_that.message);case _:
+return sendMessage(_that.message);case _BatteryLevelUpdated() when batteryLevelUpdated != null:
+return batteryLevelUpdated(_that.level);case _:
   return orElse();
 
 }
@@ -169,18 +173,19 @@ return sendMessage(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function()  enable,required TResult Function( BluetoothDeviceWithAvailability? deviceWithAvailability)  selectDevice,required TResult Function()  connected,required TResult Function( BluetoothDevice? selectedDevice)  connect,required TResult Function()  disconnect,required TResult Function()  disconnected,required TResult Function( String message,  int stageId)  messageReceived,required TResult Function( String message)  sendMessage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function()  enable,required TResult Function( BluetoothDevice? device)  selectDevice,required TResult Function()  connected,required TResult Function( BluetoothDevice? selectedDevice)  connect,required TResult Function()  disconnect,required TResult Function()  disconnected,required TResult Function( String message,  int stageId)  messageReceived,required TResult Function( String message)  sendMessage,required TResult Function( int level)  batteryLevelUpdated,}) {final _that = this;
 switch (_that) {
 case _Initialize():
 return initialize();case _Enable():
 return enable();case _SelectDevice():
-return selectDevice(_that.deviceWithAvailability);case _Connected():
+return selectDevice(_that.device);case _Connected():
 return connected();case _Connect():
 return connect(_that.selectedDevice);case _Disconnect():
 return disconnect();case _Disconnected():
 return disconnected();case _MessageReceived():
 return messageReceived(_that.message,_that.stageId);case _SendMessage():
-return sendMessage(_that.message);}
+return sendMessage(_that.message);case _BatteryLevelUpdated():
+return batteryLevelUpdated(_that.level);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -194,18 +199,19 @@ return sendMessage(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function()?  enable,TResult? Function( BluetoothDeviceWithAvailability? deviceWithAvailability)?  selectDevice,TResult? Function()?  connected,TResult? Function( BluetoothDevice? selectedDevice)?  connect,TResult? Function()?  disconnect,TResult? Function()?  disconnected,TResult? Function( String message,  int stageId)?  messageReceived,TResult? Function( String message)?  sendMessage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function()?  enable,TResult? Function( BluetoothDevice? device)?  selectDevice,TResult? Function()?  connected,TResult? Function( BluetoothDevice? selectedDevice)?  connect,TResult? Function()?  disconnect,TResult? Function()?  disconnected,TResult? Function( String message,  int stageId)?  messageReceived,TResult? Function( String message)?  sendMessage,TResult? Function( int level)?  batteryLevelUpdated,}) {final _that = this;
 switch (_that) {
 case _Initialize() when initialize != null:
 return initialize();case _Enable() when enable != null:
 return enable();case _SelectDevice() when selectDevice != null:
-return selectDevice(_that.deviceWithAvailability);case _Connected() when connected != null:
+return selectDevice(_that.device);case _Connected() when connected != null:
 return connected();case _Connect() when connect != null:
 return connect(_that.selectedDevice);case _Disconnect() when disconnect != null:
 return disconnect();case _Disconnected() when disconnected != null:
 return disconnected();case _MessageReceived() when messageReceived != null:
 return messageReceived(_that.message,_that.stageId);case _SendMessage() when sendMessage != null:
-return sendMessage(_that.message);case _:
+return sendMessage(_that.message);case _BatteryLevelUpdated() when batteryLevelUpdated != null:
+return batteryLevelUpdated(_that.level);case _:
   return null;
 
 }
@@ -281,10 +287,10 @@ String toString() {
 
 
 class _SelectDevice implements BluetoothEvent {
-  const _SelectDevice({this.deviceWithAvailability});
+  const _SelectDevice({this.device});
   
 
- final  BluetoothDeviceWithAvailability? deviceWithAvailability;
+ final  BluetoothDevice? device;
 
 /// Create a copy of BluetoothEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -296,16 +302,16 @@ _$SelectDeviceCopyWith<_SelectDevice> get copyWith => __$SelectDeviceCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectDevice&&(identical(other.deviceWithAvailability, deviceWithAvailability) || other.deviceWithAvailability == deviceWithAvailability));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectDevice&&(identical(other.device, device) || other.device == device));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,deviceWithAvailability);
+int get hashCode => Object.hash(runtimeType,device);
 
 @override
 String toString() {
-  return 'BluetoothEvent.selectDevice(deviceWithAvailability: $deviceWithAvailability)';
+  return 'BluetoothEvent.selectDevice(device: $device)';
 }
 
 
@@ -316,7 +322,7 @@ abstract mixin class _$SelectDeviceCopyWith<$Res> implements $BluetoothEventCopy
   factory _$SelectDeviceCopyWith(_SelectDevice value, $Res Function(_SelectDevice) _then) = __$SelectDeviceCopyWithImpl;
 @useResult
 $Res call({
- BluetoothDeviceWithAvailability? deviceWithAvailability
+ BluetoothDevice? device
 });
 
 
@@ -333,10 +339,10 @@ class __$SelectDeviceCopyWithImpl<$Res>
 
 /// Create a copy of BluetoothEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? deviceWithAvailability = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? device = freezed,}) {
   return _then(_SelectDevice(
-deviceWithAvailability: freezed == deviceWithAvailability ? _self.deviceWithAvailability : deviceWithAvailability // ignore: cast_nullable_to_non_nullable
-as BluetoothDeviceWithAvailability?,
+device: freezed == device ? _self.device : device // ignore: cast_nullable_to_non_nullable
+as BluetoothDevice?,
   ));
 }
 
@@ -640,6 +646,72 @@ as String,
 }
 
 /// @nodoc
+
+
+class _BatteryLevelUpdated implements BluetoothEvent {
+  const _BatteryLevelUpdated({required this.level});
+  
+
+ final  int level;
+
+/// Create a copy of BluetoothEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BatteryLevelUpdatedCopyWith<_BatteryLevelUpdated> get copyWith => __$BatteryLevelUpdatedCopyWithImpl<_BatteryLevelUpdated>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BatteryLevelUpdated&&(identical(other.level, level) || other.level == level));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,level);
+
+@override
+String toString() {
+  return 'BluetoothEvent.batteryLevelUpdated(level: $level)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$BatteryLevelUpdatedCopyWith<$Res> implements $BluetoothEventCopyWith<$Res> {
+  factory _$BatteryLevelUpdatedCopyWith(_BatteryLevelUpdated value, $Res Function(_BatteryLevelUpdated) _then) = __$BatteryLevelUpdatedCopyWithImpl;
+@useResult
+$Res call({
+ int level
+});
+
+
+
+
+}
+/// @nodoc
+class __$BatteryLevelUpdatedCopyWithImpl<$Res>
+    implements _$BatteryLevelUpdatedCopyWith<$Res> {
+  __$BatteryLevelUpdatedCopyWithImpl(this._self, this._then);
+
+  final _BatteryLevelUpdated _self;
+  final $Res Function(_BatteryLevelUpdated) _then;
+
+/// Create a copy of BluetoothEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? level = null,}) {
+  return _then(_BatteryLevelUpdated(
+level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$BluetoothBlocState {
 
 
@@ -762,14 +834,14 @@ return disconnected(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  notInitialized,TResult Function()?  notAvailable,TResult Function()?  notEnabled,TResult Function()?  connecting,TResult Function( BluetoothMessage? message)?  connected,TResult Function()?  disconnecting,TResult Function( BluetoothDevice? bluetoothDevice)?  disconnected,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  notInitialized,TResult Function()?  notAvailable,TResult Function()?  notEnabled,TResult Function()?  connecting,TResult Function( BluetoothMessage? message,  int? batteryLevel)?  connected,TResult Function()?  disconnecting,TResult Function( BluetoothDevice? bluetoothDevice)?  disconnected,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case BluetoothBlocStateNotInitialized() when notInitialized != null:
 return notInitialized();case BluetoothBlocStateNotAvailable() when notAvailable != null:
 return notAvailable();case BluetoothBlocStateNotEnabled() when notEnabled != null:
 return notEnabled();case BluetoothBlocStateConnecting() when connecting != null:
 return connecting();case BluetoothBlocStateConnected() when connected != null:
-return connected(_that.message);case BluetoothBlocStateDisconnecting() when disconnecting != null:
+return connected(_that.message,_that.batteryLevel);case BluetoothBlocStateDisconnecting() when disconnecting != null:
 return disconnecting();case BluetoothBlocStateDisconnected() when disconnected != null:
 return disconnected(_that.bluetoothDevice);case _:
   return orElse();
@@ -789,14 +861,14 @@ return disconnected(_that.bluetoothDevice);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  notInitialized,required TResult Function()  notAvailable,required TResult Function()  notEnabled,required TResult Function()  connecting,required TResult Function( BluetoothMessage? message)  connected,required TResult Function()  disconnecting,required TResult Function( BluetoothDevice? bluetoothDevice)  disconnected,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  notInitialized,required TResult Function()  notAvailable,required TResult Function()  notEnabled,required TResult Function()  connecting,required TResult Function( BluetoothMessage? message,  int? batteryLevel)  connected,required TResult Function()  disconnecting,required TResult Function( BluetoothDevice? bluetoothDevice)  disconnected,}) {final _that = this;
 switch (_that) {
 case BluetoothBlocStateNotInitialized():
 return notInitialized();case BluetoothBlocStateNotAvailable():
 return notAvailable();case BluetoothBlocStateNotEnabled():
 return notEnabled();case BluetoothBlocStateConnecting():
 return connecting();case BluetoothBlocStateConnected():
-return connected(_that.message);case BluetoothBlocStateDisconnecting():
+return connected(_that.message,_that.batteryLevel);case BluetoothBlocStateDisconnecting():
 return disconnecting();case BluetoothBlocStateDisconnected():
 return disconnected(_that.bluetoothDevice);}
 }
@@ -812,14 +884,14 @@ return disconnected(_that.bluetoothDevice);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  notInitialized,TResult? Function()?  notAvailable,TResult? Function()?  notEnabled,TResult? Function()?  connecting,TResult? Function( BluetoothMessage? message)?  connected,TResult? Function()?  disconnecting,TResult? Function( BluetoothDevice? bluetoothDevice)?  disconnected,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  notInitialized,TResult? Function()?  notAvailable,TResult? Function()?  notEnabled,TResult? Function()?  connecting,TResult? Function( BluetoothMessage? message,  int? batteryLevel)?  connected,TResult? Function()?  disconnecting,TResult? Function( BluetoothDevice? bluetoothDevice)?  disconnected,}) {final _that = this;
 switch (_that) {
 case BluetoothBlocStateNotInitialized() when notInitialized != null:
 return notInitialized();case BluetoothBlocStateNotAvailable() when notAvailable != null:
 return notAvailable();case BluetoothBlocStateNotEnabled() when notEnabled != null:
 return notEnabled();case BluetoothBlocStateConnecting() when connecting != null:
 return connecting();case BluetoothBlocStateConnected() when connected != null:
-return connected(_that.message);case BluetoothBlocStateDisconnecting() when disconnecting != null:
+return connected(_that.message,_that.batteryLevel);case BluetoothBlocStateDisconnecting() when disconnecting != null:
 return disconnecting();case BluetoothBlocStateDisconnected() when disconnected != null:
 return disconnected(_that.bluetoothDevice);case _:
   return null;
@@ -961,10 +1033,11 @@ String toString() {
 
 
 class BluetoothBlocStateConnected implements BluetoothBlocState {
-  const BluetoothBlocStateConnected({this.message});
+  const BluetoothBlocStateConnected({this.message, this.batteryLevel});
   
 
  final  BluetoothMessage? message;
+ final  int? batteryLevel;
 
 /// Create a copy of BluetoothBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -976,16 +1049,16 @@ $BluetoothBlocStateConnectedCopyWith<BluetoothBlocStateConnected> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BluetoothBlocStateConnected&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BluetoothBlocStateConnected&&(identical(other.message, message) || other.message == message)&&(identical(other.batteryLevel, batteryLevel) || other.batteryLevel == batteryLevel));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,batteryLevel);
 
 @override
 String toString() {
-  return 'BluetoothBlocState.connected(message: $message)';
+  return 'BluetoothBlocState.connected(message: $message, batteryLevel: $batteryLevel)';
 }
 
 
@@ -996,7 +1069,7 @@ abstract mixin class $BluetoothBlocStateConnectedCopyWith<$Res> implements $Blue
   factory $BluetoothBlocStateConnectedCopyWith(BluetoothBlocStateConnected value, $Res Function(BluetoothBlocStateConnected) _then) = _$BluetoothBlocStateConnectedCopyWithImpl;
 @useResult
 $Res call({
- BluetoothMessage? message
+ BluetoothMessage? message, int? batteryLevel
 });
 
 
@@ -1013,10 +1086,11 @@ class _$BluetoothBlocStateConnectedCopyWithImpl<$Res>
 
 /// Create a copy of BluetoothBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? batteryLevel = freezed,}) {
   return _then(BluetoothBlocStateConnected(
 message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as BluetoothMessage?,
+as BluetoothMessage?,batteryLevel: freezed == batteryLevel ? _self.batteryLevel : batteryLevel // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 

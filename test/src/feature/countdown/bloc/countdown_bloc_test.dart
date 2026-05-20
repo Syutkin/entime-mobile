@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/feature/audio/audio.dart';
 import 'package:entime/src/feature/countdown/bloc/countdown_bloc.dart';
@@ -9,11 +11,11 @@ import 'package:rxdart/rxdart.dart';
 
 class MockIAudioController extends Mock implements IAudioController {}
 
-class MockCountdownAtStart extends Mock implements CountdownAtStart {}
+class MockCountdownAtStart extends Mock implements ICountdownAtStart {}
 
 void main() {
   late IAudioController audioController;
-  late CountdownAtStart countdownAtStart;
+  late ICountdownAtStart countdownAtStart;
   late int stageId;
   late int second;
   late String text;
@@ -69,7 +71,11 @@ void main() {
         }
         when(
           () => countdownAtStart.ticks,
-        ).thenAnswer((_) => BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)));
+        ).thenAnswer((_) {
+          final subject = BehaviorSubject<Tick>();
+          unawaited(subject.addStream(Stream.fromIterable(ticks)));
+          return subject;
+        });
       },
       build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
       expect: () => ticks.map((element) {
@@ -85,7 +91,11 @@ void main() {
         }
         when(
           () => countdownAtStart.ticks,
-        ).thenAnswer((_) => BehaviorSubject<Tick>()..addStream(Stream.fromIterable(ticks)));
+        ).thenAnswer((_) {
+          final subject = BehaviorSubject<Tick>();
+          unawaited(subject.addStream(Stream.fromIterable(ticks)));
+          return subject;
+        });
       },
       build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
       expect: () => ticks.map((element) {
@@ -144,5 +154,24 @@ void main() {
         verify(() => countdownAtStart.stop()).called(1);
       },
     );
+
+    test('Cancels ticks subscription on close', () async {
+      var canceled = false;
+      final ticksController = StreamController<Tick>.broadcast(
+        onCancel: () {
+          canceled = true;
+        },
+      );
+      addTearDown(ticksController.close);
+
+      when(() => countdownAtStart.ticks).thenAnswer((_) => ticksController.stream);
+
+      final bloc = CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: -1);
+
+      await bloc.close();
+      await Future<void>.delayed(Duration.zero);
+
+      expect(canceled, true);
+    });
   });
 }

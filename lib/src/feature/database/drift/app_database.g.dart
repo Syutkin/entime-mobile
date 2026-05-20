@@ -79,17 +79,16 @@ class Races extends Table with TableInfo<Races, Race> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  static const VerificationMeta _isDeletedMeta = const VerificationMeta(
-    'isDeleted',
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -100,7 +99,7 @@ class Races extends Table with TableInfo<Races, Race> {
     location,
     url,
     description,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -158,10 +157,10 @@ class Races extends Table with TableInfo<Races, Race> {
         ),
       );
     }
-    if (data.containsKey('is_deleted')) {
+    if (data.containsKey('deleted_at')) {
       context.handle(
-        _isDeletedMeta,
-        isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta),
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
       );
     }
     return context;
@@ -201,10 +200,10 @@ class Races extends Table with TableInfo<Races, Race> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -225,7 +224,7 @@ class Race extends DataClass implements Insertable<Race> {
   final String? location;
   final String? url;
   final String? description;
-  final bool isDeleted;
+  final DateTime? deletedAt;
   const Race({
     required this.id,
     required this.name,
@@ -234,7 +233,7 @@ class Race extends DataClass implements Insertable<Race> {
     this.location,
     this.url,
     this.description,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -256,7 +255,9 @@ class Race extends DataClass implements Insertable<Race> {
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
     return map;
   }
 
@@ -277,7 +278,9 @@ class Race extends DataClass implements Insertable<Race> {
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -294,7 +297,7 @@ class Race extends DataClass implements Insertable<Race> {
       location: serializer.fromJson<String?>(json['location']),
       url: serializer.fromJson<String?>(json['url']),
       description: serializer.fromJson<String?>(json['description']),
-      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deleted_at']),
     );
   }
   @override
@@ -308,7 +311,7 @@ class Race extends DataClass implements Insertable<Race> {
       'location': serializer.toJson<String?>(location),
       'url': serializer.toJson<String?>(url),
       'description': serializer.toJson<String?>(description),
-      'is_deleted': serializer.toJson<bool>(isDeleted),
+      'deleted_at': serializer.toJson<DateTime?>(deletedAt),
     };
   }
 
@@ -320,7 +323,7 @@ class Race extends DataClass implements Insertable<Race> {
     Value<String?> location = const Value.absent(),
     Value<String?> url = const Value.absent(),
     Value<String?> description = const Value.absent(),
-    bool? isDeleted,
+    Value<DateTime?> deletedAt = const Value.absent(),
   }) => Race(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -329,7 +332,7 @@ class Race extends DataClass implements Insertable<Race> {
     location: location.present ? location.value : this.location,
     url: url.present ? url.value : this.url,
     description: description.present ? description.value : this.description,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   Race copyWithCompanion(RacesCompanion data) {
     return Race(
@@ -344,7 +347,7 @@ class Race extends DataClass implements Insertable<Race> {
       description: data.description.present
           ? data.description.value
           : this.description,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -358,7 +361,7 @@ class Race extends DataClass implements Insertable<Race> {
           ..write('location: $location, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -372,7 +375,7 @@ class Race extends DataClass implements Insertable<Race> {
     location,
     url,
     description,
-    isDeleted,
+    deletedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -385,7 +388,7 @@ class Race extends DataClass implements Insertable<Race> {
           other.location == this.location &&
           other.url == this.url &&
           other.description == this.description &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class RacesCompanion extends UpdateCompanion<Race> {
@@ -396,7 +399,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
   final Value<String?> location;
   final Value<String?> url;
   final Value<String?> description;
-  final Value<bool> isDeleted;
+  final Value<DateTime?> deletedAt;
   const RacesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -405,7 +408,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
     this.location = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   RacesCompanion.insert({
     this.id = const Value.absent(),
@@ -415,7 +418,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
     this.location = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Race> custom({
     Expression<int>? id,
@@ -425,7 +428,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
     Expression<String>? location,
     Expression<String>? url,
     Expression<String>? description,
-    Expression<bool>? isDeleted,
+    Expression<DateTime>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -435,7 +438,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
       if (location != null) 'location': location,
       if (url != null) 'url': url,
       if (description != null) 'description': description,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -447,7 +450,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
     Value<String?>? location,
     Value<String?>? url,
     Value<String?>? description,
-    Value<bool>? isDeleted,
+    Value<DateTime?>? deletedAt,
   }) {
     return RacesCompanion(
       id: id ?? this.id,
@@ -457,7 +460,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
       location: location ?? this.location,
       url: url ?? this.url,
       description: description ?? this.description,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -485,8 +488,8 @@ class RacesCompanion extends UpdateCompanion<Race> {
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
     }
     return map;
   }
@@ -501,7 +504,7 @@ class RacesCompanion extends UpdateCompanion<Race> {
           ..write('location: $location, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -1082,17 +1085,16 @@ class Trails extends Table with TableInfo<Trails, Trail> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  static const VerificationMeta _isDeletedMeta = const VerificationMeta(
-    'isDeleted',
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -1103,7 +1105,7 @@ class Trails extends Table with TableInfo<Trails, Trail> {
     fileId,
     url,
     description,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1161,10 +1163,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
         ),
       );
     }
-    if (data.containsKey('is_deleted')) {
+    if (data.containsKey('deleted_at')) {
       context.handle(
-        _isDeletedMeta,
-        isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta),
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
       );
     }
     return context;
@@ -1204,10 +1206,10 @@ class Trails extends Table with TableInfo<Trails, Trail> {
         DriftSqlType.string,
         data['${effectivePrefix}description'],
       ),
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -1232,7 +1234,7 @@ class Trail extends DataClass implements Insertable<Trail> {
   final int? fileId;
   final String? url;
   final String? description;
-  final bool isDeleted;
+  final DateTime? deletedAt;
   const Trail({
     required this.id,
     required this.name,
@@ -1241,7 +1243,7 @@ class Trail extends DataClass implements Insertable<Trail> {
     this.fileId,
     this.url,
     this.description,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -1263,7 +1265,9 @@ class Trail extends DataClass implements Insertable<Trail> {
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
     return map;
   }
 
@@ -1284,7 +1288,9 @@ class Trail extends DataClass implements Insertable<Trail> {
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -1301,7 +1307,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       fileId: serializer.fromJson<int?>(json['file_id']),
       url: serializer.fromJson<String?>(json['url']),
       description: serializer.fromJson<String?>(json['description']),
-      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deleted_at']),
     );
   }
   @override
@@ -1315,7 +1321,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       'file_id': serializer.toJson<int?>(fileId),
       'url': serializer.toJson<String?>(url),
       'description': serializer.toJson<String?>(description),
-      'is_deleted': serializer.toJson<bool>(isDeleted),
+      'deleted_at': serializer.toJson<DateTime?>(deletedAt),
     };
   }
 
@@ -1327,7 +1333,7 @@ class Trail extends DataClass implements Insertable<Trail> {
     Value<int?> fileId = const Value.absent(),
     Value<String?> url = const Value.absent(),
     Value<String?> description = const Value.absent(),
-    bool? isDeleted,
+    Value<DateTime?> deletedAt = const Value.absent(),
   }) => Trail(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -1336,7 +1342,7 @@ class Trail extends DataClass implements Insertable<Trail> {
     fileId: fileId.present ? fileId.value : this.fileId,
     url: url.present ? url.value : this.url,
     description: description.present ? description.value : this.description,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   Trail copyWithCompanion(TrailsCompanion data) {
     return Trail(
@@ -1349,7 +1355,7 @@ class Trail extends DataClass implements Insertable<Trail> {
       description: data.description.present
           ? data.description.value
           : this.description,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -1363,7 +1369,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           ..write('fileId: $fileId, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -1377,7 +1383,7 @@ class Trail extends DataClass implements Insertable<Trail> {
     fileId,
     url,
     description,
-    isDeleted,
+    deletedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -1390,7 +1396,7 @@ class Trail extends DataClass implements Insertable<Trail> {
           other.fileId == this.fileId &&
           other.url == this.url &&
           other.description == this.description &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class TrailsCompanion extends UpdateCompanion<Trail> {
@@ -1401,7 +1407,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
   final Value<int?> fileId;
   final Value<String?> url;
   final Value<String?> description;
-  final Value<bool> isDeleted;
+  final Value<DateTime?> deletedAt;
   const TrailsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -1410,7 +1416,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.fileId = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   TrailsCompanion.insert({
     this.id = const Value.absent(),
@@ -1420,7 +1426,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     this.fileId = const Value.absent(),
     this.url = const Value.absent(),
     this.description = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Trail> custom({
     Expression<int>? id,
@@ -1430,7 +1436,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     Expression<int>? fileId,
     Expression<String>? url,
     Expression<String>? description,
-    Expression<bool>? isDeleted,
+    Expression<DateTime>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1440,7 +1446,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       if (fileId != null) 'file_id': fileId,
       if (url != null) 'url': url,
       if (description != null) 'description': description,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -1452,7 +1458,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     Value<int?>? fileId,
     Value<String?>? url,
     Value<String?>? description,
-    Value<bool>? isDeleted,
+    Value<DateTime?>? deletedAt,
   }) {
     return TrailsCompanion(
       id: id ?? this.id,
@@ -1462,7 +1468,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
       fileId: fileId ?? this.fileId,
       url: url ?? this.url,
       description: description ?? this.description,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -1490,8 +1496,8 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
     }
     return map;
   }
@@ -1506,7 +1512,7 @@ class TrailsCompanion extends UpdateCompanion<Trail> {
           ..write('fileId: $fileId, ')
           ..write('url: $url, ')
           ..write('description: $description, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -1578,17 +1584,16 @@ class Stages extends Table with TableInfo<Stages, Stage> {
     $customConstraints: 'NOT NULL DEFAULT TRUE',
     defaultValue: const CustomExpression('TRUE'),
   );
-  static const VerificationMeta _isDeletedMeta = const VerificationMeta(
-    'isDeleted',
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -1598,7 +1603,7 @@ class Stages extends Table with TableInfo<Stages, Stage> {
     name,
     description,
     isActive,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1652,10 +1657,10 @@ class Stages extends Table with TableInfo<Stages, Stage> {
         isActive.isAcceptableOrUnknown(data['is_active']!, _isActiveMeta),
       );
     }
-    if (data.containsKey('is_deleted')) {
+    if (data.containsKey('deleted_at')) {
       context.handle(
-        _isDeletedMeta,
-        isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta),
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
       );
     }
     return context;
@@ -1691,10 +1696,10 @@ class Stages extends Table with TableInfo<Stages, Stage> {
         DriftSqlType.bool,
         data['${effectivePrefix}is_active'],
       )!,
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -1719,7 +1724,7 @@ class Stage extends DataClass implements Insertable<Stage> {
   final String name;
   final String? description;
   final bool isActive;
-  final bool isDeleted;
+  final DateTime? deletedAt;
   const Stage({
     required this.id,
     this.trailId,
@@ -1727,7 +1732,7 @@ class Stage extends DataClass implements Insertable<Stage> {
     required this.name,
     this.description,
     required this.isActive,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -1742,7 +1747,9 @@ class Stage extends DataClass implements Insertable<Stage> {
       map['description'] = Variable<String>(description);
     }
     map['is_active'] = Variable<bool>(isActive);
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
     return map;
   }
 
@@ -1758,7 +1765,9 @@ class Stage extends DataClass implements Insertable<Stage> {
           ? const Value.absent()
           : Value(description),
       isActive: Value(isActive),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -1774,7 +1783,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       name: serializer.fromJson<String>(json['name']),
       description: serializer.fromJson<String?>(json['description']),
       isActive: serializer.fromJson<bool>(json['is_active']),
-      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deleted_at']),
     );
   }
   @override
@@ -1787,7 +1796,7 @@ class Stage extends DataClass implements Insertable<Stage> {
       'name': serializer.toJson<String>(name),
       'description': serializer.toJson<String?>(description),
       'is_active': serializer.toJson<bool>(isActive),
-      'is_deleted': serializer.toJson<bool>(isDeleted),
+      'deleted_at': serializer.toJson<DateTime?>(deletedAt),
     };
   }
 
@@ -1798,7 +1807,7 @@ class Stage extends DataClass implements Insertable<Stage> {
     String? name,
     Value<String?> description = const Value.absent(),
     bool? isActive,
-    bool? isDeleted,
+    Value<DateTime?> deletedAt = const Value.absent(),
   }) => Stage(
     id: id ?? this.id,
     trailId: trailId.present ? trailId.value : this.trailId,
@@ -1806,7 +1815,7 @@ class Stage extends DataClass implements Insertable<Stage> {
     name: name ?? this.name,
     description: description.present ? description.value : this.description,
     isActive: isActive ?? this.isActive,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   Stage copyWithCompanion(StagesCompanion data) {
     return Stage(
@@ -1818,7 +1827,7 @@ class Stage extends DataClass implements Insertable<Stage> {
           ? data.description.value
           : this.description,
       isActive: data.isActive.present ? data.isActive.value : this.isActive,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -1831,14 +1840,14 @@ class Stage extends DataClass implements Insertable<Stage> {
           ..write('name: $name, ')
           ..write('description: $description, ')
           ..write('isActive: $isActive, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode =>
-      Object.hash(id, trailId, raceId, name, description, isActive, isDeleted);
+      Object.hash(id, trailId, raceId, name, description, isActive, deletedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1849,7 +1858,7 @@ class Stage extends DataClass implements Insertable<Stage> {
           other.name == this.name &&
           other.description == this.description &&
           other.isActive == this.isActive &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class StagesCompanion extends UpdateCompanion<Stage> {
@@ -1859,7 +1868,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
   final Value<String> name;
   final Value<String?> description;
   final Value<bool> isActive;
-  final Value<bool> isDeleted;
+  final Value<DateTime?> deletedAt;
   const StagesCompanion({
     this.id = const Value.absent(),
     this.trailId = const Value.absent(),
@@ -1867,7 +1876,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     this.name = const Value.absent(),
     this.description = const Value.absent(),
     this.isActive = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   StagesCompanion.insert({
     this.id = const Value.absent(),
@@ -1876,7 +1885,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     required String name,
     this.description = const Value.absent(),
     this.isActive = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : raceId = Value(raceId),
        name = Value(name);
   static Insertable<Stage> custom({
@@ -1886,7 +1895,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     Expression<String>? name,
     Expression<String>? description,
     Expression<bool>? isActive,
-    Expression<bool>? isDeleted,
+    Expression<DateTime>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1895,7 +1904,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       if (name != null) 'name': name,
       if (description != null) 'description': description,
       if (isActive != null) 'is_active': isActive,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -1906,7 +1915,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     Value<String>? name,
     Value<String?>? description,
     Value<bool>? isActive,
-    Value<bool>? isDeleted,
+    Value<DateTime?>? deletedAt,
   }) {
     return StagesCompanion(
       id: id ?? this.id,
@@ -1915,7 +1924,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
       name: name ?? this.name,
       description: description ?? this.description,
       isActive: isActive ?? this.isActive,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -1940,8 +1949,8 @@ class StagesCompanion extends UpdateCompanion<Stage> {
     if (isActive.present) {
       map['is_active'] = Variable<bool>(isActive.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
     }
     return map;
   }
@@ -1955,7 +1964,7 @@ class StagesCompanion extends UpdateCompanion<Stage> {
           ..write('name: $name, ')
           ..write('description: $description, ')
           ..write('isActive: $isActive, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -2053,17 +2062,16 @@ class Riders extends Table with TableInfo<Riders, Rider> {
     requiredDuringInsert: false,
     $customConstraints: '',
   );
-  static const VerificationMeta _isDeletedMeta = const VerificationMeta(
-    'isDeleted',
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
   );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
     aliasedName,
-    false,
-    type: DriftSqlType.bool,
+    true,
+    type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
+    $customConstraints: '',
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -2076,7 +2084,7 @@ class Riders extends Table with TableInfo<Riders, Rider> {
     email,
     phone,
     comment,
-    isDeleted,
+    deletedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -2143,10 +2151,10 @@ class Riders extends Table with TableInfo<Riders, Rider> {
         comment.isAcceptableOrUnknown(data['comment']!, _commentMeta),
       );
     }
-    if (data.containsKey('is_deleted')) {
+    if (data.containsKey('deleted_at')) {
       context.handle(
-        _isDeletedMeta,
-        isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta),
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
       );
     }
     return context;
@@ -2194,10 +2202,10 @@ class Riders extends Table with TableInfo<Riders, Rider> {
         DriftSqlType.string,
         data['${effectivePrefix}comment'],
       ),
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
     );
   }
 
@@ -2224,7 +2232,7 @@ class Rider extends DataClass implements Insertable<Rider> {
   ///	email text UNIQUE,
   ///	phone text UNIQUE,
   final String? comment;
-  final bool isDeleted;
+  final DateTime? deletedAt;
   const Rider({
     required this.id,
     required this.name,
@@ -2235,7 +2243,7 @@ class Rider extends DataClass implements Insertable<Rider> {
     this.email,
     this.phone,
     this.comment,
-    required this.isDeleted,
+    this.deletedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2263,7 +2271,9 @@ class Rider extends DataClass implements Insertable<Rider> {
     if (!nullToAbsent || comment != null) {
       map['comment'] = Variable<String>(comment);
     }
-    map['is_deleted'] = Variable<bool>(isDeleted);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
     return map;
   }
 
@@ -2288,7 +2298,9 @@ class Rider extends DataClass implements Insertable<Rider> {
       comment: comment == null && nullToAbsent
           ? const Value.absent()
           : Value(comment),
-      isDeleted: Value(isDeleted),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
     );
   }
 
@@ -2307,7 +2319,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       email: serializer.fromJson<String?>(json['email']),
       phone: serializer.fromJson<String?>(json['phone']),
       comment: serializer.fromJson<String?>(json['comment']),
-      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deleted_at']),
     );
   }
   @override
@@ -2323,7 +2335,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       'email': serializer.toJson<String?>(email),
       'phone': serializer.toJson<String?>(phone),
       'comment': serializer.toJson<String?>(comment),
-      'is_deleted': serializer.toJson<bool>(isDeleted),
+      'deleted_at': serializer.toJson<DateTime?>(deletedAt),
     };
   }
 
@@ -2337,7 +2349,7 @@ class Rider extends DataClass implements Insertable<Rider> {
     Value<String?> email = const Value.absent(),
     Value<String?> phone = const Value.absent(),
     Value<String?> comment = const Value.absent(),
-    bool? isDeleted,
+    Value<DateTime?> deletedAt = const Value.absent(),
   }) => Rider(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -2348,7 +2360,7 @@ class Rider extends DataClass implements Insertable<Rider> {
     email: email.present ? email.value : this.email,
     phone: phone.present ? phone.value : this.phone,
     comment: comment.present ? comment.value : this.comment,
-    isDeleted: isDeleted ?? this.isDeleted,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
   );
   Rider copyWithCompanion(RidersCompanion data) {
     return Rider(
@@ -2361,7 +2373,7 @@ class Rider extends DataClass implements Insertable<Rider> {
       email: data.email.present ? data.email.value : this.email,
       phone: data.phone.present ? data.phone.value : this.phone,
       comment: data.comment.present ? data.comment.value : this.comment,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
   }
 
@@ -2377,7 +2389,7 @@ class Rider extends DataClass implements Insertable<Rider> {
           ..write('email: $email, ')
           ..write('phone: $phone, ')
           ..write('comment: $comment, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -2393,7 +2405,7 @@ class Rider extends DataClass implements Insertable<Rider> {
     email,
     phone,
     comment,
-    isDeleted,
+    deletedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -2408,7 +2420,7 @@ class Rider extends DataClass implements Insertable<Rider> {
           other.email == this.email &&
           other.phone == this.phone &&
           other.comment == this.comment &&
-          other.isDeleted == this.isDeleted);
+          other.deletedAt == this.deletedAt);
 }
 
 class RidersCompanion extends UpdateCompanion<Rider> {
@@ -2421,7 +2433,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
   final Value<String?> email;
   final Value<String?> phone;
   final Value<String?> comment;
-  final Value<bool> isDeleted;
+  final Value<DateTime?> deletedAt;
   const RidersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -2432,7 +2444,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     this.email = const Value.absent(),
     this.phone = const Value.absent(),
     this.comment = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   });
   RidersCompanion.insert({
     this.id = const Value.absent(),
@@ -2444,7 +2456,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     this.email = const Value.absent(),
     this.phone = const Value.absent(),
     this.comment = const Value.absent(),
-    this.isDeleted = const Value.absent(),
+    this.deletedAt = const Value.absent(),
   }) : name = Value(name);
   static Insertable<Rider> custom({
     Expression<int>? id,
@@ -2456,7 +2468,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     Expression<String>? email,
     Expression<String>? phone,
     Expression<String>? comment,
-    Expression<bool>? isDeleted,
+    Expression<DateTime>? deletedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2468,7 +2480,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
       if (email != null) 'email': email,
       if (phone != null) 'phone': phone,
       if (comment != null) 'comment': comment,
-      if (isDeleted != null) 'is_deleted': isDeleted,
+      if (deletedAt != null) 'deleted_at': deletedAt,
     });
   }
 
@@ -2482,7 +2494,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     Value<String?>? email,
     Value<String?>? phone,
     Value<String?>? comment,
-    Value<bool>? isDeleted,
+    Value<DateTime?>? deletedAt,
   }) {
     return RidersCompanion(
       id: id ?? this.id,
@@ -2494,7 +2506,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
       email: email ?? this.email,
       phone: phone ?? this.phone,
       comment: comment ?? this.comment,
-      isDeleted: isDeleted ?? this.isDeleted,
+      deletedAt: deletedAt ?? this.deletedAt,
     );
   }
 
@@ -2528,8 +2540,8 @@ class RidersCompanion extends UpdateCompanion<Rider> {
     if (comment.present) {
       map['comment'] = Variable<String>(comment.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
     }
     return map;
   }
@@ -2546,7 +2558,7 @@ class RidersCompanion extends UpdateCompanion<Rider> {
           ..write('email: $email, ')
           ..write('phone: $phone, ')
           ..write('comment: $comment, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('deletedAt: $deletedAt')
           ..write(')'))
         .toString();
   }
@@ -2812,18 +2824,6 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     $customConstraints: 'NOT NULL DEFAULT 1',
     defaultValue: const CustomExpression('1'),
   );
-  static const VerificationMeta _isDeletedMeta = const VerificationMeta(
-    'isDeleted',
-  );
-  late final GeneratedColumn<bool> isDeleted = GeneratedColumn<bool>(
-    'is_deleted',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    $customConstraints: 'NOT NULL DEFAULT FALSE',
-    defaultValue: const CustomExpression('FALSE'),
-  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -2833,7 +2833,6 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     category,
     rfid,
     statusId,
-    isDeleted,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -2892,17 +2891,15 @@ class Participants extends Table with TableInfo<Participants, Participant> {
         statusId.isAcceptableOrUnknown(data['status_id']!, _statusIdMeta),
       );
     }
-    if (data.containsKey('is_deleted')) {
-      context.handle(
-        _isDeletedMeta,
-        isDeleted.isAcceptableOrUnknown(data['is_deleted']!, _isDeletedMeta),
-      );
-    }
     return context;
   }
 
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+    {raceId, number},
+  ];
   @override
   Participant map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -2935,10 +2932,6 @@ class Participants extends Table with TableInfo<Participants, Participant> {
         DriftSqlType.int,
         data['${effectivePrefix}status_id'],
       )!,
-      isDeleted: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_deleted'],
-      )!,
     );
   }
 
@@ -2952,6 +2945,7 @@ class Participants extends Table with TableInfo<Participants, Participant> {
     'FOREIGN KEY(rider_id)REFERENCES riders(id)',
     'FOREIGN KEY(race_id)REFERENCES races(id)ON DELETE CASCADE',
     'FOREIGN KEY(status_id)REFERENCES statuses(id)',
+    'UNIQUE(race_id, number)',
   ];
   @override
   bool get dontWriteConstraints => true;
@@ -2967,7 +2961,6 @@ class Participant extends DataClass implements Insertable<Participant> {
   /// может быть NULL для быстрого добавления номера на старте
   final String? rfid;
   final int statusId;
-  final bool isDeleted;
   const Participant({
     required this.id,
     required this.raceId,
@@ -2976,7 +2969,6 @@ class Participant extends DataClass implements Insertable<Participant> {
     this.category,
     this.rfid,
     required this.statusId,
-    required this.isDeleted,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2992,7 +2984,6 @@ class Participant extends DataClass implements Insertable<Participant> {
       map['rfid'] = Variable<String>(rfid);
     }
     map['status_id'] = Variable<int>(statusId);
-    map['is_deleted'] = Variable<bool>(isDeleted);
     return map;
   }
 
@@ -3007,7 +2998,6 @@ class Participant extends DataClass implements Insertable<Participant> {
           : Value(category),
       rfid: rfid == null && nullToAbsent ? const Value.absent() : Value(rfid),
       statusId: Value(statusId),
-      isDeleted: Value(isDeleted),
     );
   }
 
@@ -3024,7 +3014,6 @@ class Participant extends DataClass implements Insertable<Participant> {
       category: serializer.fromJson<String?>(json['category']),
       rfid: serializer.fromJson<String?>(json['rfid']),
       statusId: serializer.fromJson<int>(json['status_id']),
-      isDeleted: serializer.fromJson<bool>(json['is_deleted']),
     );
   }
   @override
@@ -3038,7 +3027,6 @@ class Participant extends DataClass implements Insertable<Participant> {
       'category': serializer.toJson<String?>(category),
       'rfid': serializer.toJson<String?>(rfid),
       'status_id': serializer.toJson<int>(statusId),
-      'is_deleted': serializer.toJson<bool>(isDeleted),
     };
   }
 
@@ -3050,7 +3038,6 @@ class Participant extends DataClass implements Insertable<Participant> {
     Value<String?> category = const Value.absent(),
     Value<String?> rfid = const Value.absent(),
     int? statusId,
-    bool? isDeleted,
   }) => Participant(
     id: id ?? this.id,
     raceId: raceId ?? this.raceId,
@@ -3059,7 +3046,6 @@ class Participant extends DataClass implements Insertable<Participant> {
     category: category.present ? category.value : this.category,
     rfid: rfid.present ? rfid.value : this.rfid,
     statusId: statusId ?? this.statusId,
-    isDeleted: isDeleted ?? this.isDeleted,
   );
   Participant copyWithCompanion(ParticipantsCompanion data) {
     return Participant(
@@ -3070,7 +3056,6 @@ class Participant extends DataClass implements Insertable<Participant> {
       category: data.category.present ? data.category.value : this.category,
       rfid: data.rfid.present ? data.rfid.value : this.rfid,
       statusId: data.statusId.present ? data.statusId.value : this.statusId,
-      isDeleted: data.isDeleted.present ? data.isDeleted.value : this.isDeleted,
     );
   }
 
@@ -3083,23 +3068,14 @@ class Participant extends DataClass implements Insertable<Participant> {
           ..write('number: $number, ')
           ..write('category: $category, ')
           ..write('rfid: $rfid, ')
-          ..write('statusId: $statusId, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('statusId: $statusId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    raceId,
-    riderId,
-    number,
-    category,
-    rfid,
-    statusId,
-    isDeleted,
-  );
+  int get hashCode =>
+      Object.hash(id, raceId, riderId, number, category, rfid, statusId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3110,8 +3086,7 @@ class Participant extends DataClass implements Insertable<Participant> {
           other.number == this.number &&
           other.category == this.category &&
           other.rfid == this.rfid &&
-          other.statusId == this.statusId &&
-          other.isDeleted == this.isDeleted);
+          other.statusId == this.statusId);
 }
 
 class ParticipantsCompanion extends UpdateCompanion<Participant> {
@@ -3122,7 +3097,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
   final Value<String?> category;
   final Value<String?> rfid;
   final Value<int> statusId;
-  final Value<bool> isDeleted;
   const ParticipantsCompanion({
     this.id = const Value.absent(),
     this.raceId = const Value.absent(),
@@ -3131,7 +3105,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
-    this.isDeleted = const Value.absent(),
   });
   ParticipantsCompanion.insert({
     this.id = const Value.absent(),
@@ -3141,7 +3114,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     this.category = const Value.absent(),
     this.rfid = const Value.absent(),
     this.statusId = const Value.absent(),
-    this.isDeleted = const Value.absent(),
   }) : raceId = Value(raceId),
        riderId = Value(riderId),
        number = Value(number);
@@ -3153,7 +3125,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     Expression<String>? category,
     Expression<String>? rfid,
     Expression<int>? statusId,
-    Expression<bool>? isDeleted,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -3163,7 +3134,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       if (category != null) 'category': category,
       if (rfid != null) 'rfid': rfid,
       if (statusId != null) 'status_id': statusId,
-      if (isDeleted != null) 'is_deleted': isDeleted,
     });
   }
 
@@ -3175,7 +3145,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     Value<String?>? category,
     Value<String?>? rfid,
     Value<int>? statusId,
-    Value<bool>? isDeleted,
   }) {
     return ParticipantsCompanion(
       id: id ?? this.id,
@@ -3185,7 +3154,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
       category: category ?? this.category,
       rfid: rfid ?? this.rfid,
       statusId: statusId ?? this.statusId,
-      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 
@@ -3213,9 +3181,6 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
     if (statusId.present) {
       map['status_id'] = Variable<int>(statusId.value);
     }
-    if (isDeleted.present) {
-      map['is_deleted'] = Variable<bool>(isDeleted.value);
-    }
     return map;
   }
 
@@ -3228,8 +3193,7 @@ class ParticipantsCompanion extends UpdateCompanion<Participant> {
           ..write('number: $number, ')
           ..write('category: $category, ')
           ..write('rfid: $rfid, ')
-          ..write('statusId: $statusId, ')
-          ..write('isDeleted: $isDeleted')
+          ..write('statusId: $statusId')
           ..write(')'))
         .toString();
   }
@@ -4954,7 +4918,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Logs logs = Logs(this);
   Selectable<Race> _getRaces() {
     return customSelect(
-      'SELECT * FROM races WHERE is_deleted = FALSE',
+      'SELECT * FROM races WHERE deleted_at IS NULL',
       variables: [],
       readsFrom: {races},
     ).asyncMap(races.mapFromRow);
@@ -4962,7 +4926,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<Stage> _getStages({required int raceId}) {
     return customSelect(
-      'SELECT * FROM stages WHERE race_id = ?1 AND is_deleted = FALSE',
+      'SELECT * FROM stages WHERE race_id = ?1 AND deleted_at IS NULL',
       variables: [Variable<int>(raceId)],
       readsFrom: {stages},
     ).asyncMap(stages.mapFromRow);
@@ -4970,7 +4934,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<TrailInfo> _getTrails() {
     return customSelect(
-      'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1, track_files.timestamp AS timestamp FROM trails LEFT JOIN track_files ON trails.file_id = track_files.id WHERE trails.is_deleted = FALSE',
+      'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1, track_files.timestamp AS timestamp FROM trails LEFT JOIN track_files ON trails.file_id = track_files.id WHERE trails.deleted_at IS NULL',
       variables: [],
       readsFrom: {trails, trackFiles},
     ).map(
@@ -4995,7 +4959,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<TrailInfo> _getTrail({required int id}) {
     return customSelect(
-      'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1, track_files.timestamp AS timestamp FROM trails LEFT JOIN track_files ON trails.file_id = track_files.id WHERE trails.id = ?1 AND trails.is_deleted = FALSE',
+      'SELECT trails.id AS id, trails.name AS name, trails.distance AS distance, trails.elevation AS elevation, trails.file_id AS file_id, trails.url AS url, trails.description AS description, track_files.name AS file_name, track_files.extension AS file_extension, track_files.size AS file_size, track_files.description AS file_description, track_files.hash_sha1 AS file_hash_sha1, track_files.timestamp AS timestamp FROM trails LEFT JOIN track_files ON trails.file_id = track_files.id WHERE trails.id = ?1 AND trails.deleted_at IS NULL',
       variables: [Variable<int>(id)],
       readsFrom: {trails, trackFiles},
     ).map(
@@ -5029,10 +4993,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ).map((QueryRow row) => row.read<int>('id'));
   }
 
-  Selectable<Rider> _getRiders({required bool isDeleted}) {
+  Selectable<Rider> _getRiders() {
     return customSelect(
-      'SELECT * FROM riders WHERE is_deleted = ?1 ORDER BY name COLLATE NOCASE ASC',
-      variables: [Variable<bool>(isDeleted)],
+      'SELECT * FROM riders WHERE deleted_at IS NULL ORDER BY name COLLATE NOCASE ASC',
+      variables: [],
       readsFrom: {riders},
     ).asyncMap(riders.mapFromRow);
   }
@@ -5119,7 +5083,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required int stageId,
   }) {
     return customSelect(
-      'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, riders.name AS name, riders.nickname AS nickname, riders.birthday AS birthday, riders.team AS team, riders.city AS city, riders.email AS email, riders.phone AS phone, riders.comment AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.timestamp_correction AS timestamp_correction, starts.ntp_offset AS ntp_offset, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 ORDER BY start_time ASC',
+      'SELECT participants.rider_id AS rider_id, participants.race_id AS race_id, participants.number AS number, participants.category AS category, participants.rfid AS rfid, participants.status_id AS participant_status_id, CASE WHEN riders.deleted_at IS NOT NULL THEN \'<DELETED>\' ELSE riders.name END AS name, CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.nickname END AS nickname, CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.birthday END AS birthday, CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.team END AS team, CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.city END AS city, CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.email END AS email, CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.phone END AS phone, CASE WHEN riders.deleted_at IS NOT NULL THEN NULL ELSE riders.comment END AS comment, starts.id AS start_id, starts.stage_id AS stage_id, starts.participant_id AS participant_id, starts.start_time AS start_time, starts.timestamp AS timestamp, starts.timestamp_correction AS timestamp_correction, starts.ntp_offset AS ntp_offset, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, starts.manual_start_time AS manual_start_time, starts.manual_correction AS manual_correction, starts.status_id AS status_id FROM participants,riders,starts WHERE participants.rider_id = riders.id AND starts.participant_id = participants.id AND stage_id = ?1 ORDER BY start_time ASC',
       variables: [Variable<int>(stageId)],
       readsFrom: {participants, riders, starts},
     ).map(
@@ -5227,7 +5191,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String after,
   }) {
     return customSelect(
-      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3',
+      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE stage_id = ?1 AND participants.id = starts.participant_id AND start_time BETWEEN ?2 AND ?3 AND starts.status_id = 1',
       variables: [
         Variable<int>(stageId),
         Variable<String>(before),
@@ -5326,7 +5290,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String after,
   }) {
     return customSelect(
-      'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, riders.name AS name FROM starts,participants,riders WHERE starts.participant_id = participants.id AND participants.rider_id = riders.id AND starts.stage_id = ?1 AND(start_time BETWEEN ?2 AND ?3)AND automatic_start_time ISNULL AND starts.status_id = 1',
+      'SELECT participants.number AS number, starts.start_time AS start_time, starts.automatic_start_time AS automatic_start_time, starts.automatic_correction AS automatic_correction, CASE WHEN riders.deleted_at IS NOT NULL THEN \'<DELETED>\' ELSE riders.name END AS name FROM starts,participants,riders WHERE starts.participant_id = participants.id AND participants.rider_id = riders.id AND starts.stage_id = ?1 AND(start_time BETWEEN ?2 AND ?3)AND automatic_start_time ISNULL AND starts.status_id = 1',
       variables: [
         Variable<int>(stageId),
         Variable<String>(time),
@@ -5347,7 +5311,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Future<int> _setDNSForStartId({required int statusId, required int id}) {
     return customUpdate(
-      'UPDATE starts SET status_id = ?1, automatic_correction = NULL, automatic_start_time = NULL, manual_correction = NULL, manual_start_time = NULL, timestamp = NULL, timestamp_correction = NULL, ntp_offset = NULL WHERE id = ?2',
+      'UPDATE starts SET status_id = ?1 WHERE id = ?2',
       variables: [Variable<int>(statusId), Variable<int>(id)],
       updates: {starts},
       updateKind: UpdateKind.update,
@@ -5359,7 +5323,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required String timeNow,
   }) {
     return customSelect(
-      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 AND starts.automatic_start_time ISNULL ORDER BY starts.start_time ASC',
+      'SELECT starts.id AS start_id, stage_id, participant_id, start_time, timestamp, timestamp_correction, ntp_offset, automatic_start_time, automatic_correction, manual_start_time, manual_correction, starts.status_id AS start_status, finish_id, race_id, rider_id, number, category, rfid, participants.status_id AS participant_status FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND julianday(time(?2)) > julianday(time(starts.start_time)) AND starts.finish_id ISNULL AND starts.status_id = 1 ORDER BY starts.start_time ASC',
       variables: [Variable<int>(stageId), Variable<String>(timeNow)],
       readsFrom: {starts, participants},
     ).map(
@@ -5554,7 +5518,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
   Selectable<StartForCsv> _getStartsForCsv({required int stageId}) {
     return customSelect(
-      'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.automatic_correction, IFNULL(starts.manual_correction, \'DNS\')) AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+      'SELECT participants.number AS number, starts.start_time AS start_time, CASE WHEN starts.status_id = 2 THEN \'DNS\' ELSE IFNULL(starts.automatic_correction, IFNULL(starts.manual_correction, \'DNS\')) END AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL ORDER BY starts.start_time ASC',
       variables: [Variable<int>(stageId)],
       readsFrom: {participants, starts},
     ).map(
@@ -5571,7 +5535,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     required int stageId,
   }) {
     return customSelect(
-      'SELECT participants.number AS number, starts.start_time AS start_time, IFNULL(starts.timestamp_correction, IFNULL(starts.manual_correction, \'DNS\')) AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL AND(starts.automatic_correction NOTNULL OR starts.manual_correction NOTNULL OR starts.status_id = 2)ORDER BY starts.start_time ASC',
+      'SELECT participants.number AS number, starts.start_time AS start_time, CASE WHEN starts.status_id = 2 THEN \'DNS\' ELSE IFNULL(starts.timestamp_correction, IFNULL(starts.manual_correction, \'DNS\')) END AS correction FROM starts,participants WHERE starts.participant_id = participants.id AND starts.stage_id = ?1 AND starts.start_time NOTNULL ORDER BY starts.start_time ASC',
       variables: [Variable<int>(stageId)],
       readsFrom: {participants, starts},
     ).map(
@@ -5718,7 +5682,7 @@ typedef $RacesCreateCompanionBuilder =
       Value<String?> location,
       Value<String?> url,
       Value<String?> description,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 typedef $RacesUpdateCompanionBuilder =
     RacesCompanion Function({
@@ -5729,7 +5693,7 @@ typedef $RacesUpdateCompanionBuilder =
       Value<String?> location,
       Value<String?> url,
       Value<String?> description,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 
 class $RacesFilterComposer extends Composer<_$AppDatabase, Races> {
@@ -5775,8 +5739,8 @@ class $RacesFilterComposer extends Composer<_$AppDatabase, Races> {
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnFilters<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -5824,8 +5788,8 @@ class $RacesOrderingComposer extends Composer<_$AppDatabase, Races> {
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnOrderings(column),
   );
 }
@@ -5863,8 +5827,8 @@ class $RacesAnnotationComposer extends Composer<_$AppDatabase, Races> {
     builder: (column) => column,
   );
 
-  GeneratedColumn<bool> get isDeleted =>
-      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
+  GeneratedColumn<DateTime> get deletedAt =>
+      $composableBuilder(column: $table.deletedAt, builder: (column) => column);
 }
 
 class $RacesTableManager
@@ -5902,7 +5866,7 @@ class $RacesTableManager
                 Value<String?> location = const Value.absent(),
                 Value<String?> url = const Value.absent(),
                 Value<String?> description = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => RacesCompanion(
                 id: id,
                 name: name,
@@ -5911,7 +5875,7 @@ class $RacesTableManager
                 location: location,
                 url: url,
                 description: description,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           createCompanionCallback:
               ({
@@ -5922,7 +5886,7 @@ class $RacesTableManager
                 Value<String?> location = const Value.absent(),
                 Value<String?> url = const Value.absent(),
                 Value<String?> description = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => RacesCompanion.insert(
                 id: id,
                 name: name,
@@ -5931,7 +5895,7 @@ class $RacesTableManager
                 location: location,
                 url: url,
                 description: description,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -6209,7 +6173,7 @@ typedef $TrailsCreateCompanionBuilder =
       Value<int?> fileId,
       Value<String?> url,
       Value<String?> description,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 typedef $TrailsUpdateCompanionBuilder =
     TrailsCompanion Function({
@@ -6220,7 +6184,7 @@ typedef $TrailsUpdateCompanionBuilder =
       Value<int?> fileId,
       Value<String?> url,
       Value<String?> description,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 
 class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
@@ -6266,8 +6230,8 @@ class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnFilters<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -6315,8 +6279,8 @@ class $TrailsOrderingComposer extends Composer<_$AppDatabase, Trails> {
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnOrderings(column),
   );
 }
@@ -6352,8 +6316,8 @@ class $TrailsAnnotationComposer extends Composer<_$AppDatabase, Trails> {
     builder: (column) => column,
   );
 
-  GeneratedColumn<bool> get isDeleted =>
-      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
+  GeneratedColumn<DateTime> get deletedAt =>
+      $composableBuilder(column: $table.deletedAt, builder: (column) => column);
 }
 
 class $TrailsTableManager
@@ -6391,7 +6355,7 @@ class $TrailsTableManager
                 Value<int?> fileId = const Value.absent(),
                 Value<String?> url = const Value.absent(),
                 Value<String?> description = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => TrailsCompanion(
                 id: id,
                 name: name,
@@ -6400,7 +6364,7 @@ class $TrailsTableManager
                 fileId: fileId,
                 url: url,
                 description: description,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           createCompanionCallback:
               ({
@@ -6411,7 +6375,7 @@ class $TrailsTableManager
                 Value<int?> fileId = const Value.absent(),
                 Value<String?> url = const Value.absent(),
                 Value<String?> description = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => TrailsCompanion.insert(
                 id: id,
                 name: name,
@@ -6420,7 +6384,7 @@ class $TrailsTableManager
                 fileId: fileId,
                 url: url,
                 description: description,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -6452,7 +6416,7 @@ typedef $StagesCreateCompanionBuilder =
       required String name,
       Value<String?> description,
       Value<bool> isActive,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 typedef $StagesUpdateCompanionBuilder =
     StagesCompanion Function({
@@ -6462,7 +6426,7 @@ typedef $StagesUpdateCompanionBuilder =
       Value<String> name,
       Value<String?> description,
       Value<bool> isActive,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 
 class $StagesFilterComposer extends Composer<_$AppDatabase, Stages> {
@@ -6503,8 +6467,8 @@ class $StagesFilterComposer extends Composer<_$AppDatabase, Stages> {
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnFilters<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -6547,8 +6511,8 @@ class $StagesOrderingComposer extends Composer<_$AppDatabase, Stages> {
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnOrderings(column),
   );
 }
@@ -6581,8 +6545,8 @@ class $StagesAnnotationComposer extends Composer<_$AppDatabase, Stages> {
   GeneratedColumn<bool> get isActive =>
       $composableBuilder(column: $table.isActive, builder: (column) => column);
 
-  GeneratedColumn<bool> get isDeleted =>
-      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
+  GeneratedColumn<DateTime> get deletedAt =>
+      $composableBuilder(column: $table.deletedAt, builder: (column) => column);
 }
 
 class $StagesTableManager
@@ -6619,7 +6583,7 @@ class $StagesTableManager
                 Value<String> name = const Value.absent(),
                 Value<String?> description = const Value.absent(),
                 Value<bool> isActive = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => StagesCompanion(
                 id: id,
                 trailId: trailId,
@@ -6627,7 +6591,7 @@ class $StagesTableManager
                 name: name,
                 description: description,
                 isActive: isActive,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           createCompanionCallback:
               ({
@@ -6637,7 +6601,7 @@ class $StagesTableManager
                 required String name,
                 Value<String?> description = const Value.absent(),
                 Value<bool> isActive = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => StagesCompanion.insert(
                 id: id,
                 trailId: trailId,
@@ -6645,7 +6609,7 @@ class $StagesTableManager
                 name: name,
                 description: description,
                 isActive: isActive,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -6680,7 +6644,7 @@ typedef $RidersCreateCompanionBuilder =
       Value<String?> email,
       Value<String?> phone,
       Value<String?> comment,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 typedef $RidersUpdateCompanionBuilder =
     RidersCompanion Function({
@@ -6693,7 +6657,7 @@ typedef $RidersUpdateCompanionBuilder =
       Value<String?> email,
       Value<String?> phone,
       Value<String?> comment,
-      Value<bool> isDeleted,
+      Value<DateTime?> deletedAt,
     });
 
 class $RidersFilterComposer extends Composer<_$AppDatabase, Riders> {
@@ -6749,8 +6713,8 @@ class $RidersFilterComposer extends Composer<_$AppDatabase, Riders> {
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnFilters<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -6808,8 +6772,8 @@ class $RidersOrderingComposer extends Composer<_$AppDatabase, Riders> {
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
+  ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
     builder: (column) => ColumnOrderings(column),
   );
 }
@@ -6849,8 +6813,8 @@ class $RidersAnnotationComposer extends Composer<_$AppDatabase, Riders> {
   GeneratedColumn<String> get comment =>
       $composableBuilder(column: $table.comment, builder: (column) => column);
 
-  GeneratedColumn<bool> get isDeleted =>
-      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
+  GeneratedColumn<DateTime> get deletedAt =>
+      $composableBuilder(column: $table.deletedAt, builder: (column) => column);
 }
 
 class $RidersTableManager
@@ -6890,7 +6854,7 @@ class $RidersTableManager
                 Value<String?> email = const Value.absent(),
                 Value<String?> phone = const Value.absent(),
                 Value<String?> comment = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => RidersCompanion(
                 id: id,
                 name: name,
@@ -6901,7 +6865,7 @@ class $RidersTableManager
                 email: email,
                 phone: phone,
                 comment: comment,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           createCompanionCallback:
               ({
@@ -6914,7 +6878,7 @@ class $RidersTableManager
                 Value<String?> email = const Value.absent(),
                 Value<String?> phone = const Value.absent(),
                 Value<String?> comment = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
               }) => RidersCompanion.insert(
                 id: id,
                 name: name,
@@ -6925,7 +6889,7 @@ class $RidersTableManager
                 email: email,
                 phone: phone,
                 comment: comment,
-                isDeleted: isDeleted,
+                deletedAt: deletedAt,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -7072,7 +7036,6 @@ typedef $ParticipantsCreateCompanionBuilder =
       Value<String?> category,
       Value<String?> rfid,
       Value<int> statusId,
-      Value<bool> isDeleted,
     });
 typedef $ParticipantsUpdateCompanionBuilder =
     ParticipantsCompanion Function({
@@ -7083,7 +7046,6 @@ typedef $ParticipantsUpdateCompanionBuilder =
       Value<String?> category,
       Value<String?> rfid,
       Value<int> statusId,
-      Value<bool> isDeleted,
     });
 
 class $ParticipantsFilterComposer
@@ -7127,11 +7089,6 @@ class $ParticipantsFilterComposer
 
   ColumnFilters<int> get statusId => $composableBuilder(
     column: $table.statusId,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -7179,11 +7136,6 @@ class $ParticipantsOrderingComposer
     column: $table.statusId,
     builder: (column) => ColumnOrderings(column),
   );
-
-  ColumnOrderings<bool> get isDeleted => $composableBuilder(
-    column: $table.isDeleted,
-    builder: (column) => ColumnOrderings(column),
-  );
 }
 
 class $ParticipantsAnnotationComposer
@@ -7215,9 +7167,6 @@ class $ParticipantsAnnotationComposer
 
   GeneratedColumn<int> get statusId =>
       $composableBuilder(column: $table.statusId, builder: (column) => column);
-
-  GeneratedColumn<bool> get isDeleted =>
-      $composableBuilder(column: $table.isDeleted, builder: (column) => column);
 }
 
 class $ParticipantsTableManager
@@ -7258,7 +7207,6 @@ class $ParticipantsTableManager
                 Value<String?> category = const Value.absent(),
                 Value<String?> rfid = const Value.absent(),
                 Value<int> statusId = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
               }) => ParticipantsCompanion(
                 id: id,
                 raceId: raceId,
@@ -7267,7 +7215,6 @@ class $ParticipantsTableManager
                 category: category,
                 rfid: rfid,
                 statusId: statusId,
-                isDeleted: isDeleted,
               ),
           createCompanionCallback:
               ({
@@ -7278,7 +7225,6 @@ class $ParticipantsTableManager
                 Value<String?> category = const Value.absent(),
                 Value<String?> rfid = const Value.absent(),
                 Value<int> statusId = const Value.absent(),
-                Value<bool> isDeleted = const Value.absent(),
               }) => ParticipantsCompanion.insert(
                 id: id,
                 raceId: raceId,
@@ -7287,7 +7233,6 @@ class $ParticipantsTableManager
                 category: category,
                 rfid: rfid,
                 statusId: statusId,
-                isDeleted: isDeleted,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

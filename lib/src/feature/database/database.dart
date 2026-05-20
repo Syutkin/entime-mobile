@@ -2,6 +2,7 @@
 export './bloc/database_bloc.dart';
 export './drift/app_database.dart';
 export './model/automatic_start.dart';
+export './model/database_error.dart';
 export './model/filter_finish.dart';
 export './model/notification.dart';
 export './model/participant_status.dart';

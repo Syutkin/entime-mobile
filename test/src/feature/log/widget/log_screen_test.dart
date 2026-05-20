@@ -5,8 +5,8 @@ import 'package:entime/src/feature/log/log.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,18 +65,18 @@ void main() {
   });
 
   group('LogScreen widget tests', () {
-    patrolWidgetTest('Check log screen title', (PatrolTester $) async {
+    patrolWidgetTest('Check log screen title', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(AppBar).$(Localization.current.I18nLog_bluetoothInformation), findsOneWidget);
     });
 
-    patrolWidgetTest('Check empty log list', (PatrolTester $) async {
+    patrolWidgetTest('Check empty log list', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(ListView), findsOneWidget);
       expect($(ListTile), findsNothing);
     });
 
-    patrolWidgetTest('Check log list with items', (PatrolTester $) async {
+    patrolWidgetTest('Check log list with items', ($) async {
       final testLogs = [
         Log(
           id: 1,
@@ -106,7 +106,7 @@ void main() {
       expect($(Text).containing('Test message 2'), findsOneWidget);
     });
 
-    patrolWidgetTest('Check log level icons', (PatrolTester $) async {
+    patrolWidgetTest('Check log level icons', ($) async {
       final testLogs = [
         Log(
           id: 1,
@@ -158,7 +158,7 @@ void main() {
       expect($(Icon), findsAtLeastNWidgets(10)); // 5 уровней логирования * 2 иконки на запись (уровень + источник)
     });
 
-    patrolWidgetTest('Check log source icons', (PatrolTester $) async {
+    patrolWidgetTest('Check log source icons', ($) async {
       final testLogs = [
         Log(
           id: 1,
@@ -218,12 +218,12 @@ void main() {
       expect($(Icon), findsAtLeastNWidgets(12)); // 6 источников * 2 иконки на запись
     });
 
-    patrolWidgetTest('Check scrollbar presence', (PatrolTester $) async {
+    patrolWidgetTest('Check scrollbar presence', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(Scrollbar), findsOneWidget);
     });
 
-    patrolWidgetTest('Check debug buttons is existed in debug mode', (PatrolTester $) async {
+    patrolWidgetTest('Check debug buttons is existed in debug mode', ($) async {
       // Создаем виджет с debug режимом
       final debugWidget = MaterialApp(
         localizationsDelegates: const [Localization.delegate],
@@ -244,7 +244,7 @@ void main() {
       expect($(TextButton), findsOneWidget);
     });
 
-    patrolWidgetTest('Check log item structure', (PatrolTester $) async {
+    patrolWidgetTest('Check log item structure', ($) async {
       final testLog = Log(
         id: 1,
         level: LogLevel.information,
@@ -263,7 +263,7 @@ void main() {
       expect($(Text).containing('Test log message'), findsOneWidget);
     });
 
-    patrolWidgetTest('Check multiple log items scrolling', (PatrolTester $) async {
+    patrolWidgetTest('Check multiple log items scrolling', ($) async {
       final testLogs = List.generate(
         20,
         (index) => Log(
@@ -284,7 +284,7 @@ void main() {
       expect(await $('Test message 19').scrollTo(), findsOneWidget);
     });
 
-    patrolWidgetTest('Check log with null rawData', (PatrolTester $) async {
+    patrolWidgetTest('Check log with null rawData', ($) async {
       final testLog = Log(
         id: 1,
         level: LogLevel.information,
@@ -320,7 +320,7 @@ void main() {
       );
     }
 
-    patrolWidgetTest('Check bluetooth source with input direction', (PatrolTester $) async {
+    patrolWidgetTest('Check bluetooth source with input direction', ($) async {
       await $.pumpWidgetAndSettle(
         testLogSourceIconWidget(
           source: LogSource.bluetooth,
@@ -331,7 +331,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, MdiIcons.bluetoothTransfer);
     });
 
-    patrolWidgetTest('Check bluetooth source with output direction', (PatrolTester $) async {
+    patrolWidgetTest('Check bluetooth source with output direction', ($) async {
       await $.pumpWidgetAndSettle(
         testLogSourceIconWidget(
           source: LogSource.bluetooth,
@@ -342,7 +342,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, MdiIcons.bluetoothTransfer);
     });
 
-    patrolWidgetTest('Check bluetooth source with undefined direction', (PatrolTester $) async {
+    patrolWidgetTest('Check bluetooth source with undefined direction', ($) async {
       await $.pumpWidgetAndSettle(
         testLogSourceIconWidget(
           source: LogSource.bluetooth,
@@ -353,7 +353,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, MdiIcons.bluetooth);
     });
 
-    patrolWidgetTest('Check bluetooth source with null direction', (PatrolTester $) async {
+    patrolWidgetTest('Check bluetooth source with null direction', ($) async {
       await $.pumpWidgetAndSettle(
         testLogSourceIconWidget(
           source: LogSource.bluetooth,
@@ -363,7 +363,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, MdiIcons.bluetooth);
     });
 
-    patrolWidgetTest('Check other source', (PatrolTester $) async {
+    patrolWidgetTest('Check other source', ($) async {
       await $.pumpWidgetAndSettle(
         testLogSourceIconWidget(
           source: LogSource.other,
@@ -373,7 +373,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, MdiIcons.cloudPrintOutline);
     });
 
-    patrolWidgetTest('Check unknown source', (PatrolTester $) async {
+    patrolWidgetTest('Check unknown source', ($) async {
       await $.pumpWidgetAndSettle(
         testLogSourceIconWidget(
           source: LogSource.unknown,
@@ -383,7 +383,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, Icons.help_outline);
     });
 
-    patrolWidgetTest('Check app source', (PatrolTester $) async {
+    patrolWidgetTest('Check app source', ($) async {
       await $.pumpWidgetAndSettle(
         testLogSourceIconWidget(
           source: LogSource.app,
@@ -410,7 +410,7 @@ void main() {
       );
     }
 
-    patrolWidgetTest('Check error level icon', (PatrolTester $) async {
+    patrolWidgetTest('Check error level icon', ($) async {
       await $.pumpWidgetAndSettle(
         testLogLevelIconWidget(
           level: LogLevel.error,
@@ -420,7 +420,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, MdiIcons.alertOctagon);
     });
 
-    patrolWidgetTest('Check warning level icon', (PatrolTester $) async {
+    patrolWidgetTest('Check warning level icon', ($) async {
       await $.pumpWidgetAndSettle(
         testLogLevelIconWidget(
           level: LogLevel.warning,
@@ -430,7 +430,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, Icons.warning);
     });
 
-    patrolWidgetTest('Check information level icon', (PatrolTester $) async {
+    patrolWidgetTest('Check information level icon', ($) async {
       await $.pumpWidgetAndSettle(
         testLogLevelIconWidget(
           level: LogLevel.information,
@@ -440,7 +440,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, Icons.info_outline);
     });
 
-    patrolWidgetTest('Check debug level icon', (PatrolTester $) async {
+    patrolWidgetTest('Check debug level icon', ($) async {
       await $.pumpWidgetAndSettle(
         testLogLevelIconWidget(
           level: LogLevel.debug,
@@ -450,7 +450,7 @@ void main() {
       expect(($(Icon).evaluate().single.widget as Icon).icon, MdiIcons.debugStepInto);
     });
 
-    patrolWidgetTest('Check verbose level icon', (PatrolTester $) async {
+    patrolWidgetTest('Check verbose level icon', ($) async {
       await $.pumpWidgetAndSettle(
         testLogLevelIconWidget(
           level: LogLevel.verbose,

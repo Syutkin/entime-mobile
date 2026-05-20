@@ -20,17 +20,40 @@ abstract class ModSettingsType with _$ModSettingsType {
 @freezed
 abstract class ModSettingsEntime with _$ModSettingsEntime {
   const factory ModSettingsEntime({
-    @JsonKey(name: 'Read') bool? read,
-    @JsonKey(name: 'Type') required String type,
-    @JsonKey(name: 'Bluetooth') required Bluetooth bluetooth,
-    @JsonKey(name: 'LoRa') required LoRa loRa,
-    @JsonKey(name: 'WiFi') required WiFi wiFi,
-    @JsonKey(name: 'TFT') required Tft tft,
-    @JsonKey(name: 'Buzzer') required Buzzer buzzer,
-    @JsonKey(name: 'VCC') required Vcc vcc,
+    @JsonKey(name: 'device') required DeviceSettings device,
+    @JsonKey(name: 'sync') required SyncSettings sync,
+    @JsonKey(name: 'wifi') required WiFi wifi,
+    @JsonKey(name: 'gps') required GpsSettings gps,
+    @JsonKey(name: 'touch') required TouchSettings touch,
   }) = _ModSettingsEntime;
 
-  factory ModSettingsEntime.fromJson(Map<String, dynamic> json) => _$ModSettingsEntimeFromJson(json);
+  factory ModSettingsEntime.fromJson(Map<String, dynamic> json) =>
+      _$ModSettingsEntimeFromJson(_normalizeEntimeSettingsJson(json));
+}
+
+@freezed
+abstract class DeviceSettings with _$DeviceSettings {
+  const factory DeviceSettings({
+    required String name,
+    required int number,
+    required int type,
+    @JsonKey(name: 'timezone_offset_min') required int timezoneOffsetMin,
+  }) = _DeviceSettings;
+
+  factory DeviceSettings.fromJson(Map<String, dynamic> json) => _$DeviceSettingsFromJson(json);
+}
+
+@freezed
+abstract class SyncSettings with _$SyncSettings {
+  const factory SyncSettings({
+    required bool auto,
+    required int source,
+    required String ntp1,
+    required String ntp2,
+    required String ntp3,
+  }) = _SyncSettings;
+
+  factory SyncSettings.fromJson(Map<String, dynamic> json) => _$SyncSettingsFromJson(json);
 }
 
 @freezed
@@ -54,53 +77,32 @@ abstract class Bluetooth with _$Bluetooth {
 }
 
 @freezed
-abstract class Buzzer with _$Buzzer {
-  const factory Buzzer({required bool active, required int shortFrequency, required int longFrequency}) = _Buzzer;
-
-  factory Buzzer.fromJson(Map<String, dynamic> json) => _$BuzzerFromJson(json);
-}
-
-@freezed
-abstract class LoRa with _$LoRa {
-  const factory LoRa({
-    required bool active,
-    required int frequency,
-    required int txPower,
-    required int spreadingFactor,
-    required int signalBandwidth,
-    required int codingRateDenom,
-    required int preambleLength,
-    required int syncWord,
-    required bool crc,
-  }) = _LoRa;
-
-  factory LoRa.fromJson(Map<String, dynamic> json) => _$LoRaFromJson(json);
-}
-
-@freezed
-abstract class Tft with _$Tft {
-  const factory Tft({
-    required bool active,
-    required bool timeout,
-    required int timeoutDuration,
-    required bool turnOnAtEvent,
-  }) = _Tft;
-
-  factory Tft.fromJson(Map<String, dynamic> json) => _$TftFromJson(json);
-}
-
-@freezed
-abstract class Vcc with _$Vcc {
-  const factory Vcc({required int r1, required int r2, int? vbat}) = _Vcc;
-
-  factory Vcc.fromJson(Map<String, dynamic> json) => _$VccFromJson(json);
-}
-
-@freezed
 abstract class WiFi with _$WiFi {
-  const factory WiFi({required bool active, required String ssid, required String passwd}) = _WiFi;
+  const factory WiFi({
+    required bool active,
+    required String ssid,
+    @JsonKey(includeIfNull: false) required String? passwd,
+  }) = _WiFi;
 
   factory WiFi.fromJson(Map<String, dynamic> json) => _$WiFiFromJson(json);
+}
+
+@freezed
+abstract class GpsSettings with _$GpsSettings {
+  const factory GpsSettings({required bool enabled}) = _GpsSettings;
+
+  factory GpsSettings.fromJson(Map<String, dynamic> json) => _$GpsSettingsFromJson(json);
+}
+
+@freezed
+abstract class TouchSettings with _$TouchSettings {
+  const factory TouchSettings({
+    required bool enabled,
+    @JsonKey(name: 'cal_valid') required bool calValid,
+    required List<int> calibration,
+  }) = _TouchSettings;
+
+  factory TouchSettings.fromJson(Map<String, dynamic> json) => _$TouchSettingsFromJson(json);
 }
 
 @freezed
@@ -108,4 +110,15 @@ abstract class LedPanel with _$LedPanel {
   const factory LedPanel({required int brightness}) = _LedPanel;
 
   factory LedPanel.fromJson(Map<String, dynamic> json) => _$LedPanelFromJson(json);
+}
+
+Map<String, dynamic> _normalizeEntimeSettingsJson(Map<String, dynamic> json) {
+  final wifi = json['wifi'];
+  if (wifi is! Map || wifi['passwd'] != '') {
+    return json;
+  }
+
+  final normalizedJson = Map<String, dynamic>.from(json);
+  normalizedJson['wifi'] = Map<String, dynamic>.from(wifi)..['passwd'] = null;
+  return normalizedJson;
 }

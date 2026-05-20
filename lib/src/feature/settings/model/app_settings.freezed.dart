@@ -14,51 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettings {
 
-// язык
- String get language;// = "ru", // локаль
-// восстанавливать Bluetooth подключение при обрыве
- bool get reconnect;// звук
- bool get sound;// вкл/выкл
-// звук обратного отсчёта
- bool get beep;// звуком обратного отсчёта управляет приложение
- bool get beepFromApp;// голосовые сообщения
- bool get voice;// использовать голосовые сообщения
- bool get voiceFromApp;// использовать голосовые сообщения и брать данные из приложения
- bool get voiceName;// называть имена участников
- double get volume;// громкость
- double get pitch;// тон речи
- double get rate;// скорость речи
- String get voiceLanguage;// = "ru-RU", // язык tts
-// id выбранного соревнования и участка
- int get raceId; int get stageId;// всегда включённый экран
- bool get wakelock;// кнопки "добавить вручную" на экранах старта и финиша
- bool get startFab; double get startFabSize; bool get finishFab; double get finishFabSize;// обратный отсчёт на экране старта
- bool get countdown; double get countdownSize; double get countdownLeft; double get countdownTop;// показывать обратный отсчёт вместо стартового времени
- bool get countdownAtStartTime;// проверка обновлений
- bool get checkUpdates;// выборка значений на старте
- bool get showDNS; bool get showDNF; bool get showDSQ;// выборка значений на финише
- bool get showHidden; bool get showNumbers; bool get showManual;// задержка в миллисекундах перед показыванием нового финишного времени
- int get finishDelay;// автоподстановка номеров в финишном протоколе
- bool get substituteNumbers; int get substituteNumbersDelay;// показывать разницу между автоматическим временем старта с модуля и временем устройства
- bool get showStartDifference;// показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
- bool get showColorStartDifference;// разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
- int get startDifferenceThreshold;// показывать разницу между временем финиша с модуля и временем устройства
- bool get showFinishDifference;// показывать разницу цветом между временем финиша с модуля и временем устройства
- bool get showColorFinishDifference;// разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
- int get finishDifferenceThreshold;// дельта в секундах для автоматического подставления стартового времени
- int get deltaInSeconds;// задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
- int get updateStartCorrectionDelay;// лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
- int get logLimit;// активная тема
-// required AppTheme appTheme,
- ColorSeed get seedColor; Brightness get brightness; double get contrastLevel; DynamicSchemeVariant get dynamicSchemeVariant; bool get isOLEDBackground;// версия при предыдущем запуске
- String get previousVersion;// обновлять ntp offset при запуске
- bool get updateNtpOffsetAtStartup;// использовать время устройства для автоматических отсечек
- bool get useTimestampForAutomaticStamps;
+ String get language; bool get reconnect; bool get sound; bool get beep; bool get beepFromApp; bool get voice; bool get voiceFromApp; bool get voiceName; double get volume; double get pitch; double get rate; String get voiceLanguage; int get raceId; int get stageId; bool get wakelock; bool get startFab; double get startFabSize; bool get finishFab; double get finishFabSize; bool get countdown; double get countdownSize; double get countdownLeft; double get countdownTop; bool get countdownAtStartTime; bool get checkUpdates; bool get showDNS; bool get showDNF; bool get showDSQ; bool get showHidden; bool get showNumbers; bool get showManual; int get finishDelay; bool get substituteNumbers; int get substituteNumbersDelay; bool get showStartDifference; bool get showColorStartDifference; int get startDifferenceThreshold; bool get showFinishDifference; bool get showColorFinishDifference; int get finishDifferenceThreshold; int get deltaInSeconds; int get updateStartCorrectionDelay; int get logLimit; ColorSeed get seedColor; Brightness get brightness; double get contrastLevel; DynamicSchemeVariant get dynamicSchemeVariant; bool get isOLEDBackground; String get previousVersion; bool get updateNtpOffsetAtStartup; bool get useTimestampForAutomaticStamps;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -309,97 +265,56 @@ class _AppSettings implements AppSettings {
   const _AppSettings({required this.language, required this.reconnect, required this.sound, required this.beep, required this.beepFromApp, required this.voice, required this.voiceFromApp, required this.voiceName, required this.volume, required this.pitch, required this.rate, required this.voiceLanguage, required this.raceId, required this.stageId, required this.wakelock, required this.startFab, required this.startFabSize, required this.finishFab, required this.finishFabSize, required this.countdown, required this.countdownSize, required this.countdownLeft, required this.countdownTop, required this.countdownAtStartTime, required this.checkUpdates, required this.showDNS, required this.showDNF, required this.showDSQ, required this.showHidden, required this.showNumbers, required this.showManual, required this.finishDelay, required this.substituteNumbers, required this.substituteNumbersDelay, required this.showStartDifference, required this.showColorStartDifference, required this.startDifferenceThreshold, required this.showFinishDifference, required this.showColorFinishDifference, required this.finishDifferenceThreshold, required this.deltaInSeconds, required this.updateStartCorrectionDelay, required this.logLimit, required this.seedColor, required this.brightness, required this.contrastLevel, required this.dynamicSchemeVariant, required this.isOLEDBackground, required this.previousVersion, required this.updateNtpOffsetAtStartup, required this.useTimestampForAutomaticStamps});
   
 
-// язык
 @override final  String language;
-// = "ru", // локаль
-// восстанавливать Bluetooth подключение при обрыве
 @override final  bool reconnect;
-// звук
 @override final  bool sound;
-// вкл/выкл
-// звук обратного отсчёта
 @override final  bool beep;
-// звуком обратного отсчёта управляет приложение
 @override final  bool beepFromApp;
-// голосовые сообщения
 @override final  bool voice;
 @override final  bool voiceFromApp;
 @override final  bool voiceName;
 @override final  double volume;
-// громкость
 @override final  double pitch;
-// тон речи
 @override final  double rate;
-// скорость речи
 @override final  String voiceLanguage;
-// = "ru-RU", // язык tts
-// id выбранного соревнования и участка
 @override final  int raceId;
 @override final  int stageId;
-// всегда включённый экран
 @override final  bool wakelock;
-// кнопки "добавить вручную" на экранах старта и финиша
 @override final  bool startFab;
 @override final  double startFabSize;
 @override final  bool finishFab;
 @override final  double finishFabSize;
-// обратный отсчёт на экране старта
 @override final  bool countdown;
 @override final  double countdownSize;
 @override final  double countdownLeft;
 @override final  double countdownTop;
-// показывать обратный отсчёт вместо стартового времени
 @override final  bool countdownAtStartTime;
-// проверка обновлений
 @override final  bool checkUpdates;
-// выборка значений на старте
 @override final  bool showDNS;
 @override final  bool showDNF;
 @override final  bool showDSQ;
-// выборка значений на финише
 @override final  bool showHidden;
 @override final  bool showNumbers;
 @override final  bool showManual;
-// задержка в миллисекундах перед показыванием нового финишного времени
 @override final  int finishDelay;
-// автоподстановка номеров в финишном протоколе
 @override final  bool substituteNumbers;
 @override final  int substituteNumbersDelay;
-// показывать разницу между автоматическим временем старта с модуля и временем устройства
 @override final  bool showStartDifference;
-// показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
 @override final  bool showColorStartDifference;
-// разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
 @override final  int startDifferenceThreshold;
-// показывать разницу между временем финиша с модуля и временем устройства
 @override final  bool showFinishDifference;
-// показывать разницу цветом между временем финиша с модуля и временем устройства
 @override final  bool showColorFinishDifference;
-// разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
 @override final  int finishDifferenceThreshold;
-// дельта в секундах для автоматического подставления стартового времени
 @override final  int deltaInSeconds;
-// задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
 @override final  int updateStartCorrectionDelay;
-// лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
 @override final  int logLimit;
-// активная тема
-// required AppTheme appTheme,
 @override final  ColorSeed seedColor;
 @override final  Brightness brightness;
 @override final  double contrastLevel;
 @override final  DynamicSchemeVariant dynamicSchemeVariant;
 @override final  bool isOLEDBackground;
-// версия при предыдущем запуске
 @override final  String previousVersion;
-// обновлять ntp offset при запуске
 @override final  bool updateNtpOffsetAtStartup;
-// использовать время устройства для автоматических отсечек
 @override final  bool useTimestampForAutomaticStamps;
 
 /// Create a copy of AppSettings
@@ -516,99 +431,56 @@ class _AppSettingsDefaults implements AppSettings {
   const _AppSettingsDefaults({this.language = 'ru', this.reconnect = true, this.sound = true, this.beep = true, this.beepFromApp = false, this.voice = true, this.voiceFromApp = false, this.voiceName = true, this.volume = 1.0, this.pitch = 1.0, this.rate = 0.5, this.voiceLanguage = 'ru-RU', this.raceId = -1, this.stageId = -1, this.wakelock = true, this.startFab = true, this.startFabSize = 75, this.finishFab = true, this.finishFabSize = 75, this.countdown = false, this.countdownSize = 75, this.countdownLeft = 0, this.countdownTop = 0, this.countdownAtStartTime = true, this.checkUpdates = true, this.showDNS = false, this.showDNF = false, this.showDSQ = false, this.showHidden = false, this.showNumbers = true, this.showManual = true, this.finishDelay = 350, this.substituteNumbers = false, this.substituteNumbersDelay = 500, this.showStartDifference = false, this.showColorStartDifference = false, this.startDifferenceThreshold = 2000, this.showFinishDifference = false, this.showColorFinishDifference = false, this.finishDifferenceThreshold = 2000, this.deltaInSeconds = 10, this.updateStartCorrectionDelay = 2000, this.logLimit = 100, this.seedColor = ColorSeed.blue, this.brightness = Brightness.light, this.contrastLevel = -1.0, this.dynamicSchemeVariant = DynamicSchemeVariant.vibrant, this.isOLEDBackground = false, this.previousVersion = '0.0.0', this.updateNtpOffsetAtStartup = false, this.useTimestampForAutomaticStamps = false});
   
 
-// язык
 @override@JsonKey() final  String language;
-// восстанавливать Bluetooth подключение при обрыве
 @override@JsonKey() final  bool reconnect;
-// звук
 @override@JsonKey() final  bool sound;
-// вкл/выкл
-// звук обратного отсчёта
 @override@JsonKey() final  bool beep;
-// звуком обратного отсчёта управляет приложение
 @override@JsonKey() final  bool beepFromApp;
-// голосовые сообщения
 @override@JsonKey() final  bool voice;
-// использовать голосовые сообщения
 @override@JsonKey() final  bool voiceFromApp;
-// использовать голосовые сообщения и брать данные из приложения
 @override@JsonKey() final  bool voiceName;
-// называть имена участников
 @override@JsonKey() final  double volume;
-// громкость
 @override@JsonKey() final  double pitch;
-// тон речи
 @override@JsonKey() final  double rate;
-// скорость речи
 @override@JsonKey() final  String voiceLanguage;
-// = "ru-RU", // язык
-// id выбранного соревнования и участка
 @override@JsonKey() final  int raceId;
 @override@JsonKey() final  int stageId;
-// всегда включённый экран
 @override@JsonKey() final  bool wakelock;
-// кнопки "добавить вручную" на экранах старта и финиша
 @override@JsonKey() final  bool startFab;
 @override@JsonKey() final  double startFabSize;
 @override@JsonKey() final  bool finishFab;
 @override@JsonKey() final  double finishFabSize;
-// обратный отсчёт на экране старта
 @override@JsonKey() final  bool countdown;
 @override@JsonKey() final  double countdownSize;
 @override@JsonKey() final  double countdownLeft;
 @override@JsonKey() final  double countdownTop;
-// показывать обратный отсчёт вместо стартового времени
 @override@JsonKey() final  bool countdownAtStartTime;
-// проверка обновлений
 @override@JsonKey() final  bool checkUpdates;
-// выборка значений на старте
 @override@JsonKey() final  bool showDNS;
 @override@JsonKey() final  bool showDNF;
 @override@JsonKey() final  bool showDSQ;
-// выборка значений на финише
 @override@JsonKey() final  bool showHidden;
 @override@JsonKey() final  bool showNumbers;
 @override@JsonKey() final  bool showManual;
-// задержка в миллисекундах перед показыванием нового финишного времени
 @override@JsonKey() final  int finishDelay;
-// автоподстановка номеров в финишном протоколе
 @override@JsonKey() final  bool substituteNumbers;
 @override@JsonKey() final  int substituteNumbersDelay;
-// показывать разницу между автоматическим временем старта с модуля и временем устройства
 @override@JsonKey() final  bool showStartDifference;
-// показывать разницу цветом между автоматическим временем старта с модуля и временем устройства
 @override@JsonKey() final  bool showColorStartDifference;
-// разница между автоматическим временем старта с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
 @override@JsonKey() final  int startDifferenceThreshold;
-// показывать разницу между временем финиша с модуля и временем устройства
 @override@JsonKey() final  bool showFinishDifference;
-// показывать разницу цветом между временем финиша с модуля и временем устройства
 @override@JsonKey() final  bool showColorFinishDifference;
-// разница между временем финиша с модуля и временем устройства в миллисекундах
-// при превышении которого будет цветовая индикация
 @override@JsonKey() final  int finishDifferenceThreshold;
-// дельта в секундах для автоматического подставления стартового времени
 @override@JsonKey() final  int deltaInSeconds;
-// задержка в миллисекундах перед обновлением стартовой поправки,
-// если она уже была установлена
 @override@JsonKey() final  int updateStartCorrectionDelay;
-// лог
-// ограничение количества показываемых строк в окне лога
-// -1 = без ограничений
 @override@JsonKey() final  int logLimit;
-// активная тема
-// @Default(AppTheme.lightBlue) AppTheme appTheme,
 @override@JsonKey() final  ColorSeed seedColor;
 @override@JsonKey() final  Brightness brightness;
 @override@JsonKey() final  double contrastLevel;
 @override@JsonKey() final  DynamicSchemeVariant dynamicSchemeVariant;
 @override@JsonKey() final  bool isOLEDBackground;
-// версия при предыдущем запуске
 @override@JsonKey() final  String previousVersion;
-// обновлять ntp offset при запуске
 @override@JsonKey() final  bool updateNtpOffsetAtStartup;
-// использовать время устройства для автоматических отсечек
 @override@JsonKey() final  bool useTimestampForAutomaticStamps;
 
 /// Create a copy of AppSettings

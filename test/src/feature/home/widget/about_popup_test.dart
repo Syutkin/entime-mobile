@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
-class MockAppInfoCubit extends MockCubit<AppInfoProvider> implements AppInfoCubit {}
+class MockAppInfoCubit extends MockCubit<IAppInfoProvider> implements AppInfoCubit {}
 
 void main() {
   late AppInfoCubit appInfoCubit;
@@ -22,7 +22,9 @@ void main() {
     return MaterialApp(
       localizationsDelegates: const [GlobalWidgetsLocalizations.delegate, Localization.delegate],
       supportedLocales: Localization.supportedLocales,
-      home: Scaffold(body: BlocProvider.value(value: appInfoCubit, child: const AboutPopup())),
+      home: Scaffold(
+        body: BlocProvider.value(value: appInfoCubit, child: const AboutPopup()),
+      ),
     );
   }
 
@@ -33,7 +35,7 @@ void main() {
   });
 
   group('AboutPopup tests', () {
-    patrolWidgetTest('Initial state', (PatrolTester $) async {
+    patrolWidgetTest('Initial state', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(AlertDialog), findsOneWidget);
       expect($(appName), findsOneWidget);
@@ -44,13 +46,13 @@ void main() {
       expect($(TextButton), findsNWidgets(2));
     });
 
-    patrolWidgetTest('Press changelog', (PatrolTester $) async {
+    patrolWidgetTest('Press changelog', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(Localization.current.I18nAbout_changelog).tap();
       expect($(ChangelogScreen), findsOneWidget);
     });
 
-    patrolWidgetTest('Press close button', (PatrolTester $) async {
+    patrolWidgetTest('Press close button', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       await $(TextButton).at(1).tap();
       expect($(AboutPopup), findsNothing);

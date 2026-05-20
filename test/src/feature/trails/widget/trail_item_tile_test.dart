@@ -7,10 +7,10 @@ import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
 import 'package:entime/src/feature/trails/widget/trail_item_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol_finders/patrol_finders.dart';
 
@@ -40,7 +40,10 @@ void main() {
           return Material(
             child: BlocProvider.value(
               value: databaseBloc,
-              child: BlocProvider.value(value: trailsBloc, child: TrailItemTile(trail: trail)),
+              child: BlocProvider.value(
+                value: trailsBloc,
+                child: TrailItemTile(trail: trail),
+              ),
             ),
           );
         },
@@ -72,14 +75,14 @@ void main() {
   });
 
   group('TrailItemTile tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(trail));
       expect($(trail.name), findsOneWidget);
       expect(($(ListTile).evaluate().single.widget as ListTile).subtitle, null);
       expect(($(Icon).at(0).evaluate().single.widget as Icon).icon, MdiIcons.mapMarkerOffOutline);
     });
 
-    patrolWidgetTest('Trail with additional info', (PatrolTester $) async {
+    patrolWidgetTest('Trail with additional info', ($) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: 1);
       await $.pumpWidgetAndSettle(await testWidget(trail));
       expect($(trail.name), findsOneWidget);
@@ -88,7 +91,7 @@ void main() {
       expect(($(Icon).at(0).evaluate().single.widget as Icon).icon, MdiIcons.mapMarkerOutline);
     });
 
-    patrolWidgetTest('Tap PopupMenuButton', (PatrolTester $) async {
+    patrolWidgetTest('Tap PopupMenuButton', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       expect($(PopupMenuItem<void>), findsNWidgets(2));
@@ -96,7 +99,7 @@ void main() {
       expect($(Localization.current.I18nCore_delete), findsOneWidget);
     });
 
-    patrolWidgetTest('Tap delete then ok', (PatrolTester $) async {
+    patrolWidgetTest('Tap delete then ok', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
@@ -104,7 +107,7 @@ void main() {
       verify(() => trailsBloc.add(TrailsEvent.deleteTrail(trail.id))).called(1);
     });
 
-    patrolWidgetTest('Tap delete then cancel', (PatrolTester $) async {
+    patrolWidgetTest('Tap delete then cancel', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
       await $(Localization.current.I18nCore_delete).tap();
@@ -112,7 +115,7 @@ void main() {
       verifyNever(() => trailsBloc.add(TrailsEvent.deleteTrail(trail.id)));
     });
 
-    patrolWidgetTest('Tap PopupMenuButton on trail with track', (PatrolTester $) async {
+    patrolWidgetTest('Tap PopupMenuButton on trail with track', ($) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: id, fileExtension: 'gpx');
       await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();
@@ -124,7 +127,7 @@ void main() {
       verify(() => databaseBloc.add(DatabaseEvent.shareTrack(trail: trail))).called(1);
     });
 
-    patrolWidgetTest('Tap share', (PatrolTester $) async {
+    patrolWidgetTest('Tap share', ($) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: id, fileExtension: 'gpx');
       await $.pumpWidgetAndSettle(await testWidget(trail));
       await $(PopupMenuButton<void>).tap();

@@ -1,3 +1,5 @@
+// ignore_for_file: unreachable_from_main
+
 part of 'trails_bloc.dart';
 
 @freezed
@@ -28,6 +30,14 @@ sealed class TrailsEvent with _$TrailsEvent {
   const factory TrailsEvent.deleteTrail(int id) = _DeleteTrail;
 
   const factory TrailsEvent.loadTrack({required String filePath}) = _LoadTrack;
+
+  const factory TrailsEvent.trackLoadProgress({required double progress}) = _TrackLoadProgress;
+
+  const factory TrailsEvent.trackSaveProgress({required double progress}) = _TrackSaveProgress;
+
+  const factory TrailsEvent.trackSaveCompleted({required int trackId}) = _TrackSaveCompleted;
+
+  const factory TrailsEvent.trackSaveFailed({required String message}) = _TrackSaveFailed;
 
   const factory TrailsEvent.unloadTrack() = _UnloadTrack;
 

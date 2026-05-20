@@ -26,7 +26,9 @@ class Header extends StatelessWidget {
           ),
         ],
       ),
-      child: Center(child: Text(text, style: textTheme.bodyLarge!.apply(color: colorScheme.onPrimary))),
+      child: Center(
+        child: Text(text, style: textTheme.bodyLarge!.apply(color: colorScheme.onPrimary)),
+      ),
     );
   }
 }

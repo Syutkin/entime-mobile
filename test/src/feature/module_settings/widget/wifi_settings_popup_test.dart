@@ -36,7 +36,7 @@ void main() {
   }
 
   group('wifiSettingsPopup tests', () {
-    patrolWidgetTest('Initial popup dialog', (PatrolTester $) async {
+    patrolWidgetTest('Initial popup dialog', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -49,7 +49,7 @@ void main() {
       expect($(#okButton), findsOneWidget);
     });
 
-    patrolWidgetTest('Enter valid wifi credentials and press OK', (PatrolTester $) async {
+    patrolWidgetTest('Enter valid wifi credentials and press OK', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -63,7 +63,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Enter empty credentials and press OK', (PatrolTester $) async {
+    patrolWidgetTest('Enter empty credentials and press OK', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -75,7 +75,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Enter only SSID without password', (PatrolTester $) async {
+    patrolWidgetTest('Enter only SSID without password', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -87,7 +87,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Enter only password without SSID', (PatrolTester $) async {
+    patrolWidgetTest('Enter only password without SSID', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -99,7 +99,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Enter special characters in credentials', (PatrolTester $) async {
+    patrolWidgetTest('Enter special characters in credentials', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -111,7 +111,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Press Cancel button', (PatrolTester $) async {
+    patrolWidgetTest('Press Cancel button', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -123,7 +123,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('SSID field has correct properties', (PatrolTester $) async {
+    patrolWidgetTest('SSID field has correct properties', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -132,7 +132,7 @@ void main() {
       expect(ssidField.decoration?.labelText, Localization.current.I18nModuleSettings_wifiSsid);
     });
 
-    patrolWidgetTest('Password field has correct properties', (PatrolTester $) async {
+    patrolWidgetTest('Password field has correct properties', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -141,7 +141,7 @@ void main() {
       expect(passwordField.decoration?.labelText, Localization.current.I18nModuleSettings_wifiPassword);
     });
 
-    patrolWidgetTest('Password field toggle visibility', (PatrolTester $) async {
+    patrolWidgetTest('Password field toggle visibility', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -157,7 +157,7 @@ void main() {
       expect(updatedPasswordField.obscureText, false);
     });
 
-    patrolWidgetTest('Fields update result on text change', (PatrolTester $) async {
+    patrolWidgetTest('Fields update result on text change', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -171,7 +171,7 @@ void main() {
       expect(result, ['WiFiNetwork', 'Password123']);
     });
 
-    patrolWidgetTest('Dialog closes after OK button press', (PatrolTester $) async {
+    patrolWidgetTest('Dialog closes after OK button press', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -183,7 +183,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Dialog closes after Cancel button press', (PatrolTester $) async {
+    patrolWidgetTest('Dialog closes after Cancel button press', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -195,7 +195,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('SSID field is focused by default', (PatrolTester $) async {
+    patrolWidgetTest('SSID field is focused by default', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -203,7 +203,7 @@ void main() {
       expect(ssidField.autofocus, true);
     });
 
-    patrolWidgetTest('Multiple popup opens and closes correctly', (PatrolTester $) async {
+    patrolWidgetTest('Multiple popup opens and closes correctly', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
 
       // Открываем первый popup
@@ -229,7 +229,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Long wifi credentials are handled correctly', (PatrolTester $) async {
+    patrolWidgetTest('Long wifi credentials are handled correctly', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -243,7 +243,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Unicode characters in credentials', (PatrolTester $) async {
+    patrolWidgetTest('Unicode characters in credentials', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -257,7 +257,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Pre-filled SSID parameter', (PatrolTester $) async {
+    patrolWidgetTest('Pre-filled SSID parameter', ($) async {
       const preFilledSsid = 'PreFilledNetwork';
       await $.pumpWidgetAndSettle(await testWidget(ssid: preFilledSsid));
       await $(#button).tap();
@@ -274,7 +274,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Empty SSID parameter', (PatrolTester $) async {
+    patrolWidgetTest('Empty SSID parameter', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(ssid: ''));
       await $(#button).tap();
 
@@ -291,7 +291,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Null SSID parameter', (PatrolTester $) async {
+    patrolWidgetTest('Null SSID parameter', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -308,7 +308,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Password field shows/hides password correctly', (PatrolTester $) async {
+    patrolWidgetTest('Password field shows/hides password correctly', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -336,7 +336,7 @@ void main() {
       expect(finalPasswordField.obscureText, true);
     });
 
-    patrolWidgetTest('Keyboard navigation between fields', (PatrolTester $) async {
+    patrolWidgetTest('Keyboard navigation between fields', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -354,7 +354,7 @@ void main() {
       expect(result, ['TestNetwork', 'TestPassword']);
     });
 
-    patrolWidgetTest('Special characters in SSID and password', (PatrolTester $) async {
+    patrolWidgetTest('Special characters in SSID and password', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 
@@ -369,7 +369,7 @@ void main() {
       expect($(AlertDialog), findsNothing);
     });
 
-    patrolWidgetTest('Very long credentials handling', (PatrolTester $) async {
+    patrolWidgetTest('Very long credentials handling', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
       await $(#button).tap();
 

@@ -4,7 +4,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
 import 'package:entime/src/feature/connectivity/logic/connectivity_provider.dart';
@@ -15,7 +14,6 @@ import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
@@ -48,18 +46,16 @@ Future<void> main() async {
 
   final database = AppDatabase();
 
-  final androidInfo = await DeviceInfoPlugin().androidInfo;
   final settings = await SharedPrefsSettingsProvider.load();
-  final appInfo = await AppInfoProvider.load(deviceInfo: androidInfo);
-  final updateProvider = await UpdateProvider.init(
+  final appInfo = await AppInfoProvider.load();
+  final updateController = await UpdateController.init(
     client: http.Client(),
     appInfoProvider: appInfo,
     settingsProvider: settings,
   );
-  final flutterBluetoothSerial = FlutterBluetoothSerial.instance;
   final bluetoothBackgroundConnection = BluetoothBackgroundConnection();
   final bluetoothProvider = BluetoothProvider(
-    flutterBluetoothSerial: flutterBluetoothSerial,
+    appInfo: appInfo,
     bluetoothBackgroundConnection: bluetoothBackgroundConnection,
   );
 
@@ -92,7 +88,7 @@ Future<void> main() async {
     ],
     child: EntimeApp(
       settingsProvider: settings,
-      updateProvider: updateProvider,
+      updateController: updateController,
       bluetoothProvider: bluetoothProvider,
       ttsProvider: ttsProvider,
       audioController: audioController,
@@ -121,7 +117,7 @@ Future<void> main() async {
 class EntimeApp extends StatelessWidget {
   const EntimeApp({
     required this.settingsProvider,
-    required this.updateProvider,
+    required this.updateController,
     required this.bluetoothProvider,
     required this.ttsProvider,
     required this.audioController,
@@ -134,15 +130,15 @@ class EntimeApp extends StatelessWidget {
   });
 
   final ISettingsProvider settingsProvider;
-  final AppInfoProvider appInfo;
-  final IUpdateProvider updateProvider;
+  final IAppInfoProvider appInfo;
+  final IUpdateController updateController;
   final IBluetoothProvider bluetoothProvider;
   final IAudioController audioController;
   final TtsProvider ttsProvider;
 
   // final ILogProvider logProvider;
   final AppDatabase database;
-  final CountdownAtStart countdown;
+  final ICountdownAtStart countdown;
   final INtpProvider ntpProvider;
   final IConnectivityProvider connectivityProvider;
 
@@ -173,6 +169,10 @@ class EntimeApp extends StatelessWidget {
             stageId: settingsProvider.settings.stageId,
           ),
         ),
+        BlocProvider<BluetoothDiscoveryCubit>(
+          create: (context) => BluetoothDiscoveryCubit(bluetoothProvider: bluetoothProvider),
+        ),
+        BlocProvider<BluetoothRequestCubit>(create: (context) => BluetoothRequestCubit()),
         BlocProvider<BluetoothBloc>(
           create: (context) => BluetoothBloc(
             audioController: audioController,
@@ -182,7 +182,7 @@ class EntimeApp extends StatelessWidget {
           )..add(const BluetoothEvent.initialize()),
         ),
         BlocProvider<UpdateBloc>(
-          create: (context) => UpdateBloc(updateProvider: updateProvider)..add(const UpdateEvent.popupChangelog()),
+          create: (context) => UpdateBloc(updateController: updateController)..add(const UpdateEvent.popupChangelog()),
         ),
         BlocProvider<AppInfoCubit>(create: (context) => AppInfoCubit(appInfo: appInfo)),
         BlocProvider<NtpBloc>(create: (context) => NtpBloc(ntpProvider)),

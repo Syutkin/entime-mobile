@@ -1,29 +1,30 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Мок-классы для тестирования
 class MockBluetoothConnection extends Mock implements IBluetoothConnection {}
 
-class MockBluetoothDevice extends Mock implements BluetoothDevice {}
-
 class MockStreamSubscription extends Mock implements StreamSubscription<Uint8List> {}
 
 class MockStream extends Mock implements Stream<Uint8List> {}
-
-class MockBluetoothStreamSink extends Mock implements BluetoothStreamSink<Uint8List> {}
 
 // Мок-фабрика для тестирования
 class MockBluetoothConnectionFactory implements IBluetoothConnectionFactory {
   MockBluetoothConnectionFactory({this.mockConnection});
   final IBluetoothConnection? mockConnection;
+  Exception? throwOnConnect;
 
   @override
-  Future<IBluetoothConnection> connectToAddress(String address) async {
+  Future<IBluetoothConnection> connectToDevice(BluetoothDevice device) async {
+    if (throwOnConnect != null) {
+      throw throwOnConnect!;
+    }
     if (mockConnection != null) {
       return mockConnection!;
     }
@@ -37,10 +38,8 @@ void main() {
 
   late BluetoothBackgroundConnection bbc;
   late MockBluetoothConnection mockConnection;
-  late MockBluetoothDevice mockDevice;
   late MockStreamSubscription mockSubscription;
   late MockStream mockInputStream;
-  late MockBluetoothStreamSink mockOutputStream;
   // late MockBluetoothConnectionFactory mockFactory;
 
   setUpAll(() {
@@ -52,10 +51,8 @@ void main() {
   setUp(() {
     bbc = BluetoothBackgroundConnection();
     mockConnection = MockBluetoothConnection();
-    mockDevice = MockBluetoothDevice();
     mockSubscription = MockStreamSubscription();
     mockInputStream = MockStream();
-    mockOutputStream = MockBluetoothStreamSink();
     // mockFactory = MockBluetoothConnectionFactory();
   });
 
@@ -75,47 +72,178 @@ void main() {
     });
 
     group('sendMessage', () {
-      test('should return false for empty message', () async {
-        final result = await bbc.sendMessage('');
+      Future<BluetoothBackgroundConnection> connectWithMock({
+        bool connected = true,
+        Stream<int>? batteryStream,
+      }) async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+
+        when(() => mockConnection.isConnected).thenReturn(connected);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => batteryStream ?? const Stream<int>.empty());
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.write(any())).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+        return bbcWithMock;
+      }
+
+      test('should return false for empty message and not write', () async {
+        final bbcWithMock = await connectWithMock();
+        final result = await bbcWithMock.sendMessage('');
+
         expect(result, false);
+        verifyNever(() => mockConnection.write(any()));
+
+        await bbcWithMock.dispose();
       });
 
-      test('should return false for whitespace-only message', () async {
-        final result = await bbc.sendMessage('   ');
+      test('should return false for whitespace-only message and not write', () async {
+        final bbcWithMock = await connectWithMock();
+        final result = await bbcWithMock.sendMessage('   ');
+
         expect(result, false);
+        verifyNever(() => mockConnection.write(any()));
+
+        await bbcWithMock.dispose();
       });
 
-      test('should return false for non-empty message when not connected', () async {
-        //Метод проверяет соединение и возвращает false если его нет
-        final result = await bbc.sendMessage('test message');
+      test('should trim and send payload with newline', () async {
+        final bbcWithMock = await connectWithMock();
+        final result = await bbcWithMock.sendMessage('  test  ');
+
+        expect(result, true);
+        verify(
+          () => mockConnection.write(
+            any(
+              that: predicate<Uint8List>((data) => utf8.decode(data) == 'test\n'),
+            ),
+          ),
+        ).called(1);
+
+        await bbcWithMock.dispose();
+      });
+
+      test('should return false when not connected and not write', () async {
+        final bbcWithMock = await connectWithMock(connected: false);
+        final result = await bbcWithMock.sendMessage('test message');
+
         expect(result, false);
+        verifyNever(() => mockConnection.write(any()));
+
+        await bbcWithMock.dispose();
+      });
+    });
+
+    group('battery level', () {
+      test('should emit battery level updates from connection', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final batteryController = StreamController<int>.broadcast();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => batteryController.stream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+
+        final levels = <int>[];
+        final sub = bbcWithMock.batteryLevel.listen(levels.add);
+        batteryController.add(42);
+        await Future<void>.delayed(Duration.zero);
+
+        expect(levels, [42]);
+
+        await sub.cancel();
+        await batteryController.close();
+        await bbcWithMock.dispose();
       });
 
-      test('should log warning when trying to send message without connection', () async {
-        // Тест проверяет, что при попытке отправить сообщение без соединения
-        // метод возвращает false
-        final result = await bbc.sendMessage('test message');
-        expect(result, false);
+      test('should cancel battery subscription on dispose', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        var cancelled = false;
+        final batteryController = StreamController<int>(
+          onCancel: () {
+            cancelled = true;
+          },
+        );
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => batteryController.stream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+        await bbcWithMock.dispose();
+
+        expect(cancelled, isTrue);
+
+        await batteryController.close();
       });
 
-      test('should properly trim messages before sending', () async {
-        final result1 = await bbc.sendMessage('  test  ');
-        final result2 = await bbc.sendMessage('test');
+      test('should cancel previous battery subscription on reconnect', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        var firstCancelled = false;
+        final firstBatteryController = StreamController<int>(
+          onCancel: () {
+            firstCancelled = true;
+          },
+        );
+        final secondBatteryController = StreamController<int>.broadcast();
 
-        // Оба должны возвращать false, так как нет соединения
-        expect(result1, false);
-        expect(result2, false);
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.close()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => firstBatteryController.stream);
+        await bbcWithMock.connect(device);
+
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => secondBatteryController.stream);
+        await bbcWithMock.connect(device);
+
+        expect(firstCancelled, isTrue);
+
+        await secondBatteryController.close();
+        await firstBatteryController.close();
+        await bbcWithMock.dispose();
       });
 
-      test('should handle various whitespace patterns correctly', () async {
-        // Тестируем различные паттерны пробелов
-        final result1 = await bbc.sendMessage('\t\n test \t\n');
-        final result2 = await bbc.sendMessage('  ');
-        final result3 = await bbc.sendMessage('\t\n\r');
+      test('should not fail when connection has no battery stream', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
-        expect(result1, false); // false потому что нет соединения
-        expect(result2, false); // false потому что после trim() ничего не остается
-        expect(result3, false); // false потому что после trim() ничего не остается
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => null);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+        await bbcWithMock.dispose();
       });
     });
 
@@ -128,18 +256,45 @@ void main() {
     });
 
     group('stop', () {
-      test('should stop without errors when not connected', () async {
-        await bbc.stop();
-        // Проверяем, что метод выполнился без ошибок
-        expect(bbc, isA<BluetoothBackgroundConnection>());
+      test('should finish connection when connected', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+        await bbcWithMock.stop();
+
+        verify(() => mockConnection.finish()).called(1);
+
+        await bbcWithMock.dispose();
       });
     });
 
     group('dispose', () {
-      test('should dispose resources successfully', () async {
-        await bbc.dispose();
-        // Проверяем, что метод выполнился без ошибок
-        expect(bbc, isA<BluetoothBackgroundConnection>());
+      test('should finish connection and cancel subscription', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+        await bbcWithMock.dispose();
+
+        verify(() => mockConnection.finish()).called(1);
+        verify(() => mockSubscription.cancel()).called(1);
       });
     });
 
@@ -187,6 +342,107 @@ void main() {
       });
     });
 
+    group('message buffer', () {
+      test('should keep new stream active when old input closes after reconnect', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final input1 = StreamController<Uint8List>();
+        final input2 = StreamController<Uint8List>();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.close()).thenAnswer((_) async {});
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
+
+        when(() => mockConnection.input).thenAnswer((_) => input1.stream);
+        await bbcWithMock.connect(device);
+
+        when(() => mockConnection.input).thenAnswer((_) => input2.stream);
+        await bbcWithMock.connect(device);
+
+        final messages = <String>[];
+        final sub = bbcWithMock.message.listen(messages.add);
+
+        await input1.close();
+        await Future<void>.delayed(Duration.zero);
+
+        input2.add(Uint8List.fromList(utf8.encode('ping\n')));
+        await Future<void>.delayed(Duration.zero);
+
+        expect(messages, ['ping']);
+
+        await sub.cancel();
+        await input2.close();
+        await bbcWithMock.dispose();
+      });
+
+      test('should reset buffer on reconnect', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final input1 = StreamController<Uint8List>();
+        final input2 = StreamController<Uint8List>();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.close()).thenAnswer((_) async {});
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
+
+        when(() => mockConnection.input).thenAnswer((_) => input1.stream);
+        await bbcWithMock.connect(device);
+
+        final messages = <String>[];
+        final sub = bbcWithMock.message.listen(messages.add);
+
+        input1.add(Uint8List.fromList(utf8.encode('foo')));
+        await Future<void>.delayed(Duration.zero);
+
+        when(() => mockConnection.input).thenAnswer((_) => input2.stream);
+        await bbcWithMock.connect(device);
+
+        input2.add(Uint8List.fromList(utf8.encode('bar\n')));
+        await Future<void>.delayed(Duration.zero);
+
+        expect(messages, ['bar']);
+
+        await sub.cancel();
+        await input1.close();
+        await input2.close();
+        await bbcWithMock.dispose();
+      });
+
+      test('should clear buffer on overflow and keep parsing next message', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+        final input = StreamController<Uint8List>();
+
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.batteryLevel).thenAnswer((_) => const Stream<int>.empty());
+        when(() => mockConnection.input).thenAnswer((_) => input.stream);
+
+        await bbcWithMock.connect(device);
+
+        final messages = <String>[];
+        final sub = bbcWithMock.message.listen(messages.add);
+
+        final overflow = List.filled(BluetoothBackgroundConnection.maxMessageBufferLength + 1, 'a').join();
+        input.add(Uint8List.fromList(utf8.encode(overflow)));
+        await Future<void>.delayed(Duration.zero);
+
+        input.add(Uint8List.fromList(utf8.encode('ok\n')));
+        await Future<void>.delayed(Duration.zero);
+
+        expect(messages, ['ok']);
+
+        await sub.cancel();
+        await input.close();
+        await bbcWithMock.dispose();
+      });
+    });
+
     group('error handling', () {
       test('should handle operations gracefully when not connected', () async {
         // Тестируем, что операции не падают с ошибками когда нет соединения
@@ -218,31 +474,50 @@ void main() {
         }, returnsNormally);
       });
 
-      test('should handle multiple message sends when not connected', () async {
-        final result1 = await bbc.sendMessage('message1');
-        final result2 = await bbc.sendMessage('message2');
-        final result3 = await bbc.sendMessage('');
+      test('should send multiple messages and ignore empty', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
-        expect(result1, false); // false потому что нет соединения
-        expect(result2, false); // false потому что нет соединения
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockConnection.write(any())).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+
+        final result1 = await bbcWithMock.sendMessage('message1');
+        final result2 = await bbcWithMock.sendMessage('message2');
+        final result3 = await bbcWithMock.sendMessage('');
+
+        expect(result1, true);
+        expect(result2, true);
         expect(result3, false);
+        verify(() => mockConnection.write(any())).called(2);
+
+        await bbcWithMock.dispose();
       });
 
-      test('should handle multiple operations in sequence', () async {
-        await bbc.start();
-        final result1 = await bbc.sendMessage('test1');
-        final result2 = await bbc.sendMessage('test2');
-        await bbc.stop();
-        await bbc.dispose();
+      test('should finish connection on stop and dispose in sequence', () async {
+        final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+        final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+        final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
-        expect(result1, false); // false потому что нет соединения
-        expect(result2, false); // false потому что нет соединения
-        // Проверяем, что все операции завершились без исключений
-        expect(() async {
-          await bbc.start();
-          await bbc.stop();
-          await bbc.dispose();
-        }, returnsNormally);
+        when(() => mockConnection.isConnected).thenReturn(true);
+        when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
+        when(() => mockConnection.finish()).thenAnswer((_) async {});
+        when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
+        when(() => mockSubscription.onDone(any())).thenReturn(null);
+        when(() => mockSubscription.cancel()).thenAnswer((_) async {});
+
+        await bbcWithMock.connect(device);
+        await bbcWithMock.stop();
+        await bbcWithMock.dispose();
+
+        verify(() => mockConnection.finish()).called(greaterThanOrEqualTo(1));
       });
     });
 
@@ -283,22 +558,19 @@ void main() {
         ..onDisconnect(() {})
         ..onSendError((_) {});
 
-      // Настраиваем мок-устройство
-      when(() => mockDevice.address).thenReturn('00:11:22:33:44:55');
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
       // Настраиваем мок-соединение
       when(() => mockConnection.isConnected).thenReturn(true);
-      when(() => mockConnection.output).thenReturn(mockOutputStream);
       when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
       when(() => mockConnection.finish()).thenAnswer((_) async {});
-      when(() => mockOutputStream.add(any())).thenReturn(null);
-      when(() => mockOutputStream.allSent).thenAnswer((_) async {});
+      when(() => mockConnection.write(any())).thenAnswer((_) async {});
       when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
       when(() => mockSubscription.onDone(any())).thenReturn(null);
       when(() => mockSubscription.cancel()).thenAnswer((_) async {});
 
       // Подключаемся (это вызовет мок-фабрику)
-      await bbcWithMock.connect(mockDevice);
+      await bbcWithMock.connect(device);
 
       // Отправляем сообщение
       final result = await bbcWithMock.sendMessage('test message');
@@ -306,8 +578,8 @@ void main() {
       // Проверяем результат
       expect(result, true);
 
-      // Проверяем, что метод add был вызван
-      verify(() => mockOutputStream.add(any())).called(1);
+      // Проверяем, что запись была вызвана
+      verify(() => mockConnection.write(any())).called(1);
 
       await bbcWithMock.dispose();
     });
@@ -318,24 +590,111 @@ void main() {
         ..onDisconnect(() {})
         ..onSendError((_) {});
 
-      // Настраиваем мок-устройство
-      when(() => mockDevice.address).thenReturn('00:11:22:33:44:55');
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
 
       // Настраиваем мок-соединение
       when(() => mockConnection.isConnected).thenReturn(true);
-      when(() => mockConnection.output).thenReturn(mockOutputStream);
       when(() => mockConnection.input).thenAnswer((_) => mockInputStream);
       when(() => mockConnection.finish()).thenAnswer((_) async {});
       when(() => mockInputStream.listen(any())).thenReturn(mockSubscription);
       when(() => mockSubscription.onDone(any())).thenReturn(null);
       when(() => mockSubscription.cancel()).thenAnswer((_) async {});
 
-      await bbcWithMock.connect(mockDevice);
+      await bbcWithMock.connect(device);
 
       final result = await bbcWithMock.sendMessage('');
 
       expect(result, false);
 
+      await bbcWithMock.dispose();
+    });
+
+    test('should swallow errors when connect fails', () async {
+      final mockFactory = MockBluetoothConnectionFactory()..throwOnConnect = Exception('connect failed');
+      final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+
+      await bbcWithMock.connect(device);
+
+      expect(bbcWithMock.isConnected, isFalse);
+
+      await bbcWithMock.dispose();
+    });
+
+    test('should emit messages split by newline from input stream', () async {
+      final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+      final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+      final controller = StreamController<Uint8List>();
+
+      when(() => mockConnection.isConnected).thenReturn(true);
+      when(() => mockConnection.input).thenAnswer((_) => controller.stream);
+      when(() => mockConnection.close()).thenAnswer((_) async {});
+      when(() => mockConnection.finish()).thenAnswer((_) async {});
+
+      await bbcWithMock.connect(device);
+
+      final messages = <String>[];
+      final sub = bbcWithMock.message.listen(messages.add);
+
+      controller
+        ..add(Uint8List.fromList(utf8.encode('foo')))
+        ..add(Uint8List.fromList(utf8.encode('bar\nbaz\n')));
+      await Future<void>.delayed(Duration.zero);
+
+      expect(messages, ['foobar', 'baz']);
+
+      await sub.cancel();
+      await controller.close();
+      await bbcWithMock.dispose();
+    });
+
+    test('should call onDisconnect when input stream closes', () async {
+      final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+      final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+      final controller = StreamController<Uint8List>();
+      var disconnected = false;
+
+      when(() => mockConnection.isConnected).thenReturn(true);
+      when(() => mockConnection.input).thenAnswer((_) => controller.stream);
+      when(() => mockConnection.close()).thenAnswer((_) async {});
+      when(() => mockConnection.finish()).thenAnswer((_) async {});
+
+      bbcWithMock.onDisconnect(() {
+        disconnected = true;
+      });
+
+      await bbcWithMock.connect(device);
+      await controller.close();
+      await Future<void>.delayed(Duration.zero);
+
+      expect(disconnected, isTrue);
+
+      await bbcWithMock.dispose();
+    });
+
+    test('should call onSendError when write throws', () async {
+      final mockFactory = MockBluetoothConnectionFactory(mockConnection: mockConnection);
+      final bbcWithMock = BluetoothBackgroundConnection(connectionFactory: mockFactory);
+      final device = BluetoothDevice.fromId('00:11:22:33:44:55');
+      final controller = StreamController<Uint8List>();
+      final errors = <String>[];
+
+      when(() => mockConnection.isConnected).thenReturn(true);
+      when(() => mockConnection.input).thenAnswer((_) => controller.stream);
+      when(() => mockConnection.finish()).thenAnswer((_) async {});
+      when(() => mockConnection.write(any())).thenThrow(Exception('boom'));
+
+      bbcWithMock.onSendError(errors.add);
+
+      await bbcWithMock.connect(device);
+      final result = await bbcWithMock.sendMessage('ping');
+
+      expect(result, isFalse);
+      expect(errors, isNotEmpty);
+
+      await controller.close();
       await bbcWithMock.dispose();
     });
   });

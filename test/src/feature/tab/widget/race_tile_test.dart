@@ -39,8 +39,8 @@ void main() {
   });
 
   setUp(() {
-    race = const Race(id: 1, name: 'Race name', isDeleted: false);
-    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true, isDeleted: false);
+    race = const Race(id: 1, name: 'Race name');
+    stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
     when(() => databaseBloc.state).thenReturn(
       const DatabaseState(
         races: [],
@@ -55,13 +55,13 @@ void main() {
   });
 
   group('RaceTile tests', () {
-    patrolWidgetTest('Initial build', (PatrolTester $) async {
+    patrolWidgetTest('Initial build', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
       expect($(RaceTile), findsOneWidget);
       expect($(ListTile), findsOneWidget);
     });
 
-    patrolWidgetTest('Race selected and stage not selected', (PatrolTester $) async {
+    patrolWidgetTest('Race selected and stage not selected', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],
@@ -81,7 +81,7 @@ void main() {
       expect($(Localization.current.I18nInit_selectStage), findsOneWidget);
     });
 
-    patrolWidgetTest('Race and stage selected', (PatrolTester $) async {
+    patrolWidgetTest('Race and stage selected', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],
@@ -103,7 +103,7 @@ void main() {
       expect($(stage.name), findsOneWidget);
     });
 
-    patrolWidgetTest('Tap import protocol', (PatrolTester $) async {
+    patrolWidgetTest('Tap import protocol', ($) async {
       when(() => databaseBloc.state).thenReturn(
         DatabaseState(
           races: [],

@@ -27,13 +27,20 @@ void main() {
         act: (bloc) => bloc.add(
           const ModuleSettingsEvent.get('''
         {
-          "Type": "entime",
-          "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
-          "LoRa": {"active": true, "frequency": 868, "txPower": 14, "spreadingFactor": 7, "signalBandwidth": 125, "codingRateDenom": 5, "preambleLength": 8, "syncWord": 12, "crc": true},
-          "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
-          "TFT": {"active": true, "timeout": true, "timeoutDuration": 30, "turnOnAtEvent": true},
-          "Buzzer": {"active": true, "shortFrequency": 1000, "longFrequency": 2000},
-          "VCC": {"r1": 10000, "r2": 10000}
+          "cmd": "load_config",
+          "data": {
+            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone_offset_min": 180},
+            "sync": {
+              "auto": true,
+              "source": 0,
+              "ntp1": "ru.pool.ntp.org",
+              "ntp2": "time.google.com",
+              "ntp3": "time.cloudflare.com"
+            },
+            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": ""},
+            "gps": {"enabled": true},
+            "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
+          }
         }'''),
         ),
         expect: () => [
@@ -45,7 +52,30 @@ void main() {
           ),
         ],
         verify: (bloc) {
-          expect((bloc.state as ModuleSettingsLoaded).moduleSettings, isA<ModSettingsModelEntime>());
+          final moduleSettings = (bloc.state as ModuleSettingsLoaded).moduleSettings;
+          expect(moduleSettings, isA<ModSettingsModelEntime>());
+
+          final entime = (moduleSettings as ModSettingsModelEntime).entime;
+          expect(entime.device.timezoneOffsetMin, 180);
+          expect(entime.gps.enabled, true);
+          expect(entime.touch.enabled, true);
+          expect(entime.touch.calValid, false);
+          expect(entime.touch.calibration, [0, 0, 0, 0, 0]);
+          expect(entime.wifi.passwd, isNull);
+
+          final json = entime.toJson();
+          expect(json['device'], isA<Map<String, dynamic>>());
+          final deviceJson = json['device'] as Map<String, dynamic>;
+          expect(deviceJson['timezone_offset_min'], 180);
+          expect(deviceJson.containsKey('timezone'), isFalse);
+          expect(json['gps'], {'enabled': true});
+          expect(json['touch'], {
+            'enabled': true,
+            'cal_valid': false,
+            'calibration': [0, 0, 0, 0, 0],
+          });
+          expect(json['wifi'], isA<Map<String, dynamic>>());
+          expect((json['wifi'] as Map<String, dynamic>).containsKey('passwd'), isFalse);
         },
       );
 
@@ -108,7 +138,7 @@ void main() {
       blocTest<ModuleSettingsBloc, ModuleSettingsState>(
         'emits loading then error state when entime module update fails after type detection',
         build: () => bloc,
-        act: (bloc) => bloc.add(const ModuleSettingsEvent.get('{"Type": "entime", "invalid": "data"}')),
+        act: (bloc) => bloc.add(const ModuleSettingsEvent.get('{"cmd": "load_config", "data": {"invalid": "data"}}')),
         expect: () => [
           const ModuleSettingsState.loading(),
           const ModuleSettingsState.error(),
@@ -134,18 +164,35 @@ void main() {
           const ModuleSettingsState.uninitialized(),
         ],
       );
+
+      blocTest<ModuleSettingsBloc, ModuleSettingsState>(
+        'emits error on loadFailed event',
+        build: () => bloc,
+        seed: () => const ModuleSettingsState.loading(),
+        act: (bloc) => bloc.add(const ModuleSettingsEvent.loadFailed()),
+        expect: () => [
+          const ModuleSettingsState.error(),
+        ],
+      );
     });
 
     group('Update module settings', () {
       const jsonEntime = '''
           {
-            "Type": "entime",
-            "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
-            "LoRa": {"active": true, "frequency": 868, "txPower": 14, "spreadingFactor": 7, "signalBandwidth": 125, "codingRateDenom": 5, "preambleLength": 8, "syncWord": 12, "crc": true},
-            "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
-            "TFT": {"active": true, "timeout": true, "timeoutDuration": 30, "turnOnAtEvent": true},
-            "Buzzer": {"active": true, "shortFrequency": 1000, "longFrequency": 2000},
-            "VCC": {"r1": 10000, "r2": 10000}
+            "cmd": "load_config",
+            "data": {
+              "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone_offset_min": 180},
+              "sync": {
+                "auto": true,
+                "source": 0,
+                "ntp1": "ru.pool.ntp.org",
+                "ntp2": "time.google.com",
+                "ntp3": "time.cloudflare.com"
+              },
+              "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+              "gps": {"enabled": true},
+              "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
+            }
           }''';
 
       const jsonLed = '''
@@ -174,7 +221,11 @@ void main() {
         expect: () => [
           const ModuleSettingsState.loading(),
           ModuleSettingsState.loaded(
-            ModSettingsModel.entime(ModSettingsEntime.fromJson(jsonDecode(jsonEntime) as Map<String, dynamic>)),
+            ModSettingsModel.entime(
+              ModSettingsEntime.fromJson(
+                (jsonDecode(jsonEntime) as Map<String, dynamic>)['data'] as Map<String, dynamic>,
+              ),
+            ),
           ),
         ],
         verify: (bloc) {
@@ -256,13 +307,20 @@ void main() {
         bloc.add(
           const ModuleSettingsEvent.get('''
         {
-          "Type": "entime",
-          "Bluetooth": {"active": true, "name": "TestBT", "number": 1},
-          "LoRa": {"active": true, "frequency": 868, "txPower": 14, "spreadingFactor": 7, "signalBandwidth": 125, "codingRateDenom": 5, "preambleLength": 8, "syncWord": 12, "crc": true},
-          "WiFi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
-          "TFT": {"active": true, "timeout": true, "timeoutDuration": 30, "turnOnAtEvent": true},
-          "Buzzer": {"active": true, "shortFrequency": 1000, "longFrequency": 2000},
-          "VCC": {"r1": 10000, "r2": 10000}
+          "cmd": "load_config",
+          "data": {
+            "device": {"name": "ENTime-Test", "number": 1, "type": 1, "timezone_offset_min": 180},
+            "sync": {
+              "auto": true,
+              "source": 0,
+              "ntp1": "ru.pool.ntp.org",
+              "ntp2": "time.google.com",
+              "ntp3": "time.cloudflare.com"
+            },
+            "wifi": {"active": true, "ssid": "TestWiFi", "passwd": "password"},
+            "gps": {"enabled": true},
+            "touch": {"enabled": true, "cal_valid": false, "calibration": [0, 0, 0, 0, 0]}
+          }
         }'''),
         );
 

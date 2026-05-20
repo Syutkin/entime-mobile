@@ -30,7 +30,7 @@ class FilePickerProvider implements IFilePickerProvider {
     bool lockParentWindow = false,
     bool readSequential = false,
   }) async {
-    final file = (await FilePicker.platform.pickFiles(
+    final file = (await FilePicker.pickFiles(
       dialogTitle: dialogTitle,
       initialDirectory: initialDirectory,
       type: type,

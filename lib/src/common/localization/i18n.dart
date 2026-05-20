@@ -336,72 +336,51 @@ class I18nHelp {
   static String get manualMd => Intl.message('''
 # Entime mobile
 
-Перед началом работы можно изменить настройки приложения.
+Приложение для старт/финиш‑тайминга соревнований с поддержкой модулей по BLE и ручного ввода.
 
-![](resource:assets/1.png)
+## Быстрый старт
 
- - Включить звук обратного отсчёта
- - Включить и настроить голосовые оповещения
- - Отключить выключение эрана во время работы приложения.
+1) Во вкладке **Начало** выберите соревнование и спецучасток.
+- Создайте новые или импортируйте из CSV (меню у плитки соревнования).
+- Формат CSV: см. `CSV_FORMAT.md`.
 
-![](resource:assets/9.png)
-![](resource:assets/11.png)
+2) Подключите модуль во вкладке **Начало** → Bluetooth.
+- Включите Bluetooth, выберите устройство и подключитесь.
+- После подключения доступны настройки модуля (имя/номер/часовой пояс, Wi‑Fi, и др.).
 
-Для непосредственной работы нужно выбрать файл стартового протокола.
+3) При необходимости синхронизируйте время через NTP (плитка **NTP**).
 
-![](resource:assets/2.png)
+4) Дополнительно: в **Трейлах** можно вести список трасс/треков, в **Гонщиках** — список участников.
 
-Затем bluetooth модуль, который предварительно должен быть сопряжён с мобильным устройством.
+## Старт
 
-![](resource:assets/4.png)
+Во вкладке **Старт** отображается стартовый протокол:
+- Колонки: номер, плановое время, фактическое время (от модуля/устройства), поправка.
+- DNS/DNF/DSQ можно отмечать в строке участника (жесты/меню), а видимость фильтровать через кнопку фильтра вверху.
+- Кнопка **+** позволяет добавить участника или изменить его стартовое время.
+- Результаты стартов отправляются через стандартную кнопку **поделиться**.
 
-После выбора bluetooth модуля, нужно нажать на любой из появившихся bluetooth значков, для соединения с модулем.
+Также доступен экран обратного отсчёта и голосовые/звуковые уведомления (настраиваются в **Настройках**).
 
-![](resource:assets/5.png)
+## Финиш
 
-После установки соединения, можно ~~изменить~~ пока только посмотреть настройки модуля.
+Во вкладке **Финиш** отображаются финишные времена:
+- Время приходит от модуля или вводится вручную кнопкой с иконкой руки.
+- Номер участника назначается перетаскиванием из списка «на трассе» либо через диалог по нажатию на время.
+- Финишные времена можно скрывать свайпом; массовое скрытие доступно через контекстное меню (долгое нажатие).
+- Кнопка фильтра позволяет показывать/скрывать ручные значения, скрытые строки и записи с номерами.
+- Результаты финиша отправляются через стандартную кнопку **поделиться**.
 
-![](resource:assets/8.png)
+## Настройки
 
+В боковом меню доступны:
+- звук и голосовые сообщения, язык;
+- обратный отсчёт, окно старта, автоподстановка номеров;
+- использование времени устройства вместо времени модуля;
+- темы и параметры интерфейса;
+- журнал и обновления.
 
-Для работы на старте переходим во вкладку "Start", в ней отображается стартовый протокол.
-
-В первом столбце номер участника, во втором - плановое стартовое время, в третьем - реальное стартовое время (поступает от стартового модуля), в четвёртом - поправка в миллисекундах относительно планового времени старта.
-
-| Номер | Время старта | Фактическое время старта | Поправка |
-|-------|--------------|--------------------------|----------|
-
-Если участник не стартовал, выставить DNS можно свайпом в левую сторону на строке с нужным номером.
-
-После окончания стартов передать результаты можно нажав стандартную кнопку **share** вверху.
-
-![](resource:assets/12.png)
-
-При нажатии на синий плюс внизу, можно добавить нового участника, либо изменить время старта уже существующего.
-
-Для этого в открывшемся диалоге вводим номер и новое стартовое время.
-
-![](resource:assets/20.png)
-
-Для работы на финише переходим во вкладку "Finish", в ней отображаются финишные времена, введённые либо вручную, при нажатии на иконку руки внизу экрана, либо полученные от финишного модуля. Значок слева поможет определить, как именно было получено значение времени финиша.
-
-Внизу отображаются номера гонщиков, которые сейчас должны быть на трассе.
-
-![](resource:assets/13.png)
-
-Для присвоения номеру времени финиша, либо перетащите номер снизу на нужное время, либо выставите номер вручную из диалога, который появится при нажатии на любое значение времени в основной таблице.
-
-![](resource:assets/15.png)
-
-Отработанные, либо ненужные времена финиша, можно либо скрывать поодиночке свайпом в любую сторону,
-
-![](resource:assets/17.png)
-
-либо сразу все из всплывающего меню, которое появляется при долгом нажатии на любом значении времени.
-
-![](resource:assets/14.png)
-
-После окончания заездов передать результаты финиша можно нажав стандартную кнопку **share** вверху.
+Примечание: поддерживается только BLE‑подключение, Bluetooth Classic не используется.
   ''', name: 'I18nHelp_manualMd');
 }
 
@@ -636,64 +615,31 @@ class I18nModuleSettings {
   static String get errorLoadSettings =>
       Intl.message('Ошибка загрузки настроек!', name: 'I18nModuleSettings_errorLoadSettings');
 
+  static String get saveSettingsSuccess =>
+      Intl.message('Настройки сохранены', name: 'I18nModuleSettings_saveSettingsSuccess');
+
+  static String get saveSettingsSuccessReboot => Intl.message(
+    'Настройки успешно сохранены.\nЧтобы изменения вступили в силу, нужно перезагрузить модуль.',
+    name: 'I18nModuleSettings_saveSettingsSuccessReboot',
+  );
+
+  static String get saveSettingsError =>
+      Intl.message('Ошибка сохранения настроек', name: 'I18nModuleSettings_saveSettingsError');
+
+  static String get saveSettingsTimeout => Intl.message(
+    'Модуль не ответил. Проверьте подключение и повторите сохранение.',
+    name: 'I18nModuleSettings_saveSettingsTimeout',
+  );
+
+  static String saveSettingsErrorMessage(String message) => Intl.message(
+    'Ошибка сохранения настроек: $message',
+    name: 'I18nModuleSettings_saveSettingsErrorMessage',
+    args: [message],
+  );
+
   static String get awaitingSettings => Intl.message('Ждём настройки...', name: 'I18nModuleSettings_awaitingSettings');
 
   static String get module => Intl.message('Модуль', name: 'I18nModuleSettings_module');
-
-  static String get buzzer => Intl.message('Buzzer', name: 'I18nModuleSettings_buzzer');
-
-  static String get shortFrequency =>
-      Intl.message('Частота коротких гудков', name: 'I18nModuleSettings_shortFrequency');
-
-  static String get selectShortFrequency =>
-      Intl.message('Выберите частоту короткого гудка', name: 'I18nModuleSettings_selectShortFrequency');
-
-  static String get longFrequency => Intl.message('Частота длинных гудков', name: 'I18nModuleSettings_longFrequency');
-
-  static String get selectLongFrequency =>
-      Intl.message('Выберите частоту длинного гудка', name: 'I18nModuleSettings_selectLongFrequency');
-
-  static String noteFrequency(String note, int frequency) =>
-      Intl.message('Нота $note, $frequencyГц', name: 'I18nModuleSettings_noteFrequency', args: [note, frequency]);
-
-  static String get lora => Intl.message('LoRa', name: 'I18nModuleSettings_lora');
-
-  static String get frequency => Intl.message('Частота', name: 'I18nModuleSettings_frequency');
-
-  static String frequencyHz(int frequency) =>
-      Intl.message('$frequencyГц', name: 'I18nModuleSettings_frequencyHz', args: [frequency]);
-
-  static String get txPower => Intl.message('TX Power', name: 'I18nModuleSettings_txPower');
-
-  static String get spreadingFactor => Intl.message('Spreading Factor', name: 'I18nModuleSettings_spreadingFactor');
-
-  static String get signalBandwidth => Intl.message('Signal Bandwidth', name: 'I18nModuleSettings_signalBandwidth');
-
-  static String get codingRateDenominator =>
-      Intl.message('Coding Rate Denominator', name: 'I18nModuleSettings_codingRateDenominator');
-
-  static String get preambleLength => Intl.message('Preamble Length', name: 'I18nModuleSettings_preambleLength');
-
-  static String get syncWord => Intl.message('Sync Word', name: 'I18nModuleSettings_syncWord');
-
-  static String get crc => Intl.message('CRC', name: 'I18nModuleSettings_crc');
-
-  static String get screen => Intl.message('Экран', name: 'I18nModuleSettings_screen');
-
-  static String get tft => Intl.message('TFT', name: 'I18nModuleSettings_tft');
-
-  static String get sleepMode => Intl.message('Спящий режим', name: 'I18nModuleSettings_sleepMode');
-
-  static String sleepModeSeconds(int seconds) => Intl.plural(
-    seconds,
-    one: '$seconds секунда',
-    few: '$seconds секунды',
-    other: 'секунд',
-    name: 'I18nModuleSettings_sleepModeSeconds',
-    args: [seconds],
-  );
-
-  static String get turnOnAtEvent => Intl.message('Включать после события', name: 'I18nModuleSettings_turnOnAtEvent');
 
   static String get bluetooth => Intl.message('Bluetooth', name: 'I18nModuleSettings_bluetooth');
 
@@ -718,29 +664,78 @@ class I18nModuleSettings {
   static String get enterWifiCredentials =>
       Intl.message('Введите данные сети', name: 'I18nModuleSettings_enterWifiCredentials');
 
-  static String get vcc => Intl.message('VCC', name: 'I18nModuleSettings_vcc');
+  static String get device => Intl.message('Устройство', name: 'I18nModuleSettings_device');
 
-  static String get resistor1 => Intl.message('R1', name: 'I18nModuleSettings_resistor1');
+  static String get deviceName => Intl.message('Имя', name: 'I18nModuleSettings_deviceName');
 
-  static String get resistor2 => Intl.message('R2', name: 'I18nModuleSettings_resistor2');
+  static String get deviceNameEmpty => Intl.message('Введите имя модуля', name: 'I18nModuleSettings_deviceNameEmpty');
 
-  static String get ohm => Intl.message('Ом', name: 'I18nModuleSettings_ohm');
+  static String get deviceNameInvalid =>
+      Intl.message('Только ASCII символы (A-Z, a-z, 0-9, -, _)', name: 'I18nModuleSettings_deviceNameInvalid');
 
-  static String resistorOhm(int ohm) => Intl.message('$ohm Ом', name: 'I18nModuleSettings_resistorOhm', args: [ohm]);
+  static String get deviceNameTooLong =>
+      Intl.message('Максимум 16 символов', name: 'I18nModuleSettings_deviceNameTooLong');
 
-  static String get enterResistor1 =>
-      Intl.message('Введите значение резистора R1', name: 'I18nModuleSettings_enterResistor1');
+  static String get deviceNumber => Intl.message('Номер', name: 'I18nModuleSettings_deviceNumber');
 
-  static String get enterResistor2 =>
-      Intl.message('Введите значение резистора R2', name: 'I18nModuleSettings_enterResistor2');
+  static String get deviceNumberEmpty =>
+      Intl.message('Введите номер устройства', name: 'I18nModuleSettings_deviceNumberEmpty');
 
-  static String get enterMeasuredVoltage =>
-      Intl.message('Ввод измеренного напряжения', name: 'I18nModuleSettings_enterMeasuredVoltage');
+  static String get deviceNumberInvalid =>
+      Intl.message('Номер должен быть целым', name: 'I18nModuleSettings_deviceNumberInvalid');
 
-  static String get mv => Intl.message('мВ', name: 'I18nModuleSettings_mv');
+  static String get deviceNumberRange => Intl.message('Диапазон 1..255', name: 'I18nModuleSettings_deviceNumberRange');
 
-  static String get enterCurrentVoltage =>
-      Intl.message('Введите текущее значение напряжения на батареях', name: 'I18nModuleSettings_enterCurrentVoltage');
+  static String get deviceType => Intl.message('Тип', name: 'I18nModuleSettings_deviceType');
+
+  static String get deviceTimezone => Intl.message('Смещение UTC', name: 'I18nModuleSettings_deviceTimezone');
+
+  static String get timezoneEmpty =>
+      Intl.message('Введите смещение UTC, например 3 или 5:45', name: 'I18nModuleSettings_timezoneEmpty');
+
+  static String get timezoneInvalid =>
+      Intl.message('Введите целые часы или часы:минуты', name: 'I18nModuleSettings_timezoneInvalid');
+
+  static String get timezoneRange =>
+      Intl.message('Диапазон UTC-12:00..UTC+14:00', name: 'I18nModuleSettings_timezoneRange');
+
+  static String get sync => Intl.message('Синхронизация', name: 'I18nModuleSettings_sync');
+
+  static String get syncAuto => Intl.message('Авто', name: 'I18nModuleSettings_syncAuto');
+
+  static String get syncSource => Intl.message('Источник', name: 'I18nModuleSettings_syncSource');
+
+  static String get syncSourceAuto => Intl.message('Авто', name: 'I18nModuleSettings_syncSourceAuto');
+
+  static String get syncSourceGps => Intl.message('GPS', name: 'I18nModuleSettings_syncSourceGps');
+
+  static String get syncSourceRtc => Intl.message('RTC', name: 'I18nModuleSettings_syncSourceRtc');
+
+  static String get gps => Intl.message('GPS', name: 'I18nModuleSettings_gps');
+
+  static String get gpsEnabled => Intl.message('GPS', name: 'I18nModuleSettings_gpsEnabled');
+
+  static String get touch => Intl.message('Тачскрин', name: 'I18nModuleSettings_touch');
+
+  static String get touchEnabled => Intl.message('Сенсорный ввод', name: 'I18nModuleSettings_touchEnabled');
+
+  static String get touchCalValid => Intl.message('Сенсор откалиброван', name: 'I18nModuleSettings_touchCalValid');
+
+  static String get touchCalibration => Intl.message('Калибровка', name: 'I18nModuleSettings_touchCalibration');
+
+  static String get ntp1 => Intl.message('NTP 1', name: 'I18nModuleSettings_ntp1');
+
+  static String get ntp2 => Intl.message('NTP 2', name: 'I18nModuleSettings_ntp2');
+
+  static String get ntp3 => Intl.message('NTP 3', name: 'I18nModuleSettings_ntp3');
+
+  static String get ntpEmpty => Intl.message('Введите NTP сервер', name: 'I18nModuleSettings_ntpEmpty');
+
+  static String get ntpInvalid => Intl.message('Неверный адрес сервера', name: 'I18nModuleSettings_ntpInvalid');
+
+  static String get ntpTooLong => Intl.message('Максимум 64 символа', name: 'I18nModuleSettings_ntpTooLong');
+
+  static String get wifiActive => Intl.message('Активно', name: 'I18nModuleSettings_wifiActive');
 
   static String get brightness => Intl.message('Яркость', name: 'I18nModuleSettings_brightness');
 
@@ -802,6 +797,12 @@ class I18nDatabase {
   static String get stageDescription => Intl.message('Описание', name: 'I18nDatabase_stageDescription');
 
   static String get isActiveStage => Intl.message('Активный', name: 'I18nDatabase_isActiveStage');
+
+  static String duplicateParticipantNumberInStagesCsv(int number) => Intl.message(
+    'В стартовом протоколе повторяется номер участника: $number',
+    name: 'I18nDatabase_duplicateParticipantNumberInStagesCsv',
+    args: [number],
+  );
 
   static String deleteRace(String raceName) => Intl.message(
     'Вы уверены, что хотите удалить гонку "$raceName"?',
