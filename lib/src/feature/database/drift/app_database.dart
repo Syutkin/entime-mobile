@@ -86,8 +86,10 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Удаляет гонку с [id]
-  Future<int> deleteRace(int id) {
-    return (update(races)..where((r) => r.id.equals(id))).write(RacesCompanion(deletedAt: Value(DateTime.now().toUtc())));
+  Future<int> deleteRace(int id, {DateTime? time}) {
+    return (update(
+      races,
+    )..where((r) => r.id.equals(id))).write(RacesCompanion(deletedAt: Value(time ?? DateTime.now().toUtc())));
   }
 
   /// Обновление информации о гонке с [id]
@@ -157,8 +159,10 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Удаляет спецучасток с [id]
-  Future<int> deleteStage(int id) {
-    return (update(stages)..where((r) => r.id.equals(id))).write(StagesCompanion(deletedAt: Value(DateTime.now().toUtc())));
+  Future<int> deleteStage(int id, {DateTime? time}) {
+    return (update(
+      stages,
+    )..where((r) => r.id.equals(id))).write(StagesCompanion(deletedAt: Value(time ?? DateTime.now().toUtc())));
   }
 
   /// Обновление информации о гоночном этапе с [id]
@@ -290,9 +294,11 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Удаляет трейл с [id]
-  Future<int> deleteTrail(int id) async {
+  Future<int> deleteTrail(int id, {DateTime? time}) async {
     // ToDo: если был файл трека, то вот его надо бы удалять
-    return (update(trails)..where((r) => r.id.equals(id))).write(TrailsCompanion(deletedAt: Value(DateTime.now().toUtc())));
+    return (update(
+      trails,
+    )..where((r) => r.id.equals(id))).write(TrailsCompanion(deletedAt: Value(time ?? DateTime.now().toUtc())));
   }
 
   /// Добавляет трек
