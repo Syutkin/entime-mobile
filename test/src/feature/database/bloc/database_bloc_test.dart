@@ -813,6 +813,49 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
+      'Add finish time uses substituteNumbersDelay independently from finishDelay',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        final dateTimeNow = '10:05:28,111'.toDateTime();
+        bloc
+          ..add(
+            DatabaseEvent.addFinishTime(
+              stage: stage,
+              finishTime: '10:05:23,123',
+              timestamp: '10:05:23,456'.toDateTime()!,
+              ntpOffset: 3456,
+              finishDelay: 0,
+              substituteNumbers: true,
+              substituteNumbersDelay: 1000,
+              dateTimeNow: dateTimeNow,
+            ),
+          )
+          ..add(
+            DatabaseEvent.addFinishTime(
+              stage: stage,
+              finishTime: '10:05:23,129',
+              timestamp: '10:05:23,459'.toDateTime()!,
+              ntpOffset: 4567,
+              finishDelay: 0,
+              substituteNumbers: true,
+              substituteNumbersDelay: 1000,
+              dateTimeNow: dateTimeNow,
+            ),
+          )
+          ..add(DatabaseEvent.selectStage(stage));
+      },
+      verify: (bloc) {
+        expect(bloc.state.finishes.length, 2);
+        expect(bloc.state.finishes[0].number, 2);
+        expect(bloc.state.finishes[1].number, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
       'Add finish time manual',
       setUp: () {
         Bloc.observer = AppBlocObserver();

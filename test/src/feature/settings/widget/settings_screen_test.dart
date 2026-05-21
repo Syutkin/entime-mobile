@@ -20,6 +20,60 @@ class MockAudioBloc extends MockBloc<AudioEvent, AudioState> implements AudioBlo
 class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit {}
 
 void main() {
+  const testSettings = AppSettings(
+    language: 'ru',
+    reconnect: false,
+    sound: true,
+    beep: true,
+    beepFromApp: true,
+    voice: true,
+    voiceFromApp: true,
+    voiceName: false,
+    volume: 0.7,
+    pitch: 1.2,
+    rate: 0.8,
+    voiceLanguage: 'en-US',
+    raceId: 11,
+    stageId: 22,
+    wakelock: false,
+    startFab: true,
+    startFabSize: 64,
+    finishFab: true,
+    finishFabSize: 68,
+    countdown: true,
+    countdownSize: 66,
+    countdownLeft: 12,
+    countdownTop: 34,
+    countdownAtStartTime: false,
+    checkUpdates: false,
+    showDNS: true,
+    showDNF: true,
+    showDSQ: true,
+    showHidden: true,
+    showNumbers: false,
+    showManual: false,
+    finishDelay: 111,
+    substituteNumbers: true,
+    substituteNumbersDelay: 222,
+    showStartDifference: true,
+    showColorStartDifference: true,
+    startDifferenceThreshold: 333,
+    showFinishDifference: true,
+    showColorFinishDifference: true,
+    finishDifferenceThreshold: 444,
+    deltaInSeconds: 55,
+    updateStartCorrectionDelay: 666,
+    logLimit: 77,
+    seedColor: ColorSeed.green,
+    brightness: Brightness.dark,
+    contrastLevel: 0.5,
+    dynamicSchemeVariant: DynamicSchemeVariant.tonalSpot,
+    isOLEDBackground: true,
+    previousVersion: '9.9.9',
+    updateNtpOffsetAtStartup: true,
+    useTimestampForAutomaticStamps: false,
+  );
+
   late SettingsCubit settingsCubit;
   late AppSettings settings;
   late SharedPrefsSettingsProvider sharedPrefsSettingsProvider;
@@ -44,7 +98,7 @@ void main() {
   }
 
   setUpAll(() {
-    registerFallbackValue(const AppSettings.defaults());
+    registerFallbackValue(testSettings);
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMessageHandler('dev.flutter.pigeon.wakelock_plus_platform_interface.WakelockPlusApi.toggle', (obj) async => obj);
   });
 
@@ -52,8 +106,7 @@ void main() {
     settingsCubit = MockSettingsCubit();
     audioBloc = MockAudioBloc();
 
-    // включаем неактивные тайлы, иначе они недоступны для тестирования
-    settings = const AppSettings.defaults().copyWith(showColorStartDifference: true, showColorFinishDifference: true, brightness: Brightness.dark, isOLEDBackground: true);
+    settings = testSettings;
     SharedPreferences.setMockInitialValues(sharedPrefsDefaults);
     sharedPrefsSettingsProvider = await SharedPrefsSettingsProvider.load();
     await sharedPrefsSettingsProvider.update(settings);
@@ -386,6 +439,10 @@ void main() {
           await $(SettingsSection).containing(Localization.current.I18nSettings_finishScreen).$(SettingsTile).$(Localization.current.I18nSettings_startFinishDifference).scrollTo(),
           findsOneWidget,
         );
+        expect(
+          await $(SettingsTile).containing($(Localization.current.I18nSettings_autoSubstitutionDelay)).$(Localization.current.I18nSettings_milliseconds(settings.substituteNumbersDelay)).scrollTo(),
+          findsOneWidget,
+        );
       });
 
       patrolWidgetTest('Set delayForNewEvents when OK button pressed from popup', ($) async {
@@ -513,7 +570,7 @@ void main() {
       });
 
       patrolWidgetTest('Open theme settings screen', ($) async {
-        settings = const AppSettings.defaults().copyWith(logLimit: -1);
+        settings = settings.copyWith(logLimit: -1);
         when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
@@ -547,7 +604,7 @@ void main() {
       });
 
       patrolWidgetTest('Show icon when unlimited log lines', ($) async {
-        settings = const AppSettings.defaults().copyWith(logLimit: -1);
+        settings = settings.copyWith(logLimit: -1);
         when(() => settingsCubit.state).thenReturn(settings);
 
         await $.pumpWidgetAndSettle(testWidget());
