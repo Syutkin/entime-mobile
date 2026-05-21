@@ -302,7 +302,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               ntpOffset: event.ntpOffset,
               finishDelay: event.finishDelay ?? _finishDelay,
               substituteNumbers: event.substituteNumbers ?? _substituteNumbers,
-              substituteNumbersDelay: event.finishDelay ?? _substituteNumbersDelay,
+              substituteNumbersDelay: event.substituteNumbersDelay ?? _substituteNumbersDelay,
               dateTimeNow: event.dateTimeNow,
               number: _awaitingNumber,
             );

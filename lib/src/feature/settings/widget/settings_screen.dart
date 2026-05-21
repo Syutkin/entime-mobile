@@ -388,7 +388,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 SettingsTile(
                   title: Text(Localization.current.I18nSettings_autoSubstitutionDelay),
-                  trailing: Text(Localization.current.I18nSettings_milliseconds(settingsState.finishDelay)),
+                  trailing: Text(Localization.current.I18nSettings_milliseconds(settingsState.substituteNumbersDelay)),
                   //leading:  Icon(MdiIcons.clockOutline),
                   onPressed: (context) async {
                     final value = await setDelayPopup(
