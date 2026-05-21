@@ -575,6 +575,23 @@ void main() {
         expect(parseStatusResponse(rawNoSync).sync?.state, BluetoothProtocolSyncState.noSync);
       });
 
+      test('keeps status response when enum values are unknown', () {
+        const raw = '''
+{"cmd":"status","id":3,"status":"unknown","device":{"type":"timer"},"wifi":{"state":"sleeping"},"ble":{"state":"pairing"},"gps":{"state":"cold_start"},"sync":{"state":"holdover","source":"network"},"system":{"reset_reason":"mystery"}}
+''';
+
+        final response = parseStatusResponse(raw);
+
+        expect(response.status, null);
+        expect(response.device?.type, null);
+        expect(response.wifi?.state, null);
+        expect(response.ble?.state, null);
+        expect(response.gps?.state, null);
+        expect(response.sync?.state, null);
+        expect(response.sync?.source, null);
+        expect(response.system?.resetReason, null);
+      });
+
       test('parses reset reason variants', () {
         const raw = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"panic"}}';
         const rawBrownout = '{"cmd":"status","id":3,"status":"ok","system":{"reset_reason":"brownout"}}';
@@ -745,6 +762,12 @@ void main() {
       final message = parser.parse(raw);
 
       expect(message, isA<BluetoothProtocolUnknownMessage>());
+    });
+
+    test('returns unknown on non-map json', () {
+      expect(parser.parse('[1, 2, 3]'), isA<BluetoothProtocolUnknownMessage>());
+      expect(parser.parse('"text"'), isA<BluetoothProtocolUnknownMessage>());
+      expect(parser.parse('123'), isA<BluetoothProtocolUnknownMessage>());
     });
 
     test('returns unknown on empty message', () {

@@ -49,6 +49,58 @@ void main() {
       }
     });
 
+    test('complete cancels timeout', () async {
+      final cubit = BluetoothRequestCubit();
+      final timedOut = <PendingBluetoothRequest>[];
+      final subscription = cubit.stream.listen((state) {
+        if (state is BluetoothRequestTimedOut) {
+          timedOut.add(state.request);
+        }
+      });
+
+      try {
+        final id = cubit.track(
+          command: BluetoothProtocolCommandType.saveConfig,
+          purpose: BluetoothRequestPurpose.moduleSettingsSave,
+          timeout: const Duration(milliseconds: 10),
+        );
+
+        final completed = cubit.complete(BluetoothJsonResponseSaveConfig(id: id));
+        await Future<void>.delayed(const Duration(milliseconds: 30));
+
+        expect(completed?.id, id);
+        expect(cubit.isPending(id), isFalse);
+        expect(timedOut, isEmpty);
+      } finally {
+        await subscription.cancel();
+        await cubit.close();
+      }
+    });
+
+    test('close cancels pending timeouts', () async {
+      final cubit = BluetoothRequestCubit();
+      final timedOut = <PendingBluetoothRequest>[];
+      final subscription = cubit.stream.listen((state) {
+        if (state is BluetoothRequestTimedOut) {
+          timedOut.add(state.request);
+        }
+      });
+
+      final id = cubit.track(
+        command: BluetoothProtocolCommandType.loadConfig,
+        purpose: BluetoothRequestPurpose.moduleSettingsLoad,
+        timeout: const Duration(milliseconds: 10),
+      );
+
+      await cubit.close();
+      await Future<void>.delayed(const Duration(milliseconds: 30));
+
+      expect(cubit.isPending(id), isFalse);
+      expect(timedOut, isEmpty);
+
+      await subscription.cancel();
+    });
+
     test('emits timeout separately for each pending request', () async {
       final cubit = BluetoothRequestCubit();
       final timedOut = <PendingBluetoothRequest>[];

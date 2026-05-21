@@ -477,6 +477,50 @@ void main() {
       );
 
       blocTest<BluetoothBloc, BluetoothBlocState>(
+        'uses latest settings stageId for messages from background stream',
+        setUp: () {
+          const message = 'B10:00:01,123#';
+          when(() => bluetoothBackgroundConnection.isConnected).thenReturn(true);
+          when(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.input,
+              rawData: message,
+            ),
+          ).thenAnswer((_) => Future.value(1));
+        },
+        build: () => BluetoothBloc(
+          audioController: audioController,
+          bluetoothProvider: bluetoothProvider,
+          database: database,
+          settingsProvider: settingsProvider,
+        ),
+        act: (bloc) async {
+          await settingsProvider.update(settings.copyWith(stageId: 42));
+          await Future<void>.delayed(Duration.zero);
+
+          final messageController = StreamController<String>();
+          when(() => bluetoothBackgroundConnection.message).thenAnswer((_) => messageController.stream);
+          when(() => bluetoothBackgroundConnection.onDisconnect(any())).thenAnswer((_) {});
+
+          bloc.add(BluetoothEvent.connect(selectedDevice: devicePrimary));
+          await Future<void>.delayed(Duration.zero);
+          messageController.add('B10:00:01,123#');
+          await Future<void>.delayed(Duration.zero);
+
+          await messageController.close();
+        },
+        expect: () => const <BluetoothBlocState>[
+          BluetoothBlocState.connecting(),
+          BluetoothBlocState.connected(),
+        ],
+        verify: (bloc) {
+          verify(() => audioController.playCountdown(time: '10:00:01,123', stageId: 42)).called(1);
+        },
+      );
+
+      blocTest<BluetoothBloc, BluetoothBlocState>(
         'attempt mismatch stops and emits disconnected',
         setUp: () {
           // First connect is delayed; second connect bumps attempt counter.
@@ -1180,6 +1224,16 @@ void main() {
         ),
         act: (bloc) => bloc.add(BluetoothEvent.messageReceived(message: message, stageId: stageId)),
         expect: () => <BluetoothBlocState>[],
+        verify: (bloc) {
+          verify(
+            () => database.addLog(
+              level: LogLevel.information,
+              source: LogSource.bluetooth,
+              direction: LogSourceDirection.input,
+              rawData: message,
+            ),
+          ).called(1);
+        },
       );
     });
 

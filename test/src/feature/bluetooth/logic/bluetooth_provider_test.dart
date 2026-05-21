@@ -175,6 +175,25 @@ void main() {
     }
   }
 
+  BmScanAdvertisement scanAdvertisement({
+    required DeviceIdentifier remoteId,
+    required String platformName,
+    required int rssi,
+  }) {
+    return BmScanAdvertisement(
+      remoteId: remoteId,
+      platformName: platformName,
+      advName: platformName,
+      connectable: true,
+      txPowerLevel: null,
+      appearance: null,
+      manufacturerData: <int, List<int>>{},
+      serviceData: <Guid, List<int>>{},
+      serviceUuids: <Guid>[],
+      rssi: rssi,
+    );
+  }
+
   group('BluetoothProvider:', () {
     late FakeFlutterBluePlusPlatform fakePlatform;
     late MockBluetoothBackgroundConnection backgroundConnection;
@@ -370,6 +389,57 @@ void main() {
       expect(updated.single, isNot(same(first.single)));
 
       await queue.cancel();
+    });
+
+    test('scanResultsAggregated keeps other devices when one device updates', () async {
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
+      await provider.startScan();
+
+      const firstRemoteId = DeviceIdentifier('11:22:33:44:55:66');
+      const secondRemoteId = DeviceIdentifier('22:33:44:55:66:77');
+      final queue = StreamQueue(provider.scanResultsAggregated());
+
+      fakePlatform.emitScanResponse(
+        BmScanResponse(
+          advertisements: [
+            scanAdvertisement(remoteId: firstRemoteId, platformName: 'First', rssi: -40),
+            scanAdvertisement(remoteId: secondRemoteId, platformName: 'Second', rssi: -70),
+          ],
+          success: true,
+          errorCode: 0,
+          errorString: '',
+        ),
+      );
+
+      final first = await nextNonEmptyDeviceList(queue);
+      expect(first.map((result) => result.device.remoteId), [firstRemoteId, secondRemoteId]);
+      expect(first.map((result) => result.rssi), [-40, -70]);
+
+      fakePlatform.emitScanResponse(
+        BmScanResponse(
+          advertisements: [
+            scanAdvertisement(remoteId: firstRemoteId, platformName: 'First', rssi: -20),
+          ],
+          success: true,
+          errorCode: 0,
+          errorString: '',
+        ),
+      );
+
+      final updated = await nextNonEmptyDeviceList(queue);
+      expect(updated.map((result) => result.device.remoteId), [firstRemoteId, secondRemoteId]);
+      expect(updated.map((result) => result.rssi), [-20, -70]);
+
+      await queue.cancel();
+    });
+
+    test('startScan stops after custom timeout', () async {
+      final provider = BluetoothProvider(appInfo: appInfo, bluetoothBackgroundConnection: backgroundConnection);
+
+      await provider.startScan(timeout: const Duration(milliseconds: 10));
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+
+      expect(fakePlatform.stopScanCalled, isTrue);
     });
 
     test('requestPermissions completes', () async {
