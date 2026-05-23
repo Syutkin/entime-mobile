@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
@@ -31,7 +33,7 @@ void main() {
         child: MaterialApp(
           localizationsDelegates: const [Localization.delegate],
           supportedLocales: Localization.supportedLocales,
-          home: const Material(child: BluetoothButton()),
+          home: Material(child: BluetoothButton()),
         ),
       ),
     );

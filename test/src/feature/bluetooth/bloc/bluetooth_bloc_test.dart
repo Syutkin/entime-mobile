@@ -561,7 +561,7 @@ void main() {
         },
       );
 
-      test('close while connect is pending does not emit after connect completes', () async {
+      test('canceled connect result does not emit after connect completes', () async {
         final connect = Completer<void>();
         when(() => bluetoothBackgroundConnection.connect(devicePrimary)).thenAnswer((_) => connect.future);
         when(() => bluetoothBackgroundConnection.isConnected).thenReturn(true);
@@ -584,6 +584,7 @@ void main() {
 
         expect(states, [const BluetoothBlocState.connecting()]);
         verifyNever(() => bluetoothBackgroundConnection.start());
+        verifyNever(() => bluetoothBackgroundConnection.onDisconnect(any()));
 
         await subscription.cancel();
       });

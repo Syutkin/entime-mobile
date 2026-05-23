@@ -141,19 +141,25 @@ void main() {
       },
     );
 
-    blocTest<CountdownBloc, CountdownState>(
-      'Add "stop" event',
-      act: (bloc) {
-        bloc
-          ..add(CountdownEvent.tick(tick))
-          ..add(const CountdownEvent.stop());
-      },
-      build: () => CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId),
-      expect: () => [isA<CountdownStateWorking>(), isA<CountdownStateInitial>()],
-      verify: (_) {
-        verify(() => countdownAtStart.stop()).called(1);
-      },
-    );
+    test('Add "stop" event', () async {
+      final bloc = CountdownBloc(audioController: audioController, countdown: countdownAtStart, stageId: stageId);
+      final expectation = expectLater(
+        bloc.stream,
+        emitsInOrder([
+          isA<CountdownStateWorking>(),
+          isA<CountdownStateInitial>(),
+        ]),
+      );
+
+      bloc
+        ..add(CountdownEvent.tick(tick))
+        ..add(const CountdownEvent.stop());
+
+      await expectation;
+      verify(() => countdownAtStart.stop()).called(1);
+
+      await bloc.close();
+    });
 
     test('Cancels ticks subscription on close', () async {
       var canceled = false;

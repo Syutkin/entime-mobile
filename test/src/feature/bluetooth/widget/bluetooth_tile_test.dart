@@ -159,6 +159,14 @@ void main() {
       expect($(Localization.current.I18nBluetooth_selectDevice), findsOneWidget);
     });
 
+    patrolWidgetTest('connected state with battery level', ($) async {
+      when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected(batteryLevel: 87));
+      when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);
+      await $.pumpWidgetAndSettle(testWidget());
+
+      expect($('BluetoothDeviceName | 87%'), findsOneWidget);
+    });
+
     patrolWidgetTest('Press log button at connected state', ($) async {
       when(() => btBloc.state).thenReturn(const BluetoothBlocState.connected());
       when(() => btBloc.bluetoothDevice).thenReturn(bluetoothDevice);

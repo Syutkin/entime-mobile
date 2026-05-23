@@ -108,6 +108,10 @@ void main() {
       final iconButton = $(IconButton).evaluate().single.widget as IconButton;
       final icon = iconButton.icon as Icon;
       expect(icon.icon, Icons.replay);
+
+      await $(IconButton).tap();
+      // initState starts discovery once, replay button starts it again.
+      verify(() => bluetoothDiscoveryCubit.startDiscovery()).called(2);
     });
 
     patrolWidgetTest('Lists scanned device and returns it on tap', ($) async {
@@ -163,6 +167,46 @@ void main() {
       expect(result, isNotNull);
       expect(result!.remoteId, remoteId);
       expect(result.platformName, deviceName);
+    });
+
+    patrolWidgetTest('selectBluetoothDevice dispatches selected device', ($) async {
+      const rssi = -40;
+      const remoteId = DeviceIdentifier('11:22:33:44:55:66');
+      const deviceName = 'Test Device';
+
+      final device = MockBluetoothDevice();
+      when(() => device.remoteId).thenReturn(remoteId);
+      when(() => device.platformName).thenReturn(deviceName);
+      when(() => device.isConnected).thenReturn(false);
+
+      when(
+        () => bluetoothDiscoveryCubit.state,
+      ).thenReturn(
+        const BluetoothDiscoveryState.initial().copyWith(
+          devices: [_scanResult(device: device, rssi: rssi)],
+        ),
+      );
+
+      await $.pumpWidget(
+        testApp(
+          Builder(
+            builder: (context) => TextButton(
+              onPressed: () async {
+                await selectBluetoothDevice(context);
+              },
+              child: const Text('select device'),
+            ),
+          ),
+        ),
+      );
+
+      await $('select device').tap();
+      await $.pumpAndSettle();
+
+      await $(device.remoteId.str).tap();
+      await $.pumpAndSettle();
+
+      verify(() => bluetoothBloc.add(BluetoothEvent.selectDevice(device: device))).called(1);
     });
   });
 }

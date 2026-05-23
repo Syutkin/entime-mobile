@@ -103,20 +103,23 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothBlocState> {
             // selectDevice и новые connect-события до завершения connect().
             unawaited(
               _handleConnect(device, attempt).then((result) {
-                if (!_canAddEvents) return;
                 switch (result) {
+                  case _ConnectResult.canceled:
+                    return;
                   case _ConnectResult.connected:
+                    if (!_canAddEvents) return;
                     add(const BluetoothEvent.connected());
                   case _ConnectResult.disconnected:
+                    if (!_canAddEvents) return;
                     if (state is! BluetoothBlocStateDisconnected) {
                       add(const BluetoothEvent.disconnected());
                     }
                     _scheduleReconnect();
                   case _ConnectResult.stale:
+                    if (!_canAddEvents) return;
                     if (state is! BluetoothBlocStateDisconnected) {
                       add(const BluetoothEvent.disconnected());
                     }
-                  case _ConnectResult.canceled:
                 }
               }),
             );
