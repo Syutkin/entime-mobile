@@ -271,7 +271,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               deltaInSeconds: event.deltaInSeconds,
             );
           case _SetStatusForStartId():
-            await _db.setStatusForStartId(startId: event.startId, status: ParticipantStatus.dns);
+            await _db.setStatusForStartId(startId: event.startId, status: event.status);
           case _UpdateAutomaticCorrection():
             final previousStarts = await _db.updateAutomaticCorrection(
               stageId: event.stageId,

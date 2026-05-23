@@ -606,7 +606,7 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
-      'Set status for start id',
+      'Set dns status for start id',
       setUp: () async {
         Bloc.observer = AppBlocObserver();
         await settingsProvider.update(settingsProvider.settings.copyWith(showDNS: true));
@@ -620,6 +620,42 @@ void main() {
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.statusId, ParticipantStatus.dns.index);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Set dnf status for start id',
+      setUp: () async {
+        Bloc.observer = AppBlocObserver();
+        await settingsProvider.update(settingsProvider.settings.copyWith(showDNS: true));
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(DatabaseEvent.setStatusForStartId(startId: 1, status: ParticipantStatus.dnf))
+          ..add(DatabaseEvent.selectStage(stage));
+      },
+      verify: (bloc) {
+        expect(bloc.state.participants.first.statusId, ParticipantStatus.dnf.index);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Set dsq status for start id',
+      setUp: () async {
+        Bloc.observer = AppBlocObserver();
+        await settingsProvider.update(settingsProvider.settings.copyWith(showDNS: true));
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        bloc
+          ..add(DatabaseEvent.setStatusForStartId(startId: 1, status: ParticipantStatus.dsq))
+          ..add(DatabaseEvent.selectStage(stage));
+      },
+      verify: (bloc) {
+        expect(bloc.state.participants.first.statusId, ParticipantStatus.dsq.index);
       },
     );
 
