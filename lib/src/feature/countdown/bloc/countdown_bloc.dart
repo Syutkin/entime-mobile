@@ -56,6 +56,7 @@ class CountdownBloc extends Bloc<CountdownEvent, CountdownState> {
   @override
   Future<void> close() async {
     await _ticksSubscription.cancel();
+    await _countdown.stop();
     return super.close();
   }
 
