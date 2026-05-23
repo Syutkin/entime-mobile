@@ -42,7 +42,7 @@ void main() {
           child: MaterialApp(
             localizationsDelegates: const [Localization.delegate],
             supportedLocales: Localization.supportedLocales,
-            home: TrailsListPage(),
+            home: const TrailsListPage(),
           ),
         ),
       ),

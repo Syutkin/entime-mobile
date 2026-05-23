@@ -24,7 +24,7 @@ void main() {
       supportedLocales: Localization.supportedLocales,
       home: BlocProvider.value(
         value: databaseBloc,
-        child: RidersListPage(),
+        child: const RidersListPage(),
       ),
     );
   }

@@ -8,10 +8,21 @@ import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../settings/bloc/settings_bloc.dart';
 import '../log.dart';
 
-class LogScreen extends StatelessWidget {
-  LogScreen({super.key});
+class LogScreen extends StatefulWidget {
+  const LogScreen({super.key});
 
+  @override
+  State<LogScreen> createState() => _LogScreenState();
+}
+
+class _LogScreenState extends State<LogScreen> {
   final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

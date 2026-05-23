@@ -55,6 +55,7 @@ class _FinishListPage extends State<FinishListPage> {
   @override
   void dispose() {
     _timer.cancel();
+    _scrollController.dispose();
     super.dispose();
   }
 

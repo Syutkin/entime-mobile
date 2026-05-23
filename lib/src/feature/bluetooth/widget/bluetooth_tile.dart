@@ -45,7 +45,7 @@ class BluetoothTile extends StatelessWidget {
       IconButton(
         icon: const Icon(Icons.format_list_bulleted_rounded),
         onPressed: () async {
-          await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => LogScreen()));
+          await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const LogScreen()));
         },
       ),
       IconButton(

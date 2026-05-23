@@ -13,10 +13,21 @@ import '../logic/validators.dart';
 
 part 'popup/edit_rider_popup.dart';
 
-class RidersListPage extends StatelessWidget {
-  RidersListPage({super.key});
+class RidersListPage extends StatefulWidget {
+  const RidersListPage({super.key});
 
+  @override
+  State<RidersListPage> createState() => _RidersListPageState();
+}
+
+class _RidersListPageState extends State<RidersListPage> {
   final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

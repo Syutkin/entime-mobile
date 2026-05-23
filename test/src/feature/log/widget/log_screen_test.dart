@@ -36,7 +36,7 @@ void main() {
           value: logBloc,
           child: BlocProvider.value(
             value: settingsCubit,
-            child: LogScreen(),
+            child: const LogScreen(),
           ),
         ),
       ),
@@ -233,7 +233,7 @@ void main() {
             value: logBloc,
             child: BlocProvider.value(
               value: settingsCubit,
-              child: LogScreen(),
+              child: const LogScreen(),
             ),
           ),
         ),

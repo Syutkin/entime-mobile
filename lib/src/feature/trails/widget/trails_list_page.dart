@@ -19,10 +19,21 @@ import '../bloc/trails_bloc.dart';
 part 'popup/add_or_update_trail_popup.dart';
 part 'popup/delete_trail_popup.dart';
 
-class TrailsListPage extends StatelessWidget {
-  TrailsListPage({super.key});
+class TrailsListPage extends StatefulWidget {
+  const TrailsListPage({super.key});
 
+  @override
+  State<TrailsListPage> createState() => _TrailsListPageState();
+}
+
+class _TrailsListPageState extends State<TrailsListPage> {
   final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

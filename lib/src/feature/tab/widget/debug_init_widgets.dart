@@ -29,7 +29,7 @@ class _DebugLogButton extends StatelessWidget {
     onPressed: () async {
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
-          builder: (context) => LogScreen(
+          builder: (context) => const LogScreen(
             //moduleSettings: moduleSettings,
           ),
         ),
@@ -66,7 +66,7 @@ class _DebugTrailsButton extends StatelessWidget {
     onPressed: () async {
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
-          builder: (context) => TrailsListPage(
+          builder: (context) => const TrailsListPage(
             //moduleSettings: moduleSettings,
           ),
         ),

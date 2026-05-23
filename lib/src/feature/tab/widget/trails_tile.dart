@@ -10,7 +10,7 @@ class TrailsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> routeToTrailsListPage() async {
-      await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => TrailsListPage()));
+      await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const TrailsListPage()));
     }
 
     return ListTile(

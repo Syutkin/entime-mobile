@@ -10,7 +10,7 @@ class RidersTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> routeToRidersListPage() async {
-      await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => RidersListPage()));
+      await Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) => const RidersListPage()));
     }
 
     return ListTile(
