@@ -46,6 +46,7 @@ class _TrailsListPageState extends State<TrailsListPage> {
             case Initialized():
               final trails = state.trails;
               return Scrollbar(
+                controller: _scrollController,
                 child: ListView.builder(
                   controller: _scrollController,
                   // shrinkWrap: true,

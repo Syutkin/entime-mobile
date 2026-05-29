@@ -33,6 +33,7 @@ class _LogScreenState extends State<LogScreen> {
         builder: (context, state) {
           final log = state.log;
           return Scrollbar(
+            controller: _scrollController,
             // ToDo: при нажатии показывать всю инфу в попапе
             child: ListView.builder(
               controller: _scrollController,

@@ -37,6 +37,7 @@ class _RidersListPageState extends State<RidersListPage> {
         builder: (context, state) {
           // final riders = state.riders;
           return Scrollbar(
+            controller: _scrollController,
             child: ListView.builder(
               controller: _scrollController,
               itemCount: state.riders.length,

@@ -110,8 +110,12 @@ void main() {
 
       await $.pumpWidgetAndSettle(await testWidget());
 
+      final listView = $.tester.widget<ListView>(find.byType(ListView));
+      final scrollbar = $.tester.widget<Scrollbar>(find.byType(Scrollbar));
+
       expect($(AppBar).$(Localization.current.I18nDatabase_trails), findsOneWidget);
       expect($(FloatingActionButton), findsOneWidget);
+      expect(scrollbar.controller, same(listView.controller));
       expect($(TrailItemTile), findsNWidgets(2));
       expect($(trail1.name), findsOneWidget);
       expect($(trail2.name), findsOneWidget);

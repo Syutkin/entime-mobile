@@ -220,7 +220,11 @@ void main() {
 
     patrolWidgetTest('Check scrollbar presence', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
+
+      final listView = $.tester.widget<ListView>(find.byType(ListView));
+      final scrollbar = $.tester.widget<Scrollbar>(find.byType(Scrollbar));
       expect($(Scrollbar), findsOneWidget);
+      expect(scrollbar.controller, same(listView.controller));
     });
 
     patrolWidgetTest('Check debug buttons is existed in debug mode', ($) async {

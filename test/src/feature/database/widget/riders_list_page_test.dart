@@ -143,7 +143,9 @@ void main() {
       await $.pumpWidgetAndSettle(testWidget());
 
       final listView = $.tester.widget<ListView>(find.byType(ListView));
+      final scrollbar = $.tester.widget<Scrollbar>(find.byType(Scrollbar));
       expect(listView.controller, isNotNull);
+      expect(scrollbar.controller, same(listView.controller));
     });
 
     patrolWidgetTest('Riders with different data combinations', ($) async {
