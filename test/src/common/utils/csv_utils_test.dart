@@ -19,6 +19,28 @@ void main() async {
       expect(converted, csv);
     });
 
+    group('csvToMaps line endings:', () {
+      final lineEndings = <String, String>{
+        r'\r\n': '\r\n',
+        r'\n': '\n',
+        r'\r': '\r',
+        r'\n\r': '\n\r',
+      };
+
+      for (final entry in lineEndings.entries) {
+        test('parses ${entry.key}', () {
+          final csv = ['number;name', '1;Alice', '2;Bob'].join(entry.value);
+
+          final maps = csvToMaps(csv, fieldDelimiter: ';');
+
+          expect(maps, [
+            {'number': 1, 'name': 'Alice'},
+            {'number': 2, 'name': 'Bob'},
+          ]);
+        });
+      }
+    });
+
     test('mapListToCsv returns null for null input', () {
       expect(mapListToCsv(null), isNull);
     });

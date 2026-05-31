@@ -1,5 +1,19 @@
 import 'package:csv/csv.dart';
 
+List<Map<String, dynamic>> csvToMaps(String csv, {String fieldDelimiter = ','}) {
+  final List<Map<String, dynamic>> maps;
+  if (csv.contains('\r\n')) {
+    maps = CsvToMapConverter(fieldDelimiter: fieldDelimiter).convert(csv);
+  } else if (csv.contains('\n\r')) {
+    maps = CsvToMapConverter(fieldDelimiter: fieldDelimiter, eol: '\n\r').convert(csv);
+  } else if (csv.contains('\n')) {
+    maps = CsvToMapConverter(fieldDelimiter: fieldDelimiter, eol: '\n').convert(csv);
+  } else {
+    maps = CsvToMapConverter(fieldDelimiter: fieldDelimiter, eol: '\r').convert(csv);
+  }
+  return maps;
+}
+
 /// Convert a list of maps to csv
 String? mapListToCsv(List<Map<String, dynamic>>? mapList, {CsvEncoder? converter, String? eol}) {
   if (mapList == null) {

@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:drift/drift.dart';
 import 'package:entime/src/common/utils/file_picker_provider.dart';
+import 'package:entime/src/common/utils/text_decoder.dart';
 import 'package:entime/src/feature/csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
@@ -44,9 +46,38 @@ Future<String> testDecoder(Uint8List bytes) async {
   return utf8.decode(bytes);
 }
 
+Future<String?> missingPluginDecoder(Uint8List bytes) {
+  return decodeBytesForTesting(
+    bytes,
+    decoder: (_) async => throw MissingPluginException(),
+  );
+}
+
+Uint8List windows1251Encode(String value) {
+  return Uint8List.fromList([
+    for (final rune in value.runes) _windows1251Byte(rune),
+  ]);
+}
+
+int _windows1251Byte(int rune) {
+  if (rune < 0x80) {
+    return rune;
+  }
+  if (rune >= 0x0410 && rune <= 0x044F) {
+    return 0xC0 + rune - 0x0410;
+  }
+  if (rune == 0x0401) {
+    return 0xA8;
+  }
+  if (rune == 0x0451) {
+    return 0xB8;
+  }
+  throw UnsupportedError('Unsupported test character: $rune');
+}
+
 void main() {
   late IFilePickerProvider filepicker;
-  late Future<String> Function(Uint8List bytes) decoder;
+  late Future<String?> Function(Uint8List bytes) decoder;
   late StartlistProvider startlistProvider;
 
   setUp(() {
@@ -66,6 +97,33 @@ void main() {
         expect(race != null, true);
         expect(race!.fileName, 'filename');
         expect(race.startItems.length, 79);
+        expect(race.startItems.first.name, 'Алексахина Варвара');
+      });
+
+      test('ANSI race csv loaded through Linux system decoder when platform decoder is unavailable', () async {
+        if (!Platform.isLinux) {
+          markTestSkipped('Linux-only charset fallback');
+        }
+
+        const csv =
+            'Категория;Номер;Имя;Старт\r\n'
+            'Девушки;2;Алексахина Варвара;00:00:00\r\n'
+            'Любители;9;Гадолин Мечислав;10:05:00\r\n'
+            'Элита;1;Абушаев Лев;10:30:30';
+        final bytes = windows1251Encode(csv);
+        final decoded = await decodeWithLinuxSystemCharsetDetector(bytes);
+        if (decoded == null) {
+          markTestSkipped('Linux charset detector system libraries are unavailable');
+        }
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) async => PlatformFile(name: 'filename', size: bytes.length, bytes: bytes));
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: missingPluginDecoder);
+
+        final race = await startlistProvider.getRaceFromFile();
+
+        expect(race, isNotNull);
+        expect(race!.stageNames, ['Старт']);
         expect(race.startItems.first.name, 'Алексахина Варвара');
       });
 
@@ -107,6 +165,67 @@ void main() {
         expect(stages.startItems.last.number, 18);
         expect(stages.startItems.last.startTimes?[stages.stageNames.last], '13:17:00');
       });
+
+      test('UTF-8 stages csv loaded through Linux system decoder when platform decoder is unavailable', () async {
+        if (!Platform.isLinux) {
+          markTestSkipped('Linux-only charset fallback');
+        }
+
+        const csv =
+            'Номер;СУ 1;СУ 2\r\n'
+            '2;00:00:00;10:00:00\r\n'
+            '9;00:01:00;10:01:00\r\n'
+            '18;00:02:00;10:02:00';
+        final bytes = Uint8List.fromList(utf8.encode(csv));
+        final decoded = await decodeWithLinuxSystemCharsetDetector(bytes);
+        if (decoded == null) {
+          markTestSkipped('Linux charset detector system libraries are unavailable');
+        }
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) async => PlatformFile(name: 'filename', size: bytes.length, bytes: bytes));
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: missingPluginDecoder);
+
+        final stages = await startlistProvider.getStagesFromFile();
+
+        expect(stages, isNotNull);
+        expect(stages!.stageNames, ['СУ 1', 'СУ 2']);
+        expect(stages.startItems.last.number, 18);
+        expect(stages.startItems.last.startTimes?['СУ 2'], '10:02:00');
+      });
+
+      // uchardet can misdetect short CP1251 stages CSV as another 8-bit charset.
+      test(
+        'ANSI stages csv loaded through Linux system decoder when platform decoder is unavailable',
+        () async {
+          if (!Platform.isLinux) {
+            markTestSkipped('Linux-only charset fallback');
+          }
+
+          const csv =
+              'Номер;СУ 1;СУ 2\r\n'
+              '2;00:00:00;10:00:00\r\n'
+              '9;00:01:00;10:01:00\r\n'
+              '18;00:02:00;10:02:00';
+          final bytes = windows1251Encode(csv);
+          final decoded = await decodeWithLinuxSystemCharsetDetector(bytes);
+          if (decoded == null) {
+            markTestSkipped('Linux charset detector system libraries are unavailable');
+          }
+          when(
+            () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+          ).thenAnswer((_) async => PlatformFile(name: 'filename', size: bytes.length, bytes: bytes));
+          startlistProvider = StartlistProvider(filepicker: filepicker, decoder: missingPluginDecoder);
+
+          final stages = await startlistProvider.getStagesFromFile();
+
+          expect(stages, isNotNull);
+          expect(stages!.stageNames, ['СУ 1', 'СУ 2']);
+          expect(stages.startItems.last.number, 18);
+          expect(stages.startItems.last.startTimes?['СУ 2'], '10:02:00');
+        },
+        skip: 'uchardet may detect short CP1251 stages CSV as ISO-8859-6; no charset guessing fallback by design',
+      );
 
       test('Stages csv with errors loaded', () async {
         when(

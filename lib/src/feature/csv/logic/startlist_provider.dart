@@ -1,8 +1,7 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:entime/src/common/utils/text_decoder.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/services.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
@@ -16,44 +15,25 @@ class StartlistProvider {
   const StartlistProvider({required this.filepicker, this.decoder = decodeBytes});
 
   final IFilePickerProvider filepicker;
-  final Future<String> Function(Uint8List bytes) decoder;
-
-  List<Map<String, dynamic>> _convertCsv(String csv) {
-    final List<Map<String, dynamic>> maps;
-    if (csv.contains('\r\n')) {
-      maps = CsvToMapConverter(fieldDelimiter: ';').convert(csv);
-    } else if (csv.contains('\n')) {
-      maps = CsvToMapConverter(fieldDelimiter: ';', eol: '\n').convert(csv);
-    } else {
-      maps = CsvToMapConverter(fieldDelimiter: ';', eol: '\r').convert(csv);
-    }
-    return maps;
-  }
+  final Future<String?> Function(Uint8List bytes) decoder;
 
   Future<RaceCsv?> getRaceFromFile() async {
     final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
-      late String csv;
+      late final String? csv;
       try {
         csv = await decoder(file.bytes!);
-      } on MissingPluginException {
-        final path = file.path;
-        if (path != null) {
-          try {
-            csv = File(path).readAsStringSync();
-          } catch (e, st) {
-            logger.e('CSV -> Error while reading starting list', error: e, stackTrace: st);
-            return null;
-          }
-        } else {
-          return null;
-        }
       } catch (e, st) {
         logger.e('CSV -> Error while decoding starting list', error: e, stackTrace: st);
         return null;
       }
+      if (csv == null) {
+        logger.e('CSV -> Error while decoding starting list');
+        return null;
+      }
+
       try {
-        final maps = _convertCsv(csv);
+        final maps = csvToMaps(csv, fieldDelimiter: ';');
         final riders = <StartItemCsv>[];
         for (final map in maps) {
           final rider = StartItemCsv.fromMap(map);
@@ -76,9 +56,20 @@ class StartlistProvider {
   Future<StagesCsv?> getStagesFromFile() async {
     final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
-      final csv = await decoder(file.bytes!);
+      late final String? csv;
       try {
-        final maps = _convertCsv(csv);
+        csv = await decoder(file.bytes!);
+      } catch (e, st) {
+        logger.e('CSV -> Error while decoding stages list', error: e, stackTrace: st);
+        return null;
+      }
+      if (csv == null) {
+        logger.e('CSV -> Error while decoding stages list');
+        return null;
+      }
+
+      try {
+        final maps = csvToMaps(csv, fieldDelimiter: ';');
         final stages = <StartNumberAndTimesCsv>[];
         for (final map in maps) {
           final rider = StartNumberAndTimesCsv.fromMap(map);
