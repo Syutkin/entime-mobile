@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Entime
+Exec=@BINARY_NAME@
+Icon=@APPLICATION_ID@
+Terminal=false
+Categories=Utility;
+StartupWMClass=@APPLICATION_ID@

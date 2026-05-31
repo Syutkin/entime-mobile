@@ -1,11 +1,67 @@
 #include "my_application.h"
 
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <flutter_linux/flutter_linux.h>
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #endif
 
 #include "flutter/generated_plugin_registrant.h"
+
+static const char kIconAsset[] = "assets/entime.png";
+
+static gchar* get_flutter_asset_path(const char* asset) {
+  g_autofree gchar* executable_path = g_file_read_link("/proc/self/exe", nullptr);
+  if (executable_path == nullptr) {
+    return nullptr;
+  }
+
+  g_autofree gchar* executable_dir = g_path_get_dirname(executable_path);
+  return g_build_filename(executable_dir, "data", "flutter_assets", asset,
+                          nullptr);
+}
+
+static void set_window_icon(GtkWindow* window, const char* icon_path) {
+  gtk_window_set_default_icon_name(APPLICATION_ID);
+  gtk_window_set_icon_name(window, APPLICATION_ID);
+
+  if (icon_path == nullptr) {
+    return;
+  }
+
+  g_autoptr(GError) default_icon_error = nullptr;
+  if (!gtk_window_set_default_icon_from_file(icon_path, &default_icon_error)) {
+    g_warning("Failed to set default window icon: %s",
+              default_icon_error != nullptr ? default_icon_error->message
+                                            : "unknown error");
+  }
+
+  g_autoptr(GError) icon_error = nullptr;
+  if (!gtk_window_set_icon_from_file(window, icon_path, &icon_error)) {
+    g_warning("Failed to set window icon: %s",
+              icon_error != nullptr ? icon_error->message : "unknown error");
+  }
+}
+
+static void add_header_bar_icon(GtkHeaderBar* header_bar,
+                                const char* icon_path) {
+  if (icon_path == nullptr) {
+    return;
+  }
+
+  g_autoptr(GError) icon_error = nullptr;
+  g_autoptr(GdkPixbuf) icon =
+      gdk_pixbuf_new_from_file_at_scale(icon_path, 24, 24, TRUE, &icon_error);
+  if (icon == nullptr) {
+    g_warning("Failed to load header bar icon: %s",
+              icon_error != nullptr ? icon_error->message : "unknown error");
+    return;
+  }
+
+  GtkWidget* header_icon = gtk_image_new_from_pixbuf(icon);
+  gtk_widget_show(header_icon);
+  gtk_header_bar_pack_start(header_bar, header_icon);
+}
 
 struct _MyApplication {
   GtkApplication parent_instance;
@@ -22,8 +78,11 @@ static void first_frame_cb(MyApplication* self, FlView* view) {
 // Implements GApplication::activate.
 static void my_application_activate(GApplication* application) {
   MyApplication* self = MY_APPLICATION(application);
+  g_autofree gchar* icon_path = get_flutter_asset_path(kIconAsset);
+
   GtkWindow* window =
       GTK_WINDOW(gtk_application_window_new(GTK_APPLICATION(application)));
+  set_window_icon(window, icon_path);
 
   // Use a header bar when running in GNOME as this is the common style used
   // by applications and is the setup most users will be using (e.g. Ubuntu
@@ -44,6 +103,7 @@ static void my_application_activate(GApplication* application) {
 #endif
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
+    add_header_bar_icon(header_bar, icon_path);
     gtk_widget_show(GTK_WIDGET(header_bar));
     gtk_header_bar_set_title(header_bar, "entime");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);

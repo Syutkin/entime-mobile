@@ -137,6 +137,24 @@ install(DIRECTORY "${PROJECT_BUILD_DIR}/${FLUTTER_ASSET_DIR_NAME}"
   COMPONENT Runtime
 )
 
+set(DESKTOP_FILE "${PROJECT_BINARY_DIR}/${APPLICATION_ID}.desktop")
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/runner/entime.desktop.in"
+  "${DESKTOP_FILE}"
+  @ONLY
+)
+
+install(FILES "${DESKTOP_FILE}"
+  DESTINATION "share/applications"
+  COMPONENT Runtime
+)
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/../assets/entime.png"
+  DESTINATION "share/icons/hicolor/192x192/apps"
+  RENAME "${APPLICATION_ID}.png"
+  COMPONENT Runtime
+)
+
 # Install the AOT library on non-Debug builds only.
 if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
   install(FILES "${AOT_LIBRARY}"
