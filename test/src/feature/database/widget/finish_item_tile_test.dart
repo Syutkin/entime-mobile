@@ -24,15 +24,24 @@ void main() {
   late SettingsCubit settingsCubit;
   late AppSettings settings;
 
-  Future<Widget> testWidget(Finish item) async {
+  Future<Widget> testWidget(
+    Finish item, {
+    DismissDirectionCallback? onDismissed,
+    DragTargetAcceptWithDetails<int>? onAccept,
+  }) async {
     await initializeDateFormatting();
+    final tile = FinishItemTile(item: item, onAccept: onAccept);
+    final child = onDismissed == null
+        ? tile
+        : _DismissibleFinishTileTestHost(item: item, onDismissed: onDismissed, onAccept: onAccept);
+
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
       home: Material(
         child: BlocProvider.value(
           value: settingsCubit,
-          child: FinishItemTile(item: item),
+          child: child,
         ),
       ),
     );
@@ -309,5 +318,124 @@ void main() {
 
       expect($(curDifference.toString()), findsOneWidget);
     });
+
+    patrolWidgetTest('Calls onDismissed with dismiss direction', ($) async {
+      when(() => settingsCubit.state).thenReturn(settings);
+      DismissDirection? dismissedDirection;
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(
+        await testWidget(
+          item,
+          onDismissed: (direction) {
+            dismissedDirection = direction;
+          },
+        ),
+      );
+      await $.tester.drag($(Dismissible), const Offset(-500, 0));
+      await $.pumpAndSettle();
+
+      expect(dismissedDirection, DismissDirection.endToStart);
+      expect($(FinishItemTile), findsNothing);
+    });
+
+    patrolWidgetTest('Rejects dragged number when finish already has number', ($) async {
+      when(() => settingsCubit.state).thenReturn(settings);
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+        number: number,
+      );
+
+      await $.pumpWidgetAndSettle(await testWidget(item));
+
+      final dragTarget = $.tester.widget<DragTarget<int>>(find.byType(DragTarget<int>));
+      final details = DragTargetDetails<int>(data: 42, offset: Offset.zero);
+
+      expect(dragTarget.onWillAcceptWithDetails?.call(details), false);
+    });
+
+    patrolWidgetTest('Accepts dragged number and forwards details when finish has no number', ($) async {
+      when(() => settingsCubit.state).thenReturn(settings);
+      DragTargetDetails<int>? acceptedDetails;
+
+      final item = Finish(
+        id: 1,
+        stageId: 1,
+        timestamp: timestamp,
+        ntpOffset: 0,
+        finishTime: finishTime,
+        isHidden: false,
+        isManual: false,
+      );
+
+      await $.pumpWidgetAndSettle(
+        await testWidget(
+          item,
+          onAccept: (details) {
+            acceptedDetails = details;
+          },
+        ),
+      );
+
+      final dragTarget = $.tester.widget<DragTarget<int>>(find.byType(DragTarget<int>));
+      final details = DragTargetDetails<int>(data: 42, offset: const Offset(10, 20));
+
+      expect(dragTarget.onWillAcceptWithDetails?.call(details), true);
+
+      dragTarget.onAcceptWithDetails?.call(details);
+
+      expect(acceptedDetails?.data, details.data);
+      expect(acceptedDetails?.offset, details.offset);
+    });
   });
+}
+
+class _DismissibleFinishTileTestHost extends StatefulWidget {
+  const _DismissibleFinishTileTestHost({required this.item, this.onDismissed, this.onAccept});
+
+  final Finish item;
+  final DismissDirectionCallback? onDismissed;
+  final DragTargetAcceptWithDetails<int>? onAccept;
+
+  @override
+  State<_DismissibleFinishTileTestHost> createState() => _DismissibleFinishTileTestHostState();
+}
+
+class _DismissibleFinishTileTestHostState extends State<_DismissibleFinishTileTestHost> {
+  bool isVisible = true;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!isVisible) {
+      return const SizedBox.shrink();
+    }
+
+    return FinishItemTile(
+      item: widget.item,
+      onAccept: widget.onAccept,
+      onDismissed: (direction) {
+        widget.onDismissed?.call(direction);
+        setState(() {
+          isVisible = false;
+        });
+      },
+    );
+  }
 }

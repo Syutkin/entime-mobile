@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:entime/src/feature/database/widget/popup/finish_details.dart';
@@ -8,18 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-import 'package:intl/intl.dart';
 
 import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/helper.dart';
 import '../../../common/widget/sliver_sub_header_delegate.dart';
-import '../../../constants/date_time_formats.dart';
-import '../../bluetooth/bloc/bluetooth_bloc.dart';
 import '../../ntp/bloc/ntp_bloc.dart';
 import '../../settings/settings.dart';
 import '../database.dart';
 import '../logic/filter_finish_list.dart';
+import 'finish_debug_footer_buttons.dart';
 import 'popup/change_finish_time_to_number_popup.dart';
 
 enum FinishPopupMenu { details, clearNumber, hideAll }
@@ -345,79 +342,11 @@ class _FinishListPage extends State<FinishListPage> {
   }
 
   List<Widget> _getFooterButtons(BuildContext context) {
-    final databaseBloc = context.read<DatabaseBloc>();
-    final stage = databaseBloc.state.stage;
+    final numbersOnTrace = _getNumbersOnTrace(context);
     if (!kReleaseMode) {
-      return <Widget>[
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            _getNumbersOnTrace(context),
-            Row(
-              children: <Widget>[
-                TextButton(
-                  onPressed: () async {
-                    final rand = Random().nextInt(10000) - 5000;
-                    // print(rand);
-                    final duration = Duration(milliseconds: rand);
-                    // print(duration);
-                    final timestamp = DateTime.now();
-                    final finishTime = timestamp.add(duration);
-                    final ntpOffset = Random().nextInt(10000) - 5000;
-                    // print(finishTime);
-                    databaseBloc.add(
-                      DatabaseEvent.addFinishTime(
-                        finishTime: DateFormat(longTimeFormat).format(finishTime),
-                        timestamp: timestamp,
-                        ntpOffset: ntpOffset,
-                        stage: stage!,
-                      ),
-                    );
-                  },
-                  child: const Icon(Icons.person_add_alt_1),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    // LogProvider.db.add(
-                    //   LogLevel.Error,
-                    //   LogSource.Other,
-                    //   'rawData',
-                    // );
-                    // LogProvider.db.getLog(
-                    //   level: [LogLevel.Error, LogLevel.Information, LogLevel.Debug],
-                    // direction: [LogSourceDirection.In, LogSourceDirection.Out],
-                    // source: [LogSource.Bluetooth]);
-                    BlocProvider.of<BluetoothBloc>(context).add(
-                      BluetoothEvent.messageReceived(
-                        message: 'F12:12:12,121#\nF13:13:13,131#\nF14:14:14,141#\nF15:16:17,181#',
-                        stageId: stage!.id,
-                      ),
-                    );
-                    //_parseBT("F19:24:05,123#");
-                    //            _parseBT("F19:25:57#");
-                    //            var _deltas = List<int>();
-                    //            _deltas.insert(0, -100);
-                    //            logger.(_deltas);
-                  },
-                  child: const Icon(Icons.build),
-                ),
-                //TextButton(child: const Icon(Icons.add), onPressed: () => _addFinishTime(context)),
-                TextButton(
-                  onPressed: () async {
-                    final stageId = stage?.id;
-                    if (stageId != null) {
-                      databaseBloc.add(DatabaseEvent.clearFinishResultsDebug(stageId));
-                    }
-                  },
-                  child: const Icon(Icons.clear_all),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ];
+      return finishDebugFooterButtons(context, numbersOnTrace: numbersOnTrace);
     } else {
-      return <Widget>[_getNumbersOnTrace(context)];
+      return <Widget>[numbersOnTrace];
     }
   }
 

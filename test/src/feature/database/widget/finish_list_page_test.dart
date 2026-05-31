@@ -438,6 +438,98 @@ void main() {
         await $(Localization.current.I18nCore_details).tap();
         expect($(FinishDetailsPopup), findsOneWidget);
       });
+
+      patrolWidgetTest('Add number to finish when FinishItemTile accepts dragged number', ($) async {
+        const draggedNumber = 42;
+        final finish = finishes(1).single;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [finish],
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(await testWidget());
+
+        final tile = $.tester.widget<FinishItemTile>(find.byType(FinishItemTile));
+        tile.onAccept?.call(
+          DragTargetDetails<int>(
+            data: draggedNumber,
+            offset: Offset.zero,
+          ),
+        );
+
+        verify(
+          () => databaseBloc.add(
+            DatabaseEvent.addNumberToFinish(
+              stage: stage,
+              finishId: finish.id,
+              number: draggedNumber,
+              finishTime: finish.finishTime,
+            ),
+          ),
+        ).called(1);
+      });
+
+      patrolWidgetTest('Do not add number to finish when stage is null', ($) async {
+        const draggedNumber = 42;
+        final finish = finishes(1).single;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [finish],
+            numbersOnTrace: [],
+          ),
+        );
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(await testWidget());
+
+        final tile = $.tester.widget<FinishItemTile>(find.byType(FinishItemTile));
+        tile.onAccept?.call(
+          DragTargetDetails<int>(
+            data: draggedNumber,
+            offset: Offset.zero,
+          ),
+        );
+
+        verifyNever(() => databaseBloc.add(any()));
+      });
+
+      patrolWidgetTest('Hide finish when FinishItemTile is dismissed', ($) async {
+        final finish = finishes(1).single;
+        when(() => databaseBloc.state).thenReturn(
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [finish],
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+        );
+        when(() => settingsCubit.state).thenReturn(settings);
+
+        await $.pumpWidgetAndSettle(await testWidget());
+
+        final tile = $.tester.widget<FinishItemTile>(find.byType(FinishItemTile));
+        tile.onDismissed?.call(DismissDirection.endToStart);
+
+        verify(() => databaseBloc.add(DatabaseEvent.hideFinish(id: finish.id))).called(1);
+      });
     });
 
     group('NumbersOnTrace list', () {
