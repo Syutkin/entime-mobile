@@ -55,9 +55,7 @@ sealed class DatabaseEvent with _$DatabaseEvent {
 
   const factory DatabaseEvent.getRaces() = _GetRaces;
 
-  const factory DatabaseEvent.selectRace(Race race) = _SelectRace;
-
-  const factory DatabaseEvent.deselectRace() = _DeselectRace;
+  const factory DatabaseEvent.selectRaceAndStage({required Race race, required Stage stage}) = _SelectRaceAndStage;
 
   const factory DatabaseEvent.addStage({required String name, required int raceId, int? trailId}) = _AddStage;
 
@@ -75,8 +73,6 @@ sealed class DatabaseEvent with _$DatabaseEvent {
   const factory DatabaseEvent.deleteStage(int id) = _DeleteStage;
 
   const factory DatabaseEvent.getStages(int raceId) = _GetStages;
-
-  const factory DatabaseEvent.selectStage(Stage stage) = _SelectStage;
 
   const factory DatabaseEvent.getParticipantsAtStart(int stageId) = _GetParticipantsAtStart;
 

@@ -15,7 +15,7 @@ void main() {
   late Race race;
   late DatabaseBloc databaseBloc;
 
-  Future<Widget> testWidget() async {
+  Future<Widget> testWidget({ValueChanged<Race>? onSelected}) async {
     await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
@@ -23,13 +23,13 @@ void main() {
       home: Scaffold(
         body: BlocProvider.value(
           value: databaseBloc,
-          child: RaceItemTile(race: race),
+          child: RaceItemTile(race: race, onSelected: onSelected ?? (_) {}),
         ),
       ),
     );
   }
 
-  setUpAll(() {
+  setUp(() {
     databaseBloc = MockDatabaseBloc();
   });
 
@@ -73,16 +73,23 @@ void main() {
       expect($(expectedDateText), findsOneWidget);
     });
 
-    patrolWidgetTest('Tap on tile triggers selectRace event', ($) async {
+    patrolWidgetTest('Tap on tile invokes callback', ($) async {
       race = const Race(
         id: 1,
         name: 'Test Race',
       );
+      Race? selectedRace;
 
-      await $.pumpWidgetAndSettle(await testWidget());
+      await $.pumpWidgetAndSettle(
+        await testWidget(
+          onSelected: (race) {
+            selectedRace = race;
+          },
+        ),
+      );
       await $(ListTile).tap();
 
-      verify(() => databaseBloc.add(DatabaseEvent.selectRace(race))).called(1);
+      expect(selectedRace, race);
     });
 
     patrolWidgetTest('PopupMenu contains all menu items', ($) async {

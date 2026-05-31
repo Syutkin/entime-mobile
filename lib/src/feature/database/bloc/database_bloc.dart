@@ -158,16 +158,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             );
           case _GetRaces():
             _races = await _db.getRaces().get();
-          case _SelectRace():
+          case _SelectRaceAndStage():
             _race = event.race;
-            final raceId = event.race.id;
-            final settings = _settingsProvider.settings.copyWith(raceId: raceId);
-            await _settingsProvider.update(settings);
-            add(const DatabaseEvent.initialize());
-          case _DeselectRace():
-            _race = null;
-            _stage = null;
-            final settings = _settingsProvider.settings.copyWith(raceId: -1, stageId: -1);
+            _stage = event.stage;
+            final settings = _settingsProvider.settings.copyWith(raceId: event.race.id, stageId: event.stage.id);
             await _settingsProvider.update(settings);
             add(const DatabaseEvent.initialize());
           case _AddStage():
@@ -188,12 +182,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           case _GetStages():
             _stages = await _db.getStages(raceId: event.raceId).get();
             await _emitState();
-          case _SelectStage():
-            _stage = event.stage;
-            final stageId = event.stage.id;
-            final settings = _settingsProvider.settings.copyWith(stageId: stageId);
-            await _settingsProvider.update(settings);
-            add(const DatabaseEvent.initialize());
           case _GetParticipantsAtStart():
             _participants = await _db.getParticipantsAtStart(stageId: event.stageId).get();
             await _emitState();
@@ -371,8 +359,11 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               final id = await _db.createRaceFromRaceCsv(raceCsv);
               final race = await _db.getRace(id);
               if (race != null) {
+                _race = race;
                 _stage = null;
-                add(DatabaseEvent.selectRace(race));
+                final settings = _settingsProvider.settings.copyWith(raceId: race.id, stageId: -1);
+                await _settingsProvider.update(settings);
+                add(const DatabaseEvent.initialize());
               }
             }
           case _CreateStagesFromFile():

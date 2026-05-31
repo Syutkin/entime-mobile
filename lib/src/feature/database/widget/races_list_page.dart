@@ -12,7 +12,9 @@ part 'popup/delete_race_popup.dart';
 part 'popup/add_or_update_race_popup.dart';
 
 class RacesListPage extends StatelessWidget {
-  const RacesListPage({super.key});
+  const RacesListPage({required this.onRaceSelected, super.key});
+
+  final ValueChanged<Race> onRaceSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class RacesListPage extends StatelessWidget {
             itemCount: count,
             itemBuilder: (context, index) {
               final race = state.races[index];
-              return RaceItemTile(race: race);
+              return RaceItemTile(race: race, onSelected: onRaceSelected);
             },
           );
         },

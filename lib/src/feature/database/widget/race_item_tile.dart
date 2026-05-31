@@ -6,9 +6,10 @@ import '../../../common/localization/localization.dart';
 import '../database.dart';
 
 class RaceItemTile extends StatelessWidget {
-  const RaceItemTile({required this.race, super.key});
+  const RaceItemTile({required this.race, required this.onSelected, super.key});
 
   final Race race;
+  final ValueChanged<Race> onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,7 @@ class RaceItemTile extends StatelessWidget {
               '${formatter.format(DateTime.parse(race.finishDate!))}',
             )
           : const SizedBox.shrink(),
-      onTap: () {
-        context.read<DatabaseBloc>().add(DatabaseEvent.selectRace(race));
-      },
+      onTap: () => onSelected(race),
       trailing: PopupMenuButton<void>(icon: const Icon(Icons.more_vert), itemBuilder: _menuEntryList),
     );
   }

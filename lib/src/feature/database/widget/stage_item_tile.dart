@@ -2,24 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../countdown/countdown.dart';
 import '../database.dart';
 
 class StageItemTile extends StatelessWidget {
-  const StageItemTile({required this.stage, super.key});
+  const StageItemTile({required this.stage, required this.onSelected, super.key});
 
   final Stage stage;
+  final ValueChanged<Stage> onSelected;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(stage.name),
       enabled: stage.isActive,
-      onTap: () {
-        context.read<DatabaseBloc>().add(DatabaseEvent.selectStage(stage));
-        context.read<CountdownBloc>().add(CountdownEvent.start(stageId: stage.id));
-        Navigator.of(context).pop();
-      },
+      onTap: () => onSelected(stage),
       trailing: PopupMenuButton<void>(
         icon: const Icon(Icons.more_vert),
         itemBuilder: (context) => <PopupMenuEntry<void>>[

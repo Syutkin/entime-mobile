@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
-import 'package:entime/src/feature/countdown/countdown.dart';
 import 'package:entime/src/feature/database/database.dart';
 import 'package:entime/src/feature/trails/bloc/trails_bloc.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +12,12 @@ class MockTrailsBloc extends MockBloc<TrailsEvent, TrailsState> implements Trail
 
 class MockDatabaseBloc extends MockBloc<DatabaseEvent, DatabaseState> implements DatabaseBloc {}
 
-class MockCountdownBloc extends MockBloc<CountdownEvent, CountdownState> implements CountdownBloc {}
-
 void main() {
   late Stage stage;
   late TrailsBloc trailsBloc;
   late DatabaseBloc databaseBloc;
-  late CountdownBloc countdownBloc;
 
-  Widget testWidget() {
+  Widget testWidget({ValueChanged<Stage>? onSelected}) {
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
@@ -30,10 +26,7 @@ void main() {
           value: databaseBloc,
           child: BlocProvider.value(
             value: trailsBloc,
-            child: BlocProvider.value(
-              value: countdownBloc,
-              child: StageItemTile(stage: stage),
-            ),
+            child: StageItemTile(stage: stage, onSelected: onSelected ?? (_) {}),
           ),
         ),
       ),
@@ -44,7 +37,6 @@ void main() {
     stage = const Stage(id: 1, raceId: 1, name: 'Stage name', isActive: true);
     trailsBloc = MockTrailsBloc();
     databaseBloc = MockDatabaseBloc();
-    countdownBloc = MockCountdownBloc();
   });
 
   group('StagesItemTile_test', () {
@@ -82,14 +74,20 @@ void main() {
       verify(() => databaseBloc.add(DatabaseEvent.deleteStage(stage.id))).called(1);
     });
 
-    patrolWidgetTest('Tap on widget', ($) async {
-      await $.pumpWidgetAndSettle(testWidget());
+    patrolWidgetTest('Tap on widget invokes callback', ($) async {
+      Stage? selectedStage;
+
+      await $.pumpWidgetAndSettle(
+        testWidget(
+          onSelected: (stage) {
+            selectedStage = stage;
+          },
+        ),
+      );
       await $(StageItemTile).tap();
-      verify(() => databaseBloc.add(DatabaseEvent.selectStage(stage))).called(1);
-      verify(() => countdownBloc.add(CountdownEvent.start(stageId: stage.id))).called(1);
-      // pop
-      expect($(Scaffold), findsNothing);
-      expect($(MaterialApp), findsOneWidget);
+
+      expect(selectedStage, stage);
+      expect($(Scaffold), findsOneWidget);
     });
   });
 }

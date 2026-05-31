@@ -14,13 +14,16 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late DatabaseBloc databaseBloc;
 
-  Future<Widget> testWidget() async {
+  Future<Widget> testWidget({ValueChanged<Race>? onRaceSelected}) async {
     await initializeDateFormatting();
     return MaterialApp(
       localizationsDelegates: const [Localization.delegate],
       supportedLocales: Localization.supportedLocales,
       home: Material(
-        child: BlocProvider.value(value: databaseBloc, child: const RacesListPage()),
+        child: BlocProvider.value(
+          value: databaseBloc,
+          child: RacesListPage(onRaceSelected: onRaceSelected ?? (_) {}),
+        ),
       ),
     );
   }
@@ -72,6 +75,33 @@ void main() {
       );
       await $.pumpWidgetAndSettle(await testWidget());
       expect($(RaceItemTile), findsNWidgets(5));
+    });
+
+    patrolWidgetTest('Tap race invokes callback', ($) async {
+      const race = Race(id: 1, name: 'name');
+      Race? selectedRace;
+      when(() => databaseBloc.state).thenReturn(
+        const DatabaseState(
+          races: [race],
+          stages: [],
+          categories: [],
+          riders: [],
+          participants: [],
+          finishes: [],
+          numbersOnTrace: [],
+        ),
+      );
+
+      await $.pumpWidgetAndSettle(
+        await testWidget(
+          onRaceSelected: (race) {
+            selectedRace = race;
+          },
+        ),
+      );
+      await $(race.name).tap();
+
+      expect(selectedRace, race);
     });
   });
 }

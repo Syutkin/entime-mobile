@@ -12,8 +12,10 @@ part 'popup/add_or_update_stage_popup.dart';
 part 'popup/delete_stage_popup.dart';
 
 class StagesListPage extends StatelessWidget {
-  const StagesListPage({required this.race, super.key});
+  const StagesListPage({required this.race, required this.onStageSelected, super.key});
+
   final Race race;
+  final ValueChanged<Stage> onStageSelected;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -26,12 +28,13 @@ class StagesListPage extends StatelessWidget {
     ),
     body: BlocBuilder<DatabaseBloc, DatabaseState>(
       builder: (context, state) {
-        final count = state.stages.length;
+        final stages = state.stages.where((stage) => stage.raceId == race.id).toList();
+        final count = stages.length;
         return ListView.builder(
           itemCount: count,
           itemBuilder: (context, index) {
-            final stage = state.stages[index];
-            return StageItemTile(stage: stage);
+            final stage = stages[index];
+            return StageItemTile(stage: stage, onSelected: onStageSelected);
           },
         );
       },

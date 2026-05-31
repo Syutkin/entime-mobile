@@ -20,7 +20,7 @@ void main() {
   late Race race;
   late Stage stage;
 
-  Future<Widget> testWidget() async {
+  Future<Widget> testWidget({ValueChanged<Stage>? onStageSelected}) async {
     await initializeDateFormatting();
     return BlocProvider.value(
       value: databaseBloc,
@@ -29,7 +29,7 @@ void main() {
         child: MaterialApp(
           localizationsDelegates: const [Localization.delegate],
           supportedLocales: Localization.supportedLocales,
-          home: StagesListPage(race: race),
+          home: StagesListPage(race: race, onStageSelected: onStageSelected ?? (_) {}),
         ),
       ),
     );
@@ -87,6 +87,33 @@ void main() {
       );
       await $.pumpWidgetAndSettle(await testWidget());
       expect($(StageItemTile), findsNWidgets(4));
+    });
+
+    patrolWidgetTest('Tap stage invokes callback', ($) async {
+      Stage? selectedStage;
+      when(() => databaseBloc.state).thenReturn(
+        DatabaseState(
+          races: [race],
+          stages: [stage],
+          categories: [],
+          riders: [],
+          participants: [],
+          finishes: [],
+          numbersOnTrace: [],
+          race: race,
+        ),
+      );
+
+      await $.pumpWidgetAndSettle(
+        await testWidget(
+          onStageSelected: (stage) {
+            selectedStage = stage;
+          },
+        ),
+      );
+      await $(stage.name).tap();
+
+      expect(selectedStage, stage);
     });
   });
 }

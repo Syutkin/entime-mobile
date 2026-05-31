@@ -260,42 +260,20 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
-      'Select race',
+      'Select race and stage',
       setUp: () {
         Bloc.observer = AppBlocObserver();
         bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
       act: (bloc) {
-        bloc.add(DatabaseEvent.selectRace(race));
+        bloc.add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.race?.id, race.id);
-        // Stages populated after race selection
-        expect(bloc.state.stages.length, 4);
-        // Selected race id saved to settings
-        expect(settingsProvider.settings.raceId, 1);
-      },
-    );
-
-    blocTest<DatabaseBloc, DatabaseState>(
-      'Deselect race',
-      setUp: () {
-        Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
-      },
-      build: () => bloc,
-      act: (bloc) {
-        bloc
-          ..add(DatabaseEvent.selectRace(race))
-          ..add(DatabaseEvent.selectStage(stage))
-          ..add(const DatabaseEvent.deselectRace());
-      },
-      verify: (bloc) {
-        expect(bloc.state.race, null);
-        expect(bloc.state.stage, null);
-        expect(settingsProvider.settings.raceId, -1);
-        expect(settingsProvider.settings.stageId, -1);
+        expect(bloc.state.stage?.id, stage.id);
+        expect(settingsProvider.settings.raceId, race.id);
+        expect(settingsProvider.settings.stageId, stage.id);
       },
     );
 
@@ -309,10 +287,9 @@ void main() {
       act: (bloc) {
         bloc
           ..add(DatabaseEvent.addStage(name: stage.name, raceId: race.id))
-          ..add(DatabaseEvent.selectRace(race));
+          ..add(DatabaseEvent.getStages(race.id));
       },
       verify: (bloc) {
-        // Stages populated only when race is selected
         expect(bloc.state.stages.length, 5);
         expect(bloc.state.stages.last.name, stage.name);
       },
@@ -328,7 +305,7 @@ void main() {
       act: (bloc) {
         bloc
           ..add(DatabaseEvent.upsertStage(name: stage.name, raceId: race.id))
-          ..add(DatabaseEvent.selectRace(race));
+          ..add(DatabaseEvent.getStages(race.id));
       },
       verify: (bloc) {
         expect(bloc.state.stages.length, 5);
@@ -346,7 +323,7 @@ void main() {
       act: (bloc) {
         bloc
           ..add(DatabaseEvent.upsertStage(id: stage.id, name: stage.name, raceId: race.id))
-          ..add(DatabaseEvent.selectRace(race));
+          ..add(DatabaseEvent.getStages(race.id));
       },
       verify: (bloc) {
         expect(bloc.state.stages.length, 4);
@@ -364,7 +341,7 @@ void main() {
       act: (bloc) {
         bloc
           ..add(DatabaseEvent.deleteStage(stage.id))
-          ..add(DatabaseEvent.selectRace(race));
+          ..add(DatabaseEvent.getStages(race.id));
       },
       verify: (bloc) {
         expect(bloc.state.stages.length, 3);
@@ -386,29 +363,6 @@ void main() {
       },
       verify: (bloc) {
         expect(bloc.state.stages.length, 4);
-      },
-    );
-
-    blocTest<DatabaseBloc, DatabaseState>(
-      'Select stage',
-      setUp: () {
-        Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
-        stage = const Stage(id: 2, raceId: 1, name: 'name', isActive: true);
-      },
-      build: () => bloc,
-      act: (bloc) {
-        bloc.add(DatabaseEvent.selectStage(stage));
-      },
-      verify: (bloc) {
-        expect(settingsProvider.settings.stageId, stage.id);
-        // We do not selected race at this time
-        expect(bloc.state.stages.length, 0);
-        expect(bloc.state.stage?.id, stage.id);
-        expect(bloc.state.participants.length, 79);
-        // At second stage we start at midnight, so there are always at least one number on trace
-        expect(bloc.state.numbersOnTrace.isNotEmpty, true);
-        expect(bloc.state.finishes.length, 0);
       },
     );
 
@@ -439,7 +393,7 @@ void main() {
       build: () => bloc,
       act: (bloc) async {
         bloc
-          ..add(DatabaseEvent.selectStage(stage))
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage))
           ..add(DatabaseEvent.addStartNumber(stage: stage, number: 1, startTime: '09:00:00'));
       },
       verify: (bloc) {
@@ -511,7 +465,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.updateRacer(riderId: 1, participantId: 1, name: 'name', category: 'category'))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.riders.first.name, 'name');
@@ -547,7 +501,7 @@ void main() {
               comment: 'my_comment',
             ),
           )
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.riders.first.name, 'my_name');
@@ -573,7 +527,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.updateStartingInfo(stageId: stage.id, participantId: 1, startTime: '05:00:00'))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.startTime, '05:00:00');
@@ -597,7 +551,7 @@ void main() {
               deltaInSeconds: deltaInSeconds,
             ),
           )
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         // Add offset to manual start time
@@ -616,7 +570,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.setStatusForStartId(startId: 1, status: ParticipantStatus.dns))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.statusId, ParticipantStatus.dns.index);
@@ -634,7 +588,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.setStatusForStartId(startId: 1, status: ParticipantStatus.dnf))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.statusId, ParticipantStatus.dnf.index);
@@ -652,7 +606,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.setStatusForStartId(startId: 1, status: ParticipantStatus.dsq))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.statusId, ParticipantStatus.dsq.index);
@@ -678,7 +632,7 @@ void main() {
               deltaInSeconds: deltaInSeconds,
             ),
           )
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.automaticCorrection, 1000);
@@ -718,7 +672,7 @@ void main() {
               forceUpdate: true,
             ),
           )
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.automaticCorrection, 1123);
@@ -757,7 +711,7 @@ void main() {
               deltaInSeconds: deltaInSeconds,
             ),
           );
-        // ..add(DatabaseEvent.selectStage(stage));
+        // ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       expect: () {
         return [
@@ -807,7 +761,7 @@ void main() {
               ntpOffset: 123,
             ),
           )
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.length, 1);
@@ -836,7 +790,7 @@ void main() {
               ntpOffset: 123,
             ),
           )
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.length, 1);
@@ -882,7 +836,7 @@ void main() {
               dateTimeNow: dateTimeNow,
             ),
           )
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.length, 2);
@@ -901,7 +855,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.length, 1);
@@ -931,7 +885,7 @@ void main() {
             ),
           )
           ..add(DatabaseEvent.clearStartResultsDebug(stage.id))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.automaticCorrection, null);
@@ -957,7 +911,7 @@ void main() {
             DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123, number: 2),
           )
           ..add(DatabaseEvent.clearFinishResultsDebug(stage.id))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.length, 2);
@@ -982,7 +936,7 @@ void main() {
             DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123, number: 2),
           )
           ..add(DatabaseEvent.hideFinish(id: 1))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.first.isHidden, true);
@@ -1006,7 +960,7 @@ void main() {
             DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123, number: 2),
           )
           ..add(DatabaseEvent.hideAllFinishes(stage.id))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.first.isHidden, true);
@@ -1030,7 +984,7 @@ void main() {
             DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123, number: 2),
           )
           ..add(DatabaseEvent.clearNumberAtFinish(stage: stage, number: 1))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.first.number, null);
@@ -1048,7 +1002,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.setDNSForStage(stage: stage, number: 2))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.number, 2);
@@ -1066,7 +1020,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.setDNFForStage(stage: stage, number: 2))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.number, 2);
@@ -1085,7 +1039,7 @@ void main() {
         bloc
           ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
           ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: '', number: 5))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.finishes.first.number, 5);
@@ -1166,7 +1120,7 @@ void main() {
       act: (bloc) async {
         bloc
           ..add(DatabaseEvent.shiftStartsTime(stageId: stage.id, minutes: 65))
-          ..add(DatabaseEvent.selectStage(stage));
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.startTime, '11:05:00');
@@ -1240,8 +1194,11 @@ void main() {
       },
       verify: (bloc) {
         expect(bloc.state.race?.id, 3);
+        expect(bloc.state.stage, null);
         expect(bloc.state.stages.length, 5);
         expect(bloc.state.stages.last.name, 'stage5');
+        expect(settingsProvider.settings.raceId, bloc.state.race?.id);
+        expect(settingsProvider.settings.stageId, -1);
       },
     );
 
@@ -1325,7 +1282,7 @@ void main() {
       act: (bloc) {
         bloc
           ..add(DatabaseEvent.createStagesFromFile(raceId: race.id))
-          ..add(DatabaseEvent.selectRace(race));
+          ..add(DatabaseEvent.getStages(race.id));
       },
       verify: (bloc) {
         expect(bloc.state.stages.length, 9);
@@ -1392,8 +1349,7 @@ void main() {
       build: () => bloc,
       act: (bloc) async {
         bloc
-          ..add(DatabaseEvent.selectRace(race))
-          ..add(DatabaseEvent.selectStage(stage))
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage))
           ..add(
             DatabaseEvent.updateAutomaticCorrection(
               stageId: stage.id,
@@ -1443,8 +1399,7 @@ void main() {
       build: () => bloc,
       act: (bloc) async {
         bloc
-          ..add(DatabaseEvent.selectRace(race))
-          ..add(DatabaseEvent.selectStage(stage))
+          ..add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage))
           ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
           ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
           ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: 'ft2', number: 1))
