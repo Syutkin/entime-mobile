@@ -901,3 +901,11 @@ class I18nAbout {
 
   static String get changelog => Intl.message('Список изменений', name: 'I18nAbout_changelog');
 }
+
+class I18nLocalization {
+  static String get system => Intl.message('Как в системе', name: 'I18nLocalization_system');
+
+  static String get en => Intl.message('English', name: 'I18nLocalization_en');
+
+  static String get ru => Intl.message('Русский', name: 'I18nLocalization_ru');
+}

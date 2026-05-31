@@ -1,3 +1,4 @@
+import 'package:entime/src/common/localization/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +10,7 @@ part 'app_settings.freezed.dart';
 abstract class AppSettings with _$AppSettings {
   const factory AppSettings({
     // язык
-    required String language, // = "ru", // локаль
+    required AppLanguage language, // = "ru", // локаль
     // восстанавливать Bluetooth подключение при обрыве
     required bool reconnect,
 
@@ -122,7 +123,7 @@ abstract class AppSettings with _$AppSettings {
 
   const factory AppSettings.defaults({
     // язык
-    @Default('ru') String language,
+    @Default(AppLanguage.system) AppLanguage language,
 
     // восстанавливать Bluetooth подключение при обрыве
     @Default(true) bool reconnect,

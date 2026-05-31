@@ -3,6 +3,34 @@ import 'package:meta/meta.dart';
 
 import 'generated/l10n.dart' as generated show AppLocalizationDelegate, GeneratedLocalization;
 
+enum AppLanguage {
+  system('system'),
+  ru('ru'),
+  en('en');
+
+  const AppLanguage(this.value);
+
+  final String value;
+
+  static AppLanguage fromValue(String? value) {
+    return switch (value) {
+      'ru' || 'ru-RU' || 'ru_RU' => AppLanguage.ru,
+      'en' || 'en-US' || 'en_US' => AppLanguage.en,
+      /*   */ 'en-GB' || 'en_GB' => AppLanguage.en,
+      'system' || null || '' => AppLanguage.system,
+      _ => AppLanguage.system,
+    };
+  }
+
+  Locale? get locale {
+    return switch (this) {
+      AppLanguage.system => null,
+      AppLanguage.ru => const Locale('ru'),
+      AppLanguage.en => const Locale('en'),
+    };
+  }
+}
+
 @sealed
 class Localization extends generated.GeneratedLocalization {
   Localization._();

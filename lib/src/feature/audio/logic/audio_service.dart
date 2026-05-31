@@ -18,7 +18,7 @@ class AudioService implements IAudioService {
       _sound = settings.sound;
       _voice = settings.voice;
       _beep = settings.beep;
-      await _audio.setLanguage(settings.language);
+      await _audio.setLanguage(settings.voiceLanguage);
       await _audio.setVolume(settings.volume);
       await _audio.setSpeechRate(settings.rate);
       await _audio.setPitch(settings.pitch);

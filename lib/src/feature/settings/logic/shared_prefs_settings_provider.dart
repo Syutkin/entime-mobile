@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:entime/src/common/localization/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +24,7 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     const defaults = AppSettings.defaults();
     final prefs = await SharedPreferences.getInstance();
     final settings = AppSettings(
-      language: prefs.getString('language') ?? defaults.language,
+      language: AppLanguage.fromValue(prefs.getString('language')),
       sound: prefs.getBool('sound') ?? defaults.sound,
       beep: prefs.getBool('beep') ?? defaults.beep,
       beepFromApp: prefs.getBool('beepFromApp') ?? defaults.beepFromApp,
@@ -107,7 +108,7 @@ class SharedPrefsSettingsProvider implements ISettingsProvider {
     if (settings.wakelock != _settings.wakelock) {
       await WakelockPlus.toggle(enable: settings.wakelock);
     }
-    await _prefs.setString('language', settings.language);
+    await _prefs.setString('language', settings.language.value);
     await _prefs.setBool('sound', settings.sound);
     await _prefs.setBool('beep', settings.beep);
     await _prefs.setBool('beepFromApp', settings.beepFromApp);

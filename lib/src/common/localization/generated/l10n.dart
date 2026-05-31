@@ -3151,6 +3151,36 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `Как в системе`
+  String get I18nLocalization_system {
+    return Intl.message(
+      'Как в системе',
+      name: 'I18nLocalization_system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get I18nLocalization_en {
+    return Intl.message(
+      'English',
+      name: 'I18nLocalization_en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Русский`
+  String get I18nLocalization_ru {
+    return Intl.message(
+      'Русский',
+      name: 'I18nLocalization_ru',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

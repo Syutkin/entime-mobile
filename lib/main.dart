@@ -225,6 +225,7 @@ class EntimeAppView extends StatelessWidget {
           isOLEDBackground: state.isOLEDBackground,
         ),
         title: Pubspec.name,
+        locale: state.language.locale,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

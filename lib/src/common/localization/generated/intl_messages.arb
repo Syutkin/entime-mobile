@@ -1680,5 +1680,20 @@
   "@I18nAbout_changelog": {
     "type": "text",
     "placeholders": {}
+  },
+  "I18nLocalization_system": "Как в системе",
+  "@I18nLocalization_system": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nLocalization_en": "English",
+  "@I18nLocalization_en": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nLocalization_ru": "Русский",
+  "@I18nLocalization_ru": {
+    "type": "text",
+    "placeholders": {}
   }
 }

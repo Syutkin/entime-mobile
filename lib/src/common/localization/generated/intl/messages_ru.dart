@@ -338,6 +338,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "I18nInit_share": MessageLookupByLibrary.simpleMessage("Поделиться"),
     "I18nInit_trails": MessageLookupByLibrary.simpleMessage("Трейлы"),
+    "I18nLocalization_en": MessageLookupByLibrary.simpleMessage("English"),
+    "I18nLocalization_ru": MessageLookupByLibrary.simpleMessage("Русский"),
+    "I18nLocalization_system": MessageLookupByLibrary.simpleMessage(
+      "Как в системе",
+    ),
     "I18nLog_bluetoothInformation": MessageLookupByLibrary.simpleMessage(
       "Информация Bluetooth",
     ),

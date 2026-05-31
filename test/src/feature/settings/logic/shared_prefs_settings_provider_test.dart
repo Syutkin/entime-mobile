@@ -1,3 +1,4 @@
+import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,7 +25,7 @@ void main() {
         (variant) => variant != DynamicSchemeVariant.vibrant,
       );
       final expectedSettings = initialProvider.settings.copyWith(
-        language: 'en',
+        language: AppLanguage.en,
         reconnect: false,
         sound: false,
         beep: false,

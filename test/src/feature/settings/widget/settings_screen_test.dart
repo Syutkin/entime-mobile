@@ -21,7 +21,7 @@ class MockSettingsCubit extends MockCubit<AppSettings> implements SettingsCubit 
 
 void main() {
   const testSettings = AppSettings(
-    language: 'ru',
+    language: AppLanguage.ru,
     reconnect: false,
     sound: true,
     beep: true,
@@ -142,9 +142,17 @@ void main() {
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_reconnect).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_wakelock).scrollTo(), findsOneWidget);
         expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_sound).scrollTo(), findsOneWidget);
-        // Disabled and didn't visible for tests?
-        // expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_language).scrollTo(), findsOneWidget);
+        expect(await $(SettingsSection).containing(Localization.current.I18nSettings_general).$(SettingsTile).$(Localization.current.I18nSettings_language).scrollTo(), findsOneWidget);
       });
+
+      patrolWidgetTest('Select language', ($) async {
+        await $.pumpWidgetAndSettle(testWidget());
+        await $(DropdownMenu<AppLanguage>).tap();
+        await $.pumpAndSettle();
+        await $(Localization.current.I18nLocalization_en).tap();
+        verify(() => settingsCubit.update(settings.copyWith(language: AppLanguage.en))).called(1);
+      });
+
       patrolWidgetTest('Switch reconnect', ($) async {
         await $.pumpWidgetAndSettle(testWidget());
         await $(SettingsTile).containing($(Localization.current.I18nSettings_reconnect)).tap();

@@ -6,7 +6,7 @@ Map<String, Object> sharedPrefsDefaults = <String, Object>{
   'volume': 1.0,
   'pitch': 1.0,
   'rate': 0.5,
-  'language': 'ru-RU',
+  'language': 'ru',
   'recentFile': '',
   'wakelock': true,
   'startFab': true,

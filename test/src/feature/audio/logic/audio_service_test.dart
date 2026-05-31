@@ -97,7 +97,7 @@ void main() {
       clearInteractions(audioProvider);
 
       final changedSettings = defaults.copyWith(
-        language: 'en',
+        voiceLanguage: 'en',
         volume: 0.25,
         rate: 0.75,
         pitch: 0.5,
@@ -105,7 +105,7 @@ void main() {
       settingsStream.add(changedSettings);
       await Future<void>.delayed(Duration.zero);
 
-      verify(() => audioProvider.setLanguage(changedSettings.language)).called(1);
+      verify(() => audioProvider.setLanguage(changedSettings.voiceLanguage)).called(1);
       verify(() => audioProvider.setVolume(changedSettings.volume)).called(1);
       verify(() => audioProvider.setSpeechRate(changedSettings.rate)).called(1);
       verify(() => audioProvider.setPitch(changedSettings.pitch)).called(1);
@@ -115,7 +115,7 @@ void main() {
 
       settingsStream.add(
         defaults.copyWith(
-          language: 'fr',
+          voiceLanguage: 'fr',
           volume: 0.5,
           rate: 1,
           pitch: 1.5,

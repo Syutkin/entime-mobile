@@ -72,17 +72,14 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 SettingsTile(
-                  // ToDo: выбор локализации
-                  enabled: false,
                   title: Text(Localization.current.I18nSettings_language),
-                  trailing: DropdownMenu<String>(
+                  trailing: DropdownMenu<AppLanguage>(
                     inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
                     dropdownMenuEntries: _dropdownMenuEntries(),
-                    initialSelection: Localizations.localeOf(context).languageCode,
-                    onSelected: (locale) async {
-                      if (locale != null) {
-                        await Localization.delegate.load(Locale(locale));
-                        await settingsCubit.update(settingsState.copyWith(language: locale));
+                    initialSelection: settingsState.language,
+                    onSelected: (language) async {
+                      if (language != null) {
+                        await settingsCubit.update(settingsState.copyWith(language: language));
                       }
                     },
                   ),
@@ -543,11 +540,20 @@ class SettingsScreen extends StatelessWidget {
     ];
   }
 
-  List<DropdownMenuEntry<String>> _dropdownMenuEntries() {
-    final entries = <DropdownMenuEntry<String>>[];
-    for (final locale in Localization.supportedLocales) {
-      entries.add(DropdownMenuEntry(value: locale.languageCode, label: locale.languageCode));
-    }
-    return entries;
+  List<DropdownMenuEntry<AppLanguage>> _dropdownMenuEntries() {
+    return AppLanguage.values.map((language) {
+      return DropdownMenuEntry(
+        value: language,
+        label: _languageLabel(language),
+      );
+    }).toList();
+  }
+
+  String _languageLabel(AppLanguage language) {
+    return switch (language) {
+      AppLanguage.system => Localization.current.I18nLocalization_system,
+      AppLanguage.ru => Localization.current.I18nLocalization_ru,
+      AppLanguage.en => Localization.current.I18nLocalization_en,
+    };
   }
 }
