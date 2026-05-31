@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/feature/countdown/countdown.dart';
@@ -103,6 +105,45 @@ void main() {
       expect($(race.name), findsOneWidget);
       expect($(Localization.current.I18nInit_selectStage), findsNothing);
       expect($(stage.name), findsOneWidget);
+    });
+
+    patrolWidgetTest('Imported race clears selected stage title', ($) async {
+      final states = StreamController<DatabaseState>();
+      addTearDown(states.close);
+      const importedRace = Race(id: 2, name: 'Imported race');
+      final selectedState = DatabaseState(
+        races: [],
+        stages: [],
+        categories: [],
+        riders: [],
+        participants: [],
+        finishes: [],
+        numbersOnTrace: [],
+        race: race,
+        stage: stage,
+      );
+      const importedRaceState = DatabaseState(
+        races: [],
+        stages: [],
+        categories: [],
+        riders: [],
+        participants: [],
+        finishes: [],
+        numbersOnTrace: [],
+        race: importedRace,
+      );
+      whenListen(databaseBloc, states.stream, initialState: selectedState);
+
+      await $.pumpWidgetAndSettle(testWidget());
+      expect($(race.name), findsOneWidget);
+      expect($(stage.name), findsOneWidget);
+
+      states.add(importedRaceState);
+      await $.pumpAndSettle();
+
+      expect($(importedRace.name), findsOneWidget);
+      expect($(stage.name), findsNothing);
+      expect($(Localization.current.I18nInit_selectStage), findsOneWidget);
     });
 
     patrolWidgetTest('Opening selector does not stop countdown', ($) async {
