@@ -15,6 +15,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../constants/date_time_formats.dart';
+import '../../../feature/app_message/app_message.dart';
 import '../../../feature/csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
@@ -31,6 +32,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     required AppDatabase database,
     required this._settingsProvider,
     required this.startlistProvider,
+    this.appMessages = const NoopAppMessageSink(),
     this.shareProvider = const ShareProvider(),
   }) : _db = database,
        super(
@@ -458,6 +460,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   }
 
   final AppDatabase _db;
+  final AppMessageSink appMessages;
 
   List<Race> _races = [];
   List<Stage> _stages = [];

@@ -125,6 +125,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Entime замечания/предложения",
     ),
     "I18nAbout_version": m28,
+    "I18nAppMessage_csvImportCharsetDetectorUnavailable":
+        MessageLookupByLibrary.simpleMessage(
+          "Не удалось определить кодировку CSV файла",
+        ),
+    "I18nAppMessage_csvImportDecodeFailed":
+        MessageLookupByLibrary.simpleMessage("Не удалось прочитать CSV файл"),
+    "I18nAppMessage_csvImportParseFailed": MessageLookupByLibrary.simpleMessage(
+      "Не удалось разобрать CSV файл",
+    ),
     "I18nBluetooth_bluetoothNotAvailable": MessageLookupByLibrary.simpleMessage(
       "Bluetooth недоступен на устройстве",
     ),

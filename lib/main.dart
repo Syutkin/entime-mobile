@@ -24,6 +24,7 @@ import 'src/common/localization/localization.dart';
 import 'src/common/logger/logger.dart';
 import 'src/common/utils/file_picker_provider.dart';
 import 'src/feature/app_info/app_info.dart';
+import 'src/feature/app_message/app_message.dart';
 import 'src/feature/audio/audio.dart';
 import 'src/feature/audio/bloc/audio_bloc.dart' as audio_bloc;
 import 'src/feature/bluetooth/bluetooth.dart';
@@ -147,6 +148,7 @@ class EntimeApp extends StatelessWidget {
     final startlistProvider = context.read<StartlistProvider>();
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AppMessageCubit>(create: (context) => AppMessageCubit()),
         BlocProvider<TabCubit>(create: (context) => TabCubit()),
         BlocProvider<SettingsCubit>(create: (context) => SettingsCubit(settingsProvider)),
         BlocProvider<ModuleSettingsBloc>(create: (context) => ModuleSettingsBloc()),
@@ -154,9 +156,12 @@ class EntimeApp extends StatelessWidget {
           create: (context) => LogBloc(settingsProvider: settingsProvider, database: database),
         ),
         BlocProvider<DatabaseBloc>(
-          create: (context) =>
-              DatabaseBloc(database: database, settingsProvider: settingsProvider, startlistProvider: startlistProvider)
-                ..add(const DatabaseEvent.initialize()),
+          create: (context) => DatabaseBloc(
+            database: database,
+            settingsProvider: settingsProvider,
+            startlistProvider: startlistProvider,
+            appMessages: context.read<AppMessageCubit>(),
+          )..add(const DatabaseEvent.initialize()),
         ),
         BlocProvider<TrailsBloc>(create: (context) => TrailsBloc(database: database)),
         BlocProvider<audio_bloc.AudioBloc>(

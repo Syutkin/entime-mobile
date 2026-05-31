@@ -147,6 +147,36 @@ class GeneratedLocalization {
     return Intl.message('Нет', name: 'I18nCore_no', desc: '', args: []);
   }
 
+  /// `Не удалось прочитать CSV файл`
+  String get I18nAppMessage_csvImportDecodeFailed {
+    return Intl.message(
+      'Не удалось прочитать CSV файл',
+      name: 'I18nAppMessage_csvImportDecodeFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не удалось разобрать CSV файл`
+  String get I18nAppMessage_csvImportParseFailed {
+    return Intl.message(
+      'Не удалось разобрать CSV файл',
+      name: 'I18nAppMessage_csvImportParseFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не удалось определить кодировку CSV файла`
+  String get I18nAppMessage_csvImportCharsetDetectorUnavailable {
+    return Intl.message(
+      'Не удалось определить кодировку CSV файла',
+      name: 'I18nAppMessage_csvImportCharsetDetectorUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Что нового`
   String get I18nUpdate_whatsNew {
     return Intl.message(

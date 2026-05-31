@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
+import 'package:entime/src/feature/app_message/app_message.dart';
 import 'package:entime/src/feature/bluetooth/bluetooth.dart';
 import 'package:entime/src/feature/connectivity/bloc/connectivity_bloc.dart';
 import 'package:entime/src/feature/countdown/countdown.dart';
@@ -57,6 +58,7 @@ void main() {
   late NtpBloc ntpBloc;
   late ModuleSettingsBloc moduleSettingsBloc;
   late BluetoothRequestCubit bluetoothRequestCubit;
+  late AppMessageCubit appMessageCubit;
   late QueryRow row;
 
   late SharedPrefsSettingsProvider settingsProvider;
@@ -79,6 +81,7 @@ void main() {
     ntpBloc = MockNtpBloc();
     bluetoothBloc = MockBluetoothBloc();
     bluetoothRequestCubit = BluetoothRequestCubit();
+    appMessageCubit = AppMessageCubit();
     databaseBloc = MockDatabaseBloc();
     moduleSettingsBloc = MockModuleSettingsBloc();
     row = MockQueryRow();
@@ -113,6 +116,9 @@ void main() {
     if (!bluetoothRequestCubit.isClosed) {
       await bluetoothRequestCubit.close();
     }
+    if (!appMessageCubit.isClosed) {
+      await appMessageCubit.close();
+    }
   });
 
   Future<Widget> testWidget() async {
@@ -139,9 +145,12 @@ void main() {
                         value: ntpBloc,
                         child: BlocProvider.value(
                           value: moduleSettingsBloc,
-                          child: BlocProvider<BluetoothRequestCubit>(
-                            create: (_) => bluetoothRequestCubit,
-                            child: const HomeScreen(),
+                          child: BlocProvider.value(
+                            value: appMessageCubit,
+                            child: BlocProvider<BluetoothRequestCubit>(
+                              create: (_) => bluetoothRequestCubit,
+                              child: const HomeScreen(),
+                            ),
                           ),
                         ),
                       ),
@@ -163,6 +172,16 @@ void main() {
         expect($(#InitTab), findsOneWidget);
         expect($(#StartTab), findsOneWidget);
         expect($(#FinishTab), findsOneWidget);
+      });
+
+      patrolWidgetTest('Shows app message snackbar', ($) async {
+        await $.pumpWidgetAndSettle(await testWidget());
+
+        appMessageCubit.show(const AppCsvImportDecodeFailed());
+        await $.pump();
+        await $.pump(const Duration(milliseconds: 250));
+
+        expect(find.text(Localization.current.I18nAppMessage_csvImportDecodeFailed), findsOneWidget);
       });
 
       patrolWidgetTest('Switch screens when tap on tabs', ($) async {

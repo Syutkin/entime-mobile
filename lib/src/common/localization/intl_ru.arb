@@ -59,6 +59,21 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nAppMessage_csvImportDecodeFailed": "Не удалось прочитать CSV файл",
+  "@I18nAppMessage_csvImportDecodeFailed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_csvImportParseFailed": "Не удалось разобрать CSV файл",
+  "@I18nAppMessage_csvImportParseFailed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_csvImportCharsetDetectorUnavailable": "Не удалось определить кодировку CSV файла",
+  "@I18nAppMessage_csvImportCharsetDetectorUnavailable": {
+    "type": "text",
+    "placeholders": {}
+  },
   "I18nUpdate_whatsNew": "Что нового",
   "@I18nUpdate_whatsNew": {
     "type": "text",

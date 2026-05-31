@@ -86,6 +86,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "I18nAppMessage_csvImportCharsetDetectorUnavailable":
+        MessageLookupByLibrary.simpleMessage(
+          "Could not detect CSV file encoding",
+        ),
+    "I18nAppMessage_csvImportDecodeFailed":
+        MessageLookupByLibrary.simpleMessage("Could not read CSV file"),
+    "I18nAppMessage_csvImportParseFailed": MessageLookupByLibrary.simpleMessage(
+      "Could not parse CSV file",
+    ),
     "I18nBluetooth_dbm": MessageLookupByLibrary.simpleMessage("dBm"),
     "I18nBluetooth_selectDevice": MessageLookupByLibrary.simpleMessage(
       "Select device",

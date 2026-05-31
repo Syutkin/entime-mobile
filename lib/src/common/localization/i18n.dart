@@ -26,6 +26,19 @@ class I18nCore {
   static String get no => Intl.message('Нет', name: 'I18nCore_no');
 }
 
+class I18nAppMessage {
+  static String get csvImportDecodeFailed =>
+      Intl.message('Не удалось прочитать CSV файл', name: 'I18nAppMessage_csvImportDecodeFailed');
+
+  static String get csvImportParseFailed =>
+      Intl.message('Не удалось разобрать CSV файл', name: 'I18nAppMessage_csvImportParseFailed');
+
+  static String get csvImportCharsetDetectorUnavailable => Intl.message(
+    'Не удалось определить кодировку CSV файла',
+    name: 'I18nAppMessage_csvImportCharsetDetectorUnavailable',
+  );
+}
+
 class I18nUpdate {
   static String get whatsNew => Intl.message('Что нового', name: 'I18nUpdate_whatsNew');
 

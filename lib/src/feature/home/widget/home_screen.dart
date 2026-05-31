@@ -7,6 +7,7 @@ import 'package:nested/nested.dart';
 import '../../../common/localization/localization.dart';
 import '../../../common/logger/logger.dart';
 import '../../../constants/pubspec.yaml.g.dart';
+import '../../app_message/app_message.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
@@ -74,6 +75,8 @@ class HomeScreen extends StatelessWidget {
             _listenToUpdater(),
             // Следим за таймаутами Bluetooth JSON запросов
             _listenToBluetoothRequests(),
+            // Показываем общие сообщения приложения
+            _listenToAppMessages(),
             // Показываем ошибки базы данных
             _listenToDatabaseErrors(),
           ],
@@ -183,6 +186,29 @@ class HomeScreen extends StatelessWidget {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text(text)));
+  }
+
+  SingleChildWidget _listenToAppMessages() {
+    return BlocListener<AppMessageCubit, AppMessage?>(
+      listenWhen: (previous, current) => current != null,
+      listener: (context, message) {
+        if (message == null) return;
+        _showSnackBar(context, _appMessageText(message));
+        context.read<AppMessageCubit>().clear();
+      },
+    );
+  }
+
+  String _appMessageText(AppMessage message) {
+    final i18n = Localization.current;
+    return switch (message) {
+      AppCsvImportDecodeFailed() => i18n.I18nAppMessage_csvImportDecodeFailed,
+      AppCsvImportParseFailed() => i18n.I18nAppMessage_csvImportParseFailed,
+      AppCsvImportCharsetDetectorUnavailable() => i18n.I18nAppMessage_csvImportCharsetDetectorUnavailable,
+      AppDuplicateParticipantNumberInStagesCsv(:final number) =>
+        i18n.I18nDatabase_duplicateParticipantNumberInStagesCsv(number),
+      AppUnexpectedError(:final message) => message,
+    };
   }
 
   SingleChildWidget _listenToNewStartTime() => BlocListener<DatabaseBloc, DatabaseState>(
