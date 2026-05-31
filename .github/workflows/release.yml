@@ -16,8 +16,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          cache: 'gradle'
           cache-dependency-path: |
             android/gradle/wrapper/gradle-wrapper.properties
+            gradle.properties
             android/build.gradle
             android/app/build.gradle
 
@@ -25,6 +27,14 @@ jobs:
         with:
           channel: 'stable' # or: 'stable', 'beta', 'main' or 'master'
           cache: true
+
+      - name: Cache pub dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
       - name: Get tag name
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
