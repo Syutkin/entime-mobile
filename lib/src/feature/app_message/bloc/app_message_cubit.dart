@@ -1,23 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../model/app_message.dart';
-
 abstract interface class AppMessageSink {
-  void show(AppMessage message);
+  void show(Object message);
 }
 
 final class NoopAppMessageSink implements AppMessageSink {
   const NoopAppMessageSink();
 
   @override
-  void show(AppMessage message) {}
+  void show(Object message) {}
 }
 
-class AppMessageCubit extends Cubit<AppMessage?> implements AppMessageSink {
+class AppMessageCubit extends Cubit<Object?> implements AppMessageSink {
   AppMessageCubit() : super(null);
 
   @override
-  void show(AppMessage message) {
+  void show(Object message) {
     emit(message);
   }
 

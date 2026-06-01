@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:entime/src/common/utils/text_decoder.dart';
 import 'package:file_picker/file_picker.dart';
 
+import '../../../common/exceptions/known_exception.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/csv_utils.dart';
 import '../../../common/utils/file_picker_provider.dart';
@@ -15,22 +16,12 @@ class StartlistProvider {
   const StartlistProvider({required this.filepicker, this.decoder = decodeBytes});
 
   final IFilePickerProvider filepicker;
-  final Future<String?> Function(Uint8List bytes) decoder;
+  final Future<String> Function(Uint8List bytes) decoder;
 
   Future<RaceCsv?> getRaceFromFile() async {
     final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
-      late final String? csv;
-      try {
-        csv = await decoder(file.bytes!);
-      } catch (e, st) {
-        logger.e('CSV -> Error while decoding starting list', error: e, stackTrace: st);
-        return null;
-      }
-      if (csv == null) {
-        logger.e('CSV -> Error while decoding starting list');
-        return null;
-      }
+      final csv = await _decodeCsv(file.bytes!, 'CSV -> Error while decoding starting list');
 
       try {
         final maps = csvToMaps(csv, fieldDelimiter: ';');
@@ -47,7 +38,7 @@ class StartlistProvider {
         );
       } catch (e, st) {
         logger.e('CSV -> Error while parsing starting list', error: e, stackTrace: st);
-        return null;
+        throw const CsvImportParseFailedException();
       }
     }
     return null;
@@ -56,17 +47,7 @@ class StartlistProvider {
   Future<StagesCsv?> getStagesFromFile() async {
     final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
-      late final String? csv;
-      try {
-        csv = await decoder(file.bytes!);
-      } catch (e, st) {
-        logger.e('CSV -> Error while decoding stages list', error: e, stackTrace: st);
-        return null;
-      }
-      if (csv == null) {
-        logger.e('CSV -> Error while decoding stages list');
-        return null;
-      }
+      final csv = await _decodeCsv(file.bytes!, 'CSV -> Error while decoding stages list');
 
       try {
         final maps = csvToMaps(csv, fieldDelimiter: ';');
@@ -79,9 +60,18 @@ class StartlistProvider {
         return StagesCsv(stageNames: stages.first.startTimes?.keys.toList() ?? [], startItems: stages);
       } catch (e, st) {
         logger.e('CSV -> Error at parsing starting list', error: e, stackTrace: st);
-        return null;
+        throw const CsvImportParseFailedException();
       }
     }
     return null;
+  }
+
+  Future<String> _decodeCsv(Uint8List bytes, String errorMessage) async {
+    try {
+      return await decoder(bytes);
+    } on KnownException catch (e, st) {
+      logger.e(errorMessage, error: e, stackTrace: st);
+      rethrow;
+    }
   }
 }

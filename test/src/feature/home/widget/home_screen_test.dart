@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart';
+import 'package:entime/src/common/exceptions/known_exception.dart';
 import 'package:entime/src/common/localization/localization.dart';
 import 'package:entime/src/constants/pubspec.yaml.g.dart';
 import 'package:entime/src/feature/app_message/app_message.dart';
@@ -177,11 +178,41 @@ void main() {
       patrolWidgetTest('Shows app message snackbar', ($) async {
         await $.pumpWidgetAndSettle(await testWidget());
 
-        appMessageCubit.show(const AppCsvImportDecodeFailed());
+        appMessageCubit.show(const CsvImportDecodeFailedException());
         await $.pump();
         await $.pump(const Duration(milliseconds: 250));
 
         expect(find.text(Localization.current.I18nAppMessage_csvImportDecodeFailed), findsOneWidget);
+      });
+
+      patrolWidgetTest('Shows known exception snackbar', ($) async {
+        await $.pumpWidgetAndSettle(await testWidget());
+
+        appMessageCubit.show(const TextDecodeConversionFailedException('ISO-8859-6'));
+        await $.pump();
+        await $.pump(const Duration(milliseconds: 250));
+
+        expect(find.text(Localization.current.I18nAppMessage_textDecodeConversionFailed('ISO-8859-6')), findsOneWidget);
+      });
+
+      patrolWidgetTest('Shows duplicate participant number exception snackbar', ($) async {
+        await $.pumpWidgetAndSettle(await testWidget());
+
+        appMessageCubit.show(const DuplicateParticipantNumberInStagesCsvException(100));
+        await $.pump();
+        await $.pump(const Duration(milliseconds: 250));
+
+        expect(find.text(Localization.current.I18nDatabase_duplicateParticipantNumberInStagesCsv(100)), findsOneWidget);
+      });
+
+      patrolWidgetTest('Shows unknown exception snackbar', ($) async {
+        await $.pumpWidgetAndSettle(await testWidget());
+
+        appMessageCubit.show(Exception('decode failed'));
+        await $.pump();
+        await $.pump(const Duration(milliseconds: 250));
+
+        expect(find.text('Exception: decode failed'), findsOneWidget);
       });
 
       patrolWidgetTest('Switch screens when tap on tabs', ($) async {
@@ -574,71 +605,6 @@ void main() {
           await $.tester.pump(const Duration(milliseconds: 150));
 
           verify(() => moduleSettingsBloc.add(const ModuleSettingsEvent.loadFailed())).called(1);
-        });
-      });
-
-      group('Database error listener', () {
-        patrolWidgetTest('Shows SnackBar for race CSV creation error', ($) async {
-          const errorMessage = 'UNIQUE constraint failed: participants.race_id, participants.number';
-          const expectedStates = [
-            DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-            ),
-            DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-              error: DatabaseUnexpectedError(errorMessage),
-            ),
-          ];
-          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-
-          await $.pumpWidget(await testWidget());
-          await $.pump();
-          await $.tester.pump(const Duration(milliseconds: 250));
-
-          expect($(errorMessage), findsOneWidget);
-        });
-
-        patrolWidgetTest('Shows localized SnackBar for duplicate participant number in stages CSV', ($) async {
-          const expectedStates = [
-            DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-            ),
-            DatabaseState(
-              races: [],
-              stages: [],
-              categories: [],
-              riders: [],
-              participants: [],
-              finishes: [],
-              numbersOnTrace: [],
-              error: DatabaseDuplicateParticipantNumberInStagesCsv(100),
-            ),
-          ];
-          whenListen(databaseBloc, Stream.fromIterable(expectedStates));
-
-          await $.pumpWidget(await testWidget());
-          await $.pump();
-          await $.tester.pump(const Duration(milliseconds: 250));
-
-          expect($(Localization.current.I18nDatabase_duplicateParticipantNumberInStagesCsv(100)), findsOneWidget);
         });
       });
 

@@ -7,21 +7,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter_charset_detector/flutter_charset_detector.dart';
 import 'package:meta/meta.dart';
 
-Future<String?> decodeBytes(Uint8List bytes) {
+import '../exceptions/known_exception.dart';
+
+Future<String> decodeBytes(Uint8List bytes) {
   return _decodeBytes(bytes, decoder: _decodeBytesWithPlugin);
 }
 
 @visibleForTesting
-Future<String?> decodeBytesForTesting(
+Future<String> decodeBytesForTesting(
   Uint8List bytes, {
-  required Future<String?> Function(Uint8List bytes) decoder,
+  required Future<String> Function(Uint8List bytes) decoder,
 }) {
   return _decodeBytes(bytes, decoder: decoder);
 }
 
-Future<String?> _decodeBytes(
+Future<String> _decodeBytes(
   Uint8List bytes, {
-  required Future<String?> Function(Uint8List bytes) decoder,
+  required Future<String> Function(Uint8List bytes) decoder,
 }) async {
   try {
     return await decoder(bytes);
@@ -31,9 +33,9 @@ Future<String?> _decodeBytes(
     }
     if (Platform.isWindows) {
       // TODO: Add Windows charset fallback.
-      return null;
+      throw const TextDecodeWindowsFallbackUnavailableException();
     }
-    return null;
+    throw const TextDecodePlatformFallbackUnavailableException();
   }
 }
 
@@ -44,16 +46,16 @@ Future<String> _decodeBytesWithPlugin(Uint8List bytes) async {
 
 _LinuxSystemCharsetDetector? _linuxSystemCharsetDetector;
 
-Future<String?> decodeWithLinuxSystemCharsetDetector(Uint8List bytes) async {
+Future<String> decodeWithLinuxSystemCharsetDetector(Uint8List bytes) async {
   if (!Platform.isLinux) {
-    return null;
+    throw const TextDecodePlatformFallbackUnavailableException();
   }
   if (bytes.isEmpty) {
     return '';
   }
 
-  final detector = _linuxSystemCharsetDetector ??= _LinuxSystemCharsetDetector.tryCreate();
-  return detector?.decode(bytes);
+  final detector = _linuxSystemCharsetDetector ??= _LinuxSystemCharsetDetector.create();
+  return detector.decode(bytes);
 }
 
 final class _LinuxSystemCharsetDetector {
@@ -68,6 +70,80 @@ final class _LinuxSystemCharsetDetector {
     required this.iconvClose,
   });
 
+  factory _LinuxSystemCharsetDetector.create() {
+    final uchardet = _openDynamicLibrary(
+      const <String>['libuchardet.so.0', 'libuchardet.so'],
+      const TextDecodeUchardetLibraryMissingException(),
+    );
+    final libc = _openDynamicLibrary(
+      const <String>['libc.so.6', 'libiconv.so'],
+      const TextDecodeIconvLibraryMissingException(),
+    );
+
+    late final _UCharDetNew uchardetNew;
+    late final _UCharDetDelete uchardetDelete;
+    late final _UCharDetHandleData uchardetHandleData;
+    late final _UCharDetDataEnd uchardetDataEnd;
+    late final _UCharDetGetCharset uchardetGetCharset;
+    try {
+      uchardetNew = uchardet.lookupFunction<ffi.Pointer<ffi.Void> Function(), _UCharDetNew>('uchardet_new');
+      uchardetDelete = uchardet.lookupFunction<ffi.Void Function(ffi.Pointer<ffi.Void>), _UCharDetDelete>(
+        'uchardet_delete',
+      );
+      uchardetHandleData = uchardet
+          .lookupFunction<
+            ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Size),
+            _UCharDetHandleData
+          >(
+            'uchardet_handle_data',
+          );
+      uchardetDataEnd = uchardet.lookupFunction<ffi.Void Function(ffi.Pointer<ffi.Void>), _UCharDetDataEnd>(
+        'uchardet_data_end',
+      );
+      uchardetGetCharset = uchardet
+          .lookupFunction<ffi.Pointer<Utf8> Function(ffi.Pointer<ffi.Void>), _UCharDetGetCharset>(
+            'uchardet_get_charset',
+          );
+    } catch (_) {
+      throw const TextDecodeUchardetSymbolsMissingException();
+    }
+
+    late final _IconvOpen iconvOpen;
+    late final _Iconv iconv;
+    late final _IconvClose iconvClose;
+    try {
+      iconvOpen = libc
+          .lookupFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>), _IconvOpen>(
+            'iconv_open',
+          );
+      iconv = libc
+          .lookupFunction<
+            ffi.Size Function(
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>,
+            ),
+            _Iconv
+          >('iconv');
+      iconvClose = libc.lookupFunction<ffi.Int Function(ffi.Pointer<ffi.Void>), _IconvClose>('iconv_close');
+    } catch (_) {
+      throw const TextDecodeIconvLibraryMissingException();
+    }
+
+    return _LinuxSystemCharsetDetector._(
+      uchardetNew: uchardetNew,
+      uchardetDelete: uchardetDelete,
+      uchardetHandleData: uchardetHandleData,
+      uchardetDataEnd: uchardetDataEnd,
+      uchardetGetCharset: uchardetGetCharset,
+      iconvOpen: iconvOpen,
+      iconv: iconv,
+      iconvClose: iconvClose,
+    );
+  }
+
   final _UCharDetNew uchardetNew;
   final _UCharDetDelete uchardetDelete;
   final _UCharDetHandleData uchardetHandleData;
@@ -77,65 +153,15 @@ final class _LinuxSystemCharsetDetector {
   final _Iconv iconv;
   final _IconvClose iconvClose;
 
-  static _LinuxSystemCharsetDetector? tryCreate() {
-    try {
-      final uchardet = _openDynamicLibrary(const <String>['libuchardet.so.0', 'libuchardet.so']);
-      final libc = _openDynamicLibrary(const <String>['libc.so.6', 'libiconv.so']);
-
-      return _LinuxSystemCharsetDetector._(
-        uchardetNew: uchardet.lookupFunction<ffi.Pointer<ffi.Void> Function(), _UCharDetNew>('uchardet_new'),
-        uchardetDelete: uchardet.lookupFunction<ffi.Void Function(ffi.Pointer<ffi.Void>), _UCharDetDelete>(
-          'uchardet_delete',
-        ),
-        uchardetHandleData: uchardet
-            .lookupFunction<
-              ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>, ffi.Size),
-              _UCharDetHandleData
-            >(
-              'uchardet_handle_data',
-            ),
-        uchardetDataEnd: uchardet.lookupFunction<ffi.Void Function(ffi.Pointer<ffi.Void>), _UCharDetDataEnd>(
-          'uchardet_data_end',
-        ),
-        uchardetGetCharset: uchardet
-            .lookupFunction<ffi.Pointer<Utf8> Function(ffi.Pointer<ffi.Void>), _UCharDetGetCharset>(
-              'uchardet_get_charset',
-            ),
-        iconvOpen: libc
-            .lookupFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>), _IconvOpen>(
-              'iconv_open',
-            ),
-        iconv: libc
-            .lookupFunction<
-              ffi.Size Function(
-                ffi.Pointer<ffi.Void>,
-                ffi.Pointer<ffi.Pointer<ffi.Char>>,
-                ffi.Pointer<ffi.Size>,
-                ffi.Pointer<ffi.Pointer<ffi.Char>>,
-                ffi.Pointer<ffi.Size>,
-              ),
-              _Iconv
-            >('iconv'),
-        iconvClose: libc.lookupFunction<ffi.Int Function(ffi.Pointer<ffi.Void>), _IconvClose>('iconv_close'),
-      );
-    } catch (_) {
-      return null;
-    }
-  }
-
-  String? decode(Uint8List bytes) {
+  String decode(Uint8List bytes) {
     final charset = _detectCharset(bytes);
-    if (charset == null) {
-      return null;
-    }
-
     return _convertToUtf8(bytes, charset);
   }
 
-  String? _detectCharset(Uint8List bytes) {
+  String _detectCharset(Uint8List bytes) {
     final detector = uchardetNew();
     if (detector == ffi.nullptr) {
-      return null;
+      throw const TextDecodeCharsetNotDetectedException();
     }
 
     final data = calloc<ffi.Uint8>(bytes.length);
@@ -143,18 +169,18 @@ final class _LinuxSystemCharsetDetector {
       data.asTypedList(bytes.length).setAll(0, bytes);
       final result = uchardetHandleData(detector, data.cast<ffi.Char>(), bytes.length);
       if (result != 0) {
-        return null;
+        throw const TextDecodeCharsetNotDetectedException();
       }
 
       uchardetDataEnd(detector);
       final charset = uchardetGetCharset(detector);
       if (charset == ffi.nullptr) {
-        return null;
+        throw const TextDecodeCharsetNotDetectedException();
       }
 
       final value = charset.toDartString().trim();
       if (value.isEmpty) {
-        return null;
+        throw const TextDecodeCharsetNotDetectedException();
       }
       return value;
     } finally {
@@ -163,7 +189,7 @@ final class _LinuxSystemCharsetDetector {
     }
   }
 
-  String? _convertToUtf8(Uint8List bytes, String charset) {
+  String _convertToUtf8(Uint8List bytes, String charset) {
     final toCode = 'UTF-8'.toNativeUtf8();
     final fromCode = charset.toNativeUtf8();
     final descriptor = iconvOpen(toCode.cast<ffi.Char>(), fromCode.cast<ffi.Char>());
@@ -172,7 +198,7 @@ final class _LinuxSystemCharsetDetector {
       ..free(fromCode);
 
     if (_isInvalidPointer(descriptor)) {
-      return null;
+      throw TextDecodeConversionFailedException(charset);
     }
 
     final input = calloc<ffi.Uint8>(bytes.length);
@@ -192,11 +218,15 @@ final class _LinuxSystemCharsetDetector {
 
       final result = iconv(descriptor, inputBuffer, inputBytesLeft, outputBuffer, outputBytesLeft);
       if (result == _maxSizeValue) {
-        return null;
+        throw TextDecodeConversionFailedException(charset);
       }
 
       final writtenBytes = outputCapacity - outputBytesLeft.value;
-      return utf8.decode(output.asTypedList(writtenBytes));
+      try {
+        return utf8.decode(output.asTypedList(writtenBytes));
+      } on FormatException {
+        throw TextDecodeConversionFailedException(charset);
+      }
     } finally {
       iconvClose(descriptor);
       calloc
@@ -210,7 +240,7 @@ final class _LinuxSystemCharsetDetector {
   }
 }
 
-ffi.DynamicLibrary _openDynamicLibrary(List<String> names) {
+ffi.DynamicLibrary _openDynamicLibrary(List<String> names, KnownException failure) {
   for (final name in names) {
     try {
       return ffi.DynamicLibrary.open(name);
@@ -218,7 +248,7 @@ ffi.DynamicLibrary _openDynamicLibrary(List<String> names) {
       // Try next library name.
     }
   }
-  throw StateError('Can not open dynamic libraries: ${names.join(', ')}');
+  throw failure;
 }
 
 bool _isInvalidPointer(ffi.Pointer<ffi.Void> pointer) {

@@ -7,8 +7,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:drift/drift.dart' show DatabaseConnection, QueryRow;
 import 'package:drift/native.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
+import 'package:entime/src/common/exceptions/known_exception.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/common/utils/share_provider.dart';
+import 'package:entime/src/feature/app_message/app_message.dart';
 import 'package:entime/src/feature/csv/csv.dart';
 import 'package:entime/src/feature/csv/model/stages_csv.dart';
 import 'package:entime/src/feature/csv/model/start_number_and_times_csv.dart';
@@ -32,6 +34,15 @@ class MockStartlistProvider extends Mock implements StartlistProvider {}
 class MockShareProvider extends Mock implements ShareProvider {}
 
 class MockQueryRow extends Mock implements QueryRow {}
+
+class RecordingAppMessageSink implements AppMessageSink {
+  final messages = <Object>[];
+
+  @override
+  void show(Object message) {
+    messages.add(message);
+  }
+}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -1206,7 +1217,13 @@ void main() {
       'Create race from file with duplicate numbers fails without creating race',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+        final appMessages = RecordingAppMessageSink();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          startlistProvider: startlistProvider,
+          appMessages: appMessages,
+        );
         final startTimes = <String, String>{
           'stage1': '10:10:10',
           'stage2': '10:10:10',
@@ -1227,26 +1244,82 @@ void main() {
         bloc.add(const DatabaseEvent.createRaceFromFile());
       },
       wait: const Duration(milliseconds: 10),
-      expect: () => contains(
-        isA<DatabaseState>().having(
-          (state) => state.error,
-          'error',
-          isA<DatabaseUnexpectedError>().having(
-            (error) => error.message,
-            'message',
-            contains('UNIQUE constraint failed'),
-          ),
-        ),
-      ),
       verify: (bloc) async {
         final races = await db.getRaces().get();
         final stages = await db.getStages(raceId: 3).get();
         final participants = await db.getParticipantsAtStart(stageId: 9).get();
+        final appMessages = bloc.appMessages as RecordingAppMessageSink;
 
         expect(bloc.state.race, null);
         expect(races.length, 2);
         expect(stages, isEmpty);
         expect(participants, isEmpty);
+        expect(appMessages.messages, hasLength(1));
+        expect(
+          appMessages.messages.single.toString(),
+          contains('UNIQUE constraint failed'),
+        );
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Create race from file text decode failure shows app message',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        final appMessages = RecordingAppMessageSink();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          startlistProvider: startlistProvider,
+          appMessages: appMessages,
+        );
+        when(
+          () => startlistProvider.getRaceFromFile(),
+        ).thenThrow(const TextDecodeUchardetLibraryMissingException());
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(const DatabaseEvent.createRaceFromFile());
+      },
+      wait: const Duration(milliseconds: 10),
+      verify: (bloc) {
+        expect(bloc.appMessages, isA<RecordingAppMessageSink>());
+        final appMessages = bloc.appMessages as RecordingAppMessageSink;
+        expect(appMessages.messages, hasLength(1));
+        expect(appMessages.messages.single, isA<TextDecodeUchardetLibraryMissingException>());
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Create race from file unexpected decode failure shows unexpected app message',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        final appMessages = RecordingAppMessageSink();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          startlistProvider: startlistProvider,
+          appMessages: appMessages,
+        );
+        when(() => startlistProvider.getRaceFromFile()).thenThrow(const FormatException('decode failed'));
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(const DatabaseEvent.createRaceFromFile());
+      },
+      wait: const Duration(milliseconds: 10),
+      verify: (bloc) {
+        expect(bloc.appMessages, isA<RecordingAppMessageSink>());
+        final appMessages = bloc.appMessages as RecordingAppMessageSink;
+        expect(appMessages.messages, hasLength(1));
+        expect(
+          appMessages.messages.single,
+          isA<FormatException>().having(
+            (error) => error.message,
+            'message',
+            'decode failed',
+          ),
+        );
       },
     );
 
@@ -1291,10 +1364,44 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
+      'Create stages from file failure shows app message',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        final appMessages = RecordingAppMessageSink();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          startlistProvider: startlistProvider,
+          appMessages: appMessages,
+        );
+        when(
+          () => startlistProvider.getStagesFromFile(),
+        ).thenThrow(const CsvImportParseFailedException());
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(DatabaseEvent.createStagesFromFile(raceId: race.id));
+      },
+      wait: const Duration(milliseconds: 10),
+      verify: (bloc) {
+        expect(bloc.appMessages, isA<RecordingAppMessageSink>());
+        final appMessages = bloc.appMessages as RecordingAppMessageSink;
+        expect(appMessages.messages, hasLength(1));
+        expect(appMessages.messages.single, isA<CsvImportParseFailedException>());
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
       'Create stages from file with duplicate numbers fails without creating stages',
       setUp: () {
         Bloc.observer = AppBlocObserver();
-        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+        final appMessages = RecordingAppMessageSink();
+        bloc = DatabaseBloc(
+          database: db,
+          settingsProvider: settingsProvider,
+          startlistProvider: startlistProvider,
+          appMessages: appMessages,
+        );
         final startTimes = <String, String>{
           'stage1': '10:10:10',
           'stage2': '10:10:10',
@@ -1314,24 +1421,19 @@ void main() {
         bloc.add(DatabaseEvent.createStagesFromFile(raceId: race.id));
       },
       wait: const Duration(milliseconds: 10),
-      expect: () => contains(
-        isA<DatabaseState>().having(
-          (state) => state.error,
-          'error',
-          isA<DatabaseDuplicateParticipantNumberInStagesCsv>().having(
-            (error) => error.number,
-            'number',
-            100,
-          ),
-        ),
-      ),
       verify: (bloc) async {
         final races = await db.getRaces().get();
         final stages = await db.getStages(raceId: race.id).get();
+        final appMessages = bloc.appMessages as RecordingAppMessageSink;
 
         expect(races.length, 2);
         expect(stages.length, 4);
         expect(bloc.state.race, null);
+        expect(appMessages.messages, hasLength(1));
+        expect(
+          appMessages.messages.single,
+          isA<DuplicateParticipantNumberInStagesCsvException>().having((error) => error.number, 'number', 100),
+        );
       },
     );
 

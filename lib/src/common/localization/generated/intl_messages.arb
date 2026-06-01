@@ -74,6 +74,43 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nAppMessage_textDecodePlatformFallbackUnavailable": "Системное определение кодировки недоступно на этой платформе",
+  "@I18nAppMessage_textDecodePlatformFallbackUnavailable": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_textDecodeWindowsFallbackUnavailable": "Определение кодировки через Windows пока не реализовано",
+  "@I18nAppMessage_textDecodeWindowsFallbackUnavailable": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_textDecodeUchardetLibraryMissing": "Не найдена системная библиотека uchardet для определения кодировки",
+  "@I18nAppMessage_textDecodeUchardetLibraryMissing": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_textDecodeUchardetSymbolsMissing": "В системной библиотеке uchardet не найдены нужные функции",
+  "@I18nAppMessage_textDecodeUchardetSymbolsMissing": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_textDecodeIconvLibraryMissing": "Не найдена системная библиотека iconv для декодирования файла",
+  "@I18nAppMessage_textDecodeIconvLibraryMissing": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_textDecodeCharsetNotDetected": "Не удалось определить кодировку файла",
+  "@I18nAppMessage_textDecodeCharsetNotDetected": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nAppMessage_textDecodeConversionFailed": "Не удалось преобразовать файл из кодировки {charset}",
+  "@I18nAppMessage_textDecodeConversionFailed": {
+    "type": "text",
+    "placeholders": {
+      "charset": {}
+    }
+  },
   "I18nUpdate_whatsNew": "Что нового",
   "@I18nUpdate_whatsNew": {
     "type": "text",

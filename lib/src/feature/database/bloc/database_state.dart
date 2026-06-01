@@ -26,8 +26,5 @@ sealed class DatabaseState with _$DatabaseState {
 
     /// Номер, который будет автоматически подставлен в следующую автоматическую отсечку
     int? awaitingNumber,
-
-    /// Ошибка базы данных
-    DatabaseError? error,
   }) = DBState;
 }

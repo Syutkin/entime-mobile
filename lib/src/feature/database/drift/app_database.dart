@@ -12,18 +12,13 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3/sqlite3.dart';
 
+import '../../../common/exceptions/known_exception.dart';
 import '../../../common/logger/logger.dart';
 import '../../../common/utils/extensions.dart';
 import '../../log/log.dart';
 import 'app_database.steps.dart';
 
 part 'app_database.g.dart';
-
-class DuplicateParticipantNumberInStagesCsvException implements Exception {
-  const DuplicateParticipantNumberInStagesCsvException(this.number);
-
-  final int number;
-}
 
 @DriftDatabase(include: {'tables.drift'})
 class AppDatabase extends _$AppDatabase {

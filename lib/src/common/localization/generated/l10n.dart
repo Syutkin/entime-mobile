@@ -177,6 +177,76 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Системное определение кодировки недоступно на этой платформе`
+  String get I18nAppMessage_textDecodePlatformFallbackUnavailable {
+    return Intl.message(
+      'Системное определение кодировки недоступно на этой платформе',
+      name: 'I18nAppMessage_textDecodePlatformFallbackUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Определение кодировки через Windows пока не реализовано`
+  String get I18nAppMessage_textDecodeWindowsFallbackUnavailable {
+    return Intl.message(
+      'Определение кодировки через Windows пока не реализовано',
+      name: 'I18nAppMessage_textDecodeWindowsFallbackUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не найдена системная библиотека uchardet для определения кодировки`
+  String get I18nAppMessage_textDecodeUchardetLibraryMissing {
+    return Intl.message(
+      'Не найдена системная библиотека uchardet для определения кодировки',
+      name: 'I18nAppMessage_textDecodeUchardetLibraryMissing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `В системной библиотеке uchardet не найдены нужные функции`
+  String get I18nAppMessage_textDecodeUchardetSymbolsMissing {
+    return Intl.message(
+      'В системной библиотеке uchardet не найдены нужные функции',
+      name: 'I18nAppMessage_textDecodeUchardetSymbolsMissing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не найдена системная библиотека iconv для декодирования файла`
+  String get I18nAppMessage_textDecodeIconvLibraryMissing {
+    return Intl.message(
+      'Не найдена системная библиотека iconv для декодирования файла',
+      name: 'I18nAppMessage_textDecodeIconvLibraryMissing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не удалось определить кодировку файла`
+  String get I18nAppMessage_textDecodeCharsetNotDetected {
+    return Intl.message(
+      'Не удалось определить кодировку файла',
+      name: 'I18nAppMessage_textDecodeCharsetNotDetected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не удалось преобразовать файл из кодировки {charset}`
+  String I18nAppMessage_textDecodeConversionFailed(Object charset) {
+    return Intl.message(
+      'Не удалось преобразовать файл из кодировки $charset',
+      name: 'I18nAppMessage_textDecodeConversionFailed',
+      desc: '',
+      args: [charset],
+    );
+  }
+
   /// `Что нового`
   String get I18nUpdate_whatsNew {
     return Intl.message(

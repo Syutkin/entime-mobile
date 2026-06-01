@@ -37,6 +37,42 @@ class I18nAppMessage {
     'Не удалось определить кодировку CSV файла',
     name: 'I18nAppMessage_csvImportCharsetDetectorUnavailable',
   );
+
+  static String get textDecodePlatformFallbackUnavailable => Intl.message(
+    'Системное определение кодировки недоступно на этой платформе',
+    name: 'I18nAppMessage_textDecodePlatformFallbackUnavailable',
+  );
+
+  static String get textDecodeWindowsFallbackUnavailable => Intl.message(
+    'Определение кодировки через Windows пока не реализовано',
+    name: 'I18nAppMessage_textDecodeWindowsFallbackUnavailable',
+  );
+
+  static String get textDecodeUchardetLibraryMissing => Intl.message(
+    'Не найдена системная библиотека uchardet для определения кодировки',
+    name: 'I18nAppMessage_textDecodeUchardetLibraryMissing',
+  );
+
+  static String get textDecodeUchardetSymbolsMissing => Intl.message(
+    'В системной библиотеке uchardet не найдены нужные функции',
+    name: 'I18nAppMessage_textDecodeUchardetSymbolsMissing',
+  );
+
+  static String get textDecodeIconvLibraryMissing => Intl.message(
+    'Не найдена системная библиотека iconv для декодирования файла',
+    name: 'I18nAppMessage_textDecodeIconvLibraryMissing',
+  );
+
+  static String get textDecodeCharsetNotDetected => Intl.message(
+    'Не удалось определить кодировку файла',
+    name: 'I18nAppMessage_textDecodeCharsetNotDetected',
+  );
+
+  static String textDecodeConversionFailed(String charset) => Intl.message(
+    'Не удалось преобразовать файл из кодировки $charset',
+    name: 'I18nAppMessage_textDecodeConversionFailed',
+    args: [charset],
+  );
 }
 
 class I18nUpdate {

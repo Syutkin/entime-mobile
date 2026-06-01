@@ -19,7 +19,6 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     required int? autoFinishNumber,
     required int? awaitingNumber,
     required bool? updateFinishNumber,
-    required DatabaseError? error,
   }) = _EmitState;
 
   const factory DatabaseEvent.addRace({

@@ -19,7 +19,6 @@ import '../../../feature/app_message/app_message.dart';
 import '../../../feature/csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
-import '../model/database_error.dart';
 import '../model/notification.dart';
 import '../model/participant_status.dart';
 
@@ -124,7 +123,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
                 notification: event.notification,
                 autoFinishNumber: event.autoFinishNumber,
                 awaitingNumber: _awaitingNumber,
-                error: event.error,
               ),
             );
           case _AddRace():
@@ -369,9 +367,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               }
             }
           case _CreateStagesFromFile():
-            final stageCsv = await startlistProvider.getStagesFromFile();
-            if (stageCsv != null) {
-              await _db.createStagesFromStagesCsv(event.raceId, stageCsv);
+            final stagesCsv = await startlistProvider.getStagesFromFile();
+            if (stagesCsv != null) {
+              await _db.createStagesFromStagesCsv(event.raceId, stagesCsv);
             }
           case DatabaseEventShareStart():
             final race = _race;
@@ -448,12 +446,8 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               }
             }
         }
-      } on DuplicateParticipantNumberInStagesCsvException catch (e) {
-        await _emitState(
-          error: DatabaseDuplicateParticipantNumberInStagesCsv(e.number),
-        );
       } catch (e) {
-        await _emitState(error: DatabaseUnexpectedError(e.toString()));
+        appMessages.show(e);
       }
     });
     add(const DatabaseEvent.initialize());
@@ -495,7 +489,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
     Notification? notification,
     int? autoFinishNumber,
     bool? updateFinishNumber,
-    DatabaseError? error,
   }) async {
     add(
       DatabaseEvent.emitState(
@@ -512,7 +505,6 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         autoFinishNumber: autoFinishNumber,
         awaitingNumber: _awaitingNumber,
         updateFinishNumber: updateFinishNumber,
-        error: error,
       ),
     );
   }

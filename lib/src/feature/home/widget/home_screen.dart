@@ -11,7 +11,6 @@ import '../../app_message/app_message.dart';
 import '../../bluetooth/bluetooth.dart';
 import '../../countdown/bloc/countdown_bloc.dart';
 import '../../database/bloc/database_bloc.dart';
-import '../../database/model/database_error.dart';
 import '../../database/model/filter_finish.dart';
 import '../../database/model/filter_start.dart';
 import '../../database/widget/start_list_page.dart';
@@ -76,9 +75,7 @@ class HomeScreen extends StatelessWidget {
             // Следим за таймаутами Bluetooth JSON запросов
             _listenToBluetoothRequests(),
             // Показываем общие сообщения приложения
-            _listenToAppMessages(),
-            // Показываем ошибки базы данных
-            _listenToDatabaseErrors(),
+            const AppMessageListener(),
           ],
           child: const TabBarView(
             physics: NeverScrollableScrollPhysics(),
@@ -186,29 +183,6 @@ class HomeScreen extends StatelessWidget {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text(text)));
-  }
-
-  SingleChildWidget _listenToAppMessages() {
-    return BlocListener<AppMessageCubit, AppMessage?>(
-      listenWhen: (previous, current) => current != null,
-      listener: (context, message) {
-        if (message == null) return;
-        _showSnackBar(context, _appMessageText(message));
-        context.read<AppMessageCubit>().clear();
-      },
-    );
-  }
-
-  String _appMessageText(AppMessage message) {
-    final i18n = Localization.current;
-    return switch (message) {
-      AppCsvImportDecodeFailed() => i18n.I18nAppMessage_csvImportDecodeFailed,
-      AppCsvImportParseFailed() => i18n.I18nAppMessage_csvImportParseFailed,
-      AppCsvImportCharsetDetectorUnavailable() => i18n.I18nAppMessage_csvImportCharsetDetectorUnavailable,
-      AppDuplicateParticipantNumberInStagesCsv(:final number) =>
-        i18n.I18nDatabase_duplicateParticipantNumberInStagesCsv(number),
-      AppUnexpectedError(:final message) => message,
-    };
   }
 
   SingleChildWidget _listenToNewStartTime() => BlocListener<DatabaseBloc, DatabaseState>(
@@ -323,25 +297,6 @@ class HomeScreen extends StatelessWidget {
         }
       },
     );
-  }
-
-  SingleChildWidget _listenToDatabaseErrors() {
-    return BlocListener<DatabaseBloc, DatabaseState>(
-      listenWhen: (previous, current) => previous.error != current.error && current.error != null,
-      listener: (context, state) {
-        final error = state.error;
-        if (error == null) return;
-        _showSnackBar(context, _databaseErrorMessage(error));
-      },
-    );
-  }
-
-  String _databaseErrorMessage(DatabaseError error) {
-    return switch (error) {
-      DatabaseDuplicateParticipantNumberInStagesCsv(:final number) =>
-        Localization.current.I18nDatabase_duplicateParticipantNumberInStagesCsv(number),
-      DatabaseUnexpectedError(:final message) => message,
-    };
   }
 }
 

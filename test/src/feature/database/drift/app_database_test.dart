@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:drift/drift.dart' hide isNotNull;
 import 'package:drift/native.dart';
+import 'package:entime/src/common/exceptions/known_exception.dart';
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/constants/date_time_formats.dart';
 import 'package:entime/src/feature/csv/csv.dart';

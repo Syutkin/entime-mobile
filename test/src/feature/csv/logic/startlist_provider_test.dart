@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:entime/src/common/exceptions/known_exception.dart';
 import 'package:entime/src/common/utils/file_picker_provider.dart';
 import 'package:entime/src/common/utils/text_decoder.dart';
 import 'package:entime/src/feature/csv/csv.dart';
@@ -46,7 +47,15 @@ Future<String> testDecoder(Uint8List bytes) async {
   return utf8.decode(bytes);
 }
 
-Future<String?> missingPluginDecoder(Uint8List bytes) {
+Future<String> throwingDecoder(Uint8List bytes) async {
+  throw const FormatException('decode failed');
+}
+
+Future<String> unavailableCharsetDetectorDecoder(Uint8List bytes) async {
+  throw const TextDecodeUchardetLibraryMissingException();
+}
+
+Future<String> missingPluginDecoder(Uint8List bytes) {
   return decodeBytesForTesting(
     bytes,
     decoder: (_) async => throw MissingPluginException(),
@@ -75,9 +84,40 @@ int _windows1251Byte(int rune) {
   throw UnsupportedError('Unsupported test character: $rune');
 }
 
+Matcher throwsCsvImportParseFailed() {
+  return throwsA(isA<CsvImportParseFailedException>());
+}
+
+Matcher throwsTextDecodeFailure<T extends KnownException>() {
+  return throwsA(isA<T>());
+}
+
+bool _isLinuxSystemDecoderUnavailable(KnownException exception) {
+  return switch (exception) {
+    TextDecodeUchardetLibraryMissingException() ||
+    TextDecodeUchardetSymbolsMissingException() ||
+    TextDecodeIconvLibraryMissingException() => true,
+    _ => false,
+  };
+}
+
+Future<bool> _expectLinuxSystemDecode(Uint8List bytes, String expected) async {
+  try {
+    final decoded = await decodeWithLinuxSystemCharsetDetector(bytes);
+    expect(decoded, expected);
+    return true;
+  } on KnownException catch (e) {
+    if (_isLinuxSystemDecoderUnavailable(e)) {
+      markTestSkipped('Linux charset detector system libraries are unavailable');
+      return false;
+    }
+    rethrow;
+  }
+}
+
 void main() {
   late IFilePickerProvider filepicker;
-  late Future<String?> Function(Uint8List bytes) decoder;
+  late Future<String> Function(Uint8List bytes) decoder;
   late StartlistProvider startlistProvider;
 
   setUp(() {
@@ -93,8 +133,10 @@ void main() {
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => startlistPicker());
         startlistProvider = StartlistProvider(filepicker: filepicker, decoder: decoder);
+
         final race = await startlistProvider.getRaceFromFile();
-        expect(race != null, true);
+
+        expect(race, isNotNull);
         expect(race!.fileName, 'filename');
         expect(race.startItems.length, 79);
         expect(race.startItems.first.name, 'Алексахина Варвара');
@@ -111,9 +153,8 @@ void main() {
             'Любители;9;Гадолин Мечислав;10:05:00\r\n'
             'Элита;1;Абушаев Лев;10:30:30';
         final bytes = windows1251Encode(csv);
-        final decoded = await decodeWithLinuxSystemCharsetDetector(bytes);
-        if (decoded == null) {
-          markTestSkipped('Linux charset detector system libraries are unavailable');
+        if (!await _expectLinuxSystemDecode(bytes, csv)) {
+          return;
         }
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
@@ -127,28 +168,60 @@ void main() {
         expect(race.startItems.first.name, 'Алексахина Варвара');
       });
 
+      test('Race csv unexpected decode error is not wrapped', () async {
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => startlistPicker());
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: throwingDecoder);
+
+        await expectLater(
+          startlistProvider.getRaceFromFile(),
+          throwsA(isA<FormatException>()),
+        );
+      });
+
+      test('Race csv unavailable charset detector throws failure', () async {
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => startlistPicker());
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: unavailableCharsetDetectorDecoder);
+
+        await expectLater(
+          startlistProvider.getRaceFromFile(),
+          throwsTextDecodeFailure<TextDecodeUchardetLibraryMissingException>(),
+        );
+      });
+
       test('Race csv with errors loaded', () async {
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => startlistPickerWithErrors());
-        final race = await startlistProvider.getRaceFromFile();
-        expect(race == null, true);
+
+        await expectLater(
+          startlistProvider.getRaceFromFile(),
+          throwsCsvImportParseFailed(),
+        );
       });
 
       test('Incorrect race csv loaded', () async {
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => incorrectPicker());
-        final race = await startlistProvider.getRaceFromFile();
-        expect(race == null, true);
+
+        await expectLater(
+          startlistProvider.getRaceFromFile(),
+          throwsCsvImportParseFailed(),
+        );
       });
 
       test('Null race csv file', () async {
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => nullPicker());
+
         final race = await startlistProvider.getRaceFromFile();
-        expect(race == null, true);
+
+        expect(race, isNull);
       });
     });
 
@@ -157,8 +230,10 @@ void main() {
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => stageslistPicker());
+
         final stages = await startlistProvider.getStagesFromFile();
-        expect(stages != null, true);
+
+        expect(stages, isNotNull);
         expect(stages!.stageNames.length, 4);
         expect(stages.startItems.length, 18);
         expect(stages.stageNames.last, 'СУ 4');
@@ -177,9 +252,8 @@ void main() {
             '9;00:01:00;10:01:00\r\n'
             '18;00:02:00;10:02:00';
         final bytes = Uint8List.fromList(utf8.encode(csv));
-        final decoded = await decodeWithLinuxSystemCharsetDetector(bytes);
-        if (decoded == null) {
-          markTestSkipped('Linux charset detector system libraries are unavailable');
+        if (!await _expectLinuxSystemDecode(bytes, csv)) {
+          return;
         }
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
@@ -208,9 +282,8 @@ void main() {
               '9;00:01:00;10:01:00\r\n'
               '18;00:02:00;10:02:00';
           final bytes = windows1251Encode(csv);
-          final decoded = await decodeWithLinuxSystemCharsetDetector(bytes);
-          if (decoded == null) {
-            markTestSkipped('Linux charset detector system libraries are unavailable');
+          if (!await _expectLinuxSystemDecode(bytes, csv)) {
+            return;
           }
           when(
             () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
@@ -227,28 +300,60 @@ void main() {
         skip: 'uchardet may detect short CP1251 stages CSV as ISO-8859-6; no charset guessing fallback by design',
       );
 
+      test('Stages csv unexpected decode error is not wrapped', () async {
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => stageslistPicker());
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: throwingDecoder);
+
+        await expectLater(
+          startlistProvider.getStagesFromFile(),
+          throwsA(isA<FormatException>()),
+        );
+      });
+
+      test('Stages csv unavailable charset detector throws failure', () async {
+        when(
+          () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
+        ).thenAnswer((_) => stageslistPicker());
+        startlistProvider = StartlistProvider(filepicker: filepicker, decoder: unavailableCharsetDetectorDecoder);
+
+        await expectLater(
+          startlistProvider.getStagesFromFile(),
+          throwsTextDecodeFailure<TextDecodeUchardetLibraryMissingException>(),
+        );
+      });
+
       test('Stages csv with errors loaded', () async {
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => stageslistPickerWithErrors());
-        final stages = await startlistProvider.getStagesFromFile();
-        expect(stages == null, true);
+
+        await expectLater(
+          startlistProvider.getStagesFromFile(),
+          throwsCsvImportParseFailed(),
+        );
       });
 
       test('Incorrect stages csv loaded', () async {
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => incorrectPicker());
-        final stages = await startlistProvider.getStagesFromFile();
-        expect(stages == null, true);
+
+        await expectLater(
+          startlistProvider.getStagesFromFile(),
+          throwsCsvImportParseFailed(),
+        );
       });
 
       test('Null stages csv file', () async {
         when(
           () => filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom),
         ).thenAnswer((_) => nullPicker());
+
         final stages = await startlistProvider.getStagesFromFile();
-        expect(stages == null, true);
+
+        expect(stages, isNull);
       });
     });
   });

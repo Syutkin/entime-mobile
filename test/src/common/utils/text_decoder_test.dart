@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:entime/src/common/exceptions/known_exception.dart';
 import 'package:entime/src/common/utils/text_decoder.dart';
 import 'package:flutter/services.dart';
 import 'package:test/test.dart';
@@ -26,14 +27,14 @@ void main() {
           'Любители;9;Гадолин Мечислав;10:05:00\r\n'
           'Элита;1;Абушаев Лев;10:30:30';
 
-      final result = await decodeBytesForTesting(
-        windows1251Encode(text),
-        decoder: (_) async => throw MissingPluginException(),
+      final result = await _decodeOrSkip(
+        () => decodeBytesForTesting(
+          windows1251Encode(text),
+          decoder: (_) async => throw MissingPluginException(),
+        ),
+        skippedValue: text,
       );
 
-      if (result == null) {
-        markTestSkipped('Linux charset detector system libraries are unavailable');
-      }
       expect(result, text);
     });
   });
@@ -50,14 +51,35 @@ void main() {
           'Любители;9;Гадолин Мечислав;10:05:00\r\n'
           'Элита;1;Абушаев Лев;10:30:30';
 
-      final result = await decodeWithLinuxSystemCharsetDetector(windows1251Encode(text));
+      final result = await _decodeOrSkip(
+        () => decodeWithLinuxSystemCharsetDetector(windows1251Encode(text)),
+        skippedValue: text,
+      );
 
-      if (result == null) {
-        markTestSkipped('Linux charset detector system libraries are unavailable');
-      }
       expect(result, text);
     });
   });
+}
+
+Future<String> _decodeOrSkip(Future<String> Function() decode, {required String skippedValue}) async {
+  try {
+    return await decode();
+  } on KnownException catch (e) {
+    if (_isLinuxSystemDecoderUnavailable(e)) {
+      markTestSkipped('Linux charset detector system libraries are unavailable');
+      return skippedValue;
+    }
+    rethrow;
+  }
+}
+
+bool _isLinuxSystemDecoderUnavailable(KnownException exception) {
+  return switch (exception) {
+    TextDecodeUchardetLibraryMissingException() ||
+    TextDecodeUchardetSymbolsMissingException() ||
+    TextDecodeIconvLibraryMissingException() => true,
+    _ => false,
+  };
 }
 
 Uint8List windows1251Encode(String value) {
