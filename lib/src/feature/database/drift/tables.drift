@@ -305,6 +305,7 @@ WHERE
     	OR (number IS :number
       	AND (automatic_start_time NOTNULL OR manual_start_time NOTNULL)));
 
+/*
 _setStartingInfo:
 UPDATE starts
 SET start_time = :start_time,
@@ -316,6 +317,7 @@ SET start_time = :start_time,
 WHERE
 	stage_id = :stage_id
 	AND participant_id = :participant_id;
+*/
 
 _getParticipantAroundTime AS StartingParticipant:
 SELECT

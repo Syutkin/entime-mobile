@@ -1063,6 +1063,19 @@
     "type": "text",
     "placeholders": {}
   },
+  "I18nStart_changeStartTime": "Изменить время старта",
+  "@I18nStart_changeStartTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "I18nStart_changeStartTimeInfo": "Выерите новое время страта для участника №{number}. Текущее время старта: {currentStartTime}",
+  "@I18nStart_changeStartTimeInfo": {
+    "type": "text",
+    "placeholders": {
+      "number": {},
+      "currentStartTime": {}
+    }
+  },
   "I18nStart_replaceAutomaticCorrection": "Заменить автоматическую поправку",
   "@I18nStart_replaceAutomaticCorrection": {
     "type": "text",

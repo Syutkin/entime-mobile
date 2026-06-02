@@ -113,11 +113,11 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     required int stageId,
     required int participantId,
     required String startTime,
-    int? timestampCorrection,
-    String? automaticStartTime,
-    int? automaticCorrection,
-    String? manualStartTime,
-    int? manualCorrection,
+    @Default(Value<int?>.absent()) Value<int?> timestampCorrection,
+    @Default(Value<String?>.absent()) Value<String?> automaticStartTime,
+    @Default(Value<int?>.absent()) Value<int?> automaticCorrection,
+    @Default(Value<String?>.absent()) Value<String?> manualStartTime,
+    @Default(Value<int?>.absent()) Value<int?> manualCorrection,
   }) = _UpdateStartingInfo;
 
   const factory DatabaseEvent.updateAutomaticCorrection({

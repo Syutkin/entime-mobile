@@ -1976,6 +1976,26 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Изменить время старта`
+  String get I18nStart_changeStartTime {
+    return Intl.message(
+      'Изменить время старта',
+      name: 'I18nStart_changeStartTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выерите новое время страта для участника №{number}. Текущее время старта: {currentStartTime}`
+  String I18nStart_changeStartTimeInfo(Object number, Object currentStartTime) {
+    return Intl.message(
+      'Выерите новое время страта для участника №$number. Текущее время старта: $currentStartTime',
+      name: 'I18nStart_changeStartTimeInfo',
+      desc: '',
+      args: [number, currentStartTime],
+    );
+  }
+
   /// `Заменить автоматическую поправку`
   String get I18nStart_replaceAutomaticCorrection {
     return Intl.message(

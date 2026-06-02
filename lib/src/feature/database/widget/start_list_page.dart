@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart' show Value;
 import 'package:entime/src/common/utils/extensions.dart';
 import 'package:entime/src/common/widget/cancel_ok_buttons.dart';
 import 'package:entime/src/feature/database/logic/validators.dart';
@@ -23,13 +24,17 @@ part 'popup/add_racer_popup.dart';
 part 'popup/edit_start_time_popup.dart';
 part 'popup/set_dns_popup.dart';
 part 'popup/shift_starts_time.dart';
+part 'popup/set_start_time.dart';
 
 enum StartPopupMenu {
   /// Редактировать
   edit,
 
+  /// Изменить время старта
+  changeStartTime,
+
   /// Установить timestamp и timestamp поправку вместо автоматической отметки
-  setTimestamp,
+  replaceAutomaticCorrectionWithTimestamp,
 
   /// Сдвинуть время стартов
   shift,
@@ -434,12 +439,20 @@ class _StartListPage extends State<StartListPage> {
                 categories: currentContext.read<DatabaseBloc>().state.categories,
               );
             }
+          case StartPopupMenu.changeStartTime:
+            final currentContext = context;
+            if (currentContext.mounted) {
+              await showDialog<void>(
+                context: currentContext,
+                builder: (context) => SetStartTimePopup(item: item),
+              );
+            }
           case StartPopupMenu.shift:
             final currentContext = context;
             if (currentContext.mounted) {
               await shiftStartsTime(context: currentContext, item: item);
             }
-          case StartPopupMenu.setTimestamp:
+          case StartPopupMenu.replaceAutomaticCorrectionWithTimestamp:
             final currentContext = context;
             if (currentContext.mounted) {
               final bloc = currentContext.read<DatabaseBloc>();
@@ -459,11 +472,11 @@ class _StartListPage extends State<StartListPage> {
                     stageId: item.stageId,
                     participantId: item.participantId,
                     startTime: item.startTime,
-                    timestampCorrection: item.timestampCorrection,
-                    automaticStartTime: item.timestamp?.format(longTimeFormat),
-                    automaticCorrection: item.timestampCorrection,
-                    manualStartTime: item.manualStartTime,
-                    manualCorrection: item.manualCorrection,
+                    timestampCorrection: Value(item.timestampCorrection),
+                    automaticStartTime: Value(item.timestamp?.format(longTimeFormat)),
+                    automaticCorrection: Value(item.timestampCorrection),
+                    manualStartTime: Value(item.manualStartTime),
+                    manualCorrection: Value(item.manualCorrection),
                   ),
                 );
               }
@@ -479,20 +492,27 @@ class _StartListPage extends State<StartListPage> {
       switch (value) {
         case StartPopupMenu.edit:
           list.add(PopupMenuItem(value: StartPopupMenu.edit, child: Text(Localization.current.I18nCore_edit)));
-        case StartPopupMenu.setTimestamp:
+          list.add(const PopupMenuDivider());
+        case StartPopupMenu.changeStartTime:
+          list.add(
+            PopupMenuItem(
+              value: StartPopupMenu.changeStartTime,
+              child: Text(Localization.current.I18nStart_changeStartTime),
+            ),
+          );
+        case StartPopupMenu.shift:
+          list.add(
+            PopupMenuItem(value: StartPopupMenu.shift, child: Text(Localization.current.I18nStart_shiftStartsTime)),
+          );
+        case StartPopupMenu.replaceAutomaticCorrectionWithTimestamp:
           if (item.automaticCorrection != null) {
             list.add(
               PopupMenuItem(
-                value: StartPopupMenu.setTimestamp,
+                value: StartPopupMenu.replaceAutomaticCorrectionWithTimestamp,
                 child: Text(Localization.current.I18nStart_replaceAutomaticCorrection),
               ),
             );
           }
-        case StartPopupMenu.shift:
-          list.add(const PopupMenuDivider());
-          list.add(
-            PopupMenuItem(value: StartPopupMenu.shift, child: Text(Localization.current.I18nStart_shiftStartsTime)),
-          );
       }
     }
     return list;

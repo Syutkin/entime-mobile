@@ -155,13 +155,15 @@ Future<void> editStartTime(BuildContext context, ParticipantAtStart item) async 
             databaseBloc.add(
               DatabaseEvent.updateStartingInfo(
                 startTime: startTimeController.text,
-                timestampCorrection: timestampCorrection,
+                timestampCorrection: Value(timestampCorrection),
                 automaticStartTime: automaticStartTimeController.text.isNotEmpty
-                    ? automaticStartTimeController.text
-                    : null,
-                automaticCorrection: automaticCorrection,
-                manualStartTime: manualStartTimeController.text.isNotEmpty ? manualStartTimeController.text : null,
-                manualCorrection: manualCorrection,
+                    ? Value(automaticStartTimeController.text)
+                    : const Value(null),
+                automaticCorrection: Value(automaticCorrection),
+                manualStartTime: manualStartTimeController.text.isNotEmpty
+                    ? Value(manualStartTimeController.text)
+                    : const Value(null),
+                manualCorrection: Value(manualCorrection),
                 stageId: item.stageId,
                 participantId: item.participantId,
               ),

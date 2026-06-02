@@ -261,11 +261,11 @@ void main() {
         () => databaseBloc.add(
           DatabaseEvent.updateStartingInfo(
             startTime: startTime,
-            timestampCorrection: timestampCorrection,
-            automaticStartTime: automaticStartTime,
-            automaticCorrection: automaticCorrection,
-            manualStartTime: manualStartTime,
-            manualCorrection: manualCorrection,
+            timestampCorrection: Value(timestampCorrection),
+            automaticStartTime: Value(automaticStartTime),
+            automaticCorrection: Value(automaticCorrection),
+            manualStartTime: Value(manualStartTime),
+            manualCorrection: Value(manualCorrection),
             stageId: item.stageId,
             participantId: item.participantId,
           ),

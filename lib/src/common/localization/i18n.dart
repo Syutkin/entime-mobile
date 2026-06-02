@@ -607,6 +607,17 @@ class I18nStart {
 
   static String get startTimestamp => Intl.message('Время записи на устройстве', name: 'I18nStart_startTimestamp');
 
+  static String get changeStartTime => Intl.message('Изменить время старта', name: 'I18nStart_changeStartTime');
+
+  static String changeStartTimeInfo(
+    int number,
+    String currentStartTime,
+  ) => Intl.message(
+    'Выерите новое время страта для участника №$number. Текущее время старта: $currentStartTime',
+    name: 'I18nStart_changeStartTimeInfo',
+    args: [number, currentStartTime],
+  );
+
   static String get replaceAutomaticCorrection =>
       Intl.message('Заменить автоматическую поправку', name: 'I18nStart_replaceAutomaticCorrection');
 

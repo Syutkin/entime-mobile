@@ -596,21 +596,23 @@ class AppDatabase extends _$AppDatabase {
     required String startTime,
     required int stageId,
     required int participantId,
-    int? timestampCorrection,
-    String? automaticStartTime,
-    int? automaticCorrection,
-    String? manualStartTime,
-    int? manualCorrection,
+    Value<int?> timestampCorrection = const Value.absent(),
+    Value<String?> automaticStartTime = const Value.absent(),
+    Value<int?> automaticCorrection = const Value.absent(),
+    Value<String?> manualStartTime = const Value.absent(),
+    Value<int?> manualCorrection = const Value.absent(),
   }) {
-    return _setStartingInfo(
-      startTime: startTime,
-      stageId: stageId,
-      participantId: participantId,
-      timestampCorrection: timestampCorrection,
-      automaticCorrection: automaticCorrection,
-      automaticStartTime: automaticStartTime,
-      manualCorrection: manualCorrection,
-      manualStartTime: manualStartTime,
+    return (update(
+      starts,
+    )..where((start) => start.stageId.equals(stageId) & start.participantId.equals(participantId))).write(
+      StartsCompanion(
+        startTime: Value(startTime),
+        timestampCorrection: timestampCorrection,
+        automaticStartTime: automaticStartTime,
+        automaticCorrection: automaticCorrection,
+        manualStartTime: manualStartTime,
+        manualCorrection: manualCorrection,
+      ),
     );
   }
 

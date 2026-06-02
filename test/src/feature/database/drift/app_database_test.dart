@@ -773,10 +773,10 @@ void main() {
           startTime: startTime,
           stageId: stage.id,
           participantId: participantId,
-          manualStartTime: manualStartTime,
-          manualCorrection: manualCorrection,
-          automaticStartTime: automaticStartTime,
-          automaticCorrection: automaticCorrection,
+          manualStartTime: const Value(manualStartTime),
+          manualCorrection: const Value(manualCorrection),
+          automaticStartTime: const Value(automaticStartTime),
+          automaticCorrection: const Value(automaticCorrection),
         );
         expect(rowsUpdated, 1);
 
@@ -790,7 +790,47 @@ void main() {
         expect(participant.automaticCorrection, automaticCorrection);
       });
 
-      test('Only required fields for starting info', () async {
+      test('Only required fields for starting info preserve optional fields', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const startTime = '11:11:11';
+        const updatedStartTime = '12:12:12';
+        const manualStartTime = '11:11:11';
+        const automaticStartTime = '11:11:11';
+        const manualCorrection = 1234;
+        const automaticCorrection = -4331;
+        const number = 2;
+        var participant = (await db.getNumberAtStarts(stageId: stage.id, number: number).get()).first;
+        final participantId = participant.participantId;
+
+        var rowsUpdated = await db.setStartingInfo(
+          startTime: startTime,
+          stageId: stage.id,
+          participantId: participantId,
+          manualStartTime: const Value(manualStartTime),
+          manualCorrection: const Value(manualCorrection),
+          automaticStartTime: const Value(automaticStartTime),
+          automaticCorrection: const Value(automaticCorrection),
+        );
+        expect(rowsUpdated, 1);
+
+        rowsUpdated = await db.setStartingInfo(
+          startTime: updatedStartTime,
+          stageId: stage.id,
+          participantId: participantId,
+        );
+        expect(rowsUpdated, 1);
+
+        participant = (await db.getNumberAtStarts(stageId: stage.id, number: number).get()).first;
+        expect(participant.number, number);
+        expect(participant.participantId, participantId);
+        expect(participant.startTime, updatedStartTime);
+        expect(participant.manualStartTime, manualStartTime);
+        expect(participant.manualCorrection, manualCorrection);
+        expect(participant.automaticStartTime, automaticStartTime);
+        expect(participant.automaticCorrection, automaticCorrection);
+      });
+
+      test('Explicit nulls clear optional starting info fields', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const startTime = '11:11:11';
         const manualStartTime = '11:11:11';
@@ -805,14 +845,22 @@ void main() {
           startTime: startTime,
           stageId: stage.id,
           participantId: participantId,
-          manualStartTime: manualStartTime,
-          manualCorrection: manualCorrection,
-          automaticStartTime: automaticStartTime,
-          automaticCorrection: automaticCorrection,
+          manualStartTime: const Value(manualStartTime),
+          manualCorrection: const Value(manualCorrection),
+          automaticStartTime: const Value(automaticStartTime),
+          automaticCorrection: const Value(automaticCorrection),
         );
         expect(rowsUpdated, 1);
 
-        rowsUpdated = await db.setStartingInfo(startTime: startTime, stageId: stage.id, participantId: participantId);
+        rowsUpdated = await db.setStartingInfo(
+          startTime: startTime,
+          stageId: stage.id,
+          participantId: participantId,
+          manualStartTime: const Value(null),
+          manualCorrection: const Value(null),
+          automaticStartTime: const Value(null),
+          automaticCorrection: const Value(null),
+        );
         expect(rowsUpdated, 1);
 
         participant = (await db.getNumberAtStarts(stageId: stage.id, number: number).get()).first;

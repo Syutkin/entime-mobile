@@ -272,8 +272,9 @@ void main() {
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
         await $(StartItemTile).longPress();
-        expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(2));
+        expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(3));
         expect($(Localization.current.I18nCore_edit), findsOneWidget);
+        expect($(Localization.current.I18nStart_changeStartTime), findsOneWidget);
         expect($(Localization.current.I18nStart_shiftStartsTime), findsOneWidget);
       });
 
@@ -283,8 +284,9 @@ void main() {
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(PopupMenuItem<StartPopupMenu>), findsNothing);
         await $('6').longPress();
-        expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(3));
+        expect($(PopupMenuItem<StartPopupMenu>), findsNWidgets(4));
         expect($(Localization.current.I18nCore_edit), findsOneWidget);
+        expect($(Localization.current.I18nStart_changeStartTime), findsOneWidget);
         expect($(Localization.current.I18nStart_shiftStartsTime), findsOneWidget);
         expect($(Localization.current.I18nStart_replaceAutomaticCorrection), findsOneWidget);
       });
@@ -304,9 +306,11 @@ void main() {
               stageId: 1,
               participantId: 1,
               startTime: '10:00:00',
-              timestampCorrection: -2000,
-              automaticStartTime: '10:00:02,000',
-              automaticCorrection: -2000,
+              timestampCorrection: Value(-2000),
+              automaticStartTime: Value('10:00:02,000'),
+              automaticCorrection: Value(-2000),
+              manualCorrection: Value(null),
+              manualStartTime: Value(null),
             ),
           ),
         ).called(1);
@@ -319,6 +323,15 @@ void main() {
         await $(StartItemTile).longPress();
         await $(Localization.current.I18nCore_edit).tap();
         expect($(EditRacerPopup), findsOneWidget);
+      });
+
+      patrolWidgetTest('Call set start time popup', ($) async {
+        when(() => settingsCubit.state).thenReturn(settings);
+        when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
+        await $.pumpWidgetAndSettle(await testWidget());
+        await $(StartItemTile).longPress();
+        await $(Localization.current.I18nStart_changeStartTime).tap();
+        expect($(SetStartTimePopup), findsOneWidget);
       });
 
       patrolWidgetTest('Call shift popup', ($) async {

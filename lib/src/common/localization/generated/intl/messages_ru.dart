@@ -86,6 +86,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m34(seconds) => "${seconds}с";
 
+  static String m35(number, currentStartTime) =>
+      "Выерите новое время страта для участника №${number}. Текущее время старта: ${currentStartTime}";
+
   static String m19(category) => "Категория: ${category}";
 
   static String m20(city) => "Город: ${city}";
@@ -100,12 +103,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m25(year) => "Год/Возраст: ${year}";
 
-  static String m35(automaticCorrection, timestampCorrection) =>
+  static String m36(automaticCorrection, timestampCorrection) =>
       "Вы уверены что хотите заменить автоматическую поправку (${automaticCorrection}) на поправку относительно времени смартфона (${timestampCorrection})?";
 
-  static String m36(number) => "Участник с номером ${number} не стартовал?";
+  static String m37(number) => "Участник с номером ${number} не стартовал?";
 
-  static String m37(number, time) =>
+  static String m38(number, time) =>
       "Сдвинуть время стартов на указанное количество минут от номера ${number} (время старта ${time}) и далее?";
 
   static String m26(current, total) => "${current} из ${total}";
@@ -786,6 +789,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nStart_addParticipant": MessageLookupByLibrary.simpleMessage(
       "Добавить участника",
     ),
+    "I18nStart_changeStartTime": MessageLookupByLibrary.simpleMessage(
+      "Изменить время старта",
+    ),
+    "I18nStart_changeStartTimeInfo": m35,
     "I18nStart_didNotStart": MessageLookupByLibrary.simpleMessage(
       "Не стартовал",
     ),
@@ -828,13 +835,13 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Заменить автоматическую поправку",
         ),
-    "I18nStart_replaceAutomaticCorrectionConfirmation": m35,
-    "I18nStart_setDnsConfirmation": m36,
+    "I18nStart_replaceAutomaticCorrectionConfirmation": m36,
+    "I18nStart_setDnsConfirmation": m37,
     "I18nStart_shiftMinutes": MessageLookupByLibrary.simpleMessage("Минуты"),
     "I18nStart_shiftStartsTime": MessageLookupByLibrary.simpleMessage(
       "Сдвинуть время стартов",
     ),
-    "I18nStart_shiftStartsTimeFromNumber": m37,
+    "I18nStart_shiftStartsTimeFromNumber": m38,
     "I18nStart_sliverAutomaticCorrection": MessageLookupByLibrary.simpleMessage(
       "Авто\r\nпоправка",
     ),

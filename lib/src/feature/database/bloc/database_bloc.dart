@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:drift/drift.dart' show Value;
 import 'package:entime/src/common/utils/share_provider.dart';
 import 'package:entime/src/feature/settings/model/app_settings.dart';
 import 'package:flutter/foundation.dart';

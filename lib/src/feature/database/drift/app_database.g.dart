@@ -5158,33 +5158,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Future<int> _setStartingInfo({
-    required String startTime,
-    int? timestampCorrection,
-    String? automaticStartTime,
-    int? automaticCorrection,
-    String? manualStartTime,
-    int? manualCorrection,
-    required int stageId,
-    required int participantId,
-  }) {
-    return customUpdate(
-      'UPDATE starts SET start_time = ?1, timestamp_correction = ?2, automatic_start_time = ?3, automatic_correction = ?4, manual_start_time = ?5, manual_correction = ?6 WHERE stage_id = ?7 AND participant_id = ?8',
-      variables: [
-        Variable<String>(startTime),
-        Variable<int>(timestampCorrection),
-        Variable<String>(automaticStartTime),
-        Variable<int>(automaticCorrection),
-        Variable<String>(manualStartTime),
-        Variable<int>(manualCorrection),
-        Variable<int>(stageId),
-        Variable<int>(participantId),
-      ],
-      updates: {starts},
-      updateKind: UpdateKind.update,
-    );
-  }
-
   Selectable<StartingParticipant> _getParticipantAroundTime({
     required int stageId,
     required String before,
