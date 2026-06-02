@@ -5119,7 +5119,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     );
   }
 
-  Selectable<StartingParticipant> _getExistedStartingParticipants({
+  Selectable<StartingParticipant> getExistedStartingParticipants({
     required int stageId,
     required String startTime,
     required int number,

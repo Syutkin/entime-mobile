@@ -504,34 +504,11 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Обновляет или добавляет участника с заданным [number] и [startTime]
-  /// Возвращает null при успехе, и список участников если такое же стартовое время
-  /// уже установлено для других участников
   Future<List<StartingParticipant>?> addStartNumber({
     required Stage stage,
     required int number,
     required String startTime,
-    bool forceAdd = false,
   }) async {
-    // Если не принудительно добавлять/обновлять, то
-    // проверяем, что такого же времени старта не установлено другому номеру,
-    // или что номеру не установлено автоматическое или ручное время старта.
-    // Если истина, то добавляем номер, ставим время старта (или обновляем
-    // время старта у существующего номера) и возвращаем null.
-    // В противном случае возвращаем список конфликтующих участников.
-    if (!forceAdd) {
-      logger.i('Database -> Checking start time $startTime and number $number...');
-      final res = await _getExistedStartingParticipants(stageId: stage.id, startTime: startTime, number: number).get();
-      if (res.isNotEmpty) {
-        logger.i(
-          'Database -> Start time $startTime '
-          'already set or number $number already started',
-        );
-        return res;
-      } else {
-        logger.i('Database -> Start time $startTime and number $number not found');
-      }
-    }
-
     logger.i('Database -> Checking number $number at participants...');
     final participantAtRace = await (select(
       participants,
@@ -1078,7 +1055,6 @@ class AppDatabase extends _$AppDatabase {
               stage: Stage(id: id, raceId: raceId, name: stageName, isActive: true),
               number: item.number,
               startTime: startTime,
-              forceAdd: true,
             );
           }
         }

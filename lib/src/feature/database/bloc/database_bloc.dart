@@ -187,19 +187,38 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             _participants = await _db.getParticipantsAtStart(stageId: event.stageId).get();
             await _emitState();
           case _AddStartNumber():
-            final startingParticipants = await _db.addStartNumber(
-              stage: event.stage,
-              number: event.number,
-              startTime: event.startTime,
-              forceAdd: event.forceAdd,
-            );
-            if (startingParticipants != null && !event.forceAdd) {
-              final notification = Notification.updateStartNumber(
-                existedStartingParticipants: startingParticipants,
-                number: event.number,
-                startTime: event.startTime,
-              );
-              await _emitState(notification: notification);
+            var shouldAddStartNumber = true;
+            // Если не принудительно добавлять/обновлять, то
+            // проверяем, что такого же времени старта не установлено другому номеру,
+            // или что номеру не установлено автоматическое или ручное время старта.
+            // В противном случае показываем предупреждение, а добавление не выполняем.
+            if (!event.forceAdd) {
+              logger.i('Database -> Checking start time ${event.startTime} and number ${event.number}...');
+              final startingParticipants = await _db
+                  .getExistedStartingParticipants(
+                    stageId: event.stage.id,
+                    startTime: event.startTime,
+                    number: event.number,
+                  )
+                  .get();
+              if (startingParticipants.isNotEmpty) {
+                logger.i(
+                  'Database -> Start time ${event.startTime} '
+                  'already set or number ${event.number} already started',
+                );
+                shouldAddStartNumber = false;
+                final notification = Notification.updateStartNumber(
+                  existedStartingParticipants: startingParticipants,
+                  number: event.number,
+                  startTime: event.startTime,
+                );
+                await _emitState(notification: notification);
+              } else {
+                logger.i('Database -> Start time ${event.startTime} and number ${event.number} not found');
+              }
+            }
+            if (shouldAddStartNumber) {
+              await _db.addStartNumber(stage: event.stage, number: event.number, startTime: event.startTime);
             }
           case _UpdateRider():
             await _db.updateRider(

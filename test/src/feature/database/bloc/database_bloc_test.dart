@@ -419,16 +419,59 @@ void main() {
         bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
       },
       build: () => bloc,
-      act: (bloc) async {
-        bloc.add(DatabaseEvent.addStartNumber(stage: stage, number: 1, startTime: '10:00:00'));
+      act: (bloc) {
+        bloc.add(DatabaseEvent.addStartNumber(stage: stage, number: 100, startTime: '10:00:00'));
       },
-      verify: (bloc) {
-        switch (bloc.state.notification) {
-          case NotificationUpdateStartNumber(:final number, :final startTime):
-            expect(number, 1);
-            expect(startTime, '10:00:00');
-          default:
-        }
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        predicate<DatabaseState>((state) {
+          switch (state.notification) {
+            case NotificationUpdateStartNumber(
+              :final existedStartingParticipants,
+              number: 100,
+              startTime: '10:00:00',
+            ):
+              return existedStartingParticipants.length == 1 && existedStartingParticipants.first.number == 2;
+            default:
+              return false;
+          }
+        }, 'state with updateStartNumber notification'),
+      ),
+      verify: (bloc) async {
+        final participantsList = await db.getParticipantsAtStart(stageId: stage.id).get();
+        expect(participantsList.length, 79);
+
+        final participants = await db.getNumberAtStarts(stageId: stage.id, number: 100).get();
+        expect(participants, isEmpty);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Force add start number to existing start time',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc.add(DatabaseEvent.addStartNumber(stage: stage, number: 100, startTime: '10:00:00', forceAdd: true));
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => isNot(
+        contains(
+          predicate<DatabaseState>(
+            (state) => state.notification is NotificationUpdateStartNumber,
+            'state with updateStartNumber notification',
+          ),
+        ),
+      ),
+      verify: (bloc) async {
+        final participantsList = await db.getParticipantsAtStart(stageId: stage.id).get();
+        expect(participantsList.length, 80);
+
+        final participants = await db.getNumberAtStarts(stageId: stage.id, number: 100).get();
+        expect(participants.length, 1);
+        expect(participants.first.startTime, '10:00:00');
       },
     );
 

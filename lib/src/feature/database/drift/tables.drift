@@ -276,7 +276,7 @@ WHERE
 --	AND participants.status_id = 1
 ORDER BY start_time ASC;
 
-_getExistedStartingParticipants AS StartingParticipant:
+getExistedStartingParticipants AS StartingParticipant:
 SELECT
 	starts.id as start_id,
 	stage_id,

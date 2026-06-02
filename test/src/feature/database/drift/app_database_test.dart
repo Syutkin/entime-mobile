@@ -396,7 +396,6 @@ void main() {
         expect(getTrack.data, track.data);
         expect(getTrack.timestamp, track.timestamp);
         expect(getTrack.description, track.description);
-        expect(getTrack.description, track.description);
 
         expect(String.fromCharCodes(getTrack.data), content);
         expect(getTrack.timestamp, timestamp);
@@ -1060,26 +1059,71 @@ void main() {
         expect(secondRaceStart.raceId, 2);
       });
 
-      test('Add new start number with existed time', () async {
+      test('getExistedStartingParticipants returns participant with existing start time', () async {
         final stage = (await db.getStages(raceId: 1).get()).first;
         const startTime = '10:00:00';
         const number = 100;
 
-        final result = await db.addStartNumber(number: number, stage: stage, startTime: startTime);
-
-        expect(result?.length, 1);
-        final participant = result?.first;
+        final existedStartingParticipants = await db
+            .getExistedStartingParticipants(stageId: stage.id, startTime: startTime, number: number)
+            .get();
+        expect(existedStartingParticipants.length, 1);
 
         // Стартовое время '10:00:00' у номера 2 из тестовых данных
-        expect(participant?.number, 2);
-        expect(participant?.startTime, startTime);
+        expect(existedStartingParticipants.first.number, 2);
+        expect(existedStartingParticipants.first.startTime, startTime);
+      });
 
-        final participantsList = await db.getParticipantsAtStart(stageId: stage.id).get();
-        expect(participantsList.length, 79);
+      test('getExistedStartingParticipants returns empty list without conflicts', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const startTime = '01:00:00';
+        const number = 100;
 
-        // номер не добавлен
-        final participants = await db.getNumberAtStarts(stageId: stage.id, number: number).get();
-        expect(participants.length, 0);
+        final existedStartingParticipants = await db
+            .getExistedStartingParticipants(stageId: stage.id, startTime: startTime, number: number)
+            .get();
+
+        expect(existedStartingParticipants, isEmpty);
+      });
+
+      test('getExistedStartingParticipants returns participant with existing automatic start time', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const freeStartTime = '01:00:00';
+        const number = 1;
+        const automaticStartTime = '10:00:01,000';
+
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: number).getSingle();
+        await (db.update(db.starts)..where((start) => start.id.equals(participant.startId))).write(
+          const StartsCompanion(automaticStartTime: Value(automaticStartTime)),
+        );
+
+        final existedStartingParticipants = await db
+            .getExistedStartingParticipants(stageId: stage.id, startTime: freeStartTime, number: number)
+            .get();
+
+        expect(existedStartingParticipants.length, 1);
+        expect(existedStartingParticipants.first.number, number);
+        expect(existedStartingParticipants.first.automaticStartTime, automaticStartTime);
+      });
+
+      test('getExistedStartingParticipants returns participant with existing manual start time', () async {
+        final stage = (await db.getStages(raceId: 1).get()).first;
+        const freeStartTime = '01:00:00';
+        const number = 1;
+        const manualStartTime = '10:00:01,000';
+
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: number).getSingle();
+        await (db.update(db.starts)..where((start) => start.id.equals(participant.startId))).write(
+          const StartsCompanion(manualStartTime: Value(manualStartTime)),
+        );
+
+        final existedStartingParticipants = await db
+            .getExistedStartingParticipants(stageId: stage.id, startTime: freeStartTime, number: number)
+            .get();
+
+        expect(existedStartingParticipants.length, 1);
+        expect(existedStartingParticipants.first.number, number);
+        expect(existedStartingParticipants.first.manualStartTime, manualStartTime);
       });
 
       test('Add new start number. Number exist at participants list, '
