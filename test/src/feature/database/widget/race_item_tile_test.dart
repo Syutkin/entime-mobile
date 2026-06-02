@@ -44,7 +44,7 @@ void main() {
 
       expect($(race.name), findsOneWidget);
       expect($(ListTile), findsOneWidget);
-      expect($(PopupMenuButton<void>), findsOneWidget);
+      expect($(PopupMenuButton<RaceItemPopupMenu>), findsOneWidget);
 
       // Проверяем, что subtitle это SizedBox.shrink (когда нет дат)
       final listTile = $.tester.widget<ListTile>(find.byType(ListTile));
@@ -63,7 +63,7 @@ void main() {
 
       expect($(race.name), findsOneWidget);
       expect($(ListTile), findsOneWidget);
-      expect($(PopupMenuButton<void>), findsOneWidget);
+      expect($(PopupMenuButton<RaceItemPopupMenu>), findsOneWidget);
 
       // Проверяем, что даты отображаются в подзаголовке
       final formatter = DateFormat.yMd('en');
@@ -99,13 +99,13 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RaceItemPopupMenu>).tap();
 
       expect($(Localization.current.I18nCore_edit), findsOneWidget);
       expect($(Localization.current.I18nHome_importStagesCsv), findsOneWidget);
       expect($(Localization.current.I18nCore_delete), findsOneWidget);
       expect($(PopupMenuDivider), findsOneWidget);
-      expect($(PopupMenuItem<void>), findsNWidgets(3));
+      expect($(PopupMenuItem<RaceItemPopupMenu>), findsNWidgets(3));
     });
 
     patrolWidgetTest('Tap edit menu item', ($) async {
@@ -115,7 +115,7 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RaceItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_edit).tap();
 
       // Проверяем, что popup закрылся (меню больше не видно)
@@ -129,7 +129,7 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RaceItemPopupMenu>).tap();
       await $(Localization.current.I18nHome_importStagesCsv).tap();
 
       verify(() => databaseBloc.add(DatabaseEvent.createStagesFromFile(raceId: race.id))).called(1);
@@ -142,7 +142,7 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RaceItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_delete).tap();
 
       // Проверяем, что появился диалог подтверждения
@@ -159,7 +159,7 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RaceItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#cancelButton).tap();
 
@@ -173,7 +173,7 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(await testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RaceItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#okButton).tap();
 
@@ -221,7 +221,9 @@ void main() {
 
       await $.pumpWidgetAndSettle(await testWidget());
 
-      final popupMenuButton = $.tester.widget<PopupMenuButton<void>>(find.byType(PopupMenuButton<void>));
+      final popupMenuButton = $.tester.widget<PopupMenuButton<RaceItemPopupMenu>>(
+        find.byType(PopupMenuButton<RaceItemPopupMenu>),
+      );
       final icon = popupMenuButton.icon! as Icon;
       expect(icon.icon, equals(Icons.more_vert));
     });

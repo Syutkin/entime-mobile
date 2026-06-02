@@ -9,6 +9,8 @@ import '../../../common/utils/filesize.dart';
 import '../../database/database.dart';
 import '../bloc/trails_bloc.dart';
 
+enum TrailItemPopupMenu { share, edit, delete }
+
 class TrailItemTile extends StatelessWidget {
   const TrailItemTile({required this.trail, super.key});
 
@@ -28,34 +30,38 @@ class TrailItemTile extends StatelessWidget {
           ? Text(subtitle.join(', '), style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75))
           : null,
       leading: trail.fileId != null ? const Icon(MdiIcons.mapMarkerOutline) : const Icon(MdiIcons.mapMarkerOffOutline),
-      trailing: PopupMenuButton<void>(
+      trailing: PopupMenuButton<TrailItemPopupMenu>(
         icon: const Icon(Icons.more_vert),
-        itemBuilder: (context) => <PopupMenuEntry<void>>[
+        itemBuilder: (context) => <PopupMenuEntry<TrailItemPopupMenu>>[
           if (trail.fileExtension != null && trail.fileExtension!.isNotEmpty)
-            PopupMenuItem<void>(
-              onTap: () async {
-                context.read<DatabaseBloc>().add(DatabaseEvent.shareTrack(trail: trail));
-              },
+            PopupMenuItem<TrailItemPopupMenu>(
+              value: TrailItemPopupMenu.share,
               child: ListTile(leading: const Icon(Icons.share), title: Text(Localization.current.I18nCore_share)),
             ),
-          PopupMenuItem<void>(
-            onTap: () async {
-              await updateTrailPopup(context, trail);
-            },
+          PopupMenuItem<TrailItemPopupMenu>(
+            value: TrailItemPopupMenu.edit,
             child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
           ),
           const PopupMenuDivider(),
-          PopupMenuItem<void>(
-            onTap: () async {
+          PopupMenuItem<TrailItemPopupMenu>(
+            value: TrailItemPopupMenu.delete,
+            child: ListTile(leading: const Icon(Icons.delete), title: Text(Localization.current.I18nCore_delete)),
+          ),
+        ],
+        onSelected: (value) async {
+          switch (value) {
+            case TrailItemPopupMenu.share:
+              context.read<DatabaseBloc>().add(DatabaseEvent.shareTrack(trail: trail));
+            case TrailItemPopupMenu.edit:
+              await updateTrailPopup(context, trail);
+            case TrailItemPopupMenu.delete:
               final bloc = context.read<TrailsBloc>();
               final deleteTrail = await deleteTrailPopup(context: context, trailName: trail.name);
               if (deleteTrail ?? false) {
                 bloc.add(TrailsEvent.deleteTrail(trail.id));
               }
-            },
-            child: ListTile(leading: const Icon(Icons.delete), title: Text(Localization.current.I18nCore_delete)),
-          ),
-        ],
+          }
+        },
       ),
     );
   }

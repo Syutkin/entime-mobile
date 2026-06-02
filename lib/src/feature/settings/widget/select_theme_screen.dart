@@ -24,7 +24,7 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
           RadioGroup(
             groupValue: context.read<SettingsCubit>().state.seedColor,
             onChanged: (value) {},
-            child: PopupMenuButton(
+            child: PopupMenuButton<ColorSeed>(
               icon: const Icon(Icons.palette),
               itemBuilder: colorItemBuilder,
               onSelected: (colorSeed) => bloc.update(settings.copyWith(seedColor: colorSeed)),
@@ -33,7 +33,7 @@ class _SelectThemeScreenState extends State<SelectThemeScreen> {
           RadioGroup(
             groupValue: context.read<SettingsCubit>().state.dynamicSchemeVariant,
             onChanged: (value) {},
-            child: PopupMenuButton(
+            child: PopupMenuButton<DynamicSchemeVariant>(
               icon: const Icon(Icons.colorize),
               itemBuilder: dynamicSchemeVariantBuilder,
               onSelected: (variant) => bloc.update(settings.copyWith(dynamicSchemeVariant: variant)),

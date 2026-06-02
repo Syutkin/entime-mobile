@@ -57,7 +57,7 @@ void main() {
 
       expect($(rider.name), findsOneWidget);
       expect($(ListTile), findsOneWidget);
-      expect($(PopupMenuButton<void>), findsOneWidget);
+      expect($(PopupMenuButton<RiderItemPopupMenu>), findsOneWidget);
 
       // Проверяем, что subtitle отсутствует (null)
       final listTile = $.tester.widget<ListTile>(find.byType(ListTile));
@@ -144,10 +144,10 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RiderItemPopupMenu>).tap();
 
       expect($(Localization.current.I18nCore_edit), findsOneWidget);
-      expect($(PopupMenuItem<void>), findsOneWidget);
+      expect($(PopupMenuItem<RiderItemPopupMenu>), findsOneWidget);
       expect($(Icon), findsAtLeastNWidgets(1)); // edit icon
     });
 
@@ -158,7 +158,7 @@ void main() {
       );
 
       await $.pumpWidgetAndSettle(testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<RiderItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_edit).tap();
 
       // Проверяем, что появился диалог редактирования
@@ -173,7 +173,9 @@ void main() {
 
       await $.pumpWidgetAndSettle(testWidget());
 
-      final popupMenuButton = $.tester.widget<PopupMenuButton<void>>(find.byType(PopupMenuButton<void>));
+      final popupMenuButton = $.tester.widget<PopupMenuButton<RiderItemPopupMenu>>(
+        find.byType(PopupMenuButton<RiderItemPopupMenu>),
+      );
       final icon = popupMenuButton.icon! as Icon;
       expect(icon.icon, equals(Icons.more_vert));
     });

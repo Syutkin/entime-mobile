@@ -93,15 +93,15 @@ void main() {
 
     patrolWidgetTest('Tap PopupMenuButton', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(trail));
-      await $(PopupMenuButton<void>).tap();
-      expect($(PopupMenuItem<void>), findsNWidgets(2));
+      await $(PopupMenuButton<TrailItemPopupMenu>).tap();
+      expect($(PopupMenuItem<TrailItemPopupMenu>), findsNWidgets(2));
       expect($(Localization.current.I18nCore_edit), findsOneWidget);
       expect($(Localization.current.I18nCore_delete), findsOneWidget);
     });
 
     patrolWidgetTest('Tap delete then ok', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(trail));
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<TrailItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#okButton).tap();
       verify(() => trailsBloc.add(TrailsEvent.deleteTrail(trail.id))).called(1);
@@ -109,7 +109,7 @@ void main() {
 
     patrolWidgetTest('Tap delete then cancel', ($) async {
       await $.pumpWidgetAndSettle(await testWidget(trail));
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<TrailItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#cancelButton).tap();
       verifyNever(() => trailsBloc.add(TrailsEvent.deleteTrail(trail.id)));
@@ -118,8 +118,8 @@ void main() {
     patrolWidgetTest('Tap PopupMenuButton on trail with track', ($) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: id, fileExtension: 'gpx');
       await $.pumpWidgetAndSettle(await testWidget(trail));
-      await $(PopupMenuButton<void>).tap();
-      expect($(PopupMenuItem<void>), findsNWidgets(3));
+      await $(PopupMenuButton<TrailItemPopupMenu>).tap();
+      expect($(PopupMenuItem<TrailItemPopupMenu>), findsNWidgets(3));
       expect($(Localization.current.I18nCore_share), findsOneWidget);
       expect($(Localization.current.I18nCore_edit), findsOneWidget);
       expect($(Localization.current.I18nCore_delete), findsOneWidget);
@@ -130,7 +130,7 @@ void main() {
     patrolWidgetTest('Tap share', ($) async {
       trail = TrailInfo(row: row, id: id, name: name, fileSize: size, timestamp: now, fileId: id, fileExtension: 'gpx');
       await $.pumpWidgetAndSettle(await testWidget(trail));
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<TrailItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_share).tap();
       verify(() => databaseBloc.add(DatabaseEvent.shareTrack(trail: trail))).called(1);
     });

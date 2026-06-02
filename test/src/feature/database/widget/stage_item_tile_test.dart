@@ -48,19 +48,19 @@ void main() {
 
     patrolWidgetTest('Tap trailing icon', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<StageItemPopupMenu>).tap();
     });
 
     patrolWidgetTest('Can tap edit', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<StageItemPopupMenu>).tap();
       await $.tester.tap($(Localization.current.I18nCore_edit));
       // await $(Localization.current.I18nCore_edit).tap(settlePolicy: SettlePolicy.noSettle);
     });
 
     patrolWidgetTest('Tap delete, than cancel', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<StageItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#cancelButton).tap();
       verifyNever(() => databaseBloc.add(DatabaseEvent.deleteStage(stage.id)));
@@ -68,7 +68,7 @@ void main() {
 
     patrolWidgetTest('Tap delete, than ok', ($) async {
       await $.pumpWidgetAndSettle(testWidget());
-      await $(PopupMenuButton<void>).tap();
+      await $(PopupMenuButton<StageItemPopupMenu>).tap();
       await $(Localization.current.I18nCore_delete).tap();
       await $(#okButton).tap();
       verify(() => databaseBloc.add(DatabaseEvent.deleteStage(stage.id))).called(1);

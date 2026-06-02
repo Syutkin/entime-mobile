@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import '../../../common/localization/localization.dart';
 import '../database.dart';
 
+enum RaceItemPopupMenu { edit, importStages, delete }
+
 class RaceItemTile extends StatelessWidget {
   const RaceItemTile({required this.race, required this.onSelected, super.key});
 
@@ -23,33 +25,40 @@ class RaceItemTile extends StatelessWidget {
             )
           : const SizedBox.shrink(),
       onTap: () => onSelected(race),
-      trailing: PopupMenuButton<void>(icon: const Icon(Icons.more_vert), itemBuilder: _menuEntryList),
+      trailing: PopupMenuButton<RaceItemPopupMenu>(
+        icon: const Icon(Icons.more_vert),
+        itemBuilder: _menuEntryList,
+        onSelected: (value) async {
+          switch (value) {
+            case RaceItemPopupMenu.edit:
+              await updateRacePopup(context, race);
+            case RaceItemPopupMenu.importStages:
+              context.read<DatabaseBloc>().add(DatabaseEvent.createStagesFromFile(raceId: race.id));
+            case RaceItemPopupMenu.delete:
+              final bloc = context.read<DatabaseBloc>();
+              final deleteRace = await deleteRacePopup(context: context, raceName: race.name);
+              if (deleteRace ?? false) {
+                bloc.add(DatabaseEvent.deleteRace(race.id));
+              }
+          }
+        },
+      ),
     );
   }
 
-  List<PopupMenuEntry<void>> _menuEntryList(BuildContext context) {
-    return <PopupMenuEntry<void>>[
-      PopupMenuItem<void>(
-        onTap: () async {
-          await updateRacePopup(context, race);
-        },
+  List<PopupMenuEntry<RaceItemPopupMenu>> _menuEntryList(BuildContext context) {
+    return <PopupMenuEntry<RaceItemPopupMenu>>[
+      PopupMenuItem<RaceItemPopupMenu>(
+        value: RaceItemPopupMenu.edit,
         child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
       ),
-      PopupMenuItem<void>(
-        onTap: () async {
-          context.read<DatabaseBloc>().add(DatabaseEvent.createStagesFromFile(raceId: race.id));
-        },
+      PopupMenuItem<RaceItemPopupMenu>(
+        value: RaceItemPopupMenu.importStages,
         child: ListTile(leading: const Icon(Icons.add), title: Text(Localization.current.I18nHome_importStagesCsv)),
       ),
       const PopupMenuDivider(),
-      PopupMenuItem<void>(
-        onTap: () async {
-          final bloc = context.read<DatabaseBloc>();
-          final deleteRace = await deleteRacePopup(context: context, raceName: race.name);
-          if (deleteRace ?? false) {
-            bloc.add(DatabaseEvent.deleteRace(race.id));
-          }
-        },
+      PopupMenuItem<RaceItemPopupMenu>(
+        value: RaceItemPopupMenu.delete,
         child: ListTile(leading: const Icon(Icons.delete), title: Text(Localization.current.I18nCore_delete)),
       ),
     ];

@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../common/localization/localization.dart';
 import '../../database/database.dart';
 
+enum RiderItemPopupMenu { edit }
+
 class RiderItemTile extends StatelessWidget {
   const RiderItemTile({required this.rider, super.key});
 
@@ -19,16 +21,20 @@ class RiderItemTile extends StatelessWidget {
       subtitle: subtitle.isNotEmpty
           ? Text(subtitle.join(', '), style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75))
           : null,
-      trailing: PopupMenuButton<void>(
+      trailing: PopupMenuButton<RiderItemPopupMenu>(
         icon: const Icon(Icons.more_vert),
-        itemBuilder: (context) => <PopupMenuEntry<void>>[
-          PopupMenuItem<void>(
-            onTap: () async {
-              await editRacer(context);
-            },
+        itemBuilder: (context) => <PopupMenuEntry<RiderItemPopupMenu>>[
+          PopupMenuItem<RiderItemPopupMenu>(
+            value: RiderItemPopupMenu.edit,
             child: ListTile(leading: const Icon(Icons.edit), title: Text(Localization.current.I18nCore_edit)),
           ),
         ],
+        onSelected: (value) async {
+          switch (value) {
+            case RiderItemPopupMenu.edit:
+              await editRacer(context);
+          }
+        },
       ),
       onTap: () async {
         await editRacer(context);
