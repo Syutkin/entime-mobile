@@ -388,7 +388,7 @@ void main() {
             finishes: [],
             numbersOnTrace: [],
           ),
-          const DatabaseState(
+          DatabaseState(
             races: [],
             stages: [],
             categories: [],
@@ -397,7 +397,20 @@ void main() {
             finishes: [],
             numbersOnTrace: [],
             notification: NotificationUpdateStartNumber(
-              existedStartingParticipants: [],
+              existedStartingParticipants: [
+                StartingParticipant(
+                  row: MockQueryRow(),
+                  startId: 1,
+                  stageId: 1,
+                  participantId: 1,
+                  startTime: 'startTime',
+                  startStatus: ParticipantStatus.active.index,
+                  raceId: 1,
+                  riderId: 1,
+                  number: 456,
+                  participantStatus: ParticipantStatus.active.index,
+                ),
+              ],
               number: 123,
               startTime: 'startTime',
             ),
@@ -411,6 +424,7 @@ void main() {
         expect($(Localization.current.I18nCore_warning), findsNothing);
         await $.pumpAndSettle();
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        expect($(Localization.current.I18nHome_equalStartTime('startTime', 456, 123)), findsOneWidget);
       });
 
       patrolWidgetTest('Do nothing when cancel pressed', ($) async {
@@ -473,6 +487,7 @@ void main() {
           ),
         ];
 
+        when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
@@ -485,6 +500,111 @@ void main() {
             DatabaseEvent.addStartNumber(stage: stage, number: 123, startTime: 'startTime2', forceAdd: true),
           ),
         ).called(1);
+      });
+
+      patrolWidgetTest('Force set start time when ok pressed for existing participant', ($) async {
+        expectedStates = [
+          const DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+          ),
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            notification: NotificationUpdateStartTime(
+              existedStartingParticipants: [
+                StartingParticipant(
+                  row: MockQueryRow(),
+                  startId: 1,
+                  stageId: 1,
+                  participantId: 1,
+                  startTime: 'startTime2',
+                  startStatus: ParticipantStatus.active.index,
+                  raceId: 1,
+                  riderId: 1,
+                  number: 456,
+                  participantStatus: ParticipantStatus.active.index,
+                ),
+              ],
+              stageId: 1,
+              participantId: 3,
+              number: 123,
+              startTime: 'startTime2',
+            ),
+          ),
+        ];
+
+        when(() => countdownBloc.state).thenReturn(const CountdownState.initial());
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(await testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        expect($(Localization.current.I18nHome_equalStartTime('startTime2', 456, 123)), findsOneWidget);
+
+        await $(#okButton).tap();
+        expect($(Localization.current.I18nCore_warning), findsNothing);
+        verify(
+          () => databaseBloc.add(
+            const DatabaseEvent.setStartTime(
+              stageId: 1,
+              participantId: 3,
+              number: 123,
+              startTime: 'startTime2',
+              forceUpdate: true,
+            ),
+          ),
+        ).called(1);
+      });
+
+      patrolWidgetTest('Do nothing when cancel pressed for set start time notification', ($) async {
+        expectedStates = [
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            notification: NotificationUpdateStartTime(
+              existedStartingParticipants: [
+                StartingParticipant(
+                  row: MockQueryRow(),
+                  startId: 1,
+                  stageId: 1,
+                  participantId: 1,
+                  startTime: 'startTime2',
+                  startStatus: ParticipantStatus.active.index,
+                  raceId: 1,
+                  riderId: 1,
+                  number: 456,
+                  participantStatus: ParticipantStatus.active.index,
+                ),
+              ],
+              stageId: 1,
+              participantId: 3,
+              number: 123,
+              startTime: 'startTime2',
+            ),
+          ),
+        ];
+
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(await testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+
+        await $(#cancelButton).tap();
+        expect($(Localization.current.I18nCore_warning), findsNothing);
+        verifyNever(() => databaseBloc.add(any()));
       });
 
       patrolWidgetTest('Show warning when automatic start already exists', ($) async {
@@ -585,7 +705,61 @@ void main() {
         whenListen(databaseBloc, Stream.fromIterable(expectedStates));
         await $.pumpWidgetAndSettle(await testWidget());
         expect($(Localization.current.I18nCore_warning), findsOneWidget);
-        expect($(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'manualStartTime')), findsOneWidget);
+        expect($(Localization.current.I18nHome_updateManualStartCorrection(123, 'manualStartTime')), findsOneWidget);
+      });
+
+      patrolWidgetTest('Show automatic warning when automatic and manual start already exist', ($) async {
+        expectedStates = [
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+          ),
+          DatabaseState(
+            races: [],
+            stages: [],
+            categories: [],
+            riders: [],
+            participants: [],
+            finishes: [],
+            numbersOnTrace: [],
+            stage: stage,
+            notification: NotificationUpdateStartNumber(
+              existedStartingParticipants: [
+                StartingParticipant(
+                  row: MockQueryRow(),
+                  startId: 1,
+                  stageId: 1,
+                  participantId: 1,
+                  startTime: 'startTime1',
+                  startStatus: ParticipantStatus.active.index,
+                  raceId: 1,
+                  riderId: 1,
+                  number: 456,
+                  participantStatus: ParticipantStatus.active.index,
+                  automaticStartTime: 'automaticStartTime',
+                  manualStartTime: 'manualStartTime',
+                ),
+              ],
+              number: 123,
+              startTime: 'startTime2',
+            ),
+          ),
+        ];
+
+        whenListen(databaseBloc, Stream.fromIterable(expectedStates));
+        await $.pumpWidgetAndSettle(await testWidget());
+        expect($(Localization.current.I18nCore_warning), findsOneWidget);
+        expect(
+          $(Localization.current.I18nHome_updateAutomaticStartCorrection(123, 'automaticStartTime')),
+          findsOneWidget,
+        );
+        expect($(Localization.current.I18nHome_updateManualStartCorrection(123, 'manualStartTime')), findsNothing);
       });
     });
   });

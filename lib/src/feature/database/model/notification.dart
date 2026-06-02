@@ -14,6 +14,17 @@ sealed class Notification with _$Notification {
     required String startTime,
   }) = NotificationUpdateStartNumber;
 
+  /// Изменение стартового времени
+  /// если стартовое время уже присвоено другому номеру
+  /// или номеру уже установлено автоматическое/ручное время старта
+  const factory Notification.updateStartTime({
+    required List<StartingParticipant> existedStartingParticipants,
+    required int stageId,
+    required int participantId,
+    required int number,
+    required String startTime,
+  }) = NotificationUpdateStartTime;
+
   /// Обновить автоматическую стартовую отсечку
   const factory Notification.updateAutomaticCorrection({
     required List<StartingParticipant> previousStarts,

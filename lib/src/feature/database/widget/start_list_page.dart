@@ -237,6 +237,39 @@ class _StartListPage extends State<StartListPage> {
     CountdownStateWorking() => countdownState.tick.text,
   };
 
+  String _startTimeWarningText({
+    required List<StartingParticipant> existedStartingParticipants,
+    required int number,
+    required String startTime,
+  }) {
+    var text = '';
+    for (final element in existedStartingParticipants) {
+      if (element.automaticStartTime == null && element.manualStartTime == null) {
+        text += Localization.current.I18nHome_equalStartTime(startTime, element.number, number);
+      } else {
+        if (element.automaticStartTime != null) {
+          text += Localization.current.I18nHome_updateAutomaticStartCorrection(
+            number,
+            element.automaticStartTime!,
+          );
+        } else
+        //  if (element.manualStartTime != null)
+        {
+          text += Localization.current.I18nHome_updateManualStartCorrection(
+            number,
+            element.manualStartTime!,
+          );
+        }
+        // else {
+        //   text += Localization.current.I18nHome_errorAddParticipant(
+        //     MaterialLocalizations.of(context).cancelButtonLabel,
+        //   );
+        // }
+      }
+    }
+    return text;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<DatabaseBloc, DatabaseState>(
@@ -251,46 +284,49 @@ class _StartListPage extends State<StartListPage> {
               :final number,
               :final startTime,
             ):
-              var text = '';
-              for (final element in existedStartingParticipants) {
-                if (element.automaticStartTime == null && element.manualStartTime == null) {
-                  text += Localization.current.I18nHome_equalStartTime(startTime, element.number, number);
-                } else {
-                  if (element.automaticStartTime != null) {
-                    text += Localization.current.I18nHome_updateAutomaticStartCorrection(
-                      number,
-                      element.automaticStartTime!,
-                    );
-                  } else
-                  //  if (element.manualStartTime != null)
-                  {
-                    text += Localization.current.I18nHome_updateAutomaticStartCorrection(
-                      number,
-                      element.manualStartTime!,
-                    );
-                  }
-                  // else {
-                  //   text += Localization.current.I18nHome_errorAddParticipant(
-                  //     MaterialLocalizations.of(context).cancelButtonLabel,
-                  //   );
-                  // }
-                }
-              }
+              final text = _startTimeWarningText(
+                existedStartingParticipants: existedStartingParticipants,
+                number: number,
+                startTime: startTime,
+              );
               final update = await warningCancelOkPopup(context: context, text: text);
 
               if (update ?? false) {
-                final stage = state.stage;
-                if (stage != null) {
+                if (state.stage case final stage?) {
                   databaseBloc.add(
                     DatabaseEvent.addStartNumber(
                       stage: stage,
-                      // stage: widget.stage,
                       number: number,
                       startTime: startTime,
                       forceAdd: true,
                     ),
                   );
                 }
+              }
+            case NotificationUpdateStartTime(
+              :final existedStartingParticipants,
+              :final stageId,
+              :final participantId,
+              :final number,
+              :final startTime,
+            ):
+              final text = _startTimeWarningText(
+                existedStartingParticipants: existedStartingParticipants,
+                number: number,
+                startTime: startTime,
+              );
+              final update = await warningCancelOkPopup(context: context, text: text);
+
+              if (update ?? false) {
+                databaseBloc.add(
+                  DatabaseEvent.setStartTime(
+                    stageId: stageId,
+                    participantId: participantId,
+                    number: number,
+                    startTime: startTime,
+                    forceUpdate: true,
+                  ),
+                );
               }
             default:
           }

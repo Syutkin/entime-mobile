@@ -54,9 +54,10 @@ class _SetStartTimePopupState extends State<SetStartTimePopup> {
             // https://stackoverflow.com/questions/54775097/formatting-a-duration-like-hhmmss
             final startTime = time.toString().split('.').first.padLeft(8, '0');
             context.read<DatabaseBloc>().add(
-              DatabaseEvent.updateStartingInfo(
+              DatabaseEvent.setStartTime(
                 stageId: widget.item.stageId,
                 participantId: widget.item.participantId,
+                number: widget.item.number,
                 startTime: startTime,
               ),
             );

@@ -504,7 +504,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   /// Обновляет или добавляет участника с заданным [number] и [startTime]
-  Future<List<StartingParticipant>?> addStartNumber({
+  Future<void> addStartNumber({
     required Stage stage,
     required int number,
     required String startTime,
@@ -559,13 +559,13 @@ class AppDatabase extends _$AppDatabase {
                 manualStartTime: const Value(null),
                 startTime: Value(startTime),
                 timestamp: const Value(null),
+                timestampCorrection: const Value(null),
                 ntpOffset: const Value(null),
                 statusId: const Value(1),
               ),
             );
       }
     }
-    return null;
   }
 
   /// Устанавливает информацию об участнике на старте
@@ -573,6 +573,8 @@ class AppDatabase extends _$AppDatabase {
     required String startTime,
     required int stageId,
     required int participantId,
+    Value<DateTime?> timestamp = const Value.absent(),
+    Value<int?> ntpOffset = const Value.absent(),
     Value<int?> timestampCorrection = const Value.absent(),
     Value<String?> automaticStartTime = const Value.absent(),
     Value<int?> automaticCorrection = const Value.absent(),
@@ -584,6 +586,8 @@ class AppDatabase extends _$AppDatabase {
     )..where((start) => start.stageId.equals(stageId) & start.participantId.equals(participantId))).write(
       StartsCompanion(
         startTime: Value(startTime),
+        timestamp: timestamp,
+        ntpOffset: ntpOffset,
         timestampCorrection: timestampCorrection,
         automaticStartTime: automaticStartTime,
         automaticCorrection: automaticCorrection,

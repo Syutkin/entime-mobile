@@ -271,6 +271,42 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               stageId: event.stageId,
               participantId: event.participantId,
             );
+          case _SetStartTime():
+            var shouldSetStartTime = true;
+            if (!event.forceUpdate) {
+              final startingParticipants = await _getExistedStartingParticipants(
+                stageId: event.stageId,
+                startTime: event.startTime,
+                number: event.number,
+                participantId: event.participantId,
+              );
+              if (startingParticipants.isNotEmpty) {
+                shouldSetStartTime = false;
+                await _emitState(
+                  notification: Notification.updateStartTime(
+                    existedStartingParticipants: startingParticipants,
+                    stageId: event.stageId,
+                    participantId: event.participantId,
+                    number: event.number,
+                    startTime: event.startTime,
+                  ),
+                );
+              }
+            }
+            if (shouldSetStartTime) {
+              await _db.setStartingInfo(
+                startTime: event.startTime,
+                timestamp: const Value(null),
+                ntpOffset: const Value(null),
+                timestampCorrection: const Value(null),
+                automaticStartTime: const Value(null),
+                automaticCorrection: const Value(null),
+                manualStartTime: const Value(null),
+                manualCorrection: const Value(null),
+                stageId: event.stageId,
+                participantId: event.participantId,
+              );
+            }
           case DatabaseEventUpdateManualStartTime():
             await _db.updateManualStartTime(
               stageId: event.stageId,
@@ -504,6 +540,29 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   StartlistProvider startlistProvider;
   ShareProvider shareProvider;
+
+  Future<List<StartingParticipant>> _getExistedStartingParticipants({
+    required int stageId,
+    required String startTime,
+    required int number,
+    required int participantId,
+  }) async {
+    final startingParticipants = await _db
+        .getExistedStartingParticipants(
+          stageId: stageId,
+          startTime: startTime,
+          number: number,
+        )
+        .get();
+    return startingParticipants
+        .where(
+          (participant) =>
+              participant.participantId != participantId ||
+              participant.automaticStartTime != null ||
+              participant.manualStartTime != null,
+        )
+        .toList();
+  }
 
   Future<void> _emitState({
     Notification? notification,

@@ -120,6 +120,14 @@ sealed class DatabaseEvent with _$DatabaseEvent {
     @Default(Value<int?>.absent()) Value<int?> manualCorrection,
   }) = _UpdateStartingInfo;
 
+  const factory DatabaseEvent.setStartTime({
+    required int stageId,
+    required int participantId,
+    required int number,
+    required String startTime,
+    @Default(false) bool forceUpdate,
+  }) = _SetStartTime;
+
   const factory DatabaseEvent.updateAutomaticCorrection({
     required int stageId,
     required String startTime,

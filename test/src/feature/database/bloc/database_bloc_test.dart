@@ -4,7 +4,7 @@ import 'dart:io';
 import 'dart:typed_data' show Uint8List;
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:drift/drift.dart' show DatabaseConnection, QueryRow;
+import 'package:drift/drift.dart' show DatabaseConnection, QueryRow, Value;
 import 'package:drift/native.dart';
 import 'package:entime/src/common/bloc/app_bloc_observer.dart';
 import 'package:entime/src/common/exceptions/known_exception.dart';
@@ -585,6 +585,303 @@ void main() {
       },
       verify: (bloc) {
         expect(bloc.state.participants.first.startTime, '05:00:00');
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Set start time clears timestamp fields',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        await db.setStartingInfo(
+          stageId: stage.id,
+          participantId: participant.participantId,
+          startTime: participant.startTime,
+          timestamp: Value(DateTime(2020)),
+          ntpOffset: const Value(2),
+          timestampCorrection: const Value(1),
+        );
+        bloc.add(
+          DatabaseEvent.setStartTime(
+            stageId: stage.id,
+            participantId: participant.participantId,
+            number: participant.number,
+            startTime: '05:00:00',
+          ),
+        );
+      },
+      verify: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        expect(participant.startTime, '05:00:00');
+        expect(participant.timestamp, null);
+        expect(participant.ntpOffset, null);
+        expect(participant.timestampCorrection, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Set start time to own start time without automatic or manual start time does not show notification',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        await db.addStartNumber(stage: stage, number: 100, startTime: '05:00:00');
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 100).getSingle();
+        bloc.add(
+          DatabaseEvent.setStartTime(
+            stageId: stage.id,
+            participantId: participant.participantId,
+            number: participant.number,
+            startTime: participant.startTime,
+          ),
+        );
+      },
+      verify: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 100).getSingle();
+        expect(participant.startTime, '05:00:00');
+        expect(participant.automaticStartTime, null);
+        expect(participant.manualStartTime, null);
+        expect(bloc.state.notification, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Set start time to existing start time shows notification and does not update',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        bloc.add(
+          DatabaseEvent.setStartTime(
+            stageId: stage.id,
+            participantId: participant.participantId,
+            number: participant.number,
+            startTime: '10:00:00',
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        predicate<DatabaseState>((state) {
+          switch (state.notification) {
+            case NotificationUpdateStartTime(
+              :final existedStartingParticipants,
+              stageId: 1,
+              :final participantId,
+              number: 1,
+              startTime: '10:00:00',
+            ):
+              return participantId > 0 &&
+                  existedStartingParticipants.length == 1 &&
+                  existedStartingParticipants.first.number == 2;
+            default:
+              return false;
+          }
+        }, 'state with updateStartTime notification'),
+      ),
+      verify: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        expect(participant.startTime, isNot('10:00:00'));
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Set start time with existing automatic start time shows notification and does not update',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        await db.setStartingInfo(
+          stageId: stage.id,
+          participantId: participant.participantId,
+          startTime: participant.startTime,
+          automaticStartTime: const Value('10:00:01,000'),
+        );
+        bloc.add(
+          DatabaseEvent.setStartTime(
+            stageId: stage.id,
+            participantId: participant.participantId,
+            number: participant.number,
+            startTime: '05:00:00',
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        predicate<DatabaseState>((state) {
+          switch (state.notification) {
+            case NotificationUpdateStartTime(
+              :final existedStartingParticipants,
+              stageId: 1,
+              :final participantId,
+              number: 1,
+              startTime: '05:00:00',
+            ):
+              return participantId > 0 &&
+                  existedStartingParticipants.length == 1 &&
+                  existedStartingParticipants.first.number == 1 &&
+                  existedStartingParticipants.first.automaticStartTime == '10:00:01,000';
+            default:
+              return false;
+          }
+        }, 'state with updateStartTime notification'),
+      ),
+      verify: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        expect(participant.startTime, isNot('05:00:00'));
+        expect(participant.automaticStartTime, '10:00:01,000');
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Set start time with existing manual start time shows notification and does not update',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        await db.setStartingInfo(
+          stageId: stage.id,
+          participantId: participant.participantId,
+          startTime: participant.startTime,
+          manualStartTime: const Value('10:00:01,000'),
+        );
+        bloc.add(
+          DatabaseEvent.setStartTime(
+            stageId: stage.id,
+            participantId: participant.participantId,
+            number: participant.number,
+            startTime: '05:00:00',
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => contains(
+        predicate<DatabaseState>((state) {
+          switch (state.notification) {
+            case NotificationUpdateStartTime(
+              :final existedStartingParticipants,
+              stageId: 1,
+              :final participantId,
+              number: 1,
+              startTime: '05:00:00',
+            ):
+              return participantId > 0 &&
+                  existedStartingParticipants.length == 1 &&
+                  existedStartingParticipants.first.number == 1 &&
+                  existedStartingParticipants.first.manualStartTime == '10:00:01,000';
+            default:
+              return false;
+          }
+        }, 'state with updateStartTime notification'),
+      ),
+      verify: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        expect(participant.startTime, isNot('05:00:00'));
+        expect(participant.manualStartTime, '10:00:01,000');
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Force set start time clears existing automatic and manual start times',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        await db.setStartingInfo(
+          stageId: stage.id,
+          participantId: participant.participantId,
+          startTime: participant.startTime,
+          timestamp: Value(DateTime(2020)),
+          ntpOffset: const Value(4),
+          timestampCorrection: const Value(1),
+          automaticStartTime: const Value('10:00:01,000'),
+          automaticCorrection: const Value(2),
+          manualStartTime: const Value('10:00:02,000'),
+          manualCorrection: const Value(3),
+        );
+        bloc.add(
+          DatabaseEvent.setStartTime(
+            stageId: stage.id,
+            participantId: participant.participantId,
+            number: participant.number,
+            startTime: '05:00:00',
+            forceUpdate: true,
+          ),
+        );
+      },
+      verify: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        expect(participant.startTime, '05:00:00');
+        expect(participant.timestamp, null);
+        expect(participant.ntpOffset, null);
+        expect(participant.timestampCorrection, null);
+        expect(participant.automaticStartTime, null);
+        expect(participant.automaticCorrection, null);
+        expect(participant.manualStartTime, null);
+        expect(participant.manualCorrection, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Force set start time clears correction fields without automatic or manual start time',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        await db.setStartingInfo(
+          stageId: stage.id,
+          participantId: participant.participantId,
+          startTime: participant.startTime,
+          timestamp: Value(DateTime(2020)),
+          ntpOffset: const Value(2),
+          timestampCorrection: const Value(1),
+        );
+        bloc.add(
+          DatabaseEvent.setStartTime(
+            stageId: stage.id,
+            participantId: participant.participantId,
+            number: participant.number,
+            startTime: '10:00:00',
+            forceUpdate: true,
+          ),
+        );
+      },
+      wait: const Duration(milliseconds: 10),
+      expect: () => isNot(
+        contains(
+          predicate<DatabaseState>(
+            (state) => state.notification is NotificationUpdateStartTime,
+            'state with updateStartTime notification',
+          ),
+        ),
+      ),
+      verify: (bloc) async {
+        final participant = await db.getNumberAtStarts(stageId: stage.id, number: 1).getSingle();
+        expect(participant.startTime, '10:00:00');
+        expect(participant.timestamp, null);
+        expect(participant.ntpOffset, null);
+        expect(participant.timestampCorrection, null);
       },
     );
 

@@ -86,11 +86,12 @@ extension NotificationPatterns on Notification {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( NotificationUpdateStartNumber value)?  updateStartNumber,TResult Function( NotificationUpdateAutomaticCorrection value)?  updateAutomaticCorrection,TResult Function( NotificationChangeFinishTimeToNumber value)?  changeFinishTimeToNumber,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( NotificationUpdateStartNumber value)?  updateStartNumber,TResult Function( NotificationUpdateStartTime value)?  updateStartTime,TResult Function( NotificationUpdateAutomaticCorrection value)?  updateAutomaticCorrection,TResult Function( NotificationChangeFinishTimeToNumber value)?  changeFinishTimeToNumber,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case NotificationUpdateStartNumber() when updateStartNumber != null:
-return updateStartNumber(_that);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
+return updateStartNumber(_that);case NotificationUpdateStartTime() when updateStartTime != null:
+return updateStartTime(_that);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
 return updateAutomaticCorrection(_that);case NotificationChangeFinishTimeToNumber() when changeFinishTimeToNumber != null:
 return changeFinishTimeToNumber(_that);case _:
   return orElse();
@@ -110,11 +111,12 @@ return changeFinishTimeToNumber(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( NotificationUpdateStartNumber value)  updateStartNumber,required TResult Function( NotificationUpdateAutomaticCorrection value)  updateAutomaticCorrection,required TResult Function( NotificationChangeFinishTimeToNumber value)  changeFinishTimeToNumber,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( NotificationUpdateStartNumber value)  updateStartNumber,required TResult Function( NotificationUpdateStartTime value)  updateStartTime,required TResult Function( NotificationUpdateAutomaticCorrection value)  updateAutomaticCorrection,required TResult Function( NotificationChangeFinishTimeToNumber value)  changeFinishTimeToNumber,}){
 final _that = this;
 switch (_that) {
 case NotificationUpdateStartNumber():
-return updateStartNumber(_that);case NotificationUpdateAutomaticCorrection():
+return updateStartNumber(_that);case NotificationUpdateStartTime():
+return updateStartTime(_that);case NotificationUpdateAutomaticCorrection():
 return updateAutomaticCorrection(_that);case NotificationChangeFinishTimeToNumber():
 return changeFinishTimeToNumber(_that);}
 }
@@ -130,11 +132,12 @@ return changeFinishTimeToNumber(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( NotificationUpdateStartNumber value)?  updateStartNumber,TResult? Function( NotificationUpdateAutomaticCorrection value)?  updateAutomaticCorrection,TResult? Function( NotificationChangeFinishTimeToNumber value)?  changeFinishTimeToNumber,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( NotificationUpdateStartNumber value)?  updateStartNumber,TResult? Function( NotificationUpdateStartTime value)?  updateStartTime,TResult? Function( NotificationUpdateAutomaticCorrection value)?  updateAutomaticCorrection,TResult? Function( NotificationChangeFinishTimeToNumber value)?  changeFinishTimeToNumber,}){
 final _that = this;
 switch (_that) {
 case NotificationUpdateStartNumber() when updateStartNumber != null:
-return updateStartNumber(_that);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
+return updateStartNumber(_that);case NotificationUpdateStartTime() when updateStartTime != null:
+return updateStartTime(_that);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
 return updateAutomaticCorrection(_that);case NotificationChangeFinishTimeToNumber() when changeFinishTimeToNumber != null:
 return changeFinishTimeToNumber(_that);case _:
   return null;
@@ -153,10 +156,11 @@ return changeFinishTimeToNumber(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<StartingParticipant> existedStartingParticipants,  int number,  String startTime)?  updateStartNumber,TResult Function( List<StartingParticipant> previousStarts,  int number,  String startTime,  DateTime timestamp,  int correction)?  updateAutomaticCorrection,TResult Function( int finishId,  int number,  String finishTime,  Stage stage)?  changeFinishTimeToNumber,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<StartingParticipant> existedStartingParticipants,  int number,  String startTime)?  updateStartNumber,TResult Function( List<StartingParticipant> existedStartingParticipants,  int stageId,  int participantId,  int number,  String startTime)?  updateStartTime,TResult Function( List<StartingParticipant> previousStarts,  int number,  String startTime,  DateTime timestamp,  int correction)?  updateAutomaticCorrection,TResult Function( int finishId,  int number,  String finishTime,  Stage stage)?  changeFinishTimeToNumber,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case NotificationUpdateStartNumber() when updateStartNumber != null:
-return updateStartNumber(_that.existedStartingParticipants,_that.number,_that.startTime);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
+return updateStartNumber(_that.existedStartingParticipants,_that.number,_that.startTime);case NotificationUpdateStartTime() when updateStartTime != null:
+return updateStartTime(_that.existedStartingParticipants,_that.stageId,_that.participantId,_that.number,_that.startTime);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
 return updateAutomaticCorrection(_that.previousStarts,_that.number,_that.startTime,_that.timestamp,_that.correction);case NotificationChangeFinishTimeToNumber() when changeFinishTimeToNumber != null:
 return changeFinishTimeToNumber(_that.finishId,_that.number,_that.finishTime,_that.stage);case _:
   return orElse();
@@ -176,10 +180,11 @@ return changeFinishTimeToNumber(_that.finishId,_that.number,_that.finishTime,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<StartingParticipant> existedStartingParticipants,  int number,  String startTime)  updateStartNumber,required TResult Function( List<StartingParticipant> previousStarts,  int number,  String startTime,  DateTime timestamp,  int correction)  updateAutomaticCorrection,required TResult Function( int finishId,  int number,  String finishTime,  Stage stage)  changeFinishTimeToNumber,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<StartingParticipant> existedStartingParticipants,  int number,  String startTime)  updateStartNumber,required TResult Function( List<StartingParticipant> existedStartingParticipants,  int stageId,  int participantId,  int number,  String startTime)  updateStartTime,required TResult Function( List<StartingParticipant> previousStarts,  int number,  String startTime,  DateTime timestamp,  int correction)  updateAutomaticCorrection,required TResult Function( int finishId,  int number,  String finishTime,  Stage stage)  changeFinishTimeToNumber,}) {final _that = this;
 switch (_that) {
 case NotificationUpdateStartNumber():
-return updateStartNumber(_that.existedStartingParticipants,_that.number,_that.startTime);case NotificationUpdateAutomaticCorrection():
+return updateStartNumber(_that.existedStartingParticipants,_that.number,_that.startTime);case NotificationUpdateStartTime():
+return updateStartTime(_that.existedStartingParticipants,_that.stageId,_that.participantId,_that.number,_that.startTime);case NotificationUpdateAutomaticCorrection():
 return updateAutomaticCorrection(_that.previousStarts,_that.number,_that.startTime,_that.timestamp,_that.correction);case NotificationChangeFinishTimeToNumber():
 return changeFinishTimeToNumber(_that.finishId,_that.number,_that.finishTime,_that.stage);}
 }
@@ -195,10 +200,11 @@ return changeFinishTimeToNumber(_that.finishId,_that.number,_that.finishTime,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<StartingParticipant> existedStartingParticipants,  int number,  String startTime)?  updateStartNumber,TResult? Function( List<StartingParticipant> previousStarts,  int number,  String startTime,  DateTime timestamp,  int correction)?  updateAutomaticCorrection,TResult? Function( int finishId,  int number,  String finishTime,  Stage stage)?  changeFinishTimeToNumber,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<StartingParticipant> existedStartingParticipants,  int number,  String startTime)?  updateStartNumber,TResult? Function( List<StartingParticipant> existedStartingParticipants,  int stageId,  int participantId,  int number,  String startTime)?  updateStartTime,TResult? Function( List<StartingParticipant> previousStarts,  int number,  String startTime,  DateTime timestamp,  int correction)?  updateAutomaticCorrection,TResult? Function( int finishId,  int number,  String finishTime,  Stage stage)?  changeFinishTimeToNumber,}) {final _that = this;
 switch (_that) {
 case NotificationUpdateStartNumber() when updateStartNumber != null:
-return updateStartNumber(_that.existedStartingParticipants,_that.number,_that.startTime);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
+return updateStartNumber(_that.existedStartingParticipants,_that.number,_that.startTime);case NotificationUpdateStartTime() when updateStartTime != null:
+return updateStartTime(_that.existedStartingParticipants,_that.stageId,_that.participantId,_that.number,_that.startTime);case NotificationUpdateAutomaticCorrection() when updateAutomaticCorrection != null:
 return updateAutomaticCorrection(_that.previousStarts,_that.number,_that.startTime,_that.timestamp,_that.correction);case NotificationChangeFinishTimeToNumber() when changeFinishTimeToNumber != null:
 return changeFinishTimeToNumber(_that.finishId,_that.number,_that.finishTime,_that.stage);case _:
   return null;
@@ -276,6 +282,86 @@ class _$NotificationUpdateStartNumberCopyWithImpl<$Res>
   return _then(NotificationUpdateStartNumber(
 existedStartingParticipants: null == existedStartingParticipants ? _self._existedStartingParticipants : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
 as List<StartingParticipant>,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
+as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class NotificationUpdateStartTime implements Notification {
+  const NotificationUpdateStartTime({required final  List<StartingParticipant> existedStartingParticipants, required this.stageId, required this.participantId, required this.number, required this.startTime}): _existedStartingParticipants = existedStartingParticipants;
+  
+
+ final  List<StartingParticipant> _existedStartingParticipants;
+ List<StartingParticipant> get existedStartingParticipants {
+  if (_existedStartingParticipants is EqualUnmodifiableListView) return _existedStartingParticipants;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_existedStartingParticipants);
+}
+
+ final  int stageId;
+ final  int participantId;
+@override final  int number;
+ final  String startTime;
+
+/// Create a copy of Notification
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$NotificationUpdateStartTimeCopyWith<NotificationUpdateStartTime> get copyWith => _$NotificationUpdateStartTimeCopyWithImpl<NotificationUpdateStartTime>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationUpdateStartTime&&const DeepCollectionEquality().equals(other._existedStartingParticipants, _existedStartingParticipants)&&(identical(other.stageId, stageId) || other.stageId == stageId)&&(identical(other.participantId, participantId) || other.participantId == participantId)&&(identical(other.number, number) || other.number == number)&&(identical(other.startTime, startTime) || other.startTime == startTime));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_existedStartingParticipants),stageId,participantId,number,startTime);
+
+@override
+String toString() {
+  return 'Notification.updateStartTime(existedStartingParticipants: $existedStartingParticipants, stageId: $stageId, participantId: $participantId, number: $number, startTime: $startTime)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $NotificationUpdateStartTimeCopyWith<$Res> implements $NotificationCopyWith<$Res> {
+  factory $NotificationUpdateStartTimeCopyWith(NotificationUpdateStartTime value, $Res Function(NotificationUpdateStartTime) _then) = _$NotificationUpdateStartTimeCopyWithImpl;
+@override @useResult
+$Res call({
+ List<StartingParticipant> existedStartingParticipants, int stageId, int participantId, int number, String startTime
+});
+
+
+
+
+}
+/// @nodoc
+class _$NotificationUpdateStartTimeCopyWithImpl<$Res>
+    implements $NotificationUpdateStartTimeCopyWith<$Res> {
+  _$NotificationUpdateStartTimeCopyWithImpl(this._self, this._then);
+
+  final NotificationUpdateStartTime _self;
+  final $Res Function(NotificationUpdateStartTime) _then;
+
+/// Create a copy of Notification
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? existedStartingParticipants = null,Object? stageId = null,Object? participantId = null,Object? number = null,Object? startTime = null,}) {
+  return _then(NotificationUpdateStartTime(
+existedStartingParticipants: null == existedStartingParticipants ? _self._existedStartingParticipants : existedStartingParticipants // ignore: cast_nullable_to_non_nullable
+as List<StartingParticipant>,stageId: null == stageId ? _self.stageId : stageId // ignore: cast_nullable_to_non_nullable
+as int,participantId: null == participantId ? _self.participantId : participantId // ignore: cast_nullable_to_non_nullable
+as int,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as int,startTime: null == startTime ? _self.startTime : startTime // ignore: cast_nullable_to_non_nullable
 as String,
   ));

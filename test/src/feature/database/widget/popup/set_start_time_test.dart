@@ -31,7 +31,9 @@ void main() {
   }
 
   setUpAll(() {
-    registerFallbackValue(const DatabaseEvent.updateStartingInfo(stageId: 1, participantId: 1, startTime: ''));
+    registerFallbackValue(
+      const DatabaseEvent.setStartTime(stageId: 1, participantId: 1, number: 1, startTime: ''),
+    );
   });
 
   setUp(() {
@@ -81,7 +83,7 @@ void main() {
       expect($(SetStartTimePopup), findsNothing);
     });
 
-    patrolWidgetTest('Press OK calls updateStartingInfo with initial picker time', ($) async {
+    patrolWidgetTest('Press OK calls setStartTime with initial picker time', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
 
       await $(#okButton).tap();
@@ -89,13 +91,13 @@ void main() {
 
       verify(
         () => databaseBloc.add(
-          const DatabaseEvent.updateStartingInfo(stageId: 2, participantId: 3, startTime: '12:13:00'),
+          const DatabaseEvent.setStartTime(stageId: 2, participantId: 3, number: 42, startTime: '12:13:00'),
         ),
       ).called(1);
       expect($(SetStartTimePopup), findsNothing);
     });
 
-    patrolWidgetTest('Press OK calls updateStartingInfo with selected picker time', ($) async {
+    patrolWidgetTest('Press OK calls setStartTime with selected picker time', ($) async {
       await $.pumpWidgetAndSettle(await testWidget());
 
       final picker = $(CupertinoTimerPicker).evaluate().single.widget as CupertinoTimerPicker;
@@ -106,7 +108,7 @@ void main() {
 
       verify(
         () => databaseBloc.add(
-          const DatabaseEvent.updateStartingInfo(stageId: 2, participantId: 3, startTime: '14:35:00'),
+          const DatabaseEvent.setStartTime(stageId: 2, participantId: 3, number: 42, startTime: '14:35:00'),
         ),
       ).called(1);
       expect($(SetStartTimePopup), findsNothing);
