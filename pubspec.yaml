@@ -62,7 +62,7 @@ dependencies:
   logger: ^2.6.2
   meta: ^1.18.0
   nested: ^1.0.0
-  open_file: ^3.5.10
+  open_file: ^4.0.0
   path: ^1.9.1
   path_provider: ^2.1.5
   permission_handler: ^12.0.1
