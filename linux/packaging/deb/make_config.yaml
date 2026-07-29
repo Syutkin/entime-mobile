@@ -1,0 +1,19 @@
+display_name: Entime
+package_name: entime
+maintainer:
+  name: Andrey Syutkin
+  email: syutkin@gmail.com
+priority: optional
+section: x11
+installed_size: 37872
+icon: assets/entime.png
+keywords:
+  - race
+  - timing
+  - start
+  - finish
+generic_name: Start and finish timing application
+categories:
+  - Utility
+  - Sports
+startup_notify: true

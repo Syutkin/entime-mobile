@@ -35,6 +35,7 @@ devtools_options.yaml
 coverage/
 /integration_test/test_bundle.dart
 android/app/.cxx/
+dist/
 
 # Web related
 lib/generated_plugin_registrant.dart
