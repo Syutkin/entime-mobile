@@ -6,6 +6,8 @@ on:
       - release/0.5.2
     paths:
       - "**.dart"
+      - "pubspec.yaml"
+      - ".github/workflows/**.yml"
       - "!**.g.dart"
       - "!**.freezed.dart"
   pull_request:
@@ -13,6 +15,8 @@ on:
       - release/0.5.2
     paths:
       - "**.dart"
+      - "pubspec.yaml"
+      - ".github/workflows/**.yml"
       - "!**.g.dart"
       - "!**.freezed.dart"
 
