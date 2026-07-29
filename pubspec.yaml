@@ -79,7 +79,7 @@ dependency_overrides:
     #    path: ../flutter-settings-ui
     git:
       url: https://github.com/yako-dev/flutter-settings-ui
-      ref: dev
+      ref: e93eee88ced502bcdcc8b118265b9a6fc4c3dd23
   
 
 
