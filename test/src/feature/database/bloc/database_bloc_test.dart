@@ -1135,14 +1135,14 @@ void main() {
       act: (bloc) async {
         final numbersOnTraceLoaded = bloc.stream.firstWhere(
           (state) =>
-              state.stage?.id == stage.id && state.numbersOnTrace.any((item) => item.number == 12),
+              state.stage?.id == stage.id && state.numbersOnTrace.any((item) => item.number == 2),
         );
         bloc.add(DatabaseEvent.selectStage(stage));
         await numbersOnTraceLoaded;
-        bloc.add(DatabaseEvent.selectAwaitingNumber(number: 12));
+        bloc.add(DatabaseEvent.selectAwaitingNumber(number: 2));
       },
       verify: (bloc) {
-        expect(bloc.state.awaitingNumber, 12);
+        expect(bloc.state.awaitingNumber, 2);
       },
     );
 
@@ -1157,13 +1157,13 @@ void main() {
       act: (bloc) async {
         final numbersOnTraceLoaded = bloc.stream.firstWhere(
           (state) =>
-              state.stage?.id == stage.id && state.numbersOnTrace.any((item) => item.number == 12),
+              state.stage?.id == stage.id && state.numbersOnTrace.any((item) => item.number == 2),
         );
         bloc.add(DatabaseEvent.selectStage(stage));
         await numbersOnTraceLoaded;
 
-        final awaitingNumberSelected = bloc.stream.firstWhere((state) => state.awaitingNumber == 12);
-        bloc.add(DatabaseEvent.selectAwaitingNumber(number: 12));
+        final awaitingNumberSelected = bloc.stream.firstWhere((state) => state.awaitingNumber == 2);
+        bloc.add(DatabaseEvent.selectAwaitingNumber(number: 2));
         await awaitingNumberSelected;
 
         bloc.add(DatabaseEvent.deselectAwaitingNumber());
