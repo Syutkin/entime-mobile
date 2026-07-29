@@ -1398,6 +1398,50 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
+      'Clear awaiting number when the same number is manually added to finish',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) {
+        bloc
+          ..add(const DatabaseEvent.selectAwaitingNumber(number: 5))
+          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
+          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: '', number: 5));
+      },
+      verify: (bloc) {
+        expect(bloc.state.awaitingNumber, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Keep awaiting number when a different number is manually added to finish',
+      setUp: () async {
+        Bloc.observer = AppBlocObserver();
+        await db.addStartNumber(stage: stage, number: 2, startTime: '00:00:00');
+        await settingsProvider.update(settingsProvider.settings.copyWith(raceId: race.id, stageId: stage.id));
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: DateTime(2020, 1, 1, 11, 11, 11)),
+        );
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.numbersOnTrace.any((item) => item.number == 2), isTrue);
+        bloc
+          ..add(const DatabaseEvent.selectAwaitingNumber(number: 2))
+          ..add(DatabaseEvent.addFinishTimeManual(stageId: stage.id, timestamp: DateTime.now(), ntpOffset: 123))
+          ..add(DatabaseEvent.addNumberToFinish(stage: stage, finishId: 1, finishTime: '', number: 5));
+      },
+      verify: (bloc) {
+        expect(bloc.state.awaitingNumber, 2);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
       'Show notification when trying to add new number to finish',
       setUp: () {
         Bloc.observer = AppBlocObserver();
@@ -1462,6 +1506,58 @@ void main() {
     );
 
     blocTest<DatabaseBloc, DatabaseState>(
+      'Clear awaiting number when it is missing after numbers on trace refresh',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: DateTime(2020, 1, 1, 11, 11, 11)),
+        );
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.numbersOnTrace.any((item) => item.number == 2), isTrue);
+        bloc.add(const DatabaseEvent.selectAwaitingNumber(number: 2));
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.awaitingNumber, 2);
+        bloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: DateTime(2020, 1, 1, 9)),
+        );
+      },
+      verify: (bloc) {
+        expect(bloc.state.awaitingNumber, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Keep awaiting number when it remains after numbers on trace refresh',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: DateTime(2020, 1, 1, 11, 11, 11)),
+        );
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.numbersOnTrace.any((item) => item.number == 2), isTrue);
+        bloc.add(const DatabaseEvent.selectAwaitingNumber(number: 2));
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.awaitingNumber, 2);
+        bloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: DateTime(2020, 1, 1, 11, 11, 11)),
+        );
+      },
+      verify: (bloc) {
+        expect(bloc.state.awaitingNumber, 2);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
       'Shift starts time',
       setUp: () {
         Bloc.observer = AppBlocObserver();
@@ -1486,10 +1582,16 @@ void main() {
       },
       build: () => bloc,
       act: (bloc) async {
-        bloc.add(DatabaseEvent.selectAwaitingNumber(number: 12));
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: DateTime(2020, 1, 1, 11, 11, 11)),
+        );
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.numbersOnTrace.any((item) => item.number == 2), isTrue);
+        bloc.add(const DatabaseEvent.selectAwaitingNumber(number: 2));
       },
       verify: (bloc) {
-        expect(bloc.state.awaitingNumber, 12);
+        expect(bloc.state.awaitingNumber, 2);
       },
     );
 
@@ -1501,9 +1603,60 @@ void main() {
       },
       build: () => bloc,
       act: (bloc) async {
-        bloc
-          ..add(DatabaseEvent.selectAwaitingNumber(number: 12))
-          ..add(DatabaseEvent.deselectAwaitingNumber());
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(
+          DatabaseEvent.getNumbersOnTraceNow(stageId: stage.id, dateTimeNow: DateTime(2020, 1, 1, 11, 11, 11)),
+        );
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(const DatabaseEvent.selectAwaitingNumber(number: 2));
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.awaitingNumber, 2);
+        bloc.add(const DatabaseEvent.deselectAwaitingNumber());
+      },
+      verify: (bloc) {
+        expect(bloc.state.awaitingNumber, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Clear awaiting number when stage changes',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(const DatabaseEvent.selectAwaitingNumber(number: 2));
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.awaitingNumber, 2);
+        final nextStage = (await db.getStage(2))!;
+        bloc.add(DatabaseEvent.selectRaceAndStage(race: race, stage: nextStage));
+      },
+      verify: (bloc) {
+        expect(bloc.state.awaitingNumber, null);
+      },
+    );
+
+    blocTest<DatabaseBloc, DatabaseState>(
+      'Clear awaiting number when race changes',
+      setUp: () {
+        Bloc.observer = AppBlocObserver();
+        bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, startlistProvider: startlistProvider);
+      },
+      build: () => bloc,
+      act: (bloc) async {
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(DatabaseEvent.selectRaceAndStage(race: race, stage: stage));
+        await Future<void>.delayed(Durations.short1);
+        bloc.add(const DatabaseEvent.selectAwaitingNumber(number: 2));
+        await Future<void>.delayed(Durations.short1);
+        expect(bloc.state.awaitingNumber, 2);
+        final nextRace = (await db.getRace(2))!;
+        final nextStage = (await db.getStages(raceId: nextRace.id).get()).first;
+        bloc.add(DatabaseEvent.selectRaceAndStage(race: nextRace, stage: nextStage));
       },
       verify: (bloc) {
         expect(bloc.state.awaitingNumber, null);

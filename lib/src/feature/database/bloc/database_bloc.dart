@@ -100,6 +100,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
                 .watch()
                 .listen((event) async {
                   _numbersOnTrace = await _db.getNumbersOnTraceNow(stageId: stageId, dateTimeNow: DateTime.now()).get();
+                  _clearAwaitingNumberIfNotOnTrace();
                   logger.t('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
                   await _emitState();
                 });
@@ -160,6 +161,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           case _GetRaces():
             _races = await _db.getRaces().get();
           case _SelectRaceAndStage():
+            if (_race?.id != event.race.id || _stage?.id != event.stage.id) {
+              _awaitingNumber = null;
+            }
             _race = event.race;
             _stage = event.stage;
             final settings = _settingsProvider.settings.copyWith(raceId: event.race.id, stageId: event.stage.id);
@@ -385,6 +389,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               finishTime: event.finishTime,
             );
             if (success) {
+              if (_awaitingNumber == event.number) {
+                _awaitingNumber = null;
+              }
               await _emitState();
             } else {
               await _emitState(
@@ -400,6 +407,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             _numbersOnTrace = await _db
                 .getNumbersOnTraceNow(stageId: event.stageId, dateTimeNow: event.dateTimeNow)
                 .get();
+            _clearAwaitingNumberIfNotOnTrace();
             await _emitState();
           case _ShiftStartsTime():
             await _db.shiftStartsTime(stageId: event.stageId, minutes: event.minutes, fromTime: event.fromTime);
@@ -540,6 +548,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   StartlistProvider startlistProvider;
   ShareProvider shareProvider;
+
+  void _clearAwaitingNumberIfNotOnTrace() {
+    final awaitingNumber = _awaitingNumber;
+    if (awaitingNumber != null && !_numbersOnTrace.any((item) => item.number == awaitingNumber)) {
+      _awaitingNumber = null;
+    }
+  }
 
   Future<List<StartingParticipant>> _getExistedStartingParticipants({
     required int stageId,
