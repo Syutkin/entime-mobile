@@ -97,6 +97,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
               .watch()
               .listen((event) async {
                 _numbersOnTrace = await _db.getNumbersOnTraceNow(stageId: stageId, dateTimeNow: DateTime.now()).get();
+                _clearAwaitingNumberIfNotOnTrace();
                 logger.t('DatabaseBloc -> getNumbersOnTraceNow(stageId: $stageId).watch()');
                 await _emitState();
               });
@@ -157,6 +158,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         case _GetRaces():
           _races = await _db.getRaces().get();
         case _SelectRace():
+          if (_race?.id != event.race.id) {
+            _awaitingNumber = null;
+          }
           _race = event.race;
           final raceId = event.race.id;
           final settings = _settingsProvider.settings.copyWith(raceId: raceId);
@@ -165,6 +169,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
         case _DeselectRace():
           _race = null;
           _stage = null;
+          _awaitingNumber = null;
           final settings = _settingsProvider.settings.copyWith(raceId: -1, stageId: -1);
           await _settingsProvider.update(settings);
           add(const DatabaseEvent.initialize());
@@ -187,6 +192,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _stages = await _db.getStages(raceId: event.raceId).get();
           await _emitState();
         case _SelectStage():
+          if (_stage?.id != event.stage.id) {
+            _awaitingNumber = null;
+          }
           _stage = event.stage;
           final stageId = event.stage.id;
           final settings = _settingsProvider.settings.copyWith(stageId: stageId);
@@ -339,6 +347,9 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
             finishTime: event.finishTime,
           );
           if (success) {
+            if (_awaitingNumber == event.number) {
+              _awaitingNumber = null;
+            }
             await _emitState();
           } else {
             await _emitState(
@@ -354,6 +365,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
           _numbersOnTrace = await _db
               .getNumbersOnTraceNow(stageId: event.stageId, dateTimeNow: event.dateTimeNow)
               .get();
+          _clearAwaitingNumberIfNotOnTrace();
           await _emitState();
         case _ShiftStartsTime():
           await _db.shiftStartsTime(stageId: event.stageId, minutes: event.minutes, fromTime: event.fromTime);
@@ -487,6 +499,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   StartlistProvider fileProvider;
   ShareProvider shareProvider;
+
+  void _clearAwaitingNumberIfNotOnTrace() {
+    final awaitingNumber = _awaitingNumber;
+    if (awaitingNumber != null && !_numbersOnTrace.any((item) => item.number == awaitingNumber)) {
+      _awaitingNumber = null;
+    }
+  }
 
   Future<void> _emitState({Notification? notification, int? autoFinishNumber, bool? updateFinishNumber}) async {
     add(

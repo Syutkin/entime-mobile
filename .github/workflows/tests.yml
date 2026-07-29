@@ -3,14 +3,14 @@ name: Analyze and run tests
 on:
   push:
     branches:
-      - master
+      - release/0.5.2
     paths:
       - "**.dart"
       - "!**.g.dart"
       - "!**.freezed.dart"
   pull_request:
     branches:
-      - master
+      - release/0.5.2
     paths:
       - "**.dart"
       - "!**.g.dart"
@@ -27,6 +27,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable' # or: 'stable', 'beta', 'main' or 'master'
+          flutter-version: '3.32.0'
           cache: true
 
       - run: flutter doctor -v
