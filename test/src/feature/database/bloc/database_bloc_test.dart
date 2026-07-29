@@ -1129,9 +1129,16 @@ void main() {
       setUp: () {
         Bloc.observer = AppBlocObserver();
         bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        stage = const Stage(id: 2, raceId: 1, name: 'stageName', isActive: true, isDeleted: false);
       },
       build: () => bloc,
       act: (bloc) async {
+        final numbersOnTraceLoaded = bloc.stream.firstWhere(
+          (state) =>
+              state.stage?.id == stage.id && state.numbersOnTrace.any((item) => item.number == 12),
+        );
+        bloc.add(DatabaseEvent.selectStage(stage));
+        await numbersOnTraceLoaded;
         bloc.add(DatabaseEvent.selectAwaitingNumber(number: 12));
       },
       verify: (bloc) {
@@ -1144,12 +1151,22 @@ void main() {
       setUp: () {
         Bloc.observer = AppBlocObserver();
         bloc = DatabaseBloc(database: db, settingsProvider: settingsProvider, fileProvider: fileProvider);
+        stage = const Stage(id: 2, raceId: 1, name: 'stageName', isActive: true, isDeleted: false);
       },
       build: () => bloc,
       act: (bloc) async {
-        bloc
-          ..add(DatabaseEvent.selectAwaitingNumber(number: 12))
-          ..add(DatabaseEvent.deselectAwaitingNumber());
+        final numbersOnTraceLoaded = bloc.stream.firstWhere(
+          (state) =>
+              state.stage?.id == stage.id && state.numbersOnTrace.any((item) => item.number == 12),
+        );
+        bloc.add(DatabaseEvent.selectStage(stage));
+        await numbersOnTraceLoaded;
+
+        final awaitingNumberSelected = bloc.stream.firstWhere((state) => state.awaitingNumber == 12);
+        bloc.add(DatabaseEvent.selectAwaitingNumber(number: 12));
+        await awaitingNumberSelected;
+
+        bloc.add(DatabaseEvent.deselectAwaitingNumber());
       },
       verify: (bloc) {
         expect(bloc.state.awaitingNumber, null);
