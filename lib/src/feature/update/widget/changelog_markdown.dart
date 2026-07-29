@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-Widget changelogMarkdown(String data) {
+Widget changelogMarkdown(String data, {bool shrinkWrap = false}) {
   Future<void> linkOnTapHandler(String? href) async {
     if (href != null) {
       if (await canLaunchUrlString(href)) {
@@ -14,5 +14,9 @@ Widget changelogMarkdown(String data) {
     }
   }
 
-  return Markdown(data: data, onTapLink: (text, href, title) => linkOnTapHandler(href));
+  return Markdown(
+    data: data,
+    shrinkWrap: shrinkWrap,
+    onTapLink: (text, href, title) => linkOnTapHandler(href),
+  );
 }

@@ -11,7 +11,7 @@ Future<void> showChangelogAtStartup(BuildContext context, String markdown) async
       title: Text(Localization.current.I18nUpdate_whatsNew),
       // content: changelogMarkdown(markdownData),
       // workaround with width, see https://github.com/flutter/flutter/issues/18108
-      content: SizedBox(width: double.maxFinite, child: changelogMarkdown(markdown)),
+      content: SizedBox(width: double.maxFinite, child: changelogMarkdown(markdown, shrinkWrap: true)),
       actions: <Widget>[
         TextButton(
           onPressed: () {
