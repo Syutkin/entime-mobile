@@ -28,10 +28,9 @@ void main() {
               List<String>? allowedExtensions,
               void Function(FilePickerStatus)? onFileLoading,
               int compressionQuality,
-              bool withData,
-              bool withReadStream,
               bool lockParentWindow,
-              bool readSequential,
+              bool cancelUploadOnWindowBlur,
+              AndroidSAFOptions? androidSafOptions,
             })
           >(),
         );

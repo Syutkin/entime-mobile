@@ -157,7 +157,7 @@ class BleConnectionWrapper implements IBluetoothConnection {
 class BluetoothConnectionFactory implements IBluetoothConnectionFactory {
   @override
   Future<IBluetoothConnection> connectToDevice(BluetoothDevice device) async {
-    await device.connect(license: License.free);
+    await device.connect(license: License.nonprofit);
     try {
       await device.requestMtu(247);
     } on Exception {

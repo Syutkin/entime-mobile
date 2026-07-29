@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/localization/localization.dart';
-import '../../database/database.dart';
+import '../database.dart';
 
 enum RiderItemPopupMenu { edit }
 

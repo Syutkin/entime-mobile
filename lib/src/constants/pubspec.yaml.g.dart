@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-alpha.1+694',
+    representation: r'0.6.0-alpha.1+695',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-alpha.1+694',
+    canonical: r'0.6.0-alpha.1+695',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'alpha', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'694'],
+    build: <String>[r'695'],
   );
 
   /// Name
@@ -401,7 +401,7 @@ sealed class Pubspec {
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
     'any_date': r'^1.2.1',
-    'app_settings': r'^7.0.0',
+    'app_settings': r'^8.0.0',
     'audioplayers': r'^6.5.1',
     'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
@@ -411,7 +411,7 @@ sealed class Pubspec {
     'device_info_plus': r'^13.1.0',
     'drift': r'^2.33.0',
     'dropdown_search': r'^7.0.0',
-    'equatable': r'^2.0.7',
+    'equatable': r'^2.1.0',
     'ffi': r'^2.2.0',
     'file_picker': r'^12.0.0-beta.3',
     'file_selector': r'^1.0.3',
@@ -436,9 +436,9 @@ sealed class Pubspec {
     'logger': r'^2.6.2',
     'meta': r'^1.18.0',
     'nested': r'^1.0.0',
-    'open_file': r'^3.5.10',
+    'open_file': r'^4.0.0',
     'path': r'^1.9.1',
-    'path_provider': r'^2.1.5',
+    'path_provider': r'^2.1.6',
     'permission_handler': r'^12.0.1',
     'pub_semver': r'^2.2.0',
     'rxdart': r'^0.28.0',
@@ -454,9 +454,9 @@ sealed class Pubspec {
   /// Developer dependencies
   static const Map<String, Object> devDependencies = <String, Object>{
     'bloc_test': r'^10.0.0',
-    'build_runner': r'^2.10.5',
+    'build_runner': r'^2.15.1',
     'dart_style': r'^3.1.8',
-    'drift_dev': r'^2.30.0',
+    'drift_dev': r'^2.34.0',
     'flutter_lints': r'^6.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
@@ -467,8 +467,8 @@ sealed class Pubspec {
     },
     'json_serializable': r'^6.11.1',
     'mocktail': r'^1.0.4',
-    'patrol': r'^4.0.1',
-    'patrol_finders': r'^3.2.0',
+    'patrol': r'^4.8.0',
+    'patrol_finders': r'^3.6.0',
     'test': r'^1.31.0',
     'very_good_analysis': r'^10.0.0',
   };

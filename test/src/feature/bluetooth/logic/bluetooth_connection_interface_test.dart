@@ -536,7 +536,7 @@ void main() {
       );
 
       when(() => device.connectionState).thenAnswer((_) => const Stream<BluetoothConnectionState>.empty());
-      when(() => device.connect(license: License.free)).thenAnswer((_) async {});
+      when(() => device.connect(license: License.nonprofit)).thenAnswer((_) async {});
       when(() => device.requestMtu(247)).thenAnswer((_) async {
         return 247;
       });
@@ -566,7 +566,7 @@ void main() {
 
       when(() => device.isConnected).thenReturn(true);
       when(() => device.connectionState).thenAnswer((_) => connectionStateController.stream);
-      when(() => device.connect(license: License.free)).thenAnswer((_) async {});
+      when(() => device.connect(license: License.nonprofit)).thenAnswer((_) async {});
       when(() => device.requestMtu(247)).thenAnswer((_) async {
         return 247;
       });
@@ -605,7 +605,7 @@ void main() {
 
       when(() => device.isConnected).thenReturn(true);
       when(() => device.connectionState).thenAnswer((_) => connectionStateController.stream);
-      when(() => device.connect(license: License.free)).thenAnswer((_) async {});
+      when(() => device.connect(license: License.nonprofit)).thenAnswer((_) async {});
       when(() => device.requestMtu(247)).thenAnswer((_) async {
         return 247;
       });
@@ -646,7 +646,7 @@ void main() {
 
       when(() => device.isConnected).thenReturn(true);
       when(() => device.connectionState).thenAnswer((_) => connectionStateController.stream);
-      when(() => device.connect(license: License.free)).thenAnswer((_) async {});
+      when(() => device.connect(license: License.nonprofit)).thenAnswer((_) async {});
       when(() => device.requestMtu(247)).thenAnswer((_) async {
         return 247;
       });
@@ -679,7 +679,7 @@ void main() {
 
       when(() => device.isConnected).thenReturn(true);
       when(() => device.connectionState).thenAnswer((_) => connectionStateController.stream);
-      when(() => device.connect(license: License.free)).thenAnswer((_) async {});
+      when(() => device.connect(license: License.nonprofit)).thenAnswer((_) async {});
       when(() => device.requestMtu(247)).thenThrow(Exception('mtu failed'));
       when(() => device.discoverServices()).thenAnswer((_) async => [nusService]);
 

@@ -1,5 +1,3 @@
-// ignore_for_file: unreachable_from_main
-
 part of 'trails_bloc.dart';
 
 @freezed

@@ -1,50 +1,43 @@
-import 'package:file_picker/file_picker.dart';
+import 'package:file_picker/file_picker.dart' as fp;
 
 abstract interface class IFilePickerProvider {
   /// Pick file from filesystem
-  Future<PlatformFile?> pickFile({
+  Future<fp.PlatformFile?> pickFile({
     String? dialogTitle,
     String? initialDirectory,
-    FileType type = FileType.any,
+    fp.FileType type = fp.FileType.any,
     List<String>? allowedExtensions,
-    void Function(FilePickerStatus)? onFileLoading,
+    void Function(fp.FilePickerStatus)? onFileLoading,
     int compressionQuality = 0,
-    bool withData = true,
-    bool withReadStream = false,
     bool lockParentWindow = false,
-    bool readSequential = false,
+    bool cancelUploadOnWindowBlur = true,
+    fp.AndroidSAFOptions? androidSafOptions,
   });
 }
 
 class FilePickerProvider implements IFilePickerProvider {
   @override
-  Future<PlatformFile?> pickFile({
+  Future<fp.PlatformFile?> pickFile({
     String? dialogTitle,
     String? initialDirectory,
-    FileType type = FileType.any,
+    fp.FileType type = fp.FileType.any,
     List<String>? allowedExtensions,
-    void Function(FilePickerStatus)? onFileLoading,
+    void Function(fp.FilePickerStatus)? onFileLoading,
     int compressionQuality = 0,
-    bool withData = true,
-    bool withReadStream = false,
     bool lockParentWindow = false,
-    bool readSequential = false,
-  }) async {
-    final file = (await FilePicker.pickFiles(
+    bool cancelUploadOnWindowBlur = true,
+    fp.AndroidSAFOptions? androidSafOptions,
+  }) {
+    return fp.FilePicker.pickFile(
       dialogTitle: dialogTitle,
       initialDirectory: initialDirectory,
       type: type,
       allowedExtensions: allowedExtensions,
       onFileLoading: onFileLoading,
       compressionQuality: compressionQuality,
-      withData: withData,
-      withReadStream: withReadStream,
       lockParentWindow: lockParentWindow,
-      readSequential: readSequential,
-    ))?.files.first;
-    if (file == null || file.bytes == null) {
-      return null;
-    }
-    return file;
+      cancelUploadOnWindowBlur: cancelUploadOnWindowBlur,
+      androidSafOptions: androidSafOptions,
+    );
   }
 }

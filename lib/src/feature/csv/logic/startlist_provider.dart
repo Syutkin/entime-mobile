@@ -21,7 +21,7 @@ class StartlistProvider {
   Future<RaceCsv?> getRaceFromFile() async {
     final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
-      final csv = await _decodeCsv(file.bytes!, 'CSV -> Error while decoding starting list');
+      final csv = await _decodeCsv(await file.readAsBytes(), 'CSV -> Error while decoding starting list');
 
       try {
         final maps = csvToMaps(csv, fieldDelimiter: ';');
@@ -47,7 +47,7 @@ class StartlistProvider {
   Future<StagesCsv?> getStagesFromFile() async {
     final file = await filepicker.pickFile(allowedExtensions: ['csv'], type: FileType.custom);
     if (file != null) {
-      final csv = await _decodeCsv(file.bytes!, 'CSV -> Error while decoding stages list');
+      final csv = await _decodeCsv(await file.readAsBytes(), 'CSV -> Error while decoding stages list');
 
       try {
         final maps = csvToMaps(csv, fieldDelimiter: ';');

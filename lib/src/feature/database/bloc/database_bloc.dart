@@ -16,8 +16,8 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../common/logger/logger.dart';
 import '../../../constants/date_time_formats.dart';
-import '../../../feature/app_message/app_message.dart';
-import '../../../feature/csv/csv.dart';
+import '../../app_message/app_message.dart';
+import '../../csv/csv.dart';
 import '../../settings/logic/settings_provider.dart';
 import '../drift/app_database.dart';
 import '../model/notification.dart';
