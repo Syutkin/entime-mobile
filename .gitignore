@@ -31,7 +31,6 @@
 .pub-cache/
 .pub/
 /build/
-pubspec.lock
 devtools_options.yaml
 coverage/
 /integration_test/test_bundle.dart
