@@ -15,6 +15,7 @@ find lib test -name '*.dart' \
 
 cider bump build
 
+scripts/install_dependencies.sh
 scripts/generate.sh
 
 git add pubspec.yaml

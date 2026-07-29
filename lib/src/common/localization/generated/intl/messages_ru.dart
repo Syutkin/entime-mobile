@@ -728,9 +728,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "I18nSettings_startDeltaInSeconds": MessageLookupByLibrary.simpleMessage(
       "Отрезок времени старта после сигнала",
     ),
-    "I18nSettings_startDeltaInSecondsContent": MessageLookupByLibrary.simpleMessage(
-      "Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта",
-    ),
+    "I18nSettings_startDeltaInSecondsContent":
+        MessageLookupByLibrary.simpleMessage(
+          "Отрезок времени в секундах, в течении которого можно стартовать до и после актуального времени старта",
+        ),
     "I18nSettings_startDeltaInSecondsTitle":
         MessageLookupByLibrary.simpleMessage("Окно старта"),
     "I18nSettings_startFinishDifference": MessageLookupByLibrary.simpleMessage(
