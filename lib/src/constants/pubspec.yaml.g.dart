@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-alpha.1+701',
+    representation: r'0.6.0-alpha.1+702',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-alpha.1+701',
+    canonical: r'0.6.0-alpha.1+702',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'alpha', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'701'],
+    build: <String>[r'702'],
   );
 
   /// Name
@@ -409,7 +409,7 @@ sealed class Pubspec {
     'crypto': r'^3.0.7',
     'csv': r'^8.0.0',
     'device_info_plus': r'^13.1.0',
-    'drift': r'^2.33.0',
+    'drift': r'2.34.0',
     'dropdown_search': r'^7.0.0',
     'equatable': r'^2.1.0',
     'ffi': r'^2.2.0',
@@ -427,7 +427,7 @@ sealed class Pubspec {
     },
     'flutter_markdown_plus': r'^1.0.7',
     'flutter_material_design_icons': r'^3.1.0+7447',
-    'flutter_ntp': r'^0.0.2',
+    'flutter_ntp': r'^0.1.0',
     'flutter_tts': r'^4.2.3',
     'freezed_annotation': r'^3.1.0',
     'http': r'^1.6.0',
@@ -456,7 +456,7 @@ sealed class Pubspec {
     'bloc_test': r'^10.0.0',
     'build_runner': r'^2.15.1',
     'dart_style': r'^3.1.8',
-    'drift_dev': r'^2.34.0',
+    'drift_dev': r'2.34.0',
     'flutter_lints': r'^6.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
@@ -474,11 +474,7 @@ sealed class Pubspec {
   };
 
   /// Dependency overrides
-  static const Map<String, Object> dependencyOverrides = <String, Object>{
-    'flutter_ntp': <String, Object>{
-      'git': r'https://github.com/Syutkin/flutter_ntp',
-    },
-  };
+  static const Map<String, Object> dependencyOverrides = <String, Object>{};
 
   /// Executables
   ///

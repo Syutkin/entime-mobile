@@ -1,14 +1,30 @@
 import 'dart:async';
 
+import 'package:flutter_ntp/flutter_ntp.dart';
+
 import '../../../common/logger/logger.dart';
 import 'ntp_client.dart';
 
 abstract interface class INtpProvider {
   /// Get current NTP time
-  Future<DateTime> now({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration});
+  Future<DateTime> now({
+    NtpServer server = NtpServer.google,
+    String? lookUpAddress,
+    int? port,
+    Duration? timeout,
+    Duration? cacheDuration,
+    bool forceRefresh = false,
+    bool allowFallback = false,
+  });
 
   /// Return NTP delay in milliseconds
-  Future<int> getNtpOffset({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration});
+  Future<int> getNtpOffset({
+    NtpServer server = NtpServer.google,
+    String? lookUpAddress,
+    int? port,
+    Duration? timeout,
+    Duration? cacheDuration,
+  });
 
   /// Stream of NTP offsets in milliseconds that updates periodically.
   Stream<int> get offset;
@@ -37,23 +53,41 @@ class NtpProvider implements INtpProvider {
   Stream<int> get offset => _offsetController.stream;
 
   @override
-  Future<int> getNtpOffset({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration}) async {
+  Future<int> getNtpOffset({
+    NtpServer server = NtpServer.google,
+    String? lookUpAddress,
+    int? port,
+    Duration? timeout,
+    Duration? cacheDuration,
+  }) async {
     final offset = await _ntpClient.getNtpOffset(
+      server: server,
       lookUpAddress: lookUpAddress,
       port: port,
       timeout: timeout,
       cacheDuration: cacheDuration,
     );
-    return offset ~/ 1000;
+    return offset.inMilliseconds;
   }
 
   @override
-  Future<DateTime> now({String? lookUpAddress, int? port, Duration? timeout, Duration? cacheDuration}) {
+  Future<DateTime> now({
+    NtpServer server = NtpServer.google,
+    String? lookUpAddress,
+    int? port,
+    Duration? timeout,
+    Duration? cacheDuration,
+    bool forceRefresh = false,
+    bool allowFallback = false,
+  }) {
     final now = _ntpClient.now(
+      server: server,
       lookUpAddress: lookUpAddress,
       port: port,
       timeout: timeout,
       cacheDuration: cacheDuration,
+      forceRefresh: forceRefresh,
+      allowFallback: allowFallback,
     );
 
     return now;

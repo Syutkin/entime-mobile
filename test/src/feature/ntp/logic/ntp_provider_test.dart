@@ -23,7 +23,7 @@ void main() {
     test('delegates to client and converts to milliseconds', () async {
       when(
         () => ntpClient.getNtpOffset(),
-      ).thenAnswer((_) async => 5000000);
+      ).thenAnswer((_) async => const Duration(microseconds: 5000000));
 
       final result = await ntpProvider.getNtpOffset();
 
@@ -46,7 +46,7 @@ void main() {
           timeout: timeout,
           cacheDuration: cacheDuration,
         ),
-      ).thenAnswer((_) async => 123000);
+      ).thenAnswer((_) async => const Duration(microseconds: 123000));
 
       final result = await ntpProvider.getNtpOffset(
         lookUpAddress: lookUpAddress,
@@ -124,7 +124,7 @@ void main() {
         var call = 0;
         when(
           () => ntpClient.getNtpOffset(),
-        ).thenAnswer((_) async => call++ == 0 ? 1000 : 2000);
+        ).thenAnswer((_) async => call++ == 0 ? const Duration(seconds: 1) : const Duration(seconds: 2));
 
         final provider = NtpProvider(
           ntpClient: ntpClient,
@@ -135,12 +135,12 @@ void main() {
         final sub = provider.offset.listen(events.add);
 
         async.flushMicrotasks();
-        expect(events, [1]);
+        expect(events, [1000]);
 
         async
           ..elapse(const Duration(seconds: 1))
           ..flushMicrotasks();
-        expect(events, [1, 2]);
+        expect(events, [1000, 2000]);
 
         unawaited(sub.cancel());
       });
@@ -155,7 +155,7 @@ void main() {
           if (call++ == 0) {
             throw Exception('ntp error');
           }
-          return 3000;
+          return const Duration(seconds: 3);
         });
 
         final provider = NtpProvider(
@@ -172,7 +172,7 @@ void main() {
         async
           ..elapse(const Duration(seconds: 1))
           ..flushMicrotasks();
-        expect(events, [3]);
+        expect(events, [3000]);
 
         unawaited(sub.cancel());
       });

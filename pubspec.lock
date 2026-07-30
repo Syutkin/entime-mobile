@@ -381,10 +381,10 @@ packages:
     dependency: "direct main"
     description:
       name: drift
-      sha256: "3a3f1f6f905037d7426e4c445854139fd6a3d592135f7c96d7931682b73d16f4"
+      sha256: "6cc0b623c0e83f7080524d8396e9301b1d78b9c66a4fdceeb0f798211303254c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.34.3"
+    version: "2.34.0"
   drift_dev:
     dependency: "direct dev"
     description:
@@ -667,12 +667,11 @@ packages:
   flutter_ntp:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: b65fb4bbccb2f7fb1339f55577bf1fcf0c3505f8
-      url: "https://github.com/Syutkin/flutter_ntp"
-    source: git
-    version: "0.0.2"
+      name: flutter_ntp
+      sha256: a436bc085dcad52dce94bceef3848c92e7f819717586a3667024fa3982d10246
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
