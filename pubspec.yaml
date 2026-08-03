@@ -36,7 +36,7 @@ dependencies:
   crypto: ^3.0.7
   csv: ^8.0.0
   device_info_plus: ^13.1.0
-  drift: 2.34.0
+  drift: 2.34.3
 #  ToDo: После полноценного релиза 7.0.0 проверить работу PopupProps.autocomplete
   dropdown_search: ^7.0.0
   equatable: ^2.1.0
