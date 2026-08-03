@@ -87,7 +87,7 @@ dev_dependencies:
   freezed: ^3.2.3
   integration_test:
     sdk: flutter
-  json_serializable: ^6.11.1
+  json_serializable: ^6.14.1
   mocktail: ^1.0.4
   patrol: ^4.8.0
   patrol_finders: ^3.6.0
