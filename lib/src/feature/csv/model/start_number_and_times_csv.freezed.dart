@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'start_number_and_times_csv.dart';
@@ -9,6 +9,7 @@ part of 'start_number_and_times_csv.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$StartNumberAndTimesCsvCopyWithImpl<$Res>
 /// Create a copy of StartNumberAndTimesCsv
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? number = null,Object? startTimes = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(StartNumberAndTimesCsv(
 number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as int,startTimes: freezed == startTimes ? _self.startTimes : startTimes // ignore: cast_nullable_to_non_nullable
 as Map<String, String>?,
@@ -210,7 +211,7 @@ return $default(_that.number,_that.startTimes);case _:
 @JsonSerializable()
 
 class _StartNumberAndTimesCsv implements StartNumberAndTimesCsv {
-  const _StartNumberAndTimesCsv({required this.number, final  Map<String, String>? startTimes}): _startTimes = startTimes;
+  const _StartNumberAndTimesCsv({required this.number,  Map<String, String>? startTimes}): _startTimes = startTimes;
   factory _StartNumberAndTimesCsv.fromJson(Map<String, dynamic> json) => _$StartNumberAndTimesCsvFromJson(json);
 
 @override final  int number;

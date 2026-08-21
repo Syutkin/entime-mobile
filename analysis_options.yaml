@@ -19,6 +19,13 @@ analyzer:
     - '**/*.freezed.dart'
     - lib/src/common/localization/generated/**
     - test/src/feature/database/drift/my_database/migration_test.dart
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
   errors:
     cascade_invocations: ignore
     invalid_annotation_target: ignore
@@ -48,7 +55,6 @@ linter:
     document_ignores: false
     flutter_style_todos: false
     lines_longer_than_80_chars: false
-    one_member_abstracts: false
     public_member_api_docs: false
 
 # Additional information about this file can be found at

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'module_settings.dart';
@@ -9,6 +9,7 @@ part of 'module_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -376,7 +377,7 @@ class _$ModSettingsTypeCopyWithImpl<$Res>
 /// Create a copy of ModSettingsType
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? type = null,}) {
-  return _then(_self.copyWith(
+  return _then(ModSettingsType(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -639,7 +640,7 @@ class _$ModSettingsEntimeCopyWithImpl<$Res>
 /// Create a copy of ModSettingsEntime
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? device = null,Object? sync = null,Object? wifi = null,Object? gps = null,Object? touch = null,}) {
-  return _then(_self.copyWith(
+  return _then(ModSettingsEntime(
 device: null == device ? _self.device : device // ignore: cast_nullable_to_non_nullable
 as DeviceSettings,sync: null == sync ? _self.sync : sync // ignore: cast_nullable_to_non_nullable
 as SyncSettings,wifi: null == wifi ? _self.wifi : wifi // ignore: cast_nullable_to_non_nullable
@@ -1004,7 +1005,7 @@ class _$DeviceSettingsCopyWithImpl<$Res>
 /// Create a copy of DeviceSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? number = null,Object? type = null,Object? timezoneOffsetMin = null,}) {
-  return _then(_self.copyWith(
+  return _then(DeviceSettings(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as int,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
@@ -1276,7 +1277,7 @@ class _$SyncSettingsCopyWithImpl<$Res>
 /// Create a copy of SyncSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? auto = null,Object? source = null,Object? ntp1 = null,Object? ntp2 = null,Object? ntp3 = null,}) {
-  return _then(_self.copyWith(
+  return _then(SyncSettings(
 auto: null == auto ? _self.auto : auto // ignore: cast_nullable_to_non_nullable
 as bool,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
 as int,ntp1: null == ntp1 ? _self.ntp1 : ntp1 // ignore: cast_nullable_to_non_nullable
@@ -1551,7 +1552,7 @@ class _$ModSettingsLedCopyWithImpl<$Res>
 /// Create a copy of ModSettingsLed
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? read = freezed,Object? type = null,Object? bluetooth = null,Object? wiFi = null,Object? ledPanel = null,}) {
-  return _then(_self.copyWith(
+  return _then(ModSettingsLed(
 read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
 as bool?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,bluetooth: null == bluetooth ? _self.bluetooth : bluetooth // ignore: cast_nullable_to_non_nullable
@@ -1880,7 +1881,7 @@ class _$BluetoothCopyWithImpl<$Res>
 /// Create a copy of Bluetooth
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? active = null,Object? name = null,Object? number = null,}) {
-  return _then(_self.copyWith(
+  return _then(Bluetooth(
 active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
 as bool,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
@@ -2149,7 +2150,7 @@ class _$WiFiCopyWithImpl<$Res>
 /// Create a copy of WiFi
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? active = null,Object? ssid = null,Object? passwd = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(WiFi(
 active: null == active ? _self.active : active // ignore: cast_nullable_to_non_nullable
 as bool,ssid: null == ssid ? _self.ssid : ssid // ignore: cast_nullable_to_non_nullable
 as String,passwd: freezed == passwd ? _self.passwd : passwd // ignore: cast_nullable_to_non_nullable
@@ -2418,7 +2419,7 @@ class _$GpsSettingsCopyWithImpl<$Res>
 /// Create a copy of GpsSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? enabled = null,}) {
-  return _then(_self.copyWith(
+  return _then(GpsSettings(
 enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -2681,7 +2682,7 @@ class _$TouchSettingsCopyWithImpl<$Res>
 /// Create a copy of TouchSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? enabled = null,Object? calValid = null,Object? calibration = null,}) {
-  return _then(_self.copyWith(
+  return _then(TouchSettings(
 enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
 as bool,calValid: null == calValid ? _self.calValid : calValid // ignore: cast_nullable_to_non_nullable
 as bool,calibration: null == calibration ? _self.calibration : calibration // ignore: cast_nullable_to_non_nullable
@@ -2826,7 +2827,7 @@ return $default(_that.enabled,_that.calValid,_that.calibration);case _:
 @JsonSerializable()
 
 class _TouchSettings implements TouchSettings {
-  const _TouchSettings({required this.enabled, @JsonKey(name: 'cal_valid') required this.calValid, required final  List<int> calibration}): _calibration = calibration;
+  const _TouchSettings({required this.enabled, @JsonKey(name: 'cal_valid') required this.calValid, required  List<int> calibration}): _calibration = calibration;
   factory _TouchSettings.fromJson(Map<String, dynamic> json) => _$TouchSettingsFromJson(json);
 
 @override final  bool enabled;
@@ -2956,7 +2957,7 @@ class _$LedPanelCopyWithImpl<$Res>
 /// Create a copy of LedPanel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? brightness = null,}) {
-  return _then(_self.copyWith(
+  return _then(LedPanel(
 brightness: null == brightness ? _self.brightness : brightness // ignore: cast_nullable_to_non_nullable
 as int,
   ));

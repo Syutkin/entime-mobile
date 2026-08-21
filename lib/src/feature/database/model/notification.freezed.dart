@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'notification.dart';
@@ -9,6 +9,7 @@ part of 'notification.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -218,7 +219,7 @@ return changeFinishTimeToNumber(_that.finishId,_that.number,_that.finishTime,_th
 
 
 class NotificationUpdateStartNumber implements Notification {
-  const NotificationUpdateStartNumber({required final  List<StartingParticipant> existedStartingParticipants, required this.number, required this.startTime}): _existedStartingParticipants = existedStartingParticipants;
+  const NotificationUpdateStartNumber({required  List<StartingParticipant> existedStartingParticipants, required this.number, required this.startTime}): _existedStartingParticipants = existedStartingParticipants;
   
 
  final  List<StartingParticipant> _existedStartingParticipants;
@@ -294,7 +295,7 @@ as String,
 
 
 class NotificationUpdateStartTime implements Notification {
-  const NotificationUpdateStartTime({required final  List<StartingParticipant> existedStartingParticipants, required this.stageId, required this.participantId, required this.number, required this.startTime}): _existedStartingParticipants = existedStartingParticipants;
+  const NotificationUpdateStartTime({required  List<StartingParticipant> existedStartingParticipants, required this.stageId, required this.participantId, required this.number, required this.startTime}): _existedStartingParticipants = existedStartingParticipants;
   
 
  final  List<StartingParticipant> _existedStartingParticipants;
@@ -374,7 +375,7 @@ as String,
 
 
 class NotificationUpdateAutomaticCorrection implements Notification {
-  const NotificationUpdateAutomaticCorrection({required final  List<StartingParticipant> previousStarts, required this.number, required this.startTime, required this.timestamp, required this.correction}): _previousStarts = previousStarts;
+  const NotificationUpdateAutomaticCorrection({required  List<StartingParticipant> previousStarts, required this.number, required this.startTime, required this.timestamp, required this.correction}): _previousStarts = previousStarts;
   
 
  final  List<StartingParticipant> _previousStarts;

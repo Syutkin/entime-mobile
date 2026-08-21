@@ -5646,28 +5646,26 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
 
-typedef $RacesCreateCompanionBuilder =
-    RacesCompanion Function({
-      Value<int> id,
-      required String name,
-      Value<String?> startDate,
-      Value<String?> finishDate,
-      Value<String?> location,
-      Value<String?> url,
-      Value<String?> description,
-      Value<DateTime?> deletedAt,
-    });
-typedef $RacesUpdateCompanionBuilder =
-    RacesCompanion Function({
-      Value<int> id,
-      Value<String> name,
-      Value<String?> startDate,
-      Value<String?> finishDate,
-      Value<String?> location,
-      Value<String?> url,
-      Value<String?> description,
-      Value<DateTime?> deletedAt,
-    });
+typedef $RacesCreateCompanionBuilder = RacesCompanion Function({
+  Value<int> id,
+  required String name,
+  Value<String?> startDate,
+  Value<String?> finishDate,
+  Value<String?> location,
+  Value<String?> url,
+  Value<String?> description,
+  Value<DateTime?> deletedAt,
+});
+typedef $RacesUpdateCompanionBuilder = RacesCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<String?> startDate,
+  Value<String?> finishDate,
+  Value<String?> location,
+  Value<String?> url,
+  Value<String?> description,
+  Value<DateTime?> deletedAt,
+});
 
 class $RacesFilterComposer extends Composer<_$AppDatabase, Races> {
   $RacesFilterComposer({
@@ -5892,28 +5890,26 @@ typedef $RacesProcessedTableManager =
       Race,
       PrefetchHooks Function()
     >;
-typedef $TrackFilesCreateCompanionBuilder =
-    TrackFilesCompanion Function({
-      Value<int> id,
-      required String name,
-      Value<String?> extension,
-      required int size,
-      Value<String?> description,
-      required String hashSha1,
-      required Uint8List data,
-      required DateTime timestamp,
-    });
-typedef $TrackFilesUpdateCompanionBuilder =
-    TrackFilesCompanion Function({
-      Value<int> id,
-      Value<String> name,
-      Value<String?> extension,
-      Value<int> size,
-      Value<String?> description,
-      Value<String> hashSha1,
-      Value<Uint8List> data,
-      Value<DateTime> timestamp,
-    });
+typedef $TrackFilesCreateCompanionBuilder = TrackFilesCompanion Function({
+  Value<int> id,
+  required String name,
+  Value<String?> extension,
+  required int size,
+  Value<String?> description,
+  required String hashSha1,
+  required Uint8List data,
+  required DateTime timestamp,
+});
+typedef $TrackFilesUpdateCompanionBuilder = TrackFilesCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<String?> extension,
+  Value<int> size,
+  Value<String?> description,
+  Value<String> hashSha1,
+  Value<Uint8List> data,
+  Value<DateTime> timestamp,
+});
 
 class $TrackFilesFilterComposer extends Composer<_$AppDatabase, TrackFiles> {
   $TrackFilesFilterComposer({
@@ -6137,28 +6133,26 @@ typedef $TrackFilesProcessedTableManager =
       TrackFile,
       PrefetchHooks Function()
     >;
-typedef $TrailsCreateCompanionBuilder =
-    TrailsCompanion Function({
-      Value<int> id,
-      required String name,
-      Value<int?> distance,
-      Value<int?> elevation,
-      Value<int?> fileId,
-      Value<String?> url,
-      Value<String?> description,
-      Value<DateTime?> deletedAt,
-    });
-typedef $TrailsUpdateCompanionBuilder =
-    TrailsCompanion Function({
-      Value<int> id,
-      Value<String> name,
-      Value<int?> distance,
-      Value<int?> elevation,
-      Value<int?> fileId,
-      Value<String?> url,
-      Value<String?> description,
-      Value<DateTime?> deletedAt,
-    });
+typedef $TrailsCreateCompanionBuilder = TrailsCompanion Function({
+  Value<int> id,
+  required String name,
+  Value<int?> distance,
+  Value<int?> elevation,
+  Value<int?> fileId,
+  Value<String?> url,
+  Value<String?> description,
+  Value<DateTime?> deletedAt,
+});
+typedef $TrailsUpdateCompanionBuilder = TrailsCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<int?> distance,
+  Value<int?> elevation,
+  Value<int?> fileId,
+  Value<String?> url,
+  Value<String?> description,
+  Value<DateTime?> deletedAt,
+});
 
 class $TrailsFilterComposer extends Composer<_$AppDatabase, Trails> {
   $TrailsFilterComposer({
@@ -6381,26 +6375,24 @@ typedef $TrailsProcessedTableManager =
       Trail,
       PrefetchHooks Function()
     >;
-typedef $StagesCreateCompanionBuilder =
-    StagesCompanion Function({
-      Value<int> id,
-      Value<int?> trailId,
-      required int raceId,
-      required String name,
-      Value<String?> description,
-      Value<bool> isActive,
-      Value<DateTime?> deletedAt,
-    });
-typedef $StagesUpdateCompanionBuilder =
-    StagesCompanion Function({
-      Value<int> id,
-      Value<int?> trailId,
-      Value<int> raceId,
-      Value<String> name,
-      Value<String?> description,
-      Value<bool> isActive,
-      Value<DateTime?> deletedAt,
-    });
+typedef $StagesCreateCompanionBuilder = StagesCompanion Function({
+  Value<int> id,
+  Value<int?> trailId,
+  required int raceId,
+  required String name,
+  Value<String?> description,
+  Value<bool> isActive,
+  Value<DateTime?> deletedAt,
+});
+typedef $StagesUpdateCompanionBuilder = StagesCompanion Function({
+  Value<int> id,
+  Value<int?> trailId,
+  Value<int> raceId,
+  Value<String> name,
+  Value<String?> description,
+  Value<bool> isActive,
+  Value<DateTime?> deletedAt,
+});
 
 class $StagesFilterComposer extends Composer<_$AppDatabase, Stages> {
   $StagesFilterComposer({
@@ -6606,32 +6598,30 @@ typedef $StagesProcessedTableManager =
       Stage,
       PrefetchHooks Function()
     >;
-typedef $RidersCreateCompanionBuilder =
-    RidersCompanion Function({
-      Value<int> id,
-      required String name,
-      Value<String?> nickname,
-      Value<String?> birthday,
-      Value<String?> team,
-      Value<String?> city,
-      Value<String?> email,
-      Value<String?> phone,
-      Value<String?> comment,
-      Value<DateTime?> deletedAt,
-    });
-typedef $RidersUpdateCompanionBuilder =
-    RidersCompanion Function({
-      Value<int> id,
-      Value<String> name,
-      Value<String?> nickname,
-      Value<String?> birthday,
-      Value<String?> team,
-      Value<String?> city,
-      Value<String?> email,
-      Value<String?> phone,
-      Value<String?> comment,
-      Value<DateTime?> deletedAt,
-    });
+typedef $RidersCreateCompanionBuilder = RidersCompanion Function({
+  Value<int> id,
+  required String name,
+  Value<String?> nickname,
+  Value<String?> birthday,
+  Value<String?> team,
+  Value<String?> city,
+  Value<String?> email,
+  Value<String?> phone,
+  Value<String?> comment,
+  Value<DateTime?> deletedAt,
+});
+typedef $RidersUpdateCompanionBuilder = RidersCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<String?> nickname,
+  Value<String?> birthday,
+  Value<String?> team,
+  Value<String?> city,
+  Value<String?> email,
+  Value<String?> phone,
+  Value<String?> comment,
+  Value<DateTime?> deletedAt,
+});
 
 class $RidersFilterComposer extends Composer<_$AppDatabase, Riders> {
   $RidersFilterComposer({
@@ -6886,10 +6876,14 @@ typedef $RidersProcessedTableManager =
       Rider,
       PrefetchHooks Function()
     >;
-typedef $StatusesCreateCompanionBuilder =
-    StatusesCompanion Function({Value<int> id, required String type});
-typedef $StatusesUpdateCompanionBuilder =
-    StatusesCompanion Function({Value<int> id, Value<String> type});
+typedef $StatusesCreateCompanionBuilder = StatusesCompanion Function({
+  Value<int> id,
+  required String type,
+});
+typedef $StatusesUpdateCompanionBuilder = StatusesCompanion Function({
+  Value<int> id,
+  Value<String> type,
+});
 
 class $StatusesFilterComposer extends Composer<_$AppDatabase, Statuses> {
   $StatusesFilterComposer({
@@ -6970,14 +6964,14 @@ class $StatusesTableManager
               $StatusesOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $StatusesAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<String> type = const Value.absent(),
-              }) => StatusesCompanion(id: id, type: type),
-          createCompanionCallback:
-              ({Value<int> id = const Value.absent(), required String type}) =>
-                  StatusesCompanion.insert(id: id, type: type),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> type = const Value.absent(),
+          }) => StatusesCompanion(id: id, type: type),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String type,
+          }) => StatusesCompanion.insert(id: id, type: type),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
@@ -7000,26 +6994,24 @@ typedef $StatusesProcessedTableManager =
       Status,
       PrefetchHooks Function()
     >;
-typedef $ParticipantsCreateCompanionBuilder =
-    ParticipantsCompanion Function({
-      Value<int> id,
-      required int raceId,
-      required int riderId,
-      required int number,
-      Value<String?> category,
-      Value<String?> rfid,
-      Value<int> statusId,
-    });
-typedef $ParticipantsUpdateCompanionBuilder =
-    ParticipantsCompanion Function({
-      Value<int> id,
-      Value<int> raceId,
-      Value<int> riderId,
-      Value<int> number,
-      Value<String?> category,
-      Value<String?> rfid,
-      Value<int> statusId,
-    });
+typedef $ParticipantsCreateCompanionBuilder = ParticipantsCompanion Function({
+  Value<int> id,
+  required int raceId,
+  required int riderId,
+  required int number,
+  Value<String?> category,
+  Value<String?> rfid,
+  Value<int> statusId,
+});
+typedef $ParticipantsUpdateCompanionBuilder = ParticipantsCompanion Function({
+  Value<int> id,
+  Value<int> raceId,
+  Value<int> riderId,
+  Value<int> number,
+  Value<String?> category,
+  Value<String?> rfid,
+  Value<int> statusId,
+});
 
 class $ParticipantsFilterComposer
     extends Composer<_$AppDatabase, Participants> {
@@ -7229,28 +7221,26 @@ typedef $ParticipantsProcessedTableManager =
       Participant,
       PrefetchHooks Function()
     >;
-typedef $FinishesCreateCompanionBuilder =
-    FinishesCompanion Function({
-      Value<int> id,
-      required int stageId,
-      Value<int?> number,
-      required DateTime timestamp,
-      required int ntpOffset,
-      required String finishTime,
-      Value<bool> isHidden,
-      Value<bool> isManual,
-    });
-typedef $FinishesUpdateCompanionBuilder =
-    FinishesCompanion Function({
-      Value<int> id,
-      Value<int> stageId,
-      Value<int?> number,
-      Value<DateTime> timestamp,
-      Value<int> ntpOffset,
-      Value<String> finishTime,
-      Value<bool> isHidden,
-      Value<bool> isManual,
-    });
+typedef $FinishesCreateCompanionBuilder = FinishesCompanion Function({
+  Value<int> id,
+  required int stageId,
+  Value<int?> number,
+  required DateTime timestamp,
+  required int ntpOffset,
+  required String finishTime,
+  Value<bool> isHidden,
+  Value<bool> isManual,
+});
+typedef $FinishesUpdateCompanionBuilder = FinishesCompanion Function({
+  Value<int> id,
+  Value<int> stageId,
+  Value<int?> number,
+  Value<DateTime> timestamp,
+  Value<int> ntpOffset,
+  Value<String> finishTime,
+  Value<bool> isHidden,
+  Value<bool> isManual,
+});
 
 class $FinishesFilterComposer extends Composer<_$AppDatabase, Finishes> {
   $FinishesFilterComposer({
@@ -7473,38 +7463,36 @@ typedef $FinishesProcessedTableManager =
       Finish,
       PrefetchHooks Function()
     >;
-typedef $StartsCreateCompanionBuilder =
-    StartsCompanion Function({
-      Value<int> id,
-      required int stageId,
-      required int participantId,
-      required String startTime,
-      Value<DateTime?> timestamp,
-      Value<int?> timestampCorrection,
-      Value<int?> ntpOffset,
-      Value<String?> automaticStartTime,
-      Value<int?> automaticCorrection,
-      Value<String?> manualStartTime,
-      Value<int?> manualCorrection,
-      Value<int> statusId,
-      Value<int?> finishId,
-    });
-typedef $StartsUpdateCompanionBuilder =
-    StartsCompanion Function({
-      Value<int> id,
-      Value<int> stageId,
-      Value<int> participantId,
-      Value<String> startTime,
-      Value<DateTime?> timestamp,
-      Value<int?> timestampCorrection,
-      Value<int?> ntpOffset,
-      Value<String?> automaticStartTime,
-      Value<int?> automaticCorrection,
-      Value<String?> manualStartTime,
-      Value<int?> manualCorrection,
-      Value<int> statusId,
-      Value<int?> finishId,
-    });
+typedef $StartsCreateCompanionBuilder = StartsCompanion Function({
+  Value<int> id,
+  required int stageId,
+  required int participantId,
+  required String startTime,
+  Value<DateTime?> timestamp,
+  Value<int?> timestampCorrection,
+  Value<int?> ntpOffset,
+  Value<String?> automaticStartTime,
+  Value<int?> automaticCorrection,
+  Value<String?> manualStartTime,
+  Value<int?> manualCorrection,
+  Value<int> statusId,
+  Value<int?> finishId,
+});
+typedef $StartsUpdateCompanionBuilder = StartsCompanion Function({
+  Value<int> id,
+  Value<int> stageId,
+  Value<int> participantId,
+  Value<String> startTime,
+  Value<DateTime?> timestamp,
+  Value<int?> timestampCorrection,
+  Value<int?> ntpOffset,
+  Value<String?> automaticStartTime,
+  Value<int?> automaticCorrection,
+  Value<String?> manualStartTime,
+  Value<int?> manualCorrection,
+  Value<int> statusId,
+  Value<int?> finishId,
+});
 
 class $StartsFilterComposer extends Composer<_$AppDatabase, Starts> {
   $StartsFilterComposer({
@@ -7822,24 +7810,22 @@ typedef $StartsProcessedTableManager =
       Start,
       PrefetchHooks Function()
     >;
-typedef $LogsCreateCompanionBuilder =
-    LogsCompanion Function({
-      Value<int> id,
-      required LogLevel level,
-      required DateTime timestamp,
-      required LogSource source,
-      required LogSourceDirection direction,
-      Value<String?> rawData,
-    });
-typedef $LogsUpdateCompanionBuilder =
-    LogsCompanion Function({
-      Value<int> id,
-      Value<LogLevel> level,
-      Value<DateTime> timestamp,
-      Value<LogSource> source,
-      Value<LogSourceDirection> direction,
-      Value<String?> rawData,
-    });
+typedef $LogsCreateCompanionBuilder = LogsCompanion Function({
+  Value<int> id,
+  required LogLevel level,
+  required DateTime timestamp,
+  required LogSource source,
+  required LogSourceDirection direction,
+  Value<String?> rawData,
+});
+typedef $LogsUpdateCompanionBuilder = LogsCompanion Function({
+  Value<int> id,
+  Value<LogLevel> level,
+  Value<DateTime> timestamp,
+  Value<LogSource> source,
+  Value<LogSourceDirection> direction,
+  Value<String?> rawData,
+});
 
 class $LogsFilterComposer extends Composer<_$AppDatabase, Logs> {
   $LogsFilterComposer({

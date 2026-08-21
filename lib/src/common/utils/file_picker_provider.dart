@@ -11,7 +11,7 @@ abstract interface class IFilePickerProvider {
     int compressionQuality = 0,
     bool lockParentWindow = false,
     bool cancelUploadOnWindowBlur = true,
-    fp.AndroidSAFOptions? androidSafOptions,
+    // fp.AndroidSAFOptions? androidSafOptions,
   });
 }
 
@@ -26,7 +26,7 @@ class FilePickerProvider implements IFilePickerProvider {
     int compressionQuality = 0,
     bool lockParentWindow = false,
     bool cancelUploadOnWindowBlur = true,
-    fp.AndroidSAFOptions? androidSafOptions,
+    // fp.AndroidSAFOptions? androidSafOptions,
   }) {
     return fp.FilePicker.pickFile(
       dialogTitle: dialogTitle,
@@ -37,7 +37,7 @@ class FilePickerProvider implements IFilePickerProvider {
       compressionQuality: compressionQuality,
       lockParentWindow: lockParentWindow,
       cancelUploadOnWindowBlur: cancelUploadOnWindowBlur,
-      androidSafOptions: androidSafOptions,
+      // androidSafOptions: androidSafOptions,
     );
   }
 }

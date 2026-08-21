@@ -22,11 +22,10 @@ part 'trails_event.dart';
 
 part 'trails_state.dart';
 
-typedef TrackIsolateSpawner =
-    Future<Isolate> Function(
-      void Function(Map<String, Object?>) entryPoint,
-      Map<String, Object?> message,
-    );
+typedef TrackIsolateSpawner = Future<Isolate> Function(
+  void Function(Map<String, Object?>) entryPoint,
+  Map<String, Object?> message,
+);
 
 Future<Isolate> _defaultIsolateSpawner(
   void Function(Map<String, Object?>) entryPoint,

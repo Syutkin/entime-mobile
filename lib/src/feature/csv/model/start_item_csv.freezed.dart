@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'start_item_csv.dart';
@@ -9,6 +9,7 @@ part of 'start_item_csv.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$StartItemCsvCopyWithImpl<$Res>
 /// Create a copy of StartItemCsv
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? number = null,Object? name = null,Object? category = freezed,Object? nickname = freezed,Object? birthday = freezed,Object? team = freezed,Object? city = freezed,Object? phone = freezed,Object? email = freezed,Object? comment = freezed,Object? startTimes = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(StartItemCsv(
 number: null == number ? _self.number : number // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
@@ -219,7 +220,7 @@ return $default(_that.number,_that.name,_that.category,_that.nickname,_that.birt
 @JsonSerializable()
 
 class _StartItemCsv implements StartItemCsv {
-  const _StartItemCsv({required this.number, required this.name, this.category, this.nickname, this.birthday, this.team, this.city, this.phone, this.email, this.comment, final  Map<String, String>? startTimes}): _startTimes = startTimes;
+  const _StartItemCsv({required this.number, required this.name, this.category, this.nickname, this.birthday, this.team, this.city, this.phone, this.email, this.comment,  Map<String, String>? startTimes}): _startTimes = startTimes;
   factory _StartItemCsv.fromJson(Map<String, dynamic> json) => _$StartItemCsvFromJson(json);
 
 @override final  int number;

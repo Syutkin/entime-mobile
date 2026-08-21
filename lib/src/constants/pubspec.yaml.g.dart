@@ -92,13 +92,13 @@ sealed class Pubspec {
   static const PubspecVersion version = (
     /// Non-canonical string representation of the version as provided
     /// in the pubspec.yaml file.
-    representation: r'0.6.0-alpha.1+702',
+    representation: r'0.6.0-alpha.1+703',
 
     /// Returns a 'canonicalized' representation
     /// of the application version.
     /// This represents the version string in accordance with
     /// Semantic Versioning (SemVer) standards.
-    canonical: r'0.6.0-alpha.1+702',
+    canonical: r'0.6.0-alpha.1+703',
 
     /// MAJOR version when you make incompatible API changes.
     /// The major version number: 1 in "1.2.3".
@@ -117,7 +117,7 @@ sealed class Pubspec {
     preRelease: <String>[r'alpha', r'1'],
 
     /// The build identifier: "foo" in "1.2.3+foo".
-    build: <String>[r'702'],
+    build: <String>[r'703'],
   );
 
   /// Name
@@ -335,8 +335,8 @@ sealed class Pubspec {
 
   /// Environment
   static const Map<String, String> environment = <String, String>{
-    'sdk': '>=3.12.0 <3.13.0',
-    'flutter': '>=3.44.0 <3.45.0',
+    'sdk': '>=3.13.0 <3.14.0',
+    'flutter': '>=3.47.0 <3.48.0',
   };
 
   /// Platforms
@@ -401,7 +401,7 @@ sealed class Pubspec {
   /// see [Package dependencies](https://dart.dev/tools/pub/dependencies).
   static const Map<String, Object> dependencies = <String, Object>{
     'any_date': r'^1.2.1',
-    'app_settings': r'^8.0.0',
+    'app_settings': r'^9.0.0',
     'audioplayers': r'^6.5.1',
     'bloc_concurrency': r'^0.3.0',
     'bot_toast': r'^4.1.3',
@@ -409,7 +409,7 @@ sealed class Pubspec {
     'crypto': r'^3.0.7',
     'csv': r'^8.0.0',
     'device_info_plus': r'^13.1.0',
-    'drift': r'2.34.0',
+    'drift': r'^2.34.0',
     'dropdown_search': r'^7.0.0',
     'equatable': r'^2.1.0',
     'ffi': r'^2.2.0',
@@ -421,7 +421,7 @@ sealed class Pubspec {
     'flutter_bloc': r'^9.1.1',
     'flutter_blue_plus': r'^2.3.2',
     'flutter_blue_plus_winrt': r'^0.0.20',
-    'flutter_charset_detector': r'^5.0.0',
+    'flutter_charset_detector': r'^6.0.0',
     'flutter_localizations': <String, Object>{
       'sdk': r'flutter',
     },
@@ -439,10 +439,10 @@ sealed class Pubspec {
     'open_file': r'^4.0.0',
     'path': r'^1.9.1',
     'path_provider': r'^2.1.6',
-    'permission_handler': r'^12.0.1',
+    'permission_handler': r'^13.0.0',
     'pub_semver': r'^2.2.0',
     'rxdart': r'^0.28.0',
-    'sentry_flutter': r'^9.9.1',
+    'sentry_flutter': r'^10.0.0-alpha.3',
     'settings_ui': r'^3.0.1',
     'share_plus': r'^13.1.0',
     'shared_preferences': r'^2.5.4',
@@ -456,12 +456,12 @@ sealed class Pubspec {
     'bloc_test': r'^10.0.0',
     'build_runner': r'^2.15.1',
     'dart_style': r'^3.1.8',
-    'drift_dev': r'2.34.0',
+    'drift_dev': r'^2.34.0',
     'flutter_lints': r'^6.0.0',
     'flutter_test': <String, Object>{
       'sdk': r'flutter',
     },
-    'freezed': r'^3.2.3',
+    'freezed': r'^4.0.0-dev.3',
     'integration_test': <String, Object>{
       'sdk': r'flutter',
     },

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'database_bloc.dart';
@@ -9,6 +9,7 @@ part of 'database_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -453,7 +454,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 
 
 class _EmitState with DiagnosticableTreeMixin implements DatabaseEvent {
-  const _EmitState({required this.race, required this.stage, required final  List<Race> races, required final  List<Stage> stages, required final  List<String?> categories, required final  List<Rider> riders, required final  List<ParticipantAtStart> participants, required final  List<Finish> finishes, required final  List<StartingParticipant> numbersOnTrace, required this.notification, required this.autoFinishNumber, required this.awaitingNumber, required this.updateFinishNumber}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
+  const _EmitState({required this.race, required this.stage, required  List<Race> races, required  List<Stage> stages, required  List<String?> categories, required  List<Rider> riders, required  List<ParticipantAtStart> participants, required  List<Finish> finishes, required  List<StartingParticipant> numbersOnTrace, required this.notification, required this.autoFinishNumber, required this.awaitingNumber, required this.updateFinishNumber}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
   
 
  final  Race? race;
@@ -3530,7 +3531,7 @@ class _$DatabaseStateCopyWithImpl<$Res>
 /// Create a copy of DatabaseState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? races = null,Object? stages = null,Object? categories = null,Object? riders = null,Object? participants = null,Object? finishes = null,Object? numbersOnTrace = null,Object? race = freezed,Object? stage = freezed,Object? notification = freezed,Object? autoFinishNumber = freezed,Object? awaitingNumber = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(DatabaseState(
 races: null == races ? _self.races : races // ignore: cast_nullable_to_non_nullable
 as List<Race>,stages: null == stages ? _self.stages : stages // ignore: cast_nullable_to_non_nullable
 as List<Stage>,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
@@ -3690,7 +3691,7 @@ return $default(_that.races,_that.stages,_that.categories,_that.riders,_that.par
 
 
 class DBState with DiagnosticableTreeMixin implements DatabaseState {
-  const DBState({required final  List<Race> races, required final  List<Stage> stages, required final  List<String?> categories, required final  List<Rider> riders, required final  List<ParticipantAtStart> participants, required final  List<Finish> finishes, required final  List<StartingParticipant> numbersOnTrace, this.race, this.stage, this.notification, this.autoFinishNumber, this.awaitingNumber}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
+  const DBState({required  List<Race> races, required  List<Stage> stages, required  List<String?> categories, required  List<Rider> riders, required  List<ParticipantAtStart> participants, required  List<Finish> finishes, required  List<StartingParticipant> numbersOnTrace, this.race, this.stage, this.notification, this.autoFinishNumber, this.awaitingNumber}): _races = races,_stages = stages,_categories = categories,_riders = riders,_participants = participants,_finishes = finishes,_numbersOnTrace = numbersOnTrace;
   
 
  final  List<Race> _races;

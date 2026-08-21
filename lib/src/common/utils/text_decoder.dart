@@ -271,13 +271,12 @@ typedef _UCharDetGetCharset = ffi.Pointer<Utf8> Function(ffi.Pointer<ffi.Void>);
 
 typedef _IconvOpen = ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>);
 
-typedef _Iconv =
-    int Function(
-      ffi.Pointer<ffi.Void>,
-      ffi.Pointer<ffi.Pointer<ffi.Char>>,
-      ffi.Pointer<ffi.Size>,
-      ffi.Pointer<ffi.Pointer<ffi.Char>>,
-      ffi.Pointer<ffi.Size>,
-    );
+typedef _Iconv = int Function(
+  ffi.Pointer<ffi.Void>,
+  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+  ffi.Pointer<ffi.Size>,
+  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+  ffi.Pointer<ffi.Size>,
+);
 
 typedef _IconvClose = int Function(ffi.Pointer<ffi.Void>);

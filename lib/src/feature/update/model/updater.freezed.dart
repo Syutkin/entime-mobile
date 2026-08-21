@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'updater.dart';
@@ -9,6 +9,7 @@ part of 'updater.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$ReleaseCopyWithImpl<$Res>
 /// Create a copy of Release
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? url = null,Object? assetsUrl = null,Object? uploadUrl = null,Object? htmlUrl = null,Object? id = null,Object? author = null,Object? nodeId = null,Object? tagName = null,Object? targetCommitish = null,Object? name = null,Object? draft = null,Object? prerelease = null,Object? createdAt = null,Object? publishedAt = null,Object? assets = null,Object? tarballUrl = null,Object? zipballUrl = null,Object? body = null,}) {
-  return _then(_self.copyWith(
+  return _then(Release(
 url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String,assetsUrl: null == assetsUrl ? _self.assetsUrl : assetsUrl // ignore: cast_nullable_to_non_nullable
 as String,uploadUrl: null == uploadUrl ? _self.uploadUrl : uploadUrl // ignore: cast_nullable_to_non_nullable
@@ -235,7 +236,7 @@ return $default(_that.url,_that.assetsUrl,_that.uploadUrl,_that.htmlUrl,_that.id
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class _Release implements Release {
-  const _Release({required this.url, required this.assetsUrl, required this.uploadUrl, required this.htmlUrl, required this.id, required this.author, required this.nodeId, required this.tagName, required this.targetCommitish, required this.name, required this.draft, required this.prerelease, required this.createdAt, required this.publishedAt, required final  List<Asset> assets, required this.tarballUrl, required this.zipballUrl, required this.body}): _assets = assets;
+  const _Release({required this.url, required this.assetsUrl, required this.uploadUrl, required this.htmlUrl, required this.id, required this.author, required this.nodeId, required this.tagName, required this.targetCommitish, required this.name, required this.draft, required this.prerelease, required this.createdAt, required this.publishedAt, required  List<Asset> assets, required this.tarballUrl, required this.zipballUrl, required this.body}): _assets = assets;
   factory _Release.fromJson(Map<String, dynamic> json) => _$ReleaseFromJson(json);
 
 @override final  String url;
@@ -404,7 +405,7 @@ class _$AssetCopyWithImpl<$Res>
 /// Create a copy of Asset
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? url = null,Object? id = null,Object? nodeId = null,Object? name = null,Object? label = freezed,Object? uploader = null,Object? contentType = null,Object? state = null,Object? size = null,Object? downloadCount = null,Object? createdAt = null,Object? updatedAt = null,Object? browserDownloadUrl = null,}) {
-  return _then(_self.copyWith(
+  return _then(Asset(
 url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,nodeId: null == nodeId ? _self.nodeId : nodeId // ignore: cast_nullable_to_non_nullable
@@ -721,7 +722,7 @@ class _$AuthorCopyWithImpl<$Res>
 /// Create a copy of Author
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? login = null,Object? id = null,Object? nodeId = null,Object? avatarUrl = null,Object? gravatarId = null,Object? url = null,Object? htmlUrl = null,Object? followersUrl = null,Object? followingUrl = null,Object? gistsUrl = null,Object? starredUrl = null,Object? subscriptionsUrl = null,Object? organizationsUrl = null,Object? reposUrl = null,Object? eventsUrl = null,Object? receivedEventsUrl = null,Object? type = null,Object? siteAdmin = null,}) {
-  return _then(_self.copyWith(
+  return _then(Author(
 login: null == login ? _self.login : login // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,nodeId: null == nodeId ? _self.nodeId : nodeId // ignore: cast_nullable_to_non_nullable
